@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { mkdirSync, realpathSync, rmdirSync } from "node:fs";
+import { mkdirSync, realpathSync, rmdirSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 
 const [mainPath, verifiedCommit] = process.argv.slice(2);
@@ -8,10 +8,19 @@ if (!mainPath || !/^[0-9a-f]{40}$/.test(verifiedCommit ?? "")) {
 }
 const git = (cwd, ...args) => execFileSync("git", args, { cwd, encoding: "utf8" }).trim();
 const task = process.cwd();
-const main = realpathSync(mainPath);
-const common = (cwd) => realpathSync(resolve(cwd, git(cwd, "rev-parse", "--git-common-dir")));
-if (common(task) !== common(main)) throw new Error("Worktrees do not share a Git repository");
-const lock = resolve(common(task), "dusk-integration.lock");
+const main = realpathSync.native(mainPath);
+const common = (cwd) => realpathSync.native(resolve(cwd, git(cwd, "rev-parse", "--git-common-dir")));
+const taskCommon = common(task);
+const mainCommon = common(main);
+const taskStat = statSync(taskCommon, { bigint: true });
+const mainStat = statSync(mainCommon, { bigint: true });
+const samePath =
+  process.platform === "win32"
+    ? taskCommon.toLowerCase() === mainCommon.toLowerCase()
+    : taskCommon === mainCommon;
+const sameIdentity = taskStat.ino !== 0n && taskStat.dev === mainStat.dev && taskStat.ino === mainStat.ino;
+if (!samePath && !sameIdentity) throw new Error("Worktrees do not share a Git repository");
+const lock = resolve(taskCommon, "dusk-integration.lock");
 const deadline = Date.now() + 30_000;
 while (true) {
   try {
