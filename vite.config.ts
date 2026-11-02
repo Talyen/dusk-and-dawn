@@ -8,7 +8,10 @@ export default defineConfig({
     {
       name: "development-content-security-policy",
       apply: "serve",
-      transformIndexHtml: (html) => html.replace("script-src 'self'", "script-src 'self' 'unsafe-inline'"),
+      transformIndexHtml: (html) =>
+        html
+          .replace("script-src 'self'", "script-src 'self' 'unsafe-inline'")
+          .replace("connect-src 'self'", "connect-src 'self' ws://127.0.0.1:5173"),
     },
     react(),
     tailwindcss(),
