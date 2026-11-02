@@ -21,8 +21,8 @@
     "test": "vitest run --maxWorkers=1",
     "test:browser": "playwright test --project=chromium",
     "test:desktop": "playwright test --project=electron",
-    "dist:mac": "npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac dmg",
-    "dist:win": "npm run build && electron-builder --win --x64",
+    "dist:mac": "npm run build && cross-env CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac dmg --publish never",
+    "dist:win": "npm run build && electron-builder --win --x64 --publish never",
     "assets:prepare": "node scripts/assets.mjs --prepare",
     "assets:check": "node scripts/assets.mjs --check",
     "localization:check": "node scripts/check-localization.mjs"
