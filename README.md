@@ -51,3 +51,7 @@ Follow [AGENTS.md](AGENTS.md). From a clean task worktree whose exact commit has
 ## Provenance
 
 The seeded generator, integer selection, and shuffle in `src/lib/random.ts` are adapted from Alchemy's `src/lib/rng/index.ts`, with the rights holder's authorization for reuse in this project. Alchemy's repository identifies its own source as CC BY-NC 4.0; no project-wide license for Dusk & Dawn is specified here.
+
+## Dependency audit
+
+The current npm audit reports moderate advisories in the development-only Electron packaging dependency tree, rooted in older `minimatch` versions. The production dependency audit reports no advisories. Recheck after electron-builder updates; do not use `npm audit fix --force` to downgrade the packaging toolchain without verifying both desktop targets.
