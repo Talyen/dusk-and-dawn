@@ -523,3 +523,70 @@ test("paid library inspection survives reload and resolves without leaking early
   await expect(page.getByRole("button", { name: /Flame light/ })).toBeVisible();
   await expect(page.getByText(/Mana 2\/3/)).toBeVisible();
 });
+
+test("plays a complete seeded run through the browser", async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.addInitScript(() => {
+    Math.random = () => 0;
+  });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  const encountered = new Set<string>();
+  for (let step = 0; step < 300; step++) {
+    const title = (await page.locator("#battle-title").innerText()).trim();
+    if (title === "Victory") break;
+    if (title === "Run ended") throw new Error(`Seeded browser run ended in defeat after ${step} decisions`);
+    if (title === "Choose a reward") {
+      await page.getByRole("button", { name: "Skip reward" }).click();
+      continue;
+    }
+    if (title === "A moment of rest") {
+      await page.getByRole("button", { name: "Heal 6 HP" }).click();
+      continue;
+    }
+    encountered.add(title);
+    const player = page.locator(".battle-board .battle-panel").first();
+    const enemy = page.locator(".battle-enemy");
+    const playerStats = await player.locator("p").first().innerText();
+    const playerStatus = await player.locator("p").nth(1).innerText();
+    const enemyStatus = await enemy.locator("p").nth(1).innerText();
+    const hp = Number(/HP\s*(\d+)/.exec(playerStats)?.[1]);
+    const mana = Number(/Mana\s*(\d+)/.exec(playerStats)?.[1]);
+    const ward = Number(/ward\s+(\d+)/i.exec(playerStatus)?.[1] ?? 0);
+    const burn = Number(/burn\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
+    const curse = Number(/curse\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
+    const priority: Record<string, number> = {
+      Sun: 20,
+      Vampire: 19,
+      Wither: 18,
+      Flame: burn < 3 ? 16 : 1,
+      Angel: ward < 5 ? 12 : 2,
+      Frost: curse < 2 ? 11 : 1,
+      Key: 10,
+      Moon: 9,
+      Bloom: hp <= 24 ? 6 : 0,
+    };
+    const choices = page.locator(".battle-card");
+    let best = -1,
+      score = 0;
+    for (let index = 0; index < (await choices.count()); index++) {
+      const name = (await choices.nth(index).locator("strong").first().innerText()).trim();
+      if ((priority[name] ?? 0) > score) {
+        best = index;
+        score = priority[name]!;
+      }
+    }
+    if (!mana || best < 0) {
+      await page.getByRole("button", { name: "End turn" }).click();
+      continue;
+    }
+    await choices.nth(best).click();
+    await page.getByRole("button", { name: /^Play / }).click();
+  }
+  await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
+  expect(encountered.size).toBe(5);
+  expect(errors).toEqual([]);
+});

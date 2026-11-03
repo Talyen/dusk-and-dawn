@@ -5,6 +5,7 @@ import {
   createRun,
   enemyAttackHits,
   face,
+  getEnemy,
   route,
   type Command,
   type RunState,
@@ -208,12 +209,18 @@ function BattleSession({
     );
   }
   const top = scryTop(s.zones);
-  const enemy = route[s.fight]!;
+  const enemy = getEnemy(s);
   const action = enemy.actions[s.action]!;
   const enemyHits =
     action.hit === undefined
       ? null
-      : attackValues(enemyAttackHits(action, s.enemy.hush), s.enemy.bless, s.enemy.curse, 0, "flat-preview");
+      : attackValues(
+          enemyAttackHits(action, s.enemy.hush, s.latestDirectHit),
+          s.enemy.bless,
+          s.enemy.curse,
+          0,
+          "flat-preview",
+        );
   const genericAttack = selectedCard
     ? face(selectedCard).ops?.find((op) => op.op === "attack" || op.op === "attack-ignore-ward")
     : undefined;
@@ -310,7 +317,9 @@ function BattleSession({
                       ? `+${action.traitBonus} to first hit`
                       : action.extra !== undefined
                         ? `+${action.extra} extra hit`
-                        : "none"}
+                        : action.extraHits?.length
+                          ? `+${action.extraHits.join(" + ")} extra hits`
+                          : "none"}
                   ; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
                 </p>
               )}

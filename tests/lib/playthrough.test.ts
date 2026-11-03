@@ -3,6 +3,7 @@ import { createRun, face, type Command } from "../../src/lib/game/run";
 
 it("runs bounded seeded playtests through the real command path", () => {
   const outcomes = { victory: 0, defeat: 0, unfinished: 0 };
+  const victoryHealth: number[] = [];
   for (let seed = 0; seed < 100; seed++) {
     const game = createRun(seed);
     for (let steps = 0; steps < 300; steps++) {
@@ -59,9 +60,13 @@ it("runs bounded seeded playtests through the real command path", () => {
       expect(next.zones.hand.length).toBeLessThanOrEqual(8);
     }
     const phase = game.getSnapshot().state.phase;
+    if (phase === "victory") victoryHealth.push(game.getSnapshot().state.player.hp);
     outcomes[phase === "victory" || phase === "defeat" ? phase : "unfinished"]++;
   }
-  console.log("100 seeded heuristic playtests", outcomes);
+  console.log("100 seeded heuristic playtests", outcomes, {
+    averageVictoryHp: victoryHealth.reduce((sum, hp) => sum + hp, 0) / Math.max(1, victoryHealth.length),
+    minimumVictoryHp: Math.min(...victoryHealth),
+  });
   expect(outcomes.victory + outcomes.defeat + outcomes.unfinished).toBe(100);
   expect(outcomes.victory).toBeGreaterThan(0);
 });

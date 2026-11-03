@@ -1,3 +1,4 @@
+import { simpleEnemies } from "./simple-enemies.generated";
 import { simpleCards } from "./simple-cards.generated";
 import { rngInt, shuffle, type Rng } from "../random";
 import { createSession, restoreSession, type Handler } from "./session";
@@ -179,23 +180,39 @@ const rewards: Pair[] = [
   ]),
 ].filter((pair) => !starter.includes(pair));
 
+interface EnemyEffect {
+  op: string;
+  amount?: number | "all";
+  stage?: string;
+  to?: string;
+  face?: "light" | "dark";
+  minimum?: number;
+  maximum?: number;
+  fallback?: number;
+}
 interface Action {
   name: string;
   text: string;
   hit?: number;
   type?: DamageType;
   extra?: number;
+  extraHits?: readonly number[];
   traitBonus?: number;
-  ability?: "curse" | "heal" | "banish";
+  ability?: "curse" | "heal" | "banish" | "ward" | "bless" | "move_top" | "turn_after_draw";
+  abilityAmount?: number;
+  baseEffect?: EnemyEffect;
+  condition?: string;
   rider?: "curse" | "poison";
+  effects?: readonly EnemyEffect[];
 }
+
 interface Enemy {
   name: string;
   hp: number;
   weakness: DamageType;
   trait: string;
   traitEffect: string;
-  actions: Action[];
+  actions: readonly Action[];
 }
 export const route: readonly Enemy[] = [
   {
@@ -286,6 +303,33 @@ export const route: readonly Enemy[] = [
     ],
   },
 ];
+export const supportedEnemies: readonly Enemy[] = simpleEnemies;
+const enemyIndex = new Map<string, Enemy>(simpleEnemies.map((enemy) => [enemy.id, enemy]));
+export function validEncounter(id: string): boolean {
+  return id === "fixture:0" || id === "fixture:4" || enemyIndex.has(id);
+}
+export function getEnemy(s: Pick<RunState, "fight" | "encounters">): Enemy {
+  const id = s.encounters?.[s.fight];
+  if (id === "fixture:0") return route[0]!;
+  if (id === "fixture:4") return route[4]!;
+  if (id) {
+    const enemy = enemyIndex.get(id);
+    if (!enemy) throw new Error(`Unknown enemy: ${id}`);
+    return enemy;
+  }
+  return route[s.fight]!;
+}
+function chooseEncounters(rng: Rng): string[] {
+  const regular = simpleEnemies.filter((enemy) => enemy.hp <= 30 && enemy.name !== "Radiant Moth");
+  const elites = simpleEnemies.filter((enemy) => enemy.hp >= 32 && enemy.hp < 42);
+  const bosses = simpleEnemies.filter((enemy) => enemy.hp >= 42);
+  const regulars = shuffle(regular, rng)
+    .slice(0, 2)
+    .map((enemy) => enemy.id);
+  const elite = shuffle(elites, rng)[0]!.id;
+  const boss = shuffle(bosses, rng)[0]!.id;
+  return ["fixture:0", ...regulars, elite, boss];
+}
 interface DeckCard {
   id: string;
   pair: Pair;
@@ -299,6 +343,7 @@ export interface PendingChoice {
 export interface RunState {
   phase: "battle" | "reward" | "rest" | "victory" | "defeat";
   fight: number;
+  encounters?: string[] | undefined;
   deck: DeckCard[];
   nextId: number;
   player: Combatant;
@@ -309,6 +354,7 @@ export interface RunState {
   offers: Pair[];
   message: string;
   pending?: PendingChoice | undefined;
+  latestDirectHit?: number | undefined;
 }
 export type Command =
   | { type: "play"; id: string; targets?: string[] }
@@ -343,8 +389,10 @@ function beginFight(s: RunState, rng: Rng) {
   const hp = s.player.hp;
   s.player = combatant(30);
   s.player.hp = hp;
-  s.enemy = combatant(route[s.fight]!.hp);
+  s.enemy = combatant(getEnemy(s).hp);
   s.action = 0;
+  delete s.latestDirectHit;
+  applyEnemyIntent(s);
   s.mana = 3;
   s.zones = emptyZones();
   s.zones.library = shuffle(
@@ -353,12 +401,12 @@ function beginFight(s: RunState, rng: Rng) {
   );
   drawCards(s.zones, 5, rng);
   s.phase = "battle";
-  s.message = `Fight ${s.fight + 1}: ${route[s.fight]!.name}`;
+  s.message = `Fight ${s.fight + 1}: ${getEnemy(s).name}`;
 }
 function victory(s: RunState, rng: Rng) {
   if (s.fight === route.length - 1) {
     s.phase = "victory";
-    s.message = "The Hollow King falls.";
+    s.message = `${getEnemy(s).name} falls.`;
     return;
   }
   const owned = new Set(s.deck.map((c) => c.pair));
@@ -370,29 +418,156 @@ function victory(s: RunState, rng: Rng) {
   s.message = "Choose a card pair or skip.";
 }
 function attack(s: RunState, hits: number[], type: DamageType, leech = false, ignoreWard = false) {
-  directAttack(
+  const resolved = directAttack(
     s.player,
     s.enemy,
     hits.map((amount) => ({ amount, type })),
-    { weakness: route[s.fight]!.weakness, leech, scaling: "flat-preview", ignoreWard },
+    { weakness: getEnemy(s).weakness, leech, scaling: "flat-preview", ignoreWard },
   );
+  if (resolved.length) s.latestDirectHit = resolved.at(-1)!.amount;
 }
 /** The trait's contribution can be suppressed without suppressing a base attack. */
-export function enemyAttackHits(action: Action, hush: boolean): number[] {
+export function enemyAttackHits(action: Action, hush: boolean, latestDirectHit?: number): number[] {
   if (action.hit === undefined) return [];
+  const copy = !hush ? action.effects?.find((effect) => effect.op === "copy_latest_hit") : undefined;
+  const base = copy
+    ? Math.max(
+        copy.minimum ?? 0,
+        Math.min(copy.maximum ?? Infinity, latestDirectHit ?? copy.fallback ?? action.hit),
+      )
+    : action.hit;
   return [
-    action.hit + (hush ? 0 : (action.traitBonus ?? 0)),
+    base + (hush ? 0 : (action.traitBonus ?? 0)),
     ...(!hush && action.extra !== undefined ? [action.extra] : []),
+    ...(!hush ? (action.extraHits ?? []) : []),
   ];
+}
+function applyEnemyIntent(s: RunState): void {
+  const action = getEnemy(s).actions[s.action]!;
+  if (!s.enemy.hush && action.effects?.some((effect) => effect.op === "reflect_once")) s.enemy.reflect = true;
+}
+function hushEnemy(s: RunState): void {
+  const action = getEnemy(s).actions[s.action]!;
+  if (action.effects?.some((effect) => effect.op === "reflect_once")) s.enemy.reflect = false;
+  s.enemy.hush = true;
+}
+function applyEnemyEffect(
+  s: RunState,
+  effect: EnemyEffect,
+  rng: Rng,
+  context: { nextFace?: "light" | "dark" },
+): void {
+  const amount = typeof effect.amount === "number" ? effect.amount : 0;
+  switch (effect.op) {
+    case "curse":
+      s.player.curse += amount;
+      break;
+    case "poison":
+    case "burn":
+      applyDamageOverTime(s.player, effect.op, amount);
+      break;
+    case "heal":
+      s.enemy.hp = Math.min(s.enemy.maxHp, s.enemy.hp + amount);
+      break;
+    case "ward":
+      s.enemy.ward += amount;
+      break;
+    case "bless":
+      s.enemy.bless += amount;
+      break;
+    case "remove_burn":
+      s.enemy.burn = 0;
+      break;
+    case "remove_poison":
+      s.enemy.poison = 0;
+      break;
+    case "remove_ward":
+      s.player.ward = Math.max(0, s.player.ward - amount);
+      break;
+    case "reduce_next_draw":
+      s.player.nextDrawPenalty += amount;
+      break;
+    case "reduce_next_mana":
+      s.player.nextManaPenalty += amount;
+      break;
+    case "turn_after_draw":
+      if (effect.face) context.nextFace = effect.face;
+      break;
+    case "turn_held":
+      if (effect.face) for (const card of s.zones.hand) card.face = effect.face;
+      break;
+    case "flip_held": {
+      const pool = [...s.zones.hand];
+      const count = effect.amount === "all" ? pool.length : Math.min(amount, pool.length);
+      for (let i = 0; i < count; i++) {
+        const [card] = pool.splice(rngInt(rng, pool.length), 1);
+        card!.face = card!.face === "light" ? "dark" : "light";
+      }
+      break;
+    }
+    case "move_held": {
+      const moved: FightCard[] = [];
+      for (let i = 0; i < amount && s.zones.hand.length; i++) {
+        const [card] = s.zones.hand.splice(rngInt(rng, s.zones.hand.length), 1);
+        card!.kept = false;
+        moved.push(card!);
+      }
+      if (effect.to === "player_draw_top") s.zones.library.push(...moved.reverse());
+      else if (effect.to === "player_draw_bottom") s.zones.library.unshift(...moved.reverse());
+      else if (effect.to === "player_discard") s.zones.discard.push(...moved.reverse());
+      else if (effect.to === "player_banished") s.zones.banished.push(...moved.reverse());
+      else throw new Error(`Unsupported held-card destination: ${effect.to}`);
+      break;
+    }
+    case "move_top": {
+      if (!s.zones.library.length && s.zones.discard.length) {
+        s.zones.library = shuffle(s.zones.discard, rng);
+        s.zones.discard = [];
+      }
+      const moved: FightCard[] = [];
+      for (let i = 0; i < amount; i++) {
+        const card = s.zones.library.pop();
+        if (!card) break;
+        card.kept = false;
+        moved.push(card);
+      }
+      if (effect.to === "player_discard") s.zones.discard.push(...moved.reverse());
+      else if (effect.to === "player_draw_bottom") s.zones.library.unshift(...moved.reverse());
+      else if (effect.to === "player_banished") s.zones.banished.push(...moved.reverse());
+      else throw new Error(`Unsupported library destination: ${effect.to}`);
+      break;
+    }
+    case "recover_to_top": {
+      const card = s.zones.discard.pop();
+      if (card) s.zones.library.push(card);
+      break;
+    }
+    case "ignore_ward":
+    case "copy_latest_hit":
+    case "reflect_once":
+    case "reaction_damage":
+    case "leech":
+      break;
+    default:
+      throw new Error(`Unsupported enemy effect: ${effect.op}`);
+  }
 }
 /** Visible preflight checks never consume mana or reveal random outcomes. */
 export function cardRestriction(s: RunState, source: FightCard): string {
   const info = face(source);
   const ops = info.ops ?? [];
-  const action = route[s.fight]!.actions[s.action]!;
+  const action = getEnemy(s).actions[s.action]!;
   if (
     (info.name === "Silence" || ops.some((op) => op.op === "hush")) &&
-    (s.enemy.hush || !(action.ability || action.traitBonus || action.extra || action.rider))
+    (s.enemy.hush ||
+      !(
+        action.ability ||
+        action.traitBonus ||
+        action.extra ||
+        action.extraHits?.length ||
+        action.rider ||
+        action.effects?.length
+      ))
   )
     return "Hush requires an unsuppressed ability or trait in the next intent.";
   if ((info.name === "Ice Crystal" || ops.some((op) => op.op === "freeze")) && s.enemy.freeze)
@@ -495,15 +670,34 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       return yes();
     }
     halveWard(s.enemy);
-    const a = route[s.fight]!.actions[s.action]!;
+    const a = getEnemy(s).actions[s.action]!;
     const suppressed = s.enemy.hush;
+    const activeTrait =
+      !suppressed && (!a.condition || (a.condition === "enemy_has_Burn_after_tick" && s.enemy.burn > 0));
     const skipped = s.enemy.freeze || (suppressed && a.ability !== undefined);
+    const context: { nextFace?: "light" | "dark" } = {};
+    if (!skipped && activeTrait)
+      for (const effect of a.effects ?? [])
+        if (
+          effect.stage === "before_attack" &&
+          effect.op !== "ignore_ward" &&
+          effect.op !== "copy_latest_hit"
+        )
+          applyEnemyEffect(s, effect, rng, context);
     if (!skipped && a.hit !== undefined && a.type) {
+      const bypass = activeTrait
+        ? a.effects?.find((effect) => effect.op === "ignore_ward")?.amount
+        : undefined;
+      const leech = !!(activeTrait && a.effects?.some((effect) => effect.op === "leech"));
       directAttack(
         s.enemy,
         s.player,
-        enemyAttackHits(a, suppressed).map((amount) => ({ amount, type: a.type! })),
-        { leech: false, scaling: "flat-preview" },
+        enemyAttackHits(a, !activeTrait, s.latestDirectHit).map((amount, index) => ({
+          amount,
+          type: a.type!,
+          ...(index === 0 && bypass !== undefined ? { bypassWard: bypass } : {}),
+        })),
+        { leech, scaling: "flat-preview" },
       );
     }
     if (s.player.hp === 0) {
@@ -515,37 +709,48 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       victory(s, rng);
       return yes();
     }
-    if (!skipped && (a.ability === "curse" || (!suppressed && a.rider === "curse"))) s.player.curse++;
-    if (!skipped && a.ability === "heal") s.enemy.hp = Math.min(s.enemy.maxHp, s.enemy.hp + 3);
+    if (!skipped && a.baseEffect) applyEnemyEffect(s, a.baseEffect, rng, context);
+    else if (!skipped && a.ability === "curse") s.player.curse += a.abilityAmount ?? 1;
+    else if (!skipped && a.ability === "heal")
+      s.enemy.hp = Math.min(s.enemy.maxHp, s.enemy.hp + (a.abilityAmount ?? 3));
+    else if (!skipped && a.ability === "ward") s.enemy.ward += a.abilityAmount ?? 0;
+    else if (!skipped && a.ability === "bless") s.enemy.bless += a.abilityAmount ?? 0;
+    else if (!skipped && a.ability === "banish")
+      applyEnemyEffect(s, { op: "move_top", amount: 1, to: "player_banished" }, rng, context);
+    if (!skipped && !suppressed && a.rider === "curse") s.player.curse++;
     if (!skipped && !suppressed && a.rider === "poison") applyDamageOverTime(s.player, "poison", 3);
-    if (!skipped && a.ability === "banish") {
-      if (!s.zones.library.length && s.zones.discard.length) {
-        s.zones.library = shuffle(s.zones.discard, rng);
-        s.zones.discard = [];
-      }
-      const top = s.zones.library.pop();
-      if (top) s.zones.banished.push(top);
-    }
+    if (!skipped && activeTrait)
+      for (const effect of a.effects ?? [])
+        if (effect.stage === "after_attack") applyEnemyEffect(s, effect, rng, context);
     if (s.enemy.hp === 0) {
       victory(s, rng);
       return yes();
     }
+    if (a.effects?.some((effect) => effect.op === "reflect_once")) s.enemy.reflect = false;
     s.enemy.hush = false;
     if (s.enemy.freeze) s.enemy.freeze = false;
-    s.action = (s.action + 1) % route[s.fight]!.actions.length;
+    s.action = (s.action + 1) % getEnemy(s).actions.length;
     halveWard(s.player);
     s.mana = Math.max(0, 3 - s.player.nextManaPenalty);
     const drawCount = Math.max(0, 5 - s.player.nextDrawPenalty);
     s.player.nextManaPenalty = 0;
     s.player.nextDrawPenalty = 0;
     drawCards(s.zones, drawCount, rng);
+    if (context.nextFace) for (const card of s.zones.hand) card.face = context.nextFace;
+    delete s.latestDirectHit;
+    applyEnemyIntent(s);
     s.message = skipped ? `${a.name} skipped.` : `${a.name} resolved.`;
     return yes();
   }
   const index = s.zones.hand.findIndex((c) => c.id === command.id);
   const source = s.zones.hand[index];
   if (!source || s.mana < 1) return no("Card unavailable or insufficient mana.");
-  const name = face(source).name;
+  const playedFace = face(source);
+  const name = playedFace.name;
+  const isDirectAttack =
+    ["Vampire", "Sun", "Wither", "Thorns", "Shattered Mirror", "Ash", "Oblivion", "Sacrifice"].includes(
+      name,
+    ) || !!playedFace.ops?.some((op) => op.op === "attack" || op.op === "attack-ignore-ward");
   const restriction = cardRestriction(s, source);
   if (restriction) return no(restriction);
   const ids = command.targets ?? [];
@@ -673,7 +878,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       attack(s, [2, 2], "Decay");
       break;
     case "Silence":
-      s.enemy.hush = true;
+      hushEnemy(s);
       break;
     case "Ice Crystal":
       s.enemy.freeze = true;
@@ -895,7 +1100,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
             s.enemy.ward = Math.max(0, s.enemy.ward - op.amount);
             break;
           case "hush":
-            s.enemy.hush = true;
+            hushEnemy(s);
             break;
           case "freeze":
             s.enemy.freeze = true;
@@ -966,6 +1171,13 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   )
     s.zones.banished.push(source);
   else if (!sourceMoved) finishSource(s.zones, source);
+  const reaction = getEnemy(s).actions[s.action]!.effects?.find((effect) => effect.op === "reaction_damage");
+  if (isDirectAttack && reaction && !s.enemy.hush && s.enemy.hp > 0 && s.player.hp > 0) {
+    const amount = typeof reaction.amount === "number" ? reaction.amount : 0;
+    const absorbed = Math.min(s.player.ward, amount);
+    s.player.ward -= absorbed;
+    s.player.hp = Math.max(0, s.player.hp - (amount - absorbed));
+  }
   if (s.player.hp === 0) {
     s.phase = "defeat";
     s.message = "You fell.";
@@ -993,6 +1205,7 @@ export function createRun(seed: number) {
   };
   // Initialization consumes the same serializable RNG stream as later commands.
   const boot: Handler<RunState, { type: "boot" }, string> = (s, _c, rng) => {
+    s.encounters = chooseEncounters(rng);
     beginFight(s, rng);
     return yes();
   };

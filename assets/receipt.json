@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "manifestHash": "2dda378100e5d3cf9d9d5f9d0fd4305f291d1f7f6eb506cdab49e719e1c8b575",
+  "manifestHash": "8e38441ab5f1c4139afe8dc6b634e78ec6e66f80a0d31533051d0b9b3bc8c5a8",
   "outputs": [
     {
       "output": "card-angel.webp",
@@ -2506,6 +2506,531 @@
       "output": "card-funnel.webp",
       "sourceHash": "5bb7db21204f4e10961a68f3a015f92882b9720160e3cf4387f9756c680c6bb5",
       "hash": "a9b32fe1f5876999466bd1fcd2a420a7da933b1985dd4baba8ac62541386f114"
+    },
+    {
+      "output": "enemy-crowned-sun.webp",
+      "sourceHash": "27b7d7cbb22ae80ea07415c329bc6f80d773183e486f6cdeb171d3987662674c",
+      "hash": "2d4d34602fadfb3dcd213b75749978edea48039c7399c34c911bbb2380868bee"
+    },
+    {
+      "output": "enemy-ink-leviathan.webp",
+      "sourceHash": "7ef55b940a9eb28bd382b2f122629b7de124476b80d83e9c7868b2fa918fdf36",
+      "hash": "2b35efe7e7b02704f22053aa3406459326342c660d220a673d8b12b6d5696ef0"
+    },
+    {
+      "output": "enemy-ivory-colossus.webp",
+      "sourceHash": "2a01a6144160192c4b2168f24bf0534436467df5851aded22e26ec2cd58cb912",
+      "hash": "21fa26a3e45243f623ba00328c62c629027baf34128c9949a7f7f7bc6ab6d676"
+    },
+    {
+      "output": "enemy-porcelain-choir.webp",
+      "sourceHash": "7cd63ddffe03071e2425dfd7aee407234a7679869ae35b66873046b47bc20ce3",
+      "hash": "f8a2f8ad9399eee79a3f641b8af8d76b4aea1f40edaacc57c3409b2389c2fac7"
+    },
+    {
+      "output": "enemy-seven-eyed-heron.webp",
+      "sourceHash": "77a1f2cf4f60217551015603f8e9de0a0c6d36c5e7b286b662328db53d934c0b",
+      "hash": "5f21f15a3f2883637e684f92f75fd180d23da3c04409f5b4da817c9fe77d2f44"
+    },
+    {
+      "output": "enemy-the-astral-custodian.webp",
+      "sourceHash": "dd818f271dd3d63240d45a90cf41510e5e67d6b5e33e8b0303a21418557fa1d0",
+      "hash": "3e71dba622a281bf328d978c8a6163204371c857eb11c11f4cbf7a26c27fc0c4"
+    },
+    {
+      "output": "enemy-the-bellflower-magistrate.webp",
+      "sourceHash": "b10b37ef40787ac020d96aa72803b179d71d913c81fa0d7fb3fed77f859a2366",
+      "hash": "cadfe27a18ff859ec88aedff7646a4a6cc337f7422627ef1011664c98ea529d2"
+    },
+    {
+      "output": "enemy-the-black-jellyfish.webp",
+      "sourceHash": "a42595eb41db2705d1bbe5d64fe6121111800983c422d70f08a22f5d23f50849",
+      "hash": "3da93e9018b0221bd2b08f6c1593aa4c0cf3e73e74eae78aef93d4b840e5c2a1"
+    },
+    {
+      "output": "enemy-the-blackwater-bison.webp",
+      "sourceHash": "b46b897aebb215a3c5d08fc17991479d940835f4157b33f0ffb26689facb7731",
+      "hash": "4300ffd1ea68f386db04ffd21dbd2e05ad668e4e7520fcb520ec63b23c2e1085"
+    },
+    {
+      "output": "enemy-the-blooming-executioner.webp",
+      "sourceHash": "03b7c803c96e9b7555d2ddfce8398917e50bc72b4fb416502f7f09eaf1e5983c",
+      "hash": "c8cf0f878e10143695c7c082dbf06cfec911dde795186e6127a6f0301fe836ed"
+    },
+    {
+      "output": "enemy-the-blue-jackal.webp",
+      "sourceHash": "9b5477f4c6800458ff4fca503dd48c05b4fab31e6d730d924c6c04f0b465d957",
+      "hash": "9f1f157818f739f4e33011055c978817b7d3bbe5e6b5693a77f319b4796f4523"
+    },
+    {
+      "output": "enemy-the-brass-cicada.webp",
+      "sourceHash": "0aec053ae70c4ece97d9f0e23a8bbee40f419a80d5558bb993c5575caabe91d4",
+      "hash": "8057392caaaeca0e35c5fe358aaceceef6e1afd6fc8748688910f3bd6dd3be26"
+    },
+    {
+      "output": "enemy-the-candlewax-duchess.webp",
+      "sourceHash": "680d980562dd2fcd9c88694ff93c99eb915e11e25910ca551f5bf07519267e25",
+      "hash": "e9fdfd05d4dbf8dde77493fabcbf515a1edcfef9c524564c95375ffa9f58d59c"
+    },
+    {
+      "output": "enemy-the-cellar-duchess.webp",
+      "sourceHash": "19b4260f33e2aae59f9fbc4788fcb326c3ba85b66a21f6332a25f106c2c4e16a",
+      "hash": "a9a7298b581176973238674f3006321a9f23f87909461d12d65f80e47ff69f73"
+    },
+    {
+      "output": "enemy-the-chalk-giant.webp",
+      "sourceHash": "ae6aca5c57feffce455572aacc04e929e50eb4b9b9ae0cf8ae38f7eae07fd521",
+      "hash": "0ddd3d5abf27759d7e5db58ec23f9428d3cb1521d2b5393c6db96e3eea3d5708"
+    },
+    {
+      "output": "enemy-the-clockwork-peacock.webp",
+      "sourceHash": "2321faa34dd2720ae6b48a75271c6f75548c95cb3624ded9a6081e8740e61570",
+      "hash": "de466aa6ff128b5857757d512297fc09494a75f063fb6a47a53208c2fa18ecea"
+    },
+    {
+      "output": "enemy-the-cobweb-admiral.webp",
+      "sourceHash": "2978124f5ffbbd9c394fa60031e3dedea0cc258f8cc8587a210e2af3a32ebc5d",
+      "hash": "499bc30f12d3304117c46e01c95759065c0a9917e8687681d88011e3f42a2fea"
+    },
+    {
+      "output": "enemy-the-coin-eyed-stag.webp",
+      "sourceHash": "e179fa70003faf0b853908e19d1af635adc993fcd248403372d7bdc65ab1ccda",
+      "hash": "278071cc59c761aa114d21feb4d979b035a1994bfd5bfc031b8f222739bb9c88"
+    },
+    {
+      "output": "enemy-the-crystal-beetle.webp",
+      "sourceHash": "e1cf6f0d5ada94093009e9d73f7f553a9a36bf061d798ddb390443e1794c90bf",
+      "hash": "9f9df3d9dc7fabe6c0ec250e7610ffa2668cf941a760d8f9ea33a0db56a54aa3"
+    },
+    {
+      "output": "enemy-the-drowned-pianist.webp",
+      "sourceHash": "d81245f8b98e6ce65e75b67c0f12540f7a6e345bc17253b20a2a207b514e6697",
+      "hash": "b1f28d6e050a81f563fa3a9cd83d76bcc5dbdac44f6780adefcc5da96a9d600d"
+    },
+    {
+      "output": "enemy-the-folded-stranger.webp",
+      "sourceHash": "053aa48ba19808371437961c9ee0a0c575812a6329d99ef0a1198538a00d2d04",
+      "hash": "44a77c67abe3fe0753bca4f6bfd55404bb84413887829f4d6170bc77afbaca34"
+    },
+    {
+      "output": "enemy-the-glasshouse-matriarch.webp",
+      "sourceHash": "d0beb7ed9a73730bcab659570980700b360c5cb2a714cb40287727df154b5271",
+      "hash": "3a189fad5d83b5c04b5a9aa37e8a54f558530e6bb75a6ca7edb48bc8010f4d24"
+    },
+    {
+      "output": "enemy-the-golden-menagerie.webp",
+      "sourceHash": "edd14f6350b1132d1ebada08a61506382adbbf9a1412950fd1efa18ae1e0620f",
+      "hash": "74249666b457c7ba873fc94447fa665cc10bb22de3fb3d6ba89246deec72974d"
+    },
+    {
+      "output": "enemy-the-golden-millipede.webp",
+      "sourceHash": "14cdf7868d0836e3a05451cd20b45748599c519469a1410a2e541f9b605c8466",
+      "hash": "795bf15613e6bfce810614061944e0ef93739dbaeedcd4e9e2f407fad09d853e"
+    },
+    {
+      "output": "enemy-the-gravel-baron.webp",
+      "sourceHash": "040436b2be8a28a8a6d805de24e43a29a7c30150b2cc7917c297370af9ab36a8",
+      "hash": "ee94f839e1c63395641a20ce4774d4fa0b2c0329683b7cfd6c650cc8cbc0302e"
+    },
+    {
+      "output": "enemy-the-hollow-anemone.webp",
+      "sourceHash": "4e77ce00cb97bcd1e362da5c226e7af4873734d76946d5af6b40c6c69560124b",
+      "hash": "91a8aa651c31b8229d84668877c39f0ba3174f5850c3e66d16dd657e4ec9c3d3"
+    },
+    {
+      "output": "enemy-the-knotted-giant.webp",
+      "sourceHash": "ccc8066ec34ae16b2a14d72006f1da35f32ccf6fe10b0dd0f51ed53181791457",
+      "hash": "7fa30a123bf993bb83722f7ebd8de4ee332d9a90af473cf733e609201e023ea8"
+    },
+    {
+      "output": "enemy-the-lacquered-admiral.webp",
+      "sourceHash": "e3ec1e3169cb3093fbf14654127304bccdb02e4dfd4a626ab5eefb64a649cf71",
+      "hash": "b8d42be6e5b928219a2d9395048be648e46f77c677a91b24c43cb899d04cba0a"
+    },
+    {
+      "output": "enemy-the-linen-lioness.webp",
+      "sourceHash": "0de1405cd850e7583315732bd725f868f782741c06bc32fa12ff5a14020b1f21",
+      "hash": "b37a257272f1df468eff28f00ef9aa72ff178ced77f266a291a830cab00c38cb"
+    },
+    {
+      "output": "enemy-the-majestic-janitor.webp",
+      "sourceHash": "fb76c35f5ffc9cf8b9b0a826e3013f0b67f12bbda909957c45daea4f30b0e6ed",
+      "hash": "84e4b2d20b84a446b74808c073005ac4b959c7d669bcaa09dd1c8c8b0e743018"
+    },
+    {
+      "output": "enemy-the-midnight-oyster.webp",
+      "sourceHash": "f1dc6923bb91f717be99242f5629e66b9ce59340896dd14871b9ae16d72e54e5",
+      "hash": "8a208db0df53d15cfa87a8a9aa89297ffff2f3a4b61f0e4eae34455e3fbec970"
+    },
+    {
+      "output": "enemy-the-mirrored-sphinx.webp",
+      "sourceHash": "173bbf5cd355f34d9e7f11766809126ac087c08d1fd59a2a9e8de52c008b01c9",
+      "hash": "53bf0193e5b7556f02aeb9feb31e05206327dc721084cf4b0b3e67acbf5259be"
+    },
+    {
+      "output": "enemy-the-mossback-ogre.webp",
+      "sourceHash": "210342bc9cce69892d8eddbe15dcf33dcd0baf109941b86711ed3715a0c10a4e",
+      "hash": "58543740cb21f877305b09f6ff5d7162274cc00e9e4d8853d2033d13daa5f41e"
+    },
+    {
+      "output": "enemy-the-mould-harpist.webp",
+      "sourceHash": "9c31839dab7981e253fc2580710c75f6ce24705cc37bc3adc9e13f595b3d9399",
+      "hash": "650f4818d1d4e3f9bedc490b14c9f237811e30ab5a047789a0860e64ff872223"
+    },
+    {
+      "output": "enemy-the-opal-centipede.webp",
+      "sourceHash": "fd205dd011bc85bec9e18ddee0edc9ee227c443e0bc7d43c68a2cd1069927b54",
+      "hash": "d2e04a09d110e9a58ec0037be1f538ab49fd9c5a5ca8322a2bebcd3c756ccfee"
+    },
+    {
+      "output": "enemy-the-painted-elephant.webp",
+      "sourceHash": "212268ca70894cec14ea4aa74fbfa2d90c7c18e4a1a1980bae9e4d20f8f45793",
+      "hash": "9c878ec470be70d0c99ce31739c985e08e721657ad4f81f379456bb073a3407d"
+    },
+    {
+      "output": "enemy-the-paper-nautilus.webp",
+      "sourceHash": "56ce8f2262adf388cfd10cae0fb07dbd70a6e988469c74d708c5ff4e7f3cedbe",
+      "hash": "8b45bfcd8a5e199cc0d82d597decc4522cf062522533e358efbd0927fc15d247"
+    },
+    {
+      "output": "enemy-the-porcelain-hound.webp",
+      "sourceHash": "d3fcaab91649147d36e3a02658b0aa5f83da76a7d14053819307227128bf9ab7",
+      "hash": "efbcd86c3e7a5bca61a7a034e2a5f966966e17dd7269e177b4761a57e497ff62"
+    },
+    {
+      "output": "enemy-the-ragged-conductor.webp",
+      "sourceHash": "69f4b58e6fa67005488c4b909fd83463e9f72d499a422c4908ae46753f79bd50",
+      "hash": "51649d8956292159f3382e5786a4fdc9eb928b77c34ca328dae919daf4b9b7aa"
+    },
+    {
+      "output": "enemy-the-ribbon-general.webp",
+      "sourceHash": "1becfeb2b8171300e89c696446fc6bf89a06fc85e2bb4697b0f1257a56c1730f",
+      "hash": "fbb70c3b346ad4fc546a661c5b92ec5b50ea6ab3f7619aa82685d23ae3bf7cea"
+    },
+    {
+      "output": "enemy-the-rootbound-organist.webp",
+      "sourceHash": "699d081370d9112be000b5e00703a6bcf4902f95fa5d93f2ff48d17f08aa6f1a",
+      "hash": "5d8c52c336fa8e325a7e499e1cfe198bfb7fcc2999ea4262e95c9736e130a69e"
+    },
+    {
+      "output": "enemy-the-rooted-acrobat.webp",
+      "sourceHash": "fe37ac3e1f53ef1b8c6967a850c6557d2c3abcef1a86f0fd6e4b7c019e162668",
+      "hash": "4c17aaf205bfb9380fba71ebf2d8ae2118e1da473921d0f362ea2a51207d43a8"
+    },
+    {
+      "output": "enemy-the-saffron-spider.webp",
+      "sourceHash": "ceb6ed0dcdb5ce1be6a00f9903e291749b2a8fd50c110f157c65a42f6481226a",
+      "hash": "cae8616f63f3a8f189e639098a43eeca774be905d4337dad8748ac74a623a65b"
+    },
+    {
+      "output": "enemy-the-salt-crown.webp",
+      "sourceHash": "b113e01e0888f4625bfc83de33ef1ef2278ef8e60c868131d8cb33d48253504f",
+      "hash": "2cf6e86d793c2a2a2ea21c2927b9dd5c9c36702676ee19cab842b6273a09e910"
+    },
+    {
+      "output": "enemy-the-silver-orchard.webp",
+      "sourceHash": "148d8159f41861d7ae857dbd687920fd6c7640f745bb96b93321214d4d11c2b2",
+      "hash": "c33cba96ab1a00a67756c91cd6b04f529ddeb99dab2440113b386ceeffdb8fe4"
+    },
+    {
+      "output": "enemy-the-sleepwalking-bridge.webp",
+      "sourceHash": "0d036ce727bac91a9a876907f1d105abb9e508fe2c5163f387d78f3b23e1bd15",
+      "hash": "da34e28cd72a0d115ff65f87e711ad4da833e434fc80f504e961227c8dab6a90"
+    },
+    {
+      "output": "enemy-the-smiling-kiln.webp",
+      "sourceHash": "e42257b721681dc8fbd09329ace83354693a0b6361e6742548d962a67a697ed5",
+      "hash": "2daec52f6c7de8ef967755fab66bc95366963b9c2dac81e24fee31888ab78ca8"
+    },
+    {
+      "output": "enemy-the-soot-bride.webp",
+      "sourceHash": "265e3287efbd70c476607e3e0218cdffc15d52199bcae9ae3f07169de433596c",
+      "hash": "ae3ff023c3fbf7127f482d74f2259699887399e9f6b916e2c8744d9a9c258cb7"
+    },
+    {
+      "output": "enemy-the-sunstruck-crocodile.webp",
+      "sourceHash": "413e8070d5fc4f711510b2b640406da153e1f9bd6010a7171fd6b2d60e844bee",
+      "hash": "7cf021c7f1d0f51a6a48a408da6ff09a0a9082dcdac3dc6f1f17770be70685ba"
+    },
+    {
+      "output": "enemy-the-tangle-guest.webp",
+      "sourceHash": "c1e2b35f3c8bd24d612eb060c73e8179ed22b99ddc5d6926a2b56f021b691d22",
+      "hash": "a81d1a61fbb87d488620b74eb876095638c78378ab0428b709be0583833c8410"
+    },
+    {
+      "output": "enemy-the-umbrella-beast.webp",
+      "sourceHash": "90bce99e4a0b09de0d8dad8f1619b3c933d6f7753bc2c7d7d3ea1f802e6c270d",
+      "hash": "9c3cff1fe4fd1f87d249bfb720ea794bca824816a5b65a0d074d22a25ca6dce2"
+    },
+    {
+      "output": "enemy-the-unblinking-shepherd.webp",
+      "sourceHash": "d51658f2bb98eab70b9815f55faed22db7d7464b30f117e8bafa0edbdce0f576",
+      "hash": "fa3c536e5aaa010bb5389f20248fa33ce5ca0dac9138bdb06c571ba96a92b126"
+    },
+    {
+      "output": "enemy-the-unquiet-whelk.webp",
+      "sourceHash": "3337814c20f55680c70f28d67f28f208b8a1792e1b0a9ec39ad9c1d80f4bab2d",
+      "hash": "06345433a10a25017463317cc96d1ae30f82d1ba78f5a7d71cd1f7fdabccb764"
+    },
+    {
+      "output": "enemy-the-velvet-eel.webp",
+      "sourceHash": "2a2bcc8d1cc57d7aa8ec6dccce5873f6e6a707dffb9c98930112b012ff447a25",
+      "hash": "f6c685b54562ae09961c5c46ed6631505dffb012ed04777f669480a62df6f57f"
+    },
+    {
+      "output": "enemy-the-white-furnace.webp",
+      "sourceHash": "23f3ee85b9b0075a9e394b9a475d807ccf9041009b87a42fa4ab7823f8d102bf",
+      "hash": "957be2f9911187258a0f06658ebf27e8a60aed3098086f8051c34c3dc764acb4"
+    },
+    {
+      "output": "enemy-the-wicker-sleeper.webp",
+      "sourceHash": "480d3c5cf437010545c2fe6c22aaff39c06de0cdbcea3f57853f204e17af6af6",
+      "hash": "bab70960a75b0e1da05147cf6bc81bd7f2184bc328cc7f4f931536f3ef4c07f3"
+    },
+    {
+      "output": "enemy-lantern-eater.webp",
+      "sourceHash": "8f859356c0eadd24a5de1bb155f95c5e9bd0bd995b360fd0b26c230ef87b3b66",
+      "hash": "2024d2dfe9760cce711404a8c0275af60d7d609a09108cc86e90ff123b1ef5f0"
+    },
+    {
+      "output": "enemy-sunbleached-harlequin.webp",
+      "sourceHash": "0b4339016a089a8d9c3089d8034c9c879fff2b91ac931c12c78cf8b366ecf3bf",
+      "hash": "2d4f6c5d5a246a4704cd5751551198da23f1d316c40c504d42ea829cfbe24199"
+    },
+    {
+      "output": "enemy-the-amber-bailiff.webp",
+      "sourceHash": "96defa1bcd8a969c480d724b7d7edc8c40915638a3f135985900c8a7c66cb4a1",
+      "hash": "ce792219db3b931865253349646e1dcac2e271f0cec74ae2c57dea12c7ad98a4"
+    },
+    {
+      "output": "enemy-the-ashen-gardener.webp",
+      "sourceHash": "8fa924dfa247e3711e8f005bede0490d3d9cd212bac3380ac31d2e3e7fbfa256",
+      "hash": "1e14adbf22655c8253898091bec58b425a6a2bbcd117daf74a2829a708ed8475"
+    },
+    {
+      "output": "enemy-the-ashen-puppeteer.webp",
+      "sourceHash": "9100d8029b7027bc6cd2455a60a437825d5fabedf2508f8159993339a1fee32b",
+      "hash": "54fa93fe2ce2b117d26acb40c6d0c53f73592e27f0355cf7851c4071c1fe3cdb"
+    },
+    {
+      "output": "enemy-the-bathtub-oracle.webp",
+      "sourceHash": "036042c9c26427c8ef386fd9ee860c8429609d274e183e6a63213501ed07b427",
+      "hash": "527964120c21d3ff11ded360ed469e16ee333eb29909295fbebb7ee4d1d5d741"
+    },
+    {
+      "output": "enemy-the-bleak-carousel.webp",
+      "sourceHash": "0df77e73c2ae71ccbb907c534e243ac543b5195af356a0917b2be85ac6547372",
+      "hash": "7cd849c1b791b3edf13a17ba33f9e54e74f04f05977c968d6b85e0062939c512"
+    },
+    {
+      "output": "enemy-the-bone-cartographer.webp",
+      "sourceHash": "9de0a63f5a569b144dbe606867405ce2449fdf4cd2c077cc07c61f4ae2da3a4d",
+      "hash": "e15a290f7dbe909352cc677549c614052bbfb3f5647697af77da5618f2890760"
+    },
+    {
+      "output": "enemy-the-brass-matron.webp",
+      "sourceHash": "f281a9a0db1558533185f98c7687704a031c7b0a4c4d6ca504308ce4354b0ea6",
+      "hash": "29fd557fddec343cae528deaec729bebaada51d651ac4d3edca921c11614644d"
+    },
+    {
+      "output": "enemy-the-buried-violinist.webp",
+      "sourceHash": "850ef0283653ed718c31cefb8d3dd52cf0a277c03472a82b13bd78d8a3009499",
+      "hash": "be21e6a5cac842b1116a08bac1176bed4f4727d5d3fe73defd07ef7c38e90b47"
+    },
+    {
+      "output": "enemy-the-celestial-fisher.webp",
+      "sourceHash": "5a46c50539b71fa189458cb5b7c2d8aea3415f8fde4fb1c7e357fbbb5d976c46",
+      "hash": "5113a4c1ea140d37f199aa0e1b365d814934b85ae380ecb5139d2169606f53b7"
+    },
+    {
+      "output": "enemy-the-cracked-moon.webp",
+      "sourceHash": "b982615442c3dc706ffcca5c3735b0b725dbe1477f0f1851efc10d085e30757d",
+      "hash": "4a7324bd14b3c0de93fe6d0f4aadef65bb121536f9af417e4a22a464e1183850"
+    },
+    {
+      "output": "enemy-the-dusk-fisher.webp",
+      "sourceHash": "1a13f9d425709d37d77332b2b04bb57ef2c4c3ab0cb6f4a35e0efeaff87e39bb",
+      "hash": "efd7a5874d4903031acea79e10463184600ca996e18295b7dfb28505e4e6f6e4"
+    },
+    {
+      "output": "enemy-the-fogbound-weaver.webp",
+      "sourceHash": "15236830a33fd24d7f679dd54e489692fe3d35e5b50652bcf0a8c1538d9db575",
+      "hash": "4130fc2da5c36e043f3f50b12c0b140c78192ec5a089829892b6851372d8d5b5"
+    },
+    {
+      "output": "enemy-the-gilded-pelican.webp",
+      "sourceHash": "e3c872c6be95363032fffa86e4ec4b57453f7a967871d814967282c30cca80b4",
+      "hash": "7dba75f2ec8445eb775356f71fcc020816c0a8d54df931ba0560d60953f7eeb2"
+    },
+    {
+      "output": "enemy-the-hollow-harvester.webp",
+      "sourceHash": "72269587e94d2764c94a95544263d17fd29cb538e730aca48a44bcc85e105b7f",
+      "hash": "1f508e15bb56e04ce5524d978188beae3a2acd84b51a28ffe2e42325de6d311b"
+    },
+    {
+      "output": "enemy-the-honey-tyrant.webp",
+      "sourceHash": "9b21ea4b209824340456d80c7093ec9431beca83ab9ac9ede275c0f41eafdef4",
+      "hash": "206adc3636d3f2437478031d4dc101d1aa17d0cfa0d1c51c09640767d3a7bed2"
+    },
+    {
+      "output": "enemy-the-ink-jackrabbit.webp",
+      "sourceHash": "a0fb2f278dff9ccc1424928457ebe81a9367c1484b95d2071b37b1f39feeacfe",
+      "hash": "0f49e68dc73c0d2ccd5923c9f1ede118bea2a92fa49d54d9781d10bbfcc18e3e"
+    },
+    {
+      "output": "enemy-the-ivory-dentist.webp",
+      "sourceHash": "422450ec21fd1540083b94bb20e90890da32bf3e13137afa086e3bf60b240115",
+      "hash": "16edbb4c3d2e109ec9063ef4d280fb8301537558bf3ef2044a736814a54fe49f"
+    },
+    {
+      "output": "enemy-the-marble-nurse.webp",
+      "sourceHash": "5ec5b8d1e92f87ac578561c119c196eb746cf92374c7107386b2e0ef7d48bc15",
+      "hash": "fb134e902bf6a19c7a29ca20ffc4f7d8aadc058ed4c65372ea85a689be446c9d"
+    },
+    {
+      "output": "enemy-the-masked-midday.webp",
+      "sourceHash": "3788709417ae05e1713dd1a1cc0af14dd468b798d80927750f3d9c142be01b13",
+      "hash": "78ebd991284ff3f8b2f202126d6d420324bd22c4e5ebbf1bc4e6d0ee8dc7a853"
+    },
+    {
+      "output": "enemy-the-maskless-acrobat.webp",
+      "sourceHash": "b2694578644576dfab7c2ce585d6fdacbdeb08c6f79b8eb8409e82adb09ab7b0",
+      "hash": "33e1e0cb72edf268d9b9d6745180593a8c983ce4c92ed0ef0cfe86000e8cb14c"
+    },
+    {
+      "output": "enemy-the-midnight-tailor.webp",
+      "sourceHash": "06df56f16caa69baf26cbb6eca85009f5b915547ada0f3d1e4037896dcf82a7f",
+      "hash": "f520d3ff2289a59e00d9f26893c03ba3e03e9d648ae5c4bcebbb28cd4cc2c8f1"
+    },
+    {
+      "output": "enemy-the-mirror-eyed-swan.webp",
+      "sourceHash": "d3657999792b9635036e6c4603701b6d62fddfe469c52b855c448c8d5dfea57c",
+      "hash": "e5b6ced9483bb83346fb3053dac12d37a926151934a5d8db12115e92d6352757"
+    },
+    {
+      "output": "enemy-the-morrow-thief.webp",
+      "sourceHash": "444c95e254da2760b67ba48807e11f73e548d23442322781c64f9b3db15970f9",
+      "hash": "3a81636f2bd2beb4cefb3e09f513e17b6c2c1745bf876f446190ce6ca14cc9ef"
+    },
+    {
+      "output": "enemy-the-moth-eaten-regent.webp",
+      "sourceHash": "66fc5fb3e6ebb97a33227b78de6d9538131e28d1abbf7c0de4718e382157ddca",
+      "hash": "f887484174c030633a821c04a29b4f23c02b2c21552680316fb8d4b6a73f934b"
+    },
+    {
+      "output": "enemy-the-noon-dancer.webp",
+      "sourceHash": "9b7fb3046d1c19639e3cbc6521cff658bca13f7f7bd4d99875cb916f751eb9b9",
+      "hash": "c0110958b5aeaa6d54b88bed9f0a56f7bf29c30eddb147464dbd596177e74228"
+    },
+    {
+      "output": "enemy-the-obsidian-otter.webp",
+      "sourceHash": "c9613aacd0f632a638d88a559f33703b178e78cf9d4c1e9ee3834699bbefa23a",
+      "hash": "a214ced2c314e9f571929339d7ac2d48911013bc358be1c9bb24f57842c9cd1a"
+    },
+    {
+      "output": "enemy-the-painted-raven.webp",
+      "sourceHash": "996dcfbe70e99d71621232ac470935a6e0da063a93b1434e8ce9e4f0515d42eb",
+      "hash": "2b04b214e2a14f4e19790e2f9e71ed59a8c0431f4f0e217cef416318488203ff"
+    },
+    {
+      "output": "enemy-the-pearl-taxman.webp",
+      "sourceHash": "30b4504b9866eb0be1db92a44fdc5708f3d18d03bb584d7ec227971eec9515c8",
+      "hash": "4de94975dad570cf2be394111383bb8b852b01b907d8d19de040899ed7b6428e"
+    },
+    {
+      "output": "enemy-the-radiant-undertow.webp",
+      "sourceHash": "fdb7b59581851fcc7585350e651f5e6c7afdbecb6439e54dd3e8e7448d1fab4e",
+      "hash": "45702f090dd27f5548b17c60bc6a3cc0cd1839e9e3b8967b18a1275ad8e52b13"
+    },
+    {
+      "output": "enemy-the-sable-locksmith.webp",
+      "sourceHash": "a99cdc91e486fca21298808cd92f22972bcac1bd4ed3a9073ccbe80630240630",
+      "hash": "f08af25d0ca02d06941323c5debc6bb872f5223952ec3150e694549c94d1aa82"
+    },
+    {
+      "output": "enemy-the-shadow-puppeteer.webp",
+      "sourceHash": "88cbcf5704d2b719d2cce17d79e0beb108a553650895387e5ebf2dd55292893e",
+      "hash": "409c62080b480b42119ce774651f86390cff5655e55ccdc60f11912a2303c4b4"
+    },
+    {
+      "output": "enemy-the-shivering-cabinet.webp",
+      "sourceHash": "cf5d8a2014d279dd15d034c42eb88d562c4daa55f4625cb24cb3e0118bf9cdbc",
+      "hash": "96cb37fabd5a483659c8dc8bb7eb2ae0866fea9e5535e66cc32ab0f2a52da27f"
+    },
+    {
+      "output": "enemy-the-sleep-merchant.webp",
+      "sourceHash": "7cb3bc60ce2595ac525272c3c2222d0e3790f041f8f7b2153d3515a8978aa10e",
+      "hash": "970cecc04f4eb6989d38530028a385b7b5521cf6b68ffe692e4f573fa37578fd"
+    },
+    {
+      "output": "enemy-the-starved-banquet.webp",
+      "sourceHash": "b511dc0788848d43fc71aa04fff05788e0e5d192cf98d8ced82a1126b2eda721",
+      "hash": "7124b3e14516f71e6b28338d9bf6a190bfce820f8f633fe0a6c7eb98ed2cc820"
+    },
+    {
+      "output": "enemy-the-stilt-walker.webp",
+      "sourceHash": "918a4f396e608f023727907c8da611d742baf34bf7f9dbfb801f57710ce2a13d",
+      "hash": "458b1961d93e4966d05662e1148716a32fb2707ac49987cc683528c2bc844476"
+    },
+    {
+      "output": "enemy-the-sunken-sun.webp",
+      "sourceHash": "c7190dc70ee879c6807aa9e66a7e97c0ef7b82359da156a7af109be682c8a0a8",
+      "hash": "464b7a853aa0b3ad057a2d2ed9351a353b1466d484351c1908957995244c9e67"
+    },
+    {
+      "output": "enemy-the-tall-seamstress.webp",
+      "sourceHash": "cedea198ddee2818e2473801be29fa94ad11223f1791acad941d5385f7161bbb",
+      "hash": "54fab861bbdd10964a18062e042cb5db221ac145f4a1954a991b177b90482a42"
+    },
+    {
+      "output": "enemy-the-tar-albatross.webp",
+      "sourceHash": "cc7b62bb05abb2bd36483fb53c338abad14c8ac8e5384329386e6156cd0e6e7f",
+      "hash": "2dcbbadd8fbfed9874f2fccd7e81fd65e7dd15db4b189740f3beb5e1fde07b43"
+    },
+    {
+      "output": "enemy-the-thorned-librarian.webp",
+      "sourceHash": "3a3c232d7447b2bad3f1b331e2d6fc44e4426178dcd6fb106b9e6a4917633d21",
+      "hash": "cfa1bcb749778967285f62b6138d5cbff44e18f015fbbc26d0a89ab3853641f4"
+    },
+    {
+      "output": "enemy-the-threadbare-duke.webp",
+      "sourceHash": "e2676ce39e4a4f3716f517cfe99bcb2b3b2c90981a2feed1313d78abfdba2a5e",
+      "hash": "7fdaa84971a4f2792fb807b6d1b7958b0ebd490066af06a7dc96a03cb934f5c7"
+    },
+    {
+      "output": "enemy-the-threaded-monarch.webp",
+      "sourceHash": "d96781caf9e31220d2d5c704c0236c72ba681e975aa4063829c04a4dcee47241",
+      "hash": "b16948fe1b23e27a680606ab50a9a20887f936c5667f282b0c063c2216114ce0"
+    },
+    {
+      "output": "enemy-the-tooth-collector.webp",
+      "sourceHash": "78ac5ea9439619beb989e751f1724ba8e8630e04b779b15cb284b24cc6ad154a",
+      "hash": "5e325a581cde28cd1dd56f25d871a404ffbdeb28d170613ab6bb4f523451ad1c"
+    },
+    {
+      "output": "enemy-the-unseen-horse.webp",
+      "sourceHash": "a8921f829b4de77996bae15f6504195d8997f4ddd892a118c3bb968dc1fabf6c",
+      "hash": "a40fe8023366584802792929e2df482ae6c9ee29d5d0bae2142be80ccd68d3e3"
+    },
+    {
+      "output": "enemy-the-velvet-mole.webp",
+      "sourceHash": "c13d5f846b5bbe0bfe5394f0ab517950a72dc36830040efdf5ab0b1d0512ffca",
+      "hash": "59a7fad16a2c73a80fd506a910ff579dbd7febffd985b9584770aa38b995a278"
+    },
+    {
+      "output": "enemy-the-velvet-skeleton.webp",
+      "sourceHash": "40df11628ec100e9871dafb511f0055f191cd061b994350a567e243a68786ca2",
+      "hash": "24e77dadaf97dc106df24fb2fc6ccdd0f8f7377a15f9326aec9b29139a5674aa"
+    },
+    {
+      "output": "enemy-the-wax-regent.webp",
+      "sourceHash": "d1119171e5d774a6ebf6524a9f8fbd0579d2d7cfaf586793b47bdea95a2b16bd",
+      "hash": "db03ff6b43cf56558694e8f693303044af86b86aca8ec5a9d3c4867ed52c860f"
+    },
+    {
+      "output": "enemy-the-whispering-casket.webp",
+      "sourceHash": "f17a396086a5c72c20a3836375d75de63da7e544d85d5468912e3c7a43fab5f4",
+      "hash": "80c1c65cc9c0ba6a4f6f2c5e527358522dc6d331db675a78e1cfd18b34744f42"
     }
   ]
 }

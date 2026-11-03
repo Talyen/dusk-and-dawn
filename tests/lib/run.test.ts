@@ -112,6 +112,7 @@ describe("playable run", () => {
   it("Hush skips an enemy ability and Freeze clears after skipping an attack", () => {
     const setup = structuredClone(createRun(1).getSnapshot());
     setup.state.fight = 1;
+    delete setup.state.encounters;
     setup.state.action = 0;
     setup.state.enemy.hush = true;
     setup.state.zones.hand = [];

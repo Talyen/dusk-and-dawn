@@ -3004,5 +3004,635 @@
     "output": "card-funnel.webp",
     "width": 512,
     "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Crowned Sun.png",
+    "output": "enemy-crowned-sun.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Ink Leviathan.png",
+    "output": "enemy-ink-leviathan.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Ivory Colossus.png",
+    "output": "enemy-ivory-colossus.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Porcelain Choir.png",
+    "output": "enemy-porcelain-choir.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Seven-Eyed Heron.png",
+    "output": "enemy-seven-eyed-heron.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Astral Custodian.png",
+    "output": "enemy-the-astral-custodian.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Bellflower Magistrate.png",
+    "output": "enemy-the-bellflower-magistrate.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Black Jellyfish.png",
+    "output": "enemy-the-black-jellyfish.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Blackwater Bison.png",
+    "output": "enemy-the-blackwater-bison.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Blooming Executioner.png",
+    "output": "enemy-the-blooming-executioner.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Blue Jackal.png",
+    "output": "enemy-the-blue-jackal.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Brass Cicada.png",
+    "output": "enemy-the-brass-cicada.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Candlewax Duchess.png",
+    "output": "enemy-the-candlewax-duchess.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Cellar Duchess.png",
+    "output": "enemy-the-cellar-duchess.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Chalk Giant.png",
+    "output": "enemy-the-chalk-giant.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Clockwork Peacock.png",
+    "output": "enemy-the-clockwork-peacock.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Cobweb Admiral.png",
+    "output": "enemy-the-cobweb-admiral.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Coin-Eyed Stag.png",
+    "output": "enemy-the-coin-eyed-stag.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Crystal Beetle.png",
+    "output": "enemy-the-crystal-beetle.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Drowned Pianist.png",
+    "output": "enemy-the-drowned-pianist.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Folded Stranger.png",
+    "output": "enemy-the-folded-stranger.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Glasshouse Matriarch.png",
+    "output": "enemy-the-glasshouse-matriarch.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Golden Menagerie.png",
+    "output": "enemy-the-golden-menagerie.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Golden Millipede.png",
+    "output": "enemy-the-golden-millipede.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Gravel Baron.png",
+    "output": "enemy-the-gravel-baron.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Hollow Anemone.png",
+    "output": "enemy-the-hollow-anemone.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Knotted Giant.png",
+    "output": "enemy-the-knotted-giant.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Lacquered Admiral.png",
+    "output": "enemy-the-lacquered-admiral.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Linen Lioness.png",
+    "output": "enemy-the-linen-lioness.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Majestic Janitor.png",
+    "output": "enemy-the-majestic-janitor.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Midnight Oyster.png",
+    "output": "enemy-the-midnight-oyster.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Mirrored Sphinx.png",
+    "output": "enemy-the-mirrored-sphinx.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Mossback Ogre.png",
+    "output": "enemy-the-mossback-ogre.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Mould Harpist.png",
+    "output": "enemy-the-mould-harpist.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Opal Centipede.png",
+    "output": "enemy-the-opal-centipede.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Painted Elephant.png",
+    "output": "enemy-the-painted-elephant.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Paper Nautilus.png",
+    "output": "enemy-the-paper-nautilus.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Porcelain Hound.png",
+    "output": "enemy-the-porcelain-hound.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Ragged Conductor.png",
+    "output": "enemy-the-ragged-conductor.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Ribbon General.png",
+    "output": "enemy-the-ribbon-general.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Rootbound Organist.png",
+    "output": "enemy-the-rootbound-organist.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Rooted Acrobat.png",
+    "output": "enemy-the-rooted-acrobat.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Saffron Spider.png",
+    "output": "enemy-the-saffron-spider.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Salt Crown.png",
+    "output": "enemy-the-salt-crown.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Silver Orchard.png",
+    "output": "enemy-the-silver-orchard.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Sleepwalking Bridge.png",
+    "output": "enemy-the-sleepwalking-bridge.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Smiling Kiln.png",
+    "output": "enemy-the-smiling-kiln.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Soot Bride.png",
+    "output": "enemy-the-soot-bride.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Sunstruck Crocodile.png",
+    "output": "enemy-the-sunstruck-crocodile.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Tangle Guest.png",
+    "output": "enemy-the-tangle-guest.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Umbrella Beast.png",
+    "output": "enemy-the-umbrella-beast.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Unblinking Shepherd.png",
+    "output": "enemy-the-unblinking-shepherd.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Unquiet Whelk.png",
+    "output": "enemy-the-unquiet-whelk.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Velvet Eel.png",
+    "output": "enemy-the-velvet-eel.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The White Furnace.png",
+    "output": "enemy-the-white-furnace.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Wicker Sleeper.png",
+    "output": "enemy-the-wicker-sleeper.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Lantern Eater.png",
+    "output": "enemy-lantern-eater.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Sunbleached Harlequin.png",
+    "output": "enemy-sunbleached-harlequin.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Amber Bailiff.png",
+    "output": "enemy-the-amber-bailiff.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Ashen Gardener.png",
+    "output": "enemy-the-ashen-gardener.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Ashen Puppeteer.png",
+    "output": "enemy-the-ashen-puppeteer.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Bathtub Oracle.png",
+    "output": "enemy-the-bathtub-oracle.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Bleak Carousel.png",
+    "output": "enemy-the-bleak-carousel.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Bone Cartographer.png",
+    "output": "enemy-the-bone-cartographer.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Brass Matron.png",
+    "output": "enemy-the-brass-matron.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Buried Violinist.png",
+    "output": "enemy-the-buried-violinist.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Celestial Fisher.png",
+    "output": "enemy-the-celestial-fisher.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Cracked Moon.png",
+    "output": "enemy-the-cracked-moon.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Dusk Fisher.png",
+    "output": "enemy-the-dusk-fisher.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Fogbound Weaver.png",
+    "output": "enemy-the-fogbound-weaver.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Gilded Pelican.png",
+    "output": "enemy-the-gilded-pelican.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Hollow Harvester.png",
+    "output": "enemy-the-hollow-harvester.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Honey Tyrant.png",
+    "output": "enemy-the-honey-tyrant.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Ink Jackrabbit.png",
+    "output": "enemy-the-ink-jackrabbit.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Ivory Dentist.png",
+    "output": "enemy-the-ivory-dentist.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Marble Nurse.png",
+    "output": "enemy-the-marble-nurse.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Masked Midday.png",
+    "output": "enemy-the-masked-midday.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Maskless Acrobat.png",
+    "output": "enemy-the-maskless-acrobat.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Midnight Tailor.png",
+    "output": "enemy-the-midnight-tailor.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Mirror-Eyed Swan.png",
+    "output": "enemy-the-mirror-eyed-swan.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Morrow Thief.png",
+    "output": "enemy-the-morrow-thief.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Moth-Eaten Regent.png",
+    "output": "enemy-the-moth-eaten-regent.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Noon Dancer.png",
+    "output": "enemy-the-noon-dancer.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Obsidian Otter.png",
+    "output": "enemy-the-obsidian-otter.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Painted Raven.png",
+    "output": "enemy-the-painted-raven.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Pearl Taxman.png",
+    "output": "enemy-the-pearl-taxman.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Radiant Undertow.png",
+    "output": "enemy-the-radiant-undertow.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Sable Locksmith.png",
+    "output": "enemy-the-sable-locksmith.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Shadow Puppeteer.png",
+    "output": "enemy-the-shadow-puppeteer.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Shivering Cabinet.png",
+    "output": "enemy-the-shivering-cabinet.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Sleep Merchant.png",
+    "output": "enemy-the-sleep-merchant.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Starved Banquet.png",
+    "output": "enemy-the-starved-banquet.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Stilt Walker.png",
+    "output": "enemy-the-stilt-walker.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Sunken Sun.png",
+    "output": "enemy-the-sunken-sun.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Tall Seamstress.png",
+    "output": "enemy-the-tall-seamstress.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Tar Albatross.png",
+    "output": "enemy-the-tar-albatross.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Thorned Librarian.png",
+    "output": "enemy-the-thorned-librarian.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Threadbare Duke.png",
+    "output": "enemy-the-threadbare-duke.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Threaded Monarch.png",
+    "output": "enemy-the-threaded-monarch.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Tooth Collector.png",
+    "output": "enemy-the-tooth-collector.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Unseen Horse.png",
+    "output": "enemy-the-unseen-horse.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Velvet Mole.png",
+    "output": "enemy-the-velvet-mole.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Velvet Skeleton.png",
+    "output": "enemy-the-velvet-skeleton.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Wax Regent.png",
+    "output": "enemy-the-wax-regent.webp",
+    "width": 640,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/The Whispering Casket.png",
+    "output": "enemy-the-whispering-casket.webp",
+    "width": 640,
+    "quality": 82
   }
 ]

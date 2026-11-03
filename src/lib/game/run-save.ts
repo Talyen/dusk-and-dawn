@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { cards, route, runHandler, type RunState } from "./run";
+import { cards, getEnemy, route, runHandler, validEncounter, type RunState } from "./run";
 import { restoreSession, type Snapshot } from "./session";
 import { decodeSave, encodeSave, snapshotFromSave, snapshotToSave, type SaveBackend } from "../save/save";
 
@@ -28,6 +28,7 @@ const runSchema = z
   .object({
     phase: z.enum(["battle", "reward", "rest", "victory", "defeat"]),
     fight: integer.max(route.length - 1),
+    encounters: z.array(z.string().refine(validEncounter)).length(route.length).optional(),
     deck: z.array(deckCard),
     nextId: integer,
     player: combatant,
@@ -43,6 +44,7 @@ const runSchema = z
       .strict(),
     mana: integer.max(3),
     action: integer,
+    latestDirectHit: integer.optional(),
     offers: z.array(cardPair),
     message: z.string(),
     pending: z
@@ -57,7 +59,7 @@ const runSchema = z
   })
   .strict()
   .superRefine((run, ctx) => {
-    if (run.action >= route[run.fight]!.actions.length)
+    if (run.action >= getEnemy(run).actions.length)
       ctx.addIssue({ code: "custom", message: "Invalid enemy action" });
     const deck = new Map(run.deck.map((card) => [card.id, card.pair]));
     if (deck.size !== run.deck.length) ctx.addIssue({ code: "custom", message: "Duplicate deck card" });
