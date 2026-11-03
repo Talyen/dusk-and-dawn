@@ -1,0 +1,1411 @@
+{
+  "review_date": "2026-11-03",
+  "source_folder": "/Users/ryanmcintire/Google Drive/My Drive/Dusk & Dawn/Enemy Artwork",
+  "source_png_count": 110,
+  "designed_count": 110,
+  "inspected_count": 110,
+  "uninspected": [],
+  "missing_artworks": [],
+  "extra_records": [],
+  "inspection_method": "All 110 source PNGs decoded and inspected visually in ten labeled contact sheets; thumbnails up to 420 × 305 px. Not a full-resolution image-quality review.",
+  "contact_sheet_files": [
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-01.jpg",
+      "sha256": "0f43f0450212a10b27dade91dbd6259d8474c8fb830fd00709c29e4d4173eff1"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-02.jpg",
+      "sha256": "3cbc30756d8265f12bd431bb462ee952339e67c66585ac1a5f1d4ff283465f16"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-03.jpg",
+      "sha256": "6231acfedc129412be6c190e8dd9ef584e149d7f6926466d6ba84c02d12e601a"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-04.jpg",
+      "sha256": "c7b7b580d552d3d4561f1df6827d79299bc181187bd40b8dc92013a26f585f8b"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-05.jpg",
+      "sha256": "99443fa502daca37f886bc2a42f907e5203357067ca75cc59b569d3199f128a5"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-06.jpg",
+      "sha256": "ff93b9c2d56f84be1e66c885045b67f007a2614481982adb18b2a1ec113d7a56"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-07.jpg",
+      "sha256": "296881ac36079d850230a926457b6ce2163d1c94340f5635f085a8892b269189"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-08.jpg",
+      "sha256": "730f272d02d78301f9fa3b0d84f661ab9c5b7fdb7561c52a8203571fb79b7a05"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-09.jpg",
+      "sha256": "9a6b6f54c1d843b870473e50a2ba8b430185d0e8e5588c3c6e4613e6bd4abfee"
+    },
+    {
+      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-10.jpg",
+      "sha256": "cafab90e0c840877ab13dab149aa4e130e96ad080db57417f240693c252b0078"
+    }
+  ],
+  "rules_read": {
+    "path": "/Users/ryanmcintire/Developer/Dusk & Dawn/docs/Dusk & Dawn — Game Design v0.2.html",
+    "sha256": "286039c6a9ace6eefae57c7ce9a37613c2c4b015fe2f5744667f3fc2452cbf71"
+  },
+  "cards_read": {
+    "path": "/Users/ryanmcintire/Developer/Dusk & Dawn/docs/Dusk & Dawn — Card Effect Catalogue v0.2.json",
+    "sha256": "4883680fd623c01f3ad5eb50e581257aa6a67c3044dc68a4ba95e8bc7f933017"
+  },
+  "weakness_distribution": {
+    "Shadow": 18,
+    "Radiance": 12,
+    "Release": 36,
+    "Decay": 12,
+    "Binding": 6,
+    "Growth": 9,
+    "Oblivion": 13,
+    "Frost": 4
+  },
+  "flags": {
+    "weakness-needs-wider-pool": 68,
+    "recovery-stall-check": 13,
+    "keep-interaction": 20,
+    "temporary-deck-loss-advanced": 2,
+    "sparse-weakness-attacks": 26,
+    "full-ward-bypass-advanced": 2
+  },
+  "hushable_non_attack_encounters": 20,
+  "current_hush_unavailable_encounters": 90,
+  "checked": "Exact filename-set equality, source SHA-256 match, one trait/weakness/attack per record, unique IDs/names/trait text, sequential numbering, opposing weakness mapping, one printed attack type, direct damage availability, HTML/JSON correspondence.",
+  "validation_limit": "No combat implementation or simulation; thought experiments are manual reasoning, not human playtesting or a balance claim.",
+  "browser_preview": {
+    "status": "denied",
+    "action": "Open the local catalogue in the in-app browser for visual QA",
+    "reason": "Browser URL policy does not allow file:// URLs. No alternate route attempted.",
+    "remaining_limit": "HTML layout and filter interaction were not verified in a running browser. Content, embedded image count, parsing and HTML/JSON correspondence were verified statically; a plain-text companion is provided."
+  },
+  "artwork_inventory": [
+    {
+      "number": 1,
+      "source_filename": "Crowned Sun.png",
+      "sha256": "27b7d7cbb22ae80ea07415c329bc6f80d773183e486f6cdeb171d3987662674c",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "A crowned sun fills the sky above reaching figures."
+    },
+    {
+      "number": 2,
+      "source_filename": "Glass Judge.png",
+      "sha256": "fc70ba55ab12ed92cd61180285e154dce61c1901808189877c7fcc6c6c4ae2c1",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "A transparent judge holds a pair of scales."
+    },
+    {
+      "number": 3,
+      "source_filename": "Hollow King.png",
+      "sha256": "f142c9707acff450aeb1c6aba8f14d73bd1b4dfe878a6868b9e94dc6d1f4fe98",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "A huge crowned, hollow figure looms over a ruined throne."
+    },
+    {
+      "number": 4,
+      "source_filename": "Ink Leviathan.png",
+      "sha256": "7ef55b940a9eb28bd382b2f122629b7de124476b80d83e9c7868b2fa918fdf36",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "An inky sea creature rises with a vast mouth and sweeping tendrils."
+    },
+    {
+      "number": 5,
+      "source_filename": "Ivory Colossus.png",
+      "sha256": "2a01a6144160192c4b2168f24bf0534436467df5851aded22e26ec2cd58cb912",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "An ivory giant is built from monumental arches."
+    },
+    {
+      "number": 6,
+      "source_filename": "Lantern Eater.png",
+      "sha256": "8f859356c0eadd24a5de1bb155f95c5e9bd0bd995b360fd0b26c230ef87b3b66",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "A huge mouth reaches toward a lantern offered by a traveler."
+    },
+    {
+      "number": 7,
+      "source_filename": "Mourning Tree.png",
+      "sha256": "e8b5a658a577d78577f4fef5e85638ec07bac027dce7555b9cba57fdec68b079",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "A weeping tree sheds drops into a pool beneath tangled roots."
+    },
+    {
+      "number": 8,
+      "source_filename": "Porcelain Choir.png",
+      "sha256": "7cd63ddffe03071e2425dfd7aee407234a7679869ae35b66873046b47bc20ce3",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "Several porcelain singers lift their faces together."
+    },
+    {
+      "number": 9,
+      "source_filename": "Radiant Moth.png",
+      "sha256": "a67828d7ef33f68d25917f7c5190d9641201b0308b6a3bf300bef292ff02f7d1",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "A luminous moth spreads broad wings before an eclipse."
+    },
+    {
+      "number": 10,
+      "source_filename": "Seven-Eyed Heron.png",
+      "sha256": "77a1f2cf4f60217551015603f8e9de0a0c6d36c5e7b286b662328db53d934c0b",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "Eyes run down a heron's long neck beneath a solar disk."
+    },
+    {
+      "number": 11,
+      "source_filename": "Sunbleached Harlequin.png",
+      "sha256": "0b4339016a089a8d9c3089d8034c9c879fff2b91ac931c12c78cf8b366ecf3bf",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "A sunlit jester balances beneath curling architecture."
+    },
+    {
+      "number": 12,
+      "source_filename": "The Amber Bailiff.png",
+      "sha256": "96defa1bcd8a969c480d724b7d7edc8c40915638a3f135985900c8a7c66cb4a1",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-01.jpg",
+      "observed": "An amber ruler holds a glowing amber orb."
+    },
+    {
+      "number": 13,
+      "source_filename": "The Ashen Gardener.png",
+      "sha256": "8fa924dfa247e3711e8f005bede0490d3d9cd212bac3380ac31d2e3e7fbfa256",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "An ashen gardener scatters gray matter over skeletal plants."
+    },
+    {
+      "number": 14,
+      "source_filename": "The Ashen Puppeteer.png",
+      "sha256": "9100d8029b7027bc6cd2455a60a437825d5fabedf2508f8159993339a1fee32b",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A towering puppeteer holds red strings over small figures."
+    },
+    {
+      "number": 15,
+      "source_filename": "The Astral Custodian.png",
+      "sha256": "dd818f271dd3d63240d45a90cf41510e5e67d6b5e33e8b0303a21418557fa1d0",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "An astral keeper reaches across floating spheres and bridges."
+    },
+    {
+      "number": 16,
+      "source_filename": "The Bathtub Oracle.png",
+      "sha256": "036042c9c26427c8ef386fd9ee860c8429609d274e183e6a63213501ed07b427",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A reclining oracle gestures from a moonlit bathtub."
+    },
+    {
+      "number": 17,
+      "source_filename": "The Bellflower Magistrate.png",
+      "sha256": "b10b37ef40787ac020d96aa72803b179d71d913c81fa0d7fb3fed77f859a2366",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "Bell-shaped flowers cover a magistrate's robe and outstretched hand."
+    },
+    {
+      "number": 18,
+      "source_filename": "The Black Jellyfish.png",
+      "sha256": "a42595eb41db2705d1bbe5d64fe6121111800983c422d70f08a22f5d23f50849",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A black jellyfish trails long tendrils through the sky."
+    },
+    {
+      "number": 19,
+      "source_filename": "The Blackwater Bison.png",
+      "sha256": "b46b897aebb215a3c5d08fc17991479d940835f4157b33f0ffb26689facb7731",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A dark bison lowers its head beside rippling water."
+    },
+    {
+      "number": 20,
+      "source_filename": "The Bleak Carousel.png",
+      "sha256": "0df77e73c2ae71ccbb907c534e243ac543b5195af356a0917b2be85ac6547372",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "Pale carousel horses circle under a ragged canopy."
+    },
+    {
+      "number": 21,
+      "source_filename": "The Blooming Executioner.png",
+      "sha256": "03b7c803c96e9b7555d2ddfce8398917e50bc72b4fb416502f7f09eaf1e5983c",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A flowering executioner holds an enormous axe."
+    },
+    {
+      "number": 22,
+      "source_filename": "The Blue Jackal.png",
+      "sha256": "9b5477f4c6800458ff4fca503dd48c05b4fab31e6d730d924c6c04f0b465d957",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A lean blue jackal stands alert in moonlit ruins."
+    },
+    {
+      "number": 23,
+      "source_filename": "The Bone Cartographer.png",
+      "sha256": "9de0a63f5a569b144dbe606867405ce2449fdf4cd2c077cc07c61f4ae2da3a4d",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A skeletal cartographer measures a map with long dividers."
+    },
+    {
+      "number": 24,
+      "source_filename": "The Brass Cicada.png",
+      "sha256": "0aec053ae70c4ece97d9f0e23a8bbee40f419a80d5558bb993c5575caabe91d4",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-02.jpg",
+      "observed": "A huge brass cicada spreads perforated wings in a golden sky."
+    },
+    {
+      "number": 25,
+      "source_filename": "The Brass Matron.png",
+      "sha256": "f281a9a0db1558533185f98c7687704a031c7b0a4c4d6ca504308ce4354b0ea6",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A brass matron's rigid robes shelter small reaching figures."
+    },
+    {
+      "number": 26,
+      "source_filename": "The Buried Violinist.png",
+      "sha256": "850ef0283653ed718c31cefb8d3dd52cf0a277c03472a82b13bd78d8a3009499",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A buried violinist plays among roots and exposed bones."
+    },
+    {
+      "number": 27,
+      "source_filename": "The Candlewax Duchess.png",
+      "sha256": "680d980562dd2fcd9c88694ff93c99eb915e11e25910ca551f5bf07519267e25",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "Candles burn along a duchess's melting wax body."
+    },
+    {
+      "number": 28,
+      "source_filename": "The Celestial Fisher.png",
+      "sha256": "5a46c50539b71fa189458cb5b7c2d8aea3415f8fde4fb1c7e357fbbb5d976c46",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A celestial fisher holds a line attached to a huge fish."
+    },
+    {
+      "number": 29,
+      "source_filename": "The Cellar Duchess.png",
+      "sha256": "19b4260f33e2aae59f9fbc4788fcb326c3ba85b66a21f6332a25f106c2c4e16a",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A duchess sits among barrels holding a red drink."
+    },
+    {
+      "number": 30,
+      "source_filename": "The Chalk Giant.png",
+      "sha256": "ae6aca5c57feffce455572aacc04e929e50eb4b9b9ae0cf8ae38f7eae07fd521",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A vast chalk-white giant reaches over pale cliffs."
+    },
+    {
+      "number": 31,
+      "source_filename": "The Clockwork Peacock.png",
+      "sha256": "2321faa34dd2720ae6b48a75271c6f75548c95cb3624ded9a6081e8740e61570",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "Gears fill a clockwork peacock's tail."
+    },
+    {
+      "number": 32,
+      "source_filename": "The Cobweb Admiral.png",
+      "sha256": "2978124f5ffbbd9c394fa60031e3dedea0cc258f8cc8587a210e2af3a32ebc5d",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A web-covered admiral stands before a ship caught in cobwebs."
+    },
+    {
+      "number": 33,
+      "source_filename": "The Coin-Eyed Stag.png",
+      "sha256": "e179fa70003faf0b853908e19d1af635adc993fcd248403372d7bdc65ab1ccda",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "Gold coins cover a stag's eyes beneath branching antlers."
+    },
+    {
+      "number": 34,
+      "source_filename": "The Cracked Moon.png",
+      "sha256": "b982615442c3dc706ffcca5c3735b0b725dbe1477f0f1851efc10d085e30757d",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A moon is split by large cracks above a dark landscape."
+    },
+    {
+      "number": 35,
+      "source_filename": "The Crystal Beetle.png",
+      "sha256": "e1cf6f0d5ada94093009e9d73f7f553a9a36bf061d798ddb390443e1794c90bf",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A jewel-like beetle stands between watching stone faces."
+    },
+    {
+      "number": 36,
+      "source_filename": "The Drowned Pianist.png",
+      "sha256": "d81245f8b98e6ce65e75b67c0f12540f7a6e345bc17253b20a2a207b514e6697",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-03.jpg",
+      "observed": "A drowned figure plays a piano beneath tentacles and water."
+    },
+    {
+      "number": 37,
+      "source_filename": "The Dusk Fisher.png",
+      "sha256": "1a13f9d425709d37d77332b2b04bb57ef2c4c3ab0cb6f4a35e0efeaff87e39bb",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A lone fisher casts into a dark sea beneath the setting sun."
+    },
+    {
+      "number": 38,
+      "source_filename": "The Fogbound Weaver.png",
+      "sha256": "15236830a33fd24d7f679dd54e489692fe3d35e5b50652bcf0a8c1538d9db575",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A weaver holds crossing threads over a tightrope figure in fog."
+    },
+    {
+      "number": 39,
+      "source_filename": "The Folded Stranger.png",
+      "sha256": "053aa48ba19808371437961c9ee0a0c575812a6329d99ef0a1198538a00d2d04",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A sharply folded humanoid stands beside reflecting water."
+    },
+    {
+      "number": 40,
+      "source_filename": "The Gilded Pelican.png",
+      "sha256": "e3c872c6be95363032fffa86e4ec4b57453f7a967871d814967282c30cca80b4",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A golden pelican stretches a broad beak and wide wings."
+    },
+    {
+      "number": 41,
+      "source_filename": "The Glasshouse Matriarch.png",
+      "sha256": "d0beb7ed9a73730bcab659570980700b360c5cb2a714cb40287727df154b5271",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A matriarch encloses red plants in a glasshouse body."
+    },
+    {
+      "number": 42,
+      "source_filename": "The Golden Menagerie.png",
+      "sha256": "edd14f6350b1132d1ebada08a61506382adbbf9a1412950fd1efa18ae1e0620f",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "Several gilded animals crowd around one central sun-face."
+    },
+    {
+      "number": 43,
+      "source_filename": "The Golden Millipede.png",
+      "sha256": "14cdf7868d0836e3a05451cd20b45748599c519469a1410a2e541f9b605c8466",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A golden millipede curls many short legs around a bridge."
+    },
+    {
+      "number": 44,
+      "source_filename": "The Gravel Baron.png",
+      "sha256": "040436b2be8a28a8a6d805de24e43a29a7c30150b2cc7917c297370af9ab36a8",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A ragged baron lets gravel fall from one hand."
+    },
+    {
+      "number": 45,
+      "source_filename": "The Hollow Anemone.png",
+      "sha256": "4e77ce00cb97bcd1e362da5c226e7af4873734d76946d5af6b40c6c69560124b",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A hollow anemone spreads pale tentacles around a dark mouth."
+    },
+    {
+      "number": 46,
+      "source_filename": "The Hollow Harvester.png",
+      "sha256": "72269587e94d2764c94a95544263d17fd29cb538e730aca48a44bcc85e105b7f",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "A hollow, antlered harvester dangles emptied pods above a field."
+    },
+    {
+      "number": 47,
+      "source_filename": "The Honey Tyrant.png",
+      "sha256": "9b21ea4b209824340456d80c7093ec9431beca83ab9ac9ede275c0f41eafdef4",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "Honeycombs and dripping honey cover a winged ruler."
+    },
+    {
+      "number": 48,
+      "source_filename": "The Ink Jackrabbit.png",
+      "sha256": "a0fb2f278dff9ccc1424928457ebe81a9367c1484b95d2071b37b1f39feeacfe",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-04.jpg",
+      "observed": "An ink-dark jackrabbit leaps above bridges beneath a moon."
+    },
+    {
+      "number": 49,
+      "source_filename": "The Ivory Dentist.png",
+      "sha256": "422450ec21fd1540083b94bb20e90890da32bf3e13137afa086e3bf60b240115",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A gigantic dentist holds a mirror and a tooth-pulling tool over a chair."
+    },
+    {
+      "number": 50,
+      "source_filename": "The Knotted Giant.png",
+      "sha256": "ccc8066ec34ae16b2a14d72006f1da35f32ccf6fe10b0dd0f51ed53181791457",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "Thick red knots wrap a huge pale body."
+    },
+    {
+      "number": 51,
+      "source_filename": "The Lacquered Admiral.png",
+      "sha256": "e3ec1e3169cb3093fbf14654127304bccdb02e4dfd4a626ab5eefb64a649cf71",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A lacquered admiral stands before ships and dark tentacles."
+    },
+    {
+      "number": 52,
+      "source_filename": "The Linen Lioness.png",
+      "sha256": "0de1405cd850e7583315732bd725f868f782741c06bc32fa12ff5a14020b1f21",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A lioness is formed from trailing woven linen."
+    },
+    {
+      "number": 53,
+      "source_filename": "The Majestic Janitor.png",
+      "sha256": "fb76c35f5ffc9cf8b9b0a826e3013f0b67f12bbda909957c45daea4f30b0e6ed",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A crowned janitor carries a mop amid flowing golden surfaces."
+    },
+    {
+      "number": 54,
+      "source_filename": "The Marble Nurse.png",
+      "sha256": "5ec5b8d1e92f87ac578561c119c196eb746cf92374c7107386b2e0ef7d48bc15",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A marble nurse holds a syringe above reaching patients."
+    },
+    {
+      "number": 55,
+      "source_filename": "The Masked Midday.png",
+      "sha256": "3788709417ae05e1713dd1a1cc0af14dd468b798d80927750f3d9c142be01b13",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A theatrical mask sits within the sun's curling rays."
+    },
+    {
+      "number": 56,
+      "source_filename": "The Maskless Acrobat.png",
+      "sha256": "b2694578644576dfab7c2ce585d6fdacbdeb08c6f79b8eb8409e82adb09ab7b0",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A bare-faced acrobat balances on a thin rope."
+    },
+    {
+      "number": 57,
+      "source_filename": "The Midnight Oyster.png",
+      "sha256": "f1dc6923bb91f717be99242f5629e66b9ce59340896dd14871b9ae16d72e54e5",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "An open oyster holds a bright pearl in moonlit water."
+    },
+    {
+      "number": 58,
+      "source_filename": "The Midnight Tailor.png",
+      "sha256": "06df56f16caa69baf26cbb6eca85009f5b915547ada0f3d1e4037896dcf82a7f",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A nocturnal tailor stitches long cloth beside a sewing machine."
+    },
+    {
+      "number": 59,
+      "source_filename": "The Mirror-Eyed Swan.png",
+      "sha256": "d3657999792b9635036e6c4603701b6d62fddfe469c52b855c448c8d5dfea57c",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "A white swan looks into bright, patterned reflections."
+    },
+    {
+      "number": 60,
+      "source_filename": "The Mirrored Sphinx.png",
+      "sha256": "173bbf5cd355f34d9e7f11766809126ac087c08d1fd59a2a9e8de52c008b01c9",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-05.jpg",
+      "observed": "Two matching sphinxes face one another above a stair."
+    },
+    {
+      "number": 61,
+      "source_filename": "The Morrow Thief.png",
+      "sha256": "444c95e254da2760b67ba48807e11f73e548d23442322781c64f9b3db15970f9",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A running thief carries a stolen piece of sunrise."
+    },
+    {
+      "number": 62,
+      "source_filename": "The Mossback Ogre.png",
+      "sha256": "210342bc9cce69892d8eddbe15dcf33dcd0baf109941b86711ed3715a0c10a4e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A hunched ogre is covered in hanging moss beside a pool."
+    },
+    {
+      "number": 63,
+      "source_filename": "The Moth-Eaten Regent.png",
+      "sha256": "66fc5fb3e6ebb97a33227b78de6d9538131e28d1abbf7c0de4718e382157ddca",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A monarch's robe and crown are riddled with moth holes."
+    },
+    {
+      "number": 64,
+      "source_filename": "The Mould Harpist.png",
+      "sha256": "9c31839dab7981e253fc2580710c75f6ce24705cc37bc3adc9e13f595b3d9399",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "Mould coats a skeletal harpist and the harp's long strings."
+    },
+    {
+      "number": 65,
+      "source_filename": "The Noon Dancer.png",
+      "sha256": "9b7fb3046d1c19639e3cbc6521cff658bca13f7f7bd4d99875cb916f751eb9b9",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A dancer rises before the sun with broad flowing fabric."
+    },
+    {
+      "number": 66,
+      "source_filename": "The Obsidian Otter.png",
+      "sha256": "c9613aacd0f632a638d88a559f33703b178e78cf9d4c1e9ee3834699bbefa23a",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A sleek black otter perches above a pool."
+    },
+    {
+      "number": 67,
+      "source_filename": "The Opal Centipede.png",
+      "sha256": "fd205dd011bc85bec9e18ddee0edc9ee227c443e0bc7d43c68a2cd1069927b54",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "An opalescent centipede arches through illuminated bridges."
+    },
+    {
+      "number": 68,
+      "source_filename": "The Painted Elephant.png",
+      "sha256": "212268ca70894cec14ea4aa74fbfa2d90c7c18e4a1a1980bae9e4d20f8f45793",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A brightly painted elephant stands with raised trunk and long tusks."
+    },
+    {
+      "number": 69,
+      "source_filename": "The Painted Raven.png",
+      "sha256": "996dcfbe70e99d71621232ac470935a6e0da063a93b1434e8ce9e4f0515d42eb",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A multicolored raven stands beside a traveler holding a palette."
+    },
+    {
+      "number": 70,
+      "source_filename": "The Paper Nautilus.png",
+      "sha256": "56ce8f2262adf388cfd10cae0fb07dbd70a6e988469c74d708c5ff4e7f3cedbe",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A pale nautilus has a visibly folded, spiral shell."
+    },
+    {
+      "number": 71,
+      "source_filename": "The Pearl Taxman.png",
+      "sha256": "30b4504b9866eb0be1db92a44fdc5708f3d18d03bb584d7ec227971eec9515c8",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A pearl-clad taxman offers one bead from a long string."
+    },
+    {
+      "number": 72,
+      "source_filename": "The Porcelain Hound.png",
+      "sha256": "d3fcaab91649147d36e3a02658b0aa5f83da76a7d14053819307227128bf9ab7",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-06.jpg",
+      "observed": "A white porcelain hound carries a blue floral pattern."
+    },
+    {
+      "number": 73,
+      "source_filename": "The Radiant Undertow.png",
+      "sha256": "fdb7b59581851fcc7585350e651f5e6c7afdbecb6439e54dd3e8e7448d1fab4e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A bright face looms above a spiraling, sunlit wave."
+    },
+    {
+      "number": 74,
+      "source_filename": "The Ragged Conductor.png",
+      "sha256": "69f4b58e6fa67005488c4b909fd83463e9f72d499a422c4908ae46753f79bd50",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A ragged conductor directs an orchestra of skeletal musicians."
+    },
+    {
+      "number": 75,
+      "source_filename": "The Ribbon General.png",
+      "sha256": "1becfeb2b8171300e89c696446fc6bf89a06fc85e2bb4697b0f1257a56c1730f",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A general is wrapped in broad flying red ribbons."
+    },
+    {
+      "number": 76,
+      "source_filename": "The Rootbound Organist.png",
+      "sha256": "699d081370d9112be000b5e00703a6bcf4902f95fa5d93f2ff48d17f08aa6f1a",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "Roots grow from an organist into an immense pipe organ."
+    },
+    {
+      "number": 77,
+      "source_filename": "The Rooted Acrobat.png",
+      "sha256": "fe37ac3e1f53ef1b8c6967a850c6557d2c3abcef1a86f0fd6e4b7c019e162668",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "An acrobat reaches upward while thick roots anchor the legs."
+    },
+    {
+      "number": 78,
+      "source_filename": "The Sable Locksmith.png",
+      "sha256": "a99cdc91e486fca21298808cd92f22972bcac1bd4ed3a9073ccbe80630240630",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A locksmith carries keys before a giant keyhole tower."
+    },
+    {
+      "number": 79,
+      "source_filename": "The Saffron Spider.png",
+      "sha256": "ceb6ed0dcdb5ce1be6a00f9903e291749b2a8fd50c110f157c65a42f6481226a",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A huge orange spider towers over a saffron-colored landscape."
+    },
+    {
+      "number": 80,
+      "source_filename": "The Salt Crown.png",
+      "sha256": "b113e01e0888f4625bfc83de33ef1ef2278ef8e60c868131d8cb33d48253504f",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A crystalline salt crown rises above white terraces."
+    },
+    {
+      "number": 81,
+      "source_filename": "The Shadow Puppeteer.png",
+      "sha256": "88cbcf5704d2b719d2cce17d79e0beb108a553650895387e5ebf2dd55292893e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "An inky puppeteer holds strings over dancing silhouettes."
+    },
+    {
+      "number": 82,
+      "source_filename": "The Shivering Cabinet.png",
+      "sha256": "cf5d8a2014d279dd15d034c42eb88d562c4daa55f4625cb24cb3e0118bf9cdbc",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A tall cabinet's partly open door reveals reaching hands."
+    },
+    {
+      "number": 83,
+      "source_filename": "The Silver Orchard.png",
+      "sha256": "148d8159f41861d7ae857dbd687920fd6c7640f745bb96b93321214d4d11c2b2",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "Silver trees carry shining leaves in a pale orchard."
+    },
+    {
+      "number": 84,
+      "source_filename": "The Sleep Merchant.png",
+      "sha256": "7cb3bc60ce2595ac525272c3c2222d0e3790f041f8f7b2153d3515a8978aa10e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-07.jpg",
+      "observed": "A merchant offers glowing vessels containing sleeping shapes."
+    },
+    {
+      "number": 85,
+      "source_filename": "The Sleepwalking Bridge.png",
+      "sha256": "0d036ce727bac91a9a876907f1d105abb9e508fe2c5163f387d78f3b23e1bd15",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "Sleepwalkers cross a bridge shaped by a looming pale figure."
+    },
+    {
+      "number": 86,
+      "source_filename": "The Smiling Kiln.png",
+      "sha256": "e42257b721681dc8fbd09329ace83354693a0b6361e6742548d962a67a697ed5",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A smiling kiln glows with fire beneath a smoking chimney."
+    },
+    {
+      "number": 87,
+      "source_filename": "The Soot Bride.png",
+      "sha256": "265e3287efbd70c476607e3e0218cdffc15d52199bcae9ae3f07169de433596c",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A soot-dark veil trails from a pale bride under a black plume."
+    },
+    {
+      "number": 88,
+      "source_filename": "The Starved Banquet.png",
+      "sha256": "b511dc0788848d43fc71aa04fff05788e0e5d192cf98d8ced82a1126b2eda721",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "An enormous crowned diner presides over an empty banquet table."
+    },
+    {
+      "number": 89,
+      "source_filename": "The Stilt Walker.png",
+      "sha256": "918a4f396e608f023727907c8da611d742baf34bf7f9dbfb801f57710ce2a13d",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A very tall figure walks on narrow stilts."
+    },
+    {
+      "number": 90,
+      "source_filename": "The Sunken Sun.png",
+      "sha256": "c7190dc70ee879c6807aa9e66a7e97c0ef7b82359da156a7af109be682c8a0a8",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A sun's face lies half submerged in a glowing sea."
+    },
+    {
+      "number": 91,
+      "source_filename": "The Sunstruck Crocodile.png",
+      "sha256": "413e8070d5fc4f711510b2b640406da153e1f9bd6010a7171fd6b2d60e844bee",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A pale crocodile basks with open jaws beneath the sun."
+    },
+    {
+      "number": 92,
+      "source_filename": "The Tall Seamstress.png",
+      "sha256": "cedea198ddee2818e2473801be29fa94ad11223f1791acad941d5385f7161bbb",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A towering seamstress stitches a long red span between arches."
+    },
+    {
+      "number": 93,
+      "source_filename": "The Tangle Guest.png",
+      "sha256": "c1e2b35f3c8bd24d612eb060c73e8179ed22b99ddc5d6926a2b56f021b691d22",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A pale guest is woven from looping strands and openings."
+    },
+    {
+      "number": 94,
+      "source_filename": "The Tar Albatross.png",
+      "sha256": "cc7b62bb05abb2bd36483fb53c338abad14c8ac8e5384329386e6156cd0e6e7f",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "Black tar drips from a spread-winged albatross."
+    },
+    {
+      "number": 95,
+      "source_filename": "The Thorned Librarian.png",
+      "sha256": "3a3c232d7447b2bad3f1b331e2d6fc44e4426178dcd6fb106b9e6a4917633d21",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A thorn-crowned librarian holds an open book among shelves."
+    },
+    {
+      "number": 96,
+      "source_filename": "The Threadbare Duke.png",
+      "sha256": "e2676ce39e4a4f3716f517cfe99bcb2b3b2c90981a2feed1313d78abfdba2a5e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-08.jpg",
+      "observed": "A ragged duke's garments hang in long, fraying strips."
+    },
+    {
+      "number": 97,
+      "source_filename": "The Threaded Monarch.png",
+      "sha256": "d96781caf9e31220d2d5c704c0236c72ba681e975aa4063829c04a4dcee47241",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A radiant monarch controls figures with taut golden threads."
+    },
+    {
+      "number": 98,
+      "source_filename": "The Tooth Collector.png",
+      "sha256": "78ac5ea9439619beb989e751f1724ba8e8630e04b779b15cb284b24cc6ad154a",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A dark collector carries a bag filled with teeth."
+    },
+    {
+      "number": 99,
+      "source_filename": "The Umbrella Beast.png",
+      "sha256": "90bce99e4a0b09de0d8dad8f1619b3c933d6f7753bc2c7d7d3ea1f802e6c270d",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "Umbrellas hang from a towering long-limbed beast."
+    },
+    {
+      "number": 100,
+      "source_filename": "The Unblinking Shepherd.png",
+      "sha256": "d51658f2bb98eab70b9815f55faed22db7d7464b30f117e8bafa0edbdce0f576",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A single bright eye watches sheep moving along a narrow path."
+    },
+    {
+      "number": 101,
+      "source_filename": "The Unquiet Whelk.png",
+      "sha256": "3337814c20f55680c70f28d67f28f208b8a1792e1b0a9ec39ad9c1d80f4bab2d",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "An open spiral whelk shell releases curling shapes over water."
+    },
+    {
+      "number": 102,
+      "source_filename": "The Unseen Horse.png",
+      "sha256": "a8921f829b4de77996bae15f6504195d8997f4ddd892a118c3bb968dc1fabf6c",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A horse's silhouette appears as a gap in the sweeping landscape."
+    },
+    {
+      "number": 103,
+      "source_filename": "The Velvet Eel.png",
+      "sha256": "2a2bcc8d1cc57d7aa8ec6dccce5873f6e6a707dffb9c98930112b012ff447a25",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A long velvet eel curves around arches above water."
+    },
+    {
+      "number": 104,
+      "source_filename": "The Velvet Mole.png",
+      "sha256": "c13d5f846b5bbe0bfe5394f0ab517950a72dc36830040efdf5ab0b1d0512ffca",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A velvet mole pushes great claws out of dark soil."
+    },
+    {
+      "number": 105,
+      "source_filename": "The Velvet Skeleton.png",
+      "sha256": "40df11628ec100e9871dafb511f0055f191cd061b994350a567e243a68786ca2",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A velvet-robed skeleton raises a bare hand beneath the moon."
+    },
+    {
+      "number": 106,
+      "source_filename": "The Wax Regent.png",
+      "sha256": "d1119171e5d774a6ebf6524a9f8fbd0579d2d7cfaf586793b47bdea95a2b16bd",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A candle-covered ruler melts into broad wax drapes."
+    },
+    {
+      "number": 107,
+      "source_filename": "The Whispering Casket.png",
+      "sha256": "f17a396086a5c72c20a3836375d75de63da7e544d85d5468912e3c7a43fab5f4",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "Smoke-like spirits curl from an open casket."
+    },
+    {
+      "number": 108,
+      "source_filename": "The White Furnace.png",
+      "sha256": "23f3ee85b9b0075a9e394b9a475d807ccf9041009b87a42fa4ab7823f8d102bf",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-09.jpg",
+      "observed": "A giant pale figure holds an intense furnace-like light in its chest."
+    },
+    {
+      "number": 109,
+      "source_filename": "The Wicker Sleeper.png",
+      "sha256": "480d3c5cf437010545c2fe6c22aaff39c06de0cdbcea3f57853f204e17af6af6",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-10.jpg",
+      "observed": "A sleeping figure lies inside a woven wicker cradle."
+    },
+    {
+      "number": 110,
+      "source_filename": "Velvet Widow.png",
+      "sha256": "8f2a67e88183d308d43de789f94015fb4cda73537ab877bdc6f57687f6105621",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inspection": "contact-sheet",
+      "contact_sheet": "contact-10.jpg",
+      "observed": "A velvet-clad woman has long spider legs beneath her dress."
+    }
+  ]
+}
