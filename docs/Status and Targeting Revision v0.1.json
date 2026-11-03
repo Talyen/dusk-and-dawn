@@ -133,14 +133,14 @@
   "counts": {
     "card_faces_checked": 496,
     "enemies_checked": 110,
-    "changed_card_descriptions_since_previous_commit": 202,
+    "changed_card_descriptions_since_previous_commit": 287,
     "enemy_entries_with_text_or_type_changes": 62,
-    "self_Keep_faces": 29,
-    "whole_hand_Keep_faces": 12,
+    "self_Keep_faces": 31,
+    "whole_hand_Keep_faces": 13,
     "random_Keep_faces": 8,
     "self_Flip_faces": 7,
-    "whole_hand_Flip_faces": 13,
-    "random_Flip_faces": 11,
+    "whole_hand_Flip_faces": 14,
+    "random_Flip_faces": 12,
     "top_discard_Flip_faces": 3,
     "Poison_applying_faces": 6,
     "Poison_applying_enemies": 3,
@@ -321,10 +321,11 @@
       "number": 8,
       "face": "Revenant",
       "before": "Deal 5 Shadow damage. You may return a card from your discard pile to your hand.",
-      "after": "Deal 5 Shadow damage. You may return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 3 Shadow damage. Keep this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
+        "Keep",
         "Shadow"
       ]
     },
@@ -343,9 +344,9 @@
       "number": 10,
       "face": "Exile",
       "before": "Discard a card. Draw 2 cards.",
-      "after": "Discard a card. Draw 2 cards.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Discard a random card. Draw 2 cards.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -410,9 +411,9 @@
       "number": 16,
       "face": "Gravedigger",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -421,9 +422,9 @@
       "number": 17,
       "face": "Confession",
       "before": "Discard a card. Heal 3 HP. Banish this card.",
-      "after": "Discard a card. Heal 3 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Discard a random card. Heal 3 HP. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -486,9 +487,9 @@
       "number": 23,
       "face": "Sacrifice",
       "before": "Banish another card from your hand. Deal 8 Radiance damage.",
-      "after": "Banish another card from your hand. Deal 8 Radiance damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish another card of your choice from your hand. Deal 8 Radiance damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Radiance"
@@ -520,9 +521,9 @@
       "number": 26,
       "face": "Raven",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -801,9 +802,9 @@
       "number": 52,
       "face": "Empty Reliquary",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -835,7 +836,7 @@
       "number": 55,
       "face": "Seed",
       "before": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
-      "after": "Put up to 2 cards from your discard pile on the bottom of your library.",
+      "after": "Put the bottom 2 cards of your discard pile on the bottom of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -844,9 +845,9 @@
       "number": 56,
       "face": "Ash",
       "before": "Banish another card from your hand. Deal 7 Decay damage.",
-      "after": "Banish another card from your hand. Deal 7 Decay damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 7 Decay damage. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Decay"
@@ -946,9 +947,9 @@
       "number": 65,
       "face": "Open Book",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -1019,9 +1020,9 @@
       "number": 72,
       "face": "Ruined Cathedral",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -1040,9 +1041,9 @@
       "number": 74,
       "face": "Moonlit Crypt",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -1060,7 +1061,7 @@
       "number": 76,
       "face": "Overgrown Ruins",
       "before": "Put a card from your discard pile on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your library.",
+      "after": "Put the top card of your discard pile on top of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -1091,9 +1092,9 @@
       "number": 79,
       "face": "Bridge",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -1167,9 +1168,9 @@
       "number": 86,
       "face": "Sunken Shrine",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -1199,16 +1200,16 @@
       "number": 89,
       "face": "Ascension",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 90,
       "face": "Descent",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "after": "Put this card on the bottom of your library. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -1217,18 +1218,20 @@
       "number": 91,
       "face": "Memory",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
-      "keywords": []
+      "after": "Return a card of your choice from your discard pile to your hand. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
+      "keywords": [
+        "Banish"
+      ]
     },
     {
       "number": 92,
       "face": "Oblivion",
       "before": "Banish another card from your hand. Deal 7 Oblivion damage.",
-      "after": "Banish another card from your hand. Deal 7 Oblivion damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 7 Oblivion damage. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Oblivion"
@@ -1313,16 +1316,19 @@
       "number": 100,
       "face": "Marionette",
       "before": "Put another card from your hand on top of your draw pile.",
-      "after": "Put another card from your hand on top of your library.",
+      "after": "Flip a random card in your hand. Keep it.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Flip",
+        "Keep"
+      ]
     },
     {
       "number": 101,
       "face": "Weaver",
       "before": "Put a card from your discard pile on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your library.",
+      "after": "Put the top 2 cards of your discard pile on top of your library in their current order.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -1331,9 +1337,9 @@
       "number": 102,
       "face": "Unraveler",
       "before": "Banish another card from your hand. Deal 8 Decay damage.",
-      "after": "Banish another card from your hand. Deal 8 Decay damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile. Deal 6 Decay damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Decay"
@@ -1354,9 +1360,9 @@
       "number": 104,
       "face": "Undertaker",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -1414,9 +1420,9 @@
       "number": 110,
       "face": "Resurrector",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -1435,9 +1441,9 @@
       "number": 112,
       "face": "Locust",
       "before": "Banish another card from your hand. Deal 11 Decay damage.",
-      "after": "Banish another card from your hand. Deal 11 Decay damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your library. Deal 8 Decay damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Decay"
@@ -1458,9 +1464,9 @@
       "number": 114,
       "face": "Vulture",
       "before": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "after": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile. Heal 3 HP. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -1543,9 +1549,9 @@
       "number": 122,
       "face": "Shipwreck",
       "before": "Banish another card from your hand. Deal 10 Decay damage.",
-      "after": "Banish another card from your hand. Deal 10 Decay damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 7 Decay damage. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Decay"
@@ -1588,7 +1594,7 @@
       "number": 126,
       "face": "Wilderness",
       "before": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
-      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -1608,9 +1614,9 @@
       "number": 128,
       "face": "Bone Orchard",
       "before": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "after": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile. Heal 3 HP. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -1619,18 +1625,18 @@
       "number": 129,
       "face": "Dawn Market",
       "before": "Discard a card. Draw 2 cards.",
-      "after": "Discard a card. Draw 2 cards.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Discard a random card. Draw 2 cards.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 130,
       "face": "Night Market",
       "before": "Banish another card from your hand. Draw 3 cards.",
-      "after": "Banish another card from your hand. Draw 3 cards.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish a random other card from your hand. Draw 3 cards.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -1650,9 +1656,9 @@
       "number": 132,
       "face": "Empty Banquet Hall",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -1672,7 +1678,7 @@
       "number": 134,
       "face": "Underground Cavern",
       "before": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
-      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Return the bottom card of your discard pile to your hand.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -1738,9 +1744,9 @@
       "number": 140,
       "face": "Sunken Library",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -1770,10 +1776,12 @@
       "number": 143,
       "face": "Clockwork City",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Draw 1 card. Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Flip"
+      ]
     },
     {
       "number": 144,
@@ -1788,7 +1796,7 @@
       "number": 145,
       "face": "Sewing Needle",
       "before": "Put a card from your discard pile on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your library.",
+      "after": "Put the top card of your discard pile on top of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -1797,9 +1805,9 @@
       "number": 146,
       "face": "Scissors",
       "before": "Banish another card from your hand. Deal 7 Decay damage, ignoring Ward.",
-      "after": "Banish another card from your hand. Deal 7 Decay damage, ignoring Ward.",
-      "changed": false,
-      "review": "existing effect checked against revised timing",
+      "after": "Banish the top card of your discard pile. Deal 5 Decay damage, ignoring Ward.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Ward",
         "Banish",
@@ -1810,10 +1818,12 @@
       "number": 147,
       "face": "Compass",
       "before": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
-      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 148,
@@ -1910,7 +1920,7 @@
       "number": 156,
       "face": "Loaded Dice",
       "before": "Look at the top 3 cards of your draw pile. Put 2 in your hand and the rest on the bottom in any order.",
-      "after": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -1951,9 +1961,9 @@
       "number": 160,
       "face": "Torn Letter",
       "before": "Banish another card from your hand.",
-      "after": "Banish another card from your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -1982,10 +1992,12 @@
       "number": 163,
       "face": "Metronome",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Reverse the top 2 cards of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 164,
@@ -2002,10 +2014,12 @@
       "number": 165,
       "face": "Lens",
       "before": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
-      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 166,
@@ -2022,7 +2036,7 @@
       "number": 167,
       "face": "Comb",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Turn your hand to its light faces.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2053,10 +2067,12 @@
       "number": 170,
       "face": "Rag Doll",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
-      "keywords": []
+      "after": "Return the top 2 cards of your discard pile to your hand. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
+      "keywords": [
+        "Banish"
+      ]
     },
     {
       "number": 171,
@@ -2074,27 +2090,29 @@
       "number": 172,
       "face": "Asymmetry",
       "before": "Draw 2 cards. Discard a card.",
-      "after": "Draw 2 cards. Discard a card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Draw 2 cards. Discard a random card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 173,
       "face": "Unity",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
-      "keywords": []
+      "after": "Draw 1 card. Keep your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
+      "keywords": [
+        "Keep"
+      ]
     },
     {
       "number": 174,
       "face": "Fragmentation",
       "before": "Banish another card from your hand. Deal 4 Decay damage twice.",
-      "after": "Banish another card from your hand. Deal 4 Decay damage twice.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 3 Decay damage twice. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Decay"
@@ -2104,7 +2122,7 @@
       "number": 175,
       "face": "Convergence",
       "before": "Put up to 2 cards from your discard pile on top of your draw pile in any order.",
-      "after": "Put up to 2 cards from your discard pile on top of your library in any order.",
+      "after": "Put the top 2 cards of your discard pile on top of your library in their current order.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2113,7 +2131,7 @@
       "number": 176,
       "face": "Divergence",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "after": "Put this card on the bottom of your library. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2142,16 +2160,16 @@
       "number": 179,
       "face": "Attraction",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Draw 2 cards.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 180,
       "face": "Repulsion",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "after": "Put your hand on the bottom of your library. Draw 3 cards.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2171,9 +2189,9 @@
       "number": 182,
       "face": "Levitation",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -2192,9 +2210,9 @@
       "number": 184,
       "face": "Frenzy",
       "before": "Discard a card. Deal 10 Release damage.",
-      "after": "Discard a card. Deal 10 Release damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Discard a random card. Deal 10 Release damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Release"
       ]
@@ -2292,19 +2310,21 @@
       "number": 193,
       "face": "High Tide",
       "before": "Return up to 2 cards from your discard pile to your hand.",
-      "after": "Return up to 2 cards from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top 2 cards of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 194,
       "face": "Low Tide",
       "before": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
-      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Put the top card of your library on the bottom. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 195,
@@ -2344,7 +2364,7 @@
       "number": 198,
       "face": "Smuggler",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 2 cards.",
-      "after": "Put another card from your hand on the bottom of your library. Draw 2 cards.",
+      "after": "Put this card on the bottom of your library. Draw 2 cards.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2364,9 +2384,9 @@
       "number": 200,
       "face": "Flag Burner",
       "before": "Banish another card from your hand. Apply 3 Burn.",
-      "after": "Banish another card from your hand. Apply 3 Burn.",
-      "changed": false,
-      "review": "existing effect checked against revised timing",
+      "after": "Apply 3 Burn. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Burn",
         "Banish"
@@ -2454,27 +2474,27 @@
       "number": 208,
       "face": "Ferryman",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 209,
       "face": "Auctioneer",
       "before": "Discard a card. Draw 2 cards.",
-      "after": "Discard a card. Draw 2 cards.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Discard a random card. Draw 2 cards.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 210,
       "face": "Scavenger",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -2515,16 +2535,16 @@
       "number": 214,
       "face": "Stray Hound",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 215,
       "face": "Archivist",
       "before": "Put a card from your discard pile on top of your draw pile. Scry.",
-      "after": "Put a card from your discard pile on top of your library. Scry.",
+      "after": "Put the bottom card of your discard pile on top of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": [
@@ -2535,9 +2555,9 @@
       "number": 216,
       "face": "Bookworm",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -2546,10 +2566,12 @@
       "number": 217,
       "face": "Surveyor",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 218,
@@ -2566,9 +2588,9 @@
       "number": 219,
       "face": "Chimney Sweep",
       "before": "Remove all your Burn. Banish a card from your discard pile.",
-      "after": "Remove all your Burn. Banish a card from your discard pile.",
-      "changed": false,
-      "review": "existing effect checked against revised timing",
+      "after": "Remove all your Burn. Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Burn",
         "Banish"
@@ -2676,7 +2698,7 @@
       "number": 229,
       "face": "Dandelion",
       "before": "Put up to 2 other cards from your hand on the bottom of your draw pile. Draw that many cards.",
-      "after": "Put up to 2 other cards from your hand on the bottom of your library. Draw that many cards.",
+      "after": "Put your hand on the bottom of your library. Draw 3 cards.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2733,9 +2755,9 @@
       "number": 234,
       "face": "Shed Skin",
       "before": "Banish another card from your hand. Draw 1 card.",
-      "after": "Banish another card from your hand. Draw 1 card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Draw 1 card. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -2755,9 +2777,9 @@
       "number": 236,
       "face": "Corpse Flower",
       "before": "Banish a card from your discard pile. Deal 6 Decay damage.",
-      "after": "Banish a card from your discard pile. Deal 6 Decay damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile. Deal 6 Decay damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
         "Decay"
@@ -2843,9 +2865,9 @@
       "number": 244,
       "face": "Silverfish",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -2876,7 +2898,7 @@
       "number": 247,
       "face": "Quill",
       "before": "Put a card from your discard pile on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your library.",
+      "after": "Put the top card of your discard pile on top of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2885,9 +2907,9 @@
       "number": 248,
       "face": "Eraser",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -2920,7 +2942,7 @@
       "number": 251,
       "face": "Sieve",
       "before": "Look at the top 4 cards of your draw pile. Put 1 in your hand and discard the rest.",
-      "after": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest.",
+      "after": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2929,7 +2951,7 @@
       "number": 252,
       "face": "Funnel",
       "before": "Put another card from your hand on top of your draw pile.",
-      "after": "Put another card from your hand on top of your library.",
+      "after": "Put your hand on top of your library. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -2993,18 +3015,20 @@
       "number": 258,
       "face": "Water Clock",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Draw 1 card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Keep"
+      ]
     },
     {
       "number": 259,
       "face": "Rope Ladder",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -3122,9 +3146,9 @@
       "number": 270,
       "face": "Funeral Veil",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3142,25 +3166,25 @@
       "number": 272,
       "face": "Backstage",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 273,
       "face": "Grand Staircase",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 274,
       "face": "Spiral Well",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "after": "Put this card on the bottom of your library. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -3180,9 +3204,9 @@
       "number": 276,
       "face": "Sewer",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3237,12 +3261,10 @@
       "number": 281,
       "face": "Counting House",
       "before": "Banish another card from your hand. Draw 2 cards.",
-      "after": "Banish another card from your hand. Draw 2 cards.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "after": "Put a random card from your hand on the bottom of your library. Draw 2 cards.",
+      "changed": true,
+      "review": "updated thematic recipe",
+      "keywords": []
     },
     {
       "number": 282,
@@ -3281,9 +3303,9 @@
       "number": 285,
       "face": "Tidal Causeway",
       "before": "Exchange a card in your hand with one in your discard pile.",
-      "after": "Exchange a card in your hand with one in your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Exchange a random card in your hand with the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -3356,9 +3378,9 @@
       "number": 292,
       "face": "Abandoned Fairground",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -3387,10 +3409,12 @@
       "number": 295,
       "face": "Paved Road",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 296,
@@ -3430,9 +3454,9 @@
       "number": 299,
       "face": "Crown Jeweler",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Turn the top card of your discard pile to its light face. Return it to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -3495,10 +3519,12 @@
       "number": 305,
       "face": "Clockmaker",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Put the top card of your discard pile on top of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 306,
@@ -3538,7 +3564,7 @@
       "number": 309,
       "face": "Parchment Scribe",
       "before": "Put a card from your discard pile on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your library.",
+      "after": "Put the bottom card of your discard pile on top of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -3547,9 +3573,9 @@
       "number": 310,
       "face": "Ink Drinker",
       "before": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "after": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile. Heal 3 HP. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3569,9 +3595,9 @@
       "number": 312,
       "face": "Portrait Eraser",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3614,9 +3640,9 @@
       "number": 316,
       "face": "Scent Thief",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3735,7 +3761,7 @@
       "number": 327,
       "face": "Thread Spinner",
       "before": "Put a card from your discard pile on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your library.",
+      "after": "Put the top card of your discard pile on top of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -3744,9 +3770,9 @@
       "number": 328,
       "face": "Thread Cutter",
       "before": "Banish another card from your hand.",
-      "after": "Banish another card from your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3766,9 +3792,9 @@
       "number": 330,
       "face": "Story Swallower",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3811,9 +3837,9 @@
       "number": 334,
       "face": "Path Eraser",
       "before": "Banish another card from your hand.",
-      "after": "Banish another card from your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your library.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3855,9 +3881,9 @@
       "number": 338,
       "face": "Oath Breaker",
       "before": "Banish another card from your hand. Draw 1 card.",
-      "after": "Banish another card from your hand. Draw 1 card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Draw 1 card. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -3888,36 +3914,38 @@
       "number": 341,
       "face": "Doll Mender",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Turn the top card of your discard pile to its light face. Return it to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 342,
       "face": "Doll Thief",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 343,
       "face": "Music Conductor",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Reverse the top 3 cards of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 344,
       "face": "Improviser",
       "before": "Draw 2 cards. Discard a card.",
-      "after": "Draw 2 cards. Discard a card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Draw 2 cards. Discard a random card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -3935,9 +3963,9 @@
       "number": 346,
       "face": "Tide Wanderer",
       "before": "Exchange a card in your hand with one in your discard pile.",
-      "after": "Exchange a card in your hand with one in your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Exchange a random card in your hand with the bottom card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -4338,7 +4366,7 @@
       "number": 383,
       "face": "Silver Birch",
       "before": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
-      "after": "Put up to 2 cards from your discard pile on the bottom of your library.",
+      "after": "Put the bottom 2 cards of your discard pile on the bottom of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -4370,9 +4398,9 @@
       "number": 386,
       "face": "Fallen Leaf",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -4557,9 +4585,9 @@
       "number": 403,
       "face": "Silk Glove",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -4588,9 +4616,9 @@
       "number": 406,
       "face": "Unwoven Reeds",
       "before": "Banish another card from your hand.",
-      "after": "Banish another card from your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -4678,9 +4706,9 @@
       "number": 414,
       "face": "Loose Thread",
       "before": "Banish another card from your hand.",
-      "after": "Banish another card from your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -4768,9 +4796,9 @@
       "number": 422,
       "face": "Empty Locket",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -4791,9 +4819,9 @@
       "number": 424,
       "face": "Melted Key",
       "before": "Banish a card from your discard pile. Banish this card.",
-      "after": "Banish a card from your discard pile. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -4847,7 +4875,7 @@
       "number": 429,
       "face": "Feather Quill",
       "before": "Put a card from your discard pile on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your library.",
+      "after": "Put the top card of your discard pile on top of your library.",
       "changed": true,
       "review": "updated thematic recipe",
       "keywords": []
@@ -4856,9 +4884,9 @@
       "number": 430,
       "face": "Ink Blot",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -4878,9 +4906,9 @@
       "number": 432,
       "face": "Paint Scraper",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the top card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -4943,9 +4971,9 @@
       "number": 438,
       "face": "Empty Needlecase",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -5154,10 +5182,12 @@
       "number": 457,
       "face": "Hedge Garden",
       "before": "Look at the top 3 cards of your draw pile. Put them back in any order.",
-      "after": "Look at the top 3 cards of your library. Put them back in any order.",
+      "after": "Reverse the top 3 cards of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Scry"
+      ]
     },
     {
       "number": 458,
@@ -5185,9 +5215,9 @@
       "number": 460,
       "face": "Dry Fountain",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -5196,10 +5226,12 @@
       "number": 461,
       "face": "Golden Atrium",
       "before": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
-      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Draw 1 card. Turn your hand to its light faces. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": []
+      "keywords": [
+        "Banish"
+      ]
     },
     {
       "number": 462,
@@ -5249,9 +5281,9 @@
       "number": 466,
       "face": "Underground Mill",
       "before": "Discard a card. Draw 2 cards.",
-      "after": "Discard a card. Draw 2 cards.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Discard a random card. Draw 2 cards.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -5300,18 +5332,18 @@
       "number": 471,
       "face": "Grand Library",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 472,
       "face": "Forgotten Archive",
       "before": "Banish a card from your discard pile.",
-      "after": "Banish a card from your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Banish the bottom card of your discard pile.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish"
       ]
@@ -5354,18 +5386,18 @@
       "number": 476,
       "face": "Ship Graveyard",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
       "number": 477,
       "face": "Ivory Bridge",
       "before": "Exchange a card in your hand with one in your discard pile.",
-      "after": "Exchange a card in your hand with one in your discard pile.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the top card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -5394,9 +5426,9 @@
       "number": 480,
       "face": "Stone Stairway",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {
@@ -5455,9 +5487,9 @@
       "number": 486,
       "face": "Timeless Tower",
       "before": "Return a card from your discard pile to your hand.",
-      "after": "Return a card from your discard pile to your hand.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Return the bottom card of your discard pile to your hand.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": []
     },
     {

@@ -5467,11 +5467,11 @@
   "contact_sheet_files": [
     {
       "path": "card-artwork-review/cards-01.jpg",
-      "sha256": "546b00884de05e127516b993714c6174c4ac20582c3203d3fb86ca55d8ba14dc"
+      "sha256": "7e2e1c8c60657101fb701fa4c86602bc0e89b7896c8d9bd9eb0989d3c9295cbf"
     },
     {
       "path": "card-artwork-review/cards-02.jpg",
-      "sha256": "8e7191b115ee252bf7c001850b52e7ed111284e0f2dd6f5acee6797b0d9e9dc8"
+      "sha256": "e95696bbb10388264628964397f7884928921102daa24c5d7315c9137a348ceb"
     },
     {
       "path": "card-artwork-review/cards-03.jpg",
@@ -5479,79 +5479,79 @@
     },
     {
       "path": "card-artwork-review/cards-04.jpg",
-      "sha256": "10eb88a015527dcde7f1a7af5f00fa648f1e99feaa386ac72dc1664d20c3c834"
+      "sha256": "b8d6e41c0ac499668337055f0a5db1380a1d30aab8bb3f77e6a1b452a2650341"
     },
     {
       "path": "card-artwork-review/cards-05.jpg",
-      "sha256": "6de8c303ee9e2a3dd908813f5f4caa6a2e32803ef3bcd243f927554133dd7ab7"
+      "sha256": "917dcd62e1eefcf81ea80f48bce7d0161d1f351a6efe60ebc1601a1481e7278f"
     },
     {
       "path": "card-artwork-review/cards-06.jpg",
-      "sha256": "d72d0c2703006063e7c5235ca93de6c004950b458f15251f7688a60e0b2420f1"
+      "sha256": "97d835e9bd4260ea4c0ce741a3138a35cbf24a4ec5046e43188bb5d721e55ae0"
     },
     {
       "path": "card-artwork-review/cards-07.jpg",
-      "sha256": "6f8dfcc9fe57e92465d41a4aa6bf82aaa9dbb31c5d7198f6e9054edcc5321446"
+      "sha256": "a09b10f8e086d6a334c7b1ed95b803eae8b10d186a6a6af560564aa596223f31"
     },
     {
       "path": "card-artwork-review/cards-08.jpg",
-      "sha256": "f392f7d2c5632a584d1733fe602198e859d1513627eb02c7f721966b3b42f526"
+      "sha256": "7b3e99c661d34d9a1be481108a43f2a25ed0a75c2c5edf02b29165ae8feb6a93"
     },
     {
       "path": "card-artwork-review/cards-09.jpg",
-      "sha256": "7c86f66c977e1d64f72e944a6024f5c2c52f6f41a913bb4a50465ef2207d50b8"
+      "sha256": "8eeb65c26fd642c28e906b267a0400b49df7389c82e33327e35fb3b1ee5ad20a"
     },
     {
       "path": "card-artwork-review/cards-10.jpg",
-      "sha256": "e0bb5448d576781f7b46c27448afd363479d3de4ef3c045b55f75a955cc1705d"
+      "sha256": "3b28a37aa33a0d605f7a593fb26f626828111ae49e83a1cc358afffb46a69739"
     },
     {
       "path": "card-artwork-review/cards-11.jpg",
-      "sha256": "d6d620fd5d5ebbebb1e10adf8ed7f1dfd8214b717d00587c1718456d506db0b0"
+      "sha256": "9fa05242104a7737a6c8c631ad3a33e9e736c65c20494a0c65eec96241737c49"
     },
     {
       "path": "card-artwork-review/cards-12.jpg",
-      "sha256": "7b2ad8d0d4251bfa40c4d82459c924e84443858cb40480e83a492b19b83c0df9"
+      "sha256": "933477c0416ba374574886d5fee117401f0083ee7e67a20fb1b213b39af93581"
     },
     {
       "path": "card-artwork-review/cards-13.jpg",
-      "sha256": "c30fb3775dde3fde6f5ddbb0711de23e68883646904b2b5ef88215a0a49ea4d7"
+      "sha256": "b116e6b6ba48d00793095c0d2637c68bfb2745c1cff0d5e00b911476f43b8ef2"
     },
     {
       "path": "card-artwork-review/cards-14.jpg",
-      "sha256": "98eda87ad3d3e555c4aaee2ca5040e4ead6915a21b70a636a3f49be0c81beec5"
+      "sha256": "d271948932399af5ec7d58c61e09f8a0f65f2384ea7972ee525ef415c3ff6024"
     },
     {
       "path": "card-artwork-review/cards-15.jpg",
-      "sha256": "902e132610f838a1155a7f66f9e4660f1427fc0a87833c3a0f245fa07c285e9f"
+      "sha256": "e860a9726354daee8ab148d31a667b89777bce8bf8a792b76d3a0f3367e000ec"
     },
     {
       "path": "card-artwork-review/cards-16.jpg",
-      "sha256": "efffffe208c055aaa5dbb7e64e5cf59d4b7d4d8f0a2ff998408e16fe4668fb5e"
+      "sha256": "8cd48fd4477619ee984b8f5c9a4ff957f37998b22419da6c7282f0280a95d73f"
     },
     {
       "path": "card-artwork-review/cards-17.jpg",
-      "sha256": "adab8f36b4572e6573c22cdbb2a706f3d98d920680e28fad871862e10bca6e66"
+      "sha256": "93e32fc89f17d6e77fda734166a9b8ddd3ef726a4b72cf61b38655676403db71"
     },
     {
       "path": "card-artwork-review/cards-18.jpg",
-      "sha256": "d4bfd5464abf511d74a13760472d397e5dbf0f1b1160e5f548f0ace0835941c7"
+      "sha256": "aba669f3725bbc52602b8a93713ce9af4aa7f35f4a6bc01a25f9e54e3057d1e9"
     },
     {
       "path": "card-artwork-review/cards-19.jpg",
-      "sha256": "3b0be86f99c1aa2e44be1b564e6f3c9d527e2250c11435b5c4230d51176cc10d"
+      "sha256": "168303c13817a3965958e7d1338a73132808c7f76120b527d6696cacbcf9c11a"
     },
     {
       "path": "card-artwork-review/cards-20.jpg",
-      "sha256": "04acd4392631154c5bdb998147c857fc3e5abfe2a2493cf0ceec17da0a3ade24"
+      "sha256": "8d925248d1978546b98c5474781823f74d15f516febe443bd245542aa536692e"
     },
     {
       "path": "card-artwork-review/cards-21.jpg",
-      "sha256": "c883bddfcfd926da0ee8f8583fce2ef77b54d326629f1623184c3168dff546ee"
+      "sha256": "245c74b76956170fe3c1c9392bea313e9a8dc1534ad4f92c110e46c745ab1fe1"
     },
     {
       "path": "card-artwork-review/cards-22.jpg",
-      "sha256": "43760087c0e40d740fff3e3faae656defefff3b3019b60353f56b9268f0ffe69"
+      "sha256": "e487fc1c270a9efaf5a0aa9d3ee784c9d8b3c363f076fdddf66affad69449bca"
     },
     {
       "path": "card-artwork-review/cards-23.jpg",
@@ -5559,35 +5559,35 @@
     },
     {
       "path": "card-artwork-review/cards-24.jpg",
-      "sha256": "39b810786aa945c75ad89a5ac262920223aca127ce2e64ab7eaf46d89ca1e146"
+      "sha256": "6d3a7f75ae895d92ed8a83c08cdf3a24560f78e3310cc05c2cef902f44073e4a"
     },
     {
       "path": "card-artwork-review/cards-25.jpg",
-      "sha256": "1c0accf4e4c4c4282686f8803ace72dbe8083f6634e5753ce3e9b32a46791bcb"
+      "sha256": "27613869067d6dd2a9157c62af55d11cb558398a134f5a0de2d788ef40c72468"
     },
     {
       "path": "card-artwork-review/cards-26.jpg",
-      "sha256": "91647452443cdc876c650ce2b0a1c86d7006ae8f09aab228dd4d7161c02f1391"
+      "sha256": "fd589a3713ee449d8bd8fe5379de96ea5a73457fc1b75068e3fd0d871bcf0513"
     },
     {
       "path": "card-artwork-review/cards-27.jpg",
-      "sha256": "08531cf3cfdb7f70600d4442c75b3eab20ac813ce826ed19e26395384311b16c"
+      "sha256": "7e5a3ce1791bcf834a20becfdcf74d95aa9b8584451b30f6a7be674b2c16c317"
     },
     {
       "path": "card-artwork-review/cards-28.jpg",
-      "sha256": "7bbbd42f76792343b99cd293b7487d5a89f396283aaf9e6bd1eda6ec58c70a9c"
+      "sha256": "b02ef6cb09040c40888d51cc66a8da31fbee2dbae705dd1055fd248855e45f66"
     },
     {
       "path": "card-artwork-review/cards-29.jpg",
-      "sha256": "9f5bb20d4dceb6e153901d853ed22351fd703dc4c6d1e5d373da0e3e4d046ab9"
+      "sha256": "a467b3565f1901d525ca144cee65ca7b34528793ffe78693db30b46bdf9138cf"
     },
     {
       "path": "card-artwork-review/cards-30.jpg",
-      "sha256": "ea373d0490dcf42f8d80c9245ea7f6e702b9ce551253f34044e626b2c2df11c4"
+      "sha256": "adbd328885cde05f35842de6148119597fa616bf38a5b5004b9101a522eab94a"
     },
     {
       "path": "card-artwork-review/cards-31.jpg",
-      "sha256": "69165f66b83da57e66221c340b7bee5827357c6d361d806e78e2836981a5492a"
+      "sha256": "1e865478a3a1e3e409997fcfafe1762564261ffb0c273415bea6fbd23cba5f3a"
     }
   ]
 }

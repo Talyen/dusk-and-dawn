@@ -172,7 +172,7 @@
       "definition": "Give the stated cards a Keep marker. They survive this turn’s discard on their current faces. “Keep this card” returns the resolving source to your hand, marked, when its effect finishes.",
       "notes": [
         "“Keep your hand” marks the cards currently in hand and excludes the resolving source. Random targets are picked automatically without replacement; use all available cards if fewer exist.",
-        "Kept cards remain playable and count toward the 8-card cap. A source returning through Keep also obeys the cap; if no slot remains, discard it instead. Every current self-Keep effect leaves room for its source.",
+        "Kept cards remain playable and count toward the 8-card cap. A self-Keep source returns only if space remains; otherwise discard it. Water Clock draws before self-Keep, so a full hand can prevent that return. Preview the failure.",
         "A card leaving the hand loses its marker. Kept cards lose their markers after the end-turn discard. Next turn draw up to 5 new cards within the 8-card cap.",
         "Enemy held-card effects check the actual hand after discard. There is no retained-card snapshot or prior identity tracking."
       ]

@@ -25,18 +25,18 @@ RULES={'Ward': {'definition': 'Absorb incoming damage before HP. At the start of
                         'keeps its base hits. Advance the pattern normally.',
           'notes': ['Hush starts immediately and ends after the action’s aftereffects, including traits active while the '
                     'intent is shown.',
-                    'Hush does not remove existing Ward, Bless or Curse, undo damage or revealed information, or undo an already-applied next-turn effect. Ward '
-                    'still halves at the enemy action start.',
+                    'Hush does not remove existing Ward, Bless or Curse, undo damage or revealed information, or undo an '
+                    'already-applied next-turn effect. Ward still halves at the enemy action start.',
                     'Hush does not stack. A pure Hush card needs a suppressible ability or trait in the current intent. A '
                     'conditional trait counts even before its condition is met.',
                     'Every current Hush face Banishes its source.']},
- 'Keep': {'definition': 'Give the stated cards a Keep marker. They survive this turn’s discard on their current faces. “Keep this card” '
-                        'returns the resolving source to your hand, marked, when its effect finishes.',
+ 'Keep': {'definition': 'Give the stated cards a Keep marker. They survive this turn’s discard on their current faces. '
+                        '“Keep this card” returns the resolving source to your hand, marked, when its effect finishes.',
           'notes': ['“Keep your hand” marks the cards currently in hand and excludes the resolving source. Random targets '
                     'are picked automatically without replacement; use all available cards if fewer exist.',
-                    'Kept cards remain playable and count toward the 8-card cap. A source returning through Keep also obeys '
-                    'the cap; if no slot remains, discard it instead. Every current self-Keep effect leaves room for its '
-                    'source.',
+                    'Kept cards remain playable and count toward the 8-card cap. A self-Keep source returns only if space '
+                    'remains; otherwise discard it. Water Clock draws before self-Keep, so a full hand can prevent that '
+                    'return. Preview the failure.',
                     'A card leaving the hand loses its marker. Kept cards lose their markers after the end-turn discard. '
                     'Next turn draw up to 5 new cards within the 8-card cap.',
                     'Enemy held-card effects check the actual hand after discard. There is no retained-card snapshot or '

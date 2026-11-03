@@ -2,7 +2,7 @@
 from build import *
 from render import RULES,THOUGHTS,ImageCache
 from rules_contract import STATUS_POLICY
-from status_model import halve,apply_dot,tick_sequence,Combatant,end_turn_dots,Card,automatic_targets,keep_source,ScryView,add_stacks,attack_damage,remove_statuses,frozen_action,resolve_attack_statuses
+from status_model import halve,apply_dot,tick_sequence,Combatant,end_turn_dots,Card,automatic_targets,keep_source,ScryView,add_stacks,attack_damage,remove_statuses,frozen_action,resolve_attack_statuses,reverse_top,fixed_discard_targets,exchange_random_with_discard,finish_source
 import random
 from urllib.parse import unquote,urlsplit
 import base64,io
@@ -64,7 +64,7 @@ def validate():
  check(rules['keyword_rules']==RULES and rules['no_separate_theme_tags'] and rules['damage_types']==TYPES,'structured rule contract matches generation source')
  check(len(review['cards'])==496 and len(review['enemies'])==110 and all(x['reason'] and x['judgment']=='strong-fit-proposal' for x in review['cards']+review['enemies']),'606 individual thematic judgments and rationales')
  byface={c['face']:c['effect'] for c in cs}
- for name in [CARD+'.html',ENEMY+'.html',GAME+'.html','Full Content Review v0.1.html','Status and Targeting Revision v0.1.html','Bless Curse and Control Review v0.1.html']:
+ for name in [CARD+'.html',ENEMY+'.html',GAME+'.html','Full Content Review v0.1.html','Status and Targeting Revision v0.1.html','Bless Curse and Control Review v0.1.html','Card Flow Review v0.1.html']:
   path=DOCS/name;s=path.read_text();doc=Document();doc.feed(s)
   check(len(doc.ids)==len(set(doc.ids)),name+': unique HTML IDs')
   check(all(byface.get(n)==eff for n,eff in doc.effects),name+': embedded face examples match canonical text')
@@ -115,7 +115,7 @@ def validate():
  check(not re.search(r'(?:Keep|Flip) (?:a card|up to|the chosen)|Turn a card',current),'no selection prompt remains for Keep, Flip or directional turns')
  check(all(c['automatic_targets']==automatic_target_index(c['effect']) for c in cs),'operational targeting metadata derives from complete descriptions')
  check(all(len([x for x in c['automatic_targets'] if x['op']==op])==len(re.findall(r'\b'+op+r'\b',c['effect'])) for c in cs for op in ['Keep','Flip','Turn']),'every Keep and Flip instruction has an explicit automatic target')
- check(all(c['effect'] in ['Keep this card.','Flip this card. Keep this card.'] for c in cs if 'Keep this card.' in c['effect']),'all current self-Keep effects leave the vacated source slot available')
+ check([c['face'] for c in cs if 'Keep this card.' in c['effect'] and 'Draw ' in c['effect']]==['Water Clock'],'the one self-Keep draw source has an explicit hand-cap failure case')
  check(all(x['selection_prompts']==0 for c in cs for x in c['automatic_targets']),'automatic-target instructions expose zero selection prompts')
  check(not re.search(r'\b(Mark|Weaken)\b',current) and 'Mark' not in RULES and 'Weaken' not in RULES,'retired keywords absent from current card/enemy effects and rule keys')
  check(all(k in RULES and k in MECHANICS for k in ['Bless','Curse','Freeze','Purge','Cleanse']),'approved keyword directions present')
@@ -194,6 +194,41 @@ def validate():
  check(frozen_action(True)=={'outcome':'skip','advance':True,'clear_Freeze':True},'uncontested Freeze skips exactly one scheduled action and advances')
  check(frozen_action(False,'Fire')['outcome']=='act','an unrelated Fire event does not create an unresolved Freeze state')
  check(all(frozen_action(True,event)['outcome']=='unresolved' for event in ['direct_attack','Fire']),'contested thaw events remain unresolved in reference previews')
+ # Individual card-flow review: all former prompts, deliberate exceptions and new source/pile semantics.
+ flow=readjson(DOCS/'Card Flow Review v0.1.json')
+ check(len(flow['entries'])==122 and len({r['number'] for r in flow['entries']})==122,'all 122 formerly flagged faces have individual flow judgments')
+ check({r['number'] for r in flow['remaining_exceptions']}=={23,91,107,126,156,251},'only six documented deliberate selection exceptions remain')
+ check(flow['counts']['automatic_reworks']==116 and flow['counts']['current_faces_with_selection_flags']==6,'116 prompt removals and six exceptions accounted for')
+ check('Every current self-Keep' not in RULES['Keep']['notes'][1] and 'Water Clock' in RULES['Keep']['notes'][1],'hand-cap text acknowledges the paid-draw self-Keep exception')
+ check(all(c['selection_exception']['commitment']==('before_commit_visible_choice' if c['selection_exception']['kind'] in ['choose-offering','recall-specific-card'] else 'after_commit_hidden_inspection') for c in cs if 'selection_exception' in c),'visible exceptions select before commit; hidden inspections commit before reveal')
+ check({i for i,c in enumerate(cs,1) if 'selection_exception' in c}=={23,91,107,126,156,251},'exception metadata matches the six authored cases')
+ check(all(cs[r['number']-1]['effect']==r['after'] and r['reason'] for r in flow['entries']),'flow report effects and rationales match canonical descriptions')
+ check(all(r['number'] in {23,91,107,126,156,251} or not r['current_selection_flags'] for r in flow['entries']),'automatic reworks have no residual selection instruction')
+ sequence=[Card('a'),Card('b'),Card('c'),Card('d')];reverse_top(sequence,3)
+ example('reverse only the available top block',[c.id for c in sequence],['c','b','a','d'])
+ reverse_top(sequence,2);example('two-beat reversal',[c.id for c in sequence],['b','c','a','d'])
+ tiny=[Card('only')];reverse_top(tiny,3);check(len(tiny)==1 and tiny[0].id=='only','short library reversal uses available cards only')
+ old=[Card('oldest'),Card('middle'),Card('newest')]
+ check(not fixed_discard_targets(old,0),'a zero-count fixed transfer moves no cards')
+ example('fixed discard top two in pile order',[c.id for c in fixed_discard_targets(old,2)],['newest','middle'])
+ example('fixed discard bottom two in pile order',[c.id for c in fixed_discard_targets(old,2,'bottom')],['middle','oldest'])
+ example('hand-cap limited group return',[c.id for c in fixed_discard_targets(old,2,space=1)],['newest'])
+ held=[Card('out')];past=[Card('incoming')];pair=exchange_random_with_discard(held,past,'top',random.Random(1))
+ check(pair[0].id=='out' and held[0].id=='incoming' and past[0].id=='out','random exchange selects outgoing before incoming arrives and swaps atomically')
+ check(exchange_random_with_discard([],past,'top',random.Random(1)) is None,'exchange requires both original zones')
+ source=Card('source');piles={'resolving':[source],'library':[source],'hand':[],'discard':[],'banished':[]}
+ check(finish_source(source,piles)=='library' and not piles['discard'] and not piles['resolving'],'self-tucked source is not also discarded')
+ piles['hand'].append(piles['library'].pop(0));check(finish_source(source,piles)=='hand' and sum(c is source for items in piles.values() for c in items)==1,'empty-library self-tuck can redraw the same physical source without a copy')
+ normal=Card('normal');piles={'resolving':[normal],'hand':[],'library':[],'discard':[],'banished':[]};check(finish_source(normal,piles)=='discard' and piles['discard']==[normal],'ordinary resolving source enters discard once')
+ clock=Card('clock');fullhand=[Card(str(i)) for i in range(7)];fullhand.append(Card('drawn'))
+ check(not keep_source(clock,fullhand),'Water Clock draw can fill its vacated slot and prevent self-return')
+ piles={'resolving':[clock],'hand':fullhand,'library':[],'discard':[],'banished':[]};check(finish_source(clock,piles)=='discard','failed self-Keep leaves the source to discard normally')
+ performer=Card('performer');hand=[performer];picked=automatic_targets(hand,'random',random.Random(1))[0];picked.face^=1;picked.kept=True
+ check(picked is performer and performer.face==1 and performer.kept,'Marionette flips and Keeps the same temporary target')
+ revenant=Card('revenant');hand=[revenant];mana=3;total=0
+ while mana:
+  hand.remove(revenant);revenant.kept=False;mana-=1;total+=attack_damage([3],0,0,'flat')[0];keep_source(revenant,hand)
+ check(total==9 and mana==0 and hand==[revenant],'three repeated Revenant plays spend three mana and do not duplicate their source')
  out={'status':'passed','date':'2026-11-03','check_count':len(checks),'checked':checks,'arithmetic_examples':examples,'limitations':['Static document/data validation and arithmetic boundary cases only.','Focused status/target reference model only; not a full combat engine, balance simulation, human playtest or full-resolution art review.','Local-file browser preview denied by policy; no workaround attempted. Rendering and interactive filters unverified.'],'counts':review['counts']}
  writejson(DOCS/'Content Validation v0.1.json',out)
  print(f"PASS: {len(checks)} focused checks, 606 source-artwork hashes, 41 sheets, 110 embedded thumbnails; no playtest claim.")

@@ -11,7 +11,7 @@
     "Curse can reduce direct hits to 0, but separate Burn, Poison, card movement, healing and trait clauses still happen. Freeze controls the entire action; Hush suppresses the labeled trait and skips non-attack abilities. Those remain distinct even when Curse prevents all direct damage.",
     "Freeze control is approved. Its thaw rule is OPEN: whether direct attacks and/or Fire end it is not defined. Preview only the conditional case “if still Frozen at action start, skip the whole action, advance and clear”. Do not treat earlier breakable-freeze proposals, or a no-thaw alternative, as a settled rule.",
     "Cleanse and Purge explicitly remove one random eligible kind or all eligible kinds. Random is uniform by active kind, not stack amount; clear the whole chosen counter. No target menu. Typed narrow cures and partial Ward removal remain separate when those better fit the subject.",
-    "The main player decisions are which cards to play and in what order. Enemy held-card moves now choose random recipients; helpful recovery uses the top discarded card. The remaining older card-selection effects below are flagged for a future thematic redesign rather than silently converted into risky random Banish or recovery effects."
+    "The main player decisions are which cards to play and in what order. Enemy held-card moves now choose random recipients; helpful recovery uses the top discarded card. The dedicated card-flow pass reviews all 122 former flags. The remaining deliberate exceptions below are documented in that pass; risky random Banish was not used as a blanket replacement."
   ],
   "status_policy": {
     "status": "provisional-timing-and-rounding; values-not-playtested",
@@ -145,7 +145,7 @@
   "counts": {
     "card_faces_checked": 496,
     "enemies_checked": 110,
-    "changed_card_descriptions_since_previous_commit": 76,
+    "changed_card_descriptions_since_previous_commit": 197,
     "enemy_entries_with_effect_text_changes": 44,
     "conditional_Freeze_previews": 243,
     "Bless_faces": 8,
@@ -153,7 +153,7 @@
     "Freeze_faces": 1,
     "Cleanse_faces": 3,
     "Purge_faces": 2,
-    "remaining_card_faces_with_selection_flags": 122,
+    "remaining_card_faces_with_selection_flags": 6,
     "remaining_enemy_selection_prompts": 0
   },
   "single_hit_comparison": [
@@ -415,10 +415,8 @@
     {
       "number": 8,
       "face": "Revenant",
-      "effect": "Deal 5 Shadow damage. You may return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Deal 3 Shadow damage. Keep this card.",
+      "flags": []
     },
     {
       "number": 9,
@@ -429,10 +427,8 @@
     {
       "number": 10,
       "face": "Exile",
-      "effect": "Discard a card. Draw 2 cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Discard a random card. Draw 2 cards.",
+      "flags": []
     },
     {
       "number": 11,
@@ -467,18 +463,14 @@
     {
       "number": 16,
       "face": "Gravedigger",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 17,
       "face": "Confession",
-      "effect": "Discard a card. Heal 3 HP. Banish this card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Discard a random card. Heal 3 HP. Banish this card.",
+      "flags": []
     },
     {
       "number": 18,
@@ -513,7 +505,7 @@
     {
       "number": 23,
       "face": "Sacrifice",
-      "effect": "Banish another card from your hand. Deal 8 Radiance damage.",
+      "effect": "Banish another card of your choice from your hand. Deal 8 Radiance damage.",
       "flags": [
         "choose-held-card"
       ]
@@ -533,10 +525,8 @@
     {
       "number": 26,
       "face": "Raven",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 27,
@@ -691,10 +681,8 @@
     {
       "number": 52,
       "face": "Empty Reliquary",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile.",
+      "flags": []
     },
     {
       "number": 53,
@@ -711,18 +699,14 @@
     {
       "number": 55,
       "face": "Seed",
-      "effect": "Put up to 2 cards from your discard pile on the bottom of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the bottom 2 cards of your discard pile on the bottom of your library.",
+      "flags": []
     },
     {
       "number": 56,
       "face": "Ash",
-      "effect": "Banish another card from your hand. Deal 7 Decay damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Deal 7 Decay damage. Banish this card.",
+      "flags": []
     },
     {
       "number": 57,
@@ -775,10 +759,8 @@
     {
       "number": 65,
       "face": "Open Book",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 66,
@@ -819,10 +801,8 @@
     {
       "number": 72,
       "face": "Ruined Cathedral",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 73,
@@ -833,10 +813,8 @@
     {
       "number": 74,
       "face": "Moonlit Crypt",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 75,
@@ -847,10 +825,8 @@
     {
       "number": 76,
       "face": "Overgrown Ruins",
-      "effect": "Put a card from your discard pile on top of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the top card of your discard pile on top of your library.",
+      "flags": []
     },
     {
       "number": 77,
@@ -867,10 +843,8 @@
     {
       "number": 79,
       "face": "Bridge",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 80,
@@ -911,10 +885,8 @@
     {
       "number": 86,
       "face": "Sunken Shrine",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 87,
@@ -931,34 +903,28 @@
     {
       "number": 89,
       "face": "Ascension",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 90,
       "face": "Descent",
-      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put this card on the bottom of your library. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 91,
       "face": "Memory",
-      "effect": "Return a card from your discard pile to your hand.",
+      "effect": "Return a card of your choice from your discard pile to your hand. Banish this card.",
       "flags": [
-        "choose-discarded-card"
+        "explicit-card-choice"
       ]
     },
     {
       "number": 92,
       "face": "Oblivion",
-      "effect": "Banish another card from your hand. Deal 7 Oblivion damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Deal 7 Oblivion damage. Banish this card.",
+      "flags": []
     },
     {
       "number": 93,
@@ -1005,26 +971,20 @@
     {
       "number": 100,
       "face": "Marionette",
-      "effect": "Put another card from your hand on top of your library.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Flip a random card in your hand. Keep it.",
+      "flags": []
     },
     {
       "number": 101,
       "face": "Weaver",
-      "effect": "Put a card from your discard pile on top of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the top 2 cards of your discard pile on top of your library in their current order.",
+      "flags": []
     },
     {
       "number": 102,
       "face": "Unraveler",
-      "effect": "Banish another card from your hand. Deal 8 Decay damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish the top card of your discard pile. Deal 6 Decay damage.",
+      "flags": []
     },
     {
       "number": 103,
@@ -1035,10 +995,8 @@
     {
       "number": 104,
       "face": "Undertaker",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 105,
@@ -1075,10 +1033,8 @@
     {
       "number": 110,
       "face": "Resurrector",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 111,
@@ -1089,10 +1045,8 @@
     {
       "number": 112,
       "face": "Locust",
-      "effect": "Banish another card from your hand. Deal 11 Decay damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish the top card of your library. Deal 8 Decay damage.",
+      "flags": []
     },
     {
       "number": 113,
@@ -1103,10 +1057,8 @@
     {
       "number": 114,
       "face": "Vulture",
-      "effect": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile. Heal 3 HP. Banish this card.",
+      "flags": []
     },
     {
       "number": 115,
@@ -1153,10 +1105,8 @@
     {
       "number": 122,
       "face": "Shipwreck",
-      "effect": "Banish another card from your hand. Deal 10 Decay damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Deal 7 Decay damage. Banish this card.",
+      "flags": []
     },
     {
       "number": 123,
@@ -1179,7 +1129,7 @@
     {
       "number": 126,
       "face": "Wilderness",
-      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order.",
       "flags": [
         "inspection-selection-or-order"
       ]
@@ -1193,26 +1143,20 @@
     {
       "number": 128,
       "face": "Bone Orchard",
-      "effect": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile. Heal 3 HP. Banish this card.",
+      "flags": []
     },
     {
       "number": 129,
       "face": "Dawn Market",
-      "effect": "Discard a card. Draw 2 cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Discard a random card. Draw 2 cards.",
+      "flags": []
     },
     {
       "number": 130,
       "face": "Night Market",
-      "effect": "Banish another card from your hand. Draw 3 cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish a random other card from your hand. Draw 3 cards.",
+      "flags": []
     },
     {
       "number": 131,
@@ -1223,10 +1167,8 @@
     {
       "number": 132,
       "face": "Empty Banquet Hall",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 133,
@@ -1237,10 +1179,8 @@
     {
       "number": 134,
       "face": "Underground Cavern",
-      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 135,
@@ -1275,10 +1215,8 @@
     {
       "number": 140,
       "face": "Sunken Library",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 141,
@@ -1295,10 +1233,8 @@
     {
       "number": 143,
       "face": "Clockwork City",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Draw 1 card. Flip your hand.",
+      "flags": []
     },
     {
       "number": 144,
@@ -1309,26 +1245,20 @@
     {
       "number": 145,
       "face": "Sewing Needle",
-      "effect": "Put a card from your discard pile on top of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the top card of your discard pile on top of your library.",
+      "flags": []
     },
     {
       "number": 146,
       "face": "Scissors",
-      "effect": "Banish another card from your hand. Deal 7 Decay damage, ignoring Ward.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish the top card of your discard pile. Deal 5 Decay damage, ignoring Ward.",
+      "flags": []
     },
     {
       "number": 147,
       "face": "Compass",
-      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 148,
@@ -1381,7 +1311,7 @@
     {
       "number": 156,
       "face": "Loaded Dice",
-      "effect": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in any order.",
+      "effect": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order.",
       "flags": [
         "inspection-selection-or-order"
       ]
@@ -1407,10 +1337,8 @@
     {
       "number": 160,
       "face": "Torn Letter",
-      "effect": "Banish another card from your hand.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish this card.",
+      "flags": []
     },
     {
       "number": 161,
@@ -1427,10 +1355,8 @@
     {
       "number": 163,
       "face": "Metronome",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Reverse the top 2 cards of your library. Scry.",
+      "flags": []
     },
     {
       "number": 164,
@@ -1441,10 +1367,8 @@
     {
       "number": 165,
       "face": "Lens",
-      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 166,
@@ -1455,10 +1379,8 @@
     {
       "number": 167,
       "face": "Comb",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Turn your hand to its light faces.",
+      "flags": []
     },
     {
       "number": 168,
@@ -1475,10 +1397,8 @@
     {
       "number": 170,
       "face": "Rag Doll",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top 2 cards of your discard pile to your hand. Banish this card.",
+      "flags": []
     },
     {
       "number": 171,
@@ -1489,43 +1409,32 @@
     {
       "number": 172,
       "face": "Asymmetry",
-      "effect": "Draw 2 cards. Discard a card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Draw 2 cards. Discard a random card.",
+      "flags": []
     },
     {
       "number": 173,
       "face": "Unity",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Draw 1 card. Keep your hand.",
+      "flags": []
     },
     {
       "number": 174,
       "face": "Fragmentation",
-      "effect": "Banish another card from your hand. Deal 4 Decay damage twice.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Deal 3 Decay damage twice. Banish this card.",
+      "flags": []
     },
     {
       "number": 175,
       "face": "Convergence",
-      "effect": "Put up to 2 cards from your discard pile on top of your library in any order.",
-      "flags": [
-        "choose-discarded-card",
-        "order-cards"
-      ]
+      "effect": "Put the top 2 cards of your discard pile on top of your library in their current order.",
+      "flags": []
     },
     {
       "number": 176,
       "face": "Divergence",
-      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put this card on the bottom of your library. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 177,
@@ -1542,18 +1451,14 @@
     {
       "number": 179,
       "face": "Attraction",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Draw 2 cards.",
+      "flags": []
     },
     {
       "number": 180,
       "face": "Repulsion",
-      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put your hand on the bottom of your library. Draw 3 cards.",
+      "flags": []
     },
     {
       "number": 181,
@@ -1564,10 +1469,8 @@
     {
       "number": 182,
       "face": "Levitation",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 183,
@@ -1578,10 +1481,8 @@
     {
       "number": 184,
       "face": "Frenzy",
-      "effect": "Discard a card. Deal 10 Release damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Discard a random card. Deal 10 Release damage.",
+      "flags": []
     },
     {
       "number": 185,
@@ -1634,18 +1535,14 @@
     {
       "number": 193,
       "face": "High Tide",
-      "effect": "Return up to 2 cards from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top 2 cards of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 194,
       "face": "Low Tide",
-      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Put the top card of your library on the bottom. Scry.",
+      "flags": []
     },
     {
       "number": 195,
@@ -1668,10 +1565,8 @@
     {
       "number": 198,
       "face": "Smuggler",
-      "effect": "Put another card from your hand on the bottom of your library. Draw 2 cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put this card on the bottom of your library. Draw 2 cards.",
+      "flags": []
     },
     {
       "number": 199,
@@ -1682,10 +1577,8 @@
     {
       "number": 200,
       "face": "Flag Burner",
-      "effect": "Banish another card from your hand. Apply 3 Burn.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Apply 3 Burn. Banish this card.",
+      "flags": []
     },
     {
       "number": 201,
@@ -1732,26 +1625,20 @@
     {
       "number": 208,
       "face": "Ferryman",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 209,
       "face": "Auctioneer",
-      "effect": "Discard a card. Draw 2 cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Discard a random card. Draw 2 cards.",
+      "flags": []
     },
     {
       "number": 210,
       "face": "Scavenger",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 211,
@@ -1774,34 +1661,26 @@
     {
       "number": 214,
       "face": "Stray Hound",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 215,
       "face": "Archivist",
-      "effect": "Put a card from your discard pile on top of your library. Scry.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the bottom card of your discard pile on top of your library. Scry.",
+      "flags": []
     },
     {
       "number": 216,
       "face": "Bookworm",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile.",
+      "flags": []
     },
     {
       "number": 217,
       "face": "Surveyor",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 218,
@@ -1812,10 +1691,8 @@
     {
       "number": 219,
       "face": "Chimney Sweep",
-      "effect": "Remove all your Burn. Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Remove all your Burn. Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 220,
@@ -1874,10 +1751,8 @@
     {
       "number": 229,
       "face": "Dandelion",
-      "effect": "Put up to 2 other cards from your hand on the bottom of your library. Draw that many cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put your hand on the bottom of your library. Draw 3 cards.",
+      "flags": []
     },
     {
       "number": 230,
@@ -1906,10 +1781,8 @@
     {
       "number": 234,
       "face": "Shed Skin",
-      "effect": "Banish another card from your hand. Draw 1 card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Draw 1 card. Banish this card.",
+      "flags": []
     },
     {
       "number": 235,
@@ -1920,10 +1793,8 @@
     {
       "number": 236,
       "face": "Corpse Flower",
-      "effect": "Banish a card from your discard pile. Deal 6 Decay damage.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile. Deal 6 Decay damage.",
+      "flags": []
     },
     {
       "number": 237,
@@ -1970,10 +1841,8 @@
     {
       "number": 244,
       "face": "Silverfish",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile.",
+      "flags": []
     },
     {
       "number": 245,
@@ -1990,18 +1859,14 @@
     {
       "number": 247,
       "face": "Quill",
-      "effect": "Put a card from your discard pile on top of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the top card of your discard pile on top of your library.",
+      "flags": []
     },
     {
       "number": 248,
       "face": "Eraser",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 249,
@@ -2018,7 +1883,7 @@
     {
       "number": 251,
       "face": "Sieve",
-      "effect": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest.",
+      "effect": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order.",
       "flags": [
         "inspection-selection-or-order"
       ]
@@ -2026,10 +1891,8 @@
     {
       "number": 252,
       "face": "Funnel",
-      "effect": "Put another card from your hand on top of your library.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put your hand on top of your library. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 253,
@@ -2064,18 +1927,14 @@
     {
       "number": 258,
       "face": "Water Clock",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Draw 1 card. Keep this card.",
+      "flags": []
     },
     {
       "number": 259,
       "face": "Rope Ladder",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 260,
@@ -2140,10 +1999,8 @@
     {
       "number": 270,
       "face": "Funeral Veil",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 271,
@@ -2154,26 +2011,20 @@
     {
       "number": 272,
       "face": "Backstage",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 273,
       "face": "Grand Staircase",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 274,
       "face": "Spiral Well",
-      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put this card on the bottom of your library. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 275,
@@ -2184,10 +2035,8 @@
     {
       "number": 276,
       "face": "Sewer",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile.",
+      "flags": []
     },
     {
       "number": 277,
@@ -2216,10 +2065,8 @@
     {
       "number": 281,
       "face": "Counting House",
-      "effect": "Banish another card from your hand. Draw 2 cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Put a random card from your hand on the bottom of your library. Draw 2 cards.",
+      "flags": []
     },
     {
       "number": 282,
@@ -2242,10 +2089,8 @@
     {
       "number": 285,
       "face": "Tidal Causeway",
-      "effect": "Exchange a card in your hand with one in your discard pile.",
-      "flags": [
-        "choose-two-zone-targets"
-      ]
+      "effect": "Exchange a random card in your hand with the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 286,
@@ -2286,10 +2131,8 @@
     {
       "number": 292,
       "face": "Abandoned Fairground",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 293,
@@ -2306,10 +2149,8 @@
     {
       "number": 295,
       "face": "Paved Road",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
     },
     {
       "number": 296,
@@ -2332,10 +2173,8 @@
     {
       "number": 299,
       "face": "Crown Jeweler",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Turn the top card of your discard pile to its light face. Return it to your hand.",
+      "flags": []
     },
     {
       "number": 300,
@@ -2370,10 +2209,8 @@
     {
       "number": 305,
       "face": "Clockmaker",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Put the top card of your discard pile on top of your library. Scry.",
+      "flags": []
     },
     {
       "number": 306,
@@ -2396,18 +2233,14 @@
     {
       "number": 309,
       "face": "Parchment Scribe",
-      "effect": "Put a card from your discard pile on top of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the bottom card of your discard pile on top of your library.",
+      "flags": []
     },
     {
       "number": 310,
       "face": "Ink Drinker",
-      "effect": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile. Heal 3 HP. Banish this card.",
+      "flags": []
     },
     {
       "number": 311,
@@ -2418,10 +2251,8 @@
     {
       "number": 312,
       "face": "Portrait Eraser",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 313,
@@ -2444,10 +2275,8 @@
     {
       "number": 316,
       "face": "Scent Thief",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 317,
@@ -2512,18 +2341,14 @@
     {
       "number": 327,
       "face": "Thread Spinner",
-      "effect": "Put a card from your discard pile on top of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the top card of your discard pile on top of your library.",
+      "flags": []
     },
     {
       "number": 328,
       "face": "Thread Cutter",
-      "effect": "Banish another card from your hand.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 329,
@@ -2534,10 +2359,8 @@
     {
       "number": 330,
       "face": "Story Swallower",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 331,
@@ -2560,10 +2383,8 @@
     {
       "number": 334,
       "face": "Path Eraser",
-      "effect": "Banish another card from your hand.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish the top card of your library.",
+      "flags": []
     },
     {
       "number": 335,
@@ -2586,10 +2407,8 @@
     {
       "number": 338,
       "face": "Oath Breaker",
-      "effect": "Banish another card from your hand. Draw 1 card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Draw 1 card. Banish this card.",
+      "flags": []
     },
     {
       "number": 339,
@@ -2606,34 +2425,26 @@
     {
       "number": 341,
       "face": "Doll Mender",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Turn the top card of your discard pile to its light face. Return it to your hand.",
+      "flags": []
     },
     {
       "number": 342,
       "face": "Doll Thief",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 343,
       "face": "Music Conductor",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Reverse the top 3 cards of your library. Scry.",
+      "flags": []
     },
     {
       "number": 344,
       "face": "Improviser",
-      "effect": "Draw 2 cards. Discard a card.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Draw 2 cards. Discard a random card.",
+      "flags": []
     },
     {
       "number": 345,
@@ -2644,10 +2455,8 @@
     {
       "number": 346,
       "face": "Tide Wanderer",
-      "effect": "Exchange a card in your hand with one in your discard pile.",
-      "flags": [
-        "choose-two-zone-targets"
-      ]
+      "effect": "Exchange a random card in your hand with the bottom card of your discard pile.",
+      "flags": []
     },
     {
       "number": 347,
@@ -2868,10 +2677,8 @@
     {
       "number": 383,
       "face": "Silver Birch",
-      "effect": "Put up to 2 cards from your discard pile on the bottom of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the bottom 2 cards of your discard pile on the bottom of your library.",
+      "flags": []
     },
     {
       "number": 384,
@@ -2888,10 +2695,8 @@
     {
       "number": 386,
       "face": "Fallen Leaf",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish this card.",
+      "flags": []
     },
     {
       "number": 387,
@@ -2992,10 +2797,8 @@
     {
       "number": 403,
       "face": "Silk Glove",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 404,
@@ -3012,10 +2815,8 @@
     {
       "number": 406,
       "face": "Unwoven Reeds",
-      "effect": "Banish another card from your hand.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish this card.",
+      "flags": []
     },
     {
       "number": 407,
@@ -3062,10 +2863,8 @@
     {
       "number": 414,
       "face": "Loose Thread",
-      "effect": "Banish another card from your hand.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Banish this card.",
+      "flags": []
     },
     {
       "number": 415,
@@ -3112,10 +2911,8 @@
     {
       "number": 422,
       "face": "Empty Locket",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile.",
+      "flags": []
     },
     {
       "number": 423,
@@ -3126,10 +2923,8 @@
     {
       "number": 424,
       "face": "Melted Key",
-      "effect": "Banish a card from your discard pile. Banish this card.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish this card.",
+      "flags": []
     },
     {
       "number": 425,
@@ -3158,18 +2953,14 @@
     {
       "number": 429,
       "face": "Feather Quill",
-      "effect": "Put a card from your discard pile on top of your library.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Put the top card of your discard pile on top of your library.",
+      "flags": []
     },
     {
       "number": 430,
       "face": "Ink Blot",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 431,
@@ -3180,10 +2971,8 @@
     {
       "number": 432,
       "face": "Paint Scraper",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the top card of your discard pile.",
+      "flags": []
     },
     {
       "number": 433,
@@ -3218,10 +3007,8 @@
     {
       "number": 438,
       "face": "Empty Needlecase",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish this card.",
+      "flags": []
     },
     {
       "number": 439,
@@ -3334,10 +3121,8 @@
     {
       "number": 457,
       "face": "Hedge Garden",
-      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Reverse the top 3 cards of your library. Scry.",
+      "flags": []
     },
     {
       "number": 458,
@@ -3354,18 +3139,14 @@
     {
       "number": 460,
       "face": "Dry Fountain",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish this card.",
+      "flags": []
     },
     {
       "number": 461,
       "face": "Golden Atrium",
-      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "effect": "Draw 1 card. Turn your hand to its light faces. Banish this card.",
+      "flags": []
     },
     {
       "number": 462,
@@ -3394,10 +3175,8 @@
     {
       "number": 466,
       "face": "Underground Mill",
-      "effect": "Discard a card. Draw 2 cards.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "effect": "Discard a random card. Draw 2 cards.",
+      "flags": []
     },
     {
       "number": 467,
@@ -3426,18 +3205,14 @@
     {
       "number": 471,
       "face": "Grand Library",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 472,
       "face": "Forgotten Archive",
-      "effect": "Banish a card from your discard pile.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Banish the bottom card of your discard pile.",
+      "flags": []
     },
     {
       "number": 473,
@@ -3460,18 +3235,14 @@
     {
       "number": 476,
       "face": "Ship Graveyard",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 477,
       "face": "Ivory Bridge",
-      "effect": "Exchange a card in your hand with one in your discard pile.",
-      "flags": [
-        "choose-two-zone-targets"
-      ]
+      "effect": "Return the top card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 478,
@@ -3488,10 +3259,8 @@
     {
       "number": 480,
       "face": "Stone Stairway",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 481,
@@ -3526,10 +3295,8 @@
     {
       "number": 486,
       "face": "Timeless Tower",
-      "effect": "Return a card from your discard pile to your hand.",
-      "flags": [
-        "choose-discarded-card"
-      ]
+      "effect": "Return the bottom card of your discard pile to your hand.",
+      "flags": []
     },
     {
       "number": 487,

@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "date": "2026-11-03",
-  "check_count": 2443,
+  "check_count": 2473,
   "checked": [
     "496 unique canonical faces",
     "248 physical pairs with one face per side",
@@ -1473,6 +1473,7 @@
     "Dusk & Dawn — Game Design v0.2.html: local link exists Dusk & Dawn — Enemy Mechanics Catalogue v0.1.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Status and Targeting Revision v0.1.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Bless Curse and Control Review v0.1.html",
+    "Dusk & Dawn — Game Design v0.2.html: local link exists Card Flow Review v0.1.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Full Content Review v0.1.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Effect Rules v0.1.json",
     "Dusk & Dawn — Game Design v0.2.html: portable references, no theme chips or escaped links",
@@ -2096,6 +2097,11 @@
     "Bless Curse and Control Review v0.1.html: local link exists Dusk & Dawn — Game Design v0.2.html",
     "Bless Curse and Control Review v0.1.html: local link exists Effect Rules v0.1.json",
     "Bless Curse and Control Review v0.1.html: portable references, no theme chips or escaped links",
+    "Card Flow Review v0.1.html: unique HTML IDs",
+    "Card Flow Review v0.1.html: embedded face examples match canonical text",
+    "Card Flow Review v0.1.html: local link exists Dusk & Dawn — Game Design v0.2.html",
+    "Card Flow Review v0.1.html: local link exists Bless Curse and Control Review v0.1.html",
+    "Card Flow Review v0.1.html: portable references, no theme chips or escaped links",
     "Card Artwork Coverage v0.1.json: complete recorded visual coverage",
     "Card Artwork Coverage v0.1.json: exact source artwork set",
     "Card Artwork Coverage v0.1.json: source hashes unchanged",
@@ -2129,7 +2135,7 @@
     "no selection prompt remains for Keep, Flip or directional turns",
     "operational targeting metadata derives from complete descriptions",
     "every Keep and Flip instruction has an explicit automatic target",
-    "all current self-Keep effects leave the vacated source slot available",
+    "the one self-Keep draw source has an explicit hand-cap failure case",
     "automatic-target instructions expose zero selection prompts",
     "retired keywords absent from current card/enemy effects and rule keys",
     "approved keyword directions present",
@@ -2445,7 +2451,31 @@
     "random removal selects kinds without stack weighting",
     "uncontested Freeze skips exactly one scheduled action and advances",
     "an unrelated Fire event does not create an unresolved Freeze state",
-    "contested thaw events remain unresolved in reference previews"
+    "contested thaw events remain unresolved in reference previews",
+    "all 122 formerly flagged faces have individual flow judgments",
+    "only six documented deliberate selection exceptions remain",
+    "116 prompt removals and six exceptions accounted for",
+    "hand-cap text acknowledges the paid-draw self-Keep exception",
+    "visible exceptions select before commit; hidden inspections commit before reveal",
+    "exception metadata matches the six authored cases",
+    "flow report effects and rationales match canonical descriptions",
+    "automatic reworks have no residual selection instruction",
+    "arithmetic: reverse only the available top block",
+    "arithmetic: two-beat reversal",
+    "short library reversal uses available cards only",
+    "a zero-count fixed transfer moves no cards",
+    "arithmetic: fixed discard top two in pile order",
+    "arithmetic: fixed discard bottom two in pile order",
+    "arithmetic: hand-cap limited group return",
+    "random exchange selects outgoing before incoming arrives and swaps atomically",
+    "exchange requires both original zones",
+    "self-tucked source is not also discarded",
+    "empty-library self-tuck can redraw the same physical source without a copy",
+    "ordinary resolving source enters discard once",
+    "Water Clock draw can fill its vacated slot and prevent self-return",
+    "failed self-Keep leaves the source to discard normally",
+    "Marionette flips and Keeps the same temporary target",
+    "three repeated Revenant plays spend three mana and do not duplicate their source"
   ],
   "arithmetic_examples": {
     "Moth Sun hit": {
@@ -2763,6 +2793,62 @@
         3,
         6
       ]
+    },
+    "reverse only the available top block": {
+      "result": [
+        "c",
+        "b",
+        "a",
+        "d"
+      ],
+      "expected": [
+        "c",
+        "b",
+        "a",
+        "d"
+      ]
+    },
+    "two-beat reversal": {
+      "result": [
+        "b",
+        "c",
+        "a",
+        "d"
+      ],
+      "expected": [
+        "b",
+        "c",
+        "a",
+        "d"
+      ]
+    },
+    "fixed discard top two in pile order": {
+      "result": [
+        "newest",
+        "middle"
+      ],
+      "expected": [
+        "newest",
+        "middle"
+      ]
+    },
+    "fixed discard bottom two in pile order": {
+      "result": [
+        "middle",
+        "oldest"
+      ],
+      "expected": [
+        "middle",
+        "oldest"
+      ]
+    },
+    "hand-cap limited group return": {
+      "result": [
+        "newest"
+      ],
+      "expected": [
+        "newest"
+      ]
     }
   },
   "limitations": [
@@ -2774,8 +2860,8 @@
     "reviewed_card_faces": 496,
     "reviewed_enemies": 110,
     "enemy_actions": 243,
-    "changed_card_faces": 323,
-    "distinct_card_descriptions": 158,
+    "changed_card_faces": 347,
+    "distinct_card_descriptions": 169,
     "card_Ward_before": 93,
     "card_Ward_after": 39,
     "card_Ward_grants_before": 65,
@@ -2784,7 +2870,7 @@
     "enemy_mechanics_Ward_after": 23,
     "card_Leech_faces": 4,
     "Hush_usable_enemies": 110,
-    "keyword_free_faces": 105,
+    "keyword_free_faces": 90,
     "card_Poison_faces": 7,
     "direct_player_damage_type_counts": {
       "Radiance": 13,

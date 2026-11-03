@@ -96,3 +96,34 @@ def resolve_attack_statuses(statuses,hits,model,weakness=0):
  result=attack_damage(hits,statuses.get('Bless',0),statuses.get('Curse',0),model,weakness)
  statuses.pop('Bless',None);statuses.pop('Curse',None)
  return result
+
+def reverse_top(library,count):
+ halve(count)
+ library[:count]=reversed(library[:count])
+
+def fixed_discard_targets(discard,count,position='top',space=None):
+ halve(count)
+ if count==0:return []
+ block=discard[-count:] if position=='top' else discard[:count]
+ ordered=list(reversed(block))
+ return ordered if space is None else ordered[:max(0,space)]
+
+def exchange_random_with_discard(hand,discard,position,rng):
+ if not hand or not discard:return None
+ out=rng.choice(hand);incoming=discard[-1] if position=='top' else discard[0]
+ # Select both from their original zones before either enters the other zone.
+ hand[hand.index(out)]=incoming;discard[discard.index(incoming)]=out
+ return out,incoming
+
+def finish_source(source,piles):
+ # A source explicitly moved elsewhere must not also enter discard.
+ def same(items):return any(x is source for x in items)
+ for zone in ['hand','library','banished','discard']:
+  if same(piles.get(zone,[])):
+   piles['resolving'][:]=[x for x in piles.get('resolving',[]) if x is not source]
+   return zone
+ if same(piles.get('resolving',[])):
+  piles['resolving'][:]=[x for x in piles['resolving'] if x is not source]
+  piles.setdefault('discard',[]).append(source)
+  return 'discard'
+ return None

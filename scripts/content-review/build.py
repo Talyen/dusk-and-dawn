@@ -31,6 +31,8 @@ def automatic_target_index(effect):
   (r'Cleanse all harmful statuses from yourself\.',{'op':'Cleanse','target':'all_harmful_self'}),
   (r'Purge one random beneficial status from the enemy\.',{'op':'Purge','target':'random_beneficial_enemy'}),
   (r'Purge all beneficial statuses from the enemy\.',{'op':'Purge','target':'all_beneficial_enemy'}),
+  (r'Keep it\.',{'op':'Keep','target':'previous_Flip_target'}),
+  (r'Turn the top card of your discard pile to its (light|dark) face\.',{'op':'Turn','target':'top_discard'}),
   (r'Keep this card\.',{'op':'Keep','target':'self'}),
   (r'Keep your hand\.',{'op':'Keep','target':'whole_hand'}),
   (r'Keep (a|\d+) random cards? in your hand\.',{'op':'Keep','target':'random_hand'}),
@@ -56,9 +58,15 @@ def cards():
  oldmap={c['face']:c for c in old};rows=[l.split('|',2) for l in (HERE/'cards-review.tsv').read_text().splitlines()]
  if len(rows)!=496:raise ValueError('Missing face judgments')
  evidence=[];result=[]
+ flow_path=HERE/'flow-review.tsv'
+ exceptions={int(r[0]):{'kind':r[1],'reason':r[2],'auto_if_forced':True} for r in (line.split('|',2) for line in flow_path.read_text().splitlines()) if r[1]!='automatic'} if flow_path.exists() else {}
  for n,effect,reason in rows:
   n=int(n);c=current[n-1].copy();original=readjson(HERE/'baseline.json')['card_effects'][c['face']];effect=normalize(original if effect=='=' else effect)
-  c.pop('tags',None);c['effect']=effect;c['keywords']=keywords(effect);c['status']='proposed';c['automatic_targets']=automatic_target_index(effect);result.append(c)
+  c.pop('tags',None);c['effect']=effect;c['keywords']=keywords(effect);c['status']='proposed';c['automatic_targets']=automatic_target_index(effect)
+  if n in exceptions:
+   c['selection_exception']=dict(exceptions[n],automatic_when='zero_or_one_card' if exceptions[n]['kind']=='plan-route-order' else 'eligible_count_at_most_required_count',commitment='before_commit_visible_choice' if exceptions[n]['kind'] in ['choose-offering','recall-specific-card'] else 'after_commit_hidden_inspection')
+  else:c.pop('selection_exception',None)
+  result.append(c)
   evidence.append({'number':n,'face':c['face'],'artwork_id':c['artwork_id'],'before':original,'after':effect,'changed':original!=effect,'judgment':'strong-fit-proposal','reason':reason,'sheet':f'card-artwork-review/cards-{(n-1)//16+1:02}.jpg'})
  writejson(DOCS/(CARD+'.json'),result)
  return result,evidence,old
