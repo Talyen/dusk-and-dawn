@@ -1,5 +1,5 @@
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import {
   cards,
   cardRestriction,
@@ -23,6 +23,7 @@ import {
 } from "../../lib/save/save";
 import type { Snapshot } from "../../lib/game/session";
 import { Button } from "../ui/controls";
+import { Tooltip } from "../ui/tooltip";
 import { KeywordDescription } from "../effects/shine";
 import { keywordDefinitions } from "../../lib/keywords/keywords";
 
@@ -58,8 +59,12 @@ const keywordHelp: Record<string, string> = {
   Flip: "Turn each affected card to its other face. Cards keep their face as they move.",
   Banish: "Remove this card from the fight; it returns for the next encounter.",
   Scry: "See the current top card of the library until end turn; Scry does not reshuffle.",
+  Bless:
+    "The next direct attack gains damage on every hit; then all Bless is spent. This preview uses +1 per stack.",
   Curse:
     "The next direct attack has reduced damage per stack; then all Curse is spent. This preview uses −1 per stack.",
+  Cleanse: "Remove the specified harmful statuses from yourself; a single kind is chosen randomly.",
+  Purge: "Remove the specified beneficial statuses from the enemy; a single kind is chosen randomly.",
   Keep: "A kept card stays in hand at end turn, then loses its Keep marker.",
   Reflect: "Redirect the first hit of the next attack back to its attacker, then remove Reflect.",
   Hush: "Suppress the next action's trait, or skip its non-attack ability; then remove Hush.",
@@ -67,6 +72,102 @@ const keywordHelp: Record<string, string> = {
     "If still active at the next enemy action, skip it and remove Freeze. Early thaw rules are undecided.",
   Leech: "Heal for the attack's final damage before Ward, including overkill, up to maximum HP.",
 };
+function BattleCard({
+  card,
+  selected,
+  disabled,
+  onSelect,
+}: {
+  card: FightCard;
+  selected: boolean;
+  disabled: boolean;
+  onSelect: () => void;
+}) {
+  const trigger = useRef<HTMLButtonElement>(null);
+  const id = useId();
+  const pointer = useRef(false);
+  const focus = useRef(false);
+  const [open, setOpen] = useState(false);
+  const info = face(card);
+  useEffect(() => {
+    if (!open) return;
+    const dismiss = () => {
+      pointer.current = false;
+      focus.current = false;
+      setOpen(false);
+    };
+    document.addEventListener("wheel", dismiss, { capture: true, passive: true });
+    window.addEventListener("blur", dismiss);
+    return () => {
+      document.removeEventListener("wheel", dismiss, true);
+      window.removeEventListener("blur", dismiss);
+    };
+  }, [open]);
+  return (
+    <>
+      <button
+        ref={trigger}
+        type="button"
+        className="battle-card"
+        aria-pressed={selected}
+        aria-describedby={open ? id : undefined}
+        disabled={disabled}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
+        onPointerLeave={() => {
+          pointer.current = false;
+          if (!focus.current) setOpen(false);
+        }}
+        onFocus={(event) => {
+          if (event.currentTarget.matches(":focus-visible")) {
+            focus.current = true;
+            setOpen(true);
+          }
+        }}
+        onBlur={() => {
+          focus.current = false;
+          if (!pointer.current) setOpen(false);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && open) {
+            event.stopPropagation();
+            pointer.current = false;
+            focus.current = false;
+            setOpen(false);
+          }
+        }}
+        onClick={onSelect}
+      >
+        <img className="battle-card-art" src={art("card", info.name)} alt="" />
+        <strong>{info.name}</strong>
+        <span>
+          {card.face} · {card.kept ? "Kept · " : ""}1 mana
+        </span>
+        <span>
+          <Description text={info.effect} />
+        </span>
+      </button>
+      <Tooltip triggerRef={trigger} id={id} open={open}>
+        <strong>{info.name}</strong>
+        <p>
+          <Description text={info.effect} />
+        </p>
+        {info.keywords
+          .filter((keyword) => keywordHelp[keyword])
+          .map((keyword) => (
+            <p key={keyword}>
+              <strong>{keyword}</strong> {keywordHelp[keyword]}
+            </p>
+          ))}
+      </Tooltip>
+    </>
+  );
+}
+
 const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
   Sacrifice: { hits: [8], type: "Radiance" },
   Vampire: { hits: [4], type: "Shadow" },
@@ -142,13 +243,13 @@ export function Battle({
   }, [backend]);
   if (!loaded)
     return (
-      <main className="battle-screen">
+      <section className="battle-screen">
         <p role="status">Loading run…</p>
-      </main>
+      </section>
     );
   if (!game)
     return (
-      <main className="battle-screen battle-setup">
+      <section className="battle-screen battle-setup">
         <h1>Play</h1>
         {loadError && <p role="alert">{loadError}</p>}
         {saved?.recovered && <p>A retained copy of the run was recovered.</p>}
@@ -233,7 +334,7 @@ export function Battle({
           </section>
         )}
         <Button onClick={onExit}>Main menu</Button>
-      </main>
+      </section>
     );
   return (
     <BattleSession
@@ -426,7 +527,7 @@ function BattleSession({
     ? cards[selectedCard.pair]![selectedCard.face === "light" ? "dark" : "light"]
     : null;
   return (
-    <main className="battle-screen" aria-labelledby="battle-title">
+    <section className="battle-screen" aria-labelledby="battle-title">
       <div className="battle-head">
         <div>
           <p className="battle-eyebrow">Dusk & Dawn · playable preview</p>
@@ -469,7 +570,10 @@ function BattleSession({
               {s.zones.scry && <p>Scry: {top ? face(top).name : "library empty"}</p>}
             </section>
             <section className="battle-panel battle-enemy">
-              <img className="battle-enemy-art" src={art("enemy", enemy.name)} alt="" />
+              <figure className="battle-enemy-figure">
+                <img className="battle-enemy-art" src={art("enemy", enemy.name)} alt="" />
+                <progress aria-label={`${enemy.name} health`} value={s.enemy.hp} max={s.enemy.maxHp} />
+              </figure>
               <h2>
                 {enemy.name} · HP {s.enemy.hp}/{s.enemy.maxHp}
               </h2>
@@ -507,33 +611,33 @@ function BattleSession({
                 Trait: {enemy.trait} — {enemy.traitEffect} Pattern:{" "}
                 {enemy.actions.map((a) => a.name).join(" → ")}
               </p>
+              <details>
+                <summary>Inspect full pattern</summary>
+                <ol>
+                  {enemy.actions.map((a, index) => (
+                    <li key={`${a.name}-${index}`}>
+                      <strong>{a.name}:</strong> <Description text={a.text} />
+                    </li>
+                  ))}
+                </ol>
+              </details>
             </section>
           </div>
           <section aria-labelledby="hand-title">
             <h2 id="hand-title">Your hand</h2>
             <div className="battle-hand">
               {s.zones.hand.map((card) => (
-                <button
+                <BattleCard
                   key={card.id}
-                  type="button"
-                  className="battle-card"
-                  aria-pressed={selected === card.id}
+                  card={card}
+                  selected={selected === card.id}
                   disabled={!!s.pending}
-                  onClick={() => {
+                  onSelect={() => {
                     setSelected(card.id);
                     setTargets([]);
                     setError("");
                   }}
-                >
-                  <img className="battle-card-art" src={art("card", face(card).name)} alt="" />
-                  <strong>{face(card).name}</strong>
-                  <span>
-                    {card.face} · {card.kept ? "Kept · " : ""}1 mana
-                  </span>
-                  <span>
-                    <Description text={face(card).effect} />
-                  </span>
-                </button>
+                />
               ))}
             </div>
           </section>
@@ -808,6 +912,6 @@ function BattleSession({
           <Button onClick={exitBattle}>Return to main menu</Button>
         </section>
       )}
-    </main>
+    </section>
   );
 }

@@ -847,3 +847,87 @@ test("plays a full branching expedition through the browser", async ({ page }) =
   expect(branches).toBe(2);
   expect(errors).toEqual([]);
 });
+
+test("inspects battle cards on hover and keyboard focus without selecting them", async ({ page }) => {
+  const seed = Array.from({ length: 20 }, (_, index) => index).find((value) =>
+    createRun(value)
+      .getSnapshot()
+      .state.zones.hand.some((card) => card.pair === "Angel & Vampire"),
+  )!;
+  await page.addInitScript((value) => {
+    Math.random = () => value / 0x100000000;
+  }, seed);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
+  await expect(page.getByRole("progressbar", { name: "Radiant Moth health" })).toHaveAttribute("value", "18");
+  await page.getByText("Inspect full pattern").click();
+  await expect(page.getByText("Deal 4 Radiance damage.", { exact: false }).first()).toBeVisible();
+  const card = page.locator(".battle-card").filter({ hasText: "Angel" }).first();
+  await card.hover();
+  const tip = page.getByRole("tooltip");
+  await expect(tip).toBeVisible();
+  await expect(tip).toContainText("Absorbs damage");
+  await expect(card).toHaveAttribute("aria-pressed", "false");
+  await expect(page.getByRole("button", { name: /^Play Angel/ })).toHaveCount(0);
+  await page.mouse.move(5, 5);
+  await expect(tip).toBeHidden();
+  await page.keyboard.press("Tab");
+  await card.focus();
+  await expect(tip).toBeVisible();
+  await expect(card).toHaveAttribute("aria-describedby", (await tip.getAttribute("id"))!);
+  await page.keyboard.press("Escape");
+  await expect(tip).toBeHidden();
+  const accessibility = await new AxeBuilder({ page }).analyze();
+  expect(accessibility.violations).toEqual([]);
+});
+
+test("a conceded detour reloads as a defeat instead of recovering the previous battle", async ({ page }) => {
+  const setup = structuredClone(
+    createRun(71, { id: "detour-save", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  setup.state.phase = "reward";
+  setup.state.offers = [];
+  const game = restoreSession(setup, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  game.dispatch({ type: "route", choice: "combat" });
+  const initial = encodeRun(game.getSnapshot());
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, initial);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Concede" }).click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.phase,
+      ),
+    )
+    .toBe("defeat");
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByText("A retained copy of the run was recovered.")).toHaveCount(0);
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+});
+
+test("enemy pattern inspection preserves repeated actions without console errors", async ({ page }) => {
+  const snapshot = structuredClone(createRun(14).getSnapshot());
+  snapshot.state.encounters![0] = "the-cellar-duchess";
+  const saved = encodeRun(snapshot);
+  const errors: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByText("Inspect full pattern").click();
+  await expect(page.locator(".battle-enemy details li")).toHaveCount(3);
+  await expect(page.locator(".battle-enemy details li").filter({ hasText: "Bitter Goblet" })).toHaveCount(2);
+  expect(errors).toEqual([]);
+});

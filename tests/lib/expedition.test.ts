@@ -82,6 +82,32 @@ describe("experimental expeditions", () => {
     expect(game.getSnapshot().state.phase).toBe("battle");
     expect(game.getSnapshot().state.experiment!.route).toBeUndefined();
   });
+  for (const fight of [0, 2] as const)
+    for (const ending of ["concede", "burn"] as const) {
+      it(`retains a ${ending} defeat in the detour after fight ${fight + 1}`, async () => {
+        const route = structuredClone(routeGame().getSnapshot());
+        route.state.fight = fight;
+        let game = restoreSession(route, runHandler);
+        expect(game.dispatch({ type: "route", choice: "combat" }).decision.accepted).toBe(true);
+        if (ending === "burn") {
+          const doomed = structuredClone(game.getSnapshot());
+          doomed.state.player.hp = 1;
+          doomed.state.player.burn = 2;
+          game = restoreSession(doomed, runHandler);
+        }
+        const result = game.dispatch(ending === "concede" ? { type: "concede" } : { type: "end" });
+        expect(result.decision.accepted).toBe(true);
+        expect(result.snapshot.state.phase).toBe("defeat");
+        expect(result.snapshot.state.experiment?.route?.active).toBe(true);
+        const saved = encodeRun(result.snapshot);
+        const loaded = await readRunWithRecovery({
+          readCandidates: async () => [saved],
+          write: async () => {},
+        });
+        expect(loaded?.snapshot).toEqual(result.snapshot);
+        expect(loaded?.recovered).toBe(false);
+      });
+    }
   it("honors orientation, Cracked Vessel, and the extra midpoint removal", () => {
     const dark = createRun(21, { ...options, orientation: "dark", relic: "cracked-vessel" }).getSnapshot()
       .state;

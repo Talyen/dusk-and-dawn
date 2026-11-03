@@ -220,3 +220,113 @@ it("compares experimental routes, relics and orientations over 50 seeds each", (
   }
   console.log("Expedition playtests, 50 runs each", JSON.stringify(results));
 });
+
+it("isolates orientation and Cracked Vessel across attack and defense policies", () => {
+  const results: Record<string, unknown> = {};
+  for (const policy of ["attack", "defense"] as const)
+    for (const variant of [
+      { name: "light", relic: "none", orientation: "light", path: "rest" },
+      { name: "light-vessel", relic: "cracked-vessel", orientation: "light", path: "rest" },
+      { name: "dark", relic: "none", orientation: "dark", path: "rest" },
+      { name: "dark-vessel", relic: "cracked-vessel", orientation: "dark", path: "rest" },
+    ] as const) {
+      const counts = { victory: 0, defeat: 0, unfinished: 0 };
+      const winHp: number[] = [];
+      const openingHp: number[] = [];
+      const played: Record<string, number> = {};
+      let turns = 0;
+      let plays = 0;
+      for (let seed = 0; seed < 100; seed++) {
+        const game = createRun(seed, {
+          id: `experiment-${seed}`,
+          tier: 3,
+          orientation: variant.orientation,
+          relic: variant.relic,
+        });
+        let recordedOpening = false;
+        for (let step = 0; step < 400; step++) {
+          const state = game.getSnapshot().state;
+          if (state.phase === "victory" || state.phase === "defeat") break;
+          if (!recordedOpening && state.phase === "reward" && state.fight === 0) {
+            openingHp.push(state.player.hp);
+            recordedOpening = true;
+          }
+          let command: Command;
+          if (state.phase === "reward") {
+            const options = state.offers.slice();
+            const ranked = options
+              .map((pair) => {
+                const light: FightCard = { id: "preview", pair, face: "light", kept: false };
+                const dark: FightCard = { ...light, face: "dark" };
+                return { pair, value: Math.max(score(light, state, policy), score(dark, state, policy)) };
+              })
+              .sort((a, b) => b.value - a.value);
+            command = { type: "reward", pair: ranked[0]?.value ? ranked[0].pair : null };
+          } else if (state.phase === "rest") command = { type: "rest" };
+          else if (state.phase === "route")
+            command = {
+              type: "route",
+              choice: variant.path,
+            };
+          else if (state.pending) {
+            const choices = state.pending.cards.slice();
+            choices.sort((a, b) => score(b, state, policy) - score(a, state, policy));
+            command = {
+              type: "choose",
+              ids: choices.slice(0, state.pending.required).map((card) => card.id),
+            };
+          } else {
+            const available = state.zones.hand.filter((card) => !cardRestriction(state, card));
+            const ranked = available
+              .map((card) => ({ card, value: score(card, state, policy) }))
+              .sort((a, b) => b.value - a.value);
+            const choice = state.mana && ranked[0] && ranked[0].value > 0 ? ranked[0].card : undefined;
+            if (!choice) {
+              command = { type: "end" };
+              turns++;
+            } else {
+              const name = face(choice).name;
+              played[name] = (played[name] ?? 0) + 1;
+              const targets =
+                name === "Memory"
+                  ? state.zones.discard.slice(0, 1).map((card) => card.id)
+                  : name === "Sacrifice"
+                    ? state.zones.hand
+                        .filter((card) => card.id !== choice.id)
+                        .slice(0, 1)
+                        .map((card) => card.id)
+                    : [];
+              command = { type: "play", id: choice.id, targets };
+              plays++;
+            }
+          }
+          const result = game.dispatch(command);
+          expect(
+            result.decision,
+            `${policy} seed ${seed} step ${step}: ${JSON.stringify(command)}`,
+          ).toMatchObject({ accepted: true });
+          expect(result.snapshot.state.zones.hand.length).toBeLessThanOrEqual(8);
+        }
+        const state = game.getSnapshot().state;
+        const outcome = state.phase === "victory" || state.phase === "defeat" ? state.phase : "unfinished";
+        counts[outcome]++;
+        if (outcome === "victory") winHp.push(state.player.hp);
+      }
+      results[`${policy}-${variant.name}`] = {
+        ...counts,
+        meanVictoryHp: winHp.length
+          ? +(winHp.reduce((sum, hp) => sum + hp, 0) / winHp.length).toFixed(1)
+          : null,
+        meanOpeningHp: openingHp.length
+          ? +(openingHp.reduce((a, b) => a + b, 0) / openingHp.length).toFixed(1)
+          : null,
+        topPlays: Object.entries(played)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5),
+        turns,
+        plays,
+      };
+      expect(counts.victory + counts.defeat + counts.unfinished).toBe(100);
+    }
+  console.log("Orientation and relic factorial, 100 runs each", JSON.stringify(results));
+}, 20000);

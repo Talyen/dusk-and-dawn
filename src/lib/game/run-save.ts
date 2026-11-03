@@ -80,7 +80,10 @@ const runSchema = z
     if (
       (run.phase === "route" && (!run.experiment?.route || run.experiment.route.active)) ||
       (run.experiment?.route && !run.experiment.route.active && run.phase !== "route") ||
-      (run.experiment?.route?.active && run.phase !== "battle" && run.phase !== "reward") ||
+      (run.experiment?.route?.active &&
+        run.phase !== "battle" &&
+        run.phase !== "reward" &&
+        run.phase !== "defeat") ||
       (run.experiment?.route && run.fight !== 0 && run.fight !== 2)
     )
       ctx.addIssue({ code: "custom", message: "Invalid route state" });
