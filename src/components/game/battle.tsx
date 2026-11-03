@@ -39,6 +39,19 @@ function statuses(holder: RunState["player"]) {
   if (holder.nextManaPenalty) result.push(`Next mana −${holder.nextManaPenalty}`);
   return result.join(" · ") || "None";
 }
+const keywordHelp: Record<string, string> = {
+  Ward: "Absorbs damage; halve remaining Ward at the start of its holder's turn.",
+  Burn: "At end turn, deal this much Fire damage, then halve Burn, rounding down.",
+  Poison: "At end turn, deal this much Decay damage, then halve Poison, rounding down.",
+  Flip: "Turn each affected card to its other face. Cards keep their face as they move.",
+  Banish: "Remove this card from the fight; it returns for the next encounter.",
+  Scry: "See the current top card of the library until end turn; Scry does not reshuffle.",
+  Curse:
+    "The next direct attack has reduced damage per stack; then all Curse is spent. This preview uses −1 per stack.",
+  Keep: "A kept card stays in hand at end turn, then loses its Keep marker.",
+  Reflect: "Redirect the first hit of the next attack back to its attacker, then remove Reflect.",
+  Leech: "Heal for the attack's final damage before Ward, including overkill, up to maximum HP.",
+};
 const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
   Vampire: { hits: [4], type: "Shadow" },
   Sun: { hits: [6], type: "Radiance" },
@@ -228,6 +241,33 @@ export function Battle({ onExit }: { onExit: () => void }) {
                 <p>
                   Other face: <strong>{opposite.name}</strong> — <Description text={opposite.effect} />
                 </p>
+              )}
+              {(selectedName === "Moon" || selectedName === "Key") && (
+                <p>
+                  Flip preview:{" "}
+                  {s.zones.hand
+                    .filter((card) => card.id !== selected)
+                    .map((card) => {
+                      const other =
+                        cards[card.pair as keyof typeof cards][card.face === "light" ? "dark" : "light"];
+                      return `${face(card).name} → ${other.name} (${other.effect})`;
+                    })
+                    .join("; ") || "no other cards in hand"}
+                  .
+                  {selectedName === "Key" &&
+                    " The card drawn first will also flip; its identity is not revealed yet."}
+                </p>
+              )}
+              {face(selectedCard).keywords.some((keyword) => keywordHelp[keyword]) && (
+                <ul aria-label="Keyword explanations">
+                  {face(selectedCard)
+                    .keywords.filter((keyword) => keywordHelp[keyword])
+                    .map((keyword) => (
+                      <li key={keyword}>
+                        <strong>{keyword}:</strong> {keywordHelp[keyword]}
+                      </li>
+                    ))}
+                </ul>
               )}
               {selectedName === "Seed" && (
                 <p>
