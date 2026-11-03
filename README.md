@@ -129,3 +129,20 @@ Alchemy's WebGL and canvas lifecycle code (CC BY-NC 4.0). Plasma falls back to a
 static gradient on WebGL failure or context loss; reduced motion uses a static
 glow and hides particles. Background Glow and Background Particles can be
 adjusted independently in Options, including turning either off.
+
+## Design documents
+
+The reviewed design lives in `docs/Dusk & Dawn — Game Design v0.2.html`, with linked card and enemy catalogues. `docs/Full Content Review v0.1.html` records all 496 face and 110 enemy judgments. These are design proposals; the app still has no playable combat implementation.
+
+Descriptions contain the complete card effects. Structured `keywords` come only from words actually used in those descriptions; there are no separate theme tags. Enemy actions use independent values and include explicit Hush previews. `docs/Effect Rules v0.1.json` records the shared rule contract. Binding and Release remain provisional damage names.
+
+Regenerate and validate the documents using Python 3 with Pillow installed:
+
+```sh
+python3 scripts/content-review/render.py
+python3 scripts/content-review/validate.py
+```
+
+The versioned recipes contain one thematic rationale per artwork. Rebuilding preserves the embedded enemy thumbnails. Artwork hash checks require the original local Google Drive artwork folders recorded in the coverage manifests. To refresh the contact sheets from those masters, run `python3 scripts/content-review/prepare.py` before the renderer and validator. The 41 project-local contact sheets remain readable without that source folder.
+
+The validation report checks document/data consistency and arithmetic boundary cases. It does not establish combat balance or player enjoyment. Local-file browser preview was denied by policy, so browser rendering and filter interaction remain unverified.

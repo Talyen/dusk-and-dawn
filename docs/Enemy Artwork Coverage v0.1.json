@@ -8,84 +8,6 @@
   "missing_artworks": [],
   "extra_records": [],
   "inspection_method": "All 110 source PNGs decoded and inspected visually in ten labeled contact sheets; thumbnails up to 420 × 305 px. Not a full-resolution image-quality review.",
-  "contact_sheet_files": [
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-01.jpg",
-      "sha256": "0f43f0450212a10b27dade91dbd6259d8474c8fb830fd00709c29e4d4173eff1"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-02.jpg",
-      "sha256": "3cbc30756d8265f12bd431bb462ee952339e67c66585ac1a5f1d4ff283465f16"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-03.jpg",
-      "sha256": "6231acfedc129412be6c190e8dd9ef584e149d7f6926466d6ba84c02d12e601a"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-04.jpg",
-      "sha256": "c7b7b580d552d3d4561f1df6827d79299bc181187bd40b8dc92013a26f585f8b"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-05.jpg",
-      "sha256": "99443fa502daca37f886bc2a42f907e5203357067ca75cc59b569d3199f128a5"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-06.jpg",
-      "sha256": "ff93b9c2d56f84be1e66c885045b67f007a2614481982adb18b2a1ec113d7a56"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-07.jpg",
-      "sha256": "296881ac36079d850230a926457b6ce2163d1c94340f5635f085a8892b269189"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-08.jpg",
-      "sha256": "730f272d02d78301f9fa3b0d84f661ab9c5b7fdb7561c52a8203571fb79b7a05"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-09.jpg",
-      "sha256": "9a6b6f54c1d843b870473e50a2ba8b430185d0e8e5588c3c6e4613e6bd4abfee"
-    },
-    {
-      "path": "/Users/ryanmcintire/Documents/Codex/2026-11-03/task-2/review/contact-10.jpg",
-      "sha256": "cafab90e0c840877ab13dab149aa4e130e96ad080db57417f240693c252b0078"
-    }
-  ],
-  "rules_read": {
-    "path": "/Users/ryanmcintire/Developer/Dusk & Dawn/docs/Dusk & Dawn — Game Design v0.2.html",
-    "sha256": "286039c6a9ace6eefae57c7ce9a37613c2c4b015fe2f5744667f3fc2452cbf71"
-  },
-  "cards_read": {
-    "path": "/Users/ryanmcintire/Developer/Dusk & Dawn/docs/Dusk & Dawn — Card Effect Catalogue v0.2.json",
-    "sha256": "4883680fd623c01f3ad5eb50e581257aa6a67c3044dc68a4ba95e8bc7f933017"
-  },
-  "weakness_distribution": {
-    "Shadow": 18,
-    "Radiance": 12,
-    "Release": 36,
-    "Decay": 12,
-    "Binding": 6,
-    "Growth": 9,
-    "Oblivion": 13,
-    "Frost": 4
-  },
-  "flags": {
-    "weakness-needs-wider-pool": 68,
-    "recovery-stall-check": 13,
-    "keep-interaction": 20,
-    "temporary-deck-loss-advanced": 2,
-    "sparse-weakness-attacks": 26,
-    "full-ward-bypass-advanced": 2
-  },
-  "hushable_non_attack_encounters": 20,
-  "current_hush_unavailable_encounters": 90,
-  "checked": "Exact filename-set equality, source SHA-256 match, one trait/weakness/attack per record, unique IDs/names/trait text, sequential numbering, opposing weakness mapping, one printed attack type, direct damage availability, HTML/JSON correspondence.",
-  "validation_limit": "No combat implementation or simulation; thought experiments are manual reasoning, not human playtesting or a balance claim.",
-  "browser_preview": {
-    "status": "denied",
-    "action": "Open the local catalogue in the in-app browser for visual QA",
-    "reason": "Browser URL policy does not allow file:// URLs. No alternate route attempted.",
-    "remaining_limit": "HTML layout and filter interaction were not verified in a running browser. Content, embedded image count, parsing and HTML/JSON correspondence were verified statically; a plain-text companion is provided."
-  },
   "artwork_inventory": [
     {
       "number": 1,
@@ -1407,5 +1329,59 @@
       "contact_sheet": "contact-10.jpg",
       "observed": "A velvet-clad woman has long spider legs beneath her dress."
     }
-  ]
+  ],
+  "contact_sheet_files": [
+    {
+      "path": "enemy-artwork-review/contact-01.jpg",
+      "sha256": "0f43f0450212a10b27dade91dbd6259d8474c8fb830fd00709c29e4d4173eff1"
+    },
+    {
+      "path": "enemy-artwork-review/contact-02.jpg",
+      "sha256": "3cbc30756d8265f12bd431bb462ee952339e67c66585ac1a5f1d4ff283465f16"
+    },
+    {
+      "path": "enemy-artwork-review/contact-03.jpg",
+      "sha256": "6231acfedc129412be6c190e8dd9ef584e149d7f6926466d6ba84c02d12e601a"
+    },
+    {
+      "path": "enemy-artwork-review/contact-04.jpg",
+      "sha256": "c7b7b580d552d3d4561f1df6827d79299bc181187bd40b8dc92013a26f585f8b"
+    },
+    {
+      "path": "enemy-artwork-review/contact-05.jpg",
+      "sha256": "99443fa502daca37f886bc2a42f907e5203357067ca75cc59b569d3199f128a5"
+    },
+    {
+      "path": "enemy-artwork-review/contact-06.jpg",
+      "sha256": "ff93b9c2d56f84be1e66c885045b67f007a2614481982adb18b2a1ec113d7a56"
+    },
+    {
+      "path": "enemy-artwork-review/contact-07.jpg",
+      "sha256": "296881ac36079d850230a926457b6ce2163d1c94340f5635f085a8892b269189"
+    },
+    {
+      "path": "enemy-artwork-review/contact-08.jpg",
+      "sha256": "730f272d02d78301f9fa3b0d84f661ab9c5b7fdb7561c52a8203571fb79b7a05"
+    },
+    {
+      "path": "enemy-artwork-review/contact-09.jpg",
+      "sha256": "9a6b6f54c1d843b870473e50a2ba8b430185d0e8e5588c3c6e4613e6bd4abfee"
+    },
+    {
+      "path": "enemy-artwork-review/contact-10.jpg",
+      "sha256": "cafab90e0c840877ab13dab149aa4e130e96ad080db57417f240693c252b0078"
+    }
+  ],
+  "weakness_distribution": {
+    "Shadow": 18,
+    "Radiance": 12,
+    "Release": 36,
+    "Decay": 12,
+    "Binding": 6,
+    "Growth": 9,
+    "Oblivion": 13,
+    "Frost": 4
+  },
+  "Hush_usable_enemies": 110,
+  "browser_preview": "Local file opening denied by browser policy; rendering and interactive behavior have not been verified."
 }

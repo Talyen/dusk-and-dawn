@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "status": "proposed",
+  "keyword_rules": {
+    "Ward": {
+      "definition": "Absorb incoming damage before HP. Player Ward expires at the start of the next player turn. Old enemy Ward expires when its next action begins, after Burn, even if Hush skips that action.",
+      "notes": [
+        "Ward stops damage, not separate status or card-movement effects.",
+        "No trait checks whether damage reached Ward or HP."
+      ]
+    },
+    "Burn": {
+      "definition": "At player turn end, deal Flame damage equal to Burn, then reduce it by 1. Resolve player Burn first, then enemy Burn. Applying Burn keeps the higher value; it does not add.",
+      "notes": [
+        "Ward absorbs Burn. Burn receives no Mark, weakness, Leech or Reflect effect.",
+        "An enemy applies Burn after this tick; that Burn first ticks at the following player turn end."
+      ]
+    },
+    "Scry": {
+      "definition": "Look at the top card of your draw pile. You may put it on the bottom. If the draw pile is empty, shuffle the discard pile first; if both are empty, do nothing.",
+      "notes": []
+    },
+    "Mark": {
+      "definition": "Add Mark to the next direct attack against its holder, before Ward, then remove Mark. Mark adds together and affects only the first hit.",
+      "notes": [
+        "The player normally Marks the enemy; an enemy effect explicitly names the player when it Marks them.",
+        "Mark does not affect Burn or separate trait damage."
+      ]
+    },
+    "Weaken": {
+      "definition": "Reduce the holder’s next direct attack by Weaken, to a minimum of 0, then remove Weaken. Weaken adds together and affects only the first hit.",
+      "notes": [
+        "Weaken persists through non-attack actions.",
+        "A player effect says “Weaken 4”; an enemy effect explicitly applies Weaken to the player."
+      ]
+    },
+    "Hush": {
+      "definition": "Suppress the enemy’s labeled trait through its next action. Skip a non-attack ability; an attack keeps its base hits. Advance the pattern normally.",
+      "notes": [
+        "Hush starts immediately and ends after the action’s aftereffects, including traits active while the intent is shown.",
+        "Hush does not undo existing Ward, damage, revealed cards, or an already-applied next-turn effect.",
+        "Hush does not stack. A pure Hush card needs a suppressible ability or trait in the current intent. A conditional trait counts even before its condition is met.",
+        "Every current Hush face Banishes its source."
+      ]
+    },
+    "Keep": {
+      "definition": "Keep the chosen card through this turn’s discard. It remains on its current face and loses its Keep marker. Next turn draw up to 5 new cards within the 8-card hand cap.",
+      "notes": [
+        "The resolving source is outside the hand and cannot be kept. A card leaving the hand loses its marker.",
+        "Enemy references to held cards check the actual hand after unkept cards are discarded; no retained-card snapshot or prior identity is stored."
+      ]
+    },
+    "Flip": {
+      "definition": "Turn cards to their other faces. “Flip your hand” affects only cards currently in hand; other zones change only when explicitly named.",
+      "notes": [
+        "The resolving source never flips with its own hand effect.",
+        "Cards keep their faces through movement and reshuffling."
+      ]
+    },
+    "Banish": {
+      "definition": "Remove the physical card, including both faces, for this fight. Return it to the run deck afterward. Banished cards cannot be recovered during a fight.",
+      "notes": [
+        "This spends the depicted opportunity for the encounter; it need not mean that a depicted creature literally dies.",
+        "An enemy’s Banish can remove a player card; show its destination and that it returns after the fight."
+      ]
+    },
+    "Reflect": {
+      "definition": "Redirect the next attack’s first hit to its attacker, keeping its final damage and type. Then Reflect ends. Reflect does not stack.",
+      "notes": [
+        "Apply Mark, weakness and Weaken before reflection; do not apply them again at the new target. The attacker’s Ward can absorb the returned hit unless the hit ignores Ward.",
+        "A reflected hit cannot be reflected again. A 0-damage hit still spends Reflect. Burn and separate trait damage are not attacks.",
+        "A trait may specify an earlier expiry, such as the end of its displayed intent. Hush suspends that trait’s reflection immediately."
+      ]
+    },
+    "Leech": {
+      "definition": "Heal for the attack’s final damage after bonuses and Weaken, before Ward. Count Ward absorption and overkill. Healing stops at maximum HP.",
+      "notes": [
+        "For multiple hits with Leech, total their final damage values; do not track HP actually lost.",
+        "Leech is healing attached to that attack, not a damage type or a second hidden effect. It cannot revive an attacker already defeated.",
+        "Food, medicine and other fixed heals remain fixed heals."
+      ]
+    }
+  },
+  "damage_types": [
+    "Radiance",
+    "Shadow",
+    "Growth",
+    "Decay",
+    "Binding",
+    "Release",
+    "Flame",
+    "Frost",
+    "Memory",
+    "Oblivion"
+  ],
+  "colors": {
+    "Radiance": "#F7D670",
+    "Shadow": "#C7AEF1",
+    "Growth": "#9DDA97",
+    "Decay": "#C7CD78",
+    "Binding": "#80D1BE",
+    "Release": "#7DDDEC",
+    "Flame": "#FFAD66",
+    "Frost": "#A8E5FA",
+    "Memory": "#B8C7FF",
+    "Oblivion": "#C5C5CD",
+    "Ward": "#8BCBFF",
+    "Burn": "#FF966B",
+    "Flip": "#D8ABFF",
+    "Banish": "#F3A5B6",
+    "Scry": "#86D8D0",
+    "Mark": "#FFB3A6",
+    "Weaken": "#D5C58A",
+    "Hush": "#B5BCD1",
+    "Keep": "#B6E1A8",
+    "Reflect": "#9DDDFF",
+    "Leech": "#EF9EAC"
+  },
+  "no_separate_theme_tags": true,
+  "provisional_damage_names": [
+    "Binding",
+    "Release"
+  ],
+  "weakness_bonus": 2,
+  "weakness_frequency": "once per direct attack card, first hit",
+  "damage_order": [
+    "Mark",
+    "matching weakness",
+    "Weaken",
+    "Reflect",
+    "Ward",
+    "HP"
+  ],
+  "ordinary_instructions": "Draw, heal, look, shuffle, exchange, turn and zone movements are stated in full; they are not separate thematic tags."
+}
