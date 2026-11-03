@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { cards, createRun, face, route, type Command, type RunState } from "../../lib/game/run";
+import {
+  cards,
+  createRun,
+  enemyAttackHits,
+  face,
+  route,
+  type Command,
+  type RunState,
+} from "../../lib/game/run";
 import { scryTop, type FightCard } from "../../lib/game/card-zones";
+import { attackValues, type DamageType } from "../../lib/game/combat-status";
 import { Button } from "../ui/controls";
 import { KeywordDescription } from "../effects/shine";
 import { keywordDefinitions } from "../../lib/keywords/keywords";
@@ -24,8 +33,20 @@ function statuses(holder: RunState["player"]) {
   for (const name of ["ward", "burn", "poison", "bless", "curse"] as const)
     if (holder[name]) result.push(`${name} ${holder[name]}`);
   if (holder.reflect) result.push("Reflect");
+  if (holder.hush) result.push("Hush");
+  if (holder.freeze) result.push("Freeze");
   return result.join(" · ") || "None";
 }
+const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
+  Vampire: { hits: [4], type: "Shadow" },
+  Sun: { hits: [6], type: "Radiance" },
+  Wither: { hits: [7], type: "Decay" },
+  Thorns: { hits: [2, 2], type: "Decay" },
+  "Shattered Mirror": { hits: [2, 2], type: "Release" },
+  Ash: { hits: [7], type: "Decay" },
+  Oblivion: { hits: [7], type: "Oblivion" },
+};
+
 export function Battle({ onExit }: { onExit: () => void }) {
   const [game] = useState(() => createRun(Math.floor(Math.random() * 0x100000000)));
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
@@ -45,16 +66,10 @@ export function Battle({ onExit }: { onExit: () => void }) {
   }
   const selectedCard = s.zones.hand.find((c) => c.id === selected);
   const selectedName = selectedCard ? face(selectedCard).name : "";
-  const targetZone =
-    selectedName === "Ash" || selectedName === "Oblivion"
-      ? s.zones.hand.filter((c) => c.id !== selected)
-      : selectedName === "Memory" || selectedName === "Seed"
-        ? s.zones.discard
-        : [];
-  const needsTarget = ["Ash", "Oblivion", "Memory", "Seed"].includes(selectedName);
-  const maxTargets = selectedName === "Seed" ? 2 : 1;
-  const canPlay =
-    !!selectedCard && s.mana > 0 && (!needsTarget || selectedName === "Seed" || targets.length === 1);
+  const targetZone = selectedName === "Memory" ? s.zones.discard : [];
+  const needsTarget = selectedName === "Memory" && targetZone.length > 0;
+  const maxTargets = 1;
+  const canPlay = !!selectedCard && s.mana > 0 && (!needsTarget || targets.length === 1);
   function toggleTarget(id: string) {
     setTargets((t) =>
       t.includes(id)
@@ -68,6 +83,24 @@ export function Battle({ onExit }: { onExit: () => void }) {
   }
   const top = scryTop(s.zones);
   const enemy = route[s.fight]!;
+  const action = enemy.actions[s.action]!;
+  const enemyHits =
+    action.hit === undefined
+      ? null
+      : attackValues(enemyAttackHits(action, s.enemy.hush), s.enemy.bless, s.enemy.curse, 0, "flat-preview");
+  const cardAttack = directCardAttacks[selectedName];
+  const cardHits = cardAttack
+    ? attackValues(
+        cardAttack.hits,
+        s.player.bless,
+        s.player.curse,
+        cardAttack.type === enemy.weakness ? 2 : 0,
+        "flat-preview",
+      )
+    : null;
+  const opposite = selectedCard
+    ? cards[selectedCard.pair as keyof typeof cards][selectedCard.face === "light" ? "dark" : "light"]
+    : null;
   return (
     <main className="battle-screen" aria-labelledby="battle-title">
       <div className="battle-head">
@@ -118,10 +151,33 @@ export function Battle({ onExit }: { onExit: () => void }) {
               <p>Statuses: {statuses(s.enemy)}</p>
               <p>
                 <strong>Next: {enemy.actions[s.action]!.name}</strong> —{" "}
-                <Description text={enemy.actions[s.action]!.text} />
+                {s.enemy.freeze ? (
+                  "Frozen: this action is skipped."
+                ) : s.enemy.hush && action.ability ? (
+                  "Hushed: this ability is skipped."
+                ) : s.enemy.hush ? (
+                  "Hushed: base attack only; the trait is suppressed."
+                ) : (
+                  <Description text={action.text} />
+                )}
               </p>
+              {enemyHits && !s.enemy.freeze && (
+                <p>
+                  Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}
+                  {action.hit}; trait{" "}
+                  {s.enemy.hush
+                    ? "suppressed"
+                    : action.traitBonus
+                      ? `+${action.traitBonus} to first hit`
+                      : action.extra !== undefined
+                        ? `+${action.extra} extra hit`
+                        : "none"}
+                  ; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
+                </p>
+              )}
               <p>
-                Trait: {enemy.trait}. Pattern: {enemy.actions.map((a) => a.name).join(" → ")}
+                Trait: {enemy.trait} — {enemy.traitEffect} Pattern:{" "}
+                {enemy.actions.map((a) => a.name).join(" → ")}
               </p>
             </section>
           </div>
@@ -158,15 +214,31 @@ export function Battle({ onExit }: { onExit: () => void }) {
               <p>
                 <Description text={face(selectedCard).effect} />
               </p>
+              {cardHits && (
+                <p>
+                  Current attack: {cardHits.join(" + ")} {cardAttack!.type} damage before Ward and Reflect
+                  (base {cardAttack!.hits.join(" + ")}; weakness{" "}
+                  {cardAttack!.type === enemy.weakness ? "+2 to first hit" : "none"}; Bless {s.player.bless},
+                  Curse {s.player.curse}).
+                </p>
+              )}
+              {opposite && (
+                <p>
+                  Other face: <strong>{opposite.name}</strong> — <Description text={opposite.effect} />
+                </p>
+              )}
+              {selectedName === "Seed" && (
+                <p>
+                  Bottom of discard:{" "}
+                  {s.zones.discard
+                    .slice(0, 2)
+                    .map((card) => face(card).name)
+                    .join(", ") || "empty"}
+                </p>
+              )}
               {needsTarget && (
                 <>
-                  <p>
-                    {selectedName === "Seed"
-                      ? "Choose up to two cards from your discard pile."
-                      : selectedName === "Memory"
-                        ? "Choose a card from your discard pile."
-                        : "Choose another card in your hand to Banish."}
-                  </p>
+                  <p>Choose a card from your discard pile.</p>
                   <div className="battle-targets">
                     {targetZone.length === 0 ? (
                       <span>No eligible cards.</span>

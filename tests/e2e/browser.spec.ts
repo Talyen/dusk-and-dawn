@@ -435,7 +435,9 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   const card = page.locator(".battle-card").first();
   await expect(card.locator("img")).toHaveJSProperty("complete", true);
   expect(await card.locator("img").evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+  await expect(page.getByText(/Current attack:.*Radiance damage before Ward and Reflect/)).toBeVisible();
   await card.click();
+  await expect(page.getByText(/Other face:/)).toBeVisible();
   await page.getByRole("button", { name: /^Play / }).click();
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
   await page.getByRole("button", { name: "End turn" }).click();

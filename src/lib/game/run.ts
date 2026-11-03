@@ -84,13 +84,13 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   "Seed & Ash": {
     light: {
       name: "Seed",
-      effect: "Put up to 2 cards from your discard pile on the bottom of your library.",
+      effect: "Put the bottom 2 cards of your discard pile on the bottom of your library.",
       keywords: [],
     },
     dark: {
       name: "Ash",
-      effect: "Banish another card from your hand. Deal 7 Decay damage.",
-      keywords: ["Banish", "Decay"],
+      effect: "Deal 7 Decay damage. Banish this card.",
+      keywords: ["Decay", "Banish"],
     },
   },
   "Lantern & Shroud": {
@@ -102,11 +102,15 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
     dark: { name: "Chain", effect: "Curse 2.", keywords: ["Curse"] },
   },
   "Memory & Oblivion": {
-    light: { name: "Memory", effect: "Return a card from your discard pile to your hand.", keywords: [] },
+    light: {
+      name: "Memory",
+      effect: "Return a card of your choice from your discard pile to your hand. Banish this card.",
+      keywords: ["Banish"],
+    },
     dark: {
       name: "Oblivion",
-      effect: "Banish another card from your hand. Deal 7 Oblivion damage.",
-      keywords: ["Banish", "Oblivion"],
+      effect: "Deal 7 Oblivion damage. Banish this card.",
+      keywords: ["Oblivion", "Banish"],
     },
   },
 };
@@ -126,6 +130,7 @@ interface Action {
   hit?: number;
   type?: DamageType;
   extra?: number;
+  traitBonus?: number;
   ability?: "curse" | "heal" | "banish";
   rider?: "curse" | "poison";
 }
@@ -134,6 +139,7 @@ interface Enemy {
   hp: number;
   weakness: DamageType;
   trait: string;
+  traitEffect: string;
   actions: Action[];
 }
 export const route: readonly Enemy[] = [
@@ -142,12 +148,14 @@ export const route: readonly Enemy[] = [
     hp: 18,
     weakness: "Shadow",
     trait: "Open Wings",
+    traitEffect: "On Open-Wing Dust: add 1 Radiance damage to the base hit.",
     actions: [
       { name: "Folded-Wing Dust", text: "Deal 4 Radiance damage.", hit: 4, type: "Radiance" },
       {
         name: "Open-Wing Dust",
         text: "Deal 5 Radiance damage (including Open Wings).",
-        hit: 5,
+        hit: 4,
+        traitBonus: 1,
         type: "Radiance",
       },
     ],
@@ -157,6 +165,7 @@ export const route: readonly Enemy[] = [
     hp: 24,
     weakness: "Shadow",
     trait: "Split Verdict",
+    traitEffect: "On Prismatic Sentence: add a hit of 2 Radiance damage.",
     actions: [
       { name: "Weigh the Accused", text: "Apply 1 Curse to you.", ability: "curse" },
       { name: "Glass Hand", text: "Deal 4 Radiance damage.", hit: 4, type: "Radiance" },
@@ -174,6 +183,7 @@ export const route: readonly Enemy[] = [
     hp: 30,
     weakness: "Radiance",
     trait: "Widow Venom",
+    traitEffect: "On Venomous Lunge: apply 3 Poison to the player.",
     actions: [
       { name: "Velvet Fang", text: "Deal 5 Shadow damage.", hit: 5, type: "Shadow" },
       {
@@ -190,6 +200,7 @@ export const route: readonly Enemy[] = [
     hp: 36,
     weakness: "Decay",
     trait: "Root Snare",
+    traitEffect: "On Root Lash: apply 1 Curse to the player.",
     actions: [
       { name: "Draw from the Earth", text: "Heal 3 HP.", ability: "heal" },
       {
@@ -206,6 +217,7 @@ export const route: readonly Enemy[] = [
     hp: 48,
     weakness: "Radiance",
     trait: "Empty Grasp",
+    traitEffect: "On Hollow Clutch: apply 1 Curse to the player.",
     actions: [
       { name: "Royal Reach", text: "Deal 6 Shadow damage.", hit: 6, type: "Shadow" },
       { name: "Empty Decree", text: "Banish the top card of your library.", ability: "banish" },
@@ -300,6 +312,14 @@ function attack(s: RunState, hits: number[], type: DamageType, leech = false) {
     { weakness: route[s.fight]!.weakness, leech, scaling: "flat-preview" },
   );
 }
+/** The trait's contribution can be suppressed without suppressing a base attack. */
+export function enemyAttackHits(action: Action, hush: boolean): number[] {
+  if (action.hit === undefined) return [];
+  return [
+    action.hit + (hush ? 0 : (action.traitBonus ?? 0)),
+    ...(!hush && action.extra !== undefined ? [action.extra] : []),
+  ];
+}
 function findTargets(list: FightCard[], ids: string[]): FightCard[] | null {
   if (new Set(ids).size !== ids.length) return null;
   const result = ids.map((id) => list.find((c) => c.id === id));
@@ -352,12 +372,13 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     }
     halveWard(s.enemy);
     const a = route[s.fight]!.actions[s.action]!;
-    if (a.hit !== undefined && a.type) {
-      const hits = [a.hit, ...(a.extra === undefined ? [] : [a.extra])];
+    const suppressed = s.enemy.hush;
+    const skipped = s.enemy.freeze || (suppressed && a.ability !== undefined);
+    if (!skipped && a.hit !== undefined && a.type) {
       directAttack(
         s.enemy,
         s.player,
-        hits.map((amount) => ({ amount, type: a.type! })),
+        enemyAttackHits(a, suppressed).map((amount) => ({ amount, type: a.type! })),
         { leech: false, scaling: "flat-preview" },
       );
     }
@@ -370,10 +391,10 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       victory(s, rng);
       return yes();
     }
-    if (a.ability === "curse" || a.rider === "curse") s.player.curse++;
-    if (a.ability === "heal") s.enemy.hp = Math.min(s.enemy.maxHp, s.enemy.hp + 3);
-    if (a.rider === "poison") applyDamageOverTime(s.player, "poison", 3);
-    if (a.ability === "banish") {
+    if (!skipped && (a.ability === "curse" || (!suppressed && a.rider === "curse"))) s.player.curse++;
+    if (!skipped && a.ability === "heal") s.enemy.hp = Math.min(s.enemy.maxHp, s.enemy.hp + 3);
+    if (!skipped && !suppressed && a.rider === "poison") applyDamageOverTime(s.player, "poison", 3);
+    if (!skipped && a.ability === "banish") {
       if (!s.zones.library.length && s.zones.discard.length) {
         s.zones.library = shuffle(s.zones.discard, rng);
         s.zones.discard = [];
@@ -385,11 +406,12 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       victory(s, rng);
       return yes();
     }
+    s.enemy.hush = false;
     s.action = (s.action + 1) % route[s.fight]!.actions.length;
     halveWard(s.player);
     s.mana = 3;
     drawCards(s.zones, 5, rng);
-    s.message = `${a.name} resolved.`;
+    s.message = skipped ? `${a.name} skipped.` : `${a.name} resolved.`;
     return yes();
   }
   const index = s.zones.hand.findIndex((c) => c.id === command.id);
@@ -397,15 +419,12 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   if (!source || s.mana < 1) return no("Card unavailable or insufficient mana.");
   const name = face(source).name;
   const ids = command.targets ?? [];
-  if (name === "Ash" || name === "Oblivion") {
-    if (ids.length !== 1 || ids[0] === source.id || !findTargets(s.zones.hand, ids))
-      return no("Choose another card in hand to Banish.");
-  } else if (name === "Memory") {
-    if (ids.length !== 1 || !findTargets(s.zones.discard, ids))
+  if (name === "Memory") {
+    if (
+      (s.zones.discard.length > 0 && (ids.length !== 1 || !findTargets(s.zones.discard, ids))) ||
+      (s.zones.discard.length === 0 && ids.length !== 0)
+    )
       return no("Choose a card in your discard pile.");
-  } else if (name === "Seed") {
-    if (ids.length > 2 || !findTargets(s.zones.discard, ids))
-      return no("Choose up to two cards in your discard pile.");
   } else if (ids.length) return no("This card takes no targets.");
   s.zones.hand.splice(index, 1);
   source.kept = false;
@@ -471,27 +490,23 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       drawCards(s.zones, 2, rng);
       break;
     case "Ash":
-    case "Oblivion": {
-      const i = s.zones.hand.findIndex((c) => c.id === ids[0]);
-      const [removed] = s.zones.hand.splice(i, 1);
-      removed!.kept = false;
-      s.zones.banished.push(removed!);
+    case "Oblivion":
       attack(s, [7], name === "Ash" ? "Decay" : "Oblivion");
       break;
-    }
     case "Memory": {
-      const i = s.zones.discard.findIndex((c) => c.id === ids[0]);
-      s.zones.hand.push(s.zones.discard.splice(i, 1)[0]!);
+      if (ids.length) {
+        const i = s.zones.discard.findIndex((c) => c.id === ids[0]);
+        s.zones.hand.push(s.zones.discard.splice(i, 1)[0]!);
+      }
       break;
     }
     case "Seed":
-      for (const id of ids) {
-        const i = s.zones.discard.findIndex((c) => c.id === id);
-        s.zones.library.unshift(s.zones.discard.splice(i, 1)[0]!);
-      }
+      s.zones.library.unshift(...s.zones.discard.splice(0, 2));
       break;
   }
-  if (["Bloom", "Wither", "Mirror", "Candle", "Extinguished Candle"].includes(name))
+  if (
+    ["Bloom", "Wither", "Mirror", "Candle", "Extinguished Candle", "Ash", "Memory", "Oblivion"].includes(name)
+  )
     s.zones.banished.push(source);
   else finishSource(s.zones, source);
   if (s.player.hp === 0) {

@@ -58,12 +58,73 @@ describe("playable run", () => {
       expect(snapshot.state.fight).toBe(fight + 1);
     }
   });
-  it("leaves required-target costs unspent when no eligible target is chosen", () => {
+  it("resolves the revised automatic card flow and preserves pile order", () => {
     const setup = structuredClone(createRun(1).getSnapshot());
-    setup.state.zones.hand = [{ id: "ash", pair: "Seed & Ash", face: "dark", kept: false }];
+    const card = (id: string, pair: string, face: "light" | "dark" = "light") => ({
+      id,
+      pair,
+      face,
+      kept: false,
+    });
+    setup.state.zones.hand = [card("seed", "Seed & Ash")];
+    setup.state.zones.discard = [
+      card("bottom", "Sun & Moon"),
+      card("middle", "Angel & Vampire"),
+      card("top", "Flame & Frost"),
+    ];
+    setup.state.zones.library = [card("library", "Key & Lock")];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "seed" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.library.map((c) => c.id)).toEqual(["bottom", "middle", "library"]);
+    expect(game.getSnapshot().state.zones.discard.map((c) => c.id)).toEqual(["top", "seed"]);
+  });
+  it.each(["Ash", "Oblivion"])("plays %s without selecting another card and banishes its source", (name) => {
+    const setup = structuredClone(createRun(1).getSnapshot());
+    const pair = name === "Ash" ? "Seed & Ash" : "Memory & Oblivion";
+    setup.state.zones.hand = [{ id: "source", pair, face: "dark", kept: false }];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "source" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.banished.map((c) => c.id)).toContain("source");
+  });
+  it("requires a real Memory choice when discard contains cards and banishes Memory", () => {
+    const setup = structuredClone(createRun(1).getSnapshot());
+    setup.state.zones.hand = [{ id: "memory", pair: "Memory & Oblivion", face: "light", kept: false }];
+    setup.state.zones.discard = [{ id: "target", pair: "Sun & Moon", face: "dark", kept: false }];
     const game = restoreSession(setup, runHandler);
     const before = game.getSnapshot();
-    expect(game.dispatch({ type: "play", id: "ash" }).decision.accepted).toBe(false);
+    expect(game.dispatch({ type: "play", id: "memory" }).decision.accepted).toBe(false);
     expect(game.getSnapshot()).toEqual(before);
+    expect(game.dispatch({ type: "play", id: "memory", targets: ["target"] }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand.map((c) => c.id)).toEqual(["target"]);
+    expect(game.getSnapshot().state.zones.banished.map((c) => c.id)).toContain("memory");
+  });
+  it("Hush suppresses the trait but preserves the base attack, then expires", () => {
+    const setup = structuredClone(createRun(1).getSnapshot());
+    setup.state.action = 1;
+    setup.state.enemy.hush = true;
+    setup.state.zones.hand = [];
+    const game = restoreSession(setup, runHandler);
+    game.dispatch({ type: "end" });
+    expect(game.getSnapshot().state.player.hp).toBe(26);
+    expect(game.getSnapshot().state.enemy.hush).toBe(false);
+    expect(game.getSnapshot().state.action).toBe(0);
+  });
+  it("Hush skips an enemy ability and Freeze skips an attack without inventing thaw", () => {
+    const setup = structuredClone(createRun(1).getSnapshot());
+    setup.state.fight = 1;
+    setup.state.action = 0;
+    setup.state.enemy.hush = true;
+    setup.state.zones.hand = [];
+    const game = restoreSession(setup, runHandler);
+    game.dispatch({ type: "end" });
+    expect(game.getSnapshot().state.player.curse).toBe(0);
+    expect(game.getSnapshot().state.action).toBe(1);
+    const frozen = structuredClone(game.getSnapshot());
+    frozen.state.enemy.freeze = true;
+    const game2 = restoreSession(frozen, runHandler);
+    game2.dispatch({ type: "end" });
+    expect(game2.getSnapshot().state.player.hp).toBe(30);
+    expect(game2.getSnapshot().state.action).toBe(2);
+    expect(game2.getSnapshot().state.enemy.freeze).toBe(true);
   });
 });
