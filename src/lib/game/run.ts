@@ -23,7 +23,9 @@ import {
 type Pair = string;
 type SimpleOp =
   | (typeof simpleCards)[keyof typeof simpleCards]["light"]["ops"][number]
-  | (typeof simpleCards)[keyof typeof simpleCards]["dark"]["ops"][number];
+  | (typeof simpleCards)[keyof typeof simpleCards]["dark"]["ops"][number]
+  | { readonly op: "shuffle-library" }
+  | { readonly op: "hand-library"; readonly position: "top" };
 interface FaceInfo {
   name: string;
   effect: string;
@@ -311,12 +313,12 @@ function victory(s: RunState, rng: Rng) {
   s.phase = "reward";
   s.message = "Choose a card pair or skip.";
 }
-function attack(s: RunState, hits: number[], type: DamageType, leech = false) {
+function attack(s: RunState, hits: number[], type: DamageType, leech = false, ignoreWard = false) {
   directAttack(
     s.player,
     s.enemy,
     hits.map((amount) => ({ amount, type })),
-    { weakness: route[s.fight]!.weakness, leech, scaling: "flat-preview" },
+    { weakness: route[s.fight]!.weakness, leech, scaling: "flat-preview", ignoreWard },
   );
 }
 /** The trait's contribution can be suppressed without suppressing a base attack. */
@@ -345,6 +347,10 @@ export function cardRestriction(s: RunState, source: FightCard): string {
   if (first && ops.slice(1).some((op) => op.op !== "banish")) {
     if (first.op === "discard-random" && s.zones.hand.length <= 1)
       return "Another card in hand is required as payment.";
+    if (first.op === "banish-random" && s.zones.hand.length <= 1)
+      return "Another card in hand is required as payment.";
+    if (first.op === "banish-library-top" && !s.zones.library.length && !s.zones.discard.length)
+      return "A card in the library or discard pile is required as payment.";
     if (first.op === "banish-discard" && !s.zones.discard.length)
       return "A card in the discard pile is required as payment.";
   }
@@ -466,6 +472,14 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   source.kept = false;
   s.mana--;
   let banishSource = false;
+  let sourceMoved = false;
+  let referenced: FightCard | null = null;
+  const prepareLibrary = () => {
+    if (!s.zones.library.length && s.zones.discard.length) {
+      s.zones.library = shuffle(s.zones.discard, rng);
+      s.zones.discard = [];
+    }
+  };
   switch (name) {
     case "Angel":
       s.player.ward += 5;
@@ -551,6 +565,125 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     default:
       for (const op of face(source).ops ?? []) {
         switch (op.op) {
+          case "attack-ignore-ward":
+            attack(s, [op.amount], op.type, false, true);
+            break;
+          case "source-library-bottom":
+            source.kept = false;
+            s.zones.library.unshift(source);
+            sourceMoved = true;
+            break;
+          case "shuffle-hand":
+            for (const card of s.zones.hand) card.kept = false;
+            s.zones.library = shuffle([...s.zones.library, ...s.zones.hand], rng);
+            s.zones.hand = [];
+            break;
+          case "shuffle-library":
+            s.zones.library = shuffle(s.zones.library, rng);
+            break;
+          case "hand-library": {
+            const moved = s.zones.hand.splice(0);
+            for (const card of moved) card.kept = false;
+            if (op.position === "top") s.zones.library.push(...moved);
+            else s.zones.library.unshift(...moved);
+            break;
+          }
+          case "discard-library-top": {
+            const count = Math.min(op.count, s.zones.discard.length);
+            const moved =
+              op.position === "top"
+                ? s.zones.discard.splice(s.zones.discard.length - count, count)
+                : s.zones.discard.splice(0, count);
+            s.zones.library.push(...moved);
+            break;
+          }
+          case "discard-library-bottom":
+            s.zones.library.unshift(...s.zones.discard.splice(0, op.count));
+            break;
+          case "return-top-discard": {
+            for (let i = 0; i < op.count && s.zones.hand.length < 8; i++) {
+              const card = s.zones.discard.pop();
+              if (!card) break;
+              s.zones.hand.push(card);
+            }
+            break;
+          }
+          case "flip-discard-top":
+            referenced = s.zones.discard.at(-1) ?? null;
+            if (referenced) referenced.face = referenced.face === "light" ? "dark" : "light";
+            break;
+          case "light-discard-top":
+            referenced = s.zones.discard.at(-1) ?? null;
+            if (referenced) referenced.face = "light";
+            break;
+          case "return-reference":
+            if (referenced && s.zones.hand.length < 8) {
+              const i = s.zones.discard.indexOf(referenced);
+              if (i >= 0) s.zones.hand.push(s.zones.discard.splice(i, 1)[0]!);
+            }
+            break;
+          case "keep-reference":
+            if (referenced && s.zones.hand.includes(referenced)) referenced.kept = true;
+            break;
+          case "banish-library-top":
+            prepareLibrary();
+            {
+              const card = s.zones.library.pop();
+              if (card) {
+                card.kept = false;
+                s.zones.banished.push(card);
+              }
+            }
+            break;
+          case "banish-random":
+            if (s.zones.hand.length) {
+              const [card] = s.zones.hand.splice(rngInt(rng, s.zones.hand.length), 1);
+              card!.kept = false;
+              s.zones.banished.push(card!);
+            }
+            break;
+          case "banish-hand":
+            for (const card of s.zones.hand) card.kept = false;
+            s.zones.banished.push(...s.zones.hand.splice(0));
+            break;
+          case "library-top-bottom":
+            prepareLibrary();
+            {
+              const card = s.zones.library.pop();
+              if (card) s.zones.library.unshift(card);
+            }
+            break;
+          case "reverse-library":
+            prepareLibrary();
+            {
+              const start = Math.max(0, s.zones.library.length - op.count);
+              s.zones.library.push(...s.zones.library.splice(start).reverse());
+            }
+            break;
+          case "random-library-bottom":
+            if (s.zones.hand.length) {
+              const [card] = s.zones.hand.splice(rngInt(rng, s.zones.hand.length), 1);
+              card!.kept = false;
+              s.zones.library.unshift(card!);
+            }
+            break;
+          case "exchange-random-discard":
+            if (s.zones.hand.length && s.zones.discard.length) {
+              const i = rngInt(rng, s.zones.hand.length);
+              const outgoing = s.zones.hand[i]!;
+              const incoming = op.position === "top" ? s.zones.discard.pop()! : s.zones.discard.shift()!;
+              outgoing.kept = false;
+              incoming.kept = false;
+              s.zones.hand[i] = incoming;
+              if (op.position === "top") s.zones.discard.push(outgoing);
+              else s.zones.discard.unshift(outgoing);
+            }
+            break;
+          case "turn-random": {
+            const eligible = s.zones.hand.filter((card) => card.face === op.from);
+            if (eligible.length) eligible[rngInt(rng, eligible.length)]!.face = op.face;
+            break;
+          }
           case "banish-discard": {
             const card = op.position === "top" ? s.zones.discard.pop() : s.zones.discard.shift();
             if (card) {
@@ -567,7 +700,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
             break;
           }
           case "flip-random":
-            flipCards(s.zones, source, { kind: "random-hand", count: op.count }, rng);
+            referenced = flipCards(s.zones, source, { kind: "random-hand", count: op.count }, rng)[0] ?? null;
             break;
           case "flip-self":
             flipCards(s.zones, source, { kind: "source" }, rng);
@@ -679,7 +812,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     ].includes(name)
   )
     s.zones.banished.push(source);
-  else finishSource(s.zones, source);
+  else if (!sourceMoved) finishSource(s.zones, source);
   if (s.player.hp === 0) {
     s.phase = "defeat";
     s.message = "You fell.";

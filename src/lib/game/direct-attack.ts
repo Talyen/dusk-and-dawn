@@ -14,7 +14,7 @@ export function directAttack(
   attacker: Combatant,
   defender: Combatant,
   hits: readonly Hit[],
-  options: { weakness?: DamageType; leech: boolean; scaling: ScalingModel },
+  options: { weakness?: DamageType; leech: boolean; scaling: ScalingModel; ignoreWard?: boolean },
 ): ResolvedHit[] {
   if (hits.length === 0) throw new Error("An attack must have at least one hit");
   const bonus = hits[0]!.type === options.weakness ? 2 : 0;
@@ -36,7 +36,7 @@ export function directAttack(
     const reflected = defender.reflect;
     if (reflected) defender.reflect = false;
     const target = reflected ? attacker : defender;
-    const absorbed = Math.min(target.ward, amount);
+    const absorbed = options.ignoreWard ? 0 : Math.min(target.ward, amount);
     target.ward -= absorbed;
     target.hp = Math.max(0, target.hp - (amount - absorbed));
     resolved.push({ type: hit.type, amount, target: reflected ? "attacker" : "defender", absorbed });

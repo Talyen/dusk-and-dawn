@@ -208,11 +208,18 @@ function BattleSession({
     action.hit === undefined
       ? null
       : attackValues(enemyAttackHits(action, s.enemy.hush), s.enemy.bless, s.enemy.curse, 0, "flat-preview");
-  const genericAttack = selectedCard ? face(selectedCard).ops?.find((op) => op.op === "attack") : undefined;
+  const genericAttack = selectedCard
+    ? face(selectedCard).ops?.find((op) => op.op === "attack" || op.op === "attack-ignore-ward")
+    : undefined;
   const cardAttack =
     directCardAttacks[selectedName] ??
     (genericAttack
-      ? { hits: Array(genericAttack.hits).fill(genericAttack.amount) as number[], type: genericAttack.type }
+      ? {
+          hits: Array(genericAttack.op === "attack" ? genericAttack.hits : 1).fill(
+            genericAttack.amount,
+          ) as number[],
+          type: genericAttack.type,
+        }
       : undefined);
   const cardHits = cardAttack
     ? attackValues(
@@ -347,6 +354,9 @@ function BattleSession({
                   {cardAttack!.type === enemy.weakness ? "+2 to first hit" : "none"}; Bless {s.player.bless},
                   Curse {s.player.curse}).
                 </p>
+              )}
+              {genericAttack?.op === "attack-ignore-ward" && (
+                <p>This attack ignores Ward, including if reflected.</p>
               )}
               {opposite && (
                 <p>

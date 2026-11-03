@@ -36,6 +36,61 @@ const parse = (effect) => {
         hits: match[3] === "twice" ? 2 : match[3] === "three times" ? 3 : 1,
         leech: false,
       });
+    else if (
+      (match =
+        /^Deal (\d+) (Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage, ignoring Ward\.$/.exec(
+          text,
+        ))
+    )
+      result.push({ op: "attack-ignore-ward", amount: +match[1], type: match[2] });
+    else if (text === "Put this card on the bottom of your library.")
+      result.push({ op: "source-library-bottom" });
+    else if (text === "Shuffle your hand into your library.") result.push({ op: "shuffle-hand" });
+    else if (text === "Shuffle your library.") result.push({ op: "shuffle-library" });
+    else if ((match = /^Put your hand on the (top|bottom) of your library\.$/.exec(text)))
+      result.push({ op: "hand-library", position: match[1] });
+    else if ((match = /^Put the (top|bottom) card of your discard pile on top of your library\.$/.exec(text)))
+      result.push({ op: "discard-library-top", position: match[1], count: 1 });
+    else if (
+      (match =
+        /^Put the top (\d+) cards of your discard pile on top of your library in their current order\.$/.exec(
+          text,
+        ))
+    )
+      result.push({ op: "discard-library-top", position: "top", count: +match[1] });
+    else if (
+      (match = /^Put the bottom (\d+) cards of your discard pile on the bottom of your library\.$/.exec(text))
+    )
+      result.push({ op: "discard-library-bottom", count: +match[1] });
+    else if ((match = /^Return the top (\d+) cards of your discard pile to your hand\.$/.exec(text)))
+      result.push({ op: "return-top-discard", count: +match[1] });
+    else if (text === "Flip the top card of your discard pile.") result.push({ op: "flip-discard-top" });
+    else if (text === "Turn the top card of your discard pile to its light face.")
+      result.push({ op: "light-discard-top" });
+    else if (
+      text === "Return it to your hand." &&
+      ["flip-discard-top", "light-discard-top"].includes(result.at(-1)?.op)
+    )
+      result.push({ op: "return-reference" });
+    else if (text === "Keep it." && result.at(-1)?.op === "flip-random")
+      result.push({ op: "keep-reference" });
+    else if (text === "Banish the top card of your library.") result.push({ op: "banish-library-top" });
+    else if (text === "Banish a random other card from your hand.") result.push({ op: "banish-random" });
+    else if (text === "Banish all other cards in your hand.") result.push({ op: "banish-hand" });
+    else if (text === "Put the top card of your library on the bottom.")
+      result.push({ op: "library-top-bottom" });
+    else if ((match = /^Reverse the top (\d+) cards of your library\.$/.exec(text)))
+      result.push({ op: "reverse-library", count: +match[1] });
+    else if (text === "Put a random card from your hand on the bottom of your library.")
+      result.push({ op: "random-library-bottom" });
+    else if (
+      (match = /^Exchange a random card in your hand with the (top|bottom) card of your discard pile\.$/.exec(
+        text,
+      ))
+    )
+      result.push({ op: "exchange-random-discard", position: match[1] });
+    else if ((match = /^Turn a random (light|dark) card in your hand to its (light|dark) face\.$/.exec(text)))
+      result.push({ op: "turn-random", from: match[1], face: match[2] });
     else if (text === "Leech." && result.at(-1)?.op === "attack") result.at(-1).leech = true;
     else if ((match = /^Banish the (top|bottom) card of your discard pile\.$/.exec(text)))
       result.push({ op: "banish-discard", position: match[1] });

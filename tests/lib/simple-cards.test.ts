@@ -93,4 +93,46 @@ describe("supported catalogue cards", () => {
     });
     expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["top", "library"]);
   });
+  it("moves a resolving source to the library before drawing without duplicating it", () => {
+    const setup = structuredClone(createRun(7).getSnapshot());
+    setup.state.zones.hand = [
+      { id: "well", pair: "Grand Staircase & Spiral Well", face: "dark", kept: false },
+    ];
+    setup.state.zones.library = [];
+    setup.state.zones.discard = [];
+    setup.state.zones.banished = [];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "well" }).decision.accepted).toBe(true);
+    const zones = game.getSnapshot().state.zones;
+    expect(zones.hand.map((card) => card.id)).toEqual(["well"]);
+    expect([...zones.library, ...zones.discard, ...zones.banished]).toHaveLength(0);
+  });
+  it("keeps exactly the card flipped by Marionette", () => {
+    const setup = structuredClone(createRun(7).getSnapshot());
+    setup.state.zones.hand = [
+      { id: "marionette", pair: "Puppeteer & Marionette", face: "dark", kept: false },
+      { id: "other", pair: "Sun & Moon", face: "light", kept: false },
+    ];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "marionette" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand).toContainEqual({
+      id: "other",
+      pair: "Sun & Moon",
+      face: "dark",
+      kept: true,
+    });
+  });
+  it("moves discard blocks without reversing their top-to-bottom order", () => {
+    const setup = structuredClone(createRun(7).getSnapshot());
+    setup.state.zones.hand = [{ id: "weaver", pair: "Weaver & Unraveler", face: "light", kept: false }];
+    setup.state.zones.library = [{ id: "old", pair: "Sun & Moon", face: "light", kept: false }];
+    setup.state.zones.discard = [
+      { id: "bottom", pair: "Sun & Moon", face: "light", kept: false },
+      { id: "middle", pair: "Sun & Moon", face: "light", kept: false },
+      { id: "top", pair: "Sun & Moon", face: "light", kept: false },
+    ];
+    const game = restoreSession(setup, runHandler);
+    game.dispatch({ type: "play", id: "weaver" });
+    expect(game.getSnapshot().state.zones.library.map((card) => card.id)).toEqual(["old", "middle", "top"]);
+  });
 });

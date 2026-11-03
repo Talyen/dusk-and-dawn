@@ -64,3 +64,15 @@ describe("direct attacks", () => {
     expect(attacker.hp).toBe(0);
   });
 });
+
+it("preserves Ward-ignoring damage when the hit is reflected", () => {
+  const attacker = combatant({ hp: 20, ward: 10 });
+  const defender = combatant({ reflect: true, ward: 9 });
+  const hits = directAttack(attacker, defender, [{ amount: 5, type: "Decay" }], {
+    leech: false,
+    scaling: "flat-preview",
+    ignoreWard: true,
+  });
+  expect(hits[0]).toMatchObject({ target: "attacker", amount: 5, absorbed: 0 });
+  expect([attacker.hp, attacker.ward, defender.ward]).toEqual([15, 10, 9]);
+});

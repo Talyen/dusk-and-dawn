@@ -736,6 +736,36 @@ export const simpleCards = {
       ],
     },
   },
+  "Seed & Ash": {
+    light: {
+      name: "Seed",
+      effect: "Put the bottom 2 cards of your discard pile on the bottom of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-bottom",
+          count: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Ash",
+      effect: "Deal 7 Decay damage. Banish this card.",
+      keywords: ["Banish", "Decay"],
+      ops: [
+        {
+          op: "attack",
+          amount: 7,
+          type: "Decay",
+          hits: 1,
+          leech: false,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
   "Ivy & Thorns": {
     light: {
       name: "Ivy",
@@ -875,6 +905,36 @@ export const simpleCards = {
       ],
     },
   },
+  "Hourglass & Broken Hourglass": {
+    light: {
+      name: "Hourglass",
+      effect: "Curse 2.",
+      keywords: ["Curse"],
+      ops: [
+        {
+          op: "curse",
+          amount: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Broken Hourglass",
+      effect: "Shuffle your hand into your library. Draw 5 cards. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "shuffle-hand",
+        },
+        {
+          op: "draw",
+          amount: 5,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
   "Feather & Chain": {
     light: {
       name: "Feather",
@@ -953,6 +1013,34 @@ export const simpleCards = {
       ],
     },
   },
+  "Cloister Garden & Overgrown Ruins": {
+    light: {
+      name: "Cloister Garden",
+      effect: "Heal 5 HP. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "heal",
+          amount: 5,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+    dark: {
+      name: "Overgrown Ruins",
+      effect: "Put the top card of your discard pile on top of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 1,
+        },
+      ],
+    },
+  },
   "Bell Tower & Fallen Bell": {
     light: {
       name: "Bell Tower",
@@ -976,6 +1064,31 @@ export const simpleCards = {
           type: "Binding",
           hits: 1,
           leech: false,
+        },
+      ],
+    },
+  },
+  "Bridge & Chasm": {
+    light: {
+      name: "Bridge",
+      effect: "Return the top card of your discard pile to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "return-discard",
+          position: "top",
+        },
+      ],
+    },
+    dark: {
+      name: "Chasm",
+      effect: "Deal 5 Shadow damage, ignoring Ward.",
+      keywords: ["Ward", "Shadow"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 5,
+          type: "Shadow",
         },
       ],
     },
@@ -1088,6 +1201,33 @@ export const simpleCards = {
       ],
     },
   },
+  "Ascension & Descent": {
+    light: {
+      name: "Ascension",
+      effect: "Return the bottom card of your discard pile to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "return-discard",
+          position: "bottom",
+        },
+      ],
+    },
+    dark: {
+      name: "Descent",
+      effect: "Put this card on the bottom of your library. Draw 1 card.",
+      keywords: [],
+      ops: [
+        {
+          op: "source-library-bottom",
+        },
+        {
+          op: "draw",
+          amount: 1,
+        },
+      ],
+    },
+  },
   "Dream & Nightmare": {
     light: {
       name: "Dream",
@@ -1162,6 +1302,64 @@ export const simpleCards = {
       ],
     },
   },
+  "Puppeteer & Marionette": {
+    light: {
+      name: "Puppeteer",
+      effect: "Flip your hand.",
+      keywords: ["Flip"],
+      ops: [
+        {
+          op: "flip-hand",
+        },
+      ],
+    },
+    dark: {
+      name: "Marionette",
+      effect: "Flip a random card in your hand. Keep it.",
+      keywords: ["Flip", "Keep"],
+      ops: [
+        {
+          op: "flip-random",
+          count: 1,
+        },
+        {
+          op: "keep-reference",
+        },
+      ],
+    },
+  },
+  "Weaver & Unraveler": {
+    light: {
+      name: "Weaver",
+      effect: "Put the top 2 cards of your discard pile on top of your library in their current order.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Unraveler",
+      effect: "Banish the top card of your discard pile. Deal 6 Decay damage.",
+      keywords: ["Banish", "Decay"],
+      ops: [
+        {
+          op: "banish-discard",
+          position: "top",
+        },
+        {
+          op: "attack",
+          amount: 6,
+          type: "Decay",
+          hits: 1,
+          leech: false,
+        },
+      ],
+    },
+  },
   "Midwife & Undertaker": {
     light: {
       name: "Midwife",
@@ -1193,6 +1391,33 @@ export const simpleCards = {
       ],
     },
   },
+  "Sentinel & Sleepwalker": {
+    light: {
+      name: "Sentinel",
+      effect: "Gain 6 Ward.",
+      keywords: ["Ward"],
+      ops: [
+        {
+          op: "ward",
+          amount: 6,
+        },
+      ],
+    },
+    dark: {
+      name: "Sleepwalker",
+      effect: "Shuffle your hand into your library. Draw 3 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "shuffle-hand",
+        },
+        {
+          op: "draw",
+          amount: 3,
+        },
+      ],
+    },
+  },
   "Executioner & Resurrector": {
     light: {
       name: "Executioner",
@@ -1216,6 +1441,42 @@ export const simpleCards = {
         {
           op: "return-discard",
           position: "top",
+        },
+      ],
+    },
+  },
+  "Honeybee & Locust": {
+    light: {
+      name: "Honeybee",
+      effect: "Deal 5 Growth damage. Banish this card.",
+      keywords: ["Banish", "Growth"],
+      ops: [
+        {
+          op: "attack",
+          amount: 5,
+          type: "Growth",
+          hits: 1,
+          leech: false,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+    dark: {
+      name: "Locust",
+      effect: "Banish the top card of your library. Deal 8 Decay damage.",
+      keywords: ["Banish", "Decay"],
+      ops: [
+        {
+          op: "banish-library-top",
+        },
+        {
+          op: "attack",
+          amount: 8,
+          type: "Decay",
+          hits: 1,
+          leech: false,
         },
       ],
     },
@@ -1429,6 +1690,36 @@ export const simpleCards = {
       ],
     },
   },
+  "Dawn Market & Night Market": {
+    light: {
+      name: "Dawn Market",
+      effect: "Discard a random card. Draw 2 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-random",
+        },
+        {
+          op: "draw",
+          amount: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Night Market",
+      effect: "Banish a random other card from your hand. Draw 3 cards.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-random",
+        },
+        {
+          op: "draw",
+          amount: 3,
+        },
+      ],
+    },
+  },
   "Banquet Hall & Empty Banquet Hall": {
     light: {
       name: "Banquet Hall",
@@ -1605,6 +1896,66 @@ export const simpleCards = {
       ],
     },
   },
+  "Clockwork City & Wandering Village": {
+    light: {
+      name: "Clockwork City",
+      effect: "Draw 1 card. Flip your hand.",
+      keywords: ["Flip"],
+      ops: [
+        {
+          op: "draw",
+          amount: 1,
+        },
+        {
+          op: "flip-hand",
+        },
+      ],
+    },
+    dark: {
+      name: "Wandering Village",
+      effect: "Shuffle your hand into your library. Draw 4 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "shuffle-hand",
+        },
+        {
+          op: "draw",
+          amount: 4,
+        },
+      ],
+    },
+  },
+  "Sewing Needle & Scissors": {
+    light: {
+      name: "Sewing Needle",
+      effect: "Put the top card of your discard pile on top of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 1,
+        },
+      ],
+    },
+    dark: {
+      name: "Scissors",
+      effect: "Banish the top card of your discard pile. Deal 5 Decay damage, ignoring Ward.",
+      keywords: ["Ward", "Banish", "Decay"],
+      ops: [
+        {
+          op: "banish-discard",
+          position: "top",
+        },
+        {
+          op: "attack-ignore-ward",
+          amount: 5,
+          type: "Decay",
+        },
+      ],
+    },
+  },
   "Compass & Labyrinth": {
     light: {
       name: "Compass",
@@ -1714,6 +2065,36 @@ export const simpleCards = {
       ],
     },
   },
+  "Chessboard & Scattered Chess Pieces": {
+    light: {
+      name: "Chessboard",
+      effect: "Scry. Curse 1.",
+      keywords: ["Scry", "Curse"],
+      ops: [
+        {
+          op: "scry",
+        },
+        {
+          op: "curse",
+          amount: 1,
+        },
+      ],
+    },
+    dark: {
+      name: "Scattered Chess Pieces",
+      effect: "Shuffle your hand into your library. Draw 4 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "shuffle-hand",
+        },
+        {
+          op: "draw",
+          amount: 4,
+        },
+      ],
+    },
+  },
   "Wax Seal & Torn Letter": {
     light: {
       name: "Wax Seal",
@@ -1754,6 +2135,33 @@ export const simpleCards = {
       ops: [
         {
           op: "draw",
+          amount: 2,
+        },
+      ],
+    },
+  },
+  "Metronome & Wind Chime": {
+    light: {
+      name: "Metronome",
+      effect: "Reverse the top 2 cards of your library. Scry.",
+      keywords: ["Scry"],
+      ops: [
+        {
+          op: "reverse-library",
+          count: 2,
+        },
+        {
+          op: "scry",
+        },
+      ],
+    },
+    dark: {
+      name: "Wind Chime",
+      effect: "Curse 2.",
+      keywords: ["Curse"],
+      ops: [
+        {
+          op: "curse",
           amount: 2,
         },
       ],
@@ -1806,6 +2214,32 @@ export const simpleCards = {
         {
           op: "curse",
           amount: 2,
+        },
+      ],
+    },
+  },
+  "Porcelain Doll & Rag Doll": {
+    light: {
+      name: "Porcelain Doll",
+      effect: "Keep this card.",
+      keywords: ["Keep"],
+      ops: [
+        {
+          op: "keep-self",
+        },
+      ],
+    },
+    dark: {
+      name: "Rag Doll",
+      effect: "Return the top 2 cards of your discard pile to your hand. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "return-top-discard",
+          count: 2,
+        },
+        {
+          op: "banish",
         },
       ],
     },
@@ -1874,6 +2308,34 @@ export const simpleCards = {
       ],
     },
   },
+  "Convergence & Divergence": {
+    light: {
+      name: "Convergence",
+      effect: "Put the top 2 cards of your discard pile on top of your library in their current order.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Divergence",
+      effect: "Put this card on the bottom of your library. Draw 1 card.",
+      keywords: [],
+      ops: [
+        {
+          op: "source-library-bottom",
+        },
+        {
+          op: "draw",
+          amount: 1,
+        },
+      ],
+    },
+  },
   "Compression & Expansion": {
     light: {
       name: "Compression",
@@ -1891,6 +2353,34 @@ export const simpleCards = {
       effect: "Draw 3 cards.",
       keywords: [],
       ops: [
+        {
+          op: "draw",
+          amount: 3,
+        },
+      ],
+    },
+  },
+  "Attraction & Repulsion": {
+    light: {
+      name: "Attraction",
+      effect: "Draw 2 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "draw",
+          amount: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Repulsion",
+      effect: "Put your hand on the bottom of your library. Draw 3 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "hand-library",
+          position: "bottom",
+        },
         {
           op: "draw",
           amount: 3,
@@ -2018,6 +2508,32 @@ export const simpleCards = {
       ],
     },
   },
+  "Multiplicity & Solitude": {
+    light: {
+      name: "Multiplicity",
+      effect: "Draw 3 cards. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "draw",
+          amount: 3,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+    dark: {
+      name: "Solitude",
+      effect: "Banish all other cards in your hand.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-hand",
+        },
+      ],
+    },
+  },
   "Plenty & Famine": {
     light: {
       name: "Plenty",
@@ -2056,6 +2572,32 @@ export const simpleCards = {
       ],
     },
   },
+  "High Tide & Low Tide": {
+    light: {
+      name: "High Tide",
+      effect: "Return the top 2 cards of your discard pile to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "return-top-discard",
+          count: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Low Tide",
+      effect: "Put the top card of your library on the bottom. Scry.",
+      keywords: ["Scry"],
+      ops: [
+        {
+          op: "library-top-bottom",
+        },
+        {
+          op: "scry",
+        },
+      ],
+    },
+  },
   "Exposure & Concealment": {
     light: {
       name: "Exposure",
@@ -2077,6 +2619,33 @@ export const simpleCards = {
       ops: [
         {
           op: "keep-hand",
+        },
+      ],
+    },
+  },
+  "Herald & Smuggler": {
+    light: {
+      name: "Herald",
+      effect: "Bless 2.",
+      keywords: ["Bless"],
+      ops: [
+        {
+          op: "bless",
+          amount: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Smuggler",
+      effect: "Put this card on the bottom of your library. Draw 2 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "source-library-bottom",
+        },
+        {
+          op: "draw",
+          amount: 2,
         },
       ],
     },
@@ -2305,6 +2874,34 @@ export const simpleCards = {
       ],
     },
   },
+  "Archivist & Bookworm": {
+    light: {
+      name: "Archivist",
+      effect: "Put the bottom card of your discard pile on top of your library. Scry.",
+      keywords: ["Scry"],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "bottom",
+          count: 1,
+        },
+        {
+          op: "scry",
+        },
+      ],
+    },
+    dark: {
+      name: "Bookworm",
+      effect: "Banish the bottom card of your discard pile.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-discard",
+          position: "bottom",
+        },
+      ],
+    },
+  },
   "Surveyor & Trespasser": {
     light: {
       name: "Surveyor",
@@ -2458,6 +3055,68 @@ export const simpleCards = {
           type: "Release",
           hits: 1,
           leech: false,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
+  "Dandelion & Mandrake": {
+    light: {
+      name: "Dandelion",
+      effect: "Put your hand on the bottom of your library. Draw 3 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "hand-library",
+          position: "bottom",
+        },
+        {
+          op: "draw",
+          amount: 3,
+        },
+      ],
+    },
+    dark: {
+      name: "Mandrake",
+      effect: "Curse 3. Banish this card.",
+      keywords: ["Banish", "Curse"],
+      ops: [
+        {
+          op: "curse",
+          amount: 3,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
+  "Snowdrop & Nightshade": {
+    light: {
+      name: "Snowdrop",
+      effect: "Heal 4 HP. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "heal",
+          amount: 4,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+    dark: {
+      name: "Nightshade",
+      effect: "Deal 5 Decay damage, ignoring Ward. Banish this card.",
+      keywords: ["Ward", "Banish", "Decay"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 5,
+          type: "Decay",
         },
         {
           op: "banish",
@@ -2669,6 +3328,59 @@ export const simpleCards = {
       ],
     },
   },
+  "Quill & Eraser": {
+    light: {
+      name: "Quill",
+      effect: "Put the top card of your discard pile on top of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 1,
+        },
+      ],
+    },
+    dark: {
+      name: "Eraser",
+      effect: "Banish the top card of your discard pile.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-discard",
+          position: "top",
+        },
+      ],
+    },
+  },
+  "Fishing Net & Harpoon": {
+    light: {
+      name: "Fishing Net",
+      effect: "Curse 2.",
+      keywords: ["Curse"],
+      ops: [
+        {
+          op: "curse",
+          amount: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Harpoon",
+      effect: "Deal 7 Release damage, ignoring Ward. Banish this card.",
+      keywords: ["Ward", "Banish", "Release"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 7,
+          type: "Release",
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
   "Scabbard & Drawn Blade": {
     light: {
       name: "Scabbard",
@@ -2745,6 +3457,31 @@ export const simpleCards = {
         },
         {
           op: "keep-self",
+        },
+      ],
+    },
+  },
+  "Rope Ladder & Trapdoor": {
+    light: {
+      name: "Rope Ladder",
+      effect: "Return the top card of your discard pile to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "return-discard",
+          position: "top",
+        },
+      ],
+    },
+    dark: {
+      name: "Trapdoor",
+      effect: "Deal 5 Shadow damage, ignoring Ward.",
+      keywords: ["Ward", "Shadow"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 5,
+          type: "Shadow",
         },
       ],
     },
@@ -2896,6 +3633,33 @@ export const simpleCards = {
       ],
     },
   },
+  "Grand Staircase & Spiral Well": {
+    light: {
+      name: "Grand Staircase",
+      effect: "Return the bottom card of your discard pile to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "return-discard",
+          position: "bottom",
+        },
+      ],
+    },
+    dark: {
+      name: "Spiral Well",
+      effect: "Put this card on the bottom of your library. Draw 1 card.",
+      keywords: [],
+      ops: [
+        {
+          op: "source-library-bottom",
+        },
+        {
+          op: "draw",
+          amount: 1,
+        },
+      ],
+    },
+  },
   "Aqueduct & Sewer": {
     light: {
       name: "Aqueduct",
@@ -2987,6 +3751,32 @@ export const simpleCards = {
       ],
     },
   },
+  "Counting House & Thieves Den": {
+    light: {
+      name: "Counting House",
+      effect: "Put a random card from your hand on the bottom of your library. Draw 2 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "random-library-bottom",
+        },
+        {
+          op: "draw",
+          amount: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Thieves Den",
+      effect: "Keep your hand.",
+      keywords: ["Keep"],
+      ops: [
+        {
+          op: "keep-hand",
+        },
+      ],
+    },
+  },
   "Dovecote & Spider Nursery": {
     light: {
       name: "Dovecote",
@@ -3007,6 +3797,33 @@ export const simpleCards = {
         {
           op: "poison",
           amount: 2,
+        },
+      ],
+    },
+  },
+  "Tidal Causeway & Drifting Island": {
+    light: {
+      name: "Tidal Causeway",
+      effect: "Exchange a random card in your hand with the top card of your discard pile.",
+      keywords: [],
+      ops: [
+        {
+          op: "exchange-random-discard",
+          position: "top",
+        },
+      ],
+    },
+    dark: {
+      name: "Drifting Island",
+      effect: "Shuffle your hand into your library. Draw 4 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "shuffle-hand",
+        },
+        {
+          op: "draw",
+          amount: 4,
         },
       ],
     },
@@ -3036,6 +3853,35 @@ export const simpleCards = {
         },
         {
           op: "banish",
+        },
+      ],
+    },
+  },
+  "Pottery Workshop & Shard Heap": {
+    light: {
+      name: "Pottery Workshop",
+      effect: "Flip the top card of your discard pile. Return it to your hand.",
+      keywords: ["Flip"],
+      ops: [
+        {
+          op: "flip-discard-top",
+        },
+        {
+          op: "return-reference",
+        },
+      ],
+    },
+    dark: {
+      name: "Shard Heap",
+      effect: "Deal 2 Decay damage three times.",
+      keywords: ["Decay"],
+      ops: [
+        {
+          op: "attack",
+          amount: 2,
+          type: "Decay",
+          hits: 3,
+          leech: false,
         },
       ],
     },
@@ -3146,6 +3992,34 @@ export const simpleCards = {
       ],
     },
   },
+  "Crown Jeweler & Crown Snatcher": {
+    light: {
+      name: "Crown Jeweler",
+      effect: "Turn the top card of your discard pile to its light face. Return it to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "light-discard-top",
+        },
+        {
+          op: "return-reference",
+        },
+      ],
+    },
+    dark: {
+      name: "Crown Snatcher",
+      effect: "Hush. Banish this card.",
+      keywords: ["Banish", "Hush"],
+      ops: [
+        {
+          op: "hush",
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
   "Prism Keeper & Shade Keeper": {
     light: {
       name: "Prism Keeper",
@@ -3197,6 +4071,41 @@ export const simpleCards = {
       ],
     },
   },
+  "Clockmaker & Clock Thief": {
+    light: {
+      name: "Clockmaker",
+      effect: "Put the top card of your discard pile on top of your library. Scry.",
+      keywords: ["Scry"],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 1,
+        },
+        {
+          op: "scry",
+        },
+      ],
+    },
+    dark: {
+      name: "Clock Thief",
+      effect: "Gain 1 mana. Draw 1 card. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "mana",
+          amount: 1,
+        },
+        {
+          op: "draw",
+          amount: 1,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
   "Court Physician & Plague Doctor": {
     light: {
       name: "Court Physician",
@@ -3231,6 +4140,38 @@ export const simpleCards = {
       ],
     },
   },
+  "Parchment Scribe & Ink Drinker": {
+    light: {
+      name: "Parchment Scribe",
+      effect: "Put the bottom card of your discard pile on top of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "bottom",
+          count: 1,
+        },
+      ],
+    },
+    dark: {
+      name: "Ink Drinker",
+      effect: "Banish the top card of your discard pile. Heal 3 HP. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-discard",
+          position: "top",
+        },
+        {
+          op: "heal",
+          amount: 3,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+  },
   "Portrait Painter & Portrait Eraser": {
     light: {
       name: "Portrait Painter",
@@ -3251,6 +4192,33 @@ export const simpleCards = {
         {
           op: "banish-discard",
           position: "top",
+        },
+      ],
+    },
+  },
+  "Glassblower & Glass Crusher": {
+    light: {
+      name: "Glassblower",
+      effect: "Flip the top card of your discard pile. Return it to your hand.",
+      keywords: ["Flip"],
+      ops: [
+        {
+          op: "flip-discard-top",
+        },
+        {
+          op: "return-reference",
+        },
+      ],
+    },
+    dark: {
+      name: "Glass Crusher",
+      effect: "Deal 6 Release damage, ignoring Ward.",
+      keywords: ["Ward", "Release"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 6,
+          type: "Release",
         },
       ],
     },
@@ -3425,6 +4393,31 @@ export const simpleCards = {
       ],
     },
   },
+  "Thread Spinner & Thread Cutter": {
+    light: {
+      name: "Thread Spinner",
+      effect: "Put the top card of your discard pile on top of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 1,
+        },
+      ],
+    },
+    dark: {
+      name: "Thread Cutter",
+      effect: "Banish the top card of your discard pile.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-discard",
+          position: "top",
+        },
+      ],
+    },
+  },
   "Storyteller & Story Swallower": {
     light: {
       name: "Storyteller",
@@ -3486,6 +4479,32 @@ export const simpleCards = {
         },
         {
           op: "banish",
+        },
+      ],
+    },
+  },
+  "Path Maker & Path Eraser": {
+    light: {
+      name: "Path Maker",
+      effect: "Scry. Draw 1 card.",
+      keywords: ["Scry"],
+      ops: [
+        {
+          op: "scry",
+        },
+        {
+          op: "draw",
+          amount: 1,
+        },
+      ],
+    },
+    dark: {
+      name: "Path Eraser",
+      effect: "Banish the top card of your library.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-library-top",
         },
       ],
     },
@@ -3573,6 +4592,86 @@ export const simpleCards = {
         {
           op: "draw",
           amount: 1,
+        },
+      ],
+    },
+  },
+  "Doll Mender & Doll Thief": {
+    light: {
+      name: "Doll Mender",
+      effect: "Turn the top card of your discard pile to its light face. Return it to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "light-discard-top",
+        },
+        {
+          op: "return-reference",
+        },
+      ],
+    },
+    dark: {
+      name: "Doll Thief",
+      effect: "Return the top card of your discard pile to your hand.",
+      keywords: [],
+      ops: [
+        {
+          op: "return-discard",
+          position: "top",
+        },
+      ],
+    },
+  },
+  "Music Conductor & Improviser": {
+    light: {
+      name: "Music Conductor",
+      effect: "Reverse the top 3 cards of your library. Scry.",
+      keywords: ["Scry"],
+      ops: [
+        {
+          op: "reverse-library",
+          count: 3,
+        },
+        {
+          op: "scry",
+        },
+      ],
+    },
+    dark: {
+      name: "Improviser",
+      effect: "Draw 2 cards. Discard a random card.",
+      keywords: [],
+      ops: [
+        {
+          op: "draw",
+          amount: 2,
+        },
+        {
+          op: "discard-random",
+        },
+      ],
+    },
+  },
+  "Tide Keeper & Tide Wanderer": {
+    light: {
+      name: "Tide Keeper",
+      effect: "Curse 2.",
+      keywords: ["Curse"],
+      ops: [
+        {
+          op: "curse",
+          amount: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Tide Wanderer",
+      effect: "Exchange a random card in your hand with the bottom card of your discard pile.",
+      keywords: [],
+      ops: [
+        {
+          op: "exchange-random-discard",
+          position: "bottom",
         },
       ],
     },
@@ -3710,6 +4809,32 @@ export const simpleCards = {
         },
         {
           op: "banish",
+        },
+      ],
+    },
+  },
+  "Day Moth & Night Moth": {
+    light: {
+      name: "Day Moth",
+      effect: "Turn a random dark card in your hand to its light face.",
+      keywords: [],
+      ops: [
+        {
+          op: "turn-random",
+          from: "dark",
+          face: "light",
+        },
+      ],
+    },
+    dark: {
+      name: "Night Moth",
+      effect: "Turn a random light card in your hand to its dark face.",
+      keywords: [],
+      ops: [
+        {
+          op: "turn-random",
+          from: "light",
+          face: "dark",
         },
       ],
     },
@@ -4040,6 +5165,30 @@ export const simpleCards = {
       ],
     },
   },
+  "Silver Birch & Hollow Oak": {
+    light: {
+      name: "Silver Birch",
+      effect: "Put the bottom 2 cards of your discard pile on the bottom of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-bottom",
+          count: 2,
+        },
+      ],
+    },
+    dark: {
+      name: "Hollow Oak",
+      effect: "Keep 2 random cards in your hand.",
+      keywords: ["Keep"],
+      ops: [
+        {
+          op: "keep-random",
+          count: 2,
+        },
+      ],
+    },
+  },
   "Fern Fiddlehead & Fallen Leaf": {
     light: {
       name: "Fern Fiddlehead",
@@ -4087,6 +5236,64 @@ export const simpleCards = {
         {
           op: "draw",
           amount: 2,
+        },
+      ],
+    },
+  },
+  "Cultivated Mushroom & Wild Mushroom": {
+    light: {
+      name: "Cultivated Mushroom",
+      effect: "Heal 5 HP. Banish this card.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "heal",
+          amount: 5,
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+    dark: {
+      name: "Wild Mushroom",
+      effect: "Shuffle your hand into your library. Draw 4 cards.",
+      keywords: [],
+      ops: [
+        {
+          op: "shuffle-hand",
+        },
+        {
+          op: "draw",
+          amount: 4,
+        },
+      ],
+    },
+  },
+  "Cactus Flower & Desert Thorn": {
+    light: {
+      name: "Cactus Flower",
+      effect: "Deal 6 Growth damage.",
+      keywords: ["Growth"],
+      ops: [
+        {
+          op: "attack",
+          amount: 6,
+          type: "Growth",
+          hits: 1,
+          leech: false,
+        },
+      ],
+    },
+    dark: {
+      name: "Desert Thorn",
+      effect: "Deal 5 Decay damage, ignoring Ward.",
+      keywords: ["Ward", "Decay"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 5,
+          type: "Decay",
         },
       ],
     },
@@ -4392,6 +5599,34 @@ export const simpleCards = {
       ],
     },
   },
+  "Bronze Mirror & Tarnished Mirror": {
+    light: {
+      name: "Bronze Mirror",
+      effect: "Reflect the first hit of the enemy's next attack. Banish this card.",
+      keywords: ["Banish", "Reflect"],
+      ops: [
+        {
+          op: "reflect",
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+    dark: {
+      name: "Tarnished Mirror",
+      effect: "Flip the top card of your discard pile. Return it to your hand.",
+      keywords: ["Flip"],
+      ops: [
+        {
+          op: "flip-discard-top",
+        },
+        {
+          op: "return-reference",
+        },
+      ],
+    },
+  },
   "Glass Marble & Clay Marble": {
     light: {
       name: "Glass Marble",
@@ -4473,6 +5708,34 @@ export const simpleCards = {
       ],
     },
   },
+  "Golden Shears & Blunt Shears": {
+    light: {
+      name: "Golden Shears",
+      effect: "Deal 6 Release damage, ignoring Ward.",
+      keywords: ["Ward", "Release"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 6,
+          type: "Release",
+        },
+      ],
+    },
+    dark: {
+      name: "Blunt Shears",
+      effect: "Deal 3 Binding damage.",
+      keywords: ["Binding"],
+      ops: [
+        {
+          op: "attack",
+          amount: 3,
+          type: "Binding",
+          hits: 1,
+          leech: false,
+        },
+      ],
+    },
+  },
   "Copper Coin & Hollow Coin": {
     light: {
       name: "Copper Coin",
@@ -4503,6 +5766,31 @@ export const simpleCards = {
         },
         {
           op: "banish",
+        },
+      ],
+    },
+  },
+  "Feather Quill & Ink Blot": {
+    light: {
+      name: "Feather Quill",
+      effect: "Put the top card of your discard pile on top of your library.",
+      keywords: [],
+      ops: [
+        {
+          op: "discard-library-top",
+          position: "top",
+          count: 1,
+        },
+      ],
+    },
+    dark: {
+      name: "Ink Blot",
+      effect: "Banish the top card of your discard pile.",
+      keywords: ["Banish"],
+      ops: [
+        {
+          op: "banish-discard",
+          position: "top",
         },
       ],
     },
@@ -4653,6 +5941,33 @@ export const simpleCards = {
         },
         {
           op: "banish",
+        },
+      ],
+    },
+  },
+  "Intact Sapphire & Cracked Sapphire": {
+    light: {
+      name: "Intact Sapphire",
+      effect: "Reflect the first hit of the enemy's next attack. Banish this card.",
+      keywords: ["Banish", "Reflect"],
+      ops: [
+        {
+          op: "reflect",
+        },
+        {
+          op: "banish",
+        },
+      ],
+    },
+    dark: {
+      name: "Cracked Sapphire",
+      effect: "Deal 6 Decay damage, ignoring Ward.",
+      keywords: ["Ward", "Decay"],
+      ops: [
+        {
+          op: "attack-ignore-ward",
+          amount: 6,
+          type: "Decay",
         },
       ],
     },
@@ -4811,6 +6126,33 @@ export const simpleCards = {
         {
           op: "ward",
           amount: 6,
+        },
+      ],
+    },
+  },
+  "Hedge Garden & Wild Thicket": {
+    light: {
+      name: "Hedge Garden",
+      effect: "Reverse the top 3 cards of your library. Scry.",
+      keywords: ["Scry"],
+      ops: [
+        {
+          op: "reverse-library",
+          count: 3,
+        },
+        {
+          op: "scry",
+        },
+      ],
+    },
+    dark: {
+      name: "Wild Thicket",
+      effect: "Curse 2.",
+      keywords: ["Curse"],
+      ops: [
+        {
+          op: "curse",
+          amount: 2,
         },
       ],
     },
