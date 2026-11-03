@@ -3,15 +3,33 @@ import { useTranslation } from "react-i18next";
 import { Card } from "../cards/card";
 import { Button, TabBar } from "../ui/controls";
 import { anchorPage, getPagination } from "./pagination";
+import { collectionItems, type CollectionEntry, type CollectionKind } from "../../lib/collection/catalog";
+import { resolveKeywords } from "../../lib/keywords/keywords";
 
-type Kind = "player" | "enemy";
-const CARD_COUNT = 12;
+type Kind = CollectionKind;
 
-export function CardBrowser() {
+export function CardBrowser({
+  discoveredIds,
+  catalog,
+  onInspectChange,
+}: {
+  discoveredIds: ReadonlySet<string>;
+  catalog: readonly CollectionEntry[];
+  onInspectChange: (id: string, keywords: readonly string[] | null) => void;
+}) {
   const { t } = useTranslation();
-  const [kind, setKind] = useState<Kind>("player");
-  const [columns, setColumns] = useState(4);
-  const [paging, setPaging] = useState({ page: 0, pageSize: 8 });
+  const [kind, setKind] = useState<Kind>("cards");
+  const [columnCounts, setColumnCounts] = useState<Record<Kind, number>>({ cards: 4, enemies: 3 });
+  const columns = columnCounts[kind];
+  const [pages, setPages] = useState<Record<Kind, { page: number; pageSize: number }>>({
+    cards: { page: 0, pageSize: 8 },
+    enemies: { page: 0, pageSize: 6 },
+  });
+  const paging = pages[kind];
+  const setPaging = (next: { page: number; pageSize: number }) =>
+    setPages((current) => ({ ...current, [kind]: next }));
+  const items = collectionItems(kind, discoveredIds, catalog);
+  const itemCount = items.length;
   const gridRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLSpanElement>(null);
   const recovery = useRef<{ index: number; element: HTMLElement } | null>(null);
@@ -19,16 +37,16 @@ export function CardBrowser() {
   const previousRef = useRef<HTMLButtonElement>(null);
   const pageSize = columns * 2;
   const page = getPagination(
-    CARD_COUNT,
+    itemCount,
     paging.pageSize === pageSize
       ? paging.page
       : recovery.current
         ? Math.floor(recovery.current.index / pageSize)
-        : anchorPage(paging.page, paging.pageSize, pageSize, CARD_COUNT),
+        : anchorPage(paging.page, paging.pageSize, pageSize, itemCount),
     pageSize,
   ).page;
   if (paging.page !== page || paging.pageSize !== pageSize) setPaging({ page, pageSize });
-  const totalPages = getPagination(CARD_COUNT, page, pageSize).totalPages;
+  const totalPages = getPagination(itemCount, page, pageSize).totalPages;
 
   useLayoutEffect(() => {
     const grid = gridRef.current;
@@ -36,9 +54,12 @@ export function CardBrowser() {
     if (!grid || !measure) return;
     const update = () => {
       const width = measure.getBoundingClientRect().width;
-      const gap = width / (kind === "player" ? 7.25 : 10);
+      const gap = width / (kind === "cards" ? 7.25 : 10);
       if (width > 0 && grid.clientWidth > 0) {
-        const next = Math.max(1, Math.min(4, Math.floor((grid.clientWidth + gap + 0.5) / (width + gap))));
+        const next = Math.max(
+          1,
+          Math.min(kind === "cards" ? 4 : 3, Math.floor((grid.clientWidth + gap + 0.5) / (width + gap))),
+        );
         if (next !== columns) {
           const active = document.activeElement;
           const item =
@@ -47,7 +68,7 @@ export function CardBrowser() {
               : null;
           if (item && active instanceof HTMLElement && grid.contains(item))
             recovery.current = { index: Number(item.dataset.cardIndex), element: active };
-          setColumns(next);
+          setColumnCounts((current) => ({ ...current, [kind]: next }));
         }
       }
     };
@@ -70,7 +91,7 @@ export function CardBrowser() {
   }, [columns, page]);
 
   function changePage(next: number) {
-    const safe = getPagination(CARD_COUNT, next, pageSize).page;
+    const safe = getPagination(itemCount, next, pageSize).page;
     setPaging({ page: safe, pageSize });
     if (
       safe === totalPages - 1 &&
@@ -97,32 +118,64 @@ export function CardBrowser() {
       <TabBar
         label={t("cardTypes")}
         tabs={[
-          { id: "player", label: t("playerCards") },
-          { id: "enemy", label: t("enemyCards") },
+          { id: "cards", label: t("cards") },
+          { id: "enemies", label: t("enemies") },
         ]}
         activeTab={kind}
         onSelectTab={(next) => {
           setKind(next);
-          setPaging({ page: 0, pageSize });
         }}
       />
-      <div className={`card-grid-shell card-grid-shell--${kind}`} ref={gridRef}>
+      <div
+        className={`card-grid-shell card-grid-shell--${kind === "cards" ? "player" : "enemy"}`}
+        ref={gridRef}
+      >
         <span className="card-grid-measure" ref={measureRef} aria-hidden="true" />
-        <div className="card-grid" style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}>
-          {Array.from({ length: Math.min(pageSize, CARD_COUNT - page * pageSize) }, (_, index) => {
-            const number = page * pageSize + index + 1;
-            const title = t(kind === "player" ? "playerCardNumber" : "enemyCardNumber", { number });
-            return (
-              <div className="card-grid-item" data-card-index={number - 1} key={`${kind}-${number}`}>
-                <Card
-                  title={title}
-                  description={t("placeholderDescription")}
-                  aspect={kind === "player" ? "portrait" : "landscape"}
-                />
-                <p>{title}</p>
+        <div className="card-grid">
+          {Array.from(
+            { length: Math.ceil(Math.min(pageSize, Math.max(0, itemCount - page * pageSize)) / columns) },
+            (_, row) => (
+              <div className="card-grid-row" key={row}>
+                {items
+                  .slice(
+                    page * pageSize + row * columns,
+                    Math.min((page + 1) * pageSize, page * pageSize + (row + 1) * columns),
+                  )
+                  .map((item, offset) => {
+                    const index = page * pageSize + row * columns + offset;
+                    const label = item.discovered
+                      ? t(item.titleKey, { number: item.number })
+                      : t(kind === "cards" ? "undiscoveredCardNumber" : "undiscoveredEnemyNumber", {
+                          number: item.number,
+                        });
+                    return (
+                      <div className="card-grid-item" data-card-index={index} key={item.id}>
+                        <Card
+                          entryId={item.id}
+                          tooltipSide={offset < columns / 2 ? "left" : "right"}
+                          title={label}
+                          description={
+                            item.discovered
+                              ? t(item.descriptionKey, {
+                                  keywords: resolveKeywords(item.keywordIds)
+                                    .map((keyword) => t(keyword.labelKey))
+                                    .join(", "),
+                                })
+                              : t("undiscoveredDescription")
+                          }
+                          {...(item.art ? { art: item.art } : {})}
+                          aspect={kind === "cards" ? "portrait" : "landscape"}
+                          keywordIds={item.keywordIds}
+                          discovered={item.discovered}
+                          onInspectChange={onInspectChange}
+                        />
+                        <p>{item.discovered ? label : t("undiscovered")}</p>
+                      </div>
+                    );
+                  })}
               </div>
-            );
-          })}
+            ),
+          )}
         </div>
       </div>
       <nav className="pagination" aria-label={t("cardPages")}>

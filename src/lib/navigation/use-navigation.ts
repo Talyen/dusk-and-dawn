@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 
 type Screen = "menu" | "options" | "cards";
 
@@ -10,7 +10,7 @@ export function useNavigation(heading: RefObject<HTMLHeadingElement | null>) {
   const restore = useRef<{ element: HTMLElement; id: string } | null>(null);
   const screen = history[history.length - 1]!.screen;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const onPointer = () => {
       keyboard.current = false;
     };
@@ -56,10 +56,19 @@ export function useNavigation(heading: RefObject<HTMLHeadingElement | null>) {
           const rect = el.getBoundingClientRect();
           const dx = rect.left + rect.width / 2 - x,
             dy = rect.top + rect.height / 2 - y;
-          return { el, primary: (horizontal ? dx : dy) * sign, cross: Math.abs(horizontal ? dy : dx) };
+          return {
+            el,
+            primary: (horizontal ? dx : dy) * sign,
+            cross: Math.abs(horizontal ? dy : dx),
+            crossGap: horizontal ? Math.max(0, box.top - rect.bottom, rect.top - box.bottom) : 0,
+          };
         })
         .filter(({ primary }) => primary > 1)
-        .sort((a, b) => a.primary + 2 * a.cross - (b.primary + 2 * b.cross));
+        .sort(
+          (a, b) =>
+            Number(a.crossGap > 0) - Number(b.crossGap > 0) ||
+            a.primary + 0.5 * a.cross - (b.primary + 0.5 * b.cross),
+        );
       if (candidates[0]) {
         event.preventDefault();
         candidates[0].el.focus();

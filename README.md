@@ -74,8 +74,8 @@ not been specified here.
 
 ## Card and display foundations
 
-The Card preview on the main menu demonstrates image-led player (3:4) and enemy
-(4:3) cards with blank placeholder art and copy. `src/components/cards/card.tsx`
+Collection demonstrates image-led player (3:4) and enemy (4:3) cards with
+blank placeholder art and copy. `src/components/cards/card.tsx`
 accepts artwork and description data, and supplies hover and keyboard focus
 feedback, shimmer, and a root-space tooltip. Tooltip placement flips and
 shifts at viewport edges; Escape, scrolling, an outside press, and window blur
@@ -90,7 +90,7 @@ from Alchemy's card, tooltip, and virtual-resolution UI (CC BY-NC 4.0).
 
 ## Browsing and display
 
-The preview contains placeholder player and enemy collections in adaptive,
+Collection contains placeholder player and enemy entries in adaptive,
 paginated grids. Hover or keyboard focus reveals card details; clicking a card
 has no inspection or selection action. Arrow keys move among visible controls,
 Tab follows the normal focus order, and Back/Escape return through screen history.
@@ -103,3 +103,25 @@ A failed mode change is reported in Options. Screen fades follow the existing
 reduced-motion preference. UI sound cue hooks are ready for approved assets; no
 sounds are registered or included yet. The browsing and navigation patterns are
 adapted from Alchemy's shared UI (CC BY-NC 4.0).
+
+## Collection and keyword presentation
+
+The current Collection is a sample, not player progression. Its catalog and
+sample discovered IDs live in `src/lib/collection/catalog.ts`; the browser
+accepts a catalog and a set of discovered IDs. Undiscovered entries mask their
+art, title, and description. When gameplay establishes discovery, pass its
+canonical discovered IDs to the browser and replace the sample catalog; no
+placeholder discoveries are written to game saves or local storage.
+
+`src/lib/keywords/keywords.ts` owns keyword IDs, localized label keys, and color
+pairs. The current sample definitions and colors are temporary. Card descriptions
+highlight complete keyword labels, while hover/focus borders, ambient plasma,
+and particles derive their colors from the same definitions. Entries without
+resolved keywords use neutral shine. Add localized labels with actual keywords
+when the game design is ready.
+
+The background plasma and particle renderers in `src/lib/animation/` adapt
+Alchemy's WebGL and canvas lifecycle code (CC BY-NC 4.0). Plasma falls back to a
+static gradient on WebGL failure or context loss; reduced motion uses a static
+glow and hides particles. Background Glow and Background Particles can be
+adjusted independently in Options, including turning either off.

@@ -2,9 +2,9 @@
 
 /* Adapted from Alchemy's semantic UI palette, with Dusk & Dawn's cooler shell. */
 @theme {
-  --color-background: #11121d;
+  --color-background: #09090d;
   --color-foreground: #f3e4da;
-  --color-card: #1c1a26;
+  --color-card: #15151b;
   --color-primary: #cd9b51;
   --color-primary-foreground: #251c18;
   --color-gold-base: #cd9b51;
@@ -53,24 +53,7 @@ input:focus-visible,
   place-items: center;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 95%, #433346 0, #202031 36%, #11121d 75%);
-}
-.horizon {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-  opacity: 0.75;
-}
-.sun {
-  width: min(64vw, 410px);
-  aspect-ratio: 1;
-  border: 1px solid #b48971;
-  border-radius: 50%;
-  box-shadow:
-    0 0 90px #d9935730,
-    inset 0 0 90px #d9935712;
+  background: #08080c;
 }
 .intro {
   position: relative;
@@ -372,15 +355,17 @@ input:focus-visible,
   width: calc(10 * var(--ui-unit));
 }
 .card-grid {
-  display: grid;
-  align-content: start;
+  display: flex;
+  min-height: calc(23.5 * var(--ui-unit));
+  flex-direction: column;
+  justify-content: center;
   gap: calc(1 * var(--ui-unit));
 }
-.card-grid-shell--player .card-grid {
-  min-height: calc(23.5 * var(--ui-unit));
-}
-.card-grid-shell--enemy .card-grid {
-  min-height: calc(19.25 * var(--ui-unit));
+.card-grid-row {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: calc(1 * var(--ui-unit));
 }
 .card-grid-item {
   display: grid;
@@ -388,6 +373,11 @@ input:focus-visible,
   justify-items: center;
   gap: calc(0.5 * var(--ui-unit));
   min-width: 0;
+  width: calc(7.25 * var(--ui-unit));
+  flex: 0 1 auto;
+}
+.card-grid-shell--enemy .card-grid-item {
+  width: calc(10 * var(--ui-unit));
 }
 .card-grid-item p {
   margin: 0;
@@ -451,17 +441,12 @@ input:focus-visible,
   transition: border-color 200ms ease-out;
 }
 .game-card[data-inspecting] {
-  border-color: var(--color-primary);
-  filter: drop-shadow(
-    0 0 calc(16px * var(--ui-scale)) color-mix(in srgb, var(--color-primary) 45%, transparent)
-  );
+  border-color: transparent;
 }
 .game-card[data-inspecting] {
   scale: 1.035;
 }
-.game-card[data-inspecting]::after {
-  border-color: var(--color-primary);
-}
+
 .game-card__clip {
   position: absolute;
   inset: 0;
@@ -593,4 +578,91 @@ input:focus-visible,
 }
 .cards-screen > .ui-button {
   min-height: calc(3 * var(--ui-unit));
+}
+
+.ambient-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ambient-plasma,
+.ambient-fallback,
+.ambient-particles,
+.ambient-plasma canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.ambient-plasma {
+  mix-blend-mode: plus-lighter;
+}
+.ambient-fallback {
+  transition: background 180ms ease-out;
+}
+.game-card[data-discovered="false"] .game-card__blank {
+  background: #17171d;
+}
+.game-card__unknown {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #77727d;
+  z-index: 1;
+  font:
+    400 calc(3 * var(--ui-unit))/1 Georgia,
+    serif;
+  opacity: 0.6;
+}
+.shine-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  animation: border-shine 14s linear infinite;
+}
+.shine-border > span {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 3px;
+  background-size: 300% 300%;
+  background-position: inherit;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+}
+.shine-text {
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 0;
+  animation: text-shine 4.8s linear infinite;
+}
+@keyframes border-shine {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes text-shine {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
 }

@@ -1,15 +1,39 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Tooltip } from "../ui/tooltip";
+import { useTranslation } from "react-i18next";
+import { resolveKeywords } from "../../lib/keywords/keywords";
+import { KeywordDescription, ShineBorder, ShineText } from "../effects/shine";
 
 export interface CardProps {
   title: string;
   description: string;
   aspect: "portrait" | "landscape";
   art?: string;
+  entryId: string;
+  tooltipSide?: "left" | "right";
+  discovered: boolean;
+  keywordIds: readonly string[];
+  onInspectChange: (id: string, keywordIds: readonly string[] | null) => void;
 }
 
-/** Image-led, selectable card with the same pointer and keyboard inspection. */
-export function Card({ title, description, aspect, art }: CardProps) {
+/** Collection entries reveal details only on hover or keyboard focus. */
+export function Card({
+  title,
+  description,
+  aspect,
+  art,
+  entryId,
+  tooltipSide,
+  discovered,
+  keywordIds,
+  onInspectChange,
+}: CardProps) {
+  const { t } = useTranslation();
+  const labels = resolveKeywords(keywordIds).map((keyword) => ({
+    id: keyword.id,
+    label: t(keyword.labelKey),
+  }));
+
   const trigger = useRef<HTMLDivElement>(null);
   const id = useId();
   const pointer = useRef(false);
@@ -26,6 +50,11 @@ export function Card({ title, description, aspect, art }: CardProps) {
     focus.current = false;
     setOpen(false);
   };
+  useEffect(() => {
+    if (!open) return;
+    onInspectChange(entryId, discovered ? keywordIds : []);
+    return () => onInspectChange(entryId, null);
+  }, [open, entryId, discovered, keywordIds, onInspectChange]);
   useEffect(() => {
     if (!open) return;
     const onOutsidePress = (event: PointerEvent) => {
@@ -70,6 +99,7 @@ export function Card({ title, description, aspect, art }: CardProps) {
         tabIndex={0}
         className="game-card"
         data-inspecting={open || undefined}
+        data-discovered={discovered}
         aria-label={title}
         aria-describedby={open ? id : undefined}
         onPointerEnter={(event) => {
@@ -94,13 +124,15 @@ export function Card({ title, description, aspect, art }: CardProps) {
         }}
       >
         <span className="game-card__clip" aria-hidden="true">
-          {art ? <img src={art} alt="" /> : <span className="game-card__blank" />}
+          {art && discovered ? <img src={art} alt="" /> : <span className="game-card__blank" />}
+          {!discovered && <span className="game-card__unknown">?</span>}
           {shimmer > 0 && <span className="game-card__shimmer" key={shimmer} />}
         </span>
+        {open && <ShineBorder keywordIds={keywordIds} />}
       </div>
-      <Tooltip triggerRef={trigger} id={id} open={open}>
-        <strong>{title}</strong>
-        <p>{description}</p>
+      <Tooltip triggerRef={trigger} id={id} open={open} {...(tooltipSide ? { placement: tooltipSide } : {})}>
+        <strong>{discovered ? <ShineText keywordIds={keywordIds}>{title}</ShineText> : title}</strong>
+        <p>{discovered ? <KeywordDescription text={description} labels={labels} /> : description}</p>
       </Tooltip>
     </div>
   );

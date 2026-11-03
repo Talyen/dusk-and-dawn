@@ -136,3 +136,30 @@ test("desktop fullscreen control changes the native window and rejects invalid i
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("desktop Collection shows keyword inspection without opening a dialog", async () => {
+  test.skip(
+    Boolean(process.env.DUSK_ELECTRON_EXECUTABLE),
+    "Packaged application coverage uses its own build",
+  );
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-collection-"));
+  try {
+    const app = await electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+    try {
+      const page = await app.firstWindow();
+      await page.getByRole("button", { name: "Collection" }).click();
+      await page.getByRole("img", { name: "Player card 1" }).hover();
+      await expect(page.getByRole("tooltip")).toContainText("Sample Keyword A");
+      await expect(page.locator(".ambient-background")).toHaveAttribute("data-primary", "#8dd9cb");
+      await page.getByRole("img", { name: "Player card 1" }).click();
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+    } finally {
+      await app.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

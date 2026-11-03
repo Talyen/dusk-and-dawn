@@ -29,5 +29,20 @@
   "tooltipSize": "Tooltip size",
   "fullscreen": "Fullscreen",
   "displayError": "Could not change display mode.",
-  "playUnavailable": "Play will be available when the game is ready."
+  "playUnavailable": "Play will be available when the game is ready.",
+  "collection": "Collection",
+  "cards": "Cards",
+  "enemies": "Enemies",
+  "undiscovered": "Undiscovered",
+  "undiscoveredCardNumber": "Undiscovered card {{number}}",
+  "undiscoveredEnemyNumber": "Undiscovered enemy {{number}}",
+  "undiscoveredDescription": "Discover this entry to reveal its details.",
+  "sampleKeywordA": "Sample Keyword A",
+  "sampleKeywordB": "Sample Keyword B",
+  "sampleKeywordC": "Sample Keyword C",
+  "sampleDescription": "Placeholder description featuring {{keywords}}.",
+  "background": "Background",
+  "backgroundGlow": "Background glow",
+  "backgroundParticles": "Background particles",
+  "sampleCollection": "Sample collection"
 }

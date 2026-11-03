@@ -6,6 +6,8 @@ export interface Settings {
   reducedMotion: boolean;
   gameSizePercent: number;
   tooltipSizePercent: number;
+  backgroundGlow: number;
+  backgroundParticles: number;
 }
 
 export const defaultSettings: Settings = {
@@ -14,6 +16,8 @@ export const defaultSettings: Settings = {
   reducedMotion: false,
   gameSizePercent: 100,
   tooltipSizePercent: 100,
+  backgroundGlow: 100,
+  backgroundParticles: 100,
 };
 export const audio = createAudioManager();
 const key = "dusk-and-dawn.settings.v1";
@@ -33,7 +37,13 @@ export function readSettings(): Settings {
       typeof candidate.tooltipSizePercent === "number" && Number.isFinite(candidate.tooltipSizePercent)
         ? Math.max(90, Math.min(125, Math.round(candidate.tooltipSizePercent / 5) * 5))
         : defaultSettings.tooltipSizePercent;
+    const effectValue = (value: unknown, fallback: number) =>
+      typeof value === "number" && Number.isFinite(value)
+        ? Math.max(0, Math.min(100, Math.round(value / 5) * 5))
+        : fallback;
     return {
+      backgroundGlow: effectValue(candidate.backgroundGlow, defaultSettings.backgroundGlow),
+      backgroundParticles: effectValue(candidate.backgroundParticles, defaultSettings.backgroundParticles),
       gameSizePercent,
       tooltipSizePercent,
       music: validVolume(candidate.music) ? candidate.music : defaultSettings.music,

@@ -7,11 +7,13 @@ export function Tooltip({
   triggerRef,
   id,
   open,
+  placement = "top",
   children,
 }: {
   triggerRef: RefObject<HTMLElement | null>;
   id: string;
   open: boolean;
+  placement?: "top" | "left" | "right";
   children: ReactNode;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -42,10 +44,17 @@ export function Tooltip({
       const current = ++sequence;
       void computePosition(trigger, panel, {
         strategy: "fixed",
-        placement: "top",
+        placement,
         middleware: [
           offset(8),
-          flip({ fallbackPlacements: ["bottom", "left", "right"] }),
+          flip({
+            fallbackPlacements:
+              placement === "left"
+                ? ["right", "top", "bottom"]
+                : placement === "right"
+                  ? ["left", "top", "bottom"]
+                  : ["bottom", "left", "right"],
+          }),
           shift({ padding: 8, crossAxis: true }),
           size({
             padding: 8,
@@ -66,7 +75,7 @@ export function Tooltip({
       live = false;
       stop();
     };
-  }, [present, triggerRef]);
+  }, [present, triggerRef, placement]);
 
   if (!present) return null;
   return createPortal(

@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Background } from "./components/effects/background";
+import { sampleCatalog, sampleDiscoveredIds } from "./lib/collection/catalog";
+import { keywordPlasma } from "./lib/keywords/keywords";
 import { CardBrowser } from "./components/browsing/card-browser";
 import { getFullscreen, observeFullscreen, setFullscreen } from "./lib/display/fullscreen";
 import { useNavigation } from "./lib/navigation/use-navigation";
@@ -15,11 +18,15 @@ export function App() {
   const [fullscreen, setFullscreenState] = useState(false);
   const [displayBusy, setDisplayBusy] = useState(false);
   const [displayFailed, setDisplayFailed] = useState(false);
+  const [hovered, setHovered] = useState<{ id: string; keywords: readonly string[] } | null>(null);
+  const onInspectChange = useCallback((id: string, keywords: readonly string[] | null) => {
+    setHovered((current) => (keywords === null ? (current?.id === id ? null : current) : { id, keywords }));
+  }, []);
   useUiScale(settings.gameSizePercent);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const { screen, open, back } = useNavigation(headingRef);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     applySettings(settings);
   }, [settings]);
   useEffect(() => {
@@ -67,9 +74,12 @@ export function App() {
 
   return (
     <ScreenShell className="shell">
-      <div className="horizon" aria-hidden="true">
-        <span className="sun" />
-      </div>
+      <Background
+        pair={keywordPlasma(hovered?.keywords ?? [])}
+        reducedMotion={settings.reducedMotion}
+        glow={settings.backgroundGlow}
+        particles={settings.backgroundParticles}
+      />
       {screen === "menu" ? (
         <section className="intro" aria-labelledby="title">
           <p className="eyebrow">{t("tagline")}</p>
@@ -80,7 +90,7 @@ export function App() {
               {t("play")}
             </Button>
             <Button id="menu-cards" variant="outline" onClick={() => open("cards")}>
-              {t("cardPreview")}
+              {t("collection")}
             </Button>
             <Button id="menu-options" variant="outline" onClick={() => open("options")}>
               {t("options")}
@@ -93,12 +103,16 @@ export function App() {
       ) : screen === "cards" ? (
         <section className="cards-screen" aria-labelledby="cards-title">
           <header className="options-header">
-            <p className="eyebrow">{t("title")}</p>
+            <p className="eyebrow">{t("sampleCollection")}</p>
             <h1 id="cards-title" ref={headingRef} tabIndex={-1}>
-              {t("cardPreview")}
+              {t("collection")}
             </h1>
           </header>
-          <CardBrowser />
+          <CardBrowser
+            catalog={sampleCatalog}
+            discoveredIds={sampleDiscoveredIds}
+            onInspectChange={onInspectChange}
+          />
           <Button variant="outline" onClick={back}>
             {t("back")}
           </Button>
@@ -186,6 +200,23 @@ export function App() {
                 onCheckedChange={(reducedMotion) => updateSettings({ ...settings, reducedMotion })}
               />
             </label>
+            <h2>{t("background")}</h2>
+            {(["backgroundGlow", "backgroundParticles"] as const).map((field) => (
+              <label className="setting-row" key={field}>
+                <span>{t(field)}</span>
+                <span className="range-control">
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value={settings[field]}
+                    onChange={(event) => updateSettings({ ...settings, [field]: Number(event.target.value) })}
+                  />
+                  <output>{settings[field]}%</output>
+                </span>
+              </label>
+            ))}
             {saveFailed && (
               <p className="save-error" role="status">
                 {t("settingsSaveError")}

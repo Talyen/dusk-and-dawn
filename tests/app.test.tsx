@@ -1,11 +1,16 @@
 // @vitest-environment jsdom
 import { cleanup, render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
-import { afterEach, expect, it } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { App } from "../src/App";
 import { localization } from "../src/lib/localization";
 
+beforeEach(() => {
+  vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockImplementation(() => null);
+});
+
 afterEach(() => {
+  vi.restoreAllMocks();
   cleanup();
   void localization.changeLanguage("en");
 });

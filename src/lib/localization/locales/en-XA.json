@@ -29,5 +29,20 @@
   "tooltipSize": "[Tooooltip siiize]",
   "fullscreen": "[Fuuullscreeen]",
   "displayError": "[Cooould noooot chaaange diiisplaaay mooode.]",
-  "playUnavailable": "[Plaaay wiiill beee avaaailaaable wheeen the gaaame is reaaady.]"
+  "playUnavailable": "[Plaaay wiiill beee avaaailaaable wheeen the gaaame is reaaady.]",
+  "collection": "[Coooolleeectiiion]",
+  "cards": "[Caaards]",
+  "enemies": "[Eeenemiiies]",
+  "undiscovered": "[Undiiiscooovered]",
+  "undiscoveredCardNumber": "[Undiiiscooovered caaard {{number}}]",
+  "undiscoveredEnemyNumber": "[Undiiiscooovered eeenemy {{number}}]",
+  "undiscoveredDescription": "[Diiiscooover thiiis eeentry tooo reveeeal iiits detaaails.]",
+  "sampleKeywordA": "[Saaample Keeeyword A]",
+  "sampleKeywordB": "[Saaample Keeeyword B]",
+  "sampleKeywordC": "[Saaample Keeeyword C]",
+  "sampleDescription": "[Plaaaceholder descriiiption feaaaturing {{keywords}}.]",
+  "background": "[Baaackgrooound]",
+  "backgroundGlow": "[Baaackgrooound glooow]",
+  "backgroundParticles": "[Baaackgrooound paaarticles]",
+  "sampleCollection": "[Saaample cooolleeectiiion]"
 }
