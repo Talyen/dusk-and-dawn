@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "manifestHash": "419489a8983096bc178f1e9ac59337b5301eef70b443ddc656b955a7f56e8bf0",
+  "manifestHash": "2dda378100e5d3cf9d9d5f9d0fd4305f291d1f7f6eb506cdab49e719e1c8b575",
   "outputs": [
     {
       "output": "card-angel.webp",
@@ -2456,6 +2456,56 @@
       "output": "card-wild-thicket.webp",
       "sourceHash": "566b9bbc25ba31fead7818ae150ed1e45bc9464b77a9b31c1e4691a9d35d3ed2",
       "hash": "3e96bde90725c2bcc2a49f06aa38424c8a38d7acbbee1a796cc5e7285bdaf0bb"
+    },
+    {
+      "output": "card-sacrifice.webp",
+      "sourceHash": "b59d81318585088c0d6dcc8a8b0e3f18b188611134623b2768e373f2d20241c4",
+      "hash": "1ea531ad6c0a0e6b7995be5afdd4f1591041553ceb486bbd66d9fb1ba13b0c78"
+    },
+    {
+      "output": "card-self-preservation.webp",
+      "sourceHash": "19e7a156c05ef3a8253ed0a90031ea68bb210393df594cd2e5fb9efe4b11e2e0",
+      "hash": "8f436a93aa22e6f640ae4ad25e29b70061c154cbb6bd9450499a493347e33c66"
+    },
+    {
+      "output": "card-cartographer.webp",
+      "sourceHash": "e06582c121797c2327ad23e125cc7ec20a7d76679e86a67e53eed8cc185640f0",
+      "hash": "0cceadde91b5829ae3b286de7157ace32be7de0ba20a55778fa035f17e74fff7"
+    },
+    {
+      "output": "card-lost-wanderer.webp",
+      "sourceHash": "4b9b0ae2587f4dc31d38b7b68468278dbd4e496d2f9dd9490a7088d45b4a7803",
+      "hash": "823dca1e7ff5a6cb031c4b9a2eaa104719f21f96d0a0f409b52e5e25d0ddeb31"
+    },
+    {
+      "output": "card-walled-city.webp",
+      "sourceHash": "d7cb96ab45f120778f6c9b17c41741ec8d2d088fdc778a81c62a8e507d6e2b34",
+      "hash": "cd8b0faf767d664f27112d989504cd43a43202bba433990ede88854cead89695"
+    },
+    {
+      "output": "card-wilderness.webp",
+      "sourceHash": "71e9477c0c33753dcdd590a0919773b097227e5f12e9a179b495f5e639640a0b",
+      "hash": "2f1cda316bf5995c35f0a6d1adbb41d8a4e205f140c13fa60dbda84d6023c517"
+    },
+    {
+      "output": "card-balance-scales.webp",
+      "sourceHash": "8b6ff54b3e8b74de75355864d1cad8e27797a01945135db75a95ce679f889695",
+      "hash": "a11d58c7d644fbfd4abb697af9226d4a94aed5b0fac2239d3961a22f637eee8d"
+    },
+    {
+      "output": "card-loaded-dice.webp",
+      "sourceHash": "5d4c72e087e6bdc58c7e92952b225799bd009117f6054790b1cf6dbe9632a39b",
+      "hash": "ac71e3e1c239187a468e4e669eb360f2ce764073155630c5702c0e751676162b"
+    },
+    {
+      "output": "card-sieve.webp",
+      "sourceHash": "32841ba36b5dbdd1f1913f8a65422f824393ec409460f9e9d03bd1b4db44c6c1",
+      "hash": "2c24ae19d98b718bd595b36f614d3a76d66bb08ecc2ce5ba4611315881557058"
+    },
+    {
+      "output": "card-funnel.webp",
+      "sourceHash": "5bb7db21204f4e10961a68f3a015f92882b9720160e3cf4387f9756c680c6bb5",
+      "hash": "a9b32fe1f5876999466bd1fcd2a420a7da933b1985dd4baba8ac62541386f114"
     }
   ]
 }

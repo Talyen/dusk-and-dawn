@@ -1,5 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { createRun } from "../../src/lib/game/run";
+import { encodeRun } from "../../src/lib/game/run-save";
 
 test("collection cards fit above pagination at different window and game sizes", async ({ page }) => {
   for (const { width, height, gameSize } of [
@@ -466,4 +468,58 @@ test("a run can be resumed after reloading", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await expect(page.getByText(/HP 26\/30/)).toBeVisible();
   await expect(page.getByText(/Next: Open-Wing Dust/)).toBeVisible();
+});
+
+test("paid library inspection survives reload and resolves without leaking early", async ({ page }) => {
+  const snapshot = structuredClone(createRun(44).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Walled City & Wilderness" },
+    { id: "bottom", pair: "Sun & Moon" },
+    { id: "one", pair: "Sun & Moon" },
+    { id: "two", pair: "Angel & Vampire" },
+    { id: "three", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "dark", kept: false }];
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(1)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Wilderness dark/ }).click();
+  await expect(page.getByLabel("Committed inspection")).toHaveCount(0);
+  await page.getByRole("button", { name: "Play Wilderness" }).click();
+  await expect(page.getByLabel("Committed inspection")).toBeVisible();
+  await expect(page.getByRole("button", { name: "End turn" })).toBeDisabled();
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.pending?.cards.length,
+      ),
+    )
+    .toBe(3);
+  // The initialization hook is no longer needed; reload should use the persisted pending state.
+  await page.evaluate(() =>
+    sessionStorage.setItem("inspection-test", localStorage.getItem("dusk-and-dawn.save.v1")!),
+  );
+  await page.addInitScript(() => {
+    const value = sessionStorage.getItem("inspection-test");
+    if (value) localStorage.setItem("dusk-and-dawn.save.v1", value);
+  });
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const panel = page.getByLabel("Committed inspection");
+  await expect(panel).toBeVisible();
+  await panel.getByRole("button", { name: /^Flame —/ }).click();
+  await panel.getByRole("button", { name: "Confirm choice" }).click();
+  await expect(panel).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /Flame light/ })).toBeVisible();
+  await expect(page.getByText(/Mana 2\/3/)).toBeVisible();
 });

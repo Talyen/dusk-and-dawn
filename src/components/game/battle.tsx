@@ -65,6 +65,7 @@ const keywordHelp: Record<string, string> = {
   Leech: "Heal for the attack's final damage before Ward, including overkill, up to maximum HP.",
 };
 const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
+  Sacrifice: { hits: [8], type: "Radiance" },
   Vampire: { hits: [4], type: "Shadow" },
   Sun: { hits: [6], type: "Radiance" },
   Wither: { hits: [7], type: "Decay" },
@@ -185,9 +186,14 @@ function BattleSession({
   }
   const selectedCard = s.zones.hand.find((c) => c.id === selected);
   const selectedName = selectedCard ? face(selectedCard).name : "";
-  const targetZone = selectedName === "Memory" ? s.zones.discard : [];
-  const needsTarget = selectedName === "Memory" && targetZone.length > 0;
-  const maxTargets = 1;
+  const targetZone =
+    selectedName === "Memory"
+      ? s.zones.discard
+      : selectedName === "Sacrifice"
+        ? s.zones.hand.filter((card) => card.id !== selected)
+        : [];
+  const needsTarget = (selectedName === "Memory" || selectedName === "Sacrifice") && targetZone.length > 0;
+  const maxTargets = s.pending ? s.pending.required : 1;
   const unavailable = selectedCard ? cardRestriction(s, selectedCard) : "";
   const canPlay = !!selectedCard && s.mana > 0 && !unavailable && (!needsTarget || targets.length === 1);
   function toggleTarget(id: string) {
@@ -323,6 +329,7 @@ function BattleSession({
                   type="button"
                   className="battle-card"
                   aria-pressed={selected === card.id}
+                  disabled={!!s.pending}
                   onClick={() => {
                     setSelected(card.id);
                     setTargets([]);
@@ -341,7 +348,43 @@ function BattleSession({
               ))}
             </div>
           </section>
-          {selectedCard && (
+          {s.pending && (
+            <section className="battle-panel" aria-label="Committed inspection">
+              <h2>
+                {s.pending.kind === "order"
+                  ? "Choose top-to-bottom order"
+                  : `Choose ${s.pending.required} for your hand`}
+              </h2>
+              <p>
+                Mana is spent and the inspection cannot be canceled.{" "}
+                {s.pending.kind === "order"
+                  ? "Select each card in the order it should be drawn."
+                  : "Unchosen cards keep their library order."}
+              </p>
+              <div className="battle-targets">
+                {s.pending.cards.map((card) => (
+                  <button
+                    type="button"
+                    key={card.id}
+                    aria-pressed={targets.includes(card.id)}
+                    onClick={() => toggleTarget(card.id)}
+                  >
+                    {targets.includes(card.id) && s.pending?.kind === "order"
+                      ? `${targets.indexOf(card.id) + 1}. `
+                      : ""}
+                    {face(card).name} — {face(card).effect}
+                  </button>
+                ))}
+              </div>
+              <Button
+                disabled={targets.length !== s.pending.required}
+                onClick={() => dispatch({ type: "choose", ids: targets })}
+              >
+                Confirm choice
+              </Button>
+            </section>
+          )}
+          {selectedCard && !s.pending && (
             <section className="battle-panel" aria-label="Selected card">
               <h2>{face(selectedCard).name}</h2>
               <p>
@@ -426,7 +469,11 @@ function BattleSession({
               )}
               {needsTarget && (
                 <>
-                  <p>Choose a card from your discard pile.</p>
+                  <p>
+                    {selectedName === "Sacrifice"
+                      ? "Choose another card in your hand to Banish."
+                      : "Choose a card from your discard pile."}
+                  </p>
                   <div className="battle-targets">
                     {targetZone.length === 0 ? (
                       <span>No eligible cards.</span>
@@ -455,8 +502,12 @@ function BattleSession({
             </section>
           )}
           <div className="battle-actions">
-            <Button onClick={() => dispatch({ type: "end" })}>End turn</Button>
-            <Button onClick={() => dispatch({ type: "concede" })}>Concede</Button>
+            <Button disabled={!!s.pending} onClick={() => dispatch({ type: "end" })}>
+              End turn
+            </Button>
+            <Button disabled={!!s.pending} onClick={() => dispatch({ type: "concede" })}>
+              Concede
+            </Button>
           </div>
         </>
       )}

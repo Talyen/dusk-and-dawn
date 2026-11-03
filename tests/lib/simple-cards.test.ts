@@ -15,7 +15,15 @@ describe("supported catalogue cards", () => {
     const catalogue = JSON.parse(
       readFileSync("docs/Dusk & Dawn — Card Effect Catalogue v0.2.json", "utf8"),
     ) as { pair: string; side: string; face: string; effect: string }[];
-    expect(Object.keys(simpleCards).length).toBeGreaterThan(100);
+    expect(Object.keys(simpleCards).length).toBe(242);
+    expect(Object.keys(cards)).toHaveLength(248);
+    for (const [pair, faces] of Object.entries(cards))
+      for (const side of ["light", "dark"] as const) {
+        const source = catalogue.find((entry) => entry.pair === pair && entry.side === side);
+        expect(source?.face).toBe(faces[side].name);
+        expect(source?.effect).toBe(faces[side].effect);
+        expect(existsSync(`public/assets/card-${slug(faces[side].name)}.webp`)).toBe(true);
+      }
     for (const [pair, faces] of Object.entries(simpleCards))
       for (const side of ["light", "dark"] as const) {
         const source = catalogue.find((entry) => entry.pair === pair && entry.side === side);

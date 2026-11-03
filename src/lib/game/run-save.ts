@@ -45,6 +45,15 @@ const runSchema = z
     action: integer,
     offers: z.array(cardPair),
     message: z.string(),
+    pending: z
+      .object({
+        kind: z.enum(["order", "select-bottom", "select-discard"]),
+        source: fightCard,
+        cards: z.array(fightCard).max(4),
+        required: integer.max(4),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
   .superRefine((run, ctx) => {
@@ -52,8 +61,23 @@ const runSchema = z
       ctx.addIssue({ code: "custom", message: "Invalid enemy action" });
     const deck = new Map(run.deck.map((card) => [card.id, card.pair]));
     if (deck.size !== run.deck.length) ctx.addIssue({ code: "custom", message: "Duplicate deck card" });
+    if (run.pending && run.phase !== "battle")
+      ctx.addIssue({ code: "custom", message: "Invalid pending phase" });
     if (run.phase === "battle") {
-      const fight = [...run.zones.library, ...run.zones.hand, ...run.zones.discard, ...run.zones.banished];
+      const fight = [
+        ...run.zones.library,
+        ...run.zones.hand,
+        ...run.zones.discard,
+        ...run.zones.banished,
+        ...(run.pending ? [run.pending.source, ...run.pending.cards] : []),
+      ];
+      if (
+        run.pending &&
+        (run.pending.required > run.pending.cards.length ||
+          (run.pending.kind === "order" && run.pending.required !== run.pending.cards.length) ||
+          (run.pending.kind !== "order" && run.pending.required > 8 - run.zones.hand.length))
+      )
+        ctx.addIssue({ code: "custom", message: "Invalid pending choice" });
       if (
         fight.length !== run.deck.length ||
         new Set(fight.map((card) => card.id)).size !== fight.length ||

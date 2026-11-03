@@ -2944,5 +2944,65 @@
     "output": "card-wild-thicket.webp",
     "width": 512,
     "quality": 82
+  },
+  {
+    "source": "Artwork/Sacrifice & Self-Preservation - Sacrifice.png",
+    "output": "card-sacrifice.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sacrifice & Self-Preservation - Self-Preservation.png",
+    "output": "card-self-preservation.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Cartographer & Lost Wanderer - Cartographer.png",
+    "output": "card-cartographer.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Cartographer & Lost Wanderer - Lost Wanderer.png",
+    "output": "card-lost-wanderer.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Walled City & Wilderness - Walled City.png",
+    "output": "card-walled-city.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Walled City & Wilderness - Wilderness.png",
+    "output": "card-wilderness.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Balance Scales & Loaded Dice - Balance Scales.png",
+    "output": "card-balance-scales.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Balance Scales & Loaded Dice - Loaded Dice.png",
+    "output": "card-loaded-dice.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sieve & Funnel - Sieve.png",
+    "output": "card-sieve.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sieve & Funnel - Funnel.png",
+    "output": "card-funnel.webp",
+    "width": 512,
+    "quality": 82
   }
 ]

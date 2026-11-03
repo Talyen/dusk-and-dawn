@@ -98,6 +98,49 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
     light: { name: "Feather", effect: "Draw 2 cards.", keywords: [] },
     dark: { name: "Chain", effect: "Curse 2.", keywords: ["Curse"] },
   },
+  "Cartographer & Lost Wanderer": {
+    light: {
+      name: "Cartographer",
+      effect: "Look at the top 3 cards of your library. Put them back in any order.",
+      keywords: [],
+    },
+    dark: { name: "Lost Wanderer", effect: "Shuffle your library. Draw 2 cards.", keywords: [] },
+  },
+  "Walled City & Wilderness": {
+    light: { name: "Walled City", effect: "Gain 10 Ward.", keywords: ["Ward"] },
+    dark: {
+      name: "Wilderness",
+      effect:
+        "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order.",
+      keywords: [],
+    },
+  },
+  "Balance Scales & Loaded Dice": {
+    light: { name: "Balance Scales", effect: "Bless 1. Curse 1.", keywords: ["Bless", "Curse"] },
+    dark: {
+      name: "Loaded Dice",
+      effect:
+        "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order.",
+      keywords: [],
+    },
+  },
+  "Sieve & Funnel": {
+    light: {
+      name: "Sieve",
+      effect:
+        "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order.",
+      keywords: [],
+    },
+    dark: { name: "Funnel", effect: "Put your hand on top of your library. Draw 1 card.", keywords: [] },
+  },
+  "Sacrifice & Self-Preservation": {
+    light: {
+      name: "Sacrifice",
+      effect: "Banish another card of your choice from your hand. Deal 8 Radiance damage.",
+      keywords: ["Banish", "Radiance"],
+    },
+    dark: { name: "Self-Preservation", effect: "Gain 6 Ward.", keywords: ["Ward"] },
+  },
   "Silence & Clamor": {
     light: { name: "Silence", effect: "Hush. Banish this card.", keywords: ["Hush", "Banish"] },
     dark: { name: "Clamor", effect: "Curse 2.", keywords: ["Curse"] },
@@ -123,6 +166,11 @@ const starter: Pair[] = ["Angel & Vampire", "Sun & Moon", "Bloom & Wither", "Fla
 const rewards: Pair[] = [
   ...new Set([
     ...Object.keys(simpleCards),
+    "Sacrifice & Self-Preservation",
+    "Cartographer & Lost Wanderer",
+    "Walled City & Wilderness",
+    "Balance Scales & Loaded Dice",
+    "Sieve & Funnel",
     "Seed & Ash",
     "Lantern & Shroud",
     "Memory & Oblivion",
@@ -242,6 +290,12 @@ interface DeckCard {
   id: string;
   pair: Pair;
 }
+export interface PendingChoice {
+  kind: "order" | "select-bottom" | "select-discard";
+  source: FightCard;
+  cards: FightCard[];
+  required: number;
+}
 export interface RunState {
   phase: "battle" | "reward" | "rest" | "victory" | "defeat";
   fight: number;
@@ -254,9 +308,11 @@ export interface RunState {
   action: number;
   offers: Pair[];
   message: string;
+  pending?: PendingChoice | undefined;
 }
 export type Command =
   | { type: "play"; id: string; targets?: string[] }
+  | { type: "choose"; ids: string[] }
   | { type: "end" }
   | { type: "reward"; pair: Pair | null }
   | { type: "rest"; remove?: string }
@@ -341,6 +397,8 @@ export function cardRestriction(s: RunState, source: FightCard): string {
     return "Hush requires an unsuppressed ability or trait in the next intent.";
   if ((info.name === "Ice Crystal" || ops.some((op) => op.op === "freeze")) && s.enemy.freeze)
     return "The enemy is already Frozen.";
+  if (info.name === "Sacrifice" && s.zones.hand.length <= 1)
+    return "Another card in hand is required as payment.";
   const loss = ops.find((op) => op.op === "lose-hp");
   if (loss && s.player.hp <= loss.amount) return "Not enough HP to pay this cost.";
   const first = ops[0];
@@ -361,13 +419,43 @@ function findTargets(list: FightCard[], ids: string[]): FightCard[] | null {
   const result = ids.map((id) => list.find((c) => c.id === id));
   return result.every(Boolean) ? (result as FightCard[]) : null;
 }
+function resolveInspection(s: RunState, ids: string[]): boolean {
+  const pending = s.pending;
+  if (
+    !pending ||
+    ids.length !== pending.required ||
+    new Set(ids).size !== ids.length ||
+    ids.some((id) => !pending.cards.some((card) => card.id === id))
+  )
+    return false;
+  if (pending.kind === "order") {
+    const ordered = ids.map((id) => pending.cards.find((card) => card.id === id)!);
+    s.zones.library.push(...ordered.reverse());
+  } else {
+    const chosen = pending.cards.filter((card) => ids.includes(card.id));
+    const remainder = pending.cards.filter((card) => !ids.includes(card.id));
+    s.zones.hand.push(...chosen);
+    if (pending.kind === "select-bottom") s.zones.library.unshift(...remainder.reverse());
+    else s.zones.discard.push(...remainder.reverse());
+  }
+  finishSource(s.zones, pending.source);
+  s.message = `Played ${face(pending.source).name}.`;
+  delete s.pending;
+  return true;
+}
 export const runHandler: Handler<RunState, Command, string> = (s, command, rng) => {
   if (command.type === "concede") {
+    if (s.pending) return no("Finish the committed inspection first.");
     if (s.phase !== "battle") return no("No battle to concede.");
     s.phase = "defeat";
     s.message = "Run conceded.";
     return yes();
   }
+  if (command.type === "choose") {
+    if (s.phase !== "battle" || !resolveInspection(s, command.ids)) return no("Invalid inspection choice.");
+    return yes();
+  }
+  if (s.pending) return no("Finish the committed inspection first.");
   if (command.type === "reward") {
     if (s.phase !== "reward" || (command.pair !== null && !s.offers.includes(command.pair)))
       return no("Invalid reward.");
@@ -461,7 +549,10 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   const restriction = cardRestriction(s, source);
   if (restriction) return no(restriction);
   const ids = command.targets ?? [];
-  if (name === "Memory") {
+  if (name === "Sacrifice") {
+    if (ids.length !== 1 || ids[0] === source.id || !findTargets(s.zones.hand, ids))
+      return no("Choose another card in hand to Banish.");
+  } else if (name === "Memory") {
     if (
       (s.zones.discard.length > 0 && (ids.length !== 1 || !findTargets(s.zones.discard, ids))) ||
       (s.zones.discard.length === 0 && ids.length !== 0)
@@ -481,6 +572,68 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     }
   };
   switch (name) {
+    case "Cartographer":
+    case "Wilderness":
+    case "Loaded Dice":
+    case "Sieve": {
+      prepareLibrary();
+      const count = name === "Sieve" ? 4 : 3;
+      const inspected: FightCard[] = [];
+      for (let i = 0; i < count; i++) {
+        const card = s.zones.library.pop();
+        if (!card) break;
+        inspected.push(card);
+      }
+      const kind = name === "Cartographer" ? "order" : name === "Sieve" ? "select-discard" : "select-bottom";
+      const wanted = name === "Loaded Dice" ? 2 : 1;
+      const required =
+        kind === "order" ? inspected.length : Math.min(wanted, inspected.length, 8 - s.zones.hand.length);
+      s.pending = { source, cards: inspected, kind, required };
+      if (
+        required === 0 ||
+        (kind === "order" && required === 1) ||
+        (kind !== "order" && required === inspected.length)
+      )
+        resolveInspection(
+          s,
+          inspected.slice(0, required).map((card) => card.id),
+        );
+      else
+        s.message =
+          kind === "order"
+            ? "Choose the order from top to bottom."
+            : `Choose ${required} card${required === 1 ? "" : "s"} to put in your hand.`;
+      return yes();
+    }
+    case "Lost Wanderer":
+      s.zones.library = shuffle(s.zones.library, rng);
+      drawCards(s.zones, 2, rng);
+      break;
+    case "Walled City":
+      s.player.ward += 10;
+      break;
+    case "Balance Scales":
+      s.player.bless++;
+      s.enemy.curse++;
+      break;
+    case "Funnel": {
+      const moved = s.zones.hand.splice(0);
+      for (const card of moved) card.kept = false;
+      s.zones.library.push(...moved);
+      drawCards(s.zones, 1, rng);
+      break;
+    }
+    case "Sacrifice": {
+      const i = s.zones.hand.findIndex((card) => card.id === ids[0]);
+      const card = s.zones.hand.splice(i, 1)[0]!;
+      card.kept = false;
+      s.zones.banished.push(card);
+      attack(s, [8], "Radiance");
+      break;
+    }
+    case "Self-Preservation":
+      s.player.ward += 6;
+      break;
     case "Angel":
       s.player.ward += 5;
       break;
