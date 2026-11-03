@@ -5,27 +5,27 @@
     "reviewed_card_faces": 496,
     "reviewed_enemies": 110,
     "enemy_actions": 243,
-    "changed_card_faces": 279,
-    "distinct_card_descriptions": 157,
+    "changed_card_faces": 323,
+    "distinct_card_descriptions": 158,
     "card_Ward_before": 93,
-    "card_Ward_after": 41,
+    "card_Ward_after": 39,
     "card_Ward_grants_before": 65,
     "card_Ward_grants_after": 28,
     "enemy_mechanics_Ward_before": 52,
-    "enemy_mechanics_Ward_after": 22,
+    "enemy_mechanics_Ward_after": 23,
     "card_Leech_faces": 4,
     "Hush_usable_enemies": 110,
-    "keyword_free_faces": 104,
+    "keyword_free_faces": 105,
     "card_Poison_faces": 7,
     "direct_player_damage_type_counts": {
       "Radiance": 13,
       "Shadow": 15,
       "Growth": 2,
       "Decay": 22,
-      "Binding": 10,
+      "Binding": 11,
       "Release": 9,
       "Fire": 1,
-      "Frost": 3,
+      "Frost": 2,
       "Memory": 0,
       "Oblivion": 1
     }
@@ -47,99 +47,84 @@
   "ward_count_method": "Card counts search actual descriptions. Enemy counts search actual traits and base actions; the earlier whole-entry count of 59 included incidental advice, while the comparable mechanical baseline is 52.",
   "thought_experiments": [
     {
+      "case": "Working scaling",
+      "setup_and_result": "Bless and Curse stack. The working comparison uses +1 and −1 per stack on every attack hit, with a floor of 0. Percentage scaling is still open; this preview is not a settled numerical rule.",
+      "implication": "No Mark or Weaken remains in current effects."
+    },
+    {
       "case": "Moth opening",
-      "setup_and_result": "The Radiant Moth has 18 HP and shows Folded-Wing Dust: 4 Radiance. Angel grants 5 Ward; Sun deals 6 Radiance. Its HP becomes 12; its hit uses 4 Ward and deals no HP damage. Open-Wing Dust is next: base 4 plus the trait’s 1.",
-      "implication": "Uses the canonical first encounter, not a separate Glass Judge fixture."
+      "setup_and_result": "The Radiant Moth has 18 HP and opens with 4 Radiance. Angel grants 5 Ward; Sun deals 6 Radiance. The Moth becomes 12 HP; its hit leaves 1 player Ward. That Ward halves to 0 at the next player turn start.",
+      "implication": "Damage and decay are separate steps."
     },
     {
-      "case": "Hush and extraction",
-      "setup_and_result": "The Dentist shows Pull: 4 Release, with Extraction removing 5 player Ward first. Against 5 Ward it deals 4 HP damage. Hush removes Extraction; all 4 damage is absorbed.",
-      "implication": "The base attack remains. No trait asks which layer took the hit."
+      "case": "Bless and Prism",
+      "setup_and_result": "With no matching weakness, Prism’s three hits of 2 become 3, 3, 3 with Bless 1 in the flat candidate. The 25% candidate with nearest rounding also gives 3, 3, 3.",
+      "implication": "Other hit sizes diverge; inspect the scaling comparison."
     },
     {
-      "case": "Hush and the choir",
-      "setup_and_result": "Chorus and Clutch has a base 2 Binding hit and two trait hits of 2. Hush leaves just the base 2. Weaken 3 without Hush instead produces hits of 0, 2 and 2.",
-      "implication": "With 3 Ward, the weakened action still deals 1 HP damage."
+      "case": "Curse and the choir",
+      "setup_and_result": "Porcelain Choir’s 2, 2, 2 becomes 1, 1, 1 with Curse 1 in the flat candidate. The 25% candidate with nearest rounding leaves 2, 2, 2.",
+      "implication": "Rounding can make a percentage debuff do nothing on small hits."
     },
     {
-      "case": "Leech through Ward and overkill",
-      "setup_and_result": "A 4 Shadow Vampire attack against a Shadow weakness has final damage 6. It heals 6 even if Ward absorbs the hit or the enemy had only 1 HP. If the player was at 26/30 HP, healing stops at 30.",
+      "case": "Curse is not silence",
+      "setup_and_result": "Curse may reduce every direct hit to 0. Separate Burn, Poison, card moves, healing and trait clauses still resolve. Hush suppresses the labeled trait; an active Freeze skips the whole scheduled action.",
+      "implication": "Three distinct kinds of control remain."
+    },
+    {
+      "case": "Leech through Ward",
+      "setup_and_result": "Vampire’s 4 Shadow plus a matching +2 weakness, plus Bless 1 minus Curse 2, has final flat damage 5. Leech heals 5 before Ward, including absorption and overkill, capped at maximum HP.",
       "implication": "No HP-actually-lost counter is used."
     },
     {
-      "case": "Leech after Weaken",
-      "setup_and_result": "Vampire’s base 4 plus 2 weakness is reduced by player Weaken 3. Final damage is 3, and Leech heals 3 before Ward changes the target’s HP.",
-      "implication": "Bonuses and Weaken precede Leech; Ward does not reduce it."
-    },
-    {
-      "case": "A reflected hit",
-      "setup_and_result": "A 6-damage hit is reflected back once, with the same type and final value. It does not gain a new weakness or Mark bonus at the new target. If its attacker has 2 Ward, that Ward absorbs 2 and the attacker loses 4 HP.",
-      "implication": "A reflected hit cannot reflect again."
+      "case": "Reflect once",
+      "setup_and_result": "Apply weakness and Bless/Curse before Reflect. The redirected hit keeps that final value and type; do not apply modifiers again at its new target.",
+      "implication": "Burn, Poison and separate trait damage are not attacks."
     },
     {
       "case": "A reactive mirror",
-      "setup_and_result": "While Mirror-Eyed Swan shows Raise the Mirror Wing, its first incoming direct hit is reflected. Hush played first suspends that reflection immediately; the Swan still performs its base 4 Radiance attack. Hush played after a reflected hit does not undo it.",
-      "implication": "Reactive traits act during the player turn and must be shown before a card is played."
+      "setup_and_result": "The Swan’s while-intent reflection remains active during Freeze. Hush suspends it; Purge consumes its active one-use reflection. If Freeze still exists at action start, skip the whole action.",
+      "implication": "Whether an intervening attack thaws Freeze is undecided; do not promise that sequence a final outcome."
     },
     {
-      "case": "Thorns without a health gate",
-      "setup_and_result": "While Thorned Librarian shows Open the Brambles, each resolved direct attack card provokes 1 Binding trait damage if the Librarian survives. A hit fully absorbed by its Ward still provokes the thorn. Hush stops later pricks but does not refund an earlier one.",
-      "implication": "Reaction damage is not an attack and does not spend Reflect or Weaken."
+      "case": "One random Cleanse",
+      "setup_and_result": "With Burn 7 and Curse 1, a one-random Cleanse chooses between two status kinds equally and clears the chosen counter entirely. Removing Curse first with a narrow cure guarantees that the later random Cleanse removes Burn.",
+      "implication": "Playing order replaces an extra selection menu."
     },
     {
-      "case": "Burn feeds the mouth",
-      "setup_and_result": "Lantern Eater has 3 Burn at turn end. Burn deals 3 Fire and falls to 1. On Devour the Glow, the remaining Burn satisfies one condition for the whole trait: remove it and heal 3. With Hush, Burn stays at 1 and no feeding heal occurs.",
-      "implication": "The Burn condition is checked once for the action, not again after clearing Burn."
+      "case": "Purge and leftover Ward",
+      "setup_and_result": "With Ward, Reflect and Bless active, one-random Purge has three eligible kinds. Purge all clears all three. It does not erase the printed trait or prevent later grants.",
+      "implication": "Stacks do not weight random selection."
+    },
+    {
+      "case": "Freeze without contested events",
+      "setup_and_result": "Ice Crystal Freezes and Banishes its source. If nothing intervenes that could thaw it, skip the enemy’s next action, advance the pattern and clear Freeze. Ward still halves.",
+      "implication": "Attack and Fire thaw rules remain open; current Freeze previews are conditional."
     },
     {
       "case": "Ward carryover",
-      "setup_and_result": "End a turn with 7 Ward after all damage. At the next player turn start it becomes 3; if untouched, later starts leave 1 then 0. Enemy Ward follows the same floor rule at enemy action start, after damage-over-time ticks, even when Hush skips the action.",
-      "implication": "Only remaining Ward halves; new Ward adds normally."
+      "setup_and_result": "Remaining Ward 7 becomes 3, then 1, then 0 at successive holder turn starts. Enemy Ward halves after damage-over-time ticks, even when its action is skipped.",
+      "implication": "New Ward adds normally."
     },
     {
       "case": "Poison alongside Burn",
-      "setup_and_result": "A player with 5 Ward, 4 Burn and 3 Poison takes a 4 Fire tick, then a 3 Decay tick. Ward absorbs the first 4 and 1 of the second: lose 2 HP. Burn becomes 2 and Poison becomes 1.",
-      "implication": "Separate typed instances; both counters halve even when Ward absorbs damage."
+      "setup_and_result": "With 5 Ward, 4 Burn and 3 Poison, take a 4 Fire tick then a 3 Decay tick. Ward absorbs 5 total; lose 2 HP. Burn becomes 2 and Poison becomes 1.",
+      "implication": "Separate typed ticks, both halving even when blocked."
     },
     {
-      "case": "Scry without a choice",
-      "setup_and_result": "Scry enables the library-top reveal. If the library is empty, it does not reshuffle. Drawing or moving cards later may refill it; reveal its current top until End Turn begins.",
-      "implication": "Changing the top changes the reveal; no selection or bottom-card prompt."
+      "case": "Scry without choices",
+      "setup_and_result": "Scry follows the current library top until End Turn begins. An empty library does not reshuffle for Scry; reveal a top supplied by a later draw or move.",
+      "implication": "No choice or bottom-card prompt."
     },
     {
       "case": "Self transformation",
-      "setup_and_result": "Cocoon flips its own resolving physical card to Shed Skin, then Keeps that same card in hand on its new face. Finish the original played description; do not start the new face’s effect.",
-      "implication": "Every later play still costs mana; no copy, free replay or extra turn is granted."
+      "setup_and_result": "Cocoon flips its own resolving physical card to Shed Skin, then Keeps that same card in hand. Finish the original played effect. Every later play still costs mana.",
+      "implication": "No copy or free replay."
     },
     {
-      "case": "A player Burn",
-      "setup_and_result": "The Kiln applies 2 Burn after the current turn’s Burn step. It first ticks at the end of the next player turn. A Rain played before then removes Burn from both combatants; Bathhouse removes only the player’s Burn.",
-      "implication": "Player Ward can absorb that tick, then its remainder halves at the next turn start."
-    },
-    {
-      "case": "A visible tax",
-      "setup_and_result": "The Taxman’s Collect the Pearl applies a 1-mana refill reduction. The next player turn starts at 2 mana, not 3; the penalty then ends. Hush prevents its application but leaves the 4 Binding base hit.",
-      "implication": "No spent or unspent mana from the prior turn is inspected."
-    },
-    {
-      "case": "The next hand’s face",
-      "setup_and_result": "Masked Midday’s trait schedules a light-facing hand. At the next normal draw, draw within the eight-card cap, then turn the entire held hand light-side up. Hush on the preceding enemy action prevents that schedule; Hush afterward cannot reverse an already completed turn.",
-      "implication": "The queued effect is visible; no card identity or retained snapshot is stored."
-    },
-    {
-      "case": "Returning a changed form",
-      "setup_and_result": "Pottery Workshop flips the top card of the discard pile, then returns that physical card to hand, without a selection prompt. Its source is resolving outside the hand and cannot be chosen.",
-      "implication": "Explicit zone text is the exception to ordinary hand-only Flip."
-    },
-    {
-      "case": "Splitting a ray",
-      "setup_and_result": "Prism deals three hits of 2 Radiance. Against a Radiance weakness with Mark 3, the first hit is 7 and the next two are 2 each, before Ward. Weakness and Mark are not added to every ray.",
-      "implication": "One weakness bonus per played card; one Mark spend."
-    },
-    {
-      "case": "A cost without a target",
-      "setup_and_result": "Oblivion requires another card in hand to Banish. If it is the only card, it cannot be played and spends no mana. Scry with an empty library reveals nothing until another effect supplies a top card during that turn.",
-      "implication": "Required costs differ from instructions that operate on whatever is available."
+      "case": "Automatic enemy moves",
+      "setup_and_result": "At enemy resolution, random held-card moves use the actual remaining hand after discard. Use all available cards if fewer than requested. Helpful recovery moves the top discarded card, rather than opening a selection prompt.",
+      "implication": "No retained-card snapshots or hidden physical identities."
     }
   ],
   "cards": [
@@ -280,10 +265,10 @@
       "face": "Abbess",
       "artwork_id": "1d_X8Jst2cKr2SJb0_Rn4WvYHQWCArgt5",
       "before": "Heal 4 HP. Gain 4 Ward. Banish this card.",
-      "after": "Heal 5 HP. Banish this card.",
+      "after": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The abbess gives a blessing; a second, unrelated shield was unnecessary.",
+      "reason": "The abbess offers a single purifying restoration; the afflicted status is automatic rather than a selection prompt.",
       "sheet": "card-artwork-review/cards-01.jpg"
     },
     {
@@ -357,10 +342,10 @@
       "face": "Condemnation",
       "artwork_id": "1HcY-W3cmije33XfE-ww1Tz_MaCpJ1ekp",
       "before": "Mark 4. Banish this card.",
-      "after": "Mark 4. Banish this card.",
-      "changed": false,
+      "after": "Curse 3. Banish this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The pointing, looming judge singles out a condemned target.",
+      "reason": "Condemnation lays a strong affliction on the accused rather than blessing its caster.",
       "sheet": "card-artwork-review/cards-02.jpg"
     },
     {
@@ -412,10 +397,10 @@
       "face": "Dove",
       "artwork_id": "1vvmtMlRmLAT1YmECVRJYFnQ4EVZru0TW",
       "before": "Heal 2 HP. Gain 3 Ward. Banish this card.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The dove's open, unarmed wings express calming the coming violence.",
+      "reason": "The dove's open, unarmed wings express calming the coming violence. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-02.jpg"
     },
     {
@@ -478,10 +463,10 @@
       "face": "Lamb",
       "artwork_id": "1qoTQy2Xz8H817rIVr5-ZsZ4IfykRB0-M",
       "before": "Heal 3 HP. Banish this card.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The small lamb's gentleness softens the approaching threat rather than acting as unexplained medicine.",
+      "reason": "The small lamb's gentleness softens the approaching threat rather than acting as unexplained medicine. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-02.jpg"
     },
     {
@@ -599,10 +584,10 @@
       "face": "Frost",
       "artwork_id": "167voktusMUlZ37aYbLz5rcqiOuepYXgo",
       "before": "Gain 6 Ward.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The frozen face and icy branches slow the coming attack instead of supplying generic shielding.",
+      "reason": "The frozen face and icy branches slow the coming attack instead of supplying generic shielding. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-03.jpg"
     },
     {
@@ -632,10 +617,10 @@
       "face": "Bell Ringer",
       "artwork_id": "1weJMD7YujS38lFI9Q2-KIWth3yFzjPpU",
       "before": "Scry. Draw 1 card.",
-      "after": "Mark 3.",
+      "after": "Bless 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The large ringing bell announces and draws attention to the next strike.",
+      "reason": "The large ringing bell announces and draws attention to the next strike. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-03.jpg"
     },
     {
@@ -676,10 +661,10 @@
       "face": "Censer",
       "artwork_id": "1580yzY8NaonMm1PAX7pA77gqGvo7QqY2",
       "before": "Apply 3 Burn.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The censer releases veiling incense; obscured aim fits the smoke better than unseen flames.",
+      "reason": "The censer releases veiling incense; obscured aim fits the smoke better than unseen flames. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-04.jpg"
     },
     {
@@ -764,10 +749,10 @@
       "face": "Ivy",
       "artwork_id": "138xstSsSzp9zxkITDplEZrtnHEypteK0",
       "before": "Gain 5 Ward.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The ivy visibly wraps and restrains limbs.",
+      "reason": "The ivy visibly wraps and restrains limbs. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-04.jpg"
     },
     {
@@ -874,10 +859,10 @@
       "face": "Hourglass",
       "artwork_id": "1oPMBgpZbq-VdwPd-W9Sc777BAlUowr4P",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The hourglass slows the approach of the next attack.",
+      "reason": "The hourglass slows the approach of the next attack. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-05.jpg"
     },
     {
@@ -907,10 +892,10 @@
       "face": "Chain",
       "artwork_id": "15sUIxgGzo0ap_DXgHm8hoEuyBUFIgadu",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The chain visibly constrains the small figure's movement.",
+      "reason": "The chain visibly constrains the small figure's movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-05.jpg"
     },
     {
@@ -940,10 +925,10 @@
       "face": "Sunlit Chapel",
       "artwork_id": "1JuqHF1P1zHu-SsKVjioLSBX_0uOv6GGi",
       "before": "Heal 4 HP. Gain 3 Ward. Banish this card.",
-      "after": "Heal 5 HP. Banish this card.",
+      "after": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The kneeling visitor receives the chapel's restorative light; the second shield was incidental.",
+      "reason": "The chapel offers a restorative rite that lifts one affliction without a target menu.",
       "sheet": "card-artwork-review/cards-05.jpg"
     },
     {
@@ -984,10 +969,10 @@
       "face": "Bell Tower",
       "artwork_id": "1ZOHVqQbdvFgb-0oZBigbRkwDW2ha1lzm",
       "before": "Scry. Draw 1 card.",
-      "after": "Mark 3.",
+      "after": "Bless 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The elevated bell gives a clear signal for the following strike.",
+      "reason": "The elevated bell gives a clear signal for the following strike. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-05.jpg"
     },
     {
@@ -1039,10 +1024,10 @@
       "face": "Sealed Gate",
       "artwork_id": "1r4TA80YCa8JMFwHtVNIxX4v-gvzPYO9v",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The bound, closed gate obstructs the approaching action.",
+      "reason": "The bound, closed gate obstructs the approaching action. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -1050,10 +1035,10 @@
       "face": "Sanctuary",
       "artwork_id": "19v2hhOQhYK8XgnOufG9HUQiGDGl_DJbD",
       "before": "Heal 3 HP. Gain 5 Ward. Banish this card.",
-      "after": "Heal 5 HP. Banish this card.",
+      "after": "Cleanse all harmful statuses from yourself. Heal 3 HP. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The sanctuary offers a single period of safe recovery.",
+      "reason": "The sanctuary shelters the entire self from ongoing afflictions, with a smaller fixed heal.",
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -1061,10 +1046,10 @@
       "face": "Prison",
       "artwork_id": "14W0dmIr1HL9r9Tx6UhLMhIT5iqChZpGz",
       "before": "Weaken 4.",
-      "after": "Weaken 6. Banish this card.",
+      "after": "Curse 3. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The prison bars strongly restrain the coming attack; a single use keeps the confinement finite.",
+      "reason": "The prison bars strongly restrain the coming attack; a single use keeps the confinement finite. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -1094,10 +1079,10 @@
       "face": "Benediction",
       "artwork_id": "1XVqqqNmQ5OF-m6yoZiWbs_h7_Nh8rUCD",
       "before": "Heal 4 HP. Banish this card.",
-      "after": "Heal 4 HP. Banish this card.",
-      "changed": false,
+      "after": "Bless 3. Banish this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "A hand extended in blessing conveys one restorative gift.",
+      "reason": "The outstretched benedictory hand empowers the supplicant’s next whole attack. The effect is a boon, without a moral restriction.",
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -1105,10 +1090,10 @@
       "face": "Curse",
       "artwork_id": "1WgakSgo92a19dVli80QHeKmM9GV1MK-Q",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The floating curse visibly constrains the struggling figure.",
+      "reason": "The floating curse visibly constrains the struggling figure. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -1171,10 +1156,10 @@
       "face": "Nightmare",
       "artwork_id": "1ESInrS0cKlRm4dq3pHBgYNGO_1jTwrvG",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The threatening dream figure instills fear and impairs the next attack.",
+      "reason": "The threatening dream figure instills fear and impairs the next attack. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -1182,10 +1167,10 @@
       "face": "Bound Soul",
       "artwork_id": "1kOQ8OsYrRzPv_k7YqeF3SDNx1gVHfLTG",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "Taut bindings visibly restrain the soul's movement.",
+      "reason": "Taut bindings visibly restrain the soul's movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -1204,10 +1189,10 @@
       "face": "Sovereign",
       "artwork_id": "1O8FBT6cKAQTXiADvORymx5I1HuyBHSkz",
       "before": "Gain 8 Ward.",
-      "after": "Weaken 5.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The sovereign's commanding pose restrains opposition; a large generic shield did not express command.",
+      "reason": "The sovereign's commanding pose restrains opposition; a large generic shield did not express command. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-07.jpg"
     },
     {
@@ -1380,10 +1365,10 @@
       "face": "Peacock",
       "artwork_id": "1kahEnL1cbpSgErZtSVa1ug2kxS0AYf0h",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The peacock's many eyespots dazzle and confuse the coming attack.",
+      "reason": "The peacock's many eyespots dazzle and confuse the coming attack. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-08.jpg"
     },
     {
@@ -1413,10 +1398,10 @@
       "face": "Anglerfish",
       "artwork_id": "1-Q3qwTjJ7RVn-HL6u41cazot0WhpLHI1",
       "before": "Deal 3 Shadow damage. Mark 2.",
-      "after": "Deal 3 Shadow damage. Mark 2.",
-      "changed": false,
+      "after": "Deal 3 Shadow damage. Curse 1.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The anglerfish both bites and marks a target with its unmistakable lure.",
+      "reason": "The anglerfish’s lure dazes its prey after the bite, reducing the prey’s next whole attack.",
       "sheet": "card-artwork-review/cards-08.jpg"
     },
     {
@@ -1633,10 +1618,10 @@
       "face": "Deep Marsh",
       "artwork_id": "16AoI0C9m9ImwOkRMNd0BZsPOvIgja4c6",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "Thick marsh plants and shallow water impede movement.",
+      "reason": "Thick marsh plants and shallow water impede movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-09.jpg"
     },
     {
@@ -1644,10 +1629,10 @@
       "face": "Frozen Lake",
       "artwork_id": "1utKFzykk_TUhgY4JtjdyPgCQy0eF413I",
       "before": "Weaken 3. Deal 2 Frost damage.",
-      "after": "Weaken 3. Deal 2 Frost damage.",
-      "changed": false,
+      "after": "Curse 1. Deal 2 Frost damage.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The visible ice both chills and arrests movement.",
+      "reason": "The visible ice both chills and arrests movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-09.jpg"
     },
     {
@@ -1688,10 +1673,10 @@
       "face": "White Desert",
       "artwork_id": "1Cqja1jSt42AVMswRTKhuuIifZMFJDG62",
       "before": "Remove 5 enemy Ward.",
-      "after": "Weaken 3. Deal 3 Radiance damage.",
+      "after": "Curse 1. Deal 3 Radiance damage.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The white glare blinds and harms; no barrier-breaking action was depicted.",
+      "reason": "The white glare blinds and harms; no barrier-breaking action was depicted. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-09.jpg"
     },
     {
@@ -1765,10 +1750,10 @@
       "face": "Labyrinth",
       "artwork_id": "1A3OuMOkvTX_55q0Rz9NeLUN-dxkYXEGU",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The winding labyrinth obstructs a direct approach.",
+      "reason": "The winding labyrinth obstructs a direct approach. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1820,10 +1805,10 @@
       "face": "Tuned Violin",
       "artwork_id": "1baely1s9BmqmKnBO2DwVmWRx1nnhQBWa",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The tuned violin's controlled music calms and reduces the coming attack.",
+      "reason": "The tuned violin's controlled music calms and reduces the coming attack. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1831,10 +1816,10 @@
       "face": "Broken Violin",
       "artwork_id": "1T5rnIRur8OM4rYk0oUt7hC0mqYO-bj9K",
       "before": "Deal 5 Decay damage.",
-      "after": "Weaken 5. Banish this card.",
+      "after": "Curse 3. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The broken strings give one jarring, disruptive note rather than an unexplained Decay projectile.",
+      "reason": "The broken strings give one jarring, disruptive note rather than an unexplained Decay projectile. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1842,10 +1827,10 @@
       "face": "Balance Scales",
       "artwork_id": "1nd3-mZo4ry6l7590as8l82pzDGrHvJg7",
       "before": "Mark 2. Weaken 2.",
-      "after": "Mark 2. Weaken 2.",
-      "changed": false,
+      "after": "Bless 1. Curse 1.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "Equal Mark and Weaken amounts balance outgoing and incoming force on the two pans.",
+      "reason": "Equal Bless and Curse amounts balance outgoing and incoming force on the two pans. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1864,10 +1849,10 @@
       "face": "Chessboard",
       "artwork_id": "1oimt6rlrGPRMs5Dv77O_m-Ut2fKLMww3",
       "before": "Scry. Weaken 2.",
-      "after": "Scry. Weaken 2.",
-      "changed": false,
+      "after": "Scry. Curse 1.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The chessboard joins foresight with a restrained opposing move.",
+      "reason": "The chessboard joins foresight with a restrained opposing move. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1941,10 +1926,10 @@
       "face": "Wind Chime",
       "artwork_id": "1j2YDTZA0r7Yj7DChzrwIaXzhygpmrpGq",
       "before": "Flip a card in your hand.",
-      "after": "Weaken 3.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The chime's gentle ringing soothes the coming attack rather than changing an identity.",
+      "reason": "The chime's gentle ringing soothes the coming attack rather than changing an identity. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-11.jpg"
     },
     {
@@ -1963,10 +1948,10 @@
       "face": "Blindfold",
       "artwork_id": "1dKztkN0t59NW-zbenT4smgLsToZP0BFD",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The blindfold interferes directly with aim.",
+      "reason": "The blindfold interferes directly with aim. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-11.jpg"
     },
     {
@@ -1985,10 +1970,10 @@
       "face": "Tangled Hair",
       "artwork_id": "1Tegjhx0D4gHYRbg3xVQNoVxdQguQfwK5",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The mass of hair entangles and obstructs movement.",
+      "reason": "The mass of hair entangles and obstructs movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-11.jpg"
     },
     {
@@ -2018,10 +2003,10 @@
       "face": "Symmetry",
       "artwork_id": "1HogzwkGW9JIZdg2PxJQvpgnY4byfnR0p",
       "before": "Mark 2. Weaken 2.",
-      "after": "Mark 2. Weaken 2.",
-      "changed": false,
+      "after": "Bless 1. Curse 1.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The two matched halves produce equal offensive and defensive adjustments.",
+      "reason": "The two matched halves produce equal offensive and defensive adjustments. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-11.jpg"
     },
     {
@@ -2084,10 +2069,10 @@
       "face": "Compression",
       "artwork_id": "1nmN6_fJHOsqzZQkZi_3_b4GARRi3_zYc",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The enclosing hands compress the figure's freedom to attack.",
+      "reason": "The enclosing hands compress the figure's freedom to attack. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-12.jpg"
     },
     {
@@ -2150,10 +2135,10 @@
       "face": "Stillness",
       "artwork_id": "1wJ1tMK0HBuvdk7dT9CJ1hzBZwKQCa8Up",
       "before": "Weaken 4.",
-      "after": "Weaken 6. Banish this card.",
+      "after": "Curse 3. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The motionless figure produces one powerful pause in the coming attack through the existing Weaken rule.",
+      "reason": "The motionless figure produces one powerful pause in the coming attack through the existing Curse rule. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-12.jpg"
     },
     {
@@ -2183,10 +2168,10 @@
       "face": "Clamor",
       "artwork_id": "1dNFUoCjW4VowLKqKgULxCRs5m6Cuakvy",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The shouting crowd disrupts concentration and aim.",
+      "reason": "The shouting crowd disrupts concentration and aim. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-12.jpg"
     },
     {
@@ -2282,10 +2267,10 @@
       "face": "Exposure",
       "artwork_id": "1EYm5F6-MpL_7sYsb7MTZGaTzMed9OnV2",
       "before": "Remove 3 enemy Ward. Mark 3.",
-      "after": "Remove 3 enemy Ward. Mark 3.",
-      "changed": false,
+      "after": "Purge all beneficial statuses from the enemy. Banish this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The figure is stripped of cover and singled out in full light, matching both removal and Mark.",
+      "reason": "Exposure strips away the enemy’s accumulated protective and empowering effects.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2304,10 +2289,10 @@
       "face": "Herald",
       "artwork_id": "1uFPL0WYkTGKChGPjeCI17Bofth0w-8bm",
       "before": "Scry. Draw 1 card.",
-      "after": "Mark 3.",
+      "after": "Bless 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The herald's trumpet announces a target for the next strike.",
+      "reason": "The herald's trumpet announces a target for the next strike. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2348,10 +2333,10 @@
       "face": "Animal Tamer",
       "artwork_id": "1PdHHfLIBYmwPoKpsgVLdy7vzOlba6Cct",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The tamer's lines and controlled beasts directly restrain force.",
+      "reason": "The tamer's lines and controlled beasts directly restrain force. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2392,10 +2377,10 @@
       "face": "Fencer",
       "artwork_id": "1rGSLSSBR4grvcVZjOEPtoyoGau28eB0H",
       "before": "Deal 3 Radiance damage. Mark 2.",
-      "after": "Deal 3 Radiance damage. Mark 2.",
-      "changed": false,
+      "after": "Deal 2 Radiance damage twice.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The fencer's small precise thrust prepares a marked opening for the following strike.",
+      "reason": "The fencer makes two precise thrusts instead of granting an incidental magical blessing.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2480,10 +2465,10 @@
       "face": "Royal Hound",
       "artwork_id": "1mWtIgbjgzkthfNBIAE97xb6HQZsx189c",
       "before": "Gain 6 Ward.",
-      "after": "Mark 3.",
+      "after": "Deal 2 Binding damage twice.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The alert royal hound fixes on a quarry; a protective shield was not the dog's depicted action.",
+      "reason": "The hound snaps twice, a physical hunting action rather than an arbitrary self-blessing.",
       "sheet": "card-artwork-review/cards-14.jpg"
     },
     {
@@ -2535,10 +2520,10 @@
       "face": "Trespasser",
       "artwork_id": "1QsdyaQaCR3FXLB6vnUftADn_sIzio1rv",
       "before": "Remove 5 enemy Ward.",
-      "after": "Remove 5 enemy Ward.",
-      "changed": false,
+      "after": "Purge one random beneficial status from the enemy.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The trespasser crosses a broken defensive threshold.",
+      "reason": "The trespasser breaches one layer of the enemy’s protection; which active layer falls is automatic.",
       "sheet": "card-artwork-review/cards-14.jpg"
     },
     {
@@ -2557,10 +2542,10 @@
       "face": "Smoke Spirit",
       "artwork_id": "1bl8JrbiSwNjR2iPGSNkql-f1DnsBDrDb",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The smoke spirit veils the attacker and interferes with aim.",
+      "reason": "The smoke spirit veils the attacker and interferes with aim. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-14.jpg"
     },
     {
@@ -2579,10 +2564,10 @@
       "face": "Kelp Forest",
       "artwork_id": "1ENL48xfaEFYEfrmMvndA2rNPSsEv2__c",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "Long kelp strands entangle movement.",
+      "reason": "Long kelp strands entangle movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-14.jpg"
     },
     {
@@ -2612,10 +2597,10 @@
       "face": "Firefly",
       "artwork_id": "1g736w3O4ty_TfbL8-Qmlku5aYz8S-YQJ",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
+      "after": "Turn your hand to its light faces.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The bright lure-like glow illuminates a marked target.",
+      "reason": "The firefly illuminates the held scene instead of applying an incidental combat boon.",
       "sheet": "card-artwork-review/cards-15.jpg"
     },
     {
@@ -2667,10 +2652,10 @@
       "face": "Mandrake",
       "artwork_id": "1eb2ZpjtvDCmSuZ7uiMDcZcg2BUiOLX6z",
       "before": "Deal 6 Decay damage.",
-      "after": "Weaken 6. Banish this card.",
+      "after": "Curse 3. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The uprooted mandrake gives one overwhelming, debilitating cry rather than an arbitrary projectile.",
+      "reason": "The uprooted mandrake gives one overwhelming, debilitating cry rather than an arbitrary projectile. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-15.jpg"
     },
     {
@@ -2832,10 +2817,10 @@
       "face": "Sceptre",
       "artwork_id": "1hloy-jxu4ZSie6l01Kyy9OIaOg6wTlTh",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The sceptre commands and restrains opposing force.",
+      "reason": "The sceptre commands and restrains opposing force. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-16.jpg"
     },
     {
@@ -2876,10 +2861,10 @@
       "face": "Fishing Net",
       "artwork_id": "16CoBFJwN3eZSFQ3DjdTpE69OIuzS7Cm4",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The net entangles the attacker rather than dealing unrelated damage.",
+      "reason": "The net entangles the attacker rather than dealing unrelated damage. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-16.jpg"
     },
     {
@@ -2942,10 +2927,10 @@
       "face": "Tuning Fork",
       "artwork_id": "1pOWrkSHqk4dOazmvUYGVysSSpWU2v-X3",
       "before": "Flip a card in your hand.",
-      "after": "Remove all your Weaken.",
+      "after": "Remove all your Curse.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The tuning fork restores a disturbed instrument's proper strength rather than changing its identity.",
+      "reason": "The tuning fork restores a disturbed instrument's proper strength rather than changing its identity. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-16.jpg"
     },
     {
@@ -2953,10 +2938,10 @@
       "face": "Rattle",
       "artwork_id": "19TAUN3hRrXB6FnNCy3hc40hE8bWijPLa",
       "before": "Flip your hand.",
-      "after": "Weaken 3.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The rattle's distracting noise interrupts aim; it does not transform the whole hand.",
+      "reason": "The rattle's distracting noise interrupts aim; it does not transform the whole hand. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-16.jpg"
     },
     {
@@ -3008,10 +2993,10 @@
       "face": "Floodgate",
       "artwork_id": "1Ta2kSWANHatk5acjjpeO2w_lxQJtlXn6",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The floodgate physically holds back a moving force.",
+      "reason": "The floodgate physically holds back a moving force. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-17.jpg"
     },
     {
@@ -3052,10 +3037,10 @@
       "face": "Measuring Rod",
       "artwork_id": "13XGoQ3PUp7ORGsn8xI270thZNaDGmiuZ",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
+      "after": "Scry.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The straight measure identifies a precise target for a later strike.",
+      "reason": "The measuring rod gives precise foreknowledge of the next available card, without another choice.",
       "sheet": "card-artwork-review/cards-17.jpg"
     },
     {
@@ -3063,10 +3048,10 @@
       "face": "Twisted Ribbon",
       "artwork_id": "1K7O0tFADVa-Uz2oQvpcj-fj5r-KCL56d",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The twisted ribbon wraps and restricts movement.",
+      "reason": "The twisted ribbon wraps and restricts movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-17.jpg"
     },
     {
@@ -3195,10 +3180,10 @@
       "face": "Peat Bog",
       "artwork_id": "1dbyS5SoY3Jd5X9K0071PZKP2LNHHmElI",
       "before": "Weaken 3. Deal 2 Decay damage.",
-      "after": "Weaken 3. Deal 2 Decay damage.",
-      "changed": false,
+      "after": "Curse 1. Deal 2 Decay damage.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The peat both bogs down movement and spreads wasting Decay.",
+      "reason": "The peat both bogs down movement and spreads wasting Decay. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-18.jpg"
     },
     {
@@ -3404,10 +3389,10 @@
       "face": "Bell Founder",
       "artwork_id": "1ftMufZKisD0RKlmQA5DWZ8wLYL1MTNHf",
       "before": "Scry. Draw 1 card.",
-      "after": "Mark 3.",
+      "after": "Bless 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The founder makes a bell whose function is to announce the coming strike, not to foretell cards.",
+      "reason": "The founder makes a bell whose function is to announce the coming strike, not to foretell cards. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-19.jpg"
     },
     {
@@ -3470,10 +3455,10 @@
       "face": "Dream Binder",
       "artwork_id": "1usk09I5PHy15lv9UFidJBnx_KIfgVjDT",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The dream binder's threads restrain the sleeping form.",
+      "reason": "The dream binder's threads restrain the sleeping form. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-19.jpg"
     },
     {
@@ -3481,10 +3466,10 @@
       "face": "Dream Unbinder",
       "artwork_id": "1KF8RnbOzRK41-tKzNgQXNR6IcorIohhi",
       "before": "Flip a card in your hand.",
-      "after": "Remove all your Weaken.",
+      "after": "Remove all your Curse.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The unbinder frees the figure from its binding impairment.",
+      "reason": "The unbinder frees the figure from its binding impairment. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-19.jpg"
     },
     {
@@ -3602,10 +3587,10 @@
       "face": "Perfumer",
       "artwork_id": "1K9OtvTkXWemHbbFhrTcbXxeP1EdBau2Y",
       "before": "Heal 4 HP. Banish this card.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The visible perfume clouds soothe and distract the attacker; healing an unexplained wound was less direct.",
+      "reason": "The visible perfume clouds soothe and distract the attacker; healing an unexplained wound was less direct. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-20.jpg"
     },
     {
@@ -3679,10 +3664,10 @@
       "face": "Cage Breaker",
       "artwork_id": "1wiOh1lkZWO0jdfLysNKyqQzAwnjPU5Ir",
       "before": "Remove 5 enemy Ward.",
-      "after": "Remove all your Weaken. Draw 2 cards. Banish this card.",
+      "after": "Remove all your Curse. Draw 2 cards. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "Breaking the cage removes restraint and frees new options in one act.",
+      "reason": "Breaking the cage removes restraint and frees new options in one act. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-21.jpg"
     },
     {
@@ -3932,10 +3917,10 @@
       "face": "Tide Keeper",
       "artwork_id": "1606cBStbiYN2jX9hzSBQufu7kobpl4u6",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The keeper holds back the force of the tide.",
+      "reason": "The keeper holds back the force of the tide. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-22.jpg"
     },
     {
@@ -4086,10 +4071,10 @@
       "face": "Alabaster Spider",
       "artwork_id": "1ripPvZY9bYhV5uLL-7YZOXm5FzowxPvd",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The white spider's web and limbs restrain the next attack.",
+      "reason": "The white spider's web and limbs restrain the next attack. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-23.jpg"
     },
     {
@@ -4207,10 +4192,10 @@
       "face": "Hawk Moth",
       "artwork_id": "1Rb-ixxPTJd5GUvynvzKwDQdeiEBJda2g",
       "before": "Scry. Draw 1 card.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The moth's large false eyespots confuse the attacker's aim rather than predict the future.",
+      "reason": "The moth's large false eyespots confuse the attacker's aim rather than predict the future. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4284,10 +4269,10 @@
       "face": "Red Panda",
       "artwork_id": "19BYSHsdWX7113diKEUd-xzlp_B9l-nh3",
       "before": "Gain 4 Ward. Draw 1 card.",
-      "after": "Weaken 3.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The curled, restful red panda calms the coming violence; an armor shield and extra draw were incidental.",
+      "reason": "The curled, restful red panda calms the coming violence; an armor shield and extra draw were incidental. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4306,10 +4291,10 @@
       "face": "Living Jellyfish",
       "artwork_id": "1QbwX7iffDIJGlYuqZJjWVGjHI32qql3m",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The jellyfish's trailing stingers debilitate movement.",
+      "reason": "The jellyfish's trailing stingers debilitate movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4460,10 +4445,10 @@
       "face": "Ice Crystal",
       "artwork_id": "1SwKu2a2rvfI1YhPAYCwzrXEgbTjTLh81",
       "before": "Weaken 4.",
-      "after": "Weaken 2. Deal 3 Frost damage.",
+      "after": "Freeze. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The pointed ice both slows movement and supplies a cold strike.",
+      "reason": "The crystalline ice arrests the enemy’s next action. Any attack/Fire thaw behavior remains explicitly undecided.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4526,10 +4511,10 @@
       "face": "Silver Crown",
       "artwork_id": "1TGqO5fSWv4OGY4UzujXRvte9tixKRn1T",
       "before": "Gain 6 Ward.",
-      "after": "Mark 3.",
+      "after": "Bless 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The crown declares authority over a chosen target; it is not depicted as armor.",
+      "reason": "The crown declares authority over a chosen target; it is not depicted as armor. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4537,10 +4522,10 @@
       "face": "Rusty Crown",
       "artwork_id": "1AiCyPh6b14Ge33dWfdJNlPVIVHj_s4oQ",
       "before": "Remove 5 enemy Ward.",
-      "after": "Weaken 4.",
+      "after": "Curse 2.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The rust weakens strength directly rather than removing an unrelated barrier.",
+      "reason": "The rust weakens strength directly rather than removing an unrelated barrier. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4614,10 +4599,10 @@
       "face": "Music Box",
       "artwork_id": "1_fGrLWnpVbjF0glvj5pftEpy1rvIoUWy",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The turning dancer and music offer a calming, controlled refrain.",
+      "reason": "The turning dancer and music offer a calming, controlled refrain. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4713,10 +4698,10 @@
       "face": "Broken Cage",
       "artwork_id": "15kEUzzTziwujXCihrEmx8-od-P0KKOZm",
       "before": "Remove 5 enemy Ward.",
-      "after": "Remove all your Weaken. Draw 1 card.",
+      "after": "Remove all your Curse. Draw 1 card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The broken bars release restraint and allow a fresh possibility through.",
+      "reason": "The broken bars release restraint and allow a fresh possibility through. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4911,10 +4896,10 @@
       "face": "Spent Match",
       "artwork_id": "1l-d2OFwKN7END4RfAaKY1zxeayt40eFz",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The last curl of smoke obscures aim without claiming that an extinguished match is still burning.",
+      "reason": "The last curl of smoke obscures aim without claiming that an extinguished match is still burning. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-28.jpg"
     },
     {
@@ -4977,10 +4962,10 @@
       "face": "Black Ribbon",
       "artwork_id": "1ATSsBmCgv8SqavIlxSCQBnirCFcU8Cj3",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The black ribbon wraps around and restrains movement.",
+      "reason": "The black ribbon wraps around and restrains movement. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-28.jpg"
     },
     {
@@ -5175,10 +5160,10 @@
       "face": "Wild Thicket",
       "artwork_id": "12rP35aIj8TDQuMmKGS2h3hVxbl2NmzuF",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The tangled wild plants impede an approaching attack.",
+      "reason": "The tangled wild plants impede an approaching attack. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-29.jpg"
     },
     {
@@ -5285,10 +5270,10 @@
       "face": "Collapsed Watchtower",
       "artwork_id": "1aTEjSUcPVynfQN9Eswe6nwiNWueEz74e",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The collapsed timbers obstruct an approaching attacker.",
+      "reason": "The collapsed timbers obstruct an approaching attacker. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-30.jpg"
     },
     {
@@ -5340,10 +5325,10 @@
       "face": "Frozen Waterfall",
       "artwork_id": "1f_qBQzjm25KRI-fd2v95onHwh52TBOuv",
       "before": "Weaken 3.",
-      "after": "Weaken 2. Deal 3 Frost damage.",
+      "after": "Curse 1. Deal 3 Frost damage.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The frozen fall both arrests movement and threatens with its heavy ice.",
+      "reason": "The frozen fall both arrests movement and threatens with its heavy ice. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-30.jpg"
     },
     {
@@ -5395,10 +5380,10 @@
       "face": "Obsidian Bridge",
       "artwork_id": "1FGwTBqRu1F-I_mGnjBSNpLdBt9Jw9G4b",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
+      "after": "Curse 2.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The narrow, dark crossing obstructs a direct approach.",
+      "reason": "The narrow, dark crossing obstructs a direct approach. The provisional stack count is retuned for a whole-attack effect; flat versus percentage scaling remains open.",
       "sheet": "card-artwork-review/cards-30.jpg"
     },
     {
@@ -5619,13 +5604,13 @@
       "number": 2,
       "name": "Glass Judge",
       "judgment": "strong-fit-proposal",
-      "reason": "The scales single out a target, and the judge's divided glass sends a second ray after its reaching hand.",
+      "reason": "The judge’s scales pronounce an afflicting verdict on the accused; the divided glass still supplies a second ray.",
       "before_trait": "On turn 1 of each three-turn cycle, gain 4 Ward instead of attacking.",
       "after_trait": "On Prismatic Sentence: Add 1 hit of 2 Radiance damage.",
       "actions": [
         "Deal 4 Radiance damage.",
         "Deal 5 Radiance damage. Trait — Split Verdict: Add 1 hit of 2 Radiance damage.",
-        "Apply 2 Mark to the player."
+        "Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
     },
@@ -5635,11 +5620,11 @@
       "judgment": "strong-fit-proposal",
       "reason": "The empty king takes a future offering, while its long hollow hands sap the grasped figure's strength.",
       "before_trait": "On the second step, gain 5 Ward instead of attacking; on the third step, add 3 damage.",
-      "after_trait": "On Hollow Clutch: Apply 2 Weaken to the player.",
+      "after_trait": "On Hollow Clutch: Apply 1 Curse to the player.",
       "actions": [
         "Deal 6 Shadow damage.",
         "Banish the top 1 card of the player's library.",
-        "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 2 Weaken to the player."
+        "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
     },
@@ -5649,10 +5634,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The visible ink cloud obscures aim; it does not need to identify which part of a shield was damaged.",
       "before_trait": "Immediately before attacking, remove up to 3 player Ward.",
-      "after_trait": "On Ink Surge: Apply 3 Weaken to the player.",
+      "after_trait": "On Ink Surge: Apply 1 Curse to the player.",
       "actions": [
         "Deal 6 Shadow damage.",
-        "Deal 5 Shadow damage. Trait — Black Tide: Apply 3 Weaken to the player."
+        "Deal 5 Shadow damage. Trait — Black Tide: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
     },
@@ -5689,9 +5674,9 @@
       "judgment": "strong-fit-proposal",
       "reason": "The living roots nourish the tree and physically entangle the attacker's movement.",
       "before_trait": "On rooting turns, gain 5 Ward instead of attacking. After attacking, heal 3 HP if no direct card attack damaged its HP this turn.",
-      "after_trait": "On Root Lash: Apply 2 Weaken to the player.",
+      "after_trait": "On Root Lash: Apply 1 Curse to the player.",
       "actions": [
-        "Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player.",
+        "Deal 7 Growth damage. Trait — Root Snare: Apply 1 Curse to the player.",
         "Heal 3 HP."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
@@ -5726,12 +5711,12 @@
       "number": 10,
       "name": "Seven-Eyed Heron",
       "judgment": "strong-fit-proposal",
-      "reason": "The seven visible eyes fix the next target; no retained-card history is needed.",
+      "reason": "The many-eyed glare dazes the observed player, afflicting the next whole attack.",
       "before_trait": "If the player is carrying a card with Keep, add 2 damage.",
-      "after_trait": "On Seven-Eyed Gaze: Apply 3 Mark to the player.",
+      "after_trait": "On Seven-Eyed Gaze: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Radiance damage.",
-        "Deal 3 Radiance damage. Trait — Seven Watches: Apply 3 Mark to the player."
+        "Deal 3 Radiance damage. Trait — Seven Watches: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
     },
@@ -5754,10 +5739,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "Amber restrains a grasped limb and preserves one surrendered future card in a visible seal.",
       "before_trait": "After every third attack, Banish the last physical card played this turn for this fight, if it is still in discard.",
-      "after_trait": "On Amber Clasp: Apply 3 Weaken to the player.",
+      "after_trait": "On Amber Clasp: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Amber Custody: Apply 3 Weaken to the player.",
+        "Deal 4 Binding damage. Trait — Amber Custody: Apply 1 Curse to the player.",
         "Banish the top 1 card of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
@@ -5768,10 +5753,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The scattered ash obscures aim and buries one approaching card in the spent pile.",
       "before_trait": "After attacking, remove its remaining Burn and gain Ward equal to the Burn removed, up to 3.",
-      "after_trait": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile.",
+      "after_trait": "On Scatter Ash: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile.",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile."
+        "Deal 4 Decay damage. Trait — Ashen Dust: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5820,10 +5805,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The hanging bellflowers ring out a calming, restraining cadence after the stem strike.",
       "before_trait": "If the player ends with unspent mana, heal 2 HP after attacking.",
-      "after_trait": "On Ring the Blossoms: Apply 3 Weaken to the player.",
+      "after_trait": "On Ring the Blossoms: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Growth damage.",
-        "Deal 4 Growth damage. Trait — Closing Bell: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Closing Bell: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5846,9 +5831,9 @@
       "judgment": "strong-fit-proposal",
       "reason": "Wallowing restores the great beast; its charge throws obscuring mud rather than manufacturing armor.",
       "before_trait": "On wallow turns, gain 5 Ward; the next fixed turn is its charge.",
-      "after_trait": "On Blackwater Charge: Apply 2 Weaken to the player.",
+      "after_trait": "On Blackwater Charge: Apply 1 Curse to the player.",
       "actions": [
-        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player.",
+        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 1 Curse to the player.",
         "Heal 4 HP."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
@@ -5884,12 +5869,12 @@
       "number": 22,
       "name": "The Blue Jackal",
       "judgment": "strong-fit-proposal",
-      "reason": "The alert jackal calls attention to its quarry before the next bite.",
+      "reason": "The moonlit howl gathers strength for the jackal’s next attack.",
       "before_trait": "If the player is below half maximum HP, add 2 damage.",
-      "after_trait": "On Moon Howl: Apply 2 Mark to the player.",
+      "after_trait": "On Moon Howl: Gain 1 Bless.",
       "actions": [
         "Deal 5 Shadow damage.",
-        "Deal 4 Shadow damage. Trait — Marked Quarry: Apply 2 Mark to the player."
+        "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5925,10 +5910,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The matron tucks one still-held card into the next draw rather than copying an unrelated Ward total.",
       "before_trait": "After attacking, gain 2 Ward for each card the player carried with Keep, up to 4 Ward.",
-      "after_trait": "On Gather the Apron: The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Gather the Apron: Move a random card still in the player's hand to the top of the player's library.",
       "actions": [
         "Deal 6 Binding damage.",
-        "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 5 Binding damage. Trait — Gathering Apron: Move a random card still in the player's hand to the top of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -5938,10 +5923,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The buried melody brings one visible discarded card back to the next draw; this strange courtesy can help the player.",
       "before_trait": "After every second attack, move the last physical card the player played this turn from discard to the top of their draw pile, if still there.",
-      "after_trait": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their library.",
+      "after_trait": "On Play the Refrain: Move the top 1 card of the player's discard pile to the top of their library.",
       "actions": [
         "Deal 6 Memory damage.",
-        "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their library."
+        "Deal 4 Memory damage. Trait — Unfinished Phrase: Move the top 1 card of the player's discard pile to the top of their library."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -5964,10 +5949,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The line pulls away one card the player still holds; no previous health-damage flag is stored.",
       "before_trait": "If its previous attack damaged player HP, remove up to 3 player Ward before this attack.",
-      "after_trait": "On Reel the Line: The player discards 1 held card of their choice, if any.",
+      "after_trait": "On Reel the Line: Move a random card still in the player's hand to the player's discard pile.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Set the Hook: The player discards 1 held card of their choice, if any."
+        "Deal 4 Binding damage. Trait — Set the Hook: Move a random card still in the player's hand to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -5977,9 +5962,9 @@
       "judgment": "strong-fit-proposal",
       "reason": "The vintage restores its drinker while its heavy fumes impair the opponent.",
       "before_trait": "On drinking turns, heal 4 HP instead of attacking.",
-      "after_trait": "On Bitter Goblet: Apply 2 Weaken to the player.",
+      "after_trait": "On Bitter Goblet: Apply 1 Curse to the player.",
       "actions": [
-        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player.",
+        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 1 Curse to the player.",
         "Heal 4 HP."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
@@ -5990,10 +5975,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The giant sheds a cloud of chalk dust that interferes with aim.",
       "before_trait": "If a direct card attack had at least 8 damage after bonuses but before Ward this turn, add one 2-damage hit to its attack.",
-      "after_trait": "On Shake the Chalk: Apply 3 Weaken to the player.",
+      "after_trait": "On Shake the Chalk: Apply 1 Curse to the player.",
       "actions": [
         "Deal 6 Binding damage.",
-        "Deal 5 Binding damage. Trait — Dustfall: Apply 3 Weaken to the player."
+        "Deal 5 Binding damage. Trait — Dustfall: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -6001,12 +5986,12 @@
       "number": 31,
       "name": "The Clockwork Peacock",
       "judgment": "strong-fit-proposal",
-      "reason": "The clockwork tail aligns a target and sweeps a second geared feather across it; no hidden winding counter escalates.",
+      "reason": "Aligning the fan of gears interlocks it into a physical screen, before the peacock sweeps its segmented tail.",
       "before_trait": "Each winding turn gains 2 more Ward than the last, capped at 6.",
       "after_trait": "On Tail Sweep: Add 1 hit of 2 Binding damage.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Apply 2 Mark to the player.",
+        "Gain 3 Ward.",
         "Deal 4 Binding damage. Trait — Geared Fan: Add 1 hit of 2 Binding damage."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
@@ -6017,10 +6002,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The visible cobweb ropes entangle the opponent's next attacking motion.",
       "before_trait": "After each second attack, the player must choose one Kept card to release to discard, if any.",
-      "after_trait": "On Draw the Rigging: Apply 3 Weaken to the player.",
+      "after_trait": "On Draw the Rigging: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -6028,12 +6013,12 @@
       "number": 33,
       "name": "The Coin-Eyed Stag",
       "judgment": "strong-fit-proposal",
-      "reason": "The shining coin eyes hold a target in their attention.",
+      "reason": "The coin-eyed gaze holds its viewer in a weakening fascination.",
       "before_trait": "If the player drew cards using card effects this turn, add 2 damage.",
-      "after_trait": "On Fix the Gaze: Apply 3 Mark to the player.",
+      "after_trait": "On Fix the Gaze: Apply 1 Curse to the player.",
       "actions": [
         "Deal 6 Radiance damage.",
-        "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 3 Mark to the player."
+        "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -6097,10 +6082,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The crossing threads sew up to two actually held cards into the next draw's order.",
       "before_trait": "If the player carried at least 2 cards with Keep, add 3 damage.",
-      "after_trait": "On Close the Loom: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer.",
+      "after_trait": "On Close the Loom: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer."
+        "Deal 4 Binding damage. Trait — Closing Weave: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6123,10 +6108,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The huge pouch swallows one still-held card for this fight; playing it before the scoop keeps it out of reach.",
       "before_trait": "If its attack removes at least 3 player Ward, heal 2 HP afterward.",
-      "after_trait": "On Scoop the Offering: The player Banishes 1 held card of their choice, if any.",
+      "after_trait": "On Scoop the Offering: Banish a random card still in the player's hand.",
       "actions": [
         "Deal 6 Radiance damage.",
-        "Deal 5 Radiance damage. Trait — Filled Pouch: The player Banishes 1 held card of their choice, if any."
+        "Deal 5 Radiance damage. Trait — Filled Pouch: Banish a random card still in the player's hand."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6136,9 +6121,9 @@
       "judgment": "strong-fit-proposal",
       "reason": "The plants renew themselves and entangle a visitor, while the enclosing glass supplies actual cover.",
       "before_trait": "On tending turns, heal 2 HP and gain 3 Ward instead of attacking.",
-      "after_trait": "On Glasshouse Briar: Apply 2 Weaken to the player.",
+      "after_trait": "On Glasshouse Briar: Apply 1 Curse to the player.",
       "actions": [
-        "Deal 6 Growth damage. Trait — Green Fingers: Apply 2 Weaken to the player.",
+        "Deal 6 Growth damage. Trait — Green Fingers: Apply 1 Curse to the player.",
         "Heal 4 HP.",
         "Gain 3 Ward."
       ],
@@ -6190,10 +6175,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The soft living tentacles restrain movement rather than testing the player's kept-card history.",
       "before_trait": "Before every second attack, remove up to 2 player Ward for each card kept this turn, capped at 4.",
-      "after_trait": "On Close the Tentacles: Apply 3 Weaken to the player.",
+      "after_trait": "On Close the Tentacles: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Growth damage.",
-        "Deal 4 Growth damage. Trait — Closing Mouth: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Closing Mouth: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6216,10 +6201,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The sticky honey seals one actually held card into the next draw instead of demanding an unrelated Flip.",
       "before_trait": "If the player played no Flip effect this turn, remove up to 2 player Ward before attacking.",
-      "after_trait": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Close the Honey Trap: Move a random card still in the player's hand to the top of the player's library.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 4 Binding damage. Trait — Sticky Tribute: Move a random card still in the player's hand to the top of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6255,10 +6240,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The giant's cords constrain the opponent instead of gaining armor when an attack was blocked.",
       "before_trait": "After an attack that deals no player HP damage, gain 5 Ward.",
-      "after_trait": "On Tighten the Cords: Apply 3 Weaken to the player.",
+      "after_trait": "On Tighten the Cords: Apply 1 Curse to the player.",
       "actions": [
         "Deal 6 Binding damage.",
-        "Deal 5 Binding damage. Trait — Tightening Knot: Apply 3 Weaken to the player."
+        "Deal 5 Binding damage. Trait — Tightening Knot: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-05.jpg"
     },
@@ -6266,13 +6251,13 @@
       "number": 51,
       "name": "The Lacquered Admiral",
       "judgment": "strong-fit-proposal",
-      "reason": "The fleet's signal fixes a target and two shipboard shots follow the admiral's leading blow.",
+      "reason": "The admiral’s signal coordinates and strengthens the next whole broadside. Bless is a combat boon, not a moral alignment.",
       "before_trait": "Every third attack gains two additional 2-damage hits.",
       "after_trait": "On Fire the Broadside: Add 2 hits of 2 Binding damage.",
       "actions": [
         "Deal 5 Binding damage.",
         "Deal 4 Binding damage. Trait — Broadside Order: Add 2 hits of 2 Binding damage.",
-        "Apply 2 Mark to the player."
+        "Gain 1 Bless."
       ],
       "sheet": "enemy-artwork-review/contact-05.jpg"
     },
@@ -6282,9 +6267,9 @@
       "judgment": "strong-fit-proposal",
       "reason": "The linen is both real covering and a cloth that catches the opponent's attacking limbs; no delayed charge is implied.",
       "before_trait": "On crouching turns, gain 4 Ward; the following attack ignores up to 2 player Ward.",
-      "after_trait": "On Linen Pounce: Apply 2 Weaken to the player.",
+      "after_trait": "On Linen Pounce: Apply 1 Curse to the player.",
       "actions": [
-        "Deal 6 Binding damage. Trait — Gathered Linen: Apply 2 Weaken to the player.",
+        "Deal 6 Binding damage. Trait — Gathered Linen: Apply 1 Curse to the player.",
         "Gain 4 Ward."
       ],
       "sheet": "enemy-artwork-review/contact-05.jpg"
@@ -6345,13 +6330,13 @@
       "number": 57,
       "name": "The Midnight Oyster",
       "judgment": "strong-fit-proposal",
-      "reason": "The shell is genuine protection, and the offered pearl catches the eye for the next attack.",
+      "reason": "The bright pearl enthralls approaching prey after the shell’s snap.",
       "before_trait": "On closing turns, gain 7 Ward instead of attacking.",
-      "after_trait": "On Show the Pearl: Apply 2 Mark to the player.",
+      "after_trait": "On Show the Pearl: Apply 1 Curse to the player.",
       "actions": [
         "Deal 6 Binding damage.",
         "Gain 7 Ward.",
-        "Deal 4 Binding damage. Trait — Pearl Glint: Apply 2 Mark to the player."
+        "Deal 4 Binding damage. Trait — Pearl Glint: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-05.jpg"
     },
@@ -6361,10 +6346,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The stitch catches and removes one card still held after discard.",
       "before_trait": "After each third attack, the player discards 1 chosen card carried with Keep, if any.",
-      "after_trait": "On Sew the Hem: The player discards 1 held card of their choice, if any.",
+      "after_trait": "On Sew the Hem: Move a random card still in the player's hand to the player's discard pile.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Closing Stitch: The player discards 1 held card of their choice, if any."
+        "Deal 4 Binding damage. Trait — Closing Stitch: Move a random card still in the player's hand to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-05.jpg"
     },
@@ -6465,12 +6450,12 @@
       "number": 66,
       "name": "The Obsidian Otter",
       "judgment": "strong-fit-proposal",
-      "reason": "The otter carries one held card down to the draw pile's bottom instead of checking an unspent Mark.",
+      "reason": "The otter carries one held card down to the draw pile's bottom instead of checking an unspent Bless.",
       "before_trait": "After each second attack, gain 5 Ward if the player has no Mark on it.",
-      "after_trait": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their library, if any.",
+      "after_trait": "On Dive with the Prize: Move a random card still in the player's hand to the bottom of the player's library.",
       "actions": [
         "Deal 5 Shadow damage.",
-        "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their library, if any."
+        "Deal 4 Shadow damage. Trait — Dive for Cover: Move a random card still in the player's hand to the bottom of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
@@ -6491,12 +6476,12 @@
       "number": 68,
       "name": "The Painted Elephant",
       "judgment": "strong-fit-proposal",
-      "reason": "The painted animal transfers a visible mark, rather than comparing a remembered physical card.",
+      "reason": "The stamped painted pattern becomes a bodily affliction that hampers the next whole attack.",
       "before_trait": "If the player used a direct attack from the pair that last damaged its HP on the previous turn, add 3 damage.",
-      "after_trait": "On Stamp the Pattern: Apply 3 Mark to the player.",
+      "after_trait": "On Stamp the Pattern: Apply 1 Curse to the player.",
       "actions": [
         "Deal 6 Memory damage.",
-        "Deal 5 Memory damage. Trait — Painted Touch: Apply 3 Mark to the player."
+        "Deal 5 Memory damage. Trait — Painted Touch: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
@@ -6585,10 +6570,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The flying ribbons restrain the next attacking motion rather than converting absorbed damage into armor.",
       "before_trait": "After attacking, gain Ward equal to the player Ward that absorbed that attack, capped at 4.",
-      "after_trait": "On Bind the Formation: Apply 3 Weaken to the player.",
+      "after_trait": "On Bind the Formation: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-07.jpg"
     },
@@ -6612,10 +6597,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The landing spreads roots that entangle the opponent instead of healing only when a shield blocked a hit.",
       "before_trait": "If its attack is fully absorbed by Ward, heal 2 HP afterward.",
-      "after_trait": "On Land in the Roots: Apply 3 Weaken to the player.",
+      "after_trait": "On Land in the Roots: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Growth damage.",
-        "Deal 4 Growth damage. Trait — Anchored Landing: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Anchored Landing: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-07.jpg"
     },
@@ -6678,10 +6663,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The wooden door is real cover; the hands hide one held card at the back of the draw pile.",
       "before_trait": "If a direct card attack removed all of its Ward this turn, add one extra 3-damage hit.",
-      "after_trait": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their library, if any.",
+      "after_trait": "On Open the Hands: Move a random card still in the player's hand to the bottom of the player's library.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their library, if any.",
+        "Deal 4 Binding damage. Trait — Hands Within: Move a random card still in the player's hand to the bottom of the player's library.",
         "Gain 4 Ward."
       ],
       "sheet": "enemy-artwork-review/contact-07.jpg"
@@ -6719,10 +6704,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The uncanny procession puts the traveler into a weakening trance without remembering which saved card was played.",
       "before_trait": "If the player carried at least 1 card from last turn and played none of those carried cards, add 3 damage.",
-      "after_trait": "On Lead the Procession: Apply 3 Weaken to the player.",
+      "after_trait": "On Lead the Procession: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
     },
@@ -6745,10 +6730,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The visible soot cloud interferes with the opponent's aim, independent of Scry.",
       "before_trait": "If the player used Scry this turn, gain 5 Ward after attacking.",
-      "after_trait": "On Cast the Veil: Apply 3 Weaken to the player.",
+      "after_trait": "On Cast the Veil: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Soot Veil: Apply 3 Weaken to the player."
+        "Deal 4 Decay damage. Trait — Soot Veil: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
     },
@@ -6795,11 +6780,11 @@
       "number": 91,
       "name": "The Sunstruck Crocodile",
       "judgment": "strong-fit-proposal",
-      "reason": "The watching crocodile marks its quarry, while its radiant skin adds a separately labeled glare to the bite.",
+      "reason": "The sun warms the waiting crocodile into strength for its next snap.",
       "before_trait": "On basking turns, gain 3 Ward; its next attack adds 3 damage.",
       "after_trait": "On Sunstruck Snap: Add 2 Radiance damage to the base hit.",
       "actions": [
-        "Apply 2 Mark to the player.",
+        "Gain 1 Bless.",
         "Deal 6 Radiance damage. Trait — Sunstruck Glare: Add 2 Radiance damage to the base hit."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
@@ -6810,10 +6795,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The seamstress sews one held card into the top of the next draw rather than erasing it.",
       "before_trait": "After attacking, put one chosen Kept card on top of the player's draw pile, if any.",
-      "after_trait": "On Close the Hem: The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Close the Hem: Move a random card still in the player's hand to the top of the player's library.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 4 Binding damage. Trait — Hem the Hand: Move a random card still in the player's hand to the top of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
     },
@@ -6823,10 +6808,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The looping body restrains an attacking motion without watching for repeated pairs.",
       "before_trait": "If the player played 2 consecutive copies of the same pair this turn, add 3 damage.",
-      "after_trait": "On Offer the Tangle: Apply 3 Weaken to the player.",
+      "after_trait": "On Offer the Tangle: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
     },
@@ -6888,10 +6873,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The collector takes one visibly held piece into its bag for this fight instead of reacting to a past HP payment.",
       "before_trait": "If the player lost HP through a card payment this turn, gain 4 Ward after attacking.",
-      "after_trait": "On Collect the Tooth: The player Banishes 1 held card of their choice, if any.",
+      "after_trait": "On Collect the Tooth: Banish a random card still in the player's hand.",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Another Tooth: The player Banishes 1 held card of their choice, if any."
+        "Deal 4 Decay damage. Trait — Another Tooth: Banish a random card still in the player's hand."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -6913,12 +6898,12 @@
       "number": 100,
       "name": "The Unblinking Shepherd",
       "judgment": "strong-fit-proposal",
-      "reason": "The enormous open eye marks a target for the crook instead of detecting a previous bottom-deck move.",
+      "reason": "The eye and crook draw the player into the flock, constraining their next whole attack.",
       "before_trait": "If the player moved a card to the bottom of the draw pile this turn, add 3 damage.",
-      "after_trait": "On Gather the Flock: Apply 3 Mark to the player.",
+      "after_trait": "On Gather the Flock: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Radiance damage.",
-        "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 3 Mark to the player."
+        "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -6955,10 +6940,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The eel's long body constricts the next attacking motion rather than checking draw effects.",
       "before_trait": "If the player played no draw effect this turn, remove up to 3 player Ward before attacking.",
-      "after_trait": "On Tighten the Coil: Apply 3 Weaken to the player.",
+      "after_trait": "On Tighten the Coil: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Velvet Coil: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Velvet Coil: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -6981,10 +6966,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The courtly skeleton invites a discarded memory back to the next draw; a dark figure can offer real help.",
       "before_trait": "If the player ends with 0 mana, gain 3 Ward after attacking.",
-      "after_trait": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their library.",
+      "after_trait": "On Invite the Memory: Move the top 1 card of the player's discard pile to the top of their library.",
       "actions": [
         "Deal 5 Memory damage.",
-        "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their library."
+        "Deal 3 Memory damage. Trait — Remembered Courtesy: Move the top 1 card of the player's discard pile to the top of their library."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -6994,10 +6979,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "Hot wax leaves a Burn and seals one held card into the next draw, without testing HP damage.",
       "before_trait": "After an attack that deals player HP damage, put every card currently carried with Keep on top of the draw pile, in the player's chosen order.",
-      "after_trait": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Pour the Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library.",
       "actions": [
         "Deal 5 Fire damage.",
-        "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -7033,11 +7018,11 @@
       "judgment": "strong-fit-proposal",
       "reason": "The sleeper restores itself and its dream dulls the opponent's next attacking motion.",
       "before_trait": "On sleeping turns, heal 5 HP instead of attacking.",
-      "after_trait": "On Murmur the Lullaby: Apply 3 Weaken to the player.",
+      "after_trait": "On Murmur the Lullaby: Apply 1 Curse to the player.",
       "actions": [
         "Deal 5 Growth damage.",
         "Heal 4 HP.",
-        "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 1 Curse to the player."
       ],
       "sheet": "enemy-artwork-review/contact-10.jpg"
     },

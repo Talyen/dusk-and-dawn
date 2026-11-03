@@ -7,13 +7,13 @@
   "rule_assumptions": [
     "Each enemy has one labeled trait, one explicit damage-type weakness and 2–3 independently authored actions. No resistances or separate theme tags. Enemy values do not reference player-card values.",
     "Suppress the enemy’s labeled trait through its next action. Skip a non-attack ability; an attack keeps its base hits. Advance the pattern normally.",
-    "Heal for the attack’s final damage after bonuses and Weaken, before Ward. Count Ward absorption and overkill. Healing stops at maximum HP.",
+    "Heal for the attack’s final damage after bonuses and Bless/Curse, before Ward. Count Ward absorption and overkill. Healing stops at maximum HP.",
     "Absorb incoming damage before HP. At the start of its holder’s turn, halve remaining Ward, rounding down. Remove it at 0.",
     "At player turn end, deal Fire damage equal to Burn, then halve Burn, rounding down. Remove it at 0. Applying Burn keeps the higher value; it does not add.",
     "At player turn end, deal Decay damage equal to Poison, then halve Poison, rounding down. Remove it at 0. Applying Poison keeps the higher value; it does not add.",
     "Reveal the top card of your library for the rest of this player turn. If the top changes, reveal the new top.",
     "Show the whole intent before player choices. Hush begins immediately, lasts through the next action, does not undo prior results, and advances the pattern. Check a grouped Burn condition once after the Burn tick.",
-    "Each damage instance has exactly one type. Mark, weakness and Weaken affect the first hit only. A direct card receives at most one +2 weakness bonus. Burn, Poison and reactive trait damage do not receive these bonuses.",
+    "Each damage instance has exactly one type. Weakness affects the first card hit; Bless and Curse affect all hits of the next attack under the explicitly provisional flat preview. A direct card receives at most one +2 weakness bonus. Burn, Poison and reactive trait damage do not receive these bonuses.",
     "Held-card clauses check the actual hand after unkept cards are discarded. No retained snapshots, prior-turn identity comparisons, Ward-versus-HP tests or actual-health-loss triggers are used.",
     "Next-normal-draw and next-mana-refill penalties are visible and expire after one use; multiple copies use the highest value. Queued hand-facing effects happen after that draw.",
     "Reactive traits exist only while their named intent is displayed: Swan reflects once, Librarian pricks after each direct attack card if it survives. These are visible exceptions to action-time traits.",
@@ -22,99 +22,84 @@
   ],
   "thought_experiments": [
     {
+      "case": "Working scaling",
+      "setup_and_result": "Bless and Curse stack. The working comparison uses +1 and −1 per stack on every attack hit, with a floor of 0. Percentage scaling is still open; this preview is not a settled numerical rule.",
+      "implication": "No Mark or Weaken remains in current effects."
+    },
+    {
       "case": "Moth opening",
-      "setup_and_result": "The Radiant Moth has 18 HP and shows Folded-Wing Dust: 4 Radiance. Angel grants 5 Ward; Sun deals 6 Radiance. Its HP becomes 12; its hit uses 4 Ward and deals no HP damage. Open-Wing Dust is next: base 4 plus the trait’s 1.",
-      "implication": "Uses the canonical first encounter, not a separate Glass Judge fixture."
+      "setup_and_result": "The Radiant Moth has 18 HP and opens with 4 Radiance. Angel grants 5 Ward; Sun deals 6 Radiance. The Moth becomes 12 HP; its hit leaves 1 player Ward. That Ward halves to 0 at the next player turn start.",
+      "implication": "Damage and decay are separate steps."
     },
     {
-      "case": "Hush and extraction",
-      "setup_and_result": "The Dentist shows Pull: 4 Release, with Extraction removing 5 player Ward first. Against 5 Ward it deals 4 HP damage. Hush removes Extraction; all 4 damage is absorbed.",
-      "implication": "The base attack remains. No trait asks which layer took the hit."
+      "case": "Bless and Prism",
+      "setup_and_result": "With no matching weakness, Prism’s three hits of 2 become 3, 3, 3 with Bless 1 in the flat candidate. The 25% candidate with nearest rounding also gives 3, 3, 3.",
+      "implication": "Other hit sizes diverge; inspect the scaling comparison."
     },
     {
-      "case": "Hush and the choir",
-      "setup_and_result": "Chorus and Clutch has a base 2 Binding hit and two trait hits of 2. Hush leaves just the base 2. Weaken 3 without Hush instead produces hits of 0, 2 and 2.",
-      "implication": "With 3 Ward, the weakened action still deals 1 HP damage."
+      "case": "Curse and the choir",
+      "setup_and_result": "Porcelain Choir’s 2, 2, 2 becomes 1, 1, 1 with Curse 1 in the flat candidate. The 25% candidate with nearest rounding leaves 2, 2, 2.",
+      "implication": "Rounding can make a percentage debuff do nothing on small hits."
     },
     {
-      "case": "Leech through Ward and overkill",
-      "setup_and_result": "A 4 Shadow Vampire attack against a Shadow weakness has final damage 6. It heals 6 even if Ward absorbs the hit or the enemy had only 1 HP. If the player was at 26/30 HP, healing stops at 30.",
+      "case": "Curse is not silence",
+      "setup_and_result": "Curse may reduce every direct hit to 0. Separate Burn, Poison, card moves, healing and trait clauses still resolve. Hush suppresses the labeled trait; an active Freeze skips the whole scheduled action.",
+      "implication": "Three distinct kinds of control remain."
+    },
+    {
+      "case": "Leech through Ward",
+      "setup_and_result": "Vampire’s 4 Shadow plus a matching +2 weakness, plus Bless 1 minus Curse 2, has final flat damage 5. Leech heals 5 before Ward, including absorption and overkill, capped at maximum HP.",
       "implication": "No HP-actually-lost counter is used."
     },
     {
-      "case": "Leech after Weaken",
-      "setup_and_result": "Vampire’s base 4 plus 2 weakness is reduced by player Weaken 3. Final damage is 3, and Leech heals 3 before Ward changes the target’s HP.",
-      "implication": "Bonuses and Weaken precede Leech; Ward does not reduce it."
-    },
-    {
-      "case": "A reflected hit",
-      "setup_and_result": "A 6-damage hit is reflected back once, with the same type and final value. It does not gain a new weakness or Mark bonus at the new target. If its attacker has 2 Ward, that Ward absorbs 2 and the attacker loses 4 HP.",
-      "implication": "A reflected hit cannot reflect again."
+      "case": "Reflect once",
+      "setup_and_result": "Apply weakness and Bless/Curse before Reflect. The redirected hit keeps that final value and type; do not apply modifiers again at its new target.",
+      "implication": "Burn, Poison and separate trait damage are not attacks."
     },
     {
       "case": "A reactive mirror",
-      "setup_and_result": "While Mirror-Eyed Swan shows Raise the Mirror Wing, its first incoming direct hit is reflected. Hush played first suspends that reflection immediately; the Swan still performs its base 4 Radiance attack. Hush played after a reflected hit does not undo it.",
-      "implication": "Reactive traits act during the player turn and must be shown before a card is played."
+      "setup_and_result": "The Swan’s while-intent reflection remains active during Freeze. Hush suspends it; Purge consumes its active one-use reflection. If Freeze still exists at action start, skip the whole action.",
+      "implication": "Whether an intervening attack thaws Freeze is undecided; do not promise that sequence a final outcome."
     },
     {
-      "case": "Thorns without a health gate",
-      "setup_and_result": "While Thorned Librarian shows Open the Brambles, each resolved direct attack card provokes 1 Binding trait damage if the Librarian survives. A hit fully absorbed by its Ward still provokes the thorn. Hush stops later pricks but does not refund an earlier one.",
-      "implication": "Reaction damage is not an attack and does not spend Reflect or Weaken."
+      "case": "One random Cleanse",
+      "setup_and_result": "With Burn 7 and Curse 1, a one-random Cleanse chooses between two status kinds equally and clears the chosen counter entirely. Removing Curse first with a narrow cure guarantees that the later random Cleanse removes Burn.",
+      "implication": "Playing order replaces an extra selection menu."
     },
     {
-      "case": "Burn feeds the mouth",
-      "setup_and_result": "Lantern Eater has 3 Burn at turn end. Burn deals 3 Fire and falls to 1. On Devour the Glow, the remaining Burn satisfies one condition for the whole trait: remove it and heal 3. With Hush, Burn stays at 1 and no feeding heal occurs.",
-      "implication": "The Burn condition is checked once for the action, not again after clearing Burn."
+      "case": "Purge and leftover Ward",
+      "setup_and_result": "With Ward, Reflect and Bless active, one-random Purge has three eligible kinds. Purge all clears all three. It does not erase the printed trait or prevent later grants.",
+      "implication": "Stacks do not weight random selection."
+    },
+    {
+      "case": "Freeze without contested events",
+      "setup_and_result": "Ice Crystal Freezes and Banishes its source. If nothing intervenes that could thaw it, skip the enemy’s next action, advance the pattern and clear Freeze. Ward still halves.",
+      "implication": "Attack and Fire thaw rules remain open; current Freeze previews are conditional."
     },
     {
       "case": "Ward carryover",
-      "setup_and_result": "End a turn with 7 Ward after all damage. At the next player turn start it becomes 3; if untouched, later starts leave 1 then 0. Enemy Ward follows the same floor rule at enemy action start, after damage-over-time ticks, even when Hush skips the action.",
-      "implication": "Only remaining Ward halves; new Ward adds normally."
+      "setup_and_result": "Remaining Ward 7 becomes 3, then 1, then 0 at successive holder turn starts. Enemy Ward halves after damage-over-time ticks, even when its action is skipped.",
+      "implication": "New Ward adds normally."
     },
     {
       "case": "Poison alongside Burn",
-      "setup_and_result": "A player with 5 Ward, 4 Burn and 3 Poison takes a 4 Fire tick, then a 3 Decay tick. Ward absorbs the first 4 and 1 of the second: lose 2 HP. Burn becomes 2 and Poison becomes 1.",
-      "implication": "Separate typed instances; both counters halve even when Ward absorbs damage."
+      "setup_and_result": "With 5 Ward, 4 Burn and 3 Poison, take a 4 Fire tick then a 3 Decay tick. Ward absorbs 5 total; lose 2 HP. Burn becomes 2 and Poison becomes 1.",
+      "implication": "Separate typed ticks, both halving even when blocked."
     },
     {
-      "case": "Scry without a choice",
-      "setup_and_result": "Scry enables the library-top reveal. If the library is empty, it does not reshuffle. Drawing or moving cards later may refill it; reveal its current top until End Turn begins.",
-      "implication": "Changing the top changes the reveal; no selection or bottom-card prompt."
+      "case": "Scry without choices",
+      "setup_and_result": "Scry follows the current library top until End Turn begins. An empty library does not reshuffle for Scry; reveal a top supplied by a later draw or move.",
+      "implication": "No choice or bottom-card prompt."
     },
     {
       "case": "Self transformation",
-      "setup_and_result": "Cocoon flips its own resolving physical card to Shed Skin, then Keeps that same card in hand on its new face. Finish the original played description; do not start the new face’s effect.",
-      "implication": "Every later play still costs mana; no copy, free replay or extra turn is granted."
+      "setup_and_result": "Cocoon flips its own resolving physical card to Shed Skin, then Keeps that same card in hand. Finish the original played effect. Every later play still costs mana.",
+      "implication": "No copy or free replay."
     },
     {
-      "case": "A player Burn",
-      "setup_and_result": "The Kiln applies 2 Burn after the current turn’s Burn step. It first ticks at the end of the next player turn. A Rain played before then removes Burn from both combatants; Bathhouse removes only the player’s Burn.",
-      "implication": "Player Ward can absorb that tick, then its remainder halves at the next turn start."
-    },
-    {
-      "case": "A visible tax",
-      "setup_and_result": "The Taxman’s Collect the Pearl applies a 1-mana refill reduction. The next player turn starts at 2 mana, not 3; the penalty then ends. Hush prevents its application but leaves the 4 Binding base hit.",
-      "implication": "No spent or unspent mana from the prior turn is inspected."
-    },
-    {
-      "case": "The next hand’s face",
-      "setup_and_result": "Masked Midday’s trait schedules a light-facing hand. At the next normal draw, draw within the eight-card cap, then turn the entire held hand light-side up. Hush on the preceding enemy action prevents that schedule; Hush afterward cannot reverse an already completed turn.",
-      "implication": "The queued effect is visible; no card identity or retained snapshot is stored."
-    },
-    {
-      "case": "Returning a changed form",
-      "setup_and_result": "Pottery Workshop flips the top card of the discard pile, then returns that physical card to hand, without a selection prompt. Its source is resolving outside the hand and cannot be chosen.",
-      "implication": "Explicit zone text is the exception to ordinary hand-only Flip."
-    },
-    {
-      "case": "Splitting a ray",
-      "setup_and_result": "Prism deals three hits of 2 Radiance. Against a Radiance weakness with Mark 3, the first hit is 7 and the next two are 2 each, before Ward. Weakness and Mark are not added to every ray.",
-      "implication": "One weakness bonus per played card; one Mark spend."
-    },
-    {
-      "case": "A cost without a target",
-      "setup_and_result": "Oblivion requires another card in hand to Banish. If it is the only card, it cannot be played and spends no mana. Scry with an empty library reveals nothing until another effect supplies a top card during that turn.",
-      "implication": "Required costs differ from instructions that operate on whatever is available."
+      "case": "Automatic enemy moves",
+      "setup_and_result": "At enemy resolution, random held-card moves use the actual remaining hand after discard. Use all available cards if fewer than requested. Helpful recovery moves the top discarded card, rather than opening a selection prompt.",
+      "implication": "No retained-card snapshots or hidden physical identities."
     }
   ],
   "enemies": [
@@ -179,6 +164,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Radiance damage."
         },
         {
@@ -197,6 +183,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 6 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Radiance damage. Trait — High Noon: Add 3 Radiance damage to the base hit."
         },
         {
@@ -214,6 +201,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 4 Ward."
         }
       ],
@@ -292,6 +280,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage."
         },
         {
@@ -310,6 +299,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage. Trait — Split Verdict: Add 1 hit of 2 Radiance damage."
         },
         {
@@ -318,16 +308,17 @@
           "kind": "ability",
           "base": [
             {
-              "op": "mark",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player"
             }
           ],
-          "effect": "Apply 2 Mark to the player.",
+          "effect": "Apply 1 Curse to the player.",
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
-          "preview": "Apply 2 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -336,12 +327,12 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Curse",
         "Radiance",
         "Shadow"
       ],
       "review_flags": [],
-      "thematic_reason": "The scales single out a target, and the judge's divided glass sends a second ray after its reaching hand."
+      "thematic_reason": "The judge’s scales pronounce an afflicting verdict on the accused; the divided glass still supplies a second ray."
     },
     {
       "id": "hollow-king",
@@ -374,12 +365,12 @@
       },
       "trait": {
         "name": "Empty Grasp",
-        "effect": "On Hollow Clutch: Apply 2 Weaken to the player.",
+        "effect": "On Hollow Clutch: Apply 1 Curse to the player.",
         "by_action": {
           "c": [
             {
-              "op": "weaken",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -404,6 +395,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Shadow damage."
         },
         {
@@ -422,6 +414,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Banish the top 1 card of the player's library."
         },
         {
@@ -440,7 +433,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 7 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 2 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -450,7 +444,7 @@
       ],
       "keywords": [
         "Banish",
-        "Weaken",
+        "Curse",
         "Radiance",
         "Shadow"
       ],
@@ -490,12 +484,12 @@
       },
       "trait": {
         "name": "Black Tide",
-        "effect": "On Ink Surge: Apply 3 Weaken to the player.",
+        "effect": "On Ink Surge: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -520,6 +514,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Shadow damage."
         },
         {
@@ -538,7 +533,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Shadow damage. Trait — Black Tide: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 5 Shadow damage. Trait — Black Tide: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -546,7 +542,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Radiance",
         "Shadow"
       ],
@@ -615,6 +611,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 7 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 7 Binding damage."
         },
         {
@@ -632,6 +629,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 5 Ward."
         },
         {
@@ -650,6 +648,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 6 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Binding damage. Trait — Falling Arch: Add 1 hit of 2 Binding damage."
         }
       ],
@@ -736,6 +735,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Shadow damage."
         },
         {
@@ -754,6 +754,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Shadow damage. Trait — Swallow the Lantern: If the enemy has Burn after the tick, remove all its Burn and heal 3 HP."
         }
       ],
@@ -802,12 +803,12 @@
       },
       "trait": {
         "name": "Root Snare",
-        "effect": "On Root Lash: Apply 2 Weaken to the player.",
+        "effect": "On Root Lash: Apply 1 Curse to the player.",
         "by_action": {
           "a": [
             {
-              "op": "weaken",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -832,7 +833,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 7 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 7 Growth damage. Trait — Root Snare: Apply 1 Curse to the player."
         },
         {
           "id": "b",
@@ -849,6 +851,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 3 HP."
         }
       ],
@@ -857,7 +860,7 @@
         "a"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -928,6 +931,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 3 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Binding damage."
         },
         {
@@ -946,6 +950,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 2 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 2 Binding damage. Trait — Joining Voices: Add 2 hits of 2 Binding damage."
         }
       ],
@@ -1023,6 +1028,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage."
         },
         {
@@ -1041,6 +1047,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Open Wings: Add 1 Radiance damage to the base hit."
         }
       ],
@@ -1086,12 +1093,12 @@
       },
       "trait": {
         "name": "Seven Watches",
-        "effect": "On Seven-Eyed Gaze: Apply 3 Mark to the player.",
+        "effect": "On Seven-Eyed Gaze: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "mark",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -1116,6 +1123,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -1134,7 +1142,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 3 Radiance damage. Trait — Seven Watches: Apply 3 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 3 Radiance damage. Trait — Seven Watches: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -1142,12 +1151,12 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Curse",
         "Radiance",
         "Shadow"
       ],
       "review_flags": [],
-      "thematic_reason": "The seven visible eyes fix the next target; no retained-card history is needed."
+      "thematic_reason": "The many-eyed glare dazes the observed player, afflicting the next whole attack."
     },
     {
       "id": "sunbleached-harlequin",
@@ -1170,12 +1179,12 @@
         "type": "Binding",
         "direct_card_bonus": 2,
         "reason": "Binding arrests the jester's tumbling motion.",
-        "available_direct_face_count": 10,
+        "available_direct_face_count": 11,
         "example_direct_faces": [
           "Fallen Bell",
           "Gravity",
-          "Stalactite",
-          "Sea Urchin"
+          "Royal Hound",
+          "Stalactite"
         ]
       },
       "trait": {
@@ -1209,6 +1218,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Release damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Release damage."
         },
         {
@@ -1227,6 +1237,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Release damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Release damage. Trait — Over the Guard: The base hit ignores up to 3 player Ward."
         }
       ],
@@ -1275,12 +1286,12 @@
       },
       "trait": {
         "name": "Amber Custody",
-        "effect": "On Amber Clasp: Apply 3 Weaken to the player.",
+        "effect": "On Amber Clasp: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -1305,6 +1316,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -1323,7 +1335,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Amber Custody: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Amber Custody: Apply 1 Curse to the player."
         },
         {
           "id": "c",
@@ -1341,6 +1354,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Banish the top 1 card of the player's library."
         }
       ],
@@ -1351,7 +1365,7 @@
       ],
       "keywords": [
         "Banish",
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -1390,12 +1404,12 @@
       },
       "trait": {
         "name": "Ashen Dust",
-        "effect": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile.",
+        "effect": "On Scatter Ash: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             },
@@ -1427,6 +1441,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage."
         },
         {
@@ -1445,7 +1460,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Decay damage. Trait — Ashen Dust: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
       "pattern": [
@@ -1453,7 +1469,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -1524,6 +1540,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -1542,6 +1559,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Tugged Hands: Flip 1 random card still in the player's hand, if any."
         }
       ],
@@ -1622,6 +1640,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -1640,6 +1659,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Sweeping Orbit: Add 1 hit of 3 Radiance damage."
         }
       ],
@@ -1713,6 +1733,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Memory damage."
         },
         {
@@ -1731,6 +1752,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage. Trait — Drowned Prophecy: Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
@@ -1779,12 +1801,12 @@
       },
       "trait": {
         "name": "Closing Bell",
-        "effect": "On Ring the Blossoms: Apply 3 Weaken to the player.",
+        "effect": "On Ring the Blossoms: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -1809,6 +1831,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Growth damage."
         },
         {
@@ -1827,7 +1850,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Growth damage. Trait — Closing Bell: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Growth damage. Trait — Closing Bell: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -1835,7 +1859,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -1904,6 +1928,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Shadow damage."
         },
         {
@@ -1922,6 +1947,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Shadow damage. Trait — Trailing Tendrils: Add 2 hits of 1 Shadow damage."
         }
       ],
@@ -1967,12 +1993,12 @@
       },
       "trait": {
         "name": "Mud Spray",
-        "effect": "On Blackwater Charge: Apply 2 Weaken to the player.",
+        "effect": "On Blackwater Charge: Apply 1 Curse to the player.",
         "by_action": {
           "a": [
             {
-              "op": "weaken",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -1997,7 +2023,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 7 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 7 Shadow damage. Trait — Mud Spray: Apply 1 Curse to the player."
         },
         {
           "id": "b",
@@ -2014,6 +2041,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 4 HP."
         }
       ],
@@ -2022,7 +2050,7 @@
         "a"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Radiance",
         "Shadow"
       ],
@@ -2090,6 +2118,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -2108,6 +2137,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Memory damage. Trait — Another Circuit: Move the top 1 card of the player's library to the bottom of that pile."
         }
       ],
@@ -2187,6 +2217,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Growth damage."
         },
         {
@@ -2204,6 +2235,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 3 HP."
         },
         {
@@ -2222,6 +2254,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 6 Growth damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Growth damage. Trait — Flowering Blade: Add 1 hit of 2 Growth damage."
         }
       ],
@@ -2270,13 +2303,13 @@
       },
       "trait": {
         "name": "Marked Quarry",
-        "effect": "On Moon Howl: Apply 2 Mark to the player.",
+        "effect": "On Moon Howl: Gain 1 Bless.",
         "by_action": {
           "b": [
             {
-              "op": "mark",
-              "amount": 2,
-              "target": "player",
+              "op": "bless",
+              "amount": 1,
+              "target": "enemy",
               "stage": "after_attack"
             }
           ]
@@ -2300,6 +2333,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage."
         },
         {
@@ -2318,7 +2352,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Shadow damage. Trait — Marked Quarry: Apply 2 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."
         }
       ],
       "pattern": [
@@ -2326,12 +2361,12 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Bless",
         "Radiance",
         "Shadow"
       ],
       "review_flags": [],
-      "thematic_reason": "The alert jackal calls attention to its quarry before the next bite."
+      "thematic_reason": "The moonlit howl gathers strength for the jackal’s next attack."
     },
     {
       "id": "the-bone-cartographer",
@@ -2392,6 +2427,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -2410,6 +2446,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Memory damage. Trait — Redrawn Route: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
@@ -2489,6 +2526,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 3 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Radiance damage."
         },
         {
@@ -2507,6 +2545,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Radiance damage. Trait — Summer Rattle: Add 3 hits of 1 Radiance damage."
         }
       ],
@@ -2552,14 +2591,14 @@
       },
       "trait": {
         "name": "Gathering Apron",
-        "effect": "On Gather the Apron: The player puts 1 held card of their choice on the top of their library, if any.",
+        "effect": "On Gather the Apron: Move a random card still in the player's hand to the top of the player's library.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_draw_top",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -2583,6 +2622,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Binding damage."
         },
         {
@@ -2601,7 +2641,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their library, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 5 Binding damage. Trait — Gathering Apron: Move a random card still in the player's hand to the top of the player's library."
         }
       ],
       "pattern": [
@@ -2646,13 +2687,13 @@
       },
       "trait": {
         "name": "Unfinished Phrase",
-        "effect": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their library.",
+        "effect": "On Play the Refrain: Move the top 1 card of the player's discard pile to the top of their library.",
         "by_action": {
           "b": [
             {
               "op": "recover_to_top",
               "amount": 1,
-              "chooser": "player",
+              "chooser": "top_of_discard",
               "stage": "after_attack"
             }
           ]
@@ -2676,6 +2717,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Memory damage."
         },
         {
@@ -2694,7 +2736,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their library."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Memory damage. Trait — Unfinished Phrase: Move the top 1 card of the player's discard pile to the top of their library."
         }
       ],
       "pattern": [
@@ -2733,10 +2776,9 @@
         "type": "Frost",
         "direct_card_bonus": 2,
         "reason": "Frost cools the candles and stiffens the dripping wax.",
-        "available_direct_face_count": 3,
+        "available_direct_face_count": 2,
         "example_direct_faces": [
           "Frozen Lake",
-          "Ice Crystal",
           "Frozen Waterfall"
         ]
       },
@@ -2772,6 +2814,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Fire damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Fire damage."
         },
         {
@@ -2790,6 +2833,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."
         }
       ],
@@ -2839,14 +2883,14 @@
       },
       "trait": {
         "name": "Set the Hook",
-        "effect": "On Reel the Line: The player discards 1 held card of their choice, if any.",
+        "effect": "On Reel the Line: Move a random card still in the player's hand to the player's discard pile.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_discard",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -2870,6 +2914,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -2888,7 +2933,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Set the Hook: The player discards 1 held card of their choice, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Set the Hook: Move a random card still in the player's hand to the player's discard pile."
         }
       ],
       "pattern": [
@@ -2934,12 +2980,12 @@
       },
       "trait": {
         "name": "Cellar Fumes",
-        "effect": "On Bitter Goblet: Apply 2 Weaken to the player.",
+        "effect": "On Bitter Goblet: Apply 1 Curse to the player.",
         "by_action": {
           "a": [
             {
-              "op": "weaken",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -2964,7 +3010,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 6 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 1 Curse to the player."
         },
         {
           "id": "b",
@@ -2981,6 +3028,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 4 HP."
         }
       ],
@@ -2990,7 +3038,7 @@
         "a"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -3032,12 +3080,12 @@
       },
       "trait": {
         "name": "Dustfall",
-        "effect": "On Shake the Chalk: Apply 3 Weaken to the player.",
+        "effect": "On Shake the Chalk: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -3062,6 +3110,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Binding damage."
         },
         {
@@ -3080,7 +3129,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Binding damage. Trait — Dustfall: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 5 Binding damage. Trait — Dustfall: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -3088,7 +3138,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -3159,6 +3209,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -3167,16 +3218,17 @@
           "kind": "ability",
           "base": [
             {
-              "op": "mark",
-              "amount": 2,
-              "target": "player"
+              "op": "ward",
+              "amount": 3,
+              "target": "enemy"
             }
           ],
-          "effect": "Apply 2 Mark to the player.",
+          "effect": "Gain 3 Ward.",
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
-          "preview": "Apply 2 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Gain 3 Ward."
         },
         {
           "id": "c",
@@ -3194,6 +3246,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Geared Fan: Add 1 hit of 2 Binding damage."
         }
       ],
@@ -3203,14 +3256,14 @@
         "a"
       ],
       "keywords": [
-        "Mark",
+        "Ward",
         "Binding",
         "Release"
       ],
       "review_flags": [
         "wider-pool-weakness"
       ],
-      "thematic_reason": "The clockwork tail aligns a target and sweeps a second geared feather across it; no hidden winding counter escalates."
+      "thematic_reason": "Aligning the fan of gears interlocks it into a physical screen, before the peacock sweeps its segmented tail."
     },
     {
       "id": "the-cobweb-admiral",
@@ -3243,12 +3296,12 @@
       },
       "trait": {
         "name": "Webbed Rigging",
-        "effect": "On Draw the Rigging: Apply 3 Weaken to the player.",
+        "effect": "On Draw the Rigging: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -3273,6 +3326,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -3291,7 +3345,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -3299,7 +3354,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -3339,12 +3394,12 @@
       },
       "trait": {
         "name": "Coin-Eyed Gaze",
-        "effect": "On Fix the Gaze: Apply 3 Mark to the player.",
+        "effect": "On Fix the Gaze: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "mark",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -3369,6 +3424,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Radiance damage."
         },
         {
@@ -3387,7 +3443,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 3 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -3395,12 +3452,12 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Curse",
         "Radiance",
         "Shadow"
       ],
       "review_flags": [],
-      "thematic_reason": "The shining coin eyes hold a target in their attention."
+      "thematic_reason": "The coin-eyed gaze holds its viewer in a weakening fascination."
     },
     {
       "id": "the-cracked-moon",
@@ -3461,6 +3518,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -3479,6 +3537,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Memory damage. Trait — Falling Fragments: Add 2 hits of 2 Memory damage."
         },
         {
@@ -3496,6 +3555,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "After the player's next normal draw, turn their hand to its dark faces."
         }
       ],
@@ -3576,6 +3636,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -3594,6 +3655,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Prism Flash: Add 2 hits of 2 Radiance damage."
         },
         {
@@ -3611,6 +3673,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 4 Ward."
         }
       ],
@@ -3686,6 +3749,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -3704,6 +3768,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Memory damage. Trait — Submerged Arpeggio: Add 2 hits of 1 Memory damage."
         }
       ],
@@ -3782,6 +3847,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -3800,6 +3866,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Reel In: Remove up to 4 player Ward before the base hit."
         }
       ],
@@ -3848,14 +3915,14 @@
       },
       "trait": {
         "name": "Closing Weave",
-        "effect": "On Close the Loom: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer.",
+        "effect": "On Close the Loom: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 2,
               "to": "player_draw_top",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -3879,6 +3946,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -3897,7 +3965,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Closing Weave: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer."
         }
       ],
       "pattern": [
@@ -3975,6 +4044,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -3993,6 +4063,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."
         }
       ],
@@ -4041,14 +4112,14 @@
       },
       "trait": {
         "name": "Filled Pouch",
-        "effect": "On Scoop the Offering: The player Banishes 1 held card of their choice, if any.",
+        "effect": "On Scoop the Offering: Banish a random card still in the player's hand.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_banished",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -4072,6 +4143,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Radiance damage."
         },
         {
@@ -4090,7 +4162,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Radiance damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Radiance damage. Trait — Filled Pouch: The player Banishes 1 held card of their choice, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 5 Radiance damage. Trait — Filled Pouch: Banish a random card still in the player's hand."
         }
       ],
       "pattern": [
@@ -4098,6 +4171,7 @@
         "b"
       ],
       "keywords": [
+        "Banish",
         "Radiance",
         "Shadow"
       ],
@@ -4138,12 +4212,12 @@
       },
       "trait": {
         "name": "Green Fingers",
-        "effect": "On Glasshouse Briar: Apply 2 Weaken to the player.",
+        "effect": "On Glasshouse Briar: Apply 1 Curse to the player.",
         "by_action": {
           "a": [
             {
-              "op": "weaken",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -4168,7 +4242,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 6 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 6 Growth damage. Trait — Green Fingers: Apply 2 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 6 Growth damage. Trait — Green Fingers: Apply 1 Curse to the player."
         },
         {
           "id": "b",
@@ -4185,6 +4260,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 4 HP."
         },
         {
@@ -4202,6 +4278,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 3 Ward."
         }
       ],
@@ -4213,7 +4290,7 @@
       ],
       "keywords": [
         "Ward",
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -4284,6 +4361,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage."
         },
         {
@@ -4302,6 +4380,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Radiance damage. Trait — Menagerie Procession: Add 3 hits of 2 Radiance damage."
         }
       ],
@@ -4378,6 +4457,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage."
         },
         {
@@ -4396,6 +4476,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Binding damage. Trait — Many Feet: Add 4 hits of 1 Binding damage."
         }
       ],
@@ -4474,6 +4555,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -4492,6 +4574,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Loose Scree: Add 2 hits of 2 Binding damage."
         },
         {
@@ -4509,6 +4592,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 4 Ward."
         }
       ],
@@ -4558,12 +4642,12 @@
       },
       "trait": {
         "name": "Closing Mouth",
-        "effect": "On Close the Tentacles: Apply 3 Weaken to the player.",
+        "effect": "On Close the Tentacles: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -4588,6 +4672,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Growth damage."
         },
         {
@@ -4606,7 +4691,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Growth damage. Trait — Closing Mouth: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Growth damage. Trait — Closing Mouth: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -4614,7 +4700,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -4681,6 +4767,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Decay damage."
         },
         {
@@ -4699,6 +4786,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Decay damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage. Trait — Empty Harvest: Banish the top 1 card of the player's library."
         }
       ],
@@ -4749,14 +4837,14 @@
       },
       "trait": {
         "name": "Sticky Tribute",
-        "effect": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their library, if any.",
+        "effect": "On Close the Honey Trap: Move a random card still in the player's hand to the top of the player's library.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_draw_top",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -4780,6 +4868,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -4798,7 +4887,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their library, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Sticky Tribute: Move a random card still in the player's hand to the top of the player's library."
         }
       ],
       "pattern": [
@@ -4877,6 +4967,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Shadow damage."
         },
         {
@@ -4895,6 +4986,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage. Trait — Bounding Trail: Move the top 1 card of the player's library to the bottom of that pile."
         }
       ],
@@ -4930,12 +5022,12 @@
         "type": "Binding",
         "direct_card_bonus": 2,
         "reason": "Binding holds the tooth firm against extraction.",
-        "available_direct_face_count": 10,
+        "available_direct_face_count": 11,
         "example_direct_faces": [
           "Fallen Bell",
           "Gravity",
-          "Stalactite",
-          "Sea Urchin"
+          "Royal Hound",
+          "Stalactite"
         ]
       },
       "trait": {
@@ -4970,6 +5062,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Release damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Release damage."
         },
         {
@@ -4988,6 +5081,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Release damage. Trait — Extraction: Remove up to 5 player Ward before the base hit."
         }
       ],
@@ -5036,12 +5130,12 @@
       },
       "trait": {
         "name": "Tightening Knot",
-        "effect": "On Tighten the Cords: Apply 3 Weaken to the player.",
+        "effect": "On Tighten the Cords: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -5066,6 +5160,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Binding damage."
         },
         {
@@ -5084,7 +5179,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Binding damage. Trait — Tightening Knot: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 5 Binding damage. Trait — Tightening Knot: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -5092,7 +5188,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -5163,6 +5259,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -5181,6 +5278,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Broadside Order: Add 2 hits of 2 Binding damage."
         },
         {
@@ -5189,16 +5287,17 @@
           "kind": "ability",
           "base": [
             {
-              "op": "mark",
-              "amount": 2,
-              "target": "player"
+              "op": "bless",
+              "amount": 1,
+              "target": "enemy"
             }
           ],
-          "effect": "Apply 2 Mark to the player.",
+          "effect": "Gain 1 Bless.",
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
-          "preview": "Apply 2 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Gain 1 Bless."
         }
       ],
       "pattern": [
@@ -5207,7 +5306,7 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Bless",
         "Binding",
         "Release",
         "Fire"
@@ -5215,7 +5314,7 @@
       "review_flags": [
         "wider-pool-weakness"
       ],
-      "thematic_reason": "The fleet's signal fixes a target and two shipboard shots follow the admiral's leading blow."
+      "thematic_reason": "The admiral’s signal coordinates and strengthens the next whole broadside. Bless is a combat boon, not a moral alignment."
     },
     {
       "id": "the-linen-lioness",
@@ -5248,12 +5347,12 @@
       },
       "trait": {
         "name": "Gathered Linen",
-        "effect": "On Linen Pounce: Apply 2 Weaken to the player.",
+        "effect": "On Linen Pounce: Apply 1 Curse to the player.",
         "by_action": {
           "a": [
             {
-              "op": "weaken",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -5278,7 +5377,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 6 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 6 Binding damage. Trait — Gathered Linen: Apply 2 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 6 Binding damage. Trait — Gathered Linen: Apply 1 Curse to the player."
         },
         {
           "id": "b",
@@ -5295,6 +5395,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 4 Ward."
         }
       ],
@@ -5304,7 +5405,7 @@
       ],
       "keywords": [
         "Ward",
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -5334,12 +5435,12 @@
         "type": "Binding",
         "direct_card_bonus": 2,
         "reason": "Binding arrests the sweeping motion.",
-        "available_direct_face_count": 10,
+        "available_direct_face_count": 11,
         "example_direct_faces": [
           "Fallen Bell",
           "Gravity",
-          "Stalactite",
-          "Sea Urchin"
+          "Royal Hound",
+          "Stalactite"
         ]
       },
       "trait": {
@@ -5378,6 +5479,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Release damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Release damage."
         },
         {
@@ -5396,6 +5498,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Release damage. Trait — Clean Sweep: Remove all enemy Burn. Remove all enemy Poison."
         }
       ],
@@ -5475,6 +5578,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 4 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage."
         },
         {
@@ -5493,6 +5597,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Sedating Presence: The player draws 1 fewer card on their next normal draw."
         }
       ],
@@ -5571,6 +5676,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -5589,6 +5695,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Midday Mask: After the player's next normal draw, turn their hand to its light faces."
         }
       ],
@@ -5626,12 +5733,12 @@
         "type": "Binding",
         "direct_card_bonus": 2,
         "reason": "Binding stills the swinging rope.",
-        "available_direct_face_count": 10,
+        "available_direct_face_count": 11,
         "example_direct_faces": [
           "Fallen Bell",
           "Gravity",
-          "Stalactite",
-          "Sea Urchin"
+          "Royal Hound",
+          "Stalactite"
         ]
       },
       "trait": {
@@ -5665,6 +5772,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Release damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Release damage."
         },
         {
@@ -5683,6 +5791,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Release damage. Trait — Tightrope Rebound: The base hit ignores up to 2 player Ward."
         }
       ],
@@ -5731,12 +5840,12 @@
       },
       "trait": {
         "name": "Pearl Glint",
-        "effect": "On Show the Pearl: Apply 2 Mark to the player.",
+        "effect": "On Show the Pearl: Apply 1 Curse to the player.",
         "by_action": {
           "c": [
             {
-              "op": "mark",
-              "amount": 2,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -5761,6 +5870,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Binding damage."
         },
         {
@@ -5778,6 +5888,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 7 Ward."
         },
         {
@@ -5796,7 +5907,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Pearl Glint: Apply 2 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Pearl Glint: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -5806,14 +5918,14 @@
       ],
       "keywords": [
         "Ward",
-        "Mark",
+        "Curse",
         "Binding",
         "Release"
       ],
       "review_flags": [
         "wider-pool-weakness"
       ],
-      "thematic_reason": "The shell is genuine protection, and the offered pearl catches the eye for the next attack."
+      "thematic_reason": "The bright pearl enthralls approaching prey after the shell’s snap."
     },
     {
       "id": "the-midnight-tailor",
@@ -5846,14 +5958,14 @@
       },
       "trait": {
         "name": "Closing Stitch",
-        "effect": "On Sew the Hem: The player discards 1 held card of their choice, if any.",
+        "effect": "On Sew the Hem: Move a random card still in the player's hand to the player's discard pile.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_discard",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -5877,6 +5989,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -5895,7 +6008,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Closing Stitch: The player discards 1 held card of their choice, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Closing Stitch: Move a random card still in the player's hand to the player's discard pile."
         }
       ],
       "pattern": [
@@ -5971,6 +6085,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -5989,6 +6104,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Mirrored Wing: Reflect the first hit of the next direct card attack against this enemy. This ends when the hit is reflected or this intent ends."
         }
       ],
@@ -6065,6 +6181,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -6083,6 +6200,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Memory damage. Trait — Twin Questions: Add 1 hit of 3 Memory damage."
         }
       ],
@@ -6162,6 +6280,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage."
         },
         {
@@ -6180,6 +6299,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Banish the top 1 card of the player's library."
         },
         {
@@ -6198,6 +6318,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Shadow damage. Trait — Stolen Morrow: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
@@ -6277,6 +6398,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Growth damage."
         },
         {
@@ -6295,6 +6417,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Growth damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."
         }
       ],
@@ -6371,6 +6494,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage."
         },
         {
@@ -6389,6 +6513,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Decay damage. Trait — Moth-Eaten Tribute: Move the top 2 cards of the player's library to the player's discard pile."
         }
       ],
@@ -6467,6 +6592,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Growth damage."
         },
         {
@@ -6484,6 +6610,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 4 HP."
         },
         {
@@ -6502,6 +6629,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Growth damage. Trait — Mould Spores: Apply 2 Poison to the player."
         }
       ],
@@ -6581,6 +6709,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -6599,6 +6728,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Turning Step: Turn the cards still in the player's hand to their light faces."
         }
       ],
@@ -6646,14 +6776,14 @@
       },
       "trait": {
         "name": "Dive for Cover",
-        "effect": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their library, if any.",
+        "effect": "On Dive with the Prize: Move a random card still in the player's hand to the bottom of the player's library.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_draw_bottom",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -6677,6 +6807,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage."
         },
         {
@@ -6695,7 +6826,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their library, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Shadow damage. Trait — Dive for Cover: Move a random card still in the player's hand to the bottom of the player's library."
         }
       ],
       "pattern": [
@@ -6709,7 +6841,7 @@
       "review_flags": [
         "held-card-interaction"
       ],
-      "thematic_reason": "The otter carries one held card down to the draw pile's bottom instead of checking an unspent Mark."
+      "thematic_reason": "The otter carries one held card down to the draw pile's bottom instead of checking an unspent Bless."
     },
     {
       "id": "the-opal-centipede",
@@ -6773,6 +6905,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -6791,6 +6924,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Radiance damage. Trait — Ripple of Light: Add 3 hits of 1 Radiance damage."
         }
       ],
@@ -6833,12 +6967,12 @@
       },
       "trait": {
         "name": "Painted Touch",
-        "effect": "On Stamp the Pattern: Apply 3 Mark to the player.",
+        "effect": "On Stamp the Pattern: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "mark",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -6863,6 +6997,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Memory damage."
         },
         {
@@ -6881,7 +7016,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Memory damage. Trait — Painted Touch: Apply 3 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 5 Memory damage. Trait — Painted Touch: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -6889,7 +7025,7 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Curse",
         "Memory",
         "Oblivion"
       ],
@@ -6897,7 +7033,7 @@
         "wider-pool-weakness",
         "sparse-weakness-pool"
       ],
-      "thematic_reason": "The painted animal transfers a visible mark, rather than comparing a remembered physical card."
+      "thematic_reason": "The stamped painted pattern becomes a bodily affliction that hampers the next whole attack."
     },
     {
       "id": "the-painted-raven",
@@ -6958,6 +7094,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 3 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Memory damage."
         },
         {
@@ -6976,6 +7113,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Memory damage. Trait — Stolen Pigment: Use the latest direct hit's final damage this turn for the base hit: minimum 3, maximum 8. Use 3 if there was no direct hit."
         },
         {
@@ -6993,6 +7131,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 3 HP."
         }
       ],
@@ -7073,6 +7212,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -7091,6 +7231,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."
         }
       ],
@@ -7169,6 +7310,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -7187,6 +7329,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Pearl Levy: The player starts their next turn with 1 less mana."
         }
       ],
@@ -7266,6 +7409,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -7284,6 +7428,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Porcelain Splinters: Add 1 hit of 2 Binding damage."
         }
       ],
@@ -7362,6 +7507,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Radiance damage."
         },
         {
@@ -7380,6 +7526,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Drawing Current: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
@@ -7456,6 +7603,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -7474,6 +7622,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Binding damage. Trait — Following the Baton: Add 2 hits of 2 Binding damage."
         }
       ],
@@ -7521,12 +7670,12 @@
       },
       "trait": {
         "name": "Ribbon Formation",
-        "effect": "On Bind the Formation: Apply 3 Weaken to the player.",
+        "effect": "On Bind the Formation: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -7551,6 +7700,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -7569,7 +7719,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -7577,7 +7728,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -7648,6 +7799,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Growth damage."
         },
         {
@@ -7666,6 +7818,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Growth damage. Trait — Root Pedal: Add 1 hit of 2 Growth damage."
         },
         {
@@ -7683,6 +7836,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 3 HP."
         }
       ],
@@ -7731,12 +7885,12 @@
       },
       "trait": {
         "name": "Anchored Landing",
-        "effect": "On Land in the Roots: Apply 3 Weaken to the player.",
+        "effect": "On Land in the Roots: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -7761,6 +7915,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Growth damage."
         },
         {
@@ -7779,7 +7934,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Growth damage. Trait — Anchored Landing: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Growth damage. Trait — Anchored Landing: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -7787,7 +7943,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -7854,6 +8010,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -7872,6 +8029,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage. Trait — Turn the Key: The base hit ignores all player Ward."
         }
       ],
@@ -7951,6 +8109,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Growth damage."
         },
         {
@@ -7969,6 +8128,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Growth damage. Trait — Saffron Venom: Apply 2 Poison to the player."
         }
       ],
@@ -8048,6 +8208,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -8065,6 +8226,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 5 Ward."
         },
         {
@@ -8083,6 +8245,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Crystalline Spires: Add 2 hits of 2 Binding damage."
         }
       ],
@@ -8162,6 +8325,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage."
         },
         {
@@ -8180,6 +8344,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Shadow damage. Trait — Borrowed Gesture: Flip all cards still in the player's hand."
         }
       ],
@@ -8228,14 +8393,14 @@
       },
       "trait": {
         "name": "Hands Within",
-        "effect": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their library, if any.",
+        "effect": "On Open the Hands: Move a random card still in the player's hand to the bottom of the player's library.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_draw_bottom",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -8259,6 +8424,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -8277,7 +8443,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their library, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Hands Within: Move a random card still in the player's hand to the bottom of the player's library."
         },
         {
           "id": "c",
@@ -8294,6 +8461,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 4 Ward."
         }
       ],
@@ -8375,6 +8543,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Growth damage."
         },
         {
@@ -8392,6 +8561,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 4 HP."
         },
         {
@@ -8410,6 +8580,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Growth damage. Trait — Silver Leaf-Fall: Add 2 hits of 2 Growth damage."
         }
       ],
@@ -8485,6 +8656,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -8503,6 +8675,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Memory damage. Trait — Drowsy Bargain: The player draws 1 fewer card on their next normal draw."
         }
       ],
@@ -8552,12 +8725,12 @@
       },
       "trait": {
         "name": "Follow the Sleepwalkers",
-        "effect": "On Lead the Procession: Apply 3 Weaken to the player.",
+        "effect": "On Lead the Procession: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -8582,6 +8755,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -8600,7 +8774,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -8608,7 +8783,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -8638,10 +8813,9 @@
         "type": "Frost",
         "direct_card_bonus": 2,
         "reason": "Frost cools the kiln's furnace.",
-        "available_direct_face_count": 3,
+        "available_direct_face_count": 2,
         "example_direct_faces": [
           "Frozen Lake",
-          "Ice Crystal",
           "Frozen Waterfall"
         ]
       },
@@ -8677,6 +8851,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Fire damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Fire damage."
         },
         {
@@ -8695,6 +8870,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Fire damage. Trait — Feed the Fire: Apply 2 Burn to the player."
         }
       ],
@@ -8743,12 +8919,12 @@
       },
       "trait": {
         "name": "Soot Veil",
-        "effect": "On Cast the Veil: Apply 3 Weaken to the player.",
+        "effect": "On Cast the Veil: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -8773,6 +8949,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage."
         },
         {
@@ -8791,7 +8968,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Decay damage. Trait — Soot Veil: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Decay damage. Trait — Soot Veil: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -8799,7 +8977,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -8866,6 +9044,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage."
         },
         {
@@ -8884,6 +9063,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Decay damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage. Trait — Hungry Table: The base attack has Leech."
         }
       ],
@@ -8924,12 +9104,12 @@
         "type": "Binding",
         "direct_card_bonus": 2,
         "reason": "Binding fixes the stilts in place.",
-        "available_direct_face_count": 10,
+        "available_direct_face_count": 11,
         "example_direct_faces": [
           "Fallen Bell",
           "Gravity",
-          "Stalactite",
-          "Sea Urchin"
+          "Royal Hound",
+          "Stalactite"
         ]
       },
       "trait": {
@@ -8963,6 +9143,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Release damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Release damage."
         },
         {
@@ -8981,6 +9162,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Release damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Release damage. Trait — Step Over: The base hit ignores up to 3 player Ward."
         }
       ],
@@ -9067,6 +9249,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Half-Drowned Day: After the player's next normal draw, turn their hand to its light faces."
         },
         {
@@ -9085,6 +9268,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Radiance damage. Trait — Half-Drowned Day: After the player's next normal draw, turn their hand to its dark faces."
         }
       ],
@@ -9152,16 +9336,17 @@
           "kind": "ability",
           "base": [
             {
-              "op": "mark",
-              "amount": 2,
-              "target": "player"
+              "op": "bless",
+              "amount": 1,
+              "target": "enemy"
             }
           ],
-          "effect": "Apply 2 Mark to the player.",
+          "effect": "Gain 1 Bless.",
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
-          "preview": "Apply 2 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Gain 1 Bless."
         },
         {
           "id": "b",
@@ -9179,6 +9364,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 6 Radiance damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Radiance damage. Trait — Sunstruck Glare: Add 2 Radiance damage to the base hit."
         }
       ],
@@ -9187,12 +9373,12 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Bless",
         "Radiance",
         "Shadow"
       ],
       "review_flags": [],
-      "thematic_reason": "The watching crocodile marks its quarry, while its radiant skin adds a separately labeled glare to the bite."
+      "thematic_reason": "The sun warms the waiting crocodile into strength for its next snap."
     },
     {
       "id": "the-tall-seamstress",
@@ -9225,14 +9411,14 @@
       },
       "trait": {
         "name": "Hem the Hand",
-        "effect": "On Close the Hem: The player puts 1 held card of their choice on the top of their library, if any.",
+        "effect": "On Close the Hem: Move a random card still in the player's hand to the top of the player's library.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_draw_top",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -9256,6 +9442,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -9274,7 +9461,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their library, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Hem the Hand: Move a random card still in the player's hand to the top of the player's library."
         }
       ],
       "pattern": [
@@ -9322,12 +9510,12 @@
       },
       "trait": {
         "name": "Tangled Welcome",
-        "effect": "On Offer the Tangle: Apply 3 Weaken to the player.",
+        "effect": "On Offer the Tangle: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -9352,6 +9540,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -9370,7 +9559,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -9378,7 +9568,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -9446,6 +9636,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage."
         },
         {
@@ -9464,6 +9655,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Decay damage. Trait — Heavy Feathers: The player draws 1 fewer card on their next normal draw."
         }
       ],
@@ -9544,6 +9736,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -9562,6 +9755,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Thorned Pages: After each of the player's direct attack cards, if this enemy survives, deal 1 Binding damage to the player. This is trait damage, not a base attack."
         }
       ],
@@ -9639,6 +9833,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage."
         },
         {
@@ -9657,6 +9852,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Decay damage. Trait — Fraying Court: Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
@@ -9734,6 +9930,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Binding damage."
         },
         {
@@ -9752,6 +9949,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Royal Choreography: Turn the cards still in the player's hand to their light faces."
         }
       ],
@@ -9798,14 +9996,14 @@
       },
       "trait": {
         "name": "Another Tooth",
-        "effect": "On Collect the Tooth: The player Banishes 1 held card of their choice, if any.",
+        "effect": "On Collect the Tooth: Banish a random card still in the player's hand.",
         "by_action": {
           "b": [
             {
               "op": "move_held",
               "amount": 1,
               "to": "player_banished",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -9829,6 +10027,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Decay damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Decay damage."
         },
         {
@@ -9847,7 +10046,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Decay damage. Trait — Another Tooth: The player Banishes 1 held card of their choice, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Decay damage. Trait — Another Tooth: Banish a random card still in the player's hand."
         }
       ],
       "pattern": [
@@ -9855,6 +10055,7 @@
         "b"
       ],
       "keywords": [
+        "Banish",
         "Growth",
         "Decay"
       ],
@@ -9928,6 +10129,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Binding damage."
         },
         {
@@ -9945,6 +10147,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 6 Ward."
         },
         {
@@ -9963,6 +10166,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Binding damage. Trait — Open Canopy: Add 2 hits of 2 Binding damage."
         }
       ],
@@ -10012,12 +10216,12 @@
       },
       "trait": {
         "name": "Unblinking Gaze",
-        "effect": "On Gather the Flock: Apply 3 Mark to the player.",
+        "effect": "On Gather the Flock: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "mark",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -10042,6 +10246,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Radiance damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Radiance damage."
         },
         {
@@ -10060,7 +10265,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 3 Mark to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -10068,12 +10274,12 @@
         "b"
       ],
       "keywords": [
-        "Mark",
+        "Curse",
         "Radiance",
         "Shadow"
       ],
       "review_flags": [],
-      "thematic_reason": "The enormous open eye marks a target for the crook instead of detecting a previous bottom-deck move."
+      "thematic_reason": "The eye and crook draw the player into the flock, constraining their next whole attack."
     },
     {
       "id": "the-unquiet-whelk",
@@ -10134,6 +10340,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -10152,6 +10359,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 3 Memory damage. Trait — Shell Echo: Add 1 hit of 2 Memory damage."
         },
         {
@@ -10169,6 +10377,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Gain 5 Ward."
         }
       ],
@@ -10248,6 +10457,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage."
         },
         {
@@ -10266,6 +10476,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage. Trait — Passing Shadow: The base hit ignores up to 3 player Ward."
         }
       ],
@@ -10312,12 +10523,12 @@
       },
       "trait": {
         "name": "Velvet Coil",
-        "effect": "On Tighten the Coil: Apply 3 Weaken to the player.",
+        "effect": "On Tighten the Coil: Apply 1 Curse to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -10342,6 +10553,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Binding damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Binding damage."
         },
         {
@@ -10360,7 +10572,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Velvet Coil: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Binding damage. Trait — Velvet Coil: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -10368,7 +10581,7 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Binding",
         "Release"
       ],
@@ -10398,12 +10611,12 @@
         "type": "Binding",
         "direct_card_bonus": 2,
         "reason": "Binding pins the digging claws and closes the tunnel.",
-        "available_direct_face_count": 10,
+        "available_direct_face_count": 11,
         "example_direct_faces": [
           "Fallen Bell",
           "Gravity",
-          "Stalactite",
-          "Sea Urchin"
+          "Royal Hound",
+          "Stalactite"
         ]
       },
       "trait": {
@@ -10437,6 +10650,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Release damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Release damage."
         },
         {
@@ -10455,6 +10669,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Release damage. Trait — Burrow Under: The base hit ignores up to 4 player Ward."
         }
       ],
@@ -10500,13 +10715,13 @@
       },
       "trait": {
         "name": "Remembered Courtesy",
-        "effect": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their library.",
+        "effect": "On Invite the Memory: Move the top 1 card of the player's discard pile to the top of their library.",
         "by_action": {
           "b": [
             {
               "op": "recover_to_top",
               "amount": 1,
-              "chooser": "player",
+              "chooser": "top_of_discard",
               "stage": "after_attack"
             }
           ]
@@ -10530,6 +10745,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -10548,7 +10764,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their library."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 3 Memory damage. Trait — Remembered Courtesy: Move the top 1 card of the player's discard pile to the top of their library."
         }
       ],
       "pattern": [
@@ -10587,16 +10804,15 @@
         "type": "Frost",
         "direct_card_bonus": 2,
         "reason": "Frost cools the ruler's burning wax.",
-        "available_direct_face_count": 3,
+        "available_direct_face_count": 2,
         "example_direct_faces": [
           "Frozen Lake",
-          "Ice Crystal",
           "Frozen Waterfall"
         ]
       },
       "trait": {
         "name": "Wax Seal",
-        "effect": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any.",
+        "effect": "On Pour the Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library.",
         "by_action": {
           "b": [
             {
@@ -10609,7 +10825,7 @@
               "op": "move_held",
               "amount": 1,
               "to": "player_draw_top",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -10633,6 +10849,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Fire damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Fire damage."
         },
         {
@@ -10651,7 +10868,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Fire damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library."
         }
       ],
       "pattern": [
@@ -10730,6 +10948,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Memory damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Memory damage."
         },
         {
@@ -10748,6 +10967,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 4 Memory damage. Trait — Whispered Names: Move the top 2 cards of the player's library to the player's discard pile."
         }
       ],
@@ -10786,10 +11006,9 @@
         "type": "Frost",
         "direct_card_bonus": 2,
         "reason": "Frost cools the exposed furnace core.",
-        "available_direct_face_count": 3,
+        "available_direct_face_count": 2,
         "example_direct_faces": [
           "Frozen Lake",
-          "Ice Crystal",
           "Frozen Waterfall"
         ]
       },
@@ -10825,6 +11044,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 6 Fire damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 6 Fire damage."
         },
         {
@@ -10843,6 +11063,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Fire damage. Trait — Open Furnace: Apply 3 Burn to the player."
         }
       ],
@@ -10893,12 +11114,12 @@
       },
       "trait": {
         "name": "Dreaming Cradle",
-        "effect": "On Murmur the Lullaby: Apply 3 Weaken to the player.",
+        "effect": "On Murmur the Lullaby: Apply 1 Curse to the player.",
         "by_action": {
           "c": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "curse",
+              "amount": 1,
               "target": "player",
               "stage": "after_attack"
             }
@@ -10923,6 +11144,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Growth damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Growth damage."
         },
         {
@@ -10940,6 +11162,7 @@
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Heal 4 HP."
         },
         {
@@ -10958,7 +11181,8 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 3 Weaken to the player."
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
+          "preview": "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 1 Curse to the player."
         }
       ],
       "pattern": [
@@ -10967,7 +11191,7 @@
         "c"
       ],
       "keywords": [
-        "Weaken",
+        "Curse",
         "Growth",
         "Decay"
       ],
@@ -11037,6 +11261,7 @@
           "trait_active": false,
           "hush_target": false,
           "hushed_effect": "Deal 5 Shadow damage. No suppressible effect in this intent.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage."
         },
         {
@@ -11055,6 +11280,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.",
+          "freeze_preview": "If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.",
           "preview": "Deal 5 Shadow damage. Trait — Widow Venom: Apply 3 Poison to the player."
         }
       ],

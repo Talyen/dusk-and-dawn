@@ -2,7 +2,7 @@
 from build import *
 from render import RULES,THOUGHTS,ImageCache
 from rules_contract import STATUS_POLICY
-from status_model import halve,apply_dot,tick_sequence,Combatant,end_turn_dots,Card,automatic_targets,keep_source,ScryView
+from status_model import halve,apply_dot,tick_sequence,Combatant,end_turn_dots,Card,automatic_targets,keep_source,ScryView,add_stacks,attack_damage,remove_statuses,frozen_action,resolve_attack_statuses
 import random
 from urllib.parse import unquote,urlsplit
 import base64,io
@@ -64,7 +64,7 @@ def validate():
  check(rules['keyword_rules']==RULES and rules['no_separate_theme_tags'] and rules['damage_types']==TYPES,'structured rule contract matches generation source')
  check(len(review['cards'])==496 and len(review['enemies'])==110 and all(x['reason'] and x['judgment']=='strong-fit-proposal' for x in review['cards']+review['enemies']),'606 individual thematic judgments and rationales')
  byface={c['face']:c['effect'] for c in cs}
- for name in [CARD+'.html',ENEMY+'.html',GAME+'.html','Full Content Review v0.1.html','Status and Targeting Revision v0.1.html']:
+ for name in [CARD+'.html',ENEMY+'.html',GAME+'.html','Full Content Review v0.1.html','Status and Targeting Revision v0.1.html','Bless Curse and Control Review v0.1.html']:
   path=DOCS/name;s=path.read_text();doc=Document();doc.feed(s)
   check(len(doc.ids)==len(set(doc.ids)),name+': unique HTML IDs')
   check(all(byface.get(n)==eff for n,eff in doc.effects),name+': embedded face examples match canonical text')
@@ -93,12 +93,12 @@ def validate():
  example('Moth Sun hit',18-6,12)
  example('Dentist extraction against five Ward',max(0,4-max(0,5-5)),4)
  example('Hushed Dentist against five Ward',max(0,4-5),0)
- example('Weaken choir first hit only',[max(0,2-3),2,2],[0,2,2])
- example('Weakened choir through three Ward',max(0,sum([0,2,2])-3),1)
+ example('Curse flat candidate affects the whole choir',attack_damage([2,2,2],0,1,'flat'),[1,1,1])
+ example('Cursed choir through two Ward',max(0,sum([1,1,1])-2),1)
  example('Leech final before Ward',min(30,26+4+2),30)
- example('Leech after Weaken',max(0,4+2-3),3)
+ example('Leech after Bless and Curse',attack_damage([4],1,2,'flat',weakness=2)[0],5)
  example('Reflected same final hit through attacker Ward',max(0,6-2),4)
- example('Prism weakness and Mark once',[2+2+3,2,2],[7,2,2])
+ example('Prism weakness once, Bless on every hit',attack_damage([2,2,2],3,0,'flat',weakness=2),[7,5,5])
  example('Burn halves after tick before mouth condition',3//2,1)
  example('Mana tax expires after refill',[3-1,3],[2,3])
  example('hand cap after three kept cards',min(5,8-3),5)
@@ -117,7 +117,16 @@ def validate():
  check(all(len([x for x in c['automatic_targets'] if x['op']==op])==len(re.findall(r'\b'+op+r'\b',c['effect'])) for c in cs for op in ['Keep','Flip','Turn']),'every Keep and Flip instruction has an explicit automatic target')
  check(all(c['effect'] in ['Keep this card.','Flip this card. Keep this card.'] for c in cs if 'Keep this card.' in c['effect']),'all current self-Keep effects leave the vacated source slot available')
  check(all(x['selection_prompts']==0 for c in cs for x in c['automatic_targets']),'automatic-target instructions expose zero selection prompts')
- check(all(not re.search(r'\b'+k+r'\b',current) and k not in RULES for k in ['Freeze','Curse','Bless','Purge','Cleanse']),'discussion candidates are not settled keywords or actual effects')
+ check(not re.search(r'\b(Mark|Weaken)\b',current) and 'Mark' not in RULES and 'Weaken' not in RULES,'retired keywords absent from current card/enemy effects and rule keys')
+ check(all(k in RULES and k in MECHANICS for k in ['Bless','Curse','Freeze','Purge','Cleanse']),'approved keyword directions present')
+ check(STATUS_POLICY['attack_modifiers']['final_scaling_decision'] is None,'flat versus percentage choice remains explicitly open')
+ check(STATUS_POLICY['Freeze']['thaw_on_attack'] is None and STATUS_POLICY['Freeze']['thaw_on_Fire'] is None,'no attack or Fire thaw rule was silently chosen')
+ check(all(not re.search(r'of your choice|chosen|select',c['effect']) and re.search(r'one random|all',c['effect']) for c in cs if 'Cleanse' in c['keywords'] or 'Purge' in c['keywords']),'Cleanse/Purge explicitly print random-one or all without selection prompts')
+ check(all(len([x for x in c['automatic_targets'] if x['op']==op])==len(re.findall(r'\b'+op+r'\b',c['effect'])) for c in cs for op in ['Cleanse','Purge']),'every Cleanse/Purge has indexed quantity and status-kind targeting')
+ check(all('undecided' in a['freeze_preview'] and 'If Freeze is still active' in a['freeze_preview'] for e in es for a in e['actions']),'all 243 enemy Freeze previews preserve the unresolved thaw condition')
+ check(all('of their choice' not in e['trait']['effect'] for e in es),'enemy held-card interactions no longer add selection prompts')
+ current_ops=[x['op'] for e in es for a in e['actions'] for x in a['base']]+[x['op'] for e in es for aa in e['trait']['by_action'].values() for x in aa]
+ check('mark' not in current_ops and 'weaken' not in current_ops,'retired structured operations migrated')
  check(len([c for c in cs if re.search(r'Apply \d+ Poison',c['effect'])])==6,'six individually themed Poison-applying faces')
  check([e['number'] for e in es if any(x['op']=='poison' for atoms in e['trait']['by_action'].values() for x in atoms)]==[64,79,110],'only the three reviewed mould/spider enemies apply Poison')
  for n in range(257):
@@ -156,6 +165,35 @@ def validate():
  library.extend(['first','next']);check(view.visible(library)=='first','Scry reveals a top supplied later in the turn')
  library.pop(0);check(view.visible(library)=='next','Scry follows the changed library top')
  view.end_turn();check(view.visible(library) is None,'Scry ends before end-turn operations')
+ # Candidate scaling, explicit stack consumption, removal kinds and unresolved thaw.
+ comparison=readjson(DOCS/'Bless Curse and Control Review v0.1.json')
+ check(len(comparison['selection_audit'])==496 and comparison['counts']['enemies_checked']==110,'all entries included in the scaling and prompt audit')
+ check(comparison['counts']['remaining_card_faces_with_selection_flags']==len([x for x in comparison['selection_audit'] if x['flags']]) and not comparison['remaining_enemy_prompts'],'remaining incidental choices are counted and exposed')
+ example('Bless and Curse really add stacks',add_stacks(2,3),5)
+ example('flat Blessed Prism',attack_damage([2,2,2],1,0,'flat'),[3,3,3])
+ example('flat Cursed Millipede',attack_damage([3,1,1,1,1],0,1,'flat'),[2,0,0,0,0])
+ example('25 percent Cursed Choir is unchanged',attack_damage([2,2,2],0,1,'percent25_nearest'),[2,2,2])
+ example('25 percent Millipede Curse 1 and 2 share a rounding plateau',attack_damage([3,1,1,1,1],0,1,'percent25_nearest'),attack_damage([3,1,1,1,1],0,2,'percent25_nearest'))
+ example('percentage candidate upper bound',attack_damage([11],99,0,'percent25_nearest'),[22])
+ example('percentage candidate zero floor',attack_damage([11],0,99,'percent25_nearest'),[0])
+ example('opposed stacks combine before rounding',attack_damage([2,3,6],3,3,'percent25_nearest'),[2,3,6])
+ buffs={'Bless':2,'Curse':20,'Burn':1};hits=resolve_attack_statuses(buffs,[2,2,2],'flat')
+ check(hits==[0,0,0] and buffs=={'Burn':1},'the next attack consumes all Bless/Curse even at zero, preserving other statuses')
+ try:attack_damage([3],1,0,None)
+ except ValueError:check(True,'reference model requires an explicit scaling candidate')
+ else:check(False,'reference model silently selected a numerical rule')
+ statuses={'Burn':7,'Curse':1,'Ward':8};chosen=remove_statuses(statuses,['Burn','Curse'],'one_random',random.Random(1))
+ check(len(chosen)==1 and chosen[0] not in statuses and statuses['Ward']==8,'one-random Cleanse removes an entire eligible kind only')
+ statuses={'Bless':3,'Ward':8,'Reflect':1,'Poison':2};chosen=remove_statuses(statuses,['Bless','Ward','Reflect'],'all',random.Random(1))
+ check(set(chosen)=={'Bless','Ward','Reflect'} and statuses=={'Poison':2},'Purge all clears positive statuses and preserves negative ones')
+ check(not remove_statuses({'Ward':4},['Burn','Curse'],'one_random',random.Random(2)),'empty eligible removal pool does nothing')
+ pool_counts=collections.Counter()
+ for seed in range(100):
+  statuses={'Burn':99,'Curse':1};pool_counts[remove_statuses(statuses,['Burn','Curse'],'one_random',random.Random(seed))[0]]+=1
+ check(set(pool_counts)=={'Burn','Curse'} and all(30<=v<=70 for v in pool_counts.values()),'random removal selects kinds without stack weighting')
+ check(frozen_action(True)=={'outcome':'skip','advance':True,'clear_Freeze':True},'uncontested Freeze skips exactly one scheduled action and advances')
+ check(frozen_action(False,'Fire')['outcome']=='act','an unrelated Fire event does not create an unresolved Freeze state')
+ check(all(frozen_action(True,event)['outcome']=='unresolved' for event in ['direct_attack','Fire']),'contested thaw events remain unresolved in reference previews')
  out={'status':'passed','date':'2026-11-03','check_count':len(checks),'checked':checks,'arithmetic_examples':examples,'limitations':['Static document/data validation and arithmetic boundary cases only.','Focused status/target reference model only; not a full combat engine, balance simulation, human playtest or full-resolution art review.','Local-file browser preview denied by policy; no workaround attempted. Rendering and interactive filters unverified.'],'counts':review['counts']}
  writejson(DOCS/'Content Validation v0.1.json',out)
  print(f"PASS: {len(checks)} focused checks, 606 source-artwork hashes, 41 sheets, 110 embedded thumbnails; no playtest claim.")

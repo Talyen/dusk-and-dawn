@@ -7,8 +7,8 @@ import json,re,html,hashlib,collections
 ROOT=Path(__file__).resolve().parents[2];DOCS=ROOT/'docs';HERE=Path(__file__).parent
 CARD='Dusk & Dawn — Card Effect Catalogue v0.2';ENEMY='Dusk & Dawn — Enemy Mechanics Catalogue v0.1';GAME='Dusk & Dawn — Game Design v0.2'
 TYPES=['Radiance','Shadow','Growth','Decay','Binding','Release','Fire','Frost','Memory','Oblivion']
-MECHANICS=['Ward','Burn','Poison','Flip','Banish','Scry','Mark','Weaken','Hush','Keep','Reflect','Leech']
-COLORS={'Radiance': '#F7D670', 'Shadow': '#C7AEF1', 'Growth': '#9DDA97', 'Decay': '#C7CD78', 'Binding': '#80D1BE', 'Release': '#7DDDEC', 'Fire': '#FFAD66', 'Frost': '#A8E5FA', 'Memory': '#B8C7FF', 'Oblivion': '#C5C5CD', 'Ward': '#8BCBFF', 'Burn': '#FF966B', 'Poison': '#B2D67C', 'Flip': '#D8ABFF', 'Banish': '#F3A5B6', 'Scry': '#86D8D0', 'Mark': '#FFB3A6', 'Weaken': '#D5C58A', 'Hush': '#B5BCD1', 'Keep': '#B6E1A8', 'Reflect': '#9DDDFF', 'Leech': '#EF9EAC'}
+MECHANICS=['Ward','Burn','Poison','Flip','Banish','Scry','Bless','Curse','Freeze','Cleanse','Purge','Hush','Keep','Reflect','Leech']
+COLORS={'Radiance': '#F7D670', 'Shadow': '#C7AEF1', 'Growth': '#9DDA97', 'Decay': '#C7CD78', 'Binding': '#80D1BE', 'Release': '#7DDDEC', 'Fire': '#FFAD66', 'Frost': '#A8E5FA', 'Memory': '#B8C7FF', 'Oblivion': '#C5C5CD', 'Ward': '#8BCBFF', 'Burn': '#FF966B', 'Poison': '#B2D67C', 'Flip': '#D8ABFF', 'Banish': '#F3A5B6', 'Scry': '#86D8D0', 'Bless': '#F5D58C', 'Curse': '#D4A2E4', 'Freeze':'#90CDEC', 'Cleanse':'#A4E5CF', 'Purge':'#F4B3A1', 'Hush': '#B5BCD1', 'Keep': '#B6E1A8', 'Reflect': '#9DDDFF', 'Leech': '#EF9EAC'}
 BASELINE=ROOT/'test-results/content-review-baseline'
 def readjson(p):return json.loads(p.read_text())
 def writejson(p,x):p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
@@ -27,6 +27,10 @@ def normalize(s):
 def automatic_target_index(effect):
  out=[]
  patterns=[
+  (r'Cleanse one random harmful status from yourself\.',{'op':'Cleanse','target':'random_harmful_self'}),
+  (r'Cleanse all harmful statuses from yourself\.',{'op':'Cleanse','target':'all_harmful_self'}),
+  (r'Purge one random beneficial status from the enemy\.',{'op':'Purge','target':'random_beneficial_enemy'}),
+  (r'Purge all beneficial statuses from the enemy\.',{'op':'Purge','target':'all_beneficial_enemy'}),
   (r'Keep this card\.',{'op':'Keep','target':'self'}),
   (r'Keep your hand\.',{'op':'Keep','target':'whole_hand'}),
   (r'Keep (a|\d+) random cards? in your hand\.',{'op':'Keep','target':'random_hand'}),
@@ -40,7 +44,9 @@ def automatic_target_index(effect):
  for pattern,base in patterns:
   for m in re.finditer(pattern,effect):
    row=dict(base,selection_prompts=0,at=m.start())
-   if 'random' in row['target']:row['count']=1 if m[1] in ['a','light','dark'] else int(m[1]);row['without_replacement']=True
+   if 'random' in row['target']:
+    row['count']=1 if row['op'] in ['Cleanse','Purge'] or m[1] in ['a','light','dark'] else int(m[1]);row['without_replacement']=True
+   if row['op'] in ['Cleanse','Purge']:row['unit']='status_kind';row['clear_entire_counter']=True
    if row['op']=='Turn':row['face']=m[2] if len(m.groups())==2 else m[1]
    out.append(row)
  return sorted(out,key=lambda x:x.pop('at'))
@@ -62,8 +68,8 @@ def atom(code,typ):
  if code.startswith('d') and code[1:].isdigit():return {'op':'damage','amount':int(code[1:]),'damage_type':typ,'hits':1}
  if code.startswith('w') and code[1:].isdigit():return {'op':'ward','amount':int(code[1:]),'target':'enemy'}
  if code.startswith('h') and code[1:].isdigit():return {'op':'heal','amount':int(code[1:]),'target':'enemy'}
- if code.startswith('m') and code[1:].isdigit():return {'op':'mark','amount':int(code[1:]),'target':'player'}
- if code.startswith('p') and code[1:].isdigit():return {'op':'weaken','amount':int(code[1:]),'target':'player'}
+ if code.startswith('s') and code[1:].isdigit():return {'op':'bless','amount':int(code[1:]),'target':'enemy'}
+ if code.startswith('p') and code[1:].isdigit():return {'op':'curse','amount':int(code[1:]),'target':'player'}
  if code.startswith('q') and code[1:].isdigit():return {'op':'move_top','amount':int(code[1:]),'from':'player_draw','to':'player_banished'}
  if code in ['dark','light']:return {'op':'turn_after_draw','face':code,'target':'player'}
  raise ValueError(('base',code))
@@ -77,8 +83,8 @@ def trait_atoms(spec,typ):
    damage,count=map(int,code[5:].split('x'));a={'op':'extra_hits','amount':damage,'count':count,'damage_type':typ,'stage':'attack'}
   elif code.startswith('bypass'):a={'op':'ignore_ward','amount':'all' if code[6:]=='all' else int(code[6:]),'stage':'before_attack'}
   elif code.startswith('strip'):a={'op':'remove_ward','amount':int(code[5:]),'target':'player','stage':'before_attack'}
-  elif code.startswith('weaken'):a={'op':'weaken','amount':int(code[6:]),'target':'player','stage':'after_attack'}
-  elif code.startswith('mark'):a={'op':'mark','amount':int(code[4:]),'target':'player','stage':'after_attack'}
+  elif code.startswith('curse'):a={'op':'curse','amount':int(code[5:]),'target':'player','stage':'after_attack'}
+  elif code.startswith('bless'):a={'op':'bless','amount':int(code[5:]),'target':'enemy','stage':'after_attack'}
   elif code.startswith('poison'):a={'op':'poison','amount':int(code[6:]),'target':'player','stage':'after_attack'}
   elif code.startswith('burn'):a={'op':'burn','amount':int(code[4:]),'target':'player','stage':'after_attack'}
   elif code.startswith('heal'):a={'op':'heal','amount':int(code[4:]),'target':'enemy','stage':'after_attack'}
@@ -88,17 +94,17 @@ def trait_atoms(spec,typ):
   elif code.startswith('mill'):a={'op':'move_top','amount':int(code[4:]),'from':'player_draw','to':'player_discard','stage':'after_attack'}
   elif code.startswith('bottom'):a={'op':'move_top','amount':int(code[6:]),'from':'player_draw','to':'player_draw_bottom','stage':'after_attack'}
   elif code.startswith('banish'):a={'op':'move_top','amount':int(code[6:]),'from':'player_draw','to':'player_banished','stage':'after_attack'}
-  elif code.startswith('keptbanish'):a={'op':'move_held','amount':int(code[10:]),'to':'player_banished','chooser':'player','stage':'after_attack'}
-  elif code.startswith('discard'):a={'op':'move_held','amount':int(code[7:]),'to':'player_discard','chooser':'player','stage':'after_attack'}
-  elif code.startswith('stow'):a={'op':'move_held','amount':int(code[4:]),'to':'player_draw_top','chooser':'player','stage':'after_attack'}
-  elif code.startswith('bury'):a={'op':'move_held','amount':int(code[4:]),'to':'player_draw_bottom','chooser':'player','stage':'after_attack'}
+  elif code.startswith('keptbanish'):a={'op':'move_held','amount':int(code[10:]),'to':'player_banished','chooser':'random','stage':'after_attack'}
+  elif code.startswith('discard'):a={'op':'move_held','amount':int(code[7:]),'to':'player_discard','chooser':'random','stage':'after_attack'}
+  elif code.startswith('stow'):a={'op':'move_held','amount':int(code[4:]),'to':'player_draw_top','chooser':'random','stage':'after_attack'}
+  elif code.startswith('bury'):a={'op':'move_held','amount':int(code[4:]),'to':'player_draw_bottom','chooser':'random','stage':'after_attack'}
   elif code.startswith('flip'):a={'op':'flip_held','amount':'all' if code[4:]=='all' else int(code[4:]),'chooser':'random','stage':'after_attack'}
   elif code=='lightnow':a={'op':'turn_held','face':'light','stage':'after_attack'}
   elif code in ['dark','light']:a={'op':'turn_after_draw','face':code,'target':'player','stage':'after_attack'}
   elif code=='leech':a={'op':'leech','stage':'attack'}
   elif code.startswith('slow'):a={'op':'reduce_next_draw','amount':int(code[4:]),'target':'player','stage':'after_attack'}
   elif code.startswith('tax'):a={'op':'reduce_next_mana','amount':int(code[3:]),'target':'player','stage':'after_attack'}
-  elif code.startswith('recur'):a={'op':'recover_to_top','amount':int(code[5:]),'chooser':'player','stage':'after_attack'}
+  elif code.startswith('recur'):a={'op':'recover_to_top','amount':int(code[5:]),'chooser':'top_of_discard','stage':'after_attack'}
   elif code=='copy3to8':a={'op':'copy_latest_hit','minimum':3,'maximum':8,'fallback':3,'stage':'before_attack'}
   elif code=='mirror':a={'op':'reflect_once','stage':'while_intent_displayed'}
   elif code.startswith('thorn'):a={'op':'reaction_damage','amount':int(code[5:]),'damage_type':typ,'event':'after_player_direct_attack_card','stage':'while_intent_displayed'}
@@ -112,8 +118,8 @@ def optext(a):
  if op=='damage':s=f"Deal {v} {a['damage_type']} damage."
  elif op=='ward':s=f'Gain {v} Ward.'
  elif op=='heal':s=f'Heal {v} HP.'
- elif op=='mark':s=f'Apply {v} Mark to the player.'
- elif op=='weaken':s=f'Apply {v} Weaken to the player.'
+ elif op=='bless':s=f'Gain {v} Bless.'
+ elif op=='curse':s=f'Apply {v} Curse to the player.'
  elif op=='poison':s=f'Apply {v} Poison to the player.'
  elif op=='remove_poison':s='Remove all enemy Poison.'
  elif op=='burn':s=f'Apply {v} Burn to the player.'
@@ -127,18 +133,19 @@ def optext(a):
   noun='card' if v==1 else 'cards'
   s=(f'Banish the top {v} {noun} of the player\'s library.' if dest=='Banish' else f'Move the top {v} {noun} of the player\'s library to {dest}.')
  elif op=='move_held':
-  noun='card' if v==1 else 'cards';dest={'player_discard':'their discard pile','player_draw_top':'the top of their library','player_draw_bottom':'the bottom of their library','player_banished':'Banish'}[a['to']]
-  tail=', if any.' if v==1 else ', or all held cards if fewer.'
-  if dest=='Banish':s=f'The player Banishes {v} held {noun} of their choice'+tail
-  elif a['to']=='player_discard':s=f'The player discards {v} held {noun} of their choice'+tail
-  else:s=f'The player puts {v} held {noun} of their choice on '+dest+tail
+  subject='a random card' if v==1 else f'{v} random cards'
+  tail='.' if v==1 else ', or all held cards if fewer.'
+  where=" still in the player's hand"
+  dest={'player_discard':"the player's discard pile",'player_draw_top':"the top of the player's library",'player_draw_bottom':"the bottom of the player's library",'player_banished':'Banish'}[a['to']]
+  if dest=='Banish':s=f'Banish {subject}{where}'+tail
+  else:s=f'Move {subject}{where} to {dest}'+tail
  elif op=='flip_held':s=('Flip all cards still in the player\'s hand.' if v=='all' else f'Flip {v} random card still in the player\'s hand, if any.')
  elif op=='turn_held':s=f"Turn the cards still in the player's hand to their {a['face']} faces."
  elif op=='turn_after_draw':s=f"After the player's next normal draw, turn their hand to its {a['face']} faces."
  elif op=='leech':s='The base attack has Leech.'
  elif op=='reduce_next_draw':s=f'The player draws {v} fewer card on their next normal draw.'
  elif op=='reduce_next_mana':s=f'The player starts their next turn with {v} less mana.'
- elif op=='recover_to_top':s=f'The player may put {v} card of their choice from their discard pile on top of their library.'
+ elif op=='recover_to_top':s=f'Move the top {v} card of the player\'s discard pile to the top of their library.'
  elif op=='copy_latest_hit':s='Use the latest direct hit\'s final damage this turn for the base hit: minimum 3, maximum 8. Use 3 if there was no direct hit.'
  elif op=='reflect_once':s='Reflect the first hit of the next direct card attack against this enemy. This ends when the hit is reflected or this intent ends.'
  elif op=='reaction_damage':s=f"After each of the player's direct attack cards, if this enemy survives, deal {v} {a['damage_type']} damage to the player. This is trait damage, not a base attack."
@@ -184,6 +191,7 @@ def enemies():
   trait={'name':tname,'effect':' '.join(texts),'by_action':keyed,'conditions_by_action':conditions}
   for a in actions:
    a['trait_active']=a['id'] in keyed;a['hush_target']=a['kind']=='ability' or a['trait_active'];a['hushed_effect']=hush_text(a) if a['hush_target'] else a['effect']+' No suppressible effect in this intent.'
+   a['freeze_preview']='If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.'
    a['preview']=a['effect']+(' Trait — '+tname+': '+traittext(keyed[a['id']],a['id'] in conditions) if a['trait_active'] else '')
   pattern=list(pattern.replace(' ',''));assert all(k in [a['id'] for a in actions] for k in pattern)
   flags=[]

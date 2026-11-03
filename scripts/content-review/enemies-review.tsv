@@ -1,36 +1,36 @@
 1|High Noon|b|bonus3|Crown Ray|d6|High Noon Ray|d6|Veil of Rays|w4|cab|The sun's rays intensify at noon; the veiling corona is an actual luminous screen.|Radiance
-2|Split Verdict|b|extra2x1|Glass Hand|d4|Prismatic Sentence|d5|Weigh the Accused|m2|cab|The scales single out a target, and the judge's divided glass sends a second ray after its reaching hand.|Radiance
-3|Empty Grasp|c|weaken2|Royal Reach|d6|Empty Decree|q1|Hollow Clutch|d7|abc|The empty king takes a future offering, while its long hollow hands sap the grasped figure's strength.|Shadow
-4|Black Tide|b|weaken3|Tendril Sweep|d6|Ink Surge|d5|-|-|ab|The visible ink cloud obscures aim; it does not need to identify which part of a shield was damaged.|Shadow
+2|Split Verdict|b|extra2x1|Glass Hand|d4|Prismatic Sentence|d5|Weigh the Accused|p1|cab|The judge’s scales pronounce an afflicting verdict on the accused; the divided glass still supplies a second ray.|Radiance
+3|Empty Grasp|c|curse1|Royal Reach|d6|Empty Decree|q1|Hollow Clutch|d7|abc|The empty king takes a future offering, while its long hollow hands sap the grasped figure's strength.|Shadow
+4|Black Tide|b|curse1|Tendril Sweep|d6|Ink Surge|d5|-|-|ab|The visible ink cloud obscures aim; it does not need to identify which part of a shield was damaged.|Shadow
 5|Falling Arch|c|extra2x1|Ivory Hand|d7|Living Buttress|w5|Archfall|d6|bac|The architectural body rebuilds a genuine buttress, then drops an additional piece after its hand strike.|Binding
 6|Swallow the Lantern|b|ifburn:clean,heal3|Dark Gulp|d6|Devour the Glow|d4|-|-|ab|The mouth eats the visible fire it carries; only an existing Burn supplies this feeding.|Shadow
-7|Root Snare|a|weaken2|Root Lash|d7|Draw from the Earth|h3|-|-|ba|The living roots nourish the tree and physically entangle the attacker's movement.|Growth
+7|Root Snare|a|curse1|Root Lash|d7|Draw from the Earth|h3|-|-|ba|The living roots nourish the tree and physically entangle the attacker's movement.|Growth
 8|Joining Voices|b|extra2x2|Porcelain Hands|d3|Chorus and Clutch|d2|-|-|ab|The hands make the base strike; two resonant voices add separate hits that Hush can still.|Binding
 9|Open Wings|b|bonus1|Folded-Wing Dust|d4|Open-Wing Dust|d4|-|-|ab|The larger spread of illuminated wings intensifies the same dust attack.|Radiance
-10|Seven Watches|b|mark3|Searching Beak|d5|Seven-Eyed Gaze|d3|-|-|ab|The seven visible eyes fix the next target; no retained-card history is needed.|Radiance
+10|Seven Watches|b|curse1|Searching Beak|d5|Seven-Eyed Gaze|d3|-|-|ab|The many-eyed glare dazes the observed player, afflicting the next whole attack.|Radiance
 11|Over the Guard|b|bypass3|Tumbling Kick|d4|Vaulting Kick|d5|-|-|ab|The acrobat vaults part of a frontal guard while retaining a normal bodily kick.|Release
-12|Amber Custody|b|weaken3|Resin Hand|d5|Amber Clasp|d4|Seal an Offering|q1|abc|Amber restrains a grasped limb and preserves one surrendered future card in a visible seal.|Binding
-13|Ashen Dust|b|weaken2,mill1|Ash Rake|d5|Scatter Ash|d4|-|-|ab|The scattered ash obscures aim and buries one approaching card in the spent pile.|Decay
+12|Amber Custody|b|curse1|Resin Hand|d5|Amber Clasp|d4|Seal an Offering|q1|abc|Amber restrains a grasped limb and preserves one surrendered future card in a visible seal.|Binding
+13|Ashen Dust|b|curse1,mill1|Ash Rake|d5|Scatter Ash|d4|-|-|ab|The scattered ash obscures aim and buries one approaching card in the spent pile.|Decay
 14|Tugged Hands|b|flip1|String Jerk|d5|Puppet Dance|d4|-|-|ab|The puppeteer's strings turn one of the cards the player actually still holds.|Binding
 15|Sweeping Orbit|b|extra3x1|Orbital Hand|d5|Swing the Spheres|d4|-|-|ab|A floating sphere follows the custodian's reaching hand as a second, larger sweep.|Radiance
 16|Drowned Prophecy|b|mill1|Oracle's Touch|d4|Foretold Drowning|d5|-|-|ab|The oracle reveals a coming card and sends it below into the discard pile; it does not remember a hidden physical identity.|Memory
-17|Closing Bell|b|weaken3|Bellflower Stem|d5|Ring the Blossoms|d4|-|-|ab|The hanging bellflowers ring out a calming, restraining cadence after the stem strike.|Growth
+17|Closing Bell|b|curse1|Bellflower Stem|d5|Ring the Blossoms|d4|-|-|ab|The hanging bellflowers ring out a calming, restraining cadence after the stem strike.|Growth
 18|Trailing Tendrils|b|extra1x2|Dark Bell|d4|Tendril Pulse|d4|-|-|ab|Two dangling stingers follow the jellyfish's first pulse regardless of whether Ward absorbed it.|Shadow
-19|Mud Spray|a|weaken2|Blackwater Charge|d7|Wallow|h4|-|-|ba|Wallowing restores the great beast; its charge throws obscuring mud rather than manufacturing armor.|Shadow
+19|Mud Spray|a|curse1|Blackwater Charge|d7|Wallow|h4|-|-|ba|Wallowing restores the great beast; its charge throws obscuring mud rather than manufacturing armor.|Shadow
 20|Another Circuit|b|bottom1|Carousel Hoof|d5|Round Again|d4|-|-|ab|The carousel carries the approaching card around to the far end of the draw pile.|Memory
 21|Flowering Blade|c|extra2x1|Petal Axe|d6|Open the Blossoms|h3|Floral Beheading|d6|bac|The living flowers renew themselves and add a separate petal cut to the executioner's physical axe.|Growth
-22|Marked Quarry|b|mark2|Blue Bite|d5|Moon Howl|d4|-|-|ab|The alert jackal calls attention to its quarry before the next bite.|Shadow
+22|Marked Quarry|b|bless1|Blue Bite|d5|Moon Howl|d4|-|-|ab|The moonlit howl gathers strength for the jackal’s next attack.|Shadow
 23|Redrawn Route|b|bottom2|Divider Point|d5|Change the Map|d4|-|-|ab|The cartographer reroutes the next two cards to the far end of the known path instead of comparing old play counts.|Memory
 24|Summer Rattle|b|extra1x3|Brass Mandibles|d3|Rattling Wings|d3|-|-|ab|The brass wings add a rapid series of three small rattling pulses.|Radiance
 25|Gathering Apron|b|stow1|Brass Embrace|d6|Gather the Apron|d5|-|-|ab|The matron tucks one still-held card into the next draw rather than copying an unrelated Ward total.|Binding
 26|Unfinished Phrase|b|recur1|Buried Fingers|d6|Play the Refrain|d4|-|-|ab|The buried melody brings one visible discarded card back to the next draw; this strange courtesy can help the player.|Memory
 27|Pooled Wax|b|ward3|Candle Scald|d5|Pour the Wax|d5|-|-|ab|The poured wax hardens into a fresh covering after the scald.|Fire
 28|Set the Hook|b|discard1|Star Hook|d5|Reel the Line|d4|-|-|ab|The line pulls away one card the player still holds; no previous health-damage flag is stored.|Binding
-29|Cellar Fumes|a|weaken2|Bitter Goblet|d6|Drink the Vintage|h4|-|-|aba|The vintage restores its drinker while its heavy fumes impair the opponent.|Decay
-30|Dustfall|b|weaken3|Chalk Hand|d6|Shake the Chalk|d5|-|-|ab|The giant sheds a cloud of chalk dust that interferes with aim.|Binding
-31|Geared Fan|c|extra2x1|Geared Peck|d5|Align the Tail|m2|Tail Sweep|d4|bca|The clockwork tail aligns a target and sweeps a second geared feather across it; no hidden winding counter escalates.|Binding
-32|Webbed Rigging|b|weaken3|Admiral's Saber|d5|Draw the Rigging|d4|-|-|ab|The visible cobweb ropes entangle the opponent's next attacking motion.|Binding
-33|Coin-Eyed Gaze|b|mark3|Gilded Antlers|d6|Fix the Gaze|d4|-|-|ab|The shining coin eyes hold a target in their attention.|Radiance
+29|Cellar Fumes|a|curse1|Bitter Goblet|d6|Drink the Vintage|h4|-|-|aba|The vintage restores its drinker while its heavy fumes impair the opponent.|Decay
+30|Dustfall|b|curse1|Chalk Hand|d6|Shake the Chalk|d5|-|-|ab|The giant sheds a cloud of chalk dust that interferes with aim.|Binding
+31|Geared Fan|c|extra2x1|Geared Peck|d5|Align the Tail|w3|Tail Sweep|d4|bca|Aligning the fan of gears interlocks it into a physical screen, before the peacock sweeps its segmented tail.|Binding
+32|Webbed Rigging|b|curse1|Admiral's Saber|d5|Draw the Rigging|d4|-|-|ab|The visible cobweb ropes entangle the opponent's next attacking motion.|Binding
+33|Coin-Eyed Gaze|b|curse1|Gilded Antlers|d6|Fix the Gaze|d4|-|-|ab|The coin-eyed gaze holds its viewer in a weakening fascination.|Radiance
 34|Falling Fragments|b|extra2x2|Moon Shard|d5|Split the Moon|d3|Darken the Sky|dark|cab|The cracked moon drops several fragments and its eclipse-like passage turns the following hand dark.|Memory
 35|Prism Flash|b|extra2x2|Crystal Horn|d5|Scatter the Rays|d4|Close the Shell|w4|cab|The beetle has a real shell, and its many facets add two separate rays to the horn's strike.|Radiance
 36|Submerged Arpeggio|b|extra1x2|Drowned Hands|d5|Play the Arpeggio|d4|-|-|ab|The physical hands remain dangerous while the haunting piano adds two audible notes.|Memory
@@ -38,23 +38,23 @@
 38|Closing Weave|b|stow2|Fog Needle|d5|Close the Loom|d4|-|-|ab|The crossing threads sew up to two actually held cards into the next draw's order.|Binding
 39|Refold|b|ward3|Paper Edge|d5|Fold the Shelter|d4|-|-|ab|The folded body adds new protective layers to itself rather than reacting to the player's Flip count.|Binding
 40|Filled Pouch|b|keptbanish1|Pelican Beak|d6|Scoop the Offering|d5|-|-|ab|The huge pouch swallows one still-held card for this fight; playing it before the scoop keeps it out of reach.|Radiance
-41|Green Fingers|a|weaken2|Glasshouse Briar|d6|Tend the Shoots|h4|Set the Glass|w3|bac a|The plants renew themselves and entangle a visitor, while the enclosing glass supplies actual cover.|Growth
+41|Green Fingers|a|curse1|Glasshouse Briar|d6|Tend the Shoots|h4|Set the Glass|w3|bac a|The plants renew themselves and entangle a visitor, while the enclosing glass supplies actual cover.|Growth
 42|Menagerie Procession|b|extra2x3|Gilded Hooves|d4|Loose the Menagerie|d3|-|-|ab|Several different gilded animals follow the first hoof strike in one procession.|Radiance
 43|Many Feet|b|extra1x4|Golden Mandibles|d4|March the Segments|d3|-|-|ab|The long row of legs creates four small follow-up footfalls without checking whether the first hit reached HP.|Binding
 44|Loose Scree|b|extra2x2|Gravel Hand|d5|Release the Scree|d4|Raise a Cairn|w4|cab|The falling gravel breaks into separate impacts, while the piled stones form a real barrier.|Binding
-45|Closing Mouth|b|weaken3|Anemone Tentacle|d5|Close the Tentacles|d4|-|-|ab|The soft living tentacles restrain movement rather than testing the player's kept-card history.|Growth
+45|Closing Mouth|b|curse1|Anemone Tentacle|d5|Close the Tentacles|d4|-|-|ab|The soft living tentacles restrain movement rather than testing the player's kept-card history.|Growth
 46|Empty Harvest|b|banish1|Hollow Sickle|d6|Reap Tomorrow|d5|-|-|ab|The harvester removes one future growth from the draw pile as a temporary harvest.|Decay
 47|Sticky Tribute|b|stow1|Honey Grip|d5|Close the Honey Trap|d4|-|-|ab|The sticky honey seals one actually held card into the next draw instead of demanding an unrelated Flip.|Binding
 48|Bounding Trail|b|bottom1|Inkbound Kick|d4|Leave an Ink Trail|d5|-|-|ab|The leaping ink body blots the immediate route and sends the approaching card around to the draw pile's bottom.|Shadow
 49|Extraction|b|strip5|Probe|d4|Pull|d4|-|-|ab|The pliers remove the guard immediately before the bodily pull; Hush stops extraction without erasing the 4-damage attack.|Release
-50|Tightening Knot|b|weaken3|Knotted Fist|d6|Tighten the Cords|d5|-|-|ab|The giant's cords constrain the opponent instead of gaining armor when an attack was blocked.|Binding
-51|Broadside Order|b|extra2x2|Lacquered Saber|d5|Fire the Broadside|d4|Signal the Fleet|m2|cab|The fleet's signal fixes a target and two shipboard shots follow the admiral's leading blow.|Binding
-52|Gathered Linen|a|weaken2|Linen Pounce|d6|Fold the Linen|w4|-|-|ba|The linen is both real covering and a cloth that catches the opponent's attacking limbs; no delayed charge is implied.|Binding
+50|Tightening Knot|b|curse1|Knotted Fist|d6|Tighten the Cords|d5|-|-|ab|The giant's cords constrain the opponent instead of gaining armor when an attack was blocked.|Binding
+51|Broadside Order|b|extra2x2|Lacquered Saber|d5|Fire the Broadside|d4|Signal the Fleet|s1|cab|The admiral’s signal coordinates and strengthens the next whole broadside. Bless is a combat boon, not a moral alignment.|Binding
+52|Gathered Linen|a|curse1|Linen Pounce|d6|Fold the Linen|w4|-|-|ba|The linen is both real covering and a cloth that catches the opponent's attacking limbs; no delayed charge is implied.|Binding
 53|Clean Sweep|b|clean,cleanpoison|Royal Mop|d5|Sweep the Floor|d4|-|-|ab|The janitor mops away burning residue and toxic contamination, without removing unrelated statuses.|Release
 54|Sedating Presence|b|slow1|Marble Needle|d4|Administer the Dose|d4|-|-|ab|The nurse's uncanny sedation reduces the next normal draw by one; Ward still only stops damage.|Binding
 55|Midday Mask|b|light|Solar Stare|d5|Present the Mask|d4|-|-|ab|The bright mask turns the next entire hand to its light faces, matching the noon-lit scene.|Radiance
 56|Tightrope Rebound|b|bypass2|Rope Kick|d5|Vault the Rope|d4|-|-|ab|The unmasked acrobat clears a small frontal guard with an explicit vault, not a remembered play count.|Release
-57|Pearl Glint|c|mark2|Shell Snap|d6|Close the Shell|w7|Show the Pearl|d4|bac|The shell is genuine protection, and the offered pearl catches the eye for the next attack.|Binding
+57|Pearl Glint|c|curse1|Shell Snap|d6|Close the Shell|w7|Show the Pearl|d4|bac|The bright pearl enthralls approaching prey after the shell’s snap.|Binding
 58|Closing Stitch|b|discard1|Midnight Needle|d5|Sew the Hem|d4|-|-|ab|The stitch catches and removes one card still held after discard.|Binding
 59|Mirrored Wing|b|mirror|Mirror Beak|d5|Raise the Mirror Wing|d4|-|-|ab|While the mirror wing is shown it reflects the next attack's first hit; the beak remains the physical base attack.|Radiance
 60|Twin Questions|b|extra3x1|Sphinx Claw|d5|Ask Both Sphinxes|d3|-|-|ab|The second mirrored sphinx supplies a second claw strike instead of remembering a previous opening card.|Memory
@@ -63,18 +63,18 @@
 63|Moth-Eaten Tribute|b|mill2|Tattered Scepter|d5|Loose the Moths|d4|-|-|ab|The moths consume the next two pages of the draw sequence into the spent pile.|Decay
 64|Mould Spores|c|poison2|Bony Fingers|d5|Pluck the Mould|h4|Pluck the Mould|d4|abc|The mould-coated harp throws toxic spores from its vibrating strings; Poison follows the visible fungal growth.|Growth
 65|Turning Step|b|lightnow|Noon Step|d5|Light Pirouette|d4|-|-|ab|The sunlit turn changes only the faces the player still holds; newly drawn cards are not secretly tracked.|Radiance
-66|Dive for Cover|b|bury1|Obsidian Bite|d5|Dive with the Prize|d4|-|-|ab|The otter carries one held card down to the draw pile's bottom instead of checking an unspent Mark.|Shadow
+66|Dive for Cover|b|bury1|Obsidian Bite|d5|Dive with the Prize|d4|-|-|ab|The otter carries one held card down to the draw pile's bottom instead of checking an unspent Bless.|Shadow
 67|Ripple of Light|b|extra1x3|Opal Mandibles|d5|Ripple the Segments|d3|-|-|ab|The opalescent segments add three small moving flashes to the leading bite.|Radiance
-68|Painted Touch|b|mark3|Painted Tusks|d6|Stamp the Pattern|d5|-|-|ab|The painted animal transfers a visible mark, rather than comparing a remembered physical card.|Memory
+68|Painted Touch|b|curse1|Painted Tusks|d6|Stamp the Pattern|d5|-|-|ab|The stamped painted pattern becomes a bodily affliction that hampers the next whole attack.|Memory
 69|Stolen Pigment|b|copy3to8|Pigment Beak|d3|Mimic the Stroke|d3|Repaint the Feathers|h3|abc|The painted raven copies the most recent attack's displayed strength this turn; preening restores its painted body.|Memory
 70|Nested Folds|b|ward3|Paper Tentacle|d5|Fold the Spiral|d4|-|-|ab|The paper shell gains protective layers through its own folding rather than counting the player's remaining cards.|Binding
 71|Pearl Levy|b|tax1|Levying Hand|d5|Collect the Pearl|d4|-|-|ab|The taxman takes one unit from the player's next mana refill, a real upcoming resource rather than already expiring Ward.|Binding
 72|Porcelain Splinters|b|extra2x1|Porcelain Bite|d5|Shattering Bite|d4|-|-|ab|One sharp porcelain fragment follows the physical bite; no HP-damage trigger is required.|Binding
 73|Drawing Current|b|bottom2|Sunlit Surge|d6|Turn the Current|d4|-|-|ab|The visible undertow carries the next two draw-pile cards away to the bottom.|Radiance
 74|Following the Baton|b|extra2x2|Baton Cut|d5|Bring in the Orchestra|d3|-|-|ab|Two musicians answer the conductor's leading motion without counting the player's card plays.|Binding
-75|Ribbon Formation|b|weaken3|Ribbon Lash|d5|Bind the Formation|d4|-|-|ab|The flying ribbons restrain the next attacking motion rather than converting absorbed damage into armor.|Binding
+75|Ribbon Formation|b|curse1|Ribbon Lash|d5|Bind the Formation|d4|-|-|ab|The flying ribbons restrain the next attacking motion rather than converting absorbed damage into armor.|Binding
 76|Root Pedal|b|extra2x1|Rooted Hands|d6|Sound the Organ|d4|Drink Deep|h3|cab|The roots draw nourishment and the organ adds a second low pulse after the fingers strike.|Growth
-77|Anchored Landing|b|weaken3|Anchored Kick|d5|Land in the Roots|d4|-|-|ab|The landing spreads roots that entangle the opponent instead of healing only when a shield blocked a hit.|Growth
+77|Anchored Landing|b|curse1|Anchored Kick|d5|Land in the Roots|d4|-|-|ab|The landing spreads roots that entangle the opponent instead of healing only when a shield blocked a hit.|Growth
 78|Turn the Key|b|bypassall|Sable Key|d5|Unlocking Thrust|d5|-|-|ab|The key passes through a locked guard; Hush stops that opening while the 5-damage thrust remains.|Binding
 79|Saffron Venom|b|poison2|Saffron Fang|d5|Venomous Bite|d4|-|-|ab|The huge spider delivers venom through its bite rather than manipulating an arbitrary held card.|Growth
 80|Crystalline Spires|c|extra2x2|Salt Shard|d5|Crystallize the Crown|w5|Raise the Spires|d4|bac|The dense crystal protects and its separate spires add two distinct strikes.|Binding
@@ -82,29 +82,29 @@
 82|Hands Within|b|bury1|Cabinet Slam|d5|Open the Hands|d4|Shut the Door|w4|cba|The wooden door is real cover; the hands hide one held card at the back of the draw pile.|Binding
 83|Silver Leaf-Fall|c|extra2x2|Silver Bough|d6|Harvest the Fruit|h4|Shake the Leaves|d4|abc|The fruit restores a fixed amount, while two sharp silver leaves follow the branch's impact.|Growth
 84|Drowsy Bargain|b|slow1|Dream Toll|d5|Offer the Sleep|d4|-|-|ab|The bottled sleep reduces attention and the next normal draw by one.|Memory
-85|Follow the Sleepwalkers|b|weaken3|Bridge Tilt|d5|Lead the Procession|d4|-|-|ab|The uncanny procession puts the traveler into a weakening trance without remembering which saved card was played.|Binding
+85|Follow the Sleepwalkers|b|curse1|Bridge Tilt|d5|Lead the Procession|d4|-|-|ab|The uncanny procession puts the traveler into a weakening trance without remembering which saved card was played.|Binding
 86|Feed the Fire|b|burn2|Kiln Breath|d6|Open the Firemouth|d5|-|-|ab|Real fire from the kiln leaves a Burn after the first breath.|Fire
-87|Soot Veil|b|weaken3|Soot Kiss|d5|Cast the Veil|d4|-|-|ab|The visible soot cloud interferes with the opponent's aim, independent of Scry.|Decay
+87|Soot Veil|b|curse1|Soot Kiss|d5|Cast the Veil|d4|-|-|ab|The visible soot cloud interferes with the opponent's aim, independent of Scry.|Decay
 88|Hungry Table|b|leech|Banquet Gnash|d5|Take the Feast|d5|-|-|ab|The great mouth feeds through Leech using the full attack amount before Ward, not HP actually lost.|Decay
 89|Step Over|b|bypass3|Stilt Stamp|d5|Stride Above the Guard|d5|-|-|ab|The long stilts step above part of a frontal guard without a threshold test on remaining Ward.|Release
 90|Half-Drowned Day|ab|a:light;b:dark|Rising Ray|d4|Sinking Ray|d4|-|-|ab|The half-submerged sun alternates the next hand's day and night faces; both physical rays remain Radiance attacks.|Radiance
-91|Sunstruck Glare|b|bonus2|Watch the Bank|m2|Sunstruck Snap|d6|-|-|ab|The watching crocodile marks its quarry, while its radiant skin adds a separately labeled glare to the bite.|Radiance
+91|Sunstruck Glare|b|bonus2|Watch the Bank|s1|Sunstruck Snap|d6|-|-|ab|The sun warms the waiting crocodile into strength for its next snap.|Radiance
 92|Hem the Hand|b|stow1|Tall Needle|d5|Close the Hem|d4|-|-|ab|The seamstress sews one held card into the top of the next draw rather than erasing it.|Binding
-93|Tangled Welcome|b|weaken3|Tangle Clutch|d5|Offer the Tangle|d4|-|-|ab|The looping body restrains an attacking motion without watching for repeated pairs.|Binding
+93|Tangled Welcome|b|curse1|Tangle Clutch|d5|Offer the Tangle|d4|-|-|ab|The looping body restrains an attacking motion without watching for repeated pairs.|Binding
 94|Heavy Feathers|b|slow1|Tar Beak|d5|Shed the Tar|d4|-|-|ab|The heavy sticky residue hinders the next draw instead of inspecting old retained-card snapshots.|Decay
 95|Thorned Pages|b|thorn1|Thorn Page|d5|Open the Brambles|d4|-|-|ab|While brambles are shown, each direct attack card provokes one thorn prick regardless of whether the hit met Ward.|Binding
 96|Fraying Court|b|mill1|Frayed Rapier|d5|Unravel the Hem|d4|-|-|ab|The ragged hem takes the next page out of the coming draw sequence and leaves it among spent scraps.|Decay
 97|Royal Choreography|b|lightnow|Golden Thread|d6|Arrange the Court|d4|-|-|ab|The monarch's golden strings impose one bright presentation on the cards actually still held, not a remembered three-card sequence.|Binding
 98|Another Tooth|b|keptbanish1|Tooth Hook|d5|Collect the Tooth|d4|-|-|ab|The collector takes one visibly held piece into its bag for this fight instead of reacting to a past HP payment.|Decay
 99|Open Canopy|c|extra2x2|Umbrella Rib|d6|Raise the Umbrellas|w6|Rain of Ribs|d4|bac|The canopies provide actual shelter and the many pointed ribs add separate strikes.|Binding
-100|Unblinking Gaze|b|mark3|Shepherd's Crook|d5|Gather the Flock|d4|-|-|ab|The enormous open eye marks a target for the crook instead of detecting a previous bottom-deck move.|Radiance
+100|Unblinking Gaze|b|curse1|Shepherd's Crook|d5|Gather the Flock|d4|-|-|ab|The eye and crook draw the player into the flock, constraining their next whole attack.|Radiance
 101|Shell Echo|b|extra2x1|Whelk Ridge|d5|Sound the Shell|d3|Withdraw|w5|cab|The hard shell shelters its owner and adds an audible echo after the leading ridge strike.|Memory
 102|Passing Shadow|b|bypass3|Unseen Hoof|d5|Pass Through|d5|-|-|ab|The negative-space horse phases part of the way through a guard; no Scry history is checked.|Shadow
-103|Velvet Coil|b|weaken3|Coiling Bite|d5|Tighten the Coil|d4|-|-|ab|The eel's long body constricts the next attacking motion rather than checking draw effects.|Binding
+103|Velvet Coil|b|curse1|Coiling Bite|d5|Tighten the Coil|d4|-|-|ab|The eel's long body constricts the next attacking motion rather than checking draw effects.|Binding
 104|Burrow Under|b|bypass4|Velvet Claw|d5|Tunnel Beneath|d4|-|-|ab|The digging claws come from below a frontal guard.|Release
 105|Remembered Courtesy|b|recur1|Velvet Finger|d5|Invite the Memory|d3|-|-|ab|The courtly skeleton invites a discarded memory back to the next draw; a dark figure can offer real help.|Memory
 106|Wax Seal|b|burn1,stow1|Regent's Scald|d5|Pour the Seal|d4|-|-|ab|Hot wax leaves a Burn and seals one held card into the next draw, without testing HP damage.|Fire
 107|Whispered Names|b|mill2|Casket Murmur|d5|Speak the Names|d4|-|-|ab|The whispers draw two coming cards into the spent past without tracking the identity of last turn's final card.|Memory
 108|Open Furnace|b|burn3|White Heat|d6|Expose the Core|d5|-|-|ab|The uncovered furnace leaves a strong continuing Burn; it need not ignore every possible shield.|Fire
-109|Dreaming Cradle|c|weaken3|Wicker Reach|d5|Sleep|h4|Murmur the Lullaby|d4|bac|The sleeper restores itself and its dream dulls the opponent's next attacking motion.|Growth
+109|Dreaming Cradle|c|curse1|Wicker Reach|d5|Sleep|h4|Murmur the Lullaby|d4|bac|The sleeper restores itself and its dream dulls the opponent's next attacking motion.|Growth
 110|Widow Venom|b|poison3|Velvet Fang|d5|Venomous Lunge|d5|-|-|ab|The widow’s spider limbs deliver a venomous strike; the toxin lingers after the base hit.|Shadow

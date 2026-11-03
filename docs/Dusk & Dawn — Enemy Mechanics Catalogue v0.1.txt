@@ -1,18 +1,22 @@
+Bless/Curse scaling: provisional flat preview; percentage choice open. Freeze thaw: undecided.
 DUSK & DAWN — ENEMY MECHANICS CATALOGUE v0.1
 110 independently authored action pools · working proposal
 All health and effect values require playtesting. No resistances. No separate theme tags.
 Hush: Suppress the enemy’s labeled trait through its next action. Skip a non-attack ability; an attack keeps its base hits. Advance the pattern normally.
-Leech: Heal for the attack’s final damage after bonuses and Weaken, before Ward. Count Ward absorption and overkill. Healing stops at maximum HP.
+Leech: Heal for the attack’s final damage after bonuses and Bless/Curse, before Ward. Count Ward absorption and overkill. Healing stops at maximum HP.
 
 001 Crowned Sun · 42 HP
   Weakness: Shadow. Shade breaks the sun's direct glare.
   Trait — High Noon: On High Noon Ray: Add 3 Radiance damage to the base hit.
   Crown Ray: Deal 6 Radiance damage.
     Hush: Deal 6 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   High Noon Ray: Deal 6 Radiance damage. Uses the trait.
     Hush: Deal 6 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Veil of Rays: Gain 4 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Veil of Rays → Crown Ray → High Noon Ray. Repeat.
   Artwork fit: The sun's rays intensify at noon; the veiling corona is an actual luminous screen.
 
@@ -21,32 +25,40 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Split Verdict: On Prismatic Sentence: Add 1 hit of 2 Radiance damage.
   Glass Hand: Deal 4 Radiance damage.
     Hush: Deal 4 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Prismatic Sentence: Deal 5 Radiance damage. Uses the trait.
     Hush: Deal 5 Radiance damage. Suppress the labeled trait. Advance the pattern.
-  Weigh the Accused: Apply 2 Mark to the player.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
+  Weigh the Accused: Apply 1 Curse to the player.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Weigh the Accused → Glass Hand → Prismatic Sentence. Repeat.
-  Artwork fit: The scales single out a target, and the judge's divided glass sends a second ray after its reaching hand.
+  Artwork fit: The judge’s scales pronounce an afflicting verdict on the accused; the divided glass still supplies a second ray.
 
 003 Hollow King · 48 HP
   Weakness: Radiance. Radiance illuminates the empty spaces beneath the crown.
-  Trait — Empty Grasp: On Hollow Clutch: Apply 2 Weaken to the player.
+  Trait — Empty Grasp: On Hollow Clutch: Apply 1 Curse to the player.
   Royal Reach: Deal 6 Shadow damage.
     Hush: Deal 6 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Empty Decree: Banish the top 1 card of the player's library.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Hollow Clutch: Deal 7 Shadow damage. Uses the trait.
     Hush: Deal 7 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Royal Reach → Empty Decree → Hollow Clutch. Repeat.
   Artwork fit: The empty king takes a future offering, while its long hollow hands sap the grasped figure's strength.
 
 004 Ink Leviathan · 48 HP
   Weakness: Radiance. Radiance exposes the ink-dark body.
-  Trait — Black Tide: On Ink Surge: Apply 3 Weaken to the player.
+  Trait — Black Tide: On Ink Surge: Apply 1 Curse to the player.
   Tendril Sweep: Deal 6 Shadow damage.
     Hush: Deal 6 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Ink Surge: Deal 5 Shadow damage. Uses the trait.
     Hush: Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tendril Sweep → Ink Surge. Repeat.
   Artwork fit: The visible ink cloud obscures aim; it does not need to identify which part of a shield was damaged.
 
@@ -55,10 +67,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Falling Arch: On Archfall: Add 1 hit of 2 Binding damage.
   Ivory Hand: Deal 7 Binding damage.
     Hush: Deal 7 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Living Buttress: Gain 5 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Archfall: Deal 6 Binding damage. Uses the trait.
     Hush: Deal 6 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Living Buttress → Ivory Hand → Archfall. Repeat.
   Artwork fit: The architectural body rebuilds a genuine buttress, then drops an additional piece after its hand strike.
 
@@ -67,18 +82,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Swallow the Lantern: On Devour the Glow: If the enemy has Burn after the tick, remove all its Burn and heal 3 HP.
   Dark Gulp: Deal 6 Shadow damage.
     Hush: Deal 6 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Devour the Glow: Deal 4 Shadow damage. Uses the trait.
     Hush: Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Dark Gulp → Devour the Glow. Repeat.
   Artwork fit: The mouth eats the visible fire it carries; only an existing Burn supplies this feeding.
 
 007 Mourning Tree · 36 HP
   Weakness: Decay. Decay withers the living roots.
-  Trait — Root Snare: On Root Lash: Apply 2 Weaken to the player.
+  Trait — Root Snare: On Root Lash: Apply 1 Curse to the player.
   Root Lash: Deal 7 Growth damage. Uses the trait.
     Hush: Deal 7 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Draw from the Earth: Heal 3 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Draw from the Earth → Root Lash. Repeat.
   Artwork fit: The living roots nourish the tree and physically entangle the attacker's movement.
 
@@ -87,8 +106,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Joining Voices: On Chorus and Clutch: Add 2 hits of 2 Binding damage.
   Porcelain Hands: Deal 3 Binding damage.
     Hush: Deal 3 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Chorus and Clutch: Deal 2 Binding damage. Uses the trait.
     Hush: Deal 2 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Porcelain Hands → Chorus and Clutch. Repeat.
   Artwork fit: The hands make the base strike; two resonant voices add separate hits that Hush can still.
 
@@ -97,50 +118,61 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Open Wings: On Open-Wing Dust: Add 1 Radiance damage to the base hit.
   Folded-Wing Dust: Deal 4 Radiance damage.
     Hush: Deal 4 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Open-Wing Dust: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Folded-Wing Dust → Open-Wing Dust. Repeat.
   Artwork fit: The larger spread of illuminated wings intensifies the same dust attack.
 
 010 Seven-Eyed Heron · 28 HP
   Weakness: Shadow. Shadow hides a target from its many eyes.
-  Trait — Seven Watches: On Seven-Eyed Gaze: Apply 3 Mark to the player.
+  Trait — Seven Watches: On Seven-Eyed Gaze: Apply 1 Curse to the player.
   Searching Beak: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Seven-Eyed Gaze: Deal 3 Radiance damage. Uses the trait.
     Hush: Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Searching Beak → Seven-Eyed Gaze. Repeat.
-  Artwork fit: The seven visible eyes fix the next target; no retained-card history is needed.
+  Artwork fit: The many-eyed glare dazes the observed player, afflicting the next whole attack.
 
 011 Sunbleached Harlequin · 24 HP
   Weakness: Binding. Binding arrests the jester's tumbling motion.
   Trait — Over the Guard: On Vaulting Kick: The base hit ignores up to 3 player Ward.
   Tumbling Kick: Deal 4 Release damage.
     Hush: Deal 4 Release damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Vaulting Kick: Deal 5 Release damage. Uses the trait.
     Hush: Deal 5 Release damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tumbling Kick → Vaulting Kick. Repeat.
   Artwork fit: The acrobat vaults part of a frontal guard while retaining a normal bodily kick.
 
 012 The Amber Bailiff · 32 HP
   Weakness: Release. Release frees what amber encloses.
-  Trait — Amber Custody: On Amber Clasp: Apply 3 Weaken to the player.
+  Trait — Amber Custody: On Amber Clasp: Apply 1 Curse to the player.
   Resin Hand: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Amber Clasp: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Seal an Offering: Banish the top 1 card of the player's library.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Resin Hand → Amber Clasp → Seal an Offering. Repeat.
   Artwork fit: Amber restrains a grasped limb and preserves one surrendered future card in a visible seal.
 
 013 The Ashen Gardener · 26 HP
   Weakness: Growth. Growth brings life back into the spent garden.
-  Trait — Ashen Dust: On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile.
+  Trait — Ashen Dust: On Scatter Ash: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile.
   Ash Rake: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Scatter Ash: Deal 4 Decay damage. Uses the trait.
     Hush: Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Ash Rake → Scatter Ash. Repeat.
   Artwork fit: The scattered ash obscures aim and buries one approaching card in the spent pile.
 
@@ -149,8 +181,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Tugged Hands: On Puppet Dance: Flip 1 random card still in the player's hand, if any.
   String Jerk: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Puppet Dance: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: String Jerk → Puppet Dance. Repeat.
   Artwork fit: The puppeteer's strings turn one of the cards the player actually still holds.
 
@@ -159,8 +193,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Sweeping Orbit: On Swing the Spheres: Add 1 hit of 3 Radiance damage.
   Orbital Hand: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Swing the Spheres: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Orbital Hand → Swing the Spheres. Repeat.
   Artwork fit: A floating sphere follows the custodian's reaching hand as a second, larger sweep.
 
@@ -169,18 +205,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Drowned Prophecy: On Foretold Drowning: Move the top 1 card of the player's library to the player's discard pile.
   Oracle's Touch: Deal 4 Memory damage.
     Hush: Deal 4 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Foretold Drowning: Deal 5 Memory damage. Uses the trait.
     Hush: Deal 5 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Oracle's Touch → Foretold Drowning. Repeat.
   Artwork fit: The oracle reveals a coming card and sends it below into the discard pile; it does not remember a hidden physical identity.
 
 017 The Bellflower Magistrate · 28 HP
   Weakness: Decay. Decay wilts the living bells.
-  Trait — Closing Bell: On Ring the Blossoms: Apply 3 Weaken to the player.
+  Trait — Closing Bell: On Ring the Blossoms: Apply 1 Curse to the player.
   Bellflower Stem: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Ring the Blossoms: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Bellflower Stem → Ring the Blossoms. Repeat.
   Artwork fit: The hanging bellflowers ring out a calming, restraining cadence after the stem strike.
 
@@ -189,18 +229,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Trailing Tendrils: On Tendril Pulse: Add 2 hits of 1 Shadow damage.
   Dark Bell: Deal 4 Shadow damage.
     Hush: Deal 4 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Tendril Pulse: Deal 4 Shadow damage. Uses the trait.
     Hush: Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Dark Bell → Tendril Pulse. Repeat.
   Artwork fit: Two dangling stingers follow the jellyfish's first pulse regardless of whether Ward absorbed it.
 
 019 The Blackwater Bison · 30 HP
   Weakness: Radiance. Radiance reveals the beast in black water.
-  Trait — Mud Spray: On Blackwater Charge: Apply 2 Weaken to the player.
+  Trait — Mud Spray: On Blackwater Charge: Apply 1 Curse to the player.
   Blackwater Charge: Deal 7 Shadow damage. Uses the trait.
     Hush: Deal 7 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Wallow: Heal 4 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Wallow → Blackwater Charge. Repeat.
   Artwork fit: Wallowing restores the great beast; its charge throws obscuring mud rather than manufacturing armor.
 
@@ -209,8 +253,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Another Circuit: On Round Again: Move the top 1 card of the player's library to the bottom of that pile.
   Carousel Hoof: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Round Again: Deal 4 Memory damage. Uses the trait.
     Hush: Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Carousel Hoof → Round Again. Repeat.
   Artwork fit: The carousel carries the approaching card around to the far end of the draw pile.
 
@@ -219,30 +265,37 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Flowering Blade: On Floral Beheading: Add 1 hit of 2 Growth damage.
   Petal Axe: Deal 6 Growth damage.
     Hush: Deal 6 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Open the Blossoms: Heal 3 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Floral Beheading: Deal 6 Growth damage. Uses the trait.
     Hush: Deal 6 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Open the Blossoms → Petal Axe → Floral Beheading. Repeat.
   Artwork fit: The living flowers renew themselves and add a separate petal cut to the executioner's physical axe.
 
 022 The Blue Jackal · 24 HP
   Weakness: Radiance. Radiance exposes the moonlit hunter.
-  Trait — Marked Quarry: On Moon Howl: Apply 2 Mark to the player.
+  Trait — Marked Quarry: On Moon Howl: Gain 1 Bless.
   Blue Bite: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Moon Howl: Deal 4 Shadow damage. Uses the trait.
     Hush: Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Blue Bite → Moon Howl. Repeat.
-  Artwork fit: The alert jackal calls attention to its quarry before the next bite.
+  Artwork fit: The moonlit howl gathers strength for the jackal’s next attack.
 
 023 The Bone Cartographer · 28 HP
   Weakness: Oblivion. Oblivion erases the route it has measured.
   Trait — Redrawn Route: On Change the Map: Move the top 2 cards of the player's library to the bottom of that pile.
   Divider Point: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Change the Map: Deal 4 Memory damage. Uses the trait.
     Hush: Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Divider Point → Change the Map. Repeat.
   Artwork fit: The cartographer reroutes the next two cards to the far end of the known path instead of comparing old play counts.
 
@@ -251,28 +304,34 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Summer Rattle: On Rattling Wings: Add 3 hits of 1 Radiance damage.
   Brass Mandibles: Deal 3 Radiance damage.
     Hush: Deal 3 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Rattling Wings: Deal 3 Radiance damage. Uses the trait.
     Hush: Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Brass Mandibles → Rattling Wings. Repeat.
   Artwork fit: The brass wings add a rapid series of three small rattling pulses.
 
 025 The Brass Matron · 28 HP
   Weakness: Release. Release loosens the rigid enclosure.
-  Trait — Gathering Apron: On Gather the Apron: The player puts 1 held card of their choice on the top of their library, if any.
+  Trait — Gathering Apron: On Gather the Apron: Move a random card still in the player's hand to the top of the player's library.
   Brass Embrace: Deal 6 Binding damage.
     Hush: Deal 6 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Gather the Apron: Deal 5 Binding damage. Uses the trait.
     Hush: Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Brass Embrace → Gather the Apron. Repeat.
   Artwork fit: The matron tucks one still-held card into the next draw rather than copying an unrelated Ward total.
 
 026 The Buried Violinist · 24 HP
   Weakness: Oblivion. Oblivion ends the tune that persists underground.
-  Trait — Unfinished Phrase: On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their library.
+  Trait — Unfinished Phrase: On Play the Refrain: Move the top 1 card of the player's discard pile to the top of their library.
   Buried Fingers: Deal 6 Memory damage.
     Hush: Deal 6 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Play the Refrain: Deal 4 Memory damage. Uses the trait.
     Hush: Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Buried Fingers → Play the Refrain. Repeat.
   Artwork fit: The buried melody brings one visible discarded card back to the next draw; this strange courtesy can help the player.
 
@@ -281,38 +340,46 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Pooled Wax: On Pour the Wax: Gain 3 Ward.
   Candle Scald: Deal 5 Fire damage.
     Hush: Deal 5 Fire damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pour the Wax: Deal 5 Fire damage. Uses the trait.
     Hush: Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Candle Scald → Pour the Wax. Repeat.
   Artwork fit: The poured wax hardens into a fresh covering after the scald.
 
 028 The Celestial Fisher · 28 HP
   Weakness: Release. Release slips the hook and slackens the line.
-  Trait — Set the Hook: On Reel the Line: The player discards 1 held card of their choice, if any.
+  Trait — Set the Hook: On Reel the Line: Move a random card still in the player's hand to the player's discard pile.
   Star Hook: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Reel the Line: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Star Hook → Reel the Line. Repeat.
   Artwork fit: The line pulls away one card the player still holds; no previous health-damage flag is stored.
 
 029 The Cellar Duchess · 30 HP
   Weakness: Growth. Growth renews the stale, enclosed cellar.
-  Trait — Cellar Fumes: On Bitter Goblet: Apply 2 Weaken to the player.
+  Trait — Cellar Fumes: On Bitter Goblet: Apply 1 Curse to the player.
   Bitter Goblet: Deal 6 Decay damage. Uses the trait.
     Hush: Deal 6 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Drink the Vintage: Heal 4 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Bitter Goblet → Drink the Vintage → Bitter Goblet. Repeat.
   Artwork fit: The vintage restores its drinker while its heavy fumes impair the opponent.
 
 030 The Chalk Giant · 36 HP
   Weakness: Release. Release crumbles the chalk structure.
-  Trait — Dustfall: On Shake the Chalk: Apply 3 Weaken to the player.
+  Trait — Dustfall: On Shake the Chalk: Apply 1 Curse to the player.
   Chalk Hand: Deal 6 Binding damage.
     Hush: Deal 6 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Shake the Chalk: Deal 5 Binding damage. Uses the trait.
     Hush: Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Chalk Hand → Shake the Chalk. Repeat.
   Artwork fit: The giant sheds a cloud of chalk dust that interferes with aim.
 
@@ -321,42 +388,52 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Geared Fan: On Tail Sweep: Add 1 hit of 2 Binding damage.
   Geared Peck: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
-  Align the Tail: Apply 2 Mark to the player.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
+  Align the Tail: Gain 3 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Tail Sweep: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Align the Tail → Tail Sweep → Geared Peck. Repeat.
-  Artwork fit: The clockwork tail aligns a target and sweeps a second geared feather across it; no hidden winding counter escalates.
+  Artwork fit: Aligning the fan of gears interlocks it into a physical screen, before the peacock sweeps its segmented tail.
 
 032 The Cobweb Admiral · 30 HP
   Weakness: Release. Release parts the rigging and webbing.
-  Trait — Webbed Rigging: On Draw the Rigging: Apply 3 Weaken to the player.
+  Trait — Webbed Rigging: On Draw the Rigging: Apply 1 Curse to the player.
   Admiral's Saber: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Draw the Rigging: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Admiral's Saber → Draw the Rigging. Repeat.
   Artwork fit: The visible cobweb ropes entangle the opponent's next attacking motion.
 
 033 The Coin-Eyed Stag · 28 HP
   Weakness: Shadow. Shadow conceals a target from the shining coin eyes.
-  Trait — Coin-Eyed Gaze: On Fix the Gaze: Apply 3 Mark to the player.
+  Trait — Coin-Eyed Gaze: On Fix the Gaze: Apply 1 Curse to the player.
   Gilded Antlers: Deal 6 Radiance damage.
     Hush: Deal 6 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Fix the Gaze: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Gilded Antlers → Fix the Gaze. Repeat.
-  Artwork fit: The shining coin eyes hold a target in their attention.
+  Artwork fit: The coin-eyed gaze holds its viewer in a weakening fascination.
 
 034 The Cracked Moon · 42 HP
   Weakness: Oblivion. Oblivion removes the moon's familiar returning shape.
   Trait — Falling Fragments: On Split the Moon: Add 2 hits of 2 Memory damage.
   Moon Shard: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Split the Moon: Deal 3 Memory damage. Uses the trait.
     Hush: Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Darken the Sky: After the player's next normal draw, turn their hand to its dark faces.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Darken the Sky → Moon Shard → Split the Moon. Repeat.
   Artwork fit: The cracked moon drops several fragments and its eclipse-like passage turns the following hand dark.
 
@@ -365,10 +442,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Prism Flash: On Scatter the Rays: Add 2 hits of 2 Radiance damage.
   Crystal Horn: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Scatter the Rays: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Close the Shell: Gain 4 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Close the Shell → Crystal Horn → Scatter the Rays. Repeat.
   Artwork fit: The beetle has a real shell, and its many facets add two separate rays to the horn's strike.
 
@@ -377,8 +457,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Submerged Arpeggio: On Play the Arpeggio: Add 2 hits of 1 Memory damage.
   Drowned Hands: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Play the Arpeggio: Deal 4 Memory damage. Uses the trait.
     Hush: Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Drowned Hands → Play the Arpeggio. Repeat.
   Artwork fit: The physical hands remain dangerous while the haunting piano adds two audible notes.
 
@@ -387,18 +469,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Reel In: On Pull the Guard: Remove up to 4 player Ward before the base hit.
   Dusk Hook: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pull the Guard: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Dusk Hook → Pull the Guard. Repeat.
   Artwork fit: The hook pulls a barrier aside immediately before the same line strikes.
 
 038 The Fogbound Weaver · 28 HP
   Weakness: Release. Release loosens the supporting threads.
-  Trait — Closing Weave: On Close the Loom: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer.
+  Trait — Closing Weave: On Close the Loom: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer.
   Fog Needle: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Close the Loom: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Fog Needle → Close the Loom. Repeat.
   Artwork fit: The crossing threads sew up to two actually held cards into the next draw's order.
 
@@ -407,30 +493,37 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Refold: On Fold the Shelter: Gain 3 Ward.
   Paper Edge: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Fold the Shelter: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Paper Edge → Fold the Shelter. Repeat.
   Artwork fit: The folded body adds new protective layers to itself rather than reacting to the player's Flip count.
 
 040 The Gilded Pelican · 30 HP
   Weakness: Shadow. Shadow dims the pelican's brilliant silhouette.
-  Trait — Filled Pouch: On Scoop the Offering: The player Banishes 1 held card of their choice, if any.
+  Trait — Filled Pouch: On Scoop the Offering: Banish a random card still in the player's hand.
   Pelican Beak: Deal 6 Radiance damage.
     Hush: Deal 6 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Scoop the Offering: Deal 5 Radiance damage. Uses the trait.
     Hush: Deal 5 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Pelican Beak → Scoop the Offering. Repeat.
   Artwork fit: The huge pouch swallows one still-held card for this fight; playing it before the scoop keeps it out of reach.
 
 041 The Glasshouse Matriarch · 36 HP
   Weakness: Decay. Decay withers the sheltered growth.
-  Trait — Green Fingers: On Glasshouse Briar: Apply 2 Weaken to the player.
+  Trait — Green Fingers: On Glasshouse Briar: Apply 1 Curse to the player.
   Glasshouse Briar: Deal 6 Growth damage. Uses the trait.
     Hush: Deal 6 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Tend the Shoots: Heal 4 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Set the Glass: Gain 3 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tend the Shoots → Glasshouse Briar → Set the Glass → Glasshouse Briar. Repeat.
   Artwork fit: The plants renew themselves and entangle a visitor, while the enclosing glass supplies actual cover.
 
@@ -439,8 +532,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Menagerie Procession: On Loose the Menagerie: Add 3 hits of 2 Radiance damage.
   Gilded Hooves: Deal 4 Radiance damage.
     Hush: Deal 4 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Loose the Menagerie: Deal 3 Radiance damage. Uses the trait.
     Hush: Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Gilded Hooves → Loose the Menagerie. Repeat.
   Artwork fit: Several different gilded animals follow the first hoof strike in one procession.
 
@@ -449,8 +544,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Many Feet: On March the Segments: Add 4 hits of 1 Binding damage.
   Golden Mandibles: Deal 4 Binding damage.
     Hush: Deal 4 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   March the Segments: Deal 3 Binding damage. Uses the trait.
     Hush: Deal 3 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Golden Mandibles → March the Segments. Repeat.
   Artwork fit: The long row of legs creates four small follow-up footfalls without checking whether the first hit reached HP.
 
@@ -459,20 +556,25 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Loose Scree: On Release the Scree: Add 2 hits of 2 Binding damage.
   Gravel Hand: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Release the Scree: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Raise a Cairn: Gain 4 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Raise a Cairn → Gravel Hand → Release the Scree. Repeat.
   Artwork fit: The falling gravel breaks into separate impacts, while the piled stones form a real barrier.
 
 045 The Hollow Anemone · 26 HP
   Weakness: Decay. Decay wilts its living tentacles.
-  Trait — Closing Mouth: On Close the Tentacles: Apply 3 Weaken to the player.
+  Trait — Closing Mouth: On Close the Tentacles: Apply 1 Curse to the player.
   Anemone Tentacle: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Close the Tentacles: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Anemone Tentacle → Close the Tentacles. Repeat.
   Artwork fit: The soft living tentacles restrain movement rather than testing the player's kept-card history.
 
@@ -481,18 +583,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Empty Harvest: On Reap Tomorrow: Banish the top 1 card of the player's library.
   Hollow Sickle: Deal 6 Decay damage.
     Hush: Deal 6 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Reap Tomorrow: Deal 5 Decay damage. Uses the trait.
     Hush: Deal 5 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Hollow Sickle → Reap Tomorrow. Repeat.
   Artwork fit: The harvester removes one future growth from the draw pile as a temporary harvest.
 
 047 The Honey Tyrant · 36 HP
   Weakness: Release. Release frees a target from sticky honey.
-  Trait — Sticky Tribute: On Close the Honey Trap: The player puts 1 held card of their choice on the top of their library, if any.
+  Trait — Sticky Tribute: On Close the Honey Trap: Move a random card still in the player's hand to the top of the player's library.
   Honey Grip: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Close the Honey Trap: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Honey Grip → Close the Honey Trap. Repeat.
   Artwork fit: The sticky honey seals one actually held card into the next draw instead of demanding an unrelated Flip.
 
@@ -501,8 +607,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Bounding Trail: On Leave an Ink Trail: Move the top 1 card of the player's library to the bottom of that pile.
   Inkbound Kick: Deal 4 Shadow damage.
     Hush: Deal 4 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Leave an Ink Trail: Deal 5 Shadow damage. Uses the trait.
     Hush: Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Inkbound Kick → Leave an Ink Trail. Repeat.
   Artwork fit: The leaping ink body blots the immediate route and sends the approaching card around to the draw pile's bottom.
 
@@ -511,18 +619,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Extraction: On Pull: Remove up to 5 player Ward before the base hit.
   Probe: Deal 4 Release damage.
     Hush: Deal 4 Release damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pull: Deal 4 Release damage. Uses the trait.
     Hush: Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Probe → Pull. Repeat.
   Artwork fit: The pliers remove the guard immediately before the bodily pull; Hush stops extraction without erasing the 4-damage attack.
 
 050 The Knotted Giant · 36 HP
   Weakness: Release. Release loosens the knots holding the giant together.
-  Trait — Tightening Knot: On Tighten the Cords: Apply 3 Weaken to the player.
+  Trait — Tightening Knot: On Tighten the Cords: Apply 1 Curse to the player.
   Knotted Fist: Deal 6 Binding damage.
     Hush: Deal 6 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Tighten the Cords: Deal 5 Binding damage. Uses the trait.
     Hush: Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Knotted Fist → Tighten the Cords. Repeat.
   Artwork fit: The giant's cords constrain the opponent instead of gaining armor when an attack was blocked.
 
@@ -531,20 +643,25 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Broadside Order: On Fire the Broadside: Add 2 hits of 2 Binding damage.
   Lacquered Saber: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Fire the Broadside: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
-  Signal the Fleet: Apply 2 Mark to the player.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
+  Signal the Fleet: Gain 1 Bless.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Signal the Fleet → Lacquered Saber → Fire the Broadside. Repeat.
-  Artwork fit: The fleet's signal fixes a target and two shipboard shots follow the admiral's leading blow.
+  Artwork fit: The admiral’s signal coordinates and strengthens the next whole broadside. Bless is a combat boon, not a moral alignment.
 
 052 The Linen Lioness · 30 HP
   Weakness: Release. Release unravels the cloth body.
-  Trait — Gathered Linen: On Linen Pounce: Apply 2 Weaken to the player.
+  Trait — Gathered Linen: On Linen Pounce: Apply 1 Curse to the player.
   Linen Pounce: Deal 6 Binding damage. Uses the trait.
     Hush: Deal 6 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Fold the Linen: Gain 4 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Fold the Linen → Linen Pounce. Repeat.
   Artwork fit: The linen is both real covering and a cloth that catches the opponent's attacking limbs; no delayed charge is implied.
 
@@ -553,8 +670,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Clean Sweep: On Sweep the Floor: Remove all enemy Burn. Remove all enemy Poison.
   Royal Mop: Deal 5 Release damage.
     Hush: Deal 5 Release damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Sweep the Floor: Deal 4 Release damage. Uses the trait.
     Hush: Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Royal Mop → Sweep the Floor. Repeat.
   Artwork fit: The janitor mops away burning residue and toxic contamination, without removing unrelated statuses.
 
@@ -563,8 +682,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Sedating Presence: On Administer the Dose: The player draws 1 fewer card on their next normal draw.
   Marble Needle: Deal 4 Binding damage.
     Hush: Deal 4 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Administer the Dose: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Marble Needle → Administer the Dose. Repeat.
   Artwork fit: The nurse's uncanny sedation reduces the next normal draw by one; Ward still only stops damage.
 
@@ -573,8 +694,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Midday Mask: On Present the Mask: After the player's next normal draw, turn their hand to its light faces.
   Solar Stare: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Present the Mask: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Solar Stare → Present the Mask. Repeat.
   Artwork fit: The bright mask turns the next entire hand to its light faces, matching the noon-lit scene.
 
@@ -583,30 +706,37 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Tightrope Rebound: On Vault the Rope: The base hit ignores up to 2 player Ward.
   Rope Kick: Deal 5 Release damage.
     Hush: Deal 5 Release damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Vault the Rope: Deal 4 Release damage. Uses the trait.
     Hush: Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Rope Kick → Vault the Rope. Repeat.
   Artwork fit: The unmasked acrobat clears a small frontal guard with an explicit vault, not a remembered play count.
 
 057 The Midnight Oyster · 30 HP
   Weakness: Release. Release prises the shell apart.
-  Trait — Pearl Glint: On Show the Pearl: Apply 2 Mark to the player.
+  Trait — Pearl Glint: On Show the Pearl: Apply 1 Curse to the player.
   Shell Snap: Deal 6 Binding damage.
     Hush: Deal 6 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Close the Shell: Gain 7 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Show the Pearl: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Close the Shell → Shell Snap → Show the Pearl. Repeat.
-  Artwork fit: The shell is genuine protection, and the offered pearl catches the eye for the next attack.
+  Artwork fit: The bright pearl enthralls approaching prey after the shell’s snap.
 
 058 The Midnight Tailor · 28 HP
   Weakness: Release. Release cuts the thread and opens the seam.
-  Trait — Closing Stitch: On Sew the Hem: The player discards 1 held card of their choice, if any.
+  Trait — Closing Stitch: On Sew the Hem: Move a random card still in the player's hand to the player's discard pile.
   Midnight Needle: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Sew the Hem: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Midnight Needle → Sew the Hem. Repeat.
   Artwork fit: The stitch catches and removes one card still held after discard.
 
@@ -615,8 +745,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Mirrored Wing: While Raise the Mirror Wing is shown: Reflect the first hit of the next direct card attack against this enemy. This ends when the hit is reflected or this intent ends.
   Mirror Beak: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Raise the Mirror Wing: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Mirror Beak → Raise the Mirror Wing. Repeat.
   Artwork fit: While the mirror wing is shown it reflects the next attack's first hit; the beak remains the physical base attack.
 
@@ -625,8 +757,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Twin Questions: On Ask Both Sphinxes: Add 1 hit of 3 Memory damage.
   Sphinx Claw: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Ask Both Sphinxes: Deal 3 Memory damage. Uses the trait.
     Hush: Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Sphinx Claw → Ask Both Sphinxes. Repeat.
   Artwork fit: The second mirrored sphinx supplies a second claw strike instead of remembering a previous opening card.
 
@@ -635,10 +769,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Stolen Morrow: On Escape into Dusk: Move the top 2 cards of the player's library to the bottom of that pile.
   Dawn Snatch: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Steal Tomorrow: Banish the top 1 card of the player's library.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Escape into Dusk: Deal 4 Shadow damage. Uses the trait.
     Hush: Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Dawn Snatch → Steal Tomorrow → Escape into Dusk. Repeat.
   Artwork fit: The thief takes one future card and conceals the next approach while escaping.
 
@@ -647,8 +784,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Moss Drinks: On Let the Moss Drink: Heal 3 HP.
   Mossback Club: Deal 6 Growth damage.
     Hush: Deal 6 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Let the Moss Drink: Deal 5 Growth damage. Uses the trait.
     Hush: Deal 5 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Mossback Club → Let the Moss Drink. Repeat.
   Artwork fit: The wet moss renews its own body directly, without copying the player's healing.
 
@@ -657,8 +796,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Moth-Eaten Tribute: On Loose the Moths: Move the top 2 cards of the player's library to the player's discard pile.
   Tattered Scepter: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Loose the Moths: Deal 4 Decay damage. Uses the trait.
     Hush: Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tattered Scepter → Loose the Moths. Repeat.
   Artwork fit: The moths consume the next two pages of the draw sequence into the spent pile.
 
@@ -667,10 +808,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Mould Spores: On Pluck the Mould: Apply 2 Poison to the player.
   Bony Fingers: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pluck the Mould: Heal 4 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pluck the Mould: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Bony Fingers → Pluck the Mould → Pluck the Mould. Repeat.
   Artwork fit: The mould-coated harp throws toxic spores from its vibrating strings; Poison follows the visible fungal growth.
 
@@ -679,50 +823,61 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Turning Step: On Light Pirouette: Turn the cards still in the player's hand to their light faces.
   Noon Step: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Light Pirouette: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Noon Step → Light Pirouette. Repeat.
   Artwork fit: The sunlit turn changes only the faces the player still holds; newly drawn cards are not secretly tracked.
 
 066 The Obsidian Otter · 24 HP
   Weakness: Radiance. Radiance reveals the animal beneath the dark water.
-  Trait — Dive for Cover: On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their library, if any.
+  Trait — Dive for Cover: On Dive with the Prize: Move a random card still in the player's hand to the bottom of the player's library.
   Obsidian Bite: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Dive with the Prize: Deal 4 Shadow damage. Uses the trait.
     Hush: Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Obsidian Bite → Dive with the Prize. Repeat.
-  Artwork fit: The otter carries one held card down to the draw pile's bottom instead of checking an unspent Mark.
+  Artwork fit: The otter carries one held card down to the draw pile's bottom instead of checking an unspent Bless.
 
 067 The Opal Centipede · 30 HP
   Weakness: Shadow. Shadow dulls its many reflective segments.
   Trait — Ripple of Light: On Ripple the Segments: Add 3 hits of 1 Radiance damage.
   Opal Mandibles: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Ripple the Segments: Deal 3 Radiance damage. Uses the trait.
     Hush: Deal 3 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Opal Mandibles → Ripple the Segments. Repeat.
   Artwork fit: The opalescent segments add three small moving flashes to the leading bite.
 
 068 The Painted Elephant · 36 HP
   Weakness: Oblivion. Oblivion erases the pattern the elephant remembers.
-  Trait — Painted Touch: On Stamp the Pattern: Apply 3 Mark to the player.
+  Trait — Painted Touch: On Stamp the Pattern: Apply 1 Curse to the player.
   Painted Tusks: Deal 6 Memory damage.
     Hush: Deal 6 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Stamp the Pattern: Deal 5 Memory damage. Uses the trait.
     Hush: Deal 5 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Painted Tusks → Stamp the Pattern. Repeat.
-  Artwork fit: The painted animal transfers a visible mark, rather than comparing a remembered physical card.
+  Artwork fit: The stamped painted pattern becomes a bodily affliction that hampers the next whole attack.
 
 069 The Painted Raven · 26 HP
   Weakness: Oblivion. Oblivion wipes away the raven's collected colors.
   Trait — Stolen Pigment: On Mimic the Stroke: Use the latest direct hit's final damage this turn for the base hit: minimum 3, maximum 8. Use 3 if there was no direct hit.
   Pigment Beak: Deal 3 Memory damage.
     Hush: Deal 3 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Mimic the Stroke: Deal 3 Memory damage. Uses the trait.
     Hush: Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Repaint the Feathers: Heal 3 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Pigment Beak → Mimic the Stroke → Repaint the Feathers. Repeat.
   Artwork fit: The painted raven copies the most recent attack's displayed strength this turn; preening restores its painted body.
 
@@ -731,8 +886,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Nested Folds: On Fold the Spiral: Gain 3 Ward.
   Paper Tentacle: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Fold the Spiral: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Paper Tentacle → Fold the Spiral. Repeat.
   Artwork fit: The paper shell gains protective layers through its own folding rather than counting the player's remaining cards.
 
@@ -741,8 +898,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Pearl Levy: On Collect the Pearl: The player starts their next turn with 1 less mana.
   Levying Hand: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Collect the Pearl: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Levying Hand → Collect the Pearl. Repeat.
   Artwork fit: The taxman takes one unit from the player's next mana refill, a real upcoming resource rather than already expiring Ward.
 
@@ -751,8 +910,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Porcelain Splinters: On Shattering Bite: Add 1 hit of 2 Binding damage.
   Porcelain Bite: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Shattering Bite: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Porcelain Bite → Shattering Bite. Repeat.
   Artwork fit: One sharp porcelain fragment follows the physical bite; no HP-damage trigger is required.
 
@@ -761,8 +922,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Drawing Current: On Turn the Current: Move the top 2 cards of the player's library to the bottom of that pile.
   Sunlit Surge: Deal 6 Radiance damage.
     Hush: Deal 6 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Turn the Current: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Sunlit Surge → Turn the Current. Repeat.
   Artwork fit: The visible undertow carries the next two draw-pile cards away to the bottom.
 
@@ -771,18 +934,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Following the Baton: On Bring in the Orchestra: Add 2 hits of 2 Binding damage.
   Baton Cut: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Bring in the Orchestra: Deal 3 Binding damage. Uses the trait.
     Hush: Deal 3 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Baton Cut → Bring in the Orchestra. Repeat.
   Artwork fit: Two musicians answer the conductor's leading motion without counting the player's card plays.
 
 075 The Ribbon General · 34 HP
   Weakness: Release. Release parts the commander's ribbons.
-  Trait — Ribbon Formation: On Bind the Formation: Apply 3 Weaken to the player.
+  Trait — Ribbon Formation: On Bind the Formation: Apply 1 Curse to the player.
   Ribbon Lash: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Bind the Formation: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Ribbon Lash → Bind the Formation. Repeat.
   Artwork fit: The flying ribbons restrain the next attacking motion rather than converting absorbed damage into armor.
 
@@ -791,20 +958,25 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Root Pedal: On Sound the Organ: Add 1 hit of 2 Growth damage.
   Rooted Hands: Deal 6 Growth damage.
     Hush: Deal 6 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Sound the Organ: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Drink Deep: Heal 3 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Drink Deep → Rooted Hands → Sound the Organ. Repeat.
   Artwork fit: The roots draw nourishment and the organ adds a second low pulse after the fingers strike.
 
 077 The Rooted Acrobat · 28 HP
   Weakness: Decay. Decay withers the anchoring roots.
-  Trait — Anchored Landing: On Land in the Roots: Apply 3 Weaken to the player.
+  Trait — Anchored Landing: On Land in the Roots: Apply 1 Curse to the player.
   Anchored Kick: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Land in the Roots: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Anchored Kick → Land in the Roots. Repeat.
   Artwork fit: The landing spreads roots that entangle the opponent instead of healing only when a shield blocked a hit.
 
@@ -813,8 +985,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Turn the Key: On Unlocking Thrust: The base hit ignores all player Ward.
   Sable Key: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Unlocking Thrust: Deal 5 Binding damage. Uses the trait.
     Hush: Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Sable Key → Unlocking Thrust. Repeat.
   Artwork fit: The key passes through a locked guard; Hush stops that opening while the 5-damage thrust remains.
 
@@ -823,8 +997,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Saffron Venom: On Venomous Bite: Apply 2 Poison to the player.
   Saffron Fang: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Venomous Bite: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Saffron Fang → Venomous Bite. Repeat.
   Artwork fit: The huge spider delivers venom through its bite rather than manipulating an arbitrary held card.
 
@@ -833,10 +1009,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Crystalline Spires: On Raise the Spires: Add 2 hits of 2 Binding damage.
   Salt Shard: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Crystallize the Crown: Gain 5 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Raise the Spires: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Crystallize the Crown → Salt Shard → Raise the Spires. Repeat.
   Artwork fit: The dense crystal protects and its separate spires add two distinct strikes.
 
@@ -845,20 +1024,25 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Borrowed Gesture: On Borrow the Hands: Flip all cards still in the player's hand.
   Shadow String: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Borrow the Hands: Deal 4 Shadow damage. Uses the trait.
     Hush: Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Shadow String → Borrow the Hands. Repeat.
   Artwork fit: The puppeteer turns the actual held cards into their opposite gestures.
 
 082 The Shivering Cabinet · 28 HP
   Weakness: Release. Release opens the cabinet's confinement.
-  Trait — Hands Within: On Open the Hands: The player puts 1 held card of their choice on the bottom of their library, if any.
+  Trait — Hands Within: On Open the Hands: Move a random card still in the player's hand to the bottom of the player's library.
   Cabinet Slam: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Open the Hands: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Shut the Door: Gain 4 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Shut the Door → Open the Hands → Cabinet Slam. Repeat.
   Artwork fit: The wooden door is real cover; the hands hide one held card at the back of the draw pile.
 
@@ -867,10 +1051,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Silver Leaf-Fall: On Shake the Leaves: Add 2 hits of 2 Growth damage.
   Silver Bough: Deal 6 Growth damage.
     Hush: Deal 6 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Harvest the Fruit: Heal 4 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Shake the Leaves: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Silver Bough → Harvest the Fruit → Shake the Leaves. Repeat.
   Artwork fit: The fruit restores a fixed amount, while two sharp silver leaves follow the branch's impact.
 
@@ -879,18 +1066,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Drowsy Bargain: On Offer the Sleep: The player draws 1 fewer card on their next normal draw.
   Dream Toll: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Offer the Sleep: Deal 4 Memory damage. Uses the trait.
     Hush: Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Dream Toll → Offer the Sleep. Repeat.
   Artwork fit: The bottled sleep reduces attention and the next normal draw by one.
 
 085 The Sleepwalking Bridge · 34 HP
   Weakness: Release. Release breaks the compulsory procession.
-  Trait — Follow the Sleepwalkers: On Lead the Procession: Apply 3 Weaken to the player.
+  Trait — Follow the Sleepwalkers: On Lead the Procession: Apply 1 Curse to the player.
   Bridge Tilt: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Lead the Procession: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Bridge Tilt → Lead the Procession. Repeat.
   Artwork fit: The uncanny procession puts the traveler into a weakening trance without remembering which saved card was played.
 
@@ -899,18 +1090,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Feed the Fire: On Open the Firemouth: Apply 2 Burn to the player.
   Kiln Breath: Deal 6 Fire damage.
     Hush: Deal 6 Fire damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Open the Firemouth: Deal 5 Fire damage. Uses the trait.
     Hush: Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Kiln Breath → Open the Firemouth. Repeat.
   Artwork fit: Real fire from the kiln leaves a Burn after the first breath.
 
 087 The Soot Bride · 26 HP
   Weakness: Growth. Growth restores what the soot has blighted.
-  Trait — Soot Veil: On Cast the Veil: Apply 3 Weaken to the player.
+  Trait — Soot Veil: On Cast the Veil: Apply 1 Curse to the player.
   Soot Kiss: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Cast the Veil: Deal 4 Decay damage. Uses the trait.
     Hush: Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Soot Kiss → Cast the Veil. Repeat.
   Artwork fit: The visible soot cloud interferes with the opponent's aim, independent of Scry.
 
@@ -919,8 +1114,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Hungry Table: On Take the Feast: The base attack has Leech.
   Banquet Gnash: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Take the Feast: Deal 5 Decay damage. Uses the trait.
     Hush: Deal 5 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Banquet Gnash → Take the Feast. Repeat.
   Artwork fit: The great mouth feeds through Leech using the full attack amount before Ward, not HP actually lost.
 
@@ -929,8 +1126,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Step Over: On Stride Above the Guard: The base hit ignores up to 3 player Ward.
   Stilt Stamp: Deal 5 Release damage.
     Hush: Deal 5 Release damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Stride Above the Guard: Deal 5 Release damage. Uses the trait.
     Hush: Deal 5 Release damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Stilt Stamp → Stride Above the Guard. Repeat.
   Artwork fit: The long stilts step above part of a frontal guard without a threshold test on remaining Ward.
 
@@ -939,38 +1138,46 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Half-Drowned Day: On Rising Ray: After the player's next normal draw, turn their hand to its light faces. On Sinking Ray: After the player's next normal draw, turn their hand to its dark faces.
   Rising Ray: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Sinking Ray: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Rising Ray → Sinking Ray. Repeat.
   Artwork fit: The half-submerged sun alternates the next hand's day and night faces; both physical rays remain Radiance attacks.
 
 091 The Sunstruck Crocodile · 32 HP
   Weakness: Shadow. Shadow deprives its sunlit charge of a clear target.
   Trait — Sunstruck Glare: On Sunstruck Snap: Add 2 Radiance damage to the base hit.
-  Watch the Bank: Apply 2 Mark to the player.
+  Watch the Bank: Gain 1 Bless.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Sunstruck Snap: Deal 6 Radiance damage. Uses the trait.
     Hush: Deal 6 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Watch the Bank → Sunstruck Snap. Repeat.
-  Artwork fit: The watching crocodile marks its quarry, while its radiant skin adds a separately labeled glare to the bite.
+  Artwork fit: The sun warms the waiting crocodile into strength for its next snap.
 
 092 The Tall Seamstress · 28 HP
   Weakness: Release. Release cuts the long seam.
-  Trait — Hem the Hand: On Close the Hem: The player puts 1 held card of their choice on the top of their library, if any.
+  Trait — Hem the Hand: On Close the Hem: Move a random card still in the player's hand to the top of the player's library.
   Tall Needle: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Close the Hem: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tall Needle → Close the Hem. Repeat.
   Artwork fit: The seamstress sews one held card into the top of the next draw rather than erasing it.
 
 093 The Tangle Guest · 28 HP
   Weakness: Release. Release untangles the guest's woven body.
-  Trait — Tangled Welcome: On Offer the Tangle: Apply 3 Weaken to the player.
+  Trait — Tangled Welcome: On Offer the Tangle: Apply 1 Curse to the player.
   Tangle Clutch: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Offer the Tangle: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tangle Clutch → Offer the Tangle. Repeat.
   Artwork fit: The looping body restrains an attacking motion without watching for repeated pairs.
 
@@ -979,8 +1186,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Heavy Feathers: On Shed the Tar: The player draws 1 fewer card on their next normal draw.
   Tar Beak: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Shed the Tar: Deal 4 Decay damage. Uses the trait.
     Hush: Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tar Beak → Shed the Tar. Repeat.
   Artwork fit: The heavy sticky residue hinders the next draw instead of inspecting old retained-card snapshots.
 
@@ -989,8 +1198,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Thorned Pages: While Open the Brambles is shown: After each of the player's direct attack cards, if this enemy survives, deal 1 Binding damage to the player. This is trait damage, not a base attack.
   Thorn Page: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Open the Brambles: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Thorn Page → Open the Brambles. Repeat.
   Artwork fit: While brambles are shown, each direct attack card provokes one thorn prick regardless of whether the hit met Ward.
 
@@ -999,8 +1210,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Fraying Court: On Unravel the Hem: Move the top 1 card of the player's library to the player's discard pile.
   Frayed Rapier: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Unravel the Hem: Deal 4 Decay damage. Uses the trait.
     Hush: Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Frayed Rapier → Unravel the Hem. Repeat.
   Artwork fit: The ragged hem takes the next page out of the coming draw sequence and leaves it among spent scraps.
 
@@ -1009,18 +1222,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Royal Choreography: On Arrange the Court: Turn the cards still in the player's hand to their light faces.
   Golden Thread: Deal 6 Binding damage.
     Hush: Deal 6 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Arrange the Court: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Golden Thread → Arrange the Court. Repeat.
   Artwork fit: The monarch's golden strings impose one bright presentation on the cards actually still held, not a remembered three-card sequence.
 
 098 The Tooth Collector · 26 HP
   Weakness: Growth. Growth restores what has been extracted and lost.
-  Trait — Another Tooth: On Collect the Tooth: The player Banishes 1 held card of their choice, if any.
+  Trait — Another Tooth: On Collect the Tooth: Banish a random card still in the player's hand.
   Tooth Hook: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Collect the Tooth: Deal 4 Decay damage. Uses the trait.
     Hush: Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Tooth Hook → Collect the Tooth. Repeat.
   Artwork fit: The collector takes one visibly held piece into its bag for this fight instead of reacting to a past HP payment.
 
@@ -1029,32 +1246,40 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Open Canopy: On Rain of Ribs: Add 2 hits of 2 Binding damage.
   Umbrella Rib: Deal 6 Binding damage.
     Hush: Deal 6 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Raise the Umbrellas: Gain 6 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Rain of Ribs: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Raise the Umbrellas → Umbrella Rib → Rain of Ribs. Repeat.
   Artwork fit: The canopies provide actual shelter and the many pointed ribs add separate strikes.
 
 100 The Unblinking Shepherd · 32 HP
   Weakness: Shadow. Shadow conceals a stray from its unblinking eye.
-  Trait — Unblinking Gaze: On Gather the Flock: Apply 3 Mark to the player.
+  Trait — Unblinking Gaze: On Gather the Flock: Apply 1 Curse to the player.
   Shepherd's Crook: Deal 5 Radiance damage.
     Hush: Deal 5 Radiance damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Gather the Flock: Deal 4 Radiance damage. Uses the trait.
     Hush: Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Shepherd's Crook → Gather the Flock. Repeat.
-  Artwork fit: The enormous open eye marks a target for the crook instead of detecting a previous bottom-deck move.
+  Artwork fit: The eye and crook draw the player into the flock, constraining their next whole attack.
 
 101 The Unquiet Whelk · 28 HP
   Weakness: Oblivion. Oblivion ends the sea-echo held in the shell.
   Trait — Shell Echo: On Sound the Shell: Add 1 hit of 2 Memory damage.
   Whelk Ridge: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Sound the Shell: Deal 3 Memory damage. Uses the trait.
     Hush: Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Withdraw: Gain 5 Ward.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Withdraw → Whelk Ridge → Sound the Shell. Repeat.
   Artwork fit: The hard shell shelters its owner and adds an audible echo after the leading ridge strike.
 
@@ -1063,18 +1288,22 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Passing Shadow: On Pass Through: The base hit ignores up to 3 player Ward.
   Unseen Hoof: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pass Through: Deal 5 Shadow damage. Uses the trait.
     Hush: Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Unseen Hoof → Pass Through. Repeat.
   Artwork fit: The negative-space horse phases part of the way through a guard; no Scry history is checked.
 
 103 The Velvet Eel · 26 HP
   Weakness: Release. Release slips the eel's encircling coils.
-  Trait — Velvet Coil: On Tighten the Coil: Apply 3 Weaken to the player.
+  Trait — Velvet Coil: On Tighten the Coil: Apply 1 Curse to the player.
   Coiling Bite: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Tighten the Coil: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Coiling Bite → Tighten the Coil. Repeat.
   Artwork fit: The eel's long body constricts the next attacking motion rather than checking draw effects.
 
@@ -1083,28 +1312,34 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Burrow Under: On Tunnel Beneath: The base hit ignores up to 4 player Ward.
   Velvet Claw: Deal 5 Release damage.
     Hush: Deal 5 Release damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Tunnel Beneath: Deal 4 Release damage. Uses the trait.
     Hush: Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Velvet Claw → Tunnel Beneath. Repeat.
   Artwork fit: The digging claws come from below a frontal guard.
 
 105 The Velvet Skeleton · 24 HP
   Weakness: Oblivion. Oblivion releases the remembered courtly gesture.
-  Trait — Remembered Courtesy: On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their library.
+  Trait — Remembered Courtesy: On Invite the Memory: Move the top 1 card of the player's discard pile to the top of their library.
   Velvet Finger: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Invite the Memory: Deal 3 Memory damage. Uses the trait.
     Hush: Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Velvet Finger → Invite the Memory. Repeat.
   Artwork fit: The courtly skeleton invites a discarded memory back to the next draw; a dark figure can offer real help.
 
 106 The Wax Regent · 36 HP
   Weakness: Frost. Frost cools the ruler's burning wax.
-  Trait — Wax Seal: On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any.
+  Trait — Wax Seal: On Pour the Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library.
   Regent's Scald: Deal 5 Fire damage.
     Hush: Deal 5 Fire damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pour the Seal: Deal 4 Fire damage. Uses the trait.
     Hush: Deal 4 Fire damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Regent's Scald → Pour the Seal. Repeat.
   Artwork fit: Hot wax leaves a Burn and seals one held card into the next draw, without testing HP damage.
 
@@ -1113,8 +1348,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Whispered Names: On Speak the Names: Move the top 2 cards of the player's library to the player's discard pile.
   Casket Murmur: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Speak the Names: Deal 4 Memory damage. Uses the trait.
     Hush: Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Casket Murmur → Speak the Names. Repeat.
   Artwork fit: The whispers draw two coming cards into the spent past without tracking the identity of last turn's final card.
 
@@ -1123,20 +1360,25 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Open Furnace: On Expose the Core: Apply 3 Burn to the player.
   White Heat: Deal 6 Fire damage.
     Hush: Deal 6 Fire damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Expose the Core: Deal 5 Fire damage. Uses the trait.
     Hush: Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: White Heat → Expose the Core. Repeat.
   Artwork fit: The uncovered furnace leaves a strong continuing Burn; it need not ignore every possible shield.
 
 109 The Wicker Sleeper · 26 HP
   Weakness: Decay. Decay rots the cradle's living plant fibers.
-  Trait — Dreaming Cradle: On Murmur the Lullaby: Apply 3 Weaken to the player.
+  Trait — Dreaming Cradle: On Murmur the Lullaby: Apply 1 Curse to the player.
   Wicker Reach: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Sleep: Heal 4 HP.
     Hush: Skip this ability. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Murmur the Lullaby: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Sleep → Wicker Reach → Murmur the Lullaby. Repeat.
   Artwork fit: The sleeper restores itself and its dream dulls the opponent's next attacking motion.
 
@@ -1145,7 +1387,9 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Widow Venom: On Venomous Lunge: Apply 3 Poison to the player.
   Velvet Fang: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Venomous Lunge: Deal 5 Shadow damage. Uses the trait.
     Hush: Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.
+    Freeze: If Freeze is still active: skip this whole action and advance the pattern. Thaw conditions are undecided.
   Pattern: Velvet Fang → Venomous Lunge. Repeat.
   Artwork fit: The widow’s spider limbs deliver a venomous strike; the toxin lingers after the base hit.

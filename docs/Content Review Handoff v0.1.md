@@ -1,4 +1,4 @@
-> Historical integration handoff for the first full review. The current [status and targeting revision](Status%20and%20Targeting%20Revision%20v0.1.html) supersedes the earlier Ward/Burn/Scry/Keep/Flip rules and validation count quoted below. Current counts are in Content Validation v0.1.json.
+> Historical integration handoff for the first full review. The current [Bless/Curse and control review](Bless%20Curse%20and%20Control%20Review%20v0.1.html) and [status revision](Status%20and%20Targeting%20Revision%20v0.1.html) supersedes the earlier Ward/Burn/Scry/Keep/Flip rules and validation count quoted below. Current counts are in Content Validation v0.1.json.
 
 # Content review handoff
 

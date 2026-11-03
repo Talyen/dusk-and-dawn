@@ -199,16 +199,27 @@
     "pair": "Abbess & Vampire Countess",
     "face": "Abbess",
     "cost": 1,
-    "effect": "Heal 5 HP. Banish this card.",
+    "effect": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1d_X8Jst2cKr2SJb0_Rn4WvYHQWCArgt5",
     "artwork_url": "https://drive.google.com/file/d/1d_X8Jst2cKr2SJb0_Rn4WvYHQWCArgt5/view?usp=drivesdk",
     "keywords": [
-      "Banish"
+      "Banish",
+      "Cleanse"
     ],
-    "automatic_targets": []
+    "automatic_targets": [
+      {
+        "op": "Cleanse",
+        "target": "random_harmful_self",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true,
+        "unit": "status_kind",
+        "clear_entire_counter": true
+      }
+    ]
   },
   {
     "pair": "Abbess & Vampire Countess",
@@ -312,7 +323,7 @@
     "pair": "Absolution & Condemnation",
     "face": "Condemnation",
     "cost": 1,
-    "effect": "Mark 4. Banish this card.",
+    "effect": "Curse 3. Banish this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -320,7 +331,7 @@
     "artwork_url": "https://drive.google.com/file/d/1HcY-W3cmije33XfE-ww1Tz_MaCpJ1ekp/view?usp=drivesdk",
     "keywords": [
       "Banish",
-      "Mark"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -387,14 +398,14 @@
     "pair": "Dove & Raven",
     "face": "Dove",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1vvmtMlRmLAT1YmECVRJYFnQ4EVZru0TW",
     "artwork_url": "https://drive.google.com/file/d/1vvmtMlRmLAT1YmECVRJYFnQ4EVZru0TW/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -482,14 +493,14 @@
     "pair": "Lamb & Wolf",
     "face": "Lamb",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1qoTQy2Xz8H817rIVr5-ZsZ4IfykRB0-M",
     "artwork_url": "https://drive.google.com/file/d/1qoTQy2Xz8H817rIVr5-ZsZ4IfykRB0-M/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -677,14 +688,14 @@
     "pair": "Flame & Frost",
     "face": "Frost",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "167voktusMUlZ37aYbLz5rcqiOuepYXgo",
     "artwork_url": "https://drive.google.com/file/d/167voktusMUlZ37aYbLz5rcqiOuepYXgo/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -723,14 +734,14 @@
     "pair": "Bell Ringer & Silenced Bell Ringer",
     "face": "Bell Ringer",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Bless 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1weJMD7YujS38lFI9Q2-KIWth3yFzjPpU",
     "artwork_url": "https://drive.google.com/file/d/1weJMD7YujS38lFI9Q2-KIWth3yFzjPpU/view?usp=drivesdk",
     "keywords": [
-      "Mark"
+      "Bless"
     ],
     "automatic_targets": []
   },
@@ -784,14 +795,14 @@
     "pair": "Censer & Plague Brazier",
     "face": "Censer",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1580yzY8NaonMm1PAX7pA77gqGvo7QqY2",
     "artwork_url": "https://drive.google.com/file/d/1580yzY8NaonMm1PAX7pA77gqGvo7QqY2/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -910,14 +921,14 @@
     "pair": "Ivy & Thorns",
     "face": "Ivy",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "138xstSsSzp9zxkITDplEZrtnHEypteK0",
     "artwork_url": "https://drive.google.com/file/d/138xstSsSzp9zxkITDplEZrtnHEypteK0/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1085,14 +1096,14 @@
     "pair": "Hourglass & Broken Hourglass",
     "face": "Hourglass",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1oPMBgpZbq-VdwPd-W9Sc777BAlUowr4P",
     "artwork_url": "https://drive.google.com/file/d/1oPMBgpZbq-VdwPd-W9Sc777BAlUowr4P/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1128,14 +1139,14 @@
     "pair": "Feather & Chain",
     "face": "Chain",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "15sUIxgGzo0ap_DXgHm8hoEuyBUFIgadu",
     "artwork_url": "https://drive.google.com/file/d/15sUIxgGzo0ap_DXgHm8hoEuyBUFIgadu/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1171,16 +1182,27 @@
     "pair": "Sunlit Chapel & Moonlit Crypt",
     "face": "Sunlit Chapel",
     "cost": 1,
-    "effect": "Heal 5 HP. Banish this card.",
+    "effect": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1JuqHF1P1zHu-SsKVjioLSBX_0uOv6GGi",
     "artwork_url": "https://drive.google.com/file/d/1JuqHF1P1zHu-SsKVjioLSBX_0uOv6GGi/view?usp=drivesdk",
     "keywords": [
-      "Banish"
+      "Banish",
+      "Cleanse"
     ],
-    "automatic_targets": []
+    "automatic_targets": [
+      {
+        "op": "Cleanse",
+        "target": "random_harmful_self",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true,
+        "unit": "status_kind",
+        "clear_entire_counter": true
+      }
+    ]
   },
   {
     "pair": "Sunlit Chapel & Moonlit Crypt",
@@ -1227,14 +1249,14 @@
     "pair": "Bell Tower & Fallen Bell",
     "face": "Bell Tower",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Bless 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1ZOHVqQbdvFgb-0oZBigbRkwDW2ha1lzm",
     "artwork_url": "https://drive.google.com/file/d/1ZOHVqQbdvFgb-0oZBigbRkwDW2ha1lzm/view?usp=drivesdk",
     "keywords": [
-      "Mark"
+      "Bless"
     ],
     "automatic_targets": []
   },
@@ -1299,14 +1321,14 @@
     "pair": "Open Gate & Sealed Gate",
     "face": "Sealed Gate",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "1r4TA80YCa8JMFwHtVNIxX4v-gvzPYO9v",
     "artwork_url": "https://drive.google.com/file/d/1r4TA80YCa8JMFwHtVNIxX4v-gvzPYO9v/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1314,22 +1336,31 @@
     "pair": "Sanctuary & Prison",
     "face": "Sanctuary",
     "cost": 1,
-    "effect": "Heal 5 HP. Banish this card.",
+    "effect": "Cleanse all harmful statuses from yourself. Heal 3 HP. Banish this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "19v2hhOQhYK8XgnOufG9HUQiGDGl_DJbD",
     "artwork_url": "https://drive.google.com/file/d/19v2hhOQhYK8XgnOufG9HUQiGDGl_DJbD/view?usp=drivesdk",
     "keywords": [
-      "Banish"
+      "Banish",
+      "Cleanse"
     ],
-    "automatic_targets": []
+    "automatic_targets": [
+      {
+        "op": "Cleanse",
+        "target": "all_harmful_self",
+        "selection_prompts": 0,
+        "unit": "status_kind",
+        "clear_entire_counter": true
+      }
+    ]
   },
   {
     "pair": "Sanctuary & Prison",
     "face": "Prison",
     "cost": 1,
-    "effect": "Weaken 6. Banish this card.",
+    "effect": "Curse 3. Banish this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -1337,7 +1368,7 @@
     "artwork_url": "https://drive.google.com/file/d/14W0dmIr1HL9r9Tx6UhLMhIT5iqChZpGz/view?usp=drivesdk",
     "keywords": [
       "Banish",
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1373,14 +1404,15 @@
     "pair": "Benediction & Curse",
     "face": "Benediction",
     "cost": 1,
-    "effect": "Heal 4 HP. Banish this card.",
+    "effect": "Bless 3. Banish this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1XVqqqNmQ5OF-m6yoZiWbs_h7_Nh8rUCD",
     "artwork_url": "https://drive.google.com/file/d/1XVqqqNmQ5OF-m6yoZiWbs_h7_Nh8rUCD/view?usp=drivesdk",
     "keywords": [
-      "Banish"
+      "Banish",
+      "Bless"
     ],
     "automatic_targets": []
   },
@@ -1388,14 +1420,14 @@
     "pair": "Benediction & Curse",
     "face": "Curse",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "1WgakSgo92a19dVli80QHeKmM9GV1MK-Q",
     "artwork_url": "https://drive.google.com/file/d/1WgakSgo92a19dVli80QHeKmM9GV1MK-Q/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1473,14 +1505,14 @@
     "pair": "Dream & Nightmare",
     "face": "Nightmare",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "1ESInrS0cKlRm4dq3pHBgYNGO_1jTwrvG",
     "artwork_url": "https://drive.google.com/file/d/1ESInrS0cKlRm4dq3pHBgYNGO_1jTwrvG/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1488,14 +1520,14 @@
     "pair": "Bound Soul & Unbound Spirit",
     "face": "Bound Soul",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "1kOQ8OsYrRzPv_k7YqeF3SDNx1gVHfLTG",
     "artwork_url": "https://drive.google.com/file/d/1kOQ8OsYrRzPv_k7YqeF3SDNx1gVHfLTG/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1517,13 +1549,13 @@
     "face": "Sovereign",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 5.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1O8FBT6cKAQTXiADvORymx5I1HuyBHSkz",
     "artwork_url": "https://drive.google.com/file/d/1O8FBT6cKAQTXiADvORymx5I1HuyBHSkz/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1760,13 +1792,13 @@
     "face": "Peacock",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1kahEnL1cbpSgErZtSVa1ug2kxS0AYf0h",
     "artwork_url": "https://drive.google.com/file/d/1kahEnL1cbpSgErZtSVa1ug2kxS0AYf0h/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -1803,13 +1835,13 @@
     "face": "Anglerfish",
     "side": "dark",
     "cost": 1,
-    "effect": "Deal 3 Shadow damage. Mark 2.",
+    "effect": "Deal 3 Shadow damage. Curse 1.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1-Q3qwTjJ7RVn-HL6u41cazot0WhpLHI1",
     "artwork_url": "https://drive.google.com/file/d/1-Q3qwTjJ7RVn-HL6u41cazot0WhpLHI1/view?usp=drivesdk",
     "keywords": [
-      "Mark",
+      "Curse",
       "Shadow"
     ],
     "automatic_targets": []
@@ -2109,13 +2141,13 @@
     "face": "Deep Marsh",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "16AoI0C9m9ImwOkRMNd0BZsPOvIgja4c6",
     "artwork_url": "https://drive.google.com/file/d/16AoI0C9m9ImwOkRMNd0BZsPOvIgja4c6/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2124,13 +2156,13 @@
     "face": "Frozen Lake",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 3. Deal 2 Frost damage.",
+    "effect": "Curse 1. Deal 2 Frost damage.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1utKFzykk_TUhgY4JtjdyPgCQy0eF413I",
     "artwork_url": "https://drive.google.com/file/d/1utKFzykk_TUhgY4JtjdyPgCQy0eF413I/view?usp=drivesdk",
     "keywords": [
-      "Weaken",
+      "Curse",
       "Frost"
     ],
     "automatic_targets": []
@@ -2184,13 +2216,13 @@
     "face": "White Desert",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 3. Deal 3 Radiance damage.",
+    "effect": "Curse 1. Deal 3 Radiance damage.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1Cqja1jSt42AVMswRTKhuuIifZMFJDG62",
     "artwork_url": "https://drive.google.com/file/d/1Cqja1jSt42AVMswRTKhuuIifZMFJDG62/view?usp=drivesdk",
     "keywords": [
-      "Weaken",
+      "Curse",
       "Radiance"
     ],
     "automatic_targets": []
@@ -2290,13 +2322,13 @@
     "face": "Labyrinth",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1A3OuMOkvTX_55q0Rz9NeLUN-dxkYXEGU",
     "artwork_url": "https://drive.google.com/file/d/1A3OuMOkvTX_55q0Rz9NeLUN-dxkYXEGU/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2372,13 +2404,13 @@
     "face": "Tuned Violin",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1baely1s9BmqmKnBO2DwVmWRx1nnhQBWa",
     "artwork_url": "https://drive.google.com/file/d/1baely1s9BmqmKnBO2DwVmWRx1nnhQBWa/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2387,14 +2419,14 @@
     "face": "Broken Violin",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 5. Banish this card.",
+    "effect": "Curse 3. Banish this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1T5rnIRur8OM4rYk0oUt7hC0mqYO-bj9K",
     "artwork_url": "https://drive.google.com/file/d/1T5rnIRur8OM4rYk0oUt7hC0mqYO-bj9K/view?usp=drivesdk",
     "keywords": [
       "Banish",
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2403,14 +2435,14 @@
     "face": "Balance Scales",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 2. Weaken 2.",
+    "effect": "Bless 1. Curse 1.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1nd3-mZo4ry6l7590as8l82pzDGrHvJg7",
     "artwork_url": "https://drive.google.com/file/d/1nd3-mZo4ry6l7590as8l82pzDGrHvJg7/view?usp=drivesdk",
     "keywords": [
-      "Mark",
-      "Weaken"
+      "Bless",
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2432,14 +2464,14 @@
     "face": "Chessboard",
     "side": "light",
     "cost": 1,
-    "effect": "Scry. Weaken 2.",
+    "effect": "Scry. Curse 1.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1oimt6rlrGPRMs5Dv77O_m-Ut2fKLMww3",
     "artwork_url": "https://drive.google.com/file/d/1oimt6rlrGPRMs5Dv77O_m-Ut2fKLMww3/view?usp=drivesdk",
     "keywords": [
       "Scry",
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2544,13 +2576,13 @@
     "face": "Wind Chime",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1j2YDTZA0r7Yj7DChzrwIaXzhygpmrpGq",
     "artwork_url": "https://drive.google.com/file/d/1j2YDTZA0r7Yj7DChzrwIaXzhygpmrpGq/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2572,13 +2604,13 @@
     "face": "Blindfold",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1dKztkN0t59NW-zbenT4smgLsToZP0BFD",
     "artwork_url": "https://drive.google.com/file/d/1dKztkN0t59NW-zbenT4smgLsToZP0BFD/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2600,13 +2632,13 @@
     "face": "Tangled Hair",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1Tegjhx0D4gHYRbg3xVQNoVxdQguQfwK5",
     "artwork_url": "https://drive.google.com/file/d/1Tegjhx0D4gHYRbg3xVQNoVxdQguQfwK5/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2649,14 +2681,14 @@
     "face": "Symmetry",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 2. Weaken 2.",
+    "effect": "Bless 1. Curse 1.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1HogzwkGW9JIZdg2PxJQvpgnY4byfnR0p",
     "artwork_url": "https://drive.google.com/file/d/1HogzwkGW9JIZdg2PxJQvpgnY4byfnR0p/view?usp=drivesdk",
     "keywords": [
-      "Mark",
-      "Weaken"
+      "Bless",
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2733,13 +2765,13 @@
     "face": "Compression",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1nmN6_fJHOsqzZQkZi_3_b4GARRi3_zYc",
     "artwork_url": "https://drive.google.com/file/d/1nmN6_fJHOsqzZQkZi_3_b4GARRi3_zYc/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2815,14 +2847,14 @@
     "face": "Stillness",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 6. Banish this card.",
+    "effect": "Curse 3. Banish this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1wJ1tMK0HBuvdk7dT9CJ1hzBZwKQCa8Up",
     "artwork_url": "https://drive.google.com/file/d/1wJ1tMK0HBuvdk7dT9CJ1hzBZwKQCa8Up/view?usp=drivesdk",
     "keywords": [
       "Banish",
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -2862,13 +2894,13 @@
     "face": "Clamor",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1dNFUoCjW4VowLKqKgULxCRs5m6Cuakvy",
     "artwork_url": "https://drive.google.com/file/d/1dNFUoCjW4VowLKqKgULxCRs5m6Cuakvy/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -3000,16 +3032,24 @@
     "face": "Exposure",
     "side": "light",
     "cost": 1,
-    "effect": "Remove 3 enemy Ward. Mark 3.",
+    "effect": "Purge all beneficial statuses from the enemy. Banish this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1EYm5F6-MpL_7sYsb7MTZGaTzMed9OnV2",
     "artwork_url": "https://drive.google.com/file/d/1EYm5F6-MpL_7sYsb7MTZGaTzMed9OnV2/view?usp=drivesdk",
     "keywords": [
-      "Ward",
-      "Mark"
+      "Banish",
+      "Purge"
     ],
-    "automatic_targets": []
+    "automatic_targets": [
+      {
+        "op": "Purge",
+        "target": "all_beneficial_enemy",
+        "selection_prompts": 0,
+        "unit": "status_kind",
+        "clear_entire_counter": true
+      }
+    ]
   },
   {
     "pair": "Exposure & Concealment",
@@ -3037,13 +3077,13 @@
     "face": "Herald",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Bless 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1uFPL0WYkTGKChGPjeCI17Bofth0w-8bm",
     "artwork_url": "https://drive.google.com/file/d/1uFPL0WYkTGKChGPjeCI17Bofth0w-8bm/view?usp=drivesdk",
     "keywords": [
-      "Mark"
+      "Bless"
     ],
     "automatic_targets": []
   },
@@ -3096,13 +3136,13 @@
     "face": "Animal Tamer",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1PdHHfLIBYmwPoKpsgVLdy7vzOlba6Cct",
     "artwork_url": "https://drive.google.com/file/d/1PdHHfLIBYmwPoKpsgVLdy7vzOlba6Cct/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -3184,13 +3224,12 @@
     "face": "Fencer",
     "side": "light",
     "cost": 1,
-    "effect": "Deal 3 Radiance damage. Mark 2.",
+    "effect": "Deal 2 Radiance damage twice.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1rGSLSSBR4grvcVZjOEPtoyoGau28eB0H",
     "artwork_url": "https://drive.google.com/file/d/1rGSLSSBR4grvcVZjOEPtoyoGau28eB0H/view?usp=drivesdk",
     "keywords": [
-      "Mark",
       "Radiance"
     ],
     "automatic_targets": []
@@ -3317,13 +3356,13 @@
     "face": "Royal Hound",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Deal 2 Binding damage twice.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1mWtIgbjgzkthfNBIAE97xb6HQZsx189c",
     "artwork_url": "https://drive.google.com/file/d/1mWtIgbjgzkthfNBIAE97xb6HQZsx189c/view?usp=drivesdk",
     "keywords": [
-      "Mark"
+      "Binding"
     ],
     "automatic_targets": []
   },
@@ -3388,15 +3427,25 @@
     "face": "Trespasser",
     "side": "dark",
     "cost": 1,
-    "effect": "Remove 5 enemy Ward.",
+    "effect": "Purge one random beneficial status from the enemy.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1QsdyaQaCR3FXLB6vnUftADn_sIzio1rv",
     "artwork_url": "https://drive.google.com/file/d/1QsdyaQaCR3FXLB6vnUftADn_sIzio1rv/view?usp=drivesdk",
     "keywords": [
-      "Ward"
+      "Purge"
     ],
-    "automatic_targets": []
+    "automatic_targets": [
+      {
+        "op": "Purge",
+        "target": "random_beneficial_enemy",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true,
+        "unit": "status_kind",
+        "clear_entire_counter": true
+      }
+    ]
   },
   {
     "pair": "Chimney Sweep & Smoke Spirit",
@@ -3419,13 +3468,13 @@
     "face": "Smoke Spirit",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1bl8JrbiSwNjR2iPGSNkql-f1DnsBDrDb",
     "artwork_url": "https://drive.google.com/file/d/1bl8JrbiSwNjR2iPGSNkql-f1DnsBDrDb/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -3449,13 +3498,13 @@
     "face": "Kelp Forest",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1ENL48xfaEFYEfrmMvndA2rNPSsEv2__c",
     "artwork_url": "https://drive.google.com/file/d/1ENL48xfaEFYEfrmMvndA2rNPSsEv2__c/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -3506,15 +3555,20 @@
     "face": "Firefly",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Turn your hand to its light faces.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1g736w3O4ty_TfbL8-Qmlku5aYz8S-YQJ",
     "artwork_url": "https://drive.google.com/file/d/1g736w3O4ty_TfbL8-Qmlku5aYz8S-YQJ/view?usp=drivesdk",
-    "keywords": [
-      "Mark"
-    ],
-    "automatic_targets": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "light"
+      }
+    ]
   },
   {
     "pair": "Firefly & Cave Cricket",
@@ -3580,14 +3634,14 @@
     "face": "Mandrake",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 6. Banish this card.",
+    "effect": "Curse 3. Banish this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1eb2ZpjtvDCmSuZ7uiMDcZcg2BUiOLX6z",
     "artwork_url": "https://drive.google.com/file/d/1eb2ZpjtvDCmSuZ7uiMDcZcg2BUiOLX6z/view?usp=drivesdk",
     "keywords": [
       "Banish",
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -3833,13 +3887,13 @@
     "face": "Sceptre",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1hloy-jxu4ZSie6l01Kyy9OIaOg6wTlTh",
     "artwork_url": "https://drive.google.com/file/d/1hloy-jxu4ZSie6l01Kyy9OIaOg6wTlTh/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -3891,13 +3945,13 @@
     "face": "Fishing Net",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "16CoBFJwN3eZSFQ3DjdTpE69OIuzS7Cm4",
     "artwork_url": "https://drive.google.com/file/d/16CoBFJwN3eZSFQ3DjdTpE69OIuzS7Cm4/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -3985,13 +4039,13 @@
     "face": "Tuning Fork",
     "side": "light",
     "cost": 1,
-    "effect": "Remove all your Weaken.",
+    "effect": "Remove all your Curse.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1pOWrkSHqk4dOazmvUYGVysSSpWU2v-X3",
     "artwork_url": "https://drive.google.com/file/d/1pOWrkSHqk4dOazmvUYGVysSSpWU2v-X3/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -4000,13 +4054,13 @@
     "face": "Rattle",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "19TAUN3hRrXB6FnNCy3hc40hE8bWijPLa",
     "artwork_url": "https://drive.google.com/file/d/19TAUN3hRrXB6FnNCy3hc40hE8bWijPLa/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -4072,13 +4126,13 @@
     "face": "Floodgate",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1Ta2kSWANHatk5acjjpeO2w_lxQJtlXn6",
     "artwork_url": "https://drive.google.com/file/d/1Ta2kSWANHatk5acjjpeO2w_lxQJtlXn6/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -4138,13 +4192,13 @@
     "face": "Measuring Rod",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Scry.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "13XGoQ3PUp7ORGsn8xI270thZNaDGmiuZ",
     "artwork_url": "https://drive.google.com/file/d/13XGoQ3PUp7ORGsn8xI270thZNaDGmiuZ/view?usp=drivesdk",
     "keywords": [
-      "Mark"
+      "Scry"
     ],
     "automatic_targets": []
   },
@@ -4153,13 +4207,13 @@
     "face": "Twisted Ribbon",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1K7O0tFADVa-Uz2oQvpcj-fj5r-KCL56d",
     "artwork_url": "https://drive.google.com/file/d/1K7O0tFADVa-Uz2oQvpcj-fj5r-KCL56d/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -4339,13 +4393,13 @@
     "face": "Peat Bog",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3. Deal 2 Decay damage.",
+    "effect": "Curse 1. Deal 2 Decay damage.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1dbyS5SoY3Jd5X9K0071PZKP2LNHHmElI",
     "artwork_url": "https://drive.google.com/file/d/1dbyS5SoY3Jd5X9K0071PZKP2LNHHmElI/view?usp=drivesdk",
     "keywords": [
-      "Weaken",
+      "Curse",
       "Decay"
     ],
     "automatic_targets": []
@@ -4652,12 +4706,12 @@
     "face": "Bell Founder",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Bless 2.",
     "status": "proposed",
     "artwork_id": "1ftMufZKisD0RKlmQA5DWZ8wLYL1MTNHf",
     "artwork_url": "https://drive.google.com/file/d/1ftMufZKisD0RKlmQA5DWZ8wLYL1MTNHf/view?usp=drivesdk",
     "keywords": [
-      "Mark"
+      "Bless"
     ],
     "automatic_targets": []
   },
@@ -4744,12 +4798,12 @@
     "face": "Dream Binder",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1usk09I5PHy15lv9UFidJBnx_KIfgVjDT",
     "artwork_url": "https://drive.google.com/file/d/1usk09I5PHy15lv9UFidJBnx_KIfgVjDT/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -4758,12 +4812,12 @@
     "face": "Dream Unbinder",
     "side": "dark",
     "cost": 1,
-    "effect": "Remove all your Weaken.",
+    "effect": "Remove all your Curse.",
     "status": "proposed",
     "artwork_id": "1KF8RnbOzRK41-tKzNgQXNR6IcorIohhi",
     "artwork_url": "https://drive.google.com/file/d/1KF8RnbOzRK41-tKzNgQXNR6IcorIohhi/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -4924,12 +4978,12 @@
     "face": "Perfumer",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1K9OtvTkXWemHbbFhrTcbXxeP1EdBau2Y",
     "artwork_url": "https://drive.google.com/file/d/1K9OtvTkXWemHbbFhrTcbXxeP1EdBau2Y/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -5039,13 +5093,13 @@
     "face": "Cage Breaker",
     "side": "dark",
     "cost": 1,
-    "effect": "Remove all your Weaken. Draw 2 cards. Banish this card.",
+    "effect": "Remove all your Curse. Draw 2 cards. Banish this card.",
     "status": "proposed",
     "artwork_id": "1wiOh1lkZWO0jdfLysNKyqQzAwnjPU5Ir",
     "artwork_url": "https://drive.google.com/file/d/1wiOh1lkZWO0jdfLysNKyqQzAwnjPU5Ir/view?usp=drivesdk",
     "keywords": [
       "Banish",
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -5364,12 +5418,12 @@
     "face": "Tide Keeper",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1606cBStbiYN2jX9hzSBQufu7kobpl4u6",
     "artwork_url": "https://drive.google.com/file/d/1606cBStbiYN2jX9hzSBQufu7kobpl4u6/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -5586,12 +5640,12 @@
     "face": "Alabaster Spider",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1ripPvZY9bYhV5uLL-7YZOXm5FzowxPvd",
     "artwork_url": "https://drive.google.com/file/d/1ripPvZY9bYhV5uLL-7YZOXm5FzowxPvd/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -5748,12 +5802,12 @@
     "face": "Hawk Moth",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1Rb-ixxPTJd5GUvynvzKwDQdeiEBJda2g",
     "artwork_url": "https://drive.google.com/file/d/1Rb-ixxPTJd5GUvynvzKwDQdeiEBJda2g/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -5866,12 +5920,12 @@
     "face": "Red Panda",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "19BYSHsdWX7113diKEUd-xzlp_B9l-nh3",
     "artwork_url": "https://drive.google.com/file/d/19BYSHsdWX7113diKEUd-xzlp_B9l-nh3/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -5894,12 +5948,12 @@
     "face": "Living Jellyfish",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1QbwX7iffDIJGlYuqZJjWVGjHI32qql3m",
     "artwork_url": "https://drive.google.com/file/d/1QbwX7iffDIJGlYuqZJjWVGjHI32qql3m/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -6123,13 +6177,13 @@
     "face": "Ice Crystal",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 2. Deal 3 Frost damage.",
+    "effect": "Freeze. Banish this card.",
     "status": "proposed",
     "artwork_id": "1SwKu2a2rvfI1YhPAYCwzrXEgbTjTLh81",
     "artwork_url": "https://drive.google.com/file/d/1SwKu2a2rvfI1YhPAYCwzrXEgbTjTLh81/view?usp=drivesdk",
     "keywords": [
-      "Weaken",
-      "Frost"
+      "Banish",
+      "Freeze"
     ],
     "automatic_targets": []
   },
@@ -6238,12 +6292,12 @@
     "face": "Silver Crown",
     "side": "light",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Bless 2.",
     "status": "proposed",
     "artwork_id": "1TGqO5fSWv4OGY4UzujXRvte9tixKRn1T",
     "artwork_url": "https://drive.google.com/file/d/1TGqO5fSWv4OGY4UzujXRvte9tixKRn1T/view?usp=drivesdk",
     "keywords": [
-      "Mark"
+      "Bless"
     ],
     "automatic_targets": []
   },
@@ -6252,12 +6306,12 @@
     "face": "Rusty Crown",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1AiCyPh6b14Ge33dWfdJNlPVIVHj_s4oQ",
     "artwork_url": "https://drive.google.com/file/d/1AiCyPh6b14Ge33dWfdJNlPVIVHj_s4oQ/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -6356,12 +6410,12 @@
     "face": "Music Box",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1_fGrLWnpVbjF0glvj5pftEpy1rvIoUWy",
     "artwork_url": "https://drive.google.com/file/d/1_fGrLWnpVbjF0glvj5pftEpy1rvIoUWy/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -6521,12 +6575,12 @@
     "face": "Broken Cage",
     "side": "dark",
     "cost": 1,
-    "effect": "Remove all your Weaken. Draw 1 card.",
+    "effect": "Remove all your Curse. Draw 1 card.",
     "status": "proposed",
     "artwork_id": "15kEUzzTziwujXCihrEmx8-od-P0KKOZm",
     "artwork_url": "https://drive.google.com/file/d/15kEUzzTziwujXCihrEmx8-od-P0KKOZm/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -6802,12 +6856,12 @@
     "face": "Spent Match",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1l-d2OFwKN7END4RfAaKY1zxeayt40eFz",
     "artwork_url": "https://drive.google.com/file/d/1l-d2OFwKN7END4RfAaKY1zxeayt40eFz/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -6898,12 +6952,12 @@
     "face": "Black Ribbon",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1ATSsBmCgv8SqavIlxSCQBnirCFcU8Cj3",
     "artwork_url": "https://drive.google.com/file/d/1ATSsBmCgv8SqavIlxSCQBnirCFcU8Cj3/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -7168,12 +7222,12 @@
     "face": "Wild Thicket",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "12rP35aIj8TDQuMmKGS2h3hVxbl2NmzuF",
     "artwork_url": "https://drive.google.com/file/d/12rP35aIj8TDQuMmKGS2h3hVxbl2NmzuF/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -7310,12 +7364,12 @@
     "face": "Collapsed Watchtower",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1aTEjSUcPVynfQN9Eswe6nwiNWueEz74e",
     "artwork_url": "https://drive.google.com/file/d/1aTEjSUcPVynfQN9Eswe6nwiNWueEz74e/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },
@@ -7376,12 +7430,12 @@
     "face": "Frozen Waterfall",
     "side": "light",
     "cost": 1,
-    "effect": "Weaken 2. Deal 3 Frost damage.",
+    "effect": "Curse 1. Deal 3 Frost damage.",
     "status": "proposed",
     "artwork_id": "1f_qBQzjm25KRI-fd2v95onHwh52TBOuv",
     "artwork_url": "https://drive.google.com/file/d/1f_qBQzjm25KRI-fd2v95onHwh52TBOuv/view?usp=drivesdk",
     "keywords": [
-      "Weaken",
+      "Curse",
       "Frost"
     ],
     "automatic_targets": []
@@ -7443,12 +7497,12 @@
     "face": "Obsidian Bridge",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Curse 2.",
     "status": "proposed",
     "artwork_id": "1FGwTBqRu1F-I_mGnjBSNpLdBt9Jw9G4b",
     "artwork_url": "https://drive.google.com/file/d/1FGwTBqRu1F-I_mGnjBSNpLdBt9Jw9G4b/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
+      "Curse"
     ],
     "automatic_targets": []
   },

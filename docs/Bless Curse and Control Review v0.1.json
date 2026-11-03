@@ -1,0 +1,3602 @@
+{
+  "source_commit": "f44bc633f849afb99b96381b93e32e7db89553be",
+  "status": "design proposal; scaling and thaw decisions open",
+  "directions_and_recommendations": [
+    "Approved: Bless and Curse are stacking buff/debuff counters affecting every hit of the next direct attack. Mark and Weaken are removed from current effects and rules. Applications add, non-attacks preserve counters, and the next attack spends all of both even if damage is zero.",
+    "Recommendation: flat +1/−1 per stack, with minimum final damage 0 and no extra counter or damage cap. Current mana, cards and one-attack consumption bound individual uses; that is not proof of balance. Stack counts were conservatively retuned to mostly 1–2, with 3 on a few Banish sources. These are provisional counts, not a conversion formula to preserve old balance.",
+    "The numerical decision is OPEN. Current catalogue previews explicitly use the flat candidate as a working proposal. No percentage rate, rounding mode or percentage cap is approved.",
+    "Comparison candidate only: each stack adds or subtracts 25 percentage points. Combine Bless minus Curse, clamp the multiplier between 0× and 2×, then round each final hit to nearest integer with half ties upward. Do not compound multipliers. This permits meaningful comparison without selecting it as the rule.",
+    "Low hit sizes make percentage steps uneven. Nearest rounding leaves 2-damage hits unchanged under Curse 1; the Millipede gets the same 6 total under Curse 1 and Curse 2. Rounding down instead can erase 1-damage hits with one stack while making small Bless bonuses invisible. Rounding up reverses that bias. Fractional carry or attack-total redistribution could fix some thresholds but adds hidden arithmetic and order rules.",
+    "Flat scaling deliberately rewards or counters many-hit attacks. Bless 1 adds 3 total to Prism but 1 to a single hit; Curse 1 removes 5 total from the Millipede when it has five positive hits. Test these interactions with Leech, reflection, Banish thinning and repeated draw/recovery.",
+    "Curse can reduce direct hits to 0, but separate Burn, Poison, card movement, healing and trait clauses still happen. Freeze controls the entire action; Hush suppresses the labeled trait and skips non-attack abilities. Those remain distinct even when Curse prevents all direct damage.",
+    "Freeze control is approved. Its thaw rule is OPEN: whether direct attacks and/or Fire end it is not defined. Preview only the conditional case “if still Frozen at action start, skip the whole action, advance and clear”. Do not treat earlier breakable-freeze proposals, or a no-thaw alternative, as a settled rule.",
+    "Cleanse and Purge explicitly remove one random eligible kind or all eligible kinds. Random is uniform by active kind, not stack amount; clear the whole chosen counter. No target menu. Typed narrow cures and partial Ward removal remain separate when those better fit the subject.",
+    "The main player decisions are which cards to play and in what order. Enemy held-card moves now choose random recipients; helpful recovery uses the top discarded card. The remaining older card-selection effects below are flagged for a future thematic redesign rather than silently converted into risky random Banish or recovery effects."
+  ],
+  "status_policy": {
+    "status": "provisional-timing-and-rounding; values-not-playtested",
+    "rounding": "floor",
+    "minimum": 0,
+    "remove_at_zero": true,
+    "Ward": {
+      "decay": "floor(value/2)",
+      "player_timing": "before player mana refill and normal draw",
+      "enemy_timing": "enemy action start, after all damage-over-time ticks, including skipped actions",
+      "gain": "add"
+    },
+    "damage_over_time": {
+      "order": [
+        "player Burn",
+        "player Poison",
+        "enemy Burn",
+        "enemy Poison"
+      ],
+      "timing": "player turn end, after unkept cards are discarded",
+      "damage_types": {
+        "Burn": "Fire",
+        "Poison": "Decay"
+      },
+      "tick": "current amount, then floor(amount/2)",
+      "application": "maximum of existing and incoming value, separately per status",
+      "blocked_damage_still_decays": true,
+      "modified_by_Bless_Curse_weakness_Reflect_Leech": false,
+      "defeat": "stop immediately"
+    },
+    "Scry": {
+      "scope": "current top of library, follows changes",
+      "duration": "until End Turn begins",
+      "choices": 0,
+      "forces_reshuffle": false,
+      "stacking": "does not stack"
+    },
+    "Keep": {
+      "source": "return marked source after resolution, within hand cap",
+      "whole_hand": "current hand only, source excluded",
+      "random": "automatic, uniformly without replacement",
+      "empty_random_pool": "do nothing",
+      "insufficient_random_pool": "use all available",
+      "marker_loss": "leaving hand or after end-turn discard",
+      "self_return_when_full": "discard instead"
+    },
+    "Flip": {
+      "self": "resolving physical source; finish original played description",
+      "whole_hand": "current hand, source excluded",
+      "top_of_pile": "visible named top card, no choice",
+      "random": "automatic, uniformly without replacement after payment",
+      "empty_random_pool": "do nothing",
+      "insufficient_random_pool": "use all available"
+    },
+    "attack_modifiers": {
+      "approved": "Bless and Curse add stacks and affect every hit of the next direct attack; replace Mark and Weaken",
+      "final_scaling_decision": null,
+      "recommended_model": "flat",
+      "working_preview_model": "flat",
+      "flat_candidate": {
+        "per_stack": 1,
+        "formula": "max(0, base hit + first-hit weakness + Bless - Curse)",
+        "counter_cap": null,
+        "damage_floor": 0,
+        "upper_damage_cap": null
+      },
+      "percentage_candidate": {
+        "per_stack_percent": 25,
+        "stacking": "add percentage points; net Bless minus Curse before clamping",
+        "multiplier_bounds": [
+          0,
+          2
+        ],
+        "rounding": "nearest integer; half ties upward",
+        "formula": "round_half_up((base hit + first-hit weakness) * clamp(1 + 0.25*(Bless-Curse), 0, 2))",
+        "status": "comparison only, not approved"
+      },
+      "duration": "next direct attack, including its extra hits; non-attacks do not spend counters",
+      "stacking": "add; consume all Bless and Curse on that attack, even at zero damage",
+      "damage_types": "each hit keeps its printed type",
+      "damage_over_time_and_reactions": "unmodified",
+      "end_of_fight": "clear"
+    },
+    "Freeze": {
+      "approved": "enemy action control",
+      "skip": "whole next action if still active; advance pattern and clear",
+      "stacking": "does not stack or queue",
+      "thaw_on_attack": null,
+      "thaw_on_Fire": null,
+      "preview": "conditional on still Frozen at the scheduled action; no thaw rule assumed",
+      "reactive_traits": "remain active while displayed unless Hushed",
+      "Ward_decay": "still happens at action start",
+      "target": "enemy only"
+    },
+    "Cleanse": {
+      "target": "self",
+      "quantity": "one random eligible status or all, explicitly printed",
+      "eligible": [
+        "Burn",
+        "Poison",
+        "Curse",
+        "Hush",
+        "Freeze",
+        "next-normal-draw penalty",
+        "next-mana-refill penalty"
+      ],
+      "one": "whole named effect, all stacks",
+      "random": "uniform across active eligible kinds",
+      "selection_prompts": 0,
+      "empty_pool": "do nothing; continue later sentences"
+    },
+    "Purge": {
+      "target": "enemy",
+      "quantity": "one random eligible status or all, explicitly printed",
+      "eligible": [
+        "Ward",
+        "Reflect",
+        "Bless"
+      ],
+      "one": "whole named effect, all stacks",
+      "random": "uniform across active eligible kinds",
+      "selection_prompts": 0,
+      "printed_traits": "not eligible",
+      "empty_pool": "do nothing; continue later sentences"
+    },
+    "unresolved_decisions": [
+      "Bless/Curse flat versus percentage scaling and final per-card stack counts",
+      "Freeze thaw from attacks and/or Fire"
+    ]
+  },
+  "counts": {
+    "card_faces_checked": 496,
+    "enemies_checked": 110,
+    "changed_card_descriptions_since_previous_commit": 76,
+    "enemy_entries_with_effect_text_changes": 44,
+    "conditional_Freeze_previews": 243,
+    "Bless_faces": 8,
+    "Curse_faces": 60,
+    "Freeze_faces": 1,
+    "Cleanse_faces": 3,
+    "Purge_faces": 2,
+    "remaining_card_faces_with_selection_flags": 122,
+    "remaining_enemy_selection_prompts": 0
+  },
+  "single_hit_comparison": [
+    {
+      "base_hit": 1,
+      "flat_Bless1": 2,
+      "percent25_Bless1": 1,
+      "flat_Curse1": 0,
+      "percent25_Curse1": 1
+    },
+    {
+      "base_hit": 2,
+      "flat_Bless1": 3,
+      "percent25_Bless1": 3,
+      "flat_Curse1": 1,
+      "percent25_Curse1": 2
+    },
+    {
+      "base_hit": 3,
+      "flat_Bless1": 4,
+      "percent25_Bless1": 4,
+      "flat_Curse1": 2,
+      "percent25_Curse1": 2
+    },
+    {
+      "base_hit": 4,
+      "flat_Bless1": 5,
+      "percent25_Bless1": 5,
+      "flat_Curse1": 3,
+      "percent25_Curse1": 3
+    },
+    {
+      "base_hit": 5,
+      "flat_Bless1": 6,
+      "percent25_Bless1": 6,
+      "flat_Curse1": 4,
+      "percent25_Curse1": 4
+    },
+    {
+      "base_hit": 6,
+      "flat_Bless1": 7,
+      "percent25_Bless1": 8,
+      "flat_Curse1": 5,
+      "percent25_Curse1": 5
+    },
+    {
+      "base_hit": 7,
+      "flat_Bless1": 8,
+      "percent25_Bless1": 9,
+      "flat_Curse1": 6,
+      "percent25_Curse1": 5
+    },
+    {
+      "base_hit": 8,
+      "flat_Bless1": 9,
+      "percent25_Bless1": 10,
+      "flat_Curse1": 7,
+      "percent25_Curse1": 6
+    },
+    {
+      "base_hit": 9,
+      "flat_Bless1": 10,
+      "percent25_Bless1": 11,
+      "flat_Curse1": 8,
+      "percent25_Curse1": 7
+    },
+    {
+      "base_hit": 10,
+      "flat_Bless1": 11,
+      "percent25_Bless1": 13,
+      "flat_Curse1": 9,
+      "percent25_Curse1": 8
+    },
+    {
+      "base_hit": 11,
+      "flat_Bless1": 12,
+      "percent25_Bless1": 14,
+      "flat_Curse1": 10,
+      "percent25_Curse1": 8
+    }
+  ],
+  "actual_attack_examples": [
+    {
+      "name": "Prism",
+      "base_hits": [
+        2,
+        2,
+        2
+      ],
+      "flat_Bless1": [
+        3,
+        3,
+        3
+      ],
+      "percent25_Bless1": [
+        3,
+        3,
+        3
+      ],
+      "flat_Curse1": [
+        1,
+        1,
+        1
+      ],
+      "percent25_Curse1": [
+        2,
+        2,
+        2
+      ],
+      "percent25_Curse2": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Porcelain Choir · Chorus",
+      "base_hits": [
+        2,
+        2,
+        2
+      ],
+      "flat_Bless1": [
+        3,
+        3,
+        3
+      ],
+      "percent25_Bless1": [
+        3,
+        3,
+        3
+      ],
+      "flat_Curse1": [
+        1,
+        1,
+        1
+      ],
+      "percent25_Curse1": [
+        2,
+        2,
+        2
+      ],
+      "percent25_Curse2": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Golden Millipede · March",
+      "base_hits": [
+        3,
+        1,
+        1,
+        1,
+        1
+      ],
+      "flat_Bless1": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "percent25_Bless1": [
+        4,
+        1,
+        1,
+        1,
+        1
+      ],
+      "flat_Curse1": [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "percent25_Curse1": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "percent25_Curse2": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Large printed card hit",
+      "base_hits": [
+        11
+      ],
+      "flat_Bless1": [
+        12
+      ],
+      "percent25_Bless1": [
+        14
+      ],
+      "flat_Curse1": [
+        10
+      ],
+      "percent25_Curse1": [
+        8
+      ],
+      "percent25_Curse2": [
+        6
+      ]
+    }
+  ],
+  "selection_audit": [
+    {
+      "number": 1,
+      "face": "Angel",
+      "effect": "Gain 5 Ward.",
+      "flags": []
+    },
+    {
+      "number": 2,
+      "face": "Vampire",
+      "effect": "Deal 4 Shadow damage. Leech.",
+      "flags": []
+    },
+    {
+      "number": 3,
+      "face": "Seraph",
+      "effect": "Deal 7 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 4,
+      "face": "Fallen Seraph",
+      "effect": "Lose 2 HP. Deal 9 Shadow damage.",
+      "flags": []
+    },
+    {
+      "number": 5,
+      "face": "Cherub",
+      "effect": "Heal 3 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 6,
+      "face": "Imp",
+      "effect": "Deal 4 Shadow damage. Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 7,
+      "face": "Winged Guardian",
+      "effect": "Gain 7 Ward.",
+      "flags": []
+    },
+    {
+      "number": 8,
+      "face": "Revenant",
+      "effect": "Deal 5 Shadow damage. You may return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 9,
+      "face": "Pilgrim",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 10,
+      "face": "Exile",
+      "effect": "Discard a card. Draw 2 cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 11,
+      "face": "Oracle",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 12,
+      "face": "Deceiver",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 13,
+      "face": "Abbess",
+      "effect": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 14,
+      "face": "Vampire Countess",
+      "effect": "Deal 5 Shadow damage. Leech. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 15,
+      "face": "Gardener",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 16,
+      "face": "Gravedigger",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 17,
+      "face": "Confession",
+      "effect": "Discard a card. Heal 3 HP. Banish this card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 18,
+      "face": "Secrecy",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 19,
+      "face": "Absolution",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 20,
+      "face": "Condemnation",
+      "effect": "Curse 3. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 21,
+      "face": "Temptation",
+      "effect": "Lose 2 HP. Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 22,
+      "face": "Resolve",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 23,
+      "face": "Sacrifice",
+      "effect": "Banish another card from your hand. Deal 8 Radiance damage.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 24,
+      "face": "Self-Preservation",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 25,
+      "face": "Dove",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 26,
+      "face": "Raven",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 27,
+      "face": "White Stag",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 28,
+      "face": "Black Stag",
+      "effect": "Deal 6 Shadow damage.",
+      "flags": []
+    },
+    {
+      "number": 29,
+      "face": "White Swan",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 30,
+      "face": "Black Swan",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 31,
+      "face": "Lamb",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 32,
+      "face": "Wolf",
+      "effect": "Deal 6 Shadow damage.",
+      "flags": []
+    },
+    {
+      "number": 33,
+      "face": "Butterfly",
+      "effect": "Flip 2 random cards in your hand.",
+      "flags": []
+    },
+    {
+      "number": 34,
+      "face": "Moth",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 35,
+      "face": "Lark",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 36,
+      "face": "Owl",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 37,
+      "face": "Sun",
+      "effect": "Deal 6 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 38,
+      "face": "Moon",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 39,
+      "face": "Sunrise",
+      "effect": "Turn your hand to its light faces.",
+      "flags": []
+    },
+    {
+      "number": 40,
+      "face": "Eclipse",
+      "effect": "Turn your hand to its dark faces.",
+      "flags": []
+    },
+    {
+      "number": 41,
+      "face": "Flame",
+      "effect": "Apply 3 Burn.",
+      "flags": []
+    },
+    {
+      "number": 42,
+      "face": "Frost",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 43,
+      "face": "Rain",
+      "effect": "Remove all Burn from both combatants. Heal 3 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 44,
+      "face": "Drought",
+      "effect": "Deal 6 Decay damage.",
+      "flags": []
+    },
+    {
+      "number": 45,
+      "face": "Bell Ringer",
+      "effect": "Bless 2.",
+      "flags": []
+    },
+    {
+      "number": 46,
+      "face": "Silenced Bell Ringer",
+      "effect": "Hush. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 47,
+      "face": "Sacred Chalice",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 48,
+      "face": "Blood Goblet",
+      "effect": "Lose 2 HP. Gain 1 mana. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 49,
+      "face": "Censer",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 50,
+      "face": "Plague Brazier",
+      "effect": "Apply 3 Poison.",
+      "flags": []
+    },
+    {
+      "number": 51,
+      "face": "Reliquary",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 52,
+      "face": "Empty Reliquary",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 53,
+      "face": "Bloom",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 54,
+      "face": "Wither",
+      "effect": "Deal 7 Decay damage. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 55,
+      "face": "Seed",
+      "effect": "Put up to 2 cards from your discard pile on the bottom of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 56,
+      "face": "Ash",
+      "effect": "Banish another card from your hand. Deal 7 Decay damage.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 57,
+      "face": "Ivy",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 58,
+      "face": "Thorns",
+      "effect": "Deal 2 Decay damage twice.",
+      "flags": []
+    },
+    {
+      "number": 59,
+      "face": "Key",
+      "effect": "Draw 1 card. Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 60,
+      "face": "Lock",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 61,
+      "face": "Mirror",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 62,
+      "face": "Shattered Mirror",
+      "effect": "Deal 2 Release damage twice.",
+      "flags": []
+    },
+    {
+      "number": 63,
+      "face": "Candle",
+      "effect": "Gain 1 mana. Apply 2 Burn. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 64,
+      "face": "Extinguished Candle",
+      "effect": "Turn your hand to its dark faces. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 65,
+      "face": "Open Book",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 66,
+      "face": "Sealed Book",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 67,
+      "face": "Hourglass",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 68,
+      "face": "Broken Hourglass",
+      "effect": "Shuffle your hand into your library. Draw 5 cards. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 69,
+      "face": "Feather",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 70,
+      "face": "Chain",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 71,
+      "face": "Cathedral",
+      "effect": "Gain 7 Ward.",
+      "flags": []
+    },
+    {
+      "number": 72,
+      "face": "Ruined Cathedral",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 73,
+      "face": "Sunlit Chapel",
+      "effect": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 74,
+      "face": "Moonlit Crypt",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 75,
+      "face": "Cloister Garden",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 76,
+      "face": "Overgrown Ruins",
+      "effect": "Put a card from your discard pile on top of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 77,
+      "face": "Bell Tower",
+      "effect": "Bless 2.",
+      "flags": []
+    },
+    {
+      "number": 78,
+      "face": "Fallen Bell",
+      "effect": "Deal 7 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 79,
+      "face": "Bridge",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 80,
+      "face": "Chasm",
+      "effect": "Deal 5 Shadow damage, ignoring Ward.",
+      "flags": []
+    },
+    {
+      "number": 81,
+      "face": "Open Gate",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 82,
+      "face": "Sealed Gate",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 83,
+      "face": "Sanctuary",
+      "effect": "Cleanse all harmful statuses from yourself. Heal 3 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 84,
+      "face": "Prison",
+      "effect": "Curse 3. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 85,
+      "face": "Mountain Monastery",
+      "effect": "Gain 7 Ward.",
+      "flags": []
+    },
+    {
+      "number": 86,
+      "face": "Sunken Shrine",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 87,
+      "face": "Benediction",
+      "effect": "Bless 3. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 88,
+      "face": "Curse",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 89,
+      "face": "Ascension",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 90,
+      "face": "Descent",
+      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 91,
+      "face": "Memory",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 92,
+      "face": "Oblivion",
+      "effect": "Banish another card from your hand. Deal 7 Oblivion damage.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 93,
+      "face": "Dream",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 94,
+      "face": "Nightmare",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 95,
+      "face": "Bound Soul",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 96,
+      "face": "Unbound Spirit",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 97,
+      "face": "Sovereign",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 98,
+      "face": "Jester",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 99,
+      "face": "Puppeteer",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 100,
+      "face": "Marionette",
+      "effect": "Put another card from your hand on top of your library.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 101,
+      "face": "Weaver",
+      "effect": "Put a card from your discard pile on top of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 102,
+      "face": "Unraveler",
+      "effect": "Banish another card from your hand. Deal 8 Decay damage.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 103,
+      "face": "Midwife",
+      "effect": "Heal 5 HP. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 104,
+      "face": "Undertaker",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 105,
+      "face": "Sentinel",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 106,
+      "face": "Sleepwalker",
+      "effect": "Shuffle your hand into your library. Draw 3 cards.",
+      "flags": []
+    },
+    {
+      "number": 107,
+      "face": "Cartographer",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 108,
+      "face": "Lost Wanderer",
+      "effect": "Shuffle your library. Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 109,
+      "face": "Executioner",
+      "effect": "Deal 7 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 110,
+      "face": "Resurrector",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 111,
+      "face": "Honeybee",
+      "effect": "Deal 5 Growth damage. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 112,
+      "face": "Locust",
+      "effect": "Banish another card from your hand. Deal 11 Decay damage.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 113,
+      "face": "Peacock",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 114,
+      "face": "Vulture",
+      "effect": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 115,
+      "face": "Goldfish",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 116,
+      "face": "Anglerfish",
+      "effect": "Deal 3 Shadow damage. Curse 1.",
+      "flags": []
+    },
+    {
+      "number": 117,
+      "face": "Caged Songbird",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 118,
+      "face": "Wild Songbird",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 119,
+      "face": "Tortoise",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 120,
+      "face": "Hare",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 121,
+      "face": "Lighthouse",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 122,
+      "face": "Shipwreck",
+      "effect": "Banish another card from your hand. Deal 10 Decay damage.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 123,
+      "face": "Glasshouse",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 124,
+      "face": "Root Cellar",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 125,
+      "face": "Walled City",
+      "effect": "Gain 10 Ward.",
+      "flags": []
+    },
+    {
+      "number": 126,
+      "face": "Wilderness",
+      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 127,
+      "face": "Orchard",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 128,
+      "face": "Bone Orchard",
+      "effect": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 129,
+      "face": "Dawn Market",
+      "effect": "Discard a card. Draw 2 cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 130,
+      "face": "Night Market",
+      "effect": "Banish another card from your hand. Draw 3 cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 131,
+      "face": "Banquet Hall",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 132,
+      "face": "Empty Banquet Hall",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 133,
+      "face": "Observatory",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 134,
+      "face": "Underground Cavern",
+      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 135,
+      "face": "Salt Flat",
+      "effect": "Deal 6 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 136,
+      "face": "Deep Marsh",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 137,
+      "face": "Frozen Lake",
+      "effect": "Curse 1. Deal 2 Frost damage.",
+      "flags": []
+    },
+    {
+      "number": 138,
+      "face": "Boiling Lake",
+      "effect": "Deal 5 Fire damage. Apply 2 Burn.",
+      "flags": []
+    },
+    {
+      "number": 139,
+      "face": "Floating Library",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 140,
+      "face": "Sunken Library",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 141,
+      "face": "White Desert",
+      "effect": "Curse 1. Deal 3 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 142,
+      "face": "Black Forest",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 143,
+      "face": "Clockwork City",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 144,
+      "face": "Wandering Village",
+      "effect": "Shuffle your hand into your library. Draw 4 cards.",
+      "flags": []
+    },
+    {
+      "number": 145,
+      "face": "Sewing Needle",
+      "effect": "Put a card from your discard pile on top of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 146,
+      "face": "Scissors",
+      "effect": "Banish another card from your hand. Deal 7 Decay damage, ignoring Ward.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 147,
+      "face": "Compass",
+      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 148,
+      "face": "Labyrinth",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 149,
+      "face": "Lantern",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 150,
+      "face": "Shroud",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 151,
+      "face": "Prism",
+      "effect": "Deal 2 Radiance damage three times.",
+      "flags": []
+    },
+    {
+      "number": 152,
+      "face": "Black Glass",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 153,
+      "face": "Tuned Violin",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 154,
+      "face": "Broken Violin",
+      "effect": "Curse 3. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 155,
+      "face": "Balance Scales",
+      "effect": "Bless 1. Curse 1.",
+      "flags": []
+    },
+    {
+      "number": 156,
+      "face": "Loaded Dice",
+      "effect": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 157,
+      "face": "Chessboard",
+      "effect": "Scry. Curse 1.",
+      "flags": []
+    },
+    {
+      "number": 158,
+      "face": "Scattered Chess Pieces",
+      "effect": "Shuffle your hand into your library. Draw 4 cards.",
+      "flags": []
+    },
+    {
+      "number": 159,
+      "face": "Wax Seal",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 160,
+      "face": "Torn Letter",
+      "effect": "Banish another card from your hand.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 161,
+      "face": "Anchor",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 162,
+      "face": "Kite",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 163,
+      "face": "Metronome",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 164,
+      "face": "Wind Chime",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 165,
+      "face": "Lens",
+      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 166,
+      "face": "Blindfold",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 167,
+      "face": "Comb",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 168,
+      "face": "Tangled Hair",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 169,
+      "face": "Porcelain Doll",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 170,
+      "face": "Rag Doll",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 171,
+      "face": "Symmetry",
+      "effect": "Bless 1. Curse 1.",
+      "flags": []
+    },
+    {
+      "number": 172,
+      "face": "Asymmetry",
+      "effect": "Draw 2 cards. Discard a card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 173,
+      "face": "Unity",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 174,
+      "face": "Fragmentation",
+      "effect": "Banish another card from your hand. Deal 4 Decay damage twice.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 175,
+      "face": "Convergence",
+      "effect": "Put up to 2 cards from your discard pile on top of your library in any order.",
+      "flags": [
+        "choose-discarded-card",
+        "order-cards"
+      ]
+    },
+    {
+      "number": 176,
+      "face": "Divergence",
+      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 177,
+      "face": "Compression",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 178,
+      "face": "Expansion",
+      "effect": "Draw 3 cards.",
+      "flags": []
+    },
+    {
+      "number": 179,
+      "face": "Attraction",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 180,
+      "face": "Repulsion",
+      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 181,
+      "face": "Gravity",
+      "effect": "Deal 7 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 182,
+      "face": "Levitation",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 183,
+      "face": "Stillness",
+      "effect": "Curse 3. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 184,
+      "face": "Frenzy",
+      "effect": "Discard a card. Deal 10 Release damage.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 185,
+      "face": "Silence",
+      "effect": "Hush. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 186,
+      "face": "Clamor",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 187,
+      "face": "Awakening",
+      "effect": "Draw 1 card. Turn your hand to its light faces. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 188,
+      "face": "Slumber",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 189,
+      "face": "Multiplicity",
+      "effect": "Draw 3 cards. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 190,
+      "face": "Solitude",
+      "effect": "Banish all other cards in your hand.",
+      "flags": []
+    },
+    {
+      "number": 191,
+      "face": "Plenty",
+      "effect": "Heal 5 HP. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 192,
+      "face": "Famine",
+      "effect": "Lose 2 HP. Deal 8 Decay damage.",
+      "flags": []
+    },
+    {
+      "number": 193,
+      "face": "High Tide",
+      "effect": "Return up to 2 cards from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 194,
+      "face": "Low Tide",
+      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 195,
+      "face": "Exposure",
+      "effect": "Purge all beneficial statuses from the enemy. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 196,
+      "face": "Concealment",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 197,
+      "face": "Herald",
+      "effect": "Bless 2.",
+      "flags": []
+    },
+    {
+      "number": 198,
+      "face": "Smuggler",
+      "effect": "Put another card from your hand on the bottom of your library. Draw 2 cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 199,
+      "face": "Standard Bearer",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 200,
+      "face": "Flag Burner",
+      "effect": "Banish another card from your hand. Apply 3 Burn.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 201,
+      "face": "Animal Tamer",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 202,
+      "face": "Shapeshifter",
+      "effect": "Flip this card. Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 203,
+      "face": "Mask Maker",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 204,
+      "face": "Face Thief",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 205,
+      "face": "Fencer",
+      "effect": "Deal 2 Radiance damage twice.",
+      "flags": []
+    },
+    {
+      "number": 206,
+      "face": "Brawler",
+      "effect": "Lose 2 HP. Deal 11 Decay damage.",
+      "flags": []
+    },
+    {
+      "number": 207,
+      "face": "Charioteer",
+      "effect": "Deal 7 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 208,
+      "face": "Ferryman",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 209,
+      "face": "Auctioneer",
+      "effect": "Discard a card. Draw 2 cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 210,
+      "face": "Scavenger",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 211,
+      "face": "Ballerina",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 212,
+      "face": "Contortionist",
+      "effect": "Flip this card. Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 213,
+      "face": "Royal Hound",
+      "effect": "Deal 2 Binding damage twice.",
+      "flags": []
+    },
+    {
+      "number": 214,
+      "face": "Stray Hound",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 215,
+      "face": "Archivist",
+      "effect": "Put a card from your discard pile on top of your library. Scry.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 216,
+      "face": "Bookworm",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 217,
+      "face": "Surveyor",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 218,
+      "face": "Trespasser",
+      "effect": "Purge one random beneficial status from the enemy.",
+      "flags": []
+    },
+    {
+      "number": 219,
+      "face": "Chimney Sweep",
+      "effect": "Remove all your Burn. Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 220,
+      "face": "Smoke Spirit",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 221,
+      "face": "Coral Reef",
+      "effect": "Gain 9 Ward.",
+      "flags": []
+    },
+    {
+      "number": 222,
+      "face": "Kelp Forest",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 223,
+      "face": "Oyster",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 224,
+      "face": "Cuttlefish",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 225,
+      "face": "Firefly",
+      "effect": "Turn your hand to its light faces.",
+      "flags": []
+    },
+    {
+      "number": 226,
+      "face": "Cave Cricket",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 227,
+      "face": "Stalactite",
+      "effect": "Deal 6 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 228,
+      "face": "Geyser",
+      "effect": "Deal 7 Release damage. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 229,
+      "face": "Dandelion",
+      "effect": "Put up to 2 other cards from your hand on the bottom of your library. Draw that many cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 230,
+      "face": "Mandrake",
+      "effect": "Curse 3. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 231,
+      "face": "Snowdrop",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 232,
+      "face": "Nightshade",
+      "effect": "Deal 5 Decay damage, ignoring Ward. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 233,
+      "face": "Cocoon",
+      "effect": "Flip this card. Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 234,
+      "face": "Shed Skin",
+      "effect": "Banish another card from your hand. Draw 1 card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 235,
+      "face": "Lotus",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 236,
+      "face": "Corpse Flower",
+      "effect": "Banish a card from your discard pile. Deal 6 Decay damage.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 237,
+      "face": "Kingfisher",
+      "effect": "Deal 5 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 238,
+      "face": "Bat",
+      "effect": "Deal 3 Shadow damage. Leech.",
+      "flags": []
+    },
+    {
+      "number": 239,
+      "face": "Sunflower",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 240,
+      "face": "Moonflower",
+      "effect": "Turn your hand to its dark faces.",
+      "flags": []
+    },
+    {
+      "number": 241,
+      "face": "Starfish",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 242,
+      "face": "Sea Urchin",
+      "effect": "Deal 5 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 243,
+      "face": "Silkworm",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 244,
+      "face": "Silverfish",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 245,
+      "face": "Sceptre",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 246,
+      "face": "Begging Bowl",
+      "effect": "Draw 2 cards. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 247,
+      "face": "Quill",
+      "effect": "Put a card from your discard pile on top of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 248,
+      "face": "Eraser",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 249,
+      "face": "Fishing Net",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 250,
+      "face": "Harpoon",
+      "effect": "Deal 7 Release damage, ignoring Ward. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 251,
+      "face": "Sieve",
+      "effect": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 252,
+      "face": "Funnel",
+      "effect": "Put another card from your hand on top of your library.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 253,
+      "face": "Scabbard",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 254,
+      "face": "Drawn Blade",
+      "effect": "Deal 6 Release damage.",
+      "flags": []
+    },
+    {
+      "number": 255,
+      "face": "Tuning Fork",
+      "effect": "Remove all your Curse.",
+      "flags": []
+    },
+    {
+      "number": 256,
+      "face": "Rattle",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 257,
+      "face": "Sundial",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 258,
+      "face": "Water Clock",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 259,
+      "face": "Rope Ladder",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 260,
+      "face": "Trapdoor",
+      "effect": "Deal 5 Shadow damage, ignoring Ward.",
+      "flags": []
+    },
+    {
+      "number": 261,
+      "face": "Floodgate",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 262,
+      "face": "Broken Dam",
+      "effect": "Deal 7 Release damage.",
+      "flags": []
+    },
+    {
+      "number": 263,
+      "face": "Wax Fruit",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 264,
+      "face": "Rotting Fruit",
+      "effect": "Apply 3 Poison.",
+      "flags": []
+    },
+    {
+      "number": 265,
+      "face": "Measuring Rod",
+      "effect": "Scry.",
+      "flags": []
+    },
+    {
+      "number": 266,
+      "face": "Twisted Ribbon",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 267,
+      "face": "Glass Slipper",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 268,
+      "face": "Iron Boot",
+      "effect": "Deal 7 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 269,
+      "face": "Wedding Veil",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 270,
+      "face": "Funeral Veil",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 271,
+      "face": "Amphitheatre",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 272,
+      "face": "Backstage",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 273,
+      "face": "Grand Staircase",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 274,
+      "face": "Spiral Well",
+      "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 275,
+      "face": "Aqueduct",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 276,
+      "face": "Sewer",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 277,
+      "face": "Marble Quarry",
+      "effect": "Deal 7 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 278,
+      "face": "Peat Bog",
+      "effect": "Curse 1. Deal 2 Decay damage.",
+      "flags": []
+    },
+    {
+      "number": 279,
+      "face": "Bathhouse",
+      "effect": "Remove all your Burn. Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 280,
+      "face": "Icehouse",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 281,
+      "face": "Counting House",
+      "effect": "Banish another card from your hand. Draw 2 cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 282,
+      "face": "Thieves Den",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 283,
+      "face": "Dovecote",
+      "effect": "Keep 2 random cards in your hand.",
+      "flags": []
+    },
+    {
+      "number": 284,
+      "face": "Spider Nursery",
+      "effect": "Apply 2 Poison.",
+      "flags": []
+    },
+    {
+      "number": 285,
+      "face": "Tidal Causeway",
+      "effect": "Exchange a card in your hand with one in your discard pile.",
+      "flags": [
+        "choose-two-zone-targets"
+      ]
+    },
+    {
+      "number": 286,
+      "face": "Drifting Island",
+      "effect": "Shuffle your hand into your library. Draw 4 cards.",
+      "flags": []
+    },
+    {
+      "number": 287,
+      "face": "Crystal Ballroom",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 288,
+      "face": "Cinder Ballroom",
+      "effect": "Apply 3 Burn. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 289,
+      "face": "Pottery Workshop",
+      "effect": "Flip the top card of your discard pile. Return it to your hand.",
+      "flags": []
+    },
+    {
+      "number": 290,
+      "face": "Shard Heap",
+      "effect": "Deal 2 Decay damage three times.",
+      "flags": []
+    },
+    {
+      "number": 291,
+      "face": "Circus Ring",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 292,
+      "face": "Abandoned Fairground",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 293,
+      "face": "Beehive Palace",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 294,
+      "face": "Termite Palace",
+      "effect": "Remove 6 enemy Ward.",
+      "flags": []
+    },
+    {
+      "number": 295,
+      "face": "Paved Road",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 296,
+      "face": "Deer Trail",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 297,
+      "face": "Bell Founder",
+      "effect": "Bless 2.",
+      "flags": []
+    },
+    {
+      "number": 298,
+      "face": "Bell Breaker",
+      "effect": "Hush. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 299,
+      "face": "Crown Jeweler",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 300,
+      "face": "Crown Snatcher",
+      "effect": "Hush. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 301,
+      "face": "Prism Keeper",
+      "effect": "Deal 2 Radiance damage three times.",
+      "flags": []
+    },
+    {
+      "number": 302,
+      "face": "Shade Keeper",
+      "effect": "Keep 2 random cards in your hand.",
+      "flags": []
+    },
+    {
+      "number": 303,
+      "face": "Dream Binder",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 304,
+      "face": "Dream Unbinder",
+      "effect": "Remove all your Curse.",
+      "flags": []
+    },
+    {
+      "number": 305,
+      "face": "Clockmaker",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 306,
+      "face": "Clock Thief",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 307,
+      "face": "Court Physician",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 308,
+      "face": "Plague Doctor",
+      "effect": "Remove all your Poison. Heal 3 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 309,
+      "face": "Parchment Scribe",
+      "effect": "Put a card from your discard pile on top of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 310,
+      "face": "Ink Drinker",
+      "effect": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 311,
+      "face": "Portrait Painter",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 312,
+      "face": "Portrait Eraser",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 313,
+      "face": "Glassblower",
+      "effect": "Flip the top card of your discard pile. Return it to your hand.",
+      "flags": []
+    },
+    {
+      "number": 314,
+      "face": "Glass Crusher",
+      "effect": "Deal 6 Release damage, ignoring Ward.",
+      "flags": []
+    },
+    {
+      "number": 315,
+      "face": "Perfumer",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 316,
+      "face": "Scent Thief",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 317,
+      "face": "Stone Mason",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 318,
+      "face": "Stone Eater",
+      "effect": "Remove 4 enemy Ward. Heal 3 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 319,
+      "face": "Bird Keeper",
+      "effect": "Keep a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 320,
+      "face": "Bird Liberator",
+      "effect": "Draw 3 cards. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 321,
+      "face": "Cage Builder",
+      "effect": "Keep a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 322,
+      "face": "Cage Breaker",
+      "effect": "Remove all your Curse. Draw 2 cards. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 323,
+      "face": "Fortune Teller",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 324,
+      "face": "Fortune Gambler",
+      "effect": "Draw 3 cards. Discard a random card.",
+      "flags": []
+    },
+    {
+      "number": 325,
+      "face": "Lantern Lighter",
+      "effect": "Apply 3 Burn.",
+      "flags": []
+    },
+    {
+      "number": 326,
+      "face": "Lantern Snuffer",
+      "effect": "Remove all Burn from both combatants. Turn your hand to its dark faces.",
+      "flags": []
+    },
+    {
+      "number": 327,
+      "face": "Thread Spinner",
+      "effect": "Put a card from your discard pile on top of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 328,
+      "face": "Thread Cutter",
+      "effect": "Banish another card from your hand.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 329,
+      "face": "Storyteller",
+      "effect": "Draw 2 cards. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 330,
+      "face": "Story Swallower",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 331,
+      "face": "Coin Minter",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 332,
+      "face": "Coin Melter",
+      "effect": "Apply 1 Burn. Gain 1 mana. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 333,
+      "face": "Path Maker",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 334,
+      "face": "Path Eraser",
+      "effect": "Banish another card from your hand.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 335,
+      "face": "Weather Watcher",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 336,
+      "face": "Storm Chaser",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 337,
+      "face": "Oath Keeper",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 338,
+      "face": "Oath Breaker",
+      "effect": "Banish another card from your hand. Draw 1 card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 339,
+      "face": "Door Warden",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 340,
+      "face": "Door Wanderer",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 341,
+      "face": "Doll Mender",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 342,
+      "face": "Doll Thief",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 343,
+      "face": "Music Conductor",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 344,
+      "face": "Improviser",
+      "effect": "Draw 2 cards. Discard a card.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 345,
+      "face": "Tide Keeper",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 346,
+      "face": "Tide Wanderer",
+      "effect": "Exchange a card in your hand with one in your discard pile.",
+      "flags": [
+        "choose-two-zone-targets"
+      ]
+    },
+    {
+      "number": 347,
+      "face": "Flying Beetle",
+      "effect": "Deal 5 Release damage.",
+      "flags": []
+    },
+    {
+      "number": 348,
+      "face": "Burrowing Beetle",
+      "effect": "Gain 5 Ward.",
+      "flags": []
+    },
+    {
+      "number": 349,
+      "face": "White Fox",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 350,
+      "face": "Black Fox",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 351,
+      "face": "Glass Snail",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 352,
+      "face": "Stone Slug",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 353,
+      "face": "Dawn Crane",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 354,
+      "face": "Night Heron",
+      "effect": "Deal 5 Shadow damage.",
+      "flags": []
+    },
+    {
+      "number": 355,
+      "face": "Sunfish",
+      "effect": "Deal 6 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 356,
+      "face": "Deep Sea Dragonfish",
+      "effect": "Deal 5 Decay damage. Leech. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 357,
+      "face": "Day Moth",
+      "effect": "Turn a random dark card in your hand to its light face.",
+      "flags": []
+    },
+    {
+      "number": 358,
+      "face": "Night Moth",
+      "effect": "Turn a random light card in your hand to its dark face.",
+      "flags": []
+    },
+    {
+      "number": 359,
+      "face": "Alabaster Spider",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 360,
+      "face": "Obsidian Spider",
+      "effect": "Deal 2 Decay damage. Apply 2 Poison.",
+      "flags": []
+    },
+    {
+      "number": 361,
+      "face": "Pearl Crab",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 362,
+      "face": "Hermit Crab",
+      "effect": "Gain 5 Ward.",
+      "flags": []
+    },
+    {
+      "number": 363,
+      "face": "Honey Ant",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 364,
+      "face": "Army Ant",
+      "effect": "Deal 2 Decay damage three times.",
+      "flags": []
+    },
+    {
+      "number": 365,
+      "face": "Albino Serpent",
+      "effect": "Deal 6 Radiance damage.",
+      "flags": []
+    },
+    {
+      "number": 366,
+      "face": "Black Adder",
+      "effect": "Deal 3 Decay damage. Apply 2 Poison.",
+      "flags": []
+    },
+    {
+      "number": 367,
+      "face": "Hard Coral",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 368,
+      "face": "Soft Coral",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 369,
+      "face": "Hummingbird",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 370,
+      "face": "Hawk Moth",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 371,
+      "face": "Whole Egg",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 372,
+      "face": "Cracked Egg",
+      "effect": "Draw 2 cards. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 373,
+      "face": "Butterfly Wing",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 374,
+      "face": "Beetle Shell",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 375,
+      "face": "Amber Frog",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 376,
+      "face": "Indigo Toad",
+      "effect": "Apply 3 Poison.",
+      "flags": []
+    },
+    {
+      "number": 377,
+      "face": "Red Panda",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 378,
+      "face": "Clouded Leopard",
+      "effect": "Deal 6 Shadow damage.",
+      "flags": []
+    },
+    {
+      "number": 379,
+      "face": "Living Jellyfish",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 380,
+      "face": "Jellyfish Fossil",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 381,
+      "face": "White Poppy",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 382,
+      "face": "Black Tulip",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 383,
+      "face": "Silver Birch",
+      "effect": "Put up to 2 cards from your discard pile on the bottom of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 384,
+      "face": "Hollow Oak",
+      "effect": "Keep 2 random cards in your hand.",
+      "flags": []
+    },
+    {
+      "number": 385,
+      "face": "Fern Fiddlehead",
+      "effect": "Flip this card. Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 386,
+      "face": "Fallen Leaf",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 387,
+      "face": "Flower Bud",
+      "effect": "Flip this card. Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 388,
+      "face": "Seed Pod",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 389,
+      "face": "Cultivated Mushroom",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 390,
+      "face": "Wild Mushroom",
+      "effect": "Shuffle your hand into your library. Draw 4 cards.",
+      "flags": []
+    },
+    {
+      "number": 391,
+      "face": "Cactus Flower",
+      "effect": "Deal 6 Growth damage.",
+      "flags": []
+    },
+    {
+      "number": 392,
+      "face": "Desert Thorn",
+      "effect": "Deal 5 Decay damage, ignoring Ward.",
+      "flags": []
+    },
+    {
+      "number": 393,
+      "face": "Ice Crystal",
+      "effect": "Freeze. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 394,
+      "face": "Salt Crystal",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 395,
+      "face": "River Pearl",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 396,
+      "face": "Volcanic Obsidian",
+      "effect": "Apply 3 Burn.",
+      "flags": []
+    },
+    {
+      "number": 397,
+      "face": "Golden Mask",
+      "effect": "Flip this card. Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 398,
+      "face": "Cracked Mask",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 399,
+      "face": "Silver Crown",
+      "effect": "Bless 2.",
+      "flags": []
+    },
+    {
+      "number": 400,
+      "face": "Rusty Crown",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 401,
+      "face": "Crystal Goblet",
+      "effect": "Heal 5 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 402,
+      "face": "Clay Cup",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 403,
+      "face": "Silk Glove",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 404,
+      "face": "Iron Gauntlet",
+      "effect": "Deal 6 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 405,
+      "face": "Woven Basket",
+      "effect": "Keep 2 random cards in your hand.",
+      "flags": []
+    },
+    {
+      "number": 406,
+      "face": "Unwoven Reeds",
+      "effect": "Banish another card from your hand.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 407,
+      "face": "Music Box",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 408,
+      "face": "Silent Music Box",
+      "effect": "Hush. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 409,
+      "face": "Closed Parasol",
+      "effect": "Flip this card. Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 410,
+      "face": "Open Parasol",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 411,
+      "face": "White Fan",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 412,
+      "face": "Black Fan",
+      "effect": "Flip your hand.",
+      "flags": []
+    },
+    {
+      "number": 413,
+      "face": "Wooden Spool",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 414,
+      "face": "Loose Thread",
+      "effect": "Banish another card from your hand.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 415,
+      "face": "Gilded Cage",
+      "effect": "Keep a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 416,
+      "face": "Broken Cage",
+      "effect": "Remove all your Curse. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 417,
+      "face": "Bronze Mirror",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 418,
+      "face": "Tarnished Mirror",
+      "effect": "Flip the top card of your discard pile. Return it to your hand.",
+      "flags": []
+    },
+    {
+      "number": 419,
+      "face": "Glass Marble",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 420,
+      "face": "Clay Marble",
+      "effect": "Deal 6 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 421,
+      "face": "Silver Locket",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 422,
+      "face": "Empty Locket",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 423,
+      "face": "Wax Key",
+      "effect": "Draw 1 card. Flip your hand. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 424,
+      "face": "Melted Key",
+      "effect": "Banish a card from your discard pile. Banish this card.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 425,
+      "face": "Golden Shears",
+      "effect": "Deal 6 Release damage, ignoring Ward.",
+      "flags": []
+    },
+    {
+      "number": 426,
+      "face": "Blunt Shears",
+      "effect": "Deal 3 Binding damage.",
+      "flags": []
+    },
+    {
+      "number": 427,
+      "face": "Copper Coin",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 428,
+      "face": "Hollow Coin",
+      "effect": "Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 429,
+      "face": "Feather Quill",
+      "effect": "Put a card from your discard pile on top of your library.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 430,
+      "face": "Ink Blot",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 431,
+      "face": "Paintbrush",
+      "effect": "Flip a random card in your hand.",
+      "flags": []
+    },
+    {
+      "number": 432,
+      "face": "Paint Scraper",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 433,
+      "face": "Lit Match",
+      "effect": "Apply 3 Burn. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 434,
+      "face": "Spent Match",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 435,
+      "face": "Paper Boat",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 436,
+      "face": "Stone Boat",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 437,
+      "face": "Iron Needlecase",
+      "effect": "Keep this card.",
+      "flags": []
+    },
+    {
+      "number": 438,
+      "face": "Empty Needlecase",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 439,
+      "face": "White Ribbon",
+      "effect": "Keep 2 random cards in your hand.",
+      "flags": []
+    },
+    {
+      "number": 440,
+      "face": "Black Ribbon",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 441,
+      "face": "Hour Bell",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 442,
+      "face": "Silent Bell",
+      "effect": "Hush. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 443,
+      "face": "Intact Sapphire",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 444,
+      "face": "Cracked Sapphire",
+      "effect": "Deal 6 Decay damage, ignoring Ward.",
+      "flags": []
+    },
+    {
+      "number": 445,
+      "face": "Ivory Chess King",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 446,
+      "face": "Obsidian Chess Queen",
+      "effect": "Deal 7 Shadow damage.",
+      "flags": []
+    },
+    {
+      "number": 447,
+      "face": "Sunlit Gallery",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 448,
+      "face": "Shadow Gallery",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 449,
+      "face": "Winter Conservatory",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 450,
+      "face": "Summer Conservatory",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 451,
+      "face": "High Balcony",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 452,
+      "face": "Hidden Basement",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 453,
+      "face": "Open Pavilion",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 454,
+      "face": "Walled Pavilion",
+      "effect": "Gain 8 Ward.",
+      "flags": []
+    },
+    {
+      "number": 455,
+      "face": "Crystal Grotto",
+      "effect": "Reflect the first hit of the enemy's next attack. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 456,
+      "face": "Basalt Cave",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 457,
+      "face": "Hedge Garden",
+      "effect": "Look at the top 3 cards of your library. Put them back in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 458,
+      "face": "Wild Thicket",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 459,
+      "face": "Marble Fountain",
+      "effect": "Heal 6 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 460,
+      "face": "Dry Fountain",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 461,
+      "face": "Golden Atrium",
+      "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
+      "flags": [
+        "inspection-selection-or-order"
+      ]
+    },
+    {
+      "number": 462,
+      "face": "Black Atrium",
+      "effect": "Keep your hand.",
+      "flags": []
+    },
+    {
+      "number": 463,
+      "face": "Moonlit Pier",
+      "effect": "Scry.",
+      "flags": []
+    },
+    {
+      "number": 464,
+      "face": "Sunlit Pier",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 465,
+      "face": "Hilltop Windmill",
+      "effect": "Gain 1 mana. Draw 1 card. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 466,
+      "face": "Underground Mill",
+      "effect": "Discard a card. Draw 2 cards.",
+      "flags": [
+        "choose-held-card"
+      ]
+    },
+    {
+      "number": 467,
+      "face": "Watchtower",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 468,
+      "face": "Collapsed Watchtower",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 469,
+      "face": "Open Courtyard",
+      "effect": "Draw 2 cards.",
+      "flags": []
+    },
+    {
+      "number": 470,
+      "face": "Roofed Courtyard",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 471,
+      "face": "Grand Library",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 472,
+      "face": "Forgotten Archive",
+      "effect": "Banish a card from your discard pile.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 473,
+      "face": "Frozen Waterfall",
+      "effect": "Curse 1. Deal 3 Frost damage.",
+      "flags": []
+    },
+    {
+      "number": 474,
+      "face": "Flowing Waterfall",
+      "effect": "Remove all your Burn. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 475,
+      "face": "Coral Palace",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 476,
+      "face": "Ship Graveyard",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 477,
+      "face": "Ivory Bridge",
+      "effect": "Exchange a card in your hand with one in your discard pile.",
+      "flags": [
+        "choose-two-zone-targets"
+      ]
+    },
+    {
+      "number": 478,
+      "face": "Obsidian Bridge",
+      "effect": "Curse 2.",
+      "flags": []
+    },
+    {
+      "number": 479,
+      "face": "Glass Stairway",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 480,
+      "face": "Stone Stairway",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 481,
+      "face": "Candlelit Theatre",
+      "effect": "Turn your hand to its light faces.",
+      "flags": []
+    },
+    {
+      "number": 482,
+      "face": "Darkened Theatre",
+      "effect": "Turn your hand to its dark faces.",
+      "flags": []
+    },
+    {
+      "number": 483,
+      "face": "Tiled Bath",
+      "effect": "Remove all your Burn. Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 484,
+      "face": "Broken Bath",
+      "effect": "Deal 2 Decay damage twice.",
+      "flags": []
+    },
+    {
+      "number": 485,
+      "face": "Clock Tower",
+      "effect": "Scry. Draw 1 card.",
+      "flags": []
+    },
+    {
+      "number": 486,
+      "face": "Timeless Tower",
+      "effect": "Return a card from your discard pile to your hand.",
+      "flags": [
+        "choose-discarded-card"
+      ]
+    },
+    {
+      "number": 487,
+      "face": "Silk Tent",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 488,
+      "face": "Wicker Shelter",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 489,
+      "face": "Stone Circle",
+      "effect": "Gain 6 Ward.",
+      "flags": []
+    },
+    {
+      "number": 490,
+      "face": "Scattered Stones",
+      "effect": "Deal 2 Binding damage three times.",
+      "flags": []
+    },
+    {
+      "number": 491,
+      "face": "Shallow Shore",
+      "effect": "Scry.",
+      "flags": []
+    },
+    {
+      "number": 492,
+      "face": "Abyssal Trench",
+      "effect": "Deal 5 Shadow damage.",
+      "flags": []
+    },
+    {
+      "number": 493,
+      "face": "Bright Clearing",
+      "effect": "Heal 4 HP. Banish this card.",
+      "flags": []
+    },
+    {
+      "number": 494,
+      "face": "Dense Canopy",
+      "effect": "Gain 7 Ward.",
+      "flags": []
+    },
+    {
+      "number": 495,
+      "face": "Open Window",
+      "effect": "Scry.",
+      "flags": []
+    },
+    {
+      "number": 496,
+      "face": "Shuttered Window",
+      "effect": "Keep your hand.",
+      "flags": []
+    }
+  ],
+  "remaining_enemy_prompts": [],
+  "limitations": [
+    "Reference-model arithmetic and static consistency only; no complete combat simulation or human playtest.",
+    "Percentage parameters are comparison assumptions, not approval.",
+    "Freeze sequences with an intervening attack or Fire cannot receive a final outcome until thaw is chosen.",
+    "Older incidental card choices are flagged, not all redesigned."
+  ]
+}

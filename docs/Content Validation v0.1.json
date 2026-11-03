@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "date": "2026-11-03",
-  "check_count": 2409,
+  "check_count": 2443,
   "checked": [
     "496 unique canonical faces",
     "248 physical pairs with one face per side",
@@ -1472,6 +1472,7 @@
     "Dusk & Dawn — Game Design v0.2.html: local link exists Dusk & Dawn — Card Effect Catalogue v0.2.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Dusk & Dawn — Enemy Mechanics Catalogue v0.1.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Status and Targeting Revision v0.1.html",
+    "Dusk & Dawn — Game Design v0.2.html: local link exists Bless Curse and Control Review v0.1.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Full Content Review v0.1.html",
     "Dusk & Dawn — Game Design v0.2.html: local link exists Effect Rules v0.1.json",
     "Dusk & Dawn — Game Design v0.2.html: portable references, no theme chips or escaped links",
@@ -2086,9 +2087,15 @@
     "Full Content Review v0.1.html: portable references, no theme chips or escaped links",
     "Status and Targeting Revision v0.1.html: unique HTML IDs",
     "Status and Targeting Revision v0.1.html: embedded face examples match canonical text",
+    "Status and Targeting Revision v0.1.html: local link exists Bless Curse and Control Review v0.1.html",
     "Status and Targeting Revision v0.1.html: local link exists Dusk & Dawn — Game Design v0.2.html",
     "Status and Targeting Revision v0.1.html: local link exists Full Content Review v0.1.html",
     "Status and Targeting Revision v0.1.html: portable references, no theme chips or escaped links",
+    "Bless Curse and Control Review v0.1.html: unique HTML IDs",
+    "Bless Curse and Control Review v0.1.html: embedded face examples match canonical text",
+    "Bless Curse and Control Review v0.1.html: local link exists Dusk & Dawn — Game Design v0.2.html",
+    "Bless Curse and Control Review v0.1.html: local link exists Effect Rules v0.1.json",
+    "Bless Curse and Control Review v0.1.html: portable references, no theme chips or escaped links",
     "Card Artwork Coverage v0.1.json: complete recorded visual coverage",
     "Card Artwork Coverage v0.1.json: exact source artwork set",
     "Card Artwork Coverage v0.1.json: source hashes unchanged",
@@ -2102,12 +2109,12 @@
     "arithmetic: Moth Sun hit",
     "arithmetic: Dentist extraction against five Ward",
     "arithmetic: Hushed Dentist against five Ward",
-    "arithmetic: Weaken choir first hit only",
-    "arithmetic: Weakened choir through three Ward",
+    "arithmetic: Curse flat candidate affects the whole choir",
+    "arithmetic: Cursed choir through two Ward",
     "arithmetic: Leech final before Ward",
-    "arithmetic: Leech after Weaken",
+    "arithmetic: Leech after Bless and Curse",
     "arithmetic: Reflected same final hit through attacker Ward",
-    "arithmetic: Prism weakness and Mark once",
+    "arithmetic: Prism weakness once, Bless on every hit",
     "arithmetic: Burn halves after tick before mouth condition",
     "arithmetic: Mana tax expires after refill",
     "arithmetic: hand cap after three kept cards",
@@ -2124,7 +2131,15 @@
     "every Keep and Flip instruction has an explicit automatic target",
     "all current self-Keep effects leave the vacated source slot available",
     "automatic-target instructions expose zero selection prompts",
-    "discussion candidates are not settled keywords or actual effects",
+    "retired keywords absent from current card/enemy effects and rule keys",
+    "approved keyword directions present",
+    "flat versus percentage choice remains explicitly open",
+    "no attack or Fire thaw rule was silently chosen",
+    "Cleanse/Purge explicitly print random-one or all without selection prompts",
+    "every Cleanse/Purge has indexed quantity and status-kind targeting",
+    "all 243 enemy Freeze previews preserve the unresolved thaw condition",
+    "enemy held-card interactions no longer add selection prompts",
+    "retired structured operations migrated",
     "six individually themed Poison-applying faces",
     "only the three reviewed mould/spider enemies apply Poison",
     "halving 0: finite duration, decreasing counters and bounded damage",
@@ -2411,7 +2426,26 @@
     "empty-library Scry does not reshuffle or create a card",
     "Scry reveals a top supplied later in the turn",
     "Scry follows the changed library top",
-    "Scry ends before end-turn operations"
+    "Scry ends before end-turn operations",
+    "all entries included in the scaling and prompt audit",
+    "remaining incidental choices are counted and exposed",
+    "arithmetic: Bless and Curse really add stacks",
+    "arithmetic: flat Blessed Prism",
+    "arithmetic: flat Cursed Millipede",
+    "arithmetic: 25 percent Cursed Choir is unchanged",
+    "arithmetic: 25 percent Millipede Curse 1 and 2 share a rounding plateau",
+    "arithmetic: percentage candidate upper bound",
+    "arithmetic: percentage candidate zero floor",
+    "arithmetic: opposed stacks combine before rounding",
+    "the next attack consumes all Bless/Curse even at zero, preserving other statuses",
+    "reference model requires an explicit scaling candidate",
+    "one-random Cleanse removes an entire eligible kind only",
+    "Purge all clears positive statuses and preserves negative ones",
+    "empty eligible removal pool does nothing",
+    "random removal selects kinds without stack weighting",
+    "uncontested Freeze skips exactly one scheduled action and advances",
+    "an unrelated Fire event does not create an unresolved Freeze state",
+    "contested thaw events remain unresolved in reference previews"
   ],
   "arithmetic_examples": {
     "Moth Sun hit": {
@@ -2426,19 +2460,19 @@
       "result": 0,
       "expected": 0
     },
-    "Weaken choir first hit only": {
+    "Curse flat candidate affects the whole choir": {
       "result": [
-        0,
-        2,
-        2
+        1,
+        1,
+        1
       ],
       "expected": [
-        0,
-        2,
-        2
+        1,
+        1,
+        1
       ]
     },
-    "Weakened choir through three Ward": {
+    "Cursed choir through two Ward": {
       "result": 1,
       "expected": 1
     },
@@ -2446,24 +2480,24 @@
       "result": 30,
       "expected": 30
     },
-    "Leech after Weaken": {
-      "result": 3,
-      "expected": 3
+    "Leech after Bless and Curse": {
+      "result": 5,
+      "expected": 5
     },
     "Reflected same final hit through attacker Ward": {
       "result": 4,
       "expected": 4
     },
-    "Prism weakness and Mark once": {
+    "Prism weakness once, Bless on every hit": {
       "result": [
         7,
-        2,
-        2
+        5,
+        5
       ],
       "expected": [
         7,
-        2,
-        2
+        5,
+        5
       ]
     },
     "Burn halves after tick before mouth condition": {
@@ -2641,6 +2675,94 @@
     "Burn 1 cannot feed Lantern Eater after tick": {
       "result": 0,
       "expected": 0
+    },
+    "Bless and Curse really add stacks": {
+      "result": 5,
+      "expected": 5
+    },
+    "flat Blessed Prism": {
+      "result": [
+        3,
+        3,
+        3
+      ],
+      "expected": [
+        3,
+        3,
+        3
+      ]
+    },
+    "flat Cursed Millipede": {
+      "result": [
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "25 percent Cursed Choir is unchanged": {
+      "result": [
+        2,
+        2,
+        2
+      ],
+      "expected": [
+        2,
+        2,
+        2
+      ]
+    },
+    "25 percent Millipede Curse 1 and 2 share a rounding plateau": {
+      "result": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "percentage candidate upper bound": {
+      "result": [
+        22
+      ],
+      "expected": [
+        22
+      ]
+    },
+    "percentage candidate zero floor": {
+      "result": [
+        0
+      ],
+      "expected": [
+        0
+      ]
+    },
+    "opposed stacks combine before rounding": {
+      "result": [
+        2,
+        3,
+        6
+      ],
+      "expected": [
+        2,
+        3,
+        6
+      ]
     }
   },
   "limitations": [
@@ -2652,27 +2774,27 @@
     "reviewed_card_faces": 496,
     "reviewed_enemies": 110,
     "enemy_actions": 243,
-    "changed_card_faces": 279,
-    "distinct_card_descriptions": 157,
+    "changed_card_faces": 323,
+    "distinct_card_descriptions": 158,
     "card_Ward_before": 93,
-    "card_Ward_after": 41,
+    "card_Ward_after": 39,
     "card_Ward_grants_before": 65,
     "card_Ward_grants_after": 28,
     "enemy_mechanics_Ward_before": 52,
-    "enemy_mechanics_Ward_after": 22,
+    "enemy_mechanics_Ward_after": 23,
     "card_Leech_faces": 4,
     "Hush_usable_enemies": 110,
-    "keyword_free_faces": 104,
+    "keyword_free_faces": 105,
     "card_Poison_faces": 7,
     "direct_player_damage_type_counts": {
       "Radiance": 13,
       "Shadow": 15,
       "Growth": 2,
       "Decay": 22,
-      "Binding": 10,
+      "Binding": 11,
       "Release": 9,
       "Fire": 1,
-      "Frost": 3,
+      "Frost": 2,
       "Memory": 0,
       "Oblivion": 1
     }

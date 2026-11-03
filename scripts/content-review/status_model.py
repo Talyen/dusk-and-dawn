@@ -64,3 +64,35 @@ class ScryView:
  def enable(self):self.active=True
  def visible(self,library):return library[0] if self.active and library else None
  def end_turn(self):self.active=False
+
+# Explicit candidate models: no numerical model is silently selected here.
+def add_stacks(current,incoming):
+ halve(current);halve(incoming)
+ return current+incoming
+
+def attack_damage(hits,bless,curse,model,weakness=0):
+ halve(bless);halve(curse);halve(weakness)
+ values=[v+(weakness if i==0 else 0) for i,v in enumerate(hits)]
+ if model=='flat':return [max(0,v+bless-curse) for v in values]
+ if model=='percent25_nearest':
+  quarters=max(0,min(8,4+bless-curse))
+  return [(v*quarters+2)//4 for v in values]
+ raise ValueError('Choose an explicit candidate model; the final scaling decision is open')
+
+def remove_statuses(statuses,eligible,quantity,rng):
+ pool=sorted(k for k in statuses if k in eligible and statuses[k])
+ if quantity=='all':chosen=pool
+ elif quantity=='one_random':chosen=[rng.choice(pool)] if pool else []
+ else:raise ValueError('Quantity must explicitly be all or one_random')
+ for k in chosen:statuses.pop(k)
+ return chosen
+
+def frozen_action(frozen,intervening_event=None):
+ if frozen and intervening_event in ['direct_attack','Fire']:
+  return {'outcome':'unresolved','reason':'thaw behavior has not been approved'}
+ return {'outcome':'skip' if frozen else 'act','advance':True,'clear_Freeze':bool(frozen)}
+
+def resolve_attack_statuses(statuses,hits,model,weakness=0):
+ result=attack_damage(hits,statuses.get('Bless',0),statuses.get('Curse',0),model,weakness)
+ statuses.pop('Bless',None);statuses.pop('Curse',None)
+ return result

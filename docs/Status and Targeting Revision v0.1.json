@@ -27,7 +27,7 @@
       "tick": "current amount, then floor(amount/2)",
       "application": "maximum of existing and incoming value, separately per status",
       "blocked_damage_still_decays": true,
-      "modified_by_Mark_weakness_Weaken_Reflect_Leech": false,
+      "modified_by_Bless_Curse_weakness_Reflect_Leech": false,
       "defeat": "stop immediately"
     },
     "Scry": {
@@ -54,19 +54,87 @@
       "empty_random_pool": "do nothing",
       "insufficient_random_pool": "use all available"
     },
-    "not_approved_keywords": [
-      "Freeze",
-      "Curse",
-      "Bless",
-      "Purge",
-      "Cleanse"
+    "attack_modifiers": {
+      "approved": "Bless and Curse add stacks and affect every hit of the next direct attack; replace Mark and Weaken",
+      "final_scaling_decision": null,
+      "recommended_model": "flat",
+      "working_preview_model": "flat",
+      "flat_candidate": {
+        "per_stack": 1,
+        "formula": "max(0, base hit + first-hit weakness + Bless - Curse)",
+        "counter_cap": null,
+        "damage_floor": 0,
+        "upper_damage_cap": null
+      },
+      "percentage_candidate": {
+        "per_stack_percent": 25,
+        "stacking": "add percentage points; net Bless minus Curse before clamping",
+        "multiplier_bounds": [
+          0,
+          2
+        ],
+        "rounding": "nearest integer; half ties upward",
+        "formula": "round_half_up((base hit + first-hit weakness) * clamp(1 + 0.25*(Bless-Curse), 0, 2))",
+        "status": "comparison only, not approved"
+      },
+      "duration": "next direct attack, including its extra hits; non-attacks do not spend counters",
+      "stacking": "add; consume all Bless and Curse on that attack, even at zero damage",
+      "damage_types": "each hit keeps its printed type",
+      "damage_over_time_and_reactions": "unmodified",
+      "end_of_fight": "clear"
+    },
+    "Freeze": {
+      "approved": "enemy action control",
+      "skip": "whole next action if still active; advance pattern and clear",
+      "stacking": "does not stack or queue",
+      "thaw_on_attack": null,
+      "thaw_on_Fire": null,
+      "preview": "conditional on still Frozen at the scheduled action; no thaw rule assumed",
+      "reactive_traits": "remain active while displayed unless Hushed",
+      "Ward_decay": "still happens at action start",
+      "target": "enemy only"
+    },
+    "Cleanse": {
+      "target": "self",
+      "quantity": "one random eligible status or all, explicitly printed",
+      "eligible": [
+        "Burn",
+        "Poison",
+        "Curse",
+        "Hush",
+        "Freeze",
+        "next-normal-draw penalty",
+        "next-mana-refill penalty"
+      ],
+      "one": "whole named effect, all stacks",
+      "random": "uniform across active eligible kinds",
+      "selection_prompts": 0,
+      "empty_pool": "do nothing; continue later sentences"
+    },
+    "Purge": {
+      "target": "enemy",
+      "quantity": "one random eligible status or all, explicitly printed",
+      "eligible": [
+        "Ward",
+        "Reflect",
+        "Bless"
+      ],
+      "one": "whole named effect, all stacks",
+      "random": "uniform across active eligible kinds",
+      "selection_prompts": 0,
+      "printed_traits": "not eligible",
+      "empty_pool": "do nothing; continue later sentences"
+    },
+    "unresolved_decisions": [
+      "Bless/Curse flat versus percentage scaling and final per-card stack counts",
+      "Freeze thaw from attacks and/or Fire"
     ]
   },
   "counts": {
     "card_faces_checked": 496,
     "enemies_checked": 110,
-    "changed_card_descriptions_since_previous_commit": 126,
-    "enemy_entries_with_text_or_type_changes": 30,
+    "changed_card_descriptions_since_previous_commit": 202,
+    "enemy_entries_with_text_or_type_changes": 62,
     "self_Keep_faces": 29,
     "whole_hand_Keep_faces": 12,
     "random_Keep_faces": 8,
@@ -111,81 +179,63 @@
   "balance_and_gameplay": [
     "Ward banking makes spare defense useful across turns and can make quiet enemy turns more defensive. Repeated gains may support stalls: 10 Ward every turn with no damage approaches 19 from zero after gain. Values remain unchanged pending playtests; test healing plus Ward and shield-stripping counters.",
     "Burn loses damage faster: Burn 3 changes from 3+2+1=6 to 3+1=4; Burn 4 becomes 4+2+1=7. Poison uses the same curve with Decay damage. Existing Burn amounts are preserved; the six new Poison faces use provisional values. Both counters coexist, can be absorbed by Ward, and use max application rather than additive stacking. They deliberately share their math; their current differences are their independent counters, damage labels and specific cures or feeding interactions.",
-    "Damage-over-time instances are not direct attacks. Neither Burn nor Poison triggers weakness, Mark, Weaken, Reflect or Leech. Fire replaces the damage label only; the card named Flame and all artwork filenames retain their identities.",
+    "Damage-over-time instances are not direct attacks. Neither Burn nor Poison is modified by weakness, Bless, Curse, Reflect or Leech. Fire replaces the damage label only; the card named Flame and all artwork filenames retain their identities.",
     "Scry trades top-card filtering for turn-long information. Scry followed by Draw reveals the next top too, supporting informed draw, ordering and facing decisions without a prompt. A pure Scry face may be weak at 1 mana; test it before adding unrelated rider effects.",
     "Self-Keep preserves a particular known physical card, including its opposite face for later Flip. Whole-hand Keep can preserve too much and restrict fresh draws: seven kept cards allow only one new card under the cap. It never grants a free replay; every play still costs 1 mana.",
     "Self-Flip plus self-Keep gives Cocoon, Flower Bud and other transformation subjects a direct change of form. The original played description finishes even after its source flips. Random targets reduce prompts but reduce precision; sample only after payment, without replacement, and preview the pool rather than a secret result.",
     "Pottery Workshop, Glassblower and Tarnished Mirror now transform the visible top discarded card. End-turn discard order follows hand order rather than asking for an ordering choice; bespoke effects that explicitly say “in any order” retain that deliberate choice.",
     "The Mould Harpist spreads spores; Saffron Spider and Velvet Widow deliver venom. The Janitor removes both damaging residues. Poison 2 totals 3 before prevention; Poison 3 totals 4. These are thematic proposals with different pressure, not tested encounter balance. The Plague Doctor explicitly treats Poison; most other recovery remains unchanged.",
-    "Freeze, Curse and Bless need a distinct approved function before becoming keywords. Purge and Cleanse can be clear procedures with fixed scope and no extra target menu, but broadening an existing narrow cure into either would be a separate balance change."
+    "Bless and Curse are now stacking whole-attack modifiers; Mark and Weaken are retired. Cleanse and Purge print one random kind or all. Scaling and Freeze thaw remain unresolved; see the current comparison and prompt audit."
   ],
-  "unapproved_keyword_proposals": {
-    "Freeze": {
-      "status": "discussion-only; no card or enemy uses Freeze",
-      "recommendation": "Keep Freeze out of the current contract until halving statuses and the new targets are tested. Frost already uses Weaken. If attack prevention still feels missing, test a breakable freeze as a small separate prototype.",
-      "alternatives": [
-        "Use Frost attacks plus Weaken: adds no status or lockout rule, but does not communicate a complete freeze.",
-        "Reduce all hits of the next attack: distinguishes it from first-hit Weaken, but amounts, expiry and repeated zero-damage attacks need testing.",
-        "Skip the next whole action: clearest immobility fantasy and strongest control, but can erase all pressure when chained and overlaps Hush.",
-        "Breakable freeze: provisionally skip the next action, ending sooner on any damage. This creates a preparation window rather than free damage; Burn and Poison can thaw it before the action. It needs explicit answers for reactive traits, Hush, reflected damage and an expiring skipped action."
-      ],
-      "trial_constraints": "Do not add a player effect, immunity, resistance or once-per-fight exception here. A future trial should show exactly when thaw occurs and initially Banish its source. Banish limits repeats but does not prove safety from lockouts."
+  "directions_and_open_parameters": {
+    "Bless": {
+      "status": "approved stacking buff; numerical scaling open",
+      "current_direction": "Affects every hit of the owner’s next direct attack; applications add and all stacks are spent on that attack. The catalogue shows a labeled provisional flat model.",
+      "open_decision": "Flat +1 per stack versus percentage scaling; no final unit is chosen."
     },
     "Curse": {
-      "status": "discussion-only",
-      "recommendation": "Use Curse as an evocative card or action name with an explicit effect for now, rather than an unspecified debuff keyword. Existing Mark, Weaken and Poison already express clear harms.",
-      "alternatives": [
-        "Curse as another Weaken or Mark is easy to implement but duplicates an existing rule.",
-        "Curse as reduced healing creates a distinct anti-recovery role, but is ineffective against most current enemies. A possible later trial is “Reduce the next HP heal by N, to a minimum of 0, then remove Curse”; keep only the higher pending value, do not add, and clear at fight end. It would affect Leech healing but never its damage, and would not reverse an earlier heal. Consume it on the next healing effect even at full HP; do not track HP actually restored.",
-        "Curse as damage per card play punishes hand-play builds and is asymmetric because enemies have action pools rather than hands. Do not introduce it without a concrete encounter reason."
-      ],
-      "classification_if_adopted": "Harmful combatant status; a candidate for Cleanse, not Purge. The exact effect, N and lifetime still need approval."
+      "status": "approved stacking debuff; numerical scaling open",
+      "current_direction": "Affects every hit of the holder’s next direct attack; applications add and all stacks are spent. It replaces Weaken; Mark is also removed.",
+      "open_decision": "Flat −1 per stack versus percentage scaling; compare actual attack values before deciding."
     },
-    "Bless": {
-      "status": "discussion-only",
-      "recommendation": "Keep blessing-themed cards explicit for now: healing, Ward or another printed benefit. “Bless” alone does not yet explain a specific rule.",
-      "concrete_later_option": "Bless N could add N to the holder’s next direct attack, first hit only, then end. Use the higher pending value rather than adding; clear at fight end. Apply it with Mark and weakness before Weaken, reflection and Ward. It would also increase Leech’s final amount. This is a proposal, not current damage order.",
-      "tradeoff": "This is an attacker-side buff versus Mark’s target-side debuff, giving Purge and Cleanse different answers. Against one enemy their damage math is otherwise very similar, so it may add vocabulary without a useful new decision.",
-      "classification_if_adopted": "Beneficial combatant status; removable by Purge, not Cleanse. No light-side or moral restriction."
+    "Freeze": {
+      "status": "approved enemy action control; thaw open",
+      "current_direction": "If still active, skip the next whole enemy action, advance the pattern and clear Freeze. It does not stack or queue turns.",
+      "open_decision": "Whether direct attacks or Fire thaw it is unresolved. Current conditional previews do not choose either rule."
     },
     "Purge": {
-      "status": "recommended for a later approved migration; not used in current effects",
-      "proposed_definition": "Remove all beneficial combat statuses from the enemy.",
-      "scope": "Currently Ward and an active Reflect effect. No amount, duration, selection prompt or random status choice. This is an immediate removal procedure, not a status itself.",
-      "edge_cases": "Do not remove printed traits, HP, action patterns or card-zone states. Consuming a one-use Reflect granted by the Swan’s current intent must leave that activation spent until a new intent grants one; it must not instantly reappear from the same trait. Hush instead suppresses the trait through its action. Purge does not undo damage or healing."
+      "status": "approved direction and quantities",
+      "current_direction": "Remove one random beneficial status or all from the enemy, as printed. One clears a whole kind, regardless of stack count.",
+      "scope": "Ward, Reflect and Bless; not printed traits, action patterns or later grants."
     },
     "Cleanse": {
-      "status": "recommended for a later approved migration; not used in current effects",
-      "proposed_definition": "Remove all harmful combat statuses from yourself.",
-      "scope": "Currently Burn, Poison, Mark and Weaken, plus visible next-draw and next-mana penalties. Include Hush if the owner can have it, but a Hushed ability cannot resolve a Cleanse to escape its own suppression. No amount, duration or selection prompt.",
-      "edge_cases": "Do not heal HP, recover Banished cards, undo an already completed face change or remove Keep markers. A queued face change is neutral information/control, not automatically classified good or bad. If that scope feels unintuitive, name its removal explicitly rather than changing classification based on the current hand."
+      "status": "approved direction and quantities",
+      "current_direction": "Remove one random harmful status or all from self, as printed. One clears a whole kind; random is uniform by eligible kind.",
+      "scope": "Burn, Poison, Curse, Hush, Freeze and visible draw/mana penalties. It does not heal HP or recover cards."
     }
   },
-  "proposed_status_classification": {
+  "status_classification": {
     "beneficial_combat_statuses": [
       "Ward",
-      "Reflect"
+      "Reflect",
+      "Bless"
     ],
     "harmful_combat_statuses": [
       "Burn",
       "Poison",
-      "Mark",
-      "Weaken",
+      "Curse",
       "Hush",
+      "Freeze",
       "next-normal-draw penalty",
       "next-mana-refill penalty"
     ],
     "other_state": [
       "Keep markers belong to individual cards",
-      "Scry is a player-turn information effect",
-      "face orientation and queued face changes are neutral",
-      "Leech modifies its printed attack; it is not a persistent removable status",
-      "HP, library/discard/Banish zones, printed traits and action patterns are not removable combat statuses"
+      "Scry is player-turn information",
+      "face orientation and queued facing changes are not automatically harmful",
+      "HP, library/discard/Banish zones, printed traits and action patterns are not removed"
     ],
-    "proposal_only": [
-      "If approved, Bless would be beneficial and Curse harmful. Their names do not establish their exact effects."
-    ],
-    "principle": "Classification follows the printed rule, not artwork morality or whether a particular board position happens to benefit. This table is proposed scope for the candidate removal keywords, not a new thematic tag system."
+    "principle": "One random kind or all is printed explicitly. Random is not weighted by counter size. This is mechanical removal scope, not a thematic tag system."
   },
   "cards": [
     {
@@ -324,11 +374,12 @@
       "number": 13,
       "face": "Abbess",
       "before": "Heal 5 HP. Banish this card.",
-      "after": "Heal 5 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Banish"
+        "Banish",
+        "Cleanse"
       ]
     },
     {
@@ -403,12 +454,12 @@
       "number": 20,
       "face": "Condemnation",
       "before": "Mark 4. Banish this card.",
-      "after": "Mark 4. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 3. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
-        "Mark"
+        "Curse"
       ]
     },
     {
@@ -458,11 +509,11 @@
       "number": 25,
       "face": "Dove",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -523,11 +574,11 @@
       "number": 31,
       "face": "Lamb",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -638,11 +689,11 @@
       "number": 42,
       "face": "Frost",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -672,11 +723,11 @@
       "number": 45,
       "face": "Bell Ringer",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark"
+        "Bless"
       ]
     },
     {
@@ -717,11 +768,11 @@
       "number": 49,
       "face": "Censer",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -805,11 +856,11 @@
       "number": 57,
       "face": "Ivy",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -915,11 +966,11 @@
       "number": 67,
       "face": "Hourglass",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -946,11 +997,11 @@
       "number": 70,
       "face": "Chain",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -977,11 +1028,12 @@
       "number": 73,
       "face": "Sunlit Chapel",
       "before": "Heal 5 HP. Banish this card.",
-      "after": "Heal 5 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Banish"
+        "Banish",
+        "Cleanse"
       ]
     },
     {
@@ -1017,11 +1069,11 @@
       "number": 77,
       "face": "Bell Tower",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark"
+        "Bless"
       ]
     },
     {
@@ -1069,34 +1121,35 @@
       "number": 82,
       "face": "Sealed Gate",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
       "number": 83,
       "face": "Sanctuary",
       "before": "Heal 5 HP. Banish this card.",
-      "after": "Heal 5 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Cleanse all harmful statuses from yourself. Heal 3 HP. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Banish"
+        "Banish",
+        "Cleanse"
       ]
     },
     {
       "number": 84,
       "face": "Prison",
       "before": "Weaken 6. Banish this card.",
-      "after": "Weaken 6. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 3. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1123,22 +1176,23 @@
       "number": 87,
       "face": "Benediction",
       "before": "Heal 4 HP. Banish this card.",
-      "after": "Heal 4 HP. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 3. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Banish"
+        "Banish",
+        "Bless"
       ]
     },
     {
       "number": 88,
       "face": "Curse",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1195,22 +1249,22 @@
       "number": 94,
       "face": "Nightmare",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
       "number": 95,
       "face": "Bound Soul",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1226,11 +1280,11 @@
       "number": 97,
       "face": "Sovereign",
       "before": "Weaken 5.",
-      "after": "Weaken 5.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1393,11 +1447,11 @@
       "number": 113,
       "face": "Peacock",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1424,11 +1478,11 @@
       "number": 116,
       "face": "Anglerfish",
       "before": "Deal 3 Shadow damage. Mark 2.",
-      "after": "Deal 3 Shadow damage. Mark 2.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 3 Shadow damage. Curse 1.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark",
+        "Curse",
         "Shadow"
       ]
     },
@@ -1638,22 +1692,22 @@
       "number": 136,
       "face": "Deep Marsh",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
       "number": 137,
       "face": "Frozen Lake",
       "before": "Weaken 3. Deal 2 Frost damage.",
-      "after": "Weaken 3. Deal 2 Frost damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 1. Deal 2 Frost damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken",
+        "Curse",
         "Frost"
       ]
     },
@@ -1693,11 +1747,11 @@
       "number": 141,
       "face": "White Desert",
       "before": "Weaken 3. Deal 3 Radiance damage.",
-      "after": "Weaken 3. Deal 3 Radiance damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 1. Deal 3 Radiance damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken",
+        "Curse",
         "Radiance"
       ]
     },
@@ -1765,11 +1819,11 @@
       "number": 148,
       "face": "Labyrinth",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1821,35 +1875,35 @@
       "number": 153,
       "face": "Tuned Violin",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
       "number": 154,
       "face": "Broken Violin",
       "before": "Weaken 5. Banish this card.",
-      "after": "Weaken 5. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 3. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
-        "Weaken"
+        "Curse"
       ]
     },
     {
       "number": 155,
       "face": "Balance Scales",
       "before": "Mark 2. Weaken 2.",
-      "after": "Mark 2. Weaken 2.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 1. Curse 1.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark",
-        "Weaken"
+        "Bless",
+        "Curse"
       ]
     },
     {
@@ -1865,12 +1919,12 @@
       "number": 157,
       "face": "Chessboard",
       "before": "Scry. Weaken 2.",
-      "after": "Scry. Weaken 2.",
-      "changed": false,
-      "review": "existing effect checked against revised timing",
+      "after": "Scry. Curse 1.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Scry",
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1937,11 +1991,11 @@
       "number": 164,
       "face": "Wind Chime",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1957,11 +2011,11 @@
       "number": 166,
       "face": "Blindfold",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -1977,11 +2031,11 @@
       "number": 168,
       "face": "Tangled Hair",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2008,12 +2062,12 @@
       "number": 171,
       "face": "Symmetry",
       "before": "Mark 2. Weaken 2.",
-      "after": "Mark 2. Weaken 2.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 1. Curse 1.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark",
-        "Weaken"
+        "Bless",
+        "Curse"
       ]
     },
     {
@@ -2068,11 +2122,11 @@
       "number": 177,
       "face": "Compression",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2126,12 +2180,12 @@
       "number": 183,
       "face": "Stillness",
       "before": "Weaken 6. Banish this card.",
-      "after": "Weaken 6. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 3. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2161,11 +2215,11 @@
       "number": 186,
       "face": "Clamor",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2256,12 +2310,12 @@
       "number": 195,
       "face": "Exposure",
       "before": "Remove 3 enemy Ward. Mark 3.",
-      "after": "Remove 3 enemy Ward. Mark 3.",
-      "changed": false,
-      "review": "existing effect checked against revised timing",
+      "after": "Purge all beneficial statuses from the enemy. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Ward",
-        "Mark"
+        "Banish",
+        "Purge"
       ]
     },
     {
@@ -2279,11 +2333,11 @@
       "number": 197,
       "face": "Herald",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark"
+        "Bless"
       ]
     },
     {
@@ -2322,11 +2376,11 @@
       "number": 201,
       "face": "Animal Tamer",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2367,11 +2421,10 @@
       "number": 205,
       "face": "Fencer",
       "before": "Deal 3 Radiance damage. Mark 2.",
-      "after": "Deal 3 Radiance damage. Mark 2.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 2 Radiance damage twice.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark",
         "Radiance"
       ]
     },
@@ -2451,11 +2504,11 @@
       "number": 213,
       "face": "Royal Hound",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Deal 2 Binding damage twice.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark"
+        "Binding"
       ]
     },
     {
@@ -2502,11 +2555,11 @@
       "number": 218,
       "face": "Trespasser",
       "before": "Remove 5 enemy Ward.",
-      "after": "Remove 5 enemy Ward.",
-      "changed": false,
-      "review": "existing effect checked against revised timing",
+      "after": "Purge one random beneficial status from the enemy.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Ward"
+        "Purge"
       ]
     },
     {
@@ -2525,11 +2578,11 @@
       "number": 220,
       "face": "Smoke Spirit",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2547,11 +2600,11 @@
       "number": 222,
       "face": "Kelp Forest",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2580,12 +2633,10 @@
       "number": 225,
       "face": "Firefly",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
-      "keywords": [
-        "Mark"
-      ]
+      "after": "Turn your hand to its light faces.",
+      "changed": true,
+      "review": "updated thematic recipe",
+      "keywords": []
     },
     {
       "number": 226,
@@ -2634,12 +2685,12 @@
       "number": 230,
       "face": "Mandrake",
       "before": "Weaken 6. Banish this card.",
-      "after": "Weaken 6. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 3. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2803,11 +2854,11 @@
       "number": 245,
       "face": "Sceptre",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2845,11 +2896,11 @@
       "number": 249,
       "face": "Fishing Net",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2909,22 +2960,22 @@
       "number": 255,
       "face": "Tuning Fork",
       "before": "Remove all your Weaken.",
-      "after": "Remove all your Weaken.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Remove all your Curse.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
       "number": 256,
       "face": "Rattle",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -2972,11 +3023,11 @@
       "number": 261,
       "face": "Floodgate",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -3016,22 +3067,22 @@
       "number": 265,
       "face": "Measuring Rod",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Scry.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark"
+        "Scry"
       ]
     },
     {
       "number": 266,
       "face": "Twisted Ribbon",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -3151,11 +3202,11 @@
       "number": 278,
       "face": "Peat Bog",
       "before": "Weaken 3. Deal 2 Decay damage.",
-      "after": "Weaken 3. Deal 2 Decay damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 1. Deal 2 Decay damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken",
+        "Curse",
         "Decay"
       ]
     },
@@ -3356,11 +3407,11 @@
       "number": 297,
       "face": "Bell Founder",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark"
+        "Bless"
       ]
     },
     {
@@ -3422,22 +3473,22 @@
       "number": 303,
       "face": "Dream Binder",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
       "number": 304,
       "face": "Dream Unbinder",
       "before": "Remove all your Weaken.",
-      "after": "Remove all your Weaken.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Remove all your Curse.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -3552,11 +3603,11 @@
       "number": 315,
       "face": "Perfumer",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -3630,12 +3681,12 @@
       "number": 322,
       "face": "Cage Breaker",
       "before": "Remove all your Weaken. Draw 2 cards. Banish this card.",
-      "after": "Remove all your Weaken. Draw 2 cards. Banish this card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Remove all your Curse. Draw 2 cards. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
         "Banish",
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -3873,11 +3924,11 @@
       "number": 345,
       "face": "Tide Keeper",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4021,11 +4072,11 @@
       "number": 359,
       "face": "Alabaster Spider",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4144,11 +4195,11 @@
       "number": 370,
       "face": "Hawk Moth",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4221,11 +4272,11 @@
       "number": 377,
       "face": "Red Panda",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4243,11 +4294,11 @@
       "number": 379,
       "face": "Living Jellyfish",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4394,12 +4445,12 @@
       "number": 393,
       "face": "Ice Crystal",
       "before": "Weaken 2. Deal 3 Frost damage.",
-      "after": "Weaken 2. Deal 3 Frost damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Freeze. Banish this card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken",
-        "Frost"
+        "Banish",
+        "Freeze"
       ]
     },
     {
@@ -4462,22 +4513,22 @@
       "number": 399,
       "face": "Silver Crown",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Bless 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Mark"
+        "Bless"
       ]
     },
     {
       "number": 400,
       "face": "Rusty Crown",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4548,11 +4599,11 @@
       "number": 407,
       "face": "Music Box",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4649,11 +4700,11 @@
       "number": 416,
       "face": "Broken Cage",
       "before": "Remove all your Weaken. Draw 1 card.",
-      "after": "Remove all your Weaken. Draw 1 card.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Remove all your Curse. Draw 1 card.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4850,11 +4901,11 @@
       "number": 434,
       "face": "Spent Match",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -4914,11 +4965,11 @@
       "number": 440,
       "face": "Black Ribbon",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -5112,11 +5163,11 @@
       "number": 458,
       "face": "Wild Thicket",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -5218,11 +5269,11 @@
       "number": 468,
       "face": "Collapsed Watchtower",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -5269,11 +5320,11 @@
       "number": 473,
       "face": "Frozen Waterfall",
       "before": "Weaken 2. Deal 3 Frost damage.",
-      "after": "Weaken 2. Deal 3 Frost damage.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 1. Deal 3 Frost damage.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken",
+        "Curse",
         "Frost"
       ]
     },
@@ -5321,11 +5372,11 @@
       "number": 478,
       "face": "Obsidian Bridge",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
-      "review": "checked; no affected mechanic",
+      "after": "Curse 2.",
+      "changed": true,
+      "review": "updated thematic recipe",
       "keywords": [
-        "Weaken"
+        "Curse"
       ]
     },
     {
@@ -5539,37 +5590,37 @@
       "name": "Glass Judge",
       "before_trait": "On Prismatic Sentence: Add 1 hit of 2 Radiance damage.",
       "after_trait": "On Prismatic Sentence: Add 1 hit of 2 Radiance damage.",
-      "changed": false,
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 4 Radiance damage.",
         "Deal 5 Radiance damage. Trait — Split Verdict: Add 1 hit of 2 Radiance damage.",
-        "Apply 2 Mark to the player."
+        "Apply 1 Curse to the player."
       ]
     },
     {
       "number": 3,
       "name": "Hollow King",
       "before_trait": "On Hollow Clutch: Apply 2 Weaken to the player.",
-      "after_trait": "On Hollow Clutch: Apply 2 Weaken to the player.",
+      "after_trait": "On Hollow Clutch: Apply 1 Curse to the player.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Shadow damage.",
         "Banish the top 1 card of the player's library.",
-        "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 2 Weaken to the player."
+        "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 1 Curse to the player."
       ]
     },
     {
       "number": 4,
       "name": "Ink Leviathan",
       "before_trait": "On Ink Surge: Apply 3 Weaken to the player.",
-      "after_trait": "On Ink Surge: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Ink Surge: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Shadow damage.",
-        "Deal 5 Shadow damage. Trait — Black Tide: Apply 3 Weaken to the player."
+        "Deal 5 Shadow damage. Trait — Black Tide: Apply 1 Curse to the player."
       ]
     },
     {
@@ -5601,11 +5652,11 @@
       "number": 7,
       "name": "Mourning Tree",
       "before_trait": "On Root Lash: Apply 2 Weaken to the player.",
-      "after_trait": "On Root Lash: Apply 2 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Root Lash: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
-        "Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player.",
+        "Deal 7 Growth damage. Trait — Root Snare: Apply 1 Curse to the player.",
         "Heal 3 HP."
       ]
     },
@@ -5637,12 +5688,12 @@
       "number": 10,
       "name": "Seven-Eyed Heron",
       "before_trait": "On Seven-Eyed Gaze: Apply 3 Mark to the player.",
-      "after_trait": "On Seven-Eyed Gaze: Apply 3 Mark to the player.",
-      "changed": false,
+      "after_trait": "On Seven-Eyed Gaze: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Radiance damage.",
-        "Deal 3 Radiance damage. Trait — Seven Watches: Apply 3 Mark to the player."
+        "Deal 3 Radiance damage. Trait — Seven Watches: Apply 1 Curse to the player."
       ]
     },
     {
@@ -5661,12 +5712,12 @@
       "number": 12,
       "name": "The Amber Bailiff",
       "before_trait": "On Amber Clasp: Apply 3 Weaken to the player.",
-      "after_trait": "On Amber Clasp: Apply 3 Weaken to the player.",
+      "after_trait": "On Amber Clasp: Apply 1 Curse to the player.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Amber Custody: Apply 3 Weaken to the player.",
+        "Deal 4 Binding damage. Trait — Amber Custody: Apply 1 Curse to the player.",
         "Banish the top 1 card of the player's library."
       ]
     },
@@ -5674,12 +5725,12 @@
       "number": 13,
       "name": "The Ashen Gardener",
       "before_trait": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile.",
-      "after_trait": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile.",
+      "after_trait": "On Scatter Ash: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile."
+        "Deal 4 Decay damage. Trait — Ashen Dust: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile."
       ]
     },
     {
@@ -5722,12 +5773,12 @@
       "number": 17,
       "name": "The Bellflower Magistrate",
       "before_trait": "On Ring the Blossoms: Apply 3 Weaken to the player.",
-      "after_trait": "On Ring the Blossoms: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Ring the Blossoms: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Growth damage.",
-        "Deal 4 Growth damage. Trait — Closing Bell: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Closing Bell: Apply 1 Curse to the player."
       ]
     },
     {
@@ -5746,11 +5797,11 @@
       "number": 19,
       "name": "The Blackwater Bison",
       "before_trait": "On Blackwater Charge: Apply 2 Weaken to the player.",
-      "after_trait": "On Blackwater Charge: Apply 2 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Blackwater Charge: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
-        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player.",
+        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 1 Curse to the player.",
         "Heal 4 HP."
       ]
     },
@@ -5783,12 +5834,12 @@
       "number": 22,
       "name": "The Blue Jackal",
       "before_trait": "On Moon Howl: Apply 2 Mark to the player.",
-      "after_trait": "On Moon Howl: Apply 2 Mark to the player.",
-      "changed": false,
+      "after_trait": "On Moon Howl: Gain 1 Bless.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Shadow damage.",
-        "Deal 4 Shadow damage. Trait — Marked Quarry: Apply 2 Mark to the player."
+        "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."
       ]
     },
     {
@@ -5819,24 +5870,24 @@
       "number": 25,
       "name": "The Brass Matron",
       "before_trait": "On Gather the Apron: The player puts 1 held card of their choice on the top of their draw pile, if any.",
-      "after_trait": "On Gather the Apron: The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Gather the Apron: Move a random card still in the player's hand to the top of the player's library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Binding damage.",
-        "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 5 Binding damage. Trait — Gathering Apron: Move a random card still in the player's hand to the top of the player's library."
       ]
     },
     {
       "number": 26,
       "name": "The Buried Violinist",
       "before_trait": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
-      "after_trait": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their library.",
+      "after_trait": "On Play the Refrain: Move the top 1 card of the player's discard pile to the top of their library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Memory damage.",
-        "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their library."
+        "Deal 4 Memory damage. Trait — Unfinished Phrase: Move the top 1 card of the player's discard pile to the top of their library."
       ]
     },
     {
@@ -5855,23 +5906,23 @@
       "number": 28,
       "name": "The Celestial Fisher",
       "before_trait": "On Reel the Line: The player discards 1 held card of their choice, if any.",
-      "after_trait": "On Reel the Line: The player discards 1 held card of their choice, if any.",
-      "changed": false,
+      "after_trait": "On Reel the Line: Move a random card still in the player's hand to the player's discard pile.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Set the Hook: The player discards 1 held card of their choice, if any."
+        "Deal 4 Binding damage. Trait — Set the Hook: Move a random card still in the player's hand to the player's discard pile."
       ]
     },
     {
       "number": 29,
       "name": "The Cellar Duchess",
       "before_trait": "On Bitter Goblet: Apply 2 Weaken to the player.",
-      "after_trait": "On Bitter Goblet: Apply 2 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Bitter Goblet: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
-        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player.",
+        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 1 Curse to the player.",
         "Heal 4 HP."
       ]
     },
@@ -5879,12 +5930,12 @@
       "number": 30,
       "name": "The Chalk Giant",
       "before_trait": "On Shake the Chalk: Apply 3 Weaken to the player.",
-      "after_trait": "On Shake the Chalk: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Shake the Chalk: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Binding damage.",
-        "Deal 5 Binding damage. Trait — Dustfall: Apply 3 Weaken to the player."
+        "Deal 5 Binding damage. Trait — Dustfall: Apply 1 Curse to the player."
       ]
     },
     {
@@ -5892,11 +5943,11 @@
       "name": "The Clockwork Peacock",
       "before_trait": "On Tail Sweep: Add 1 hit of 2 Binding damage.",
       "after_trait": "On Tail Sweep: Add 1 hit of 2 Binding damage.",
-      "changed": false,
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Apply 2 Mark to the player.",
+        "Gain 3 Ward.",
         "Deal 4 Binding damage. Trait — Geared Fan: Add 1 hit of 2 Binding damage."
       ]
     },
@@ -5904,24 +5955,24 @@
       "number": 32,
       "name": "The Cobweb Admiral",
       "before_trait": "On Draw the Rigging: Apply 3 Weaken to the player.",
-      "after_trait": "On Draw the Rigging: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Draw the Rigging: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 1 Curse to the player."
       ]
     },
     {
       "number": 33,
       "name": "The Coin-Eyed Stag",
       "before_trait": "On Fix the Gaze: Apply 3 Mark to the player.",
-      "after_trait": "On Fix the Gaze: Apply 3 Mark to the player.",
-      "changed": false,
+      "after_trait": "On Fix the Gaze: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Radiance damage.",
-        "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 3 Mark to the player."
+        "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 1 Curse to the player."
       ]
     },
     {
@@ -5978,12 +6029,12 @@
       "number": 38,
       "name": "The Fogbound Weaver",
       "before_trait": "On Close the Loom: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer.",
-      "after_trait": "On Close the Loom: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer.",
+      "after_trait": "On Close the Loom: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer."
+        "Deal 4 Binding damage. Trait — Closing Weave: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer."
       ]
     },
     {
@@ -6002,23 +6053,23 @@
       "number": 40,
       "name": "The Gilded Pelican",
       "before_trait": "On Scoop the Offering: The player Banishes 1 held card of their choice, if any.",
-      "after_trait": "On Scoop the Offering: The player Banishes 1 held card of their choice, if any.",
-      "changed": false,
+      "after_trait": "On Scoop the Offering: Banish a random card still in the player's hand.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Radiance damage.",
-        "Deal 5 Radiance damage. Trait — Filled Pouch: The player Banishes 1 held card of their choice, if any."
+        "Deal 5 Radiance damage. Trait — Filled Pouch: Banish a random card still in the player's hand."
       ]
     },
     {
       "number": 41,
       "name": "The Glasshouse Matriarch",
       "before_trait": "On Glasshouse Briar: Apply 2 Weaken to the player.",
-      "after_trait": "On Glasshouse Briar: Apply 2 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Glasshouse Briar: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
-        "Deal 6 Growth damage. Trait — Green Fingers: Apply 2 Weaken to the player.",
+        "Deal 6 Growth damage. Trait — Green Fingers: Apply 1 Curse to the player.",
         "Heal 4 HP.",
         "Gain 3 Ward."
       ]
@@ -6064,12 +6115,12 @@
       "number": 45,
       "name": "The Hollow Anemone",
       "before_trait": "On Close the Tentacles: Apply 3 Weaken to the player.",
-      "after_trait": "On Close the Tentacles: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Close the Tentacles: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Growth damage.",
-        "Deal 4 Growth damage. Trait — Closing Mouth: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Closing Mouth: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6088,12 +6139,12 @@
       "number": 47,
       "name": "The Honey Tyrant",
       "before_trait": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their draw pile, if any.",
-      "after_trait": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Close the Honey Trap: Move a random card still in the player's hand to the top of the player's library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 4 Binding damage. Trait — Sticky Tribute: Move a random card still in the player's hand to the top of the player's library."
       ]
     },
     {
@@ -6124,12 +6175,12 @@
       "number": 50,
       "name": "The Knotted Giant",
       "before_trait": "On Tighten the Cords: Apply 3 Weaken to the player.",
-      "after_trait": "On Tighten the Cords: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Tighten the Cords: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Binding damage.",
-        "Deal 5 Binding damage. Trait — Tightening Knot: Apply 3 Weaken to the player."
+        "Deal 5 Binding damage. Trait — Tightening Knot: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6137,23 +6188,23 @@
       "name": "The Lacquered Admiral",
       "before_trait": "On Fire the Broadside: Add 2 hits of 2 Binding damage.",
       "after_trait": "On Fire the Broadside: Add 2 hits of 2 Binding damage.",
-      "changed": false,
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
         "Deal 4 Binding damage. Trait — Broadside Order: Add 2 hits of 2 Binding damage.",
-        "Apply 2 Mark to the player."
+        "Gain 1 Bless."
       ]
     },
     {
       "number": 52,
       "name": "The Linen Lioness",
       "before_trait": "On Linen Pounce: Apply 2 Weaken to the player.",
-      "after_trait": "On Linen Pounce: Apply 2 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Linen Pounce: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
-        "Deal 6 Binding damage. Trait — Gathered Linen: Apply 2 Weaken to the player.",
+        "Deal 6 Binding damage. Trait — Gathered Linen: Apply 1 Curse to the player.",
         "Gain 4 Ward."
       ]
     },
@@ -6209,25 +6260,25 @@
       "number": 57,
       "name": "The Midnight Oyster",
       "before_trait": "On Show the Pearl: Apply 2 Mark to the player.",
-      "after_trait": "On Show the Pearl: Apply 2 Mark to the player.",
-      "changed": false,
+      "after_trait": "On Show the Pearl: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Binding damage.",
         "Gain 7 Ward.",
-        "Deal 4 Binding damage. Trait — Pearl Glint: Apply 2 Mark to the player."
+        "Deal 4 Binding damage. Trait — Pearl Glint: Apply 1 Curse to the player."
       ]
     },
     {
       "number": 58,
       "name": "The Midnight Tailor",
       "before_trait": "On Sew the Hem: The player discards 1 held card of their choice, if any.",
-      "after_trait": "On Sew the Hem: The player discards 1 held card of their choice, if any.",
-      "changed": false,
+      "after_trait": "On Sew the Hem: Move a random card still in the player's hand to the player's discard pile.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Closing Stitch: The player discards 1 held card of their choice, if any."
+        "Deal 4 Binding damage. Trait — Closing Stitch: Move a random card still in the player's hand to the player's discard pile."
       ]
     },
     {
@@ -6320,12 +6371,12 @@
       "number": 66,
       "name": "The Obsidian Otter",
       "before_trait": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
-      "after_trait": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their library, if any.",
+      "after_trait": "On Dive with the Prize: Move a random card still in the player's hand to the bottom of the player's library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Shadow damage.",
-        "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their library, if any."
+        "Deal 4 Shadow damage. Trait — Dive for Cover: Move a random card still in the player's hand to the bottom of the player's library."
       ]
     },
     {
@@ -6344,12 +6395,12 @@
       "number": 68,
       "name": "The Painted Elephant",
       "before_trait": "On Stamp the Pattern: Apply 3 Mark to the player.",
-      "after_trait": "On Stamp the Pattern: Apply 3 Mark to the player.",
-      "changed": false,
+      "after_trait": "On Stamp the Pattern: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 6 Memory damage.",
-        "Deal 5 Memory damage. Trait — Painted Touch: Apply 3 Mark to the player."
+        "Deal 5 Memory damage. Trait — Painted Touch: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6429,12 +6480,12 @@
       "number": 75,
       "name": "The Ribbon General",
       "before_trait": "On Bind the Formation: Apply 3 Weaken to the player.",
-      "after_trait": "On Bind the Formation: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Bind the Formation: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6454,12 +6505,12 @@
       "number": 77,
       "name": "The Rooted Acrobat",
       "before_trait": "On Land in the Roots: Apply 3 Weaken to the player.",
-      "after_trait": "On Land in the Roots: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Land in the Roots: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Growth damage.",
-        "Deal 4 Growth damage. Trait — Anchored Landing: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Anchored Landing: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6515,12 +6566,12 @@
       "number": 82,
       "name": "The Shivering Cabinet",
       "before_trait": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
-      "after_trait": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their library, if any.",
+      "after_trait": "On Open the Hands: Move a random card still in the player's hand to the bottom of the player's library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their library, if any.",
+        "Deal 4 Binding damage. Trait — Hands Within: Move a random card still in the player's hand to the bottom of the player's library.",
         "Gain 4 Ward."
       ]
     },
@@ -6553,12 +6604,12 @@
       "number": 85,
       "name": "The Sleepwalking Bridge",
       "before_trait": "On Lead the Procession: Apply 3 Weaken to the player.",
-      "after_trait": "On Lead the Procession: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Lead the Procession: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6577,12 +6628,12 @@
       "number": 87,
       "name": "The Soot Bride",
       "before_trait": "On Cast the Veil: Apply 3 Weaken to the player.",
-      "after_trait": "On Cast the Veil: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Cast the Veil: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Soot Veil: Apply 3 Weaken to the player."
+        "Deal 4 Decay damage. Trait — Soot Veil: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6626,10 +6677,10 @@
       "name": "The Sunstruck Crocodile",
       "before_trait": "On Sunstruck Snap: Add 2 Radiance damage to the base hit.",
       "after_trait": "On Sunstruck Snap: Add 2 Radiance damage to the base hit.",
-      "changed": false,
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
-        "Apply 2 Mark to the player.",
+        "Gain 1 Bless.",
         "Deal 6 Radiance damage. Trait — Sunstruck Glare: Add 2 Radiance damage to the base hit."
       ]
     },
@@ -6637,24 +6688,24 @@
       "number": 92,
       "name": "The Tall Seamstress",
       "before_trait": "On Close the Hem: The player puts 1 held card of their choice on the top of their draw pile, if any.",
-      "after_trait": "On Close the Hem: The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Close the Hem: Move a random card still in the player's hand to the top of the player's library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 4 Binding damage. Trait — Hem the Hand: Move a random card still in the player's hand to the top of the player's library."
       ]
     },
     {
       "number": 93,
       "name": "The Tangle Guest",
       "before_trait": "On Offer the Tangle: Apply 3 Weaken to the player.",
-      "after_trait": "On Offer the Tangle: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Offer the Tangle: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6709,12 +6760,12 @@
       "number": 98,
       "name": "The Tooth Collector",
       "before_trait": "On Collect the Tooth: The player Banishes 1 held card of their choice, if any.",
-      "after_trait": "On Collect the Tooth: The player Banishes 1 held card of their choice, if any.",
-      "changed": false,
+      "after_trait": "On Collect the Tooth: Banish a random card still in the player's hand.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Another Tooth: The player Banishes 1 held card of their choice, if any."
+        "Deal 4 Decay damage. Trait — Another Tooth: Banish a random card still in the player's hand."
       ]
     },
     {
@@ -6734,12 +6785,12 @@
       "number": 100,
       "name": "The Unblinking Shepherd",
       "before_trait": "On Gather the Flock: Apply 3 Mark to the player.",
-      "after_trait": "On Gather the Flock: Apply 3 Mark to the player.",
-      "changed": false,
+      "after_trait": "On Gather the Flock: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Radiance damage.",
-        "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 3 Mark to the player."
+        "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6771,12 +6822,12 @@
       "number": 103,
       "name": "The Velvet Eel",
       "before_trait": "On Tighten the Coil: Apply 3 Weaken to the player.",
-      "after_trait": "On Tighten the Coil: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Tighten the Coil: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Velvet Coil: Apply 3 Weaken to the player."
+        "Deal 4 Binding damage. Trait — Velvet Coil: Apply 1 Curse to the player."
       ]
     },
     {
@@ -6795,24 +6846,24 @@
       "number": 105,
       "name": "The Velvet Skeleton",
       "before_trait": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
-      "after_trait": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their library.",
+      "after_trait": "On Invite the Memory: Move the top 1 card of the player's discard pile to the top of their library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Memory damage.",
-        "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their library."
+        "Deal 3 Memory damage. Trait — Remembered Courtesy: Move the top 1 card of the player's discard pile to the top of their library."
       ]
     },
     {
       "number": 106,
       "name": "The Wax Regent",
       "before_trait": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any.",
-      "after_trait": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any.",
+      "after_trait": "On Pour the Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Fire damage.",
-        "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any."
+        "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library."
       ]
     },
     {
@@ -6843,13 +6894,13 @@
       "number": 109,
       "name": "The Wicker Sleeper",
       "before_trait": "On Murmur the Lullaby: Apply 3 Weaken to the player.",
-      "after_trait": "On Murmur the Lullaby: Apply 3 Weaken to the player.",
-      "changed": false,
+      "after_trait": "On Murmur the Lullaby: Apply 1 Curse to the player.",
+      "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
       "actions": [
         "Deal 5 Growth damage.",
         "Heal 4 HP.",
-        "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 1 Curse to the player."
       ]
     },
     {
