@@ -820,3 +820,130 @@ input:focus-visible,
   flex: none;
   color: var(--color-muted-foreground);
 }
+.battle-screen {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 96vw);
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+  color: #eee9df;
+}
+.battle-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+}
+.battle-head h1 {
+  margin: 0.2rem 0;
+  font:
+    2.3rem Georgia,
+    serif;
+}
+.battle-eyebrow {
+  color: #e9c58b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+.battle-preview {
+  color: #c9bfcc;
+  font-size: 0.85rem;
+}
+.battle-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.battle-panel {
+  background: rgba(27, 30, 39, 0.94);
+  border: 1px solid #56505f;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.battle-panel h2,
+.battle-screen section h2 {
+  font:
+    1.35rem Georgia,
+    serif;
+  margin: 0 0 0.6rem;
+}
+.battle-panel p {
+  margin: 0.4rem 0;
+}
+.battle-hand,
+.battle-rewards,
+.battle-targets,
+.battle-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.battle-card,
+.battle-reward,
+.battle-targets button {
+  color: inherit;
+  background: #24232e;
+  border: 1px solid #777081;
+  border-radius: 0.45rem;
+  padding: 0.7rem;
+  text-align: left;
+  cursor: pointer;
+}
+.battle-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: min(10rem, 45vw);
+  min-height: 9rem;
+}
+.battle-card span,
+.battle-reward span {
+  font-size: 0.85rem;
+}
+.battle-card[aria-pressed="true"],
+.battle-targets button[aria-pressed="true"] {
+  border-color: #e9c58b;
+  box-shadow: 0 0 0 2px #e9c58b;
+}
+.battle-card:focus-visible,
+.battle-reward:focus-visible,
+.battle-targets button:focus-visible {
+  outline: 3px solid #e9c58b;
+  outline-offset: 3px;
+}
+.battle-targets {
+  margin: 0.7rem 0;
+}
+.battle-reward {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 19rem;
+}
+@media (max-width: 700px) {
+  .battle-board {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+.battle-card {
+  padding: 0.4rem;
+}
+.battle-card-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+.battle-enemy-art {
+  float: right;
+  display: block;
+  width: min(38%, 12rem);
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 0.3rem;
+  margin: 0 0 0.5rem 1rem;
+}

@@ -1,1 +1,176 @@
-[]
+[
+  {
+    "source": "Artwork/Angel & Vampire - Angel.png",
+    "output": "card-angel.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Angel & Vampire - Vampire.png",
+    "output": "card-vampire.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sun & Moon - Sun.png",
+    "output": "card-sun.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sun & Moon - Moon.png",
+    "output": "card-moon.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bloom & Wither - Bloom.png",
+    "output": "card-bloom.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bloom & Wither - Wither.png",
+    "output": "card-wither.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Flame & Frost - Flame.png",
+    "output": "card-flame.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Flame & Frost - Frost.png",
+    "output": "card-frost.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Key & Lock - Key.png",
+    "output": "card-key.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Key & Lock - Lock.png",
+    "output": "card-lock.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Ivy & Thorns - Ivy.png",
+    "output": "card-ivy.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Ivy & Thorns - Thorns.png",
+    "output": "card-thorns.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Mirror & Shattered Mirror - Mirror.png",
+    "output": "card-mirror.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Mirror & Shattered Mirror - Shattered Mirror.png",
+    "output": "card-shattered-mirror.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Candle & Extinguished Candle - Candle.png",
+    "output": "card-candle.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Candle & Extinguished Candle - Extinguished Candle.png",
+    "output": "card-extinguished-candle.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Seed & Ash - Seed.png",
+    "output": "card-seed.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Seed & Ash - Ash.png",
+    "output": "card-ash.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lantern & Shroud - Lantern.png",
+    "output": "card-lantern.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lantern & Shroud - Shroud.png",
+    "output": "card-shroud.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Feather & Chain - Feather.png",
+    "output": "card-feather.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Feather & Chain - Chain.png",
+    "output": "card-chain.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Memory & Oblivion - Memory.png",
+    "output": "card-memory.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Memory & Oblivion - Oblivion.png",
+    "output": "card-oblivion.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Radiant Moth.png",
+    "output": "enemy-radiant-moth.webp",
+    "width": 720,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Glass Judge.png",
+    "output": "enemy-glass-judge.webp",
+    "width": 720,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Velvet Widow.png",
+    "output": "enemy-velvet-widow.webp",
+    "width": 720,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Mourning Tree.png",
+    "output": "enemy-mourning-tree.webp",
+    "width": 720,
+    "quality": 82
+  },
+  {
+    "source": "Enemy Artwork/Hollow King.png",
+    "output": "enemy-hollow-king.webp",
+    "width": 720,
+    "quality": 82
+  }
+]

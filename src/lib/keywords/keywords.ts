@@ -1,4 +1,4 @@
-/** Placeholder identities and colors: replace when Dusk & Dawn's keyword design is established. */
+/** Shared keyword presentation for descriptions, borders, and backgrounds. */
 export interface KeywordDefinition {
   id: string;
   labelKey: string;
@@ -7,6 +7,32 @@ export interface KeywordDefinition {
 }
 
 export const keywordDefinitions: readonly KeywordDefinition[] = [
+  { id: "Radiance", labelKey: "keywordRadiance", primary: "#F7D670", secondary: "#F7D670" },
+  { id: "Shadow", labelKey: "keywordShadow", primary: "#C7AEF1", secondary: "#C7AEF1" },
+  { id: "Growth", labelKey: "keywordGrowth", primary: "#9DDA97", secondary: "#9DDA97" },
+  { id: "Decay", labelKey: "keywordDecay", primary: "#C7CD78", secondary: "#C7CD78" },
+  { id: "Binding", labelKey: "keywordBinding", primary: "#80D1BE", secondary: "#80D1BE" },
+  { id: "Release", labelKey: "keywordRelease", primary: "#7DDDEC", secondary: "#7DDDEC" },
+  { id: "Fire", labelKey: "keywordFire", primary: "#FFAD66", secondary: "#FFAD66" },
+  { id: "Frost", labelKey: "keywordFrost", primary: "#A8E5FA", secondary: "#A8E5FA" },
+  { id: "Memory", labelKey: "keywordMemory", primary: "#B8C7FF", secondary: "#B8C7FF" },
+  { id: "Oblivion", labelKey: "keywordOblivion", primary: "#C5C5CD", secondary: "#C5C5CD" },
+  { id: "Ward", labelKey: "keywordWard", primary: "#8BCBFF", secondary: "#8BCBFF" },
+  { id: "Burn", labelKey: "keywordBurn", primary: "#FF966B", secondary: "#FF966B" },
+  { id: "Poison", labelKey: "keywordPoison", primary: "#B2D67C", secondary: "#B2D67C" },
+  { id: "Flip", labelKey: "keywordFlip", primary: "#D8ABFF", secondary: "#D8ABFF" },
+  { id: "Banish", labelKey: "keywordBanish", primary: "#F3A5B6", secondary: "#F3A5B6" },
+  { id: "Scry", labelKey: "keywordScry", primary: "#86D8D0", secondary: "#86D8D0" },
+  { id: "Bless", labelKey: "keywordBless", primary: "#F5D58C", secondary: "#F5D58C" },
+  { id: "Curse", labelKey: "keywordCurse", primary: "#D4A2E4", secondary: "#D4A2E4" },
+  { id: "Freeze", labelKey: "keywordFreeze", primary: "#90CDEC", secondary: "#90CDEC" },
+  { id: "Cleanse", labelKey: "keywordCleanse", primary: "#A4E5CF", secondary: "#A4E5CF" },
+  { id: "Purge", labelKey: "keywordPurge", primary: "#F4B3A1", secondary: "#F4B3A1" },
+  { id: "Hush", labelKey: "keywordHush", primary: "#B5BCD1", secondary: "#B5BCD1" },
+  { id: "Keep", labelKey: "keywordKeep", primary: "#B6E1A8", secondary: "#B6E1A8" },
+  { id: "Reflect", labelKey: "keywordReflect", primary: "#9DDDFF", secondary: "#9DDDFF" },
+  { id: "Leech", labelKey: "keywordLeech", primary: "#EF9EAC", secondary: "#EF9EAC" },
+
   { id: "sample-a", labelKey: "sampleKeywordA", primary: "#8dd9cb", secondary: "#397b83" },
   { id: "sample-b", labelKey: "sampleKeywordB", primary: "#b8a0eb", secondary: "#69538f" },
   { id: "sample-c", labelKey: "sampleKeywordC", primary: "#e8be86", secondary: "#9a694b" },

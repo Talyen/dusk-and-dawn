@@ -82,11 +82,7 @@ test("card corners and inspection border widths follow Alchemy", async ({ page }
 test("browses both card shapes by hover or keyboard without click inspection", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/");
-  await expect(page.getByRole("button", { name: "Play" })).toHaveAttribute("aria-disabled", "true");
-  await page.getByRole("button", { name: "Play" }).hover();
-  await expect(page.getByRole("button", { name: "Play" })).toHaveAccessibleDescription(
-    "Play will be available when the game is ready.",
-  );
+  await expect(page.getByRole("button", { name: "Play" })).toBeEnabled();
   await page.getByRole("button", { name: "Collection" }).click();
   const card = page.getByRole("img", { name: "Player card 1" });
   await expect(page.locator(".card-grid-item p")).toHaveCount(0);
@@ -427,4 +423,23 @@ test("game menu dismisses on backdrop and centers after a resize", async ({ page
   await expect(menu).toHaveClass(/game-menu--centered/);
   await page.keyboard.press("Escape");
   await expect(menu).toBeHidden();
+});
+
+test("a player can inspect and play a card, then end the turn", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  const card = page.locator(".battle-card").first();
+  await expect(card.locator("img")).toHaveJSProperty("complete", true);
+  expect(await card.locator("img").evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+  await card.click();
+  await page.getByRole("button", { name: /^Play / }).click();
+  await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
+  await page.screenshot({ path: "/tmp/dusk-dawn-battle.png", fullPage: true });
+  expect(errors).toEqual([]);
 });

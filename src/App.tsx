@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Battle } from "./components/game/battle";
 import { Background } from "./components/effects/background";
 import { CardBrowser, initialCollectionView } from "./components/browsing/card-browser";
 import { GameMenu, type MenuDestination } from "./components/navigation/game-menu";
@@ -67,7 +68,7 @@ export function App() {
     };
   }, []);
   useEffect(() => {
-    if (screen === "menu" || menuAnchor) return;
+    if (screen === "menu" || screen === "battle" || menuAnchor) return;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && !document.fullscreenElement) back();
     };
@@ -99,7 +100,7 @@ export function App() {
     else open(destination, opener);
   }
   const header =
-    screen === "menu" ? null : (
+    screen === "menu" || screen === "battle" ? null : (
       <ScreenHeader
         title={t(screen === "cards" ? "collection" : "options")}
         headingId={screen === "cards" ? "cards-title" : "options-title"}
@@ -131,8 +132,8 @@ export function App() {
               id="menu-play"
               icon="play"
               label={t("play")}
-              reason={t("playUnavailable")}
               primary
+              onClick={() => open("battle")}
               color={PLAY_COLOR}
               onHighlight={onHighlight}
             />
@@ -168,6 +169,8 @@ export function App() {
             </div>
           </div>
         </section>
+      ) : screen === "battle" ? (
+        <Battle onExit={home} />
       ) : screen === "cards" ? (
         <section
           className={`cards-screen${collectionView.kind === "enemies" ? " cards-screen--enemy" : ""}`}
@@ -303,7 +306,7 @@ export function App() {
           </div>
         </section>
       )}
-      {menuAnchor && screen !== "menu" && (
+      {menuAnchor && screen !== "menu" && screen !== "battle" && (
         <GameMenu
           current={screen}
           anchor={menuAnchor}

@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 
-type Screen = "menu" | "options" | "cards";
+type Screen = "menu" | "options" | "cards" | "battle";
 
 export function useNavigation(heading: RefObject<HTMLHeadingElement | null>) {
   const [history, setHistory] = useState<{ screen: Screen; opener: HTMLElement | null }[]>([

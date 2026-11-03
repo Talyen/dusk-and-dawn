@@ -22,7 +22,7 @@ it("renders translated content and falls back to English", async () => {
     </I18nextProvider>,
   );
   expect(screen.getByRole("heading", { name: "Dusk & Dawn" })).toBeTruthy();
-  fireEvent.pointerEnter(screen.getByRole("button", { name: "[Plaaay]" }), { pointerType: "mouse" });
-  expect(screen.getByText("[Plaaay wiiill beee avaaailaaable wheeen the gaaame is reaaady.]")).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "[Plaaay]" }));
+  expect(screen.getByRole("heading", { name: "Radiant Moth" })).toBeTruthy();
   expect(localization.t("missing", { defaultValue: "Fallback" })).toBe("Fallback");
 });
