@@ -182,6 +182,27 @@
           <details>
             <summary>Rules reference</summary>
             <p>
+              <strong>Scry:</strong> Look at the top card of your draw pile. You may put it on the bottom. If
+              the draw pile is empty, shuffle your discard first; if both are empty, do nothing.
+            </p>
+            <p>
+              <strong>Mark:</strong> Add that much to your next direct card attack against the enemy, before
+              Ward. The bonus takes the attack’s damage type and is then spent. Multiple Marks add together.
+              Mark does not affect Burn.
+            </p>
+            <p>
+              <strong>Hush:</strong> Reduce the enemy’s next attack by that much, to a minimum of zero, before
+              Ward. Multiple Hush amounts add together. Hush persists through non-attack intents and is spent
+              by the next attack; for a multi-hit action it reduces only the first hit.
+            </p>
+            <p>
+              Mark and Hush last until spent or the fight ends; show their values near the enemy. “Flip a card
+              in your hand” requires a chosen card and flips only that card. “Cancel the enemy’s next
+              non-attack intent” can be played only when that intent is non-attack: the enemy skips it and
+              advances to its next intent normally. A card’s sentences resolve in order. “Put another card on
+              your draw pile” means put another card from your hand on top; it is a required choice.
+            </p>
+            <p>
               <strong>Play and targets:</strong> Check for 1 mana and any required targets before paying. Mana
               refills to 3 each turn and cannot exceed 3; a mana-gain card gains at most 1 and banishes
               itself. Cards cannot be copied, and banished cards cannot be recovered in the first build. The
@@ -323,14 +344,14 @@
         </article>
         <article
           class="pair"
-          data-search="winged guardian &amp; revenant winged guardian gain 9 ward. radiance binding revenant deal 5 shadow/memory damage. you may return a card from your discard pile to your hand. shadow memory"
+          data-search="winged guardian &amp; revenant winged guardian gain 5 ward. hush 2. radiance binding revenant deal 5 shadow/memory damage. you may return a card from your discard pile to your hand. shadow memory"
         >
           <h2>Winged Guardian &amp; Revenant</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Winged Guardian</h3>
-              <p class="effect">Gain 9 Ward.</p>
+              <p class="effect">Gain 5 Ward. Hush 2.</p>
               <p class="tag">Radiance · Binding</p>
               <a
                 href="https://drive.google.com/file/d/1b1QyOMNnc_ltlChW2zjG7exmVdiUAc7i/view?usp=drivesdk"
@@ -393,14 +414,14 @@
         </article>
         <article
           class="pair"
-          data-search="oracle &amp; deceiver oracle look at the top card of your draw pile. you may discard it. draw 1 card. radiance memory deceiver discard a card. draw 3 cards. banish this card. shadow release"
+          data-search="oracle &amp; deceiver oracle scry. mark 2. radiance memory deceiver discard a card. draw 3 cards. banish this card. shadow release"
         >
           <h2>Oracle &amp; Deceiver</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Oracle</h3>
-              <p class="effect">Look at the top card of your draw pile. You may discard it. Draw 1 card.</p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Radiance · Memory</p>
               <a
                 href="https://drive.google.com/file/d/1HzcE3Sz2jfUacwPg0SOcXK-LruOL56Og/view?usp=drivesdk"
@@ -495,14 +516,14 @@
         </article>
         <article
           class="pair"
-          data-search="confession &amp; secrecy confession discard a card. gain 6 ward. radiance release secrecy gain 4 ward. flip your hand. shadow binding"
+          data-search="confession &amp; secrecy confession discard a card. mark 4. radiance release secrecy gain 4 ward. flip your hand. shadow binding"
         >
           <h2>Confession &amp; Secrecy</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Confession</h3>
-              <p class="effect">Discard a card. Gain 6 Ward.</p>
+              <p class="effect">Discard a card. Mark 4.</p>
               <p class="tag">Radiance · Release</p>
               <a
                 href="https://drive.google.com/file/d/1hiYS5Fahg8J0eD7__6xik6EcRDoXNqM4/view?usp=drivesdk"
@@ -529,7 +550,7 @@
         </article>
         <article
           class="pair"
-          data-search="absolution &amp; condemnation absolution heal 5 hp. banish this card. radiance growth condemnation deal 10 radiance/decay damage. banish this card. radiance decay"
+          data-search="absolution &amp; condemnation absolution heal 5 hp. banish this card. radiance growth condemnation mark 4. banish this card. radiance decay"
         >
           <h2>Absolution &amp; Condemnation</h2>
           <div class="faces">
@@ -549,7 +570,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Condemnation</h3>
-              <p class="effect">Deal 10 Radiance/Decay damage. Banish this card.</p>
+              <p class="effect">Mark 4. Banish this card.</p>
               <p class="tag">Radiance · Decay</p>
               <a
                 href="https://drive.google.com/file/d/1HcY-W3cmije33XfE-ww1Tz_MaCpJ1ekp/view?usp=drivesdk"
@@ -563,14 +584,14 @@
         </article>
         <article
           class="pair"
-          data-search="temptation &amp; resolve temptation lose 2 hp. draw 2 cards. shadow release resolve discard a card. gain 6 ward. radiance binding"
+          data-search="temptation &amp; resolve temptation lose 2 hp. draw 2 cards. shadow release resolve discard a card. hush 4. radiance binding"
         >
           <h2>Temptation &amp; Resolve</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Resolve</h3>
-              <p class="effect">Discard a card. Gain 6 Ward.</p>
+              <p class="effect">Discard a card. Hush 4.</p>
               <p class="tag">Radiance · Binding</p>
               <a
                 href="https://drive.google.com/file/d/1W1dk7oEX0qYVBDXXpSdNb51otyqxqksA/view?usp=drivesdk"
@@ -631,7 +652,7 @@
         </article>
         <article
           class="pair"
-          data-search="dove &amp; raven dove heal 2 hp. gain 3 ward. banish this card. radiance growth raven deal 4 shadow/memory damage. you may return a card from your discard pile to your hand. shadow memory"
+          data-search="dove &amp; raven dove heal 2 hp. gain 3 ward. banish this card. radiance growth raven scry. return a card from your discard to your hand. shadow memory"
         >
           <h2>Dove &amp; Raven</h2>
           <div class="faces">
@@ -651,9 +672,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Raven</h3>
-              <p class="effect">
-                Deal 4 Shadow/Memory damage. You may return a card from your discard pile to your hand.
-              </p>
+              <p class="effect">Scry. Return a card from your discard to your hand.</p>
               <p class="tag">Shadow · Memory</p>
               <a
                 href="https://drive.google.com/file/d/11b0rjCD8g8Dkf7hn-3CTIDs9D19AOzmk/view?usp=drivesdk"
@@ -701,7 +720,7 @@
         </article>
         <article
           class="pair"
-          data-search="white swan &amp; black swan white swan gain 4 ward. draw 1 card. radiance growth black swan gain 3 ward. flip your hand. shadow release"
+          data-search="white swan &amp; black swan white swan gain 4 ward. draw 1 card. radiance growth black swan flip a card in your hand. hush 2. shadow release"
         >
           <h2>White Swan &amp; Black Swan</h2>
           <div class="faces">
@@ -721,7 +740,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Black Swan</h3>
-              <p class="effect">Gain 3 Ward. Flip your hand.</p>
+              <p class="effect">Flip a card in your hand. Hush 2.</p>
               <p class="tag">Shadow · Release</p>
               <a
                 href="https://drive.google.com/file/d/1hqB4hlGncbJEHgG5L4FwD0pZyntMsJuw/view?usp=drivesdk"
@@ -769,14 +788,14 @@
         </article>
         <article
           class="pair"
-          data-search="butterfly &amp; moth butterfly flip your hand. draw 1 card. growth release moth apply 2 burn. gain 2 ward. shadow flame"
+          data-search="butterfly &amp; moth butterfly flip a card in your hand. scry. growth release moth apply 2 burn. hush 2. shadow flame"
         >
           <h2>Butterfly &amp; Moth</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Butterfly</h3>
-              <p class="effect">Flip your hand. Draw 1 card.</p>
+              <p class="effect">Flip a card in your hand. Scry.</p>
               <p class="tag">Growth · Release</p>
               <a
                 href="https://drive.google.com/file/d/13ftDB_VQrowQtLLCX3c8g0BRX-_CG0YX/view?usp=drivesdk"
@@ -789,7 +808,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Moth</h3>
-              <p class="effect">Apply 2 Burn. Gain 2 Ward.</p>
+              <p class="effect">Apply 2 Burn. Hush 2.</p>
               <p class="tag">Shadow · Flame</p>
               <a
                 href="https://drive.google.com/file/d/1BnAd0FJlK_jFJ7kK323ipJKsA_LUc4vY/view?usp=drivesdk"
@@ -873,7 +892,7 @@
         </article>
         <article
           class="pair"
-          data-search="sunrise &amp; eclipse sunrise deal 5 radiance/growth damage. heal 3 hp. radiance growth eclipse deal 5 shadow/release damage. flip your hand. gain 3 ward. shadow release"
+          data-search="sunrise &amp; eclipse sunrise deal 5 radiance/growth damage. heal 3 hp. radiance growth eclipse hush 2. mark 2. flip your hand. shadow release"
         >
           <h2>Sunrise &amp; Eclipse</h2>
           <div class="faces">
@@ -893,7 +912,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Eclipse</h3>
-              <p class="effect">Deal 5 Shadow/Release damage. Flip your hand. Gain 3 Ward.</p>
+              <p class="effect">Hush 2. Mark 2. Flip your hand.</p>
               <p class="tag">Shadow · Release</p>
               <a
                 href="https://drive.google.com/file/d/1jbLour-iqkjz63nX5iSaKOIhVCyVyjZU/view?usp=drivesdk"
@@ -975,14 +994,14 @@
         </article>
         <article
           class="pair"
-          data-search="bell ringer &amp; silenced bell ringer bell ringer draw 1 card. deal 4 radiance/release damage. radiance release silenced bell ringer discard a card. gain 5 ward. draw 1 card. shadow binding"
+          data-search="bell ringer &amp; silenced bell ringer bell ringer mark 2. draw 1 card. radiance release silenced bell ringer discard a card. gain 5 ward. draw 1 card. shadow binding"
         >
           <h2>Bell Ringer &amp; Silenced Bell Ringer</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Bell Ringer</h3>
-              <p class="effect">Draw 1 card. Deal 4 Radiance/Release damage.</p>
+              <p class="effect">Mark 2. Draw 1 card.</p>
               <p class="tag">Radiance · Release</p>
               <a
                 href="https://drive.google.com/file/d/1weJMD7YujS38lFI9Q2-KIWth3yFzjPpU/view?usp=drivesdk"
@@ -1043,14 +1062,14 @@
         </article>
         <article
           class="pair"
-          data-search="censer &amp; plague brazier censer apply 2 burn. gain 3 ward. radiance flame plague brazier lose 1 hp. apply 5 burn. decay flame"
+          data-search="censer &amp; plague brazier censer apply 2 burn. scry. radiance flame plague brazier lose 1 hp. apply 5 burn. decay flame"
         >
           <h2>Censer &amp; Plague Brazier</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Censer</h3>
-              <p class="effect">Apply 2 Burn. Gain 3 Ward.</p>
+              <p class="effect">Apply 2 Burn. Scry.</p>
               <p class="tag">Radiance · Flame</p>
               <a
                 href="https://drive.google.com/file/d/1580yzY8NaonMm1PAX7pA77gqGvo7QqY2/view?usp=drivesdk"
@@ -1349,14 +1368,14 @@
         </article>
         <article
           class="pair"
-          data-search="hourglass &amp; broken hourglass hourglass draw 1 card. gain 3 ward. radiance memory broken hourglass discard a card. draw 3 cards. shadow release"
+          data-search="hourglass &amp; broken hourglass hourglass scry. hush 2. radiance memory broken hourglass discard a card. draw 3 cards. shadow release"
         >
           <h2>Hourglass &amp; Broken Hourglass</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Hourglass</h3>
-              <p class="effect">Draw 1 card. Gain 3 Ward.</p>
+              <p class="effect">Scry. Hush 2.</p>
               <p class="tag">Radiance · Memory</p>
               <a
                 href="https://drive.google.com/file/d/1oPMBgpZbq-VdwPd-W9Sc777BAlUowr4P/view?usp=drivesdk"
@@ -1451,7 +1470,7 @@
         </article>
         <article
           class="pair"
-          data-search="sunlit chapel &amp; moonlit crypt sunlit chapel heal 4 hp. gain 3 ward. banish this card. radiance growth moonlit crypt return a card from your discard pile to your hand. gain 3 ward. shadow memory"
+          data-search="sunlit chapel &amp; moonlit crypt sunlit chapel heal 4 hp. gain 3 ward. banish this card. radiance growth moonlit crypt return a card from your discard to your hand. hush 2. shadow memory"
         >
           <h2>Sunlit Chapel &amp; Moonlit Crypt</h2>
           <div class="faces">
@@ -1471,7 +1490,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Moonlit Crypt</h3>
-              <p class="effect">Return a card from your discard pile to your hand. Gain 3 Ward.</p>
+              <p class="effect">Return a card from your discard to your hand. Hush 2.</p>
               <p class="tag">Shadow · Memory</p>
               <a
                 href="https://drive.google.com/file/d/1_WeR4trqH6GCZd2D8O5jgipIv7pekmdw/view?usp=drivesdk"
@@ -1553,7 +1572,7 @@
         </article>
         <article
           class="pair"
-          data-search="bridge &amp; chasm bridge draw 1 card. remove 2 enemy ward. release chasm banish another card from your hand. deal 10 shadow/oblivion damage. shadow oblivion"
+          data-search="bridge &amp; chasm bridge draw 1 card. remove 2 enemy ward. release chasm banish another card from your hand. mark 6. shadow oblivion"
         >
           <h2>Bridge &amp; Chasm</h2>
           <div class="faces">
@@ -1573,7 +1592,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Chasm</h3>
-              <p class="effect">Banish another card from your hand. Deal 10 Shadow/Oblivion damage.</p>
+              <p class="effect">Banish another card from your hand. Mark 6.</p>
               <p class="tag">Shadow · Oblivion</p>
               <a
                 href="https://drive.google.com/file/d/1T5Vey3NTvNsi5MGhIIH2J0KMXpgP1G4z/view?usp=drivesdk"
@@ -1587,7 +1606,7 @@
         </article>
         <article
           class="pair"
-          data-search="open gate &amp; sealed gate open gate remove 4 enemy ward. draw 1 card. release radiance sealed gate gain 8 ward. flip your hand. binding shadow"
+          data-search="open gate &amp; sealed gate open gate remove 4 enemy ward. draw 1 card. release radiance sealed gate cancel the enemy’s next non-attack intent. banish this card. binding shadow"
         >
           <h2>Open Gate &amp; Sealed Gate</h2>
           <div class="faces">
@@ -1607,7 +1626,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Sealed Gate</h3>
-              <p class="effect">Gain 8 Ward. Flip your hand.</p>
+              <p class="effect">Cancel the enemy’s next non-attack intent. Banish this card.</p>
               <p class="tag">Binding · Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1r4TA80YCa8JMFwHtVNIxX4v-gvzPYO9v/view?usp=drivesdk"
@@ -1691,7 +1710,7 @@
         </article>
         <article
           class="pair"
-          data-search="benediction &amp; curse benediction heal 2 hp. gain 4 ward. banish this card. radiance growth curse lose 1 hp. apply 3 burn. shadow decay"
+          data-search="benediction &amp; curse benediction heal 2 hp. gain 4 ward. banish this card. radiance growth curse lose 1 hp. apply 2 burn. hush 2. shadow decay"
         >
           <h2>Benediction &amp; Curse</h2>
           <div class="faces">
@@ -1711,7 +1730,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Curse</h3>
-              <p class="effect">Lose 1 HP. Apply 3 Burn.</p>
+              <p class="effect">Lose 1 HP. Apply 2 Burn. Hush 2.</p>
               <p class="tag">Shadow · Decay</p>
               <a
                 href="https://drive.google.com/file/d/1WgakSgo92a19dVli80QHeKmM9GV1MK-Q/view?usp=drivesdk"
@@ -1725,7 +1744,7 @@
         </article>
         <article
           class="pair"
-          data-search="ascension &amp; descent ascension deal 7 radiance/release damage. flip your hand. radiance release descent discard a card. deal 9 shadow/decay damage. shadow decay"
+          data-search="ascension &amp; descent ascension deal 7 radiance/release damage. flip your hand. radiance release descent discard a card. mark 4. shadow decay"
         >
           <h2>Ascension &amp; Descent</h2>
           <div class="faces">
@@ -1745,7 +1764,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Descent</h3>
-              <p class="effect">Discard a card. Deal 9 Shadow/Decay damage.</p>
+              <p class="effect">Discard a card. Mark 4.</p>
               <p class="tag">Shadow · Decay</p>
               <a
                 href="https://drive.google.com/file/d/1C-8YBOZoTOsB59IzAwGQSiElgVuOQ4Ei/view?usp=drivesdk"
@@ -1793,7 +1812,7 @@
         </article>
         <article
           class="pair"
-          data-search="dream &amp; nightmare dream draw 2 cards. memory release nightmare deal 8 shadow/oblivion damage. flip your hand. shadow oblivion"
+          data-search="dream &amp; nightmare dream draw 2 cards. memory release nightmare hush 2. mark 2. shadow oblivion"
         >
           <h2>Dream &amp; Nightmare</h2>
           <div class="faces">
@@ -1813,7 +1832,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Nightmare</h3>
-              <p class="effect">Deal 8 Shadow/Oblivion damage. Flip your hand.</p>
+              <p class="effect">Hush 2. Mark 2.</p>
               <p class="tag">Shadow · Oblivion</p>
               <a
                 href="https://drive.google.com/file/d/1ESInrS0cKlRm4dq3pHBgYNGO_1jTwrvG/view?usp=drivesdk"
@@ -1895,14 +1914,14 @@
         </article>
         <article
           class="pair"
-          data-search="puppeteer &amp; marionette puppeteer return a card from your discard pile to your hand. binding marionette put another card from your hand on top of your draw pile. gain 5 ward. binding"
+          data-search="puppeteer &amp; marionette puppeteer flip a card in your hand. hush 2. binding marionette put another card from your hand on top of your draw pile. gain 5 ward. binding"
         >
           <h2>Puppeteer &amp; Marionette</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Puppeteer</h3>
-              <p class="effect">Return a card from your discard pile to your hand.</p>
+              <p class="effect">Flip a card in your hand. Hush 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1zV99UfETJda9F_gUFVtUe-x8AR7IeKrM/view?usp=drivesdk"
@@ -1929,14 +1948,14 @@
         </article>
         <article
           class="pair"
-          data-search="weaver &amp; unraveler weaver put a card from your discard pile on top of your draw pile. gain 3 ward. growth unraveler banish another card from your hand. deal 8 decay damage. decay"
+          data-search="weaver &amp; unraveler weaver put a card from your discard on your draw pile. scry. growth unraveler banish another card from your hand. deal 8 decay damage. decay"
         >
           <h2>Weaver &amp; Unraveler</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Weaver</h3>
-              <p class="effect">Put a card from your discard pile on top of your draw pile. Gain 3 Ward.</p>
+              <p class="effect">Put a card from your discard on your draw pile. Scry.</p>
               <p class="tag">Growth</p>
               <a
                 href="https://drive.google.com/file/d/1aASOTkSbtNGOfBdm_YpZBpVghMKG3il2/view?usp=drivesdk"
@@ -1963,7 +1982,7 @@
         </article>
         <article
           class="pair"
-          data-search="midwife &amp; undertaker midwife heal 5 hp. draw 1 card. banish this card. growth undertaker banish a card from your discard pile. gain 6 ward. decay"
+          data-search="midwife &amp; undertaker midwife heal 5 hp. draw 1 card. banish this card. growth undertaker banish a card from your discard. hush 3. decay"
         >
           <h2>Midwife &amp; Undertaker</h2>
           <div class="faces">
@@ -1983,7 +2002,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Undertaker</h3>
-              <p class="effect">Banish a card from your discard pile. Gain 6 Ward.</p>
+              <p class="effect">Banish a card from your discard. Hush 3.</p>
               <p class="tag">Decay</p>
               <a
                 href="https://drive.google.com/file/d/1z6xEFUV5CiqjUgx4IceUpJvV3KbO2_Aq/view?usp=drivesdk"
@@ -2033,16 +2052,14 @@
         </article>
         <article
           class="pair"
-          data-search="cartographer &amp; lost wanderer cartographer look at the top card of your draw pile. you may put it on the bottom. draw 1 card. radiance lost wanderer put another card from your hand on the bottom of your draw pile. draw 1 card. flip your hand. memory"
+          data-search="cartographer &amp; lost wanderer cartographer scry. mark 2. radiance lost wanderer put another card from your hand on the bottom of your draw pile. draw 1 card. flip your hand. memory"
         >
           <h2>Cartographer &amp; Lost Wanderer</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Cartographer</h3>
-              <p class="effect">
-                Look at the top card of your draw pile. You may put it on the bottom. Draw 1 card.
-              </p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1d8R3rePBF0N2lncfN7BLvW_fkqY0GoQa/view?usp=drivesdk"
@@ -2141,14 +2158,14 @@
         </article>
         <article
           class="pair"
-          data-search="peacock &amp; vulture peacock gain 4 ward. draw 1 card. radiance vulture banish a card from your discard pile. heal 3 hp. banish this card. decay"
+          data-search="peacock &amp; vulture peacock mark 3. gain 2 ward. radiance vulture banish a card from your discard pile. heal 3 hp. banish this card. decay"
         >
           <h2>Peacock &amp; Vulture</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Peacock</h3>
-              <p class="effect">Gain 4 Ward. Draw 1 card.</p>
+              <p class="effect">Mark 3. Gain 2 Ward.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1kahEnL1cbpSgErZtSVa1ug2kxS0AYf0h/view?usp=drivesdk"
@@ -2175,7 +2192,7 @@
         </article>
         <article
           class="pair"
-          data-search="goldfish &amp; anglerfish goldfish draw 1 card. gain 3 ward. growth anglerfish deal 3 shadow damage. heal 1 hp. shadow"
+          data-search="goldfish &amp; anglerfish goldfish draw 1 card. gain 3 ward. growth anglerfish deal 3 shadow damage. mark 2. shadow"
         >
           <h2>Goldfish &amp; Anglerfish</h2>
           <div class="faces">
@@ -2195,7 +2212,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Anglerfish</h3>
-              <p class="effect">Deal 3 Shadow damage. Heal 1 HP.</p>
+              <p class="effect">Deal 3 Shadow damage. Mark 2.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1-Q3qwTjJ7RVn-HL6u41cazot0WhpLHI1/view?usp=drivesdk"
@@ -2243,14 +2260,14 @@
         </article>
         <article
           class="pair"
-          data-search="tortoise &amp; hare tortoise gain 7 ward. banish this card. binding hare gain 3 ward. draw 1 card. release"
+          data-search="tortoise &amp; hare tortoise hush 3. gain 3 ward. banish this card. binding hare gain 3 ward. draw 1 card. release"
         >
           <h2>Tortoise &amp; Hare</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Tortoise</h3>
-              <p class="effect">Gain 7 Ward. Banish this card.</p>
+              <p class="effect">Hush 3. Gain 3 Ward. Banish this card.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1j7sWF2Nc_2t4tjK6BoKTocBv9vE-Qfit/view?usp=drivesdk"
@@ -2311,7 +2328,7 @@
         </article>
         <article
           class="pair"
-          data-search="glasshouse &amp; root cellar glasshouse heal 3 hp. gain 2 ward. banish this card. growth root cellar put a card from your discard pile on the bottom of your draw pile. gain 5 ward. shadow"
+          data-search="glasshouse &amp; root cellar glasshouse heal 3 hp. gain 2 ward. banish this card. growth root cellar put a card from your discard on your draw pile. hush 2. shadow"
         >
           <h2>Glasshouse &amp; Root Cellar</h2>
           <div class="faces">
@@ -2331,9 +2348,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Root Cellar</h3>
-              <p class="effect">
-                Put a card from your discard pile on the bottom of your draw pile. Gain 5 Ward.
-              </p>
+              <p class="effect">Put a card from your discard on your draw pile. Hush 2.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1KLhKYrRLx3iqvKeRjuLT-BOG97sv8uim/view?usp=drivesdk"
@@ -2347,7 +2362,7 @@
         </article>
         <article
           class="pair"
-          data-search="walled city &amp; wilderness walled city gain 10 ward. binding wilderness discard a card. draw 2 cards. flip your hand. release"
+          data-search="walled city &amp; wilderness walled city gain 10 ward. binding wilderness discard a card. scry. flip your hand. release"
         >
           <h2>Walled City &amp; Wilderness</h2>
           <div class="faces">
@@ -2367,7 +2382,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Wilderness</h3>
-              <p class="effect">Discard a card. Draw 2 cards. Flip your hand.</p>
+              <p class="effect">Discard a card. Scry. Flip your hand.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1eUJ97rgiHPjATfsrZQtd8kFaiXzYlMKl/view?usp=drivesdk"
@@ -2415,7 +2430,7 @@
         </article>
         <article
           class="pair"
-          data-search="dawn market &amp; night market dawn market discard a card. draw 2 cards. radiance night market discard a card. draw 2 cards. shadow"
+          data-search="dawn market &amp; night market dawn market discard a card. draw 2 cards. radiance night market discard a card. mark 3. draw 1 card. shadow"
         >
           <h2>Dawn Market &amp; Night Market</h2>
           <div class="faces">
@@ -2435,7 +2450,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Night Market</h3>
-              <p class="effect">Discard a card. Draw 2 cards.</p>
+              <p class="effect">Discard a card. Mark 3. Draw 1 card.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1-JkE_E8LG6Jp3_UQlUW6IiqfBTpz5ElC/view?usp=drivesdk"
@@ -2483,7 +2498,7 @@
         </article>
         <article
           class="pair"
-          data-search="observatory &amp; underground cavern observatory look at the top card of your draw pile. you may put it on the bottom. draw 1 card. radiance underground cavern discard a card. gain 7 ward. shadow"
+          data-search="observatory &amp; underground cavern observatory look at the top card of your draw pile. you may put it on the bottom. draw 1 card. radiance underground cavern hush 2. scry. shadow"
         >
           <h2>Observatory &amp; Underground Cavern</h2>
           <div class="faces">
@@ -2505,7 +2520,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Underground Cavern</h3>
-              <p class="effect">Discard a card. Gain 7 Ward.</p>
+              <p class="effect">Hush 2. Scry.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1eJ8a89R42I9ZtySh5OSKWVvTVTCKSMCb/view?usp=drivesdk"
@@ -2553,14 +2568,14 @@
         </article>
         <article
           class="pair"
-          data-search="frozen lake &amp; boiling lake frozen lake deal 4 frost damage. gain 2 ward. frost boiling lake deal 5 flame damage. apply 2 burn. flame"
+          data-search="frozen lake &amp; boiling lake frozen lake hush 3. deal 2 frost damage. frost boiling lake deal 5 flame damage. apply 2 burn. flame"
         >
           <h2>Frozen Lake &amp; Boiling Lake</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Frozen Lake</h3>
-              <p class="effect">Deal 4 Frost damage. Gain 2 Ward.</p>
+              <p class="effect">Hush 3. Deal 2 Frost damage.</p>
               <p class="tag">Frost</p>
               <a
                 href="https://drive.google.com/file/d/1utKFzykk_TUhgY4JtjdyPgCQy0eF413I/view?usp=drivesdk"
@@ -2623,14 +2638,14 @@
         </article>
         <article
           class="pair"
-          data-search="white desert &amp; black forest white desert deal 8 radiance damage, ignoring ward. radiance black forest banish another card from your hand. gain 8 ward. shadow"
+          data-search="white desert &amp; black forest white desert remove 4 enemy ward. mark 3. radiance black forest banish another card from your hand. gain 8 ward. shadow"
         >
           <h2>White Desert &amp; Black Forest</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>White Desert</h3>
-              <p class="effect">Deal 8 Radiance damage, ignoring Ward.</p>
+              <p class="effect">Remove 4 enemy Ward. Mark 3.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1Cqja1jSt42AVMswRTKhuuIifZMFJDG62/view?usp=drivesdk"
@@ -2691,14 +2706,14 @@
         </article>
         <article
           class="pair"
-          data-search="sewing needle &amp; scissors sewing needle put a card from your discard pile on top of your draw pile. gain 4 ward. growth scissors banish another card from your hand. deal 7 decay damage, ignoring ward. decay"
+          data-search="sewing needle &amp; scissors sewing needle put a card from your discard on your draw pile. scry. growth scissors banish another card from your hand. deal 7 decay damage, ignoring ward. decay"
         >
           <h2>Sewing Needle &amp; Scissors</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Sewing Needle</h3>
-              <p class="effect">Put a card from your discard pile on top of your draw pile. Gain 4 Ward.</p>
+              <p class="effect">Put a card from your discard on your draw pile. Scry.</p>
               <p class="tag">Growth</p>
               <a
                 href="https://drive.google.com/file/d/1YTm73MZEZf7Vb82UJQ_NJ4yT627Sp4rR/view?usp=drivesdk"
@@ -2725,16 +2740,14 @@
         </article>
         <article
           class="pair"
-          data-search="compass &amp; labyrinth compass look at the top card of your draw pile. you may put it on the bottom. draw 1 card. radiance labyrinth put another card from your hand on the bottom of your draw pile. gain 6 ward. shadow"
+          data-search="compass &amp; labyrinth compass scry. draw 1 card. radiance labyrinth put another card from your hand on the bottom of your draw pile. gain 6 ward. shadow"
         >
           <h2>Compass &amp; Labyrinth</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Compass</h3>
-              <p class="effect">
-                Look at the top card of your draw pile. You may put it on the bottom. Draw 1 card.
-              </p>
+              <p class="effect">Scry. Draw 1 card.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/15ZTFaNh20J0f2Mm_DfpfHjGATjfN9MnP/view?usp=drivesdk"
@@ -2831,14 +2844,14 @@
         </article>
         <article
           class="pair"
-          data-search="tuned violin &amp; broken violin tuned violin gain 2 ward. draw 1 card. flip your hand. binding broken violin discard a card. deal 6 decay damage. decay"
+          data-search="tuned violin &amp; broken violin tuned violin scry. flip your hand. binding broken violin discard a card. deal 6 decay damage. decay"
         >
           <h2>Tuned Violin &amp; Broken Violin</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Tuned Violin</h3>
-              <p class="effect">Gain 2 Ward. Draw 1 card. Flip your hand.</p>
+              <p class="effect">Scry. Flip your hand.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1baely1s9BmqmKnBO2DwVmWRx1nnhQBWa/view?usp=drivesdk"
@@ -2865,14 +2878,14 @@
         </article>
         <article
           class="pair"
-          data-search="balance scales &amp; loaded dice balance scales gain 4 ward. deal 3 binding damage. binding loaded dice lose 2 hp. draw 2 cards. release"
+          data-search="balance scales &amp; loaded dice balance scales mark 2. hush 2. binding loaded dice lose 2 hp. draw 2 cards. release"
         >
           <h2>Balance Scales &amp; Loaded Dice</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Balance Scales</h3>
-              <p class="effect">Gain 4 Ward. Deal 3 Binding damage.</p>
+              <p class="effect">Mark 2. Hush 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1nd3-mZo4ry6l7590as8l82pzDGrHvJg7/view?usp=drivesdk"
@@ -2933,14 +2946,14 @@
         </article>
         <article
           class="pair"
-          data-search="wax seal &amp; torn letter wax seal gain 5 ward. binding torn letter discard a card. remove 2 enemy ward. draw 1 card. memory"
+          data-search="wax seal &amp; torn letter wax seal hush 3. gain 2 ward. binding torn letter discard a card. remove 2 enemy ward. draw 1 card. memory"
         >
           <h2>Wax Seal &amp; Torn Letter</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Wax Seal</h3>
-              <p class="effect">Gain 5 Ward.</p>
+              <p class="effect">Hush 3. Gain 2 Ward.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1fCSB-Gdr1dCZW8jN4LGx63z9XCvXJCZR/view?usp=drivesdk"
@@ -2967,16 +2980,14 @@
         </article>
         <article
           class="pair"
-          data-search="anchor &amp; kite anchor put another card from your hand on the bottom of your draw pile. gain 12 ward. binding kite draw 1 card. flip your hand. release"
+          data-search="anchor &amp; kite anchor put another card on your draw pile. hush 4. binding kite draw 1 card. flip your hand. release"
         >
           <h2>Anchor &amp; Kite</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Anchor</h3>
-              <p class="effect">
-                Put another card from your hand on the bottom of your draw pile. Gain 12 Ward.
-              </p>
+              <p class="effect">Put another card on your draw pile. Hush 4.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/11IP2UlKOWLM5dPLI-DLSKFvF_AF15o0C/view?usp=drivesdk"
@@ -3003,7 +3014,7 @@
         </article>
         <article
           class="pair"
-          data-search="metronome &amp; wind chime metronome put a card from your discard pile on top of your draw pile. gain 3 ward. binding wind chime gain 2 ward. draw 1 card. release"
+          data-search="metronome &amp; wind chime metronome put a card from your discard pile on top of your draw pile. gain 3 ward. binding wind chime scry. flip your hand. release"
         >
           <h2>Metronome &amp; Wind Chime</h2>
           <div class="faces">
@@ -3023,7 +3034,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Wind Chime</h3>
-              <p class="effect">Gain 2 Ward. Draw 1 card.</p>
+              <p class="effect">Scry. Flip your hand.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1j2YDTZA0r7Yj7DChzrwIaXzhygpmrpGq/view?usp=drivesdk"
@@ -3037,7 +3048,7 @@
         </article>
         <article
           class="pair"
-          data-search="lens &amp; blindfold lens remove 4 enemy ward. draw 1 card. radiance blindfold discard a card. gain 6 ward. shadow"
+          data-search="lens &amp; blindfold lens remove 4 enemy ward. draw 1 card. radiance blindfold discard a card. hush 4. shadow"
         >
           <h2>Lens &amp; Blindfold</h2>
           <div class="faces">
@@ -3057,7 +3068,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Blindfold</h3>
-              <p class="effect">Discard a card. Gain 6 Ward.</p>
+              <p class="effect">Discard a card. Hush 4.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1dKztkN0t59NW-zbenT4smgLsToZP0BFD/view?usp=drivesdk"
@@ -3139,14 +3150,14 @@
         </article>
         <article
           class="pair"
-          data-search="symmetry &amp; asymmetry symmetry gain 4 ward. deal 4 binding damage. binding asymmetry gain 2 ward. deal 5 release damage. release"
+          data-search="symmetry &amp; asymmetry symmetry mark 2. hush 2. binding asymmetry gain 2 ward. deal 5 release damage. release"
         >
           <h2>Symmetry &amp; Asymmetry</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Symmetry</h3>
-              <p class="effect">Gain 4 Ward. Deal 4 Binding damage.</p>
+              <p class="effect">Mark 2. Hush 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1HogzwkGW9JIZdg2PxJQvpgnY4byfnR0p/view?usp=drivesdk"
@@ -3207,14 +3218,14 @@
         </article>
         <article
           class="pair"
-          data-search="convergence &amp; divergence convergence put another card from your hand on top of your draw pile. gain 5 ward. binding divergence put another card from your hand on the bottom of your draw pile. draw 2 cards. release"
+          data-search="convergence &amp; divergence convergence put another card on your draw pile. mark 4. binding divergence put another card from your hand on the bottom of your draw pile. draw 2 cards. release"
         >
           <h2>Convergence &amp; Divergence</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Convergence</h3>
-              <p class="effect">Put another card from your hand on top of your draw pile. Gain 5 Ward.</p>
+              <p class="effect">Put another card on your draw pile. Mark 4.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1gJ9V42OxqrI7UCAfVTWzTp8Ub_1zGnr6/view?usp=drivesdk"
@@ -3243,14 +3254,14 @@
         </article>
         <article
           class="pair"
-          data-search="compression &amp; expansion compression discard a card. gain 7 ward. binding expansion draw 3 cards. release"
+          data-search="compression &amp; expansion compression discard a card. hush 4. binding expansion draw 3 cards. release"
         >
           <h2>Compression &amp; Expansion</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Compression</h3>
-              <p class="effect">Discard a card. Gain 7 Ward.</p>
+              <p class="effect">Discard a card. Hush 4.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1nmN6_fJHOsqzZQkZi_3_b4GARRi3_zYc/view?usp=drivesdk"
@@ -3277,7 +3288,7 @@
         </article>
         <article
           class="pair"
-          data-search="attraction &amp; repulsion attraction return a card from your discard pile to your hand. radiance repulsion put another card from your hand on the bottom of your draw pile. deal 6 shadow damage. shadow"
+          data-search="attraction &amp; repulsion attraction return a card from your discard pile to your hand. radiance repulsion put another card on your draw pile. mark 4. shadow"
         >
           <h2>Attraction &amp; Repulsion</h2>
           <div class="faces">
@@ -3297,9 +3308,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Repulsion</h3>
-              <p class="effect">
-                Put another card from your hand on the bottom of your draw pile. Deal 6 Shadow damage.
-              </p>
+              <p class="effect">Put another card on your draw pile. Mark 4.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/17pKqlexRWT_dYxR9QFVXEExZys9prDgl/view?usp=drivesdk"
@@ -3347,14 +3356,14 @@
         </article>
         <article
           class="pair"
-          data-search="stillness &amp; frenzy stillness gain 7 ward. banish this card. binding frenzy discard a card. deal 10 release damage. release"
+          data-search="stillness &amp; frenzy stillness hush 4. banish this card. binding frenzy discard a card. deal 10 release damage. release"
         >
           <h2>Stillness &amp; Frenzy</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Stillness</h3>
-              <p class="effect">Gain 7 Ward. Banish this card.</p>
+              <p class="effect">Hush 4. Banish this card.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1wJ1tMK0HBuvdk7dT9CJ1hzBZwKQCa8Up/view?usp=drivesdk"
@@ -3381,14 +3390,14 @@
         </article>
         <article
           class="pair"
-          data-search="silence &amp; clamor silence banish a card from your discard pile. gain 6 ward. shadow clamor deal 4 radiance damage. draw 1 card. radiance"
+          data-search="silence &amp; clamor silence cancel the enemy’s next non-attack intent. banish this card. shadow clamor deal 4 radiance damage. draw 1 card. radiance"
         >
           <h2>Silence &amp; Clamor</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Silence</h3>
-              <p class="effect">Banish a card from your discard pile. Gain 6 Ward.</p>
+              <p class="effect">Cancel the enemy’s next non-attack intent. Banish this card.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1rccNvjMcDf85wimiOTJMal2AmC-4akCh/view?usp=drivesdk"
@@ -3415,14 +3424,14 @@
         </article>
         <article
           class="pair"
-          data-search="awakening &amp; slumber awakening draw 2 cards. banish this card. radiance slumber heal 3 hp. gain 2 ward. banish this card. shadow"
+          data-search="awakening &amp; slumber awakening scry. mark 3. banish this card. radiance slumber heal 3 hp. gain 2 ward. banish this card. shadow"
         >
           <h2>Awakening &amp; Slumber</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Awakening</h3>
-              <p class="effect">Draw 2 cards. Banish this card.</p>
+              <p class="effect">Scry. Mark 3. Banish this card.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1nkwXC5ky0hMR0eoy17U88GzS2rgrwxDN/view?usp=drivesdk"
@@ -3517,14 +3526,14 @@
         </article>
         <article
           class="pair"
-          data-search="high tide &amp; low tide high tide gain 5 ward. flip your hand. binding low tide remove 5 enemy ward. draw 1 card. release"
+          data-search="high tide &amp; low tide high tide hush 2. flip your hand. binding low tide remove 5 enemy ward. draw 1 card. release"
         >
           <h2>High Tide &amp; Low Tide</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>High Tide</h3>
-              <p class="effect">Gain 5 Ward. Flip your hand.</p>
+              <p class="effect">Hush 2. Flip your hand.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1EqX_oYPSRIG2gpA_ekNqqHM7Xrq8AMRe/view?usp=drivesdk"
@@ -3551,14 +3560,14 @@
         </article>
         <article
           class="pair"
-          data-search="exposure &amp; concealment exposure remove 4 enemy ward. deal 3 radiance damage. radiance concealment gain 5 ward. flip your hand. banish this card. shadow"
+          data-search="exposure &amp; concealment exposure remove 3 enemy ward. mark 3. radiance concealment gain 5 ward. flip your hand. banish this card. shadow"
         >
           <h2>Exposure &amp; Concealment</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Exposure</h3>
-              <p class="effect">Remove 4 enemy Ward. Deal 3 Radiance damage.</p>
+              <p class="effect">Remove 3 enemy Ward. Mark 3.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1EYm5F6-MpL_7sYsb7MTZGaTzMed9OnV2/view?usp=drivesdk"
@@ -3585,14 +3594,14 @@
         </article>
         <article
           class="pair"
-          data-search="herald &amp; smuggler herald draw 1 card. deal 3 radiance damage. radiance smuggler put another card from your hand on the bottom of your draw pile. draw 2 cards. shadow"
+          data-search="herald &amp; smuggler herald scry. mark 2. radiance smuggler put another card from your hand on the bottom of your draw pile. draw 2 cards. shadow"
         >
           <h2>Herald &amp; Smuggler</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Herald</h3>
-              <p class="effect">Draw 1 card. Deal 3 Radiance damage.</p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1uFPL0WYkTGKChGPjeCI17Bofth0w-8bm/view?usp=drivesdk"
@@ -3689,14 +3698,14 @@
         </article>
         <article
           class="pair"
-          data-search="mask maker &amp; face thief mask maker put another card from your hand on top of your draw pile. gain 6 ward. binding face thief discard a card. draw 2 cards. shadow"
+          data-search="mask maker &amp; face thief mask maker flip a card in your hand. scry. binding face thief flip a card in your hand. discard a card. draw 1 card. shadow"
         >
           <h2>Mask Maker &amp; Face Thief</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Mask Maker</h3>
-              <p class="effect">Put another card from your hand on top of your draw pile. Gain 6 Ward.</p>
+              <p class="effect">Flip a card in your hand. Scry.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/18EcvYegKBcNie-hlC7j2oTcjS4XYUheW/view?usp=drivesdk"
@@ -3709,7 +3718,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Face Thief</h3>
-              <p class="effect">Discard a card. Draw 2 cards.</p>
+              <p class="effect">Flip a card in your hand. Discard a card. Draw 1 card.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1-SJTrMnA90Wq8C0Nl5Mst5YPqbad_O9d/view?usp=drivesdk"
@@ -3723,14 +3732,14 @@
         </article>
         <article
           class="pair"
-          data-search="fencer &amp; brawler fencer deal 6 radiance damage. radiance brawler lose 2 hp. deal 11 decay damage. decay"
+          data-search="fencer &amp; brawler fencer deal 3 radiance damage. mark 2. radiance brawler lose 2 hp. deal 11 decay damage. decay"
         >
           <h2>Fencer &amp; Brawler</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Fencer</h3>
-              <p class="effect">Deal 6 Radiance damage.</p>
+              <p class="effect">Deal 3 Radiance damage. Mark 2.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1rGSLSSBR4grvcVZjOEPtoyoGau28eB0H/view?usp=drivesdk"
@@ -3895,14 +3904,14 @@
         </article>
         <article
           class="pair"
-          data-search="archivist &amp; bookworm archivist gain 4 ward. draw 1 card. memory bookworm banish a card from your discard pile. deal 6 decay damage. decay"
+          data-search="archivist &amp; bookworm archivist scry. put a card from your discard on your draw pile. memory bookworm banish a card from your discard pile. deal 6 decay damage. decay"
         >
           <h2>Archivist &amp; Bookworm</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Archivist</h3>
-              <p class="effect">Gain 4 Ward. Draw 1 card.</p>
+              <p class="effect">Scry. Put a card from your discard on your draw pile.</p>
               <p class="tag">Memory</p>
               <a
                 href="https://drive.google.com/file/d/1WDzj7JbcIsjO5yNv7x8hpYGZ9q8Fhm44/view?usp=drivesdk"
@@ -3929,7 +3938,7 @@
         </article>
         <article
           class="pair"
-          data-search="surveyor &amp; trespasser surveyor look at the top card of your draw pile. gain 4 ward. binding trespasser remove 4 enemy ward. draw 1 card. release"
+          data-search="surveyor &amp; trespasser surveyor look at the top card of your draw pile. gain 4 ward. binding trespasser remove 3 enemy ward. mark 2. release"
         >
           <h2>Surveyor &amp; Trespasser</h2>
           <div class="faces">
@@ -3949,7 +3958,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Trespasser</h3>
-              <p class="effect">Remove 4 enemy Ward. Draw 1 card.</p>
+              <p class="effect">Remove 3 enemy Ward. Mark 2.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1QsdyaQaCR3FXLB6vnUftADn_sIzio1rv/view?usp=drivesdk"
@@ -3963,7 +3972,7 @@
         </article>
         <article
           class="pair"
-          data-search="chimney sweep &amp; smoke spirit chimney sweep remove 5 enemy ward. draw 1 card. radiance smoke spirit gain 4 ward. apply 1 burn. shadow"
+          data-search="chimney sweep &amp; smoke spirit chimney sweep remove 5 enemy ward. draw 1 card. radiance smoke spirit hush 2. apply 1 burn. shadow"
         >
           <h2>Chimney Sweep &amp; Smoke Spirit</h2>
           <div class="faces">
@@ -3983,7 +3992,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Smoke Spirit</h3>
-              <p class="effect">Gain 4 Ward. Apply 1 Burn.</p>
+              <p class="effect">Hush 2. Apply 1 Burn.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1bl8JrbiSwNjR2iPGSNkql-f1DnsBDrDb/view?usp=drivesdk"
@@ -4031,7 +4040,7 @@
         </article>
         <article
           class="pair"
-          data-search="oyster &amp; cuttlefish oyster gain 6 ward. binding cuttlefish flip your hand. draw 1 card. shadow"
+          data-search="oyster &amp; cuttlefish oyster gain 6 ward. binding cuttlefish flip a card in your hand. draw 1 card. shadow"
         >
           <h2>Oyster &amp; Cuttlefish</h2>
           <div class="faces">
@@ -4051,7 +4060,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Cuttlefish</h3>
-              <p class="effect">Flip your hand. Draw 1 card.</p>
+              <p class="effect">Flip a card in your hand. Draw 1 card.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1xIWKJgYYrJFarHfGnm79VGiP_Pg0iLrt/view?usp=drivesdk"
@@ -4099,14 +4108,14 @@
         </article>
         <article
           class="pair"
-          data-search="stalactite &amp; geyser stalactite deal 4 binding damage. gain 2 ward. binding geyser deal 9 release damage. release"
+          data-search="stalactite &amp; geyser stalactite deal 3 binding damage. mark 2. binding geyser deal 9 release damage. release"
         >
           <h2>Stalactite &amp; Geyser</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Stalactite</h3>
-              <p class="effect">Deal 4 Binding damage. Gain 2 Ward.</p>
+              <p class="effect">Deal 3 Binding damage. Mark 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/11wqM0NaqCXkDJTLLOtD-f5mgv0eluvz4/view?usp=drivesdk"
@@ -4133,16 +4142,14 @@
         </article>
         <article
           class="pair"
-          data-search="dandelion &amp; mandrake dandelion put another card from your hand on the bottom of your draw pile. draw 2 cards. growth mandrake deal 4 decay damage. gain 2 ward. decay"
+          data-search="dandelion &amp; mandrake dandelion scry. flip your hand. growth mandrake deal 4 decay damage. gain 2 ward. decay"
         >
           <h2>Dandelion &amp; Mandrake</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Dandelion</h3>
-              <p class="effect">
-                Put another card from your hand on the bottom of your draw pile. Draw 2 cards.
-              </p>
+              <p class="effect">Scry. Flip your hand.</p>
               <p class="tag">Growth</p>
               <a
                 href="https://drive.google.com/file/d/1yjS7U6v6vGk_XLVZcClKcbJFHBy7jYug/view?usp=drivesdk"
@@ -4203,14 +4210,14 @@
         </article>
         <article
           class="pair"
-          data-search="cocoon &amp; shed skin cocoon gain 8 ward. flip your hand. growth shed skin banish another card from your hand. gain 8 ward. decay"
+          data-search="cocoon &amp; shed skin cocoon hush 2. flip your hand. growth shed skin banish another card from your hand. gain 8 ward. decay"
         >
           <h2>Cocoon &amp; Shed Skin</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Cocoon</h3>
-              <p class="effect">Gain 8 Ward. Flip your hand.</p>
+              <p class="effect">Hush 2. Flip your hand.</p>
               <p class="tag">Growth</p>
               <a
                 href="https://drive.google.com/file/d/1KGoybZxq0G4xJz4RlYDPxoZjtgLBVSoC/view?usp=drivesdk"
@@ -4237,7 +4244,7 @@
         </article>
         <article
           class="pair"
-          data-search="lotus &amp; corpse flower lotus heal 4 hp. banish this card. growth corpse flower banish a card from your discard pile. deal 9 decay damage. decay"
+          data-search="lotus &amp; corpse flower lotus heal 4 hp. banish this card. growth corpse flower banish a card from your discard. apply 3 burn. decay"
         >
           <h2>Lotus &amp; Corpse Flower</h2>
           <div class="faces">
@@ -4257,7 +4264,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Corpse Flower</h3>
-              <p class="effect">Banish a card from your discard pile. Deal 9 Decay damage.</p>
+              <p class="effect">Banish a card from your discard. Apply 3 Burn.</p>
               <p class="tag">Decay</p>
               <a
                 href="https://drive.google.com/file/d/1hmRVclMw_hmK-5m96SE2gDUwCU3leRFw/view?usp=drivesdk"
@@ -4305,7 +4312,7 @@
         </article>
         <article
           class="pair"
-          data-search="sunflower &amp; moonflower sunflower gain 1 mana. draw 1 card. banish this card. radiance moonflower flip your hand. draw 1 card. shadow"
+          data-search="sunflower &amp; moonflower sunflower gain 1 mana. draw 1 card. banish this card. radiance moonflower scry. flip your hand. shadow"
         >
           <h2>Sunflower &amp; Moonflower</h2>
           <div class="faces">
@@ -4325,7 +4332,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Moonflower</h3>
-              <p class="effect">Flip your hand. Draw 1 card.</p>
+              <p class="effect">Scry. Flip your hand.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1d9n9s4RWlOuv5cshT3w0HOn2XGpRZPv9/view?usp=drivesdk"
@@ -4373,14 +4380,14 @@
         </article>
         <article
           class="pair"
-          data-search="silkworm &amp; silverfish silkworm gain 5 ward. draw 1 card. banish this card. growth silverfish banish a card from your discard pile. gain 4 ward. decay"
+          data-search="silkworm &amp; silverfish silkworm hush 2. scry. banish this card. growth silverfish banish a card from your discard pile. gain 4 ward. decay"
         >
           <h2>Silkworm &amp; Silverfish</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Silkworm</h3>
-              <p class="effect">Gain 5 Ward. Draw 1 card. Banish this card.</p>
+              <p class="effect">Hush 2. Scry. Banish this card.</p>
               <p class="tag">Growth</p>
               <a
                 href="https://drive.google.com/file/d/1P0keoJxTo7V5gyqOVl96HlN-YzHJRa0A/view?usp=drivesdk"
@@ -4443,14 +4450,14 @@
         </article>
         <article
           class="pair"
-          data-search="quill &amp; eraser quill look at the top card of your draw pile. you may discard it. draw 1 card. memory eraser banish a card from your discard pile. draw 2 cards. oblivion"
+          data-search="quill &amp; eraser quill scry. mark 2. memory eraser banish a card from your discard pile. draw 2 cards. oblivion"
         >
           <h2>Quill &amp; Eraser</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Quill</h3>
-              <p class="effect">Look at the top card of your draw pile. You may discard it. Draw 1 card.</p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Memory</p>
               <a
                 href="https://drive.google.com/file/d/13J34Vvfd1nJaQpefINMLTEkqMnNBKR6K/view?usp=drivesdk"
@@ -4477,14 +4484,14 @@
         </article>
         <article
           class="pair"
-          data-search="fishing net &amp; harpoon fishing net discard a card. gain 6 ward. binding harpoon deal 9 release damage, ignoring ward. release"
+          data-search="fishing net &amp; harpoon fishing net discard a card. hush 4. binding harpoon deal 9 release damage, ignoring ward. release"
         >
           <h2>Fishing Net &amp; Harpoon</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Fishing Net</h3>
-              <p class="effect">Discard a card. Gain 6 Ward.</p>
+              <p class="effect">Discard a card. Hush 4.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/16CoBFJwN3eZSFQ3DjdTpE69OIuzS7Cm4/view?usp=drivesdk"
@@ -4687,14 +4694,14 @@
         </article>
         <article
           class="pair"
-          data-search="floodgate &amp; broken dam floodgate gain 9 ward. binding broken dam discard a card. deal 10 release damage. release"
+          data-search="floodgate &amp; broken dam floodgate hush 4. gain 3 ward. binding broken dam discard a card. deal 10 release damage. release"
         >
           <h2>Floodgate &amp; Broken Dam</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Floodgate</h3>
-              <p class="effect">Gain 9 Ward.</p>
+              <p class="effect">Hush 4. Gain 3 Ward.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1Ta2kSWANHatk5acjjpeO2w_lxQJtlXn6/view?usp=drivesdk"
@@ -4823,7 +4830,7 @@
         </article>
         <article
           class="pair"
-          data-search="wedding veil &amp; funeral veil wedding veil heal 3 hp. draw 1 card. banish this card. growth funeral veil banish a card from your discard pile. gain 6 ward. decay"
+          data-search="wedding veil &amp; funeral veil wedding veil heal 3 hp. draw 1 card. banish this card. growth funeral veil banish a card from your discard. hush 3. decay"
         >
           <h2>Wedding Veil &amp; Funeral Veil</h2>
           <div class="faces">
@@ -4843,7 +4850,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Funeral Veil</h3>
-              <p class="effect">Banish a card from your discard pile. Gain 6 Ward.</p>
+              <p class="effect">Banish a card from your discard. Hush 3.</p>
               <p class="tag">Decay</p>
               <a
                 href="https://drive.google.com/file/d/1z4c7EynRaTexalizCZdNJJZheF8WFb2U/view?usp=drivesdk"
@@ -4995,7 +5002,7 @@
         </article>
         <article
           class="pair"
-          data-search="bathhouse &amp; icehouse bathhouse heal 5 hp. gain 3 ward. banish this card. growth icehouse put another card from your hand on top of your draw pile. gain 6 ward. frost"
+          data-search="bathhouse &amp; icehouse bathhouse heal 5 hp. gain 3 ward. banish this card. growth icehouse put another card on your draw pile. hush 3. frost"
         >
           <h2>Bathhouse &amp; Icehouse</h2>
           <div class="faces">
@@ -5015,7 +5022,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Icehouse</h3>
-              <p class="effect">Put another card from your hand on top of your draw pile. Gain 6 Ward.</p>
+              <p class="effect">Put another card on your draw pile. Hush 3.</p>
               <p class="tag">Frost</p>
               <a
                 href="https://drive.google.com/file/d/1R9zc4drUBtyQoHfMpTfAhTvT0leow1rz/view?usp=drivesdk"
@@ -5133,14 +5140,14 @@
         </article>
         <article
           class="pair"
-          data-search="crystal ballroom &amp; cinder ballroom crystal ballroom gain 3 ward. flip your hand. radiance cinder ballroom apply 3 burn. banish this card. decay"
+          data-search="crystal ballroom &amp; cinder ballroom crystal ballroom scry. flip your hand. radiance cinder ballroom apply 3 burn. banish this card. decay"
         >
           <h2>Crystal Ballroom &amp; Cinder Ballroom</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Crystal Ballroom</h3>
-              <p class="effect">Gain 3 Ward. Flip your hand.</p>
+              <p class="effect">Scry. Flip your hand.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/13fcYTdR5mzrUdTEUt4w4Aw2D4CwerPeR/view?usp=drivesdk"
@@ -5303,14 +5310,14 @@
         </article>
         <article
           class="pair"
-          data-search="bell founder &amp; bell breaker bell founder remove 2 enemy ward. draw 1 card. binding bell breaker remove 5 enemy ward. deal 6 release damage. release"
+          data-search="bell founder &amp; bell breaker bell founder remove 2 enemy ward. hush 2. binding bell breaker cancel the enemy’s next non-attack intent. banish this card. release"
         >
           <h2>Bell Founder &amp; Bell Breaker</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Bell Founder</h3>
-              <p class="effect">Remove 2 enemy Ward. Draw 1 card.</p>
+              <p class="effect">Remove 2 enemy Ward. Hush 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1ftMufZKisD0RKlmQA5DWZ8wLYL1MTNHf/view?usp=drivesdk"
@@ -5323,7 +5330,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Bell Breaker</h3>
-              <p class="effect">Remove 5 enemy Ward. Deal 6 Release damage.</p>
+              <p class="effect">Cancel the enemy’s next non-attack intent. Banish this card.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1xA3y9DjXYx8TM0lvHd7fWXFgCjFLsyqe/view?usp=drivesdk"
@@ -5371,14 +5378,14 @@
         </article>
         <article
           class="pair"
-          data-search="prism keeper &amp; shade keeper prism keeper deal 3 radiance damage. look at the top card of your draw pile. radiance shade keeper gain 3 ward. flip your hand. shadow"
+          data-search="prism keeper &amp; shade keeper prism keeper scry. mark 3. radiance shade keeper gain 3 ward. flip your hand. shadow"
         >
           <h2>Prism Keeper &amp; Shade Keeper</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Prism Keeper</h3>
-              <p class="effect">Deal 3 Radiance damage. Look at the top card of your draw pile.</p>
+              <p class="effect">Scry. Mark 3.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1dBYyxiy9TgL8H6_R4OdcMnhl9eRE6tlK/view?usp=drivesdk"
@@ -5405,14 +5412,14 @@
         </article>
         <article
           class="pair"
-          data-search="dream binder &amp; dream unbinder dream binder put a card from your discard pile on top of your draw pile. gain 7 ward. binding dream unbinder remove 3 enemy ward. flip your hand. release"
+          data-search="dream binder &amp; dream unbinder dream binder put a card from your discard on your draw pile. hush 3. binding dream unbinder flip a card in your hand. remove 2 enemy ward. release"
         >
           <h2>Dream Binder &amp; Dream Unbinder</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Dream Binder</h3>
-              <p class="effect">Put a card from your discard pile on top of your draw pile. Gain 7 Ward.</p>
+              <p class="effect">Put a card from your discard on your draw pile. Hush 3.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1usk09I5PHy15lv9UFidJBnx_KIfgVjDT/view?usp=drivesdk"
@@ -5425,7 +5432,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Dream Unbinder</h3>
-              <p class="effect">Remove 3 enemy Ward. Flip your hand.</p>
+              <p class="effect">Flip a card in your hand. Remove 2 enemy Ward.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1KF8RnbOzRK41-tKzNgQXNR6IcorIohhi/view?usp=drivesdk"
@@ -5439,16 +5446,14 @@
         </article>
         <article
           class="pair"
-          data-search="clockmaker &amp; clock thief clockmaker look at the top card of your draw pile. you may put it on the bottom. draw 1 card. binding clock thief return a card from your discard pile to your hand. gain 4 ward. memory"
+          data-search="clockmaker &amp; clock thief clockmaker scry. hush 2. binding clock thief return a card from your discard pile to your hand. gain 4 ward. memory"
         >
           <h2>Clockmaker &amp; Clock Thief</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Clockmaker</h3>
-              <p class="effect">
-                Look at the top card of your draw pile. You may put it on the bottom. Draw 1 card.
-              </p>
+              <p class="effect">Scry. Hush 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1JyKasXM8Cb6P3ZKMsIakkU3l97YAwi07/view?usp=drivesdk"
@@ -5543,16 +5548,14 @@
         </article>
         <article
           class="pair"
-          data-search="portrait painter &amp; portrait eraser portrait painter put another card from your hand on the bottom of your draw pile. draw 2 cards. memory portrait eraser banish a card from your discard pile. deal 8 oblivion damage. oblivion"
+          data-search="portrait painter &amp; portrait eraser portrait painter flip a card in your hand. scry. memory portrait eraser banish a card from your discard pile. deal 8 oblivion damage. oblivion"
         >
           <h2>Portrait Painter &amp; Portrait Eraser</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Portrait Painter</h3>
-              <p class="effect">
-                Put another card from your hand on the bottom of your draw pile. Draw 2 cards.
-              </p>
+              <p class="effect">Flip a card in your hand. Scry.</p>
               <p class="tag">Memory</p>
               <a
                 href="https://drive.google.com/file/d/1s4wNcZo9iAO14duzvbtyVTpKoF90loJO/view?usp=drivesdk"
@@ -5647,14 +5650,14 @@
         </article>
         <article
           class="pair"
-          data-search="stone mason &amp; stone eater stone mason gain 8 ward. remove 2 enemy ward. binding stone eater remove 4 enemy ward. heal 3 hp. banish this card. decay"
+          data-search="stone mason &amp; stone eater stone mason hush 2. gain 4 ward. binding stone eater remove 4 enemy ward. heal 3 hp. banish this card. decay"
         >
           <h2>Stone Mason &amp; Stone Eater</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Stone Mason</h3>
-              <p class="effect">Gain 8 Ward. Remove 2 enemy Ward.</p>
+              <p class="effect">Hush 2. Gain 4 Ward.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/18kMtxpJwyiqyWzFXm6-swUWVKJPNO_LF/view?usp=drivesdk"
@@ -5681,14 +5684,14 @@
         </article>
         <article
           class="pair"
-          data-search="bird keeper &amp; bird liberator bird keeper put another card from your hand on top of your draw pile. gain 3 ward. binding bird liberator remove 3 enemy ward. draw 1 card. release"
+          data-search="bird keeper &amp; bird liberator bird keeper put another card on your draw pile. hush 2. binding bird liberator remove 3 enemy ward. draw 1 card. release"
         >
           <h2>Bird Keeper &amp; Bird Liberator</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Bird Keeper</h3>
-              <p class="effect">Put another card from your hand on top of your draw pile. Gain 3 Ward.</p>
+              <p class="effect">Put another card on your draw pile. Hush 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1kfXGl4cJUiDeKByBem_T_2rHaz5_r2vF/view?usp=drivesdk"
@@ -5715,14 +5718,14 @@
         </article>
         <article
           class="pair"
-          data-search="cage builder &amp; cage breaker cage builder discard a card. gain 7 ward. binding cage breaker remove 4 enemy ward. flip your hand. release"
+          data-search="cage builder &amp; cage breaker cage builder discard a card. hush 4. binding cage breaker remove 4 enemy ward. flip your hand. release"
         >
           <h2>Cage Builder &amp; Cage Breaker</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Cage Builder</h3>
-              <p class="effect">Discard a card. Gain 7 Ward.</p>
+              <p class="effect">Discard a card. Hush 4.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1iamq-p5-ep0pY3sM7KbmbV3CI0junRHP/view?usp=drivesdk"
@@ -5749,7 +5752,7 @@
         </article>
         <article
           class="pair"
-          data-search="fortune teller &amp; fortune gambler fortune teller look at the top card of your draw pile. gain 4 ward. memory fortune gambler discard a card. deal 9 release damage. release"
+          data-search="fortune teller &amp; fortune gambler fortune teller look at the top card of your draw pile. gain 4 ward. memory fortune gambler discard a card. mark 4. release"
         >
           <h2>Fortune Teller &amp; Fortune Gambler</h2>
           <div class="faces">
@@ -5769,7 +5772,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Fortune Gambler</h3>
-              <p class="effect">Discard a card. Deal 9 Release damage.</p>
+              <p class="effect">Discard a card. Mark 4.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1YyKsOq8kKVsVK7fIhEN0bno_hejs_PeZ/view?usp=drivesdk"
@@ -5783,7 +5786,7 @@
         </article>
         <article
           class="pair"
-          data-search="lantern lighter &amp; lantern snuffer lantern lighter deal 3 flame damage. apply 2 burn. flame lantern snuffer remove 4 enemy ward. flip your hand. shadow"
+          data-search="lantern lighter &amp; lantern snuffer lantern lighter deal 3 flame damage. apply 2 burn. flame lantern snuffer hush 2. flip your hand. shadow"
         >
           <h2>Lantern Lighter &amp; Lantern Snuffer</h2>
           <div class="faces">
@@ -5803,7 +5806,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Lantern Snuffer</h3>
-              <p class="effect">Remove 4 enemy Ward. Flip your hand.</p>
+              <p class="effect">Hush 2. Flip your hand.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1LVaaUnrEn8JrSzSuqygrDu0F8b4orTc3/view?usp=drivesdk"
@@ -5817,7 +5820,7 @@
         </article>
         <article
           class="pair"
-          data-search="thread spinner &amp; thread cutter thread spinner put a card from your discard pile on top of your draw pile. gain 4 ward. binding thread cutter banish a card from your hand. deal 11 release damage. release"
+          data-search="thread spinner &amp; thread cutter thread spinner put a card from your discard pile on top of your draw pile. gain 4 ward. binding thread cutter banish another card from your hand. mark 5. release"
         >
           <h2>Thread Spinner &amp; Thread Cutter</h2>
           <div class="faces">
@@ -5837,7 +5840,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Thread Cutter</h3>
-              <p class="effect">Banish a card from your hand. Deal 11 Release damage.</p>
+              <p class="effect">Banish another card from your hand. Mark 5.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1TWvk4_6t2QhPZn6IJGd0fUX-Ch9oX7bV/view?usp=drivesdk"
@@ -5851,7 +5854,7 @@
         </article>
         <article
           class="pair"
-          data-search="storyteller &amp; story swallower storyteller draw 2 cards. banish this card. memory story swallower banish a card from your discard pile. gain 6 ward. oblivion"
+          data-search="storyteller &amp; story swallower storyteller draw 2 cards. banish this card. memory story swallower banish a card from your discard. hush 3. oblivion"
         >
           <h2>Storyteller &amp; Story Swallower</h2>
           <div class="faces">
@@ -5871,7 +5874,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Story Swallower</h3>
-              <p class="effect">Banish a card from your discard pile. Gain 6 Ward.</p>
+              <p class="effect">Banish a card from your discard. Hush 3.</p>
               <p class="tag">Oblivion</p>
               <a
                 href="https://drive.google.com/file/d/1XbBHCmpEHe8sKENFSjXXOCIzQ1ZAxjNA/view?usp=drivesdk"
@@ -5919,7 +5922,7 @@
         </article>
         <article
           class="pair"
-          data-search="path maker &amp; path eraser path maker look at the top card of your draw pile. gain 4 ward. release path eraser put another card from your hand on the bottom of your draw pile. draw 2 cards. oblivion"
+          data-search="path maker &amp; path eraser path maker look at the top card of your draw pile. gain 4 ward. release path eraser banish another card from your hand. scry. draw 1 card. oblivion"
         >
           <h2>Path Maker &amp; Path Eraser</h2>
           <div class="faces">
@@ -5939,9 +5942,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Path Eraser</h3>
-              <p class="effect">
-                Put another card from your hand on the bottom of your draw pile. Draw 2 cards.
-              </p>
+              <p class="effect">Banish another card from your hand. Scry. Draw 1 card.</p>
               <p class="tag">Oblivion</p>
               <a
                 href="https://drive.google.com/file/d/1ne8OrqEIQQHYrsM0NGuXDyVZy-q7Nw1V/view?usp=drivesdk"
@@ -5989,14 +5990,14 @@
         </article>
         <article
           class="pair"
-          data-search="oath keeper &amp; oath breaker oath keeper deal 5 binding damage. gain 4 ward. binding oath breaker lose 2 hp. deal 11 release damage. release"
+          data-search="oath keeper &amp; oath breaker oath keeper hush 2. deal 3 binding damage. binding oath breaker lose 2 hp. deal 11 release damage. release"
         >
           <h2>Oath Keeper &amp; Oath Breaker</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Oath Keeper</h3>
-              <p class="effect">Deal 5 Binding damage. Gain 4 Ward.</p>
+              <p class="effect">Hush 2. Deal 3 Binding damage.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1TzBUjm4F1Gi_rg-AWN-sgEl2vd11Vcnr/view?usp=drivesdk"
@@ -6023,7 +6024,7 @@
         </article>
         <article
           class="pair"
-          data-search="door warden &amp; door wanderer door warden gain 9 ward. look at the top card of your draw pile. binding door wanderer put another card from your hand on the bottom of your draw pile. draw 2 cards. release"
+          data-search="door warden &amp; door wanderer door warden gain 9 ward. look at the top card of your draw pile. binding door wanderer scry. flip your hand. release"
         >
           <h2>Door Warden &amp; Door Wanderer</h2>
           <div class="faces">
@@ -6043,9 +6044,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Door Wanderer</h3>
-              <p class="effect">
-                Put another card from your hand on the bottom of your draw pile. Draw 2 cards.
-              </p>
+              <p class="effect">Scry. Flip your hand.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1H-C4EPxB9DyzIx1IuZAZ1uPZfTxU6U8E/view?usp=drivesdk"
@@ -6127,14 +6126,14 @@
         </article>
         <article
           class="pair"
-          data-search="tide keeper &amp; tide wanderer tide keeper gain 3 ward. look at the top card of your draw pile. binding tide wanderer put another card from your hand on the bottom of your draw pile. draw 2 cards. release"
+          data-search="tide keeper &amp; tide wanderer tide keeper scry. hush 2. binding tide wanderer put another card from your hand on the bottom of your draw pile. draw 2 cards. release"
         >
           <h2>Tide Keeper &amp; Tide Wanderer</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Tide Keeper</h3>
-              <p class="effect">Gain 3 Ward. Look at the top card of your draw pile.</p>
+              <p class="effect">Scry. Hush 2.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1606cBStbiYN2jX9hzSBQufu7kobpl4u6/view?usp=drivesdk"
@@ -6197,7 +6196,7 @@
         </article>
         <article
           class="pair"
-          data-search="white fox &amp; black fox white fox deal 4 radiance damage. gain 2 ward. radiance black fox deal 3 shadow damage. flip your hand. shadow"
+          data-search="white fox &amp; black fox white fox deal 4 radiance damage. gain 2 ward. radiance black fox mark 2. flip your hand. shadow"
         >
           <h2>White Fox &amp; Black Fox</h2>
           <div class="faces">
@@ -6217,7 +6216,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Black Fox</h3>
-              <p class="effect">Deal 3 Shadow damage. Flip your hand.</p>
+              <p class="effect">Mark 2. Flip your hand.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1RiNVVluuNccpFCFK0KK6d4pqDgeeOnqE/view?usp=drivesdk"
@@ -6265,7 +6264,7 @@
         </article>
         <article
           class="pair"
-          data-search="dawn crane &amp; night heron dawn crane deal 4 radiance damage. draw 1 card. radiance night heron deal 7 shadow damage, ignoring ward. shadow"
+          data-search="dawn crane &amp; night heron dawn crane deal 4 radiance damage. draw 1 card. radiance night heron hush 2. deal 4 shadow damage. shadow"
         >
           <h2>Dawn Crane &amp; Night Heron</h2>
           <div class="faces">
@@ -6285,7 +6284,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Night Heron</h3>
-              <p class="effect">Deal 7 Shadow damage, ignoring Ward.</p>
+              <p class="effect">Hush 2. Deal 4 Shadow damage.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1cVHio-tqD5eEo3TFfJGVgaonEWlcG6kI/view?usp=drivesdk"
@@ -6367,7 +6366,7 @@
         </article>
         <article
           class="pair"
-          data-search="alabaster spider &amp; obsidian spider alabaster spider gain 4 ward. remove 2 enemy ward. binding obsidian spider banish a card from your discard pile. deal 7 decay damage. decay"
+          data-search="alabaster spider &amp; obsidian spider alabaster spider gain 4 ward. remove 2 enemy ward. binding obsidian spider banish a card from your discard. mark 4. decay"
         >
           <h2>Alabaster Spider &amp; Obsidian Spider</h2>
           <div class="faces">
@@ -6387,7 +6386,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Obsidian Spider</h3>
-              <p class="effect">Banish a card from your discard pile. Deal 7 Decay damage.</p>
+              <p class="effect">Banish a card from your discard. Mark 4.</p>
               <p class="tag">Decay</p>
               <a
                 href="https://drive.google.com/file/d/1Yv6wB8F8uV34d8HykX2TyEiN9-5n8X1u/view?usp=drivesdk"
@@ -6401,7 +6400,7 @@
         </article>
         <article
           class="pair"
-          data-search="pearl crab &amp; hermit crab pearl crab gain 8 ward. draw 1 card. binding hermit crab gain 6 ward. banish this card. shadow"
+          data-search="pearl crab &amp; hermit crab pearl crab gain 8 ward. draw 1 card. binding hermit crab hush 3. banish this card. shadow"
         >
           <h2>Pearl Crab &amp; Hermit Crab</h2>
           <div class="faces">
@@ -6421,7 +6420,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Hermit Crab</h3>
-              <p class="effect">Gain 6 Ward. Banish this card.</p>
+              <p class="effect">Hush 3. Banish this card.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1k7yY2JB0AHf-_1M0HE5irMYKvkN01SKy/view?usp=drivesdk"
@@ -6503,7 +6502,7 @@
         </article>
         <article
           class="pair"
-          data-search="hard coral &amp; soft coral hard coral deal 2 binding damage. gain 8 ward. binding soft coral gain 4 ward. flip your hand. release"
+          data-search="hard coral &amp; soft coral hard coral deal 2 binding damage. gain 8 ward. binding soft coral hush 2. flip your hand. release"
         >
           <h2>Hard Coral &amp; Soft Coral</h2>
           <div class="faces">
@@ -6523,7 +6522,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Soft Coral</h3>
-              <p class="effect">Gain 4 Ward. Flip your hand.</p>
+              <p class="effect">Hush 2. Flip your hand.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1ac4bI3qhlCwOyRZUhSEgSS9c-yvtJwnM/view?usp=drivesdk"
@@ -6571,7 +6570,7 @@
         </article>
         <article
           class="pair"
-          data-search="whole egg &amp; cracked egg whole egg gain 7 ward. heal 2 hp. banish this card. binding cracked egg draw 2 cards. banish this card. release"
+          data-search="whole egg &amp; cracked egg whole egg gain 7 ward. heal 2 hp. banish this card. binding cracked egg scry. flip your hand. banish this card. release"
         >
           <h2>Whole Egg &amp; Cracked Egg</h2>
           <div class="faces">
@@ -6591,7 +6590,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Cracked Egg</h3>
-              <p class="effect">Draw 2 cards. Banish this card.</p>
+              <p class="effect">Scry. Flip your hand. Banish this card.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1SXMPLUCdIpmaCugGWkoyNLmxTVmr9947/view?usp=drivesdk"
@@ -6845,7 +6844,7 @@
         </article>
         <article
           class="pair"
-          data-search="flower bud &amp; seed pod flower bud draw 2 cards. banish this card. growth seed pod put another card from your hand on the bottom of your draw pile. draw 2 cards. release"
+          data-search="flower bud &amp; seed pod flower bud draw 2 cards. banish this card. growth seed pod put another card on your draw pile. scry. draw 1 card. release"
         >
           <h2>Flower Bud &amp; Seed Pod</h2>
           <div class="faces">
@@ -6865,9 +6864,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Seed Pod</h3>
-              <p class="effect">
-                Put another card from your hand on the bottom of your draw pile. Draw 2 cards.
-              </p>
+              <p class="effect">Put another card on your draw pile. Scry. Draw 1 card.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1m6-NIkR2SryWPMGbrfoN3lFZNyor8LY7/view?usp=drivesdk"
@@ -6949,14 +6946,14 @@
         </article>
         <article
           class="pair"
-          data-search="ice crystal &amp; salt crystal ice crystal deal 4 frost damage. gain 2 ward. frost salt crystal deal 4 decay damage. draw 1 card. decay"
+          data-search="ice crystal &amp; salt crystal ice crystal hush 2. deal 3 frost damage. frost salt crystal deal 4 decay damage. draw 1 card. decay"
         >
           <h2>Ice Crystal &amp; Salt Crystal</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Ice Crystal</h3>
-              <p class="effect">Deal 4 Frost damage. Gain 2 Ward.</p>
+              <p class="effect">Hush 2. Deal 3 Frost damage.</p>
               <p class="tag">Frost</p>
               <a
                 href="https://drive.google.com/file/d/1SwKu2a2rvfI1YhPAYCwzrXEgbTjTLh81/view?usp=drivesdk"
@@ -7017,7 +7014,7 @@
         </article>
         <article
           class="pair"
-          data-search="golden mask &amp; cracked mask golden mask gain 4 ward. look at the top card of your draw pile. radiance cracked mask deal 4 shadow damage. flip your hand. shadow"
+          data-search="golden mask &amp; cracked mask golden mask gain 4 ward. look at the top card of your draw pile. radiance cracked mask flip a card in your hand. mark 2. shadow"
         >
           <h2>Golden Mask &amp; Cracked Mask</h2>
           <div class="faces">
@@ -7037,7 +7034,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Cracked Mask</h3>
-              <p class="effect">Deal 4 Shadow damage. Flip your hand.</p>
+              <p class="effect">Flip a card in your hand. Mark 2.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1at4wsEWspmF3d7SvCp-PNRlJVZpUzJng/view?usp=drivesdk"
@@ -7189,14 +7186,14 @@
         </article>
         <article
           class="pair"
-          data-search="music box &amp; silent music box music box put a card from your discard pile on top of your draw pile. gain 4 ward. memory silent music box gain 6 ward. shadow"
+          data-search="music box &amp; silent music box music box scry. mark 2. memory silent music box gain 6 ward. shadow"
         >
           <h2>Music Box &amp; Silent Music Box</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Music Box</h3>
-              <p class="effect">Put a card from your discard pile on top of your draw pile. Gain 4 Ward.</p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Memory</p>
               <a
                 href="https://drive.google.com/file/d/1_fGrLWnpVbjF0glvj5pftEpy1rvIoUWy/view?usp=drivesdk"
@@ -7257,7 +7254,7 @@
         </article>
         <article
           class="pair"
-          data-search="white fan &amp; black fan white fan gain 3 ward. draw 1 card. radiance black fan remove 3 enemy ward. flip your hand. shadow"
+          data-search="white fan &amp; black fan white fan gain 3 ward. draw 1 card. radiance black fan hush 2. flip your hand. shadow"
         >
           <h2>White Fan &amp; Black Fan</h2>
           <div class="faces">
@@ -7277,7 +7274,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Black Fan</h3>
-              <p class="effect">Remove 3 enemy Ward. Flip your hand.</p>
+              <p class="effect">Hush 2. Flip your hand.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1VryJ6zAyPAHtd63KNLlP9-JFw9O5Wh4M/view?usp=drivesdk"
@@ -7325,7 +7322,7 @@
         </article>
         <article
           class="pair"
-          data-search="gilded cage &amp; broken cage gilded cage banish another card from your hand. gain 14 ward. binding broken cage banish a card from your hand. draw 2 cards. release"
+          data-search="gilded cage &amp; broken cage gilded cage banish another card from your hand. gain 14 ward. binding broken cage banish another card from your hand. flip your hand. release"
         >
           <h2>Gilded Cage &amp; Broken Cage</h2>
           <div class="faces">
@@ -7345,7 +7342,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Broken Cage</h3>
-              <p class="effect">Banish a card from your hand. Draw 2 cards.</p>
+              <p class="effect">Banish another card from your hand. Flip your hand.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/15kEUzzTziwujXCihrEmx8-od-P0KKOZm/view?usp=drivesdk"
@@ -7359,14 +7356,14 @@
         </article>
         <article
           class="pair"
-          data-search="bronze mirror &amp; tarnished mirror bronze mirror gain 4 ward. flip your hand. radiance tarnished mirror remove 4 enemy ward. draw 1 card. decay"
+          data-search="bronze mirror &amp; tarnished mirror bronze mirror flip a card in your hand. scry. radiance tarnished mirror remove 3 enemy ward. scry. decay"
         >
           <h2>Bronze Mirror &amp; Tarnished Mirror</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Bronze Mirror</h3>
-              <p class="effect">Gain 4 Ward. Flip your hand.</p>
+              <p class="effect">Flip a card in your hand. Scry.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1EkqgBvrLrRsJMvZy_i2v6F9WVmIysJd0/view?usp=drivesdk"
@@ -7379,7 +7376,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Tarnished Mirror</h3>
-              <p class="effect">Remove 4 enemy Ward. Draw 1 card.</p>
+              <p class="effect">Remove 3 enemy Ward. Scry.</p>
               <p class="tag">Decay</p>
               <a
                 href="https://drive.google.com/file/d/11fSJYjFVg9xFaL4AQY9NpHn_hxTn0L0u/view?usp=drivesdk"
@@ -7461,14 +7458,14 @@
         </article>
         <article
           class="pair"
-          data-search="wax key &amp; melted key wax key remove 4 enemy ward. draw 1 card. release melted key remove 3 enemy ward. gain 1 mana. banish this card. decay"
+          data-search="wax key &amp; melted key wax key remove 3 enemy ward. scry. release melted key remove 3 enemy ward. gain 1 mana. banish this card. decay"
         >
           <h2>Wax Key &amp; Melted Key</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Wax Key</h3>
-              <p class="effect">Remove 4 enemy Ward. Draw 1 card.</p>
+              <p class="effect">Remove 3 enemy Ward. Scry.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1sjq6KqOHishiYASsaoR1CwK9mLMMDNsk/view?usp=drivesdk"
@@ -7563,14 +7560,14 @@
         </article>
         <article
           class="pair"
-          data-search="feather quill &amp; ink blot feather quill put a card from your discard pile on top of your draw pile. gain 3 ward. memory ink blot draw 1 card. flip your hand. oblivion"
+          data-search="feather quill &amp; ink blot feather quill scry. mark 2. memory ink blot draw 1 card. flip your hand. oblivion"
         >
           <h2>Feather Quill &amp; Ink Blot</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Feather Quill</h3>
-              <p class="effect">Put a card from your discard pile on top of your draw pile. Gain 3 Ward.</p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Memory</p>
               <a
                 href="https://drive.google.com/file/d/1XdodTpAeoJ6GXQJlmboZJ1T39B_MW8Fr/view?usp=drivesdk"
@@ -7597,7 +7594,7 @@
         </article>
         <article
           class="pair"
-          data-search="paintbrush &amp; paint scraper paintbrush discard a card. draw 2 cards. memory paint scraper banish a card from your discard pile. deal 8 oblivion damage. oblivion"
+          data-search="paintbrush &amp; paint scraper paintbrush discard a card. draw 2 cards. memory paint scraper banish a card from your discard. mark 4. oblivion"
         >
           <h2>Paintbrush &amp; Paint Scraper</h2>
           <div class="faces">
@@ -7617,7 +7614,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Paint Scraper</h3>
-              <p class="effect">Banish a card from your discard pile. Deal 8 Oblivion damage.</p>
+              <p class="effect">Banish a card from your discard. Mark 4.</p>
               <p class="tag">Oblivion</p>
               <a
                 href="https://drive.google.com/file/d/1-aHwrBxzfb77j27vzpRtrF1HG8QUAYLM/view?usp=drivesdk"
@@ -7665,7 +7662,7 @@
         </article>
         <article
           class="pair"
-          data-search="paper boat &amp; stone boat paper boat draw 2 cards. banish this card. release stone boat gain 12 ward. banish this card. binding"
+          data-search="paper boat &amp; stone boat paper boat draw 2 cards. banish this card. release stone boat hush 4. banish this card. binding"
         >
           <h2>Paper Boat &amp; Stone Boat</h2>
           <div class="faces">
@@ -7685,7 +7682,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Stone Boat</h3>
-              <p class="effect">Gain 12 Ward. Banish this card.</p>
+              <p class="effect">Hush 4. Banish this card.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/17pTXhd7qHQCGZ1zvte4t0hi4NTOlvBk0/view?usp=drivesdk"
@@ -7769,14 +7766,14 @@
         </article>
         <article
           class="pair"
-          data-search="hour bell &amp; silent bell hour bell put a card from your discard pile on top of your draw pile. gain 3 ward. radiance silent bell gain 5 ward. look at the top card of your draw pile. shadow"
+          data-search="hour bell &amp; silent bell hour bell scry. mark 2. radiance silent bell gain 5 ward. look at the top card of your draw pile. shadow"
         >
           <h2>Hour Bell &amp; Silent Bell</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Hour Bell</h3>
-              <p class="effect">Put a card from your discard pile on top of your draw pile. Gain 3 Ward.</p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1-gYxAh1MKrrGbvf4VnBwinEDKyfwuTx7/view?usp=drivesdk"
@@ -7837,14 +7834,14 @@
         </article>
         <article
           class="pair"
-          data-search="ivory chess king &amp; obsidian chess queen ivory chess king gain 9 ward. look at the top card of your draw pile. binding obsidian chess queen deal 8 shadow damage. shadow"
+          data-search="ivory chess king &amp; obsidian chess queen ivory chess king hush 3. scry. binding obsidian chess queen deal 8 shadow damage. shadow"
         >
           <h2>Ivory Chess King &amp; Obsidian Chess Queen</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Ivory Chess King</h3>
-              <p class="effect">Gain 9 Ward. Look at the top card of your draw pile.</p>
+              <p class="effect">Hush 3. Scry.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1m3quWQOP8a5bwZ5hBIm-Bia7a2z41c6w/view?usp=drivesdk"
@@ -7939,16 +7936,14 @@
         </article>
         <article
           class="pair"
-          data-search="high balcony &amp; hidden basement high balcony look at the top card of your draw pile. you may put it on the bottom. draw 1 card. radiance hidden basement gain 8 ward. look at the top card of your draw pile. shadow"
+          data-search="high balcony &amp; hidden basement high balcony scry. mark 2. radiance hidden basement gain 8 ward. look at the top card of your draw pile. shadow"
         >
           <h2>High Balcony &amp; Hidden Basement</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>High Balcony</h3>
-              <p class="effect">
-                Look at the top card of your draw pile. You may put it on the bottom. Draw 1 card.
-              </p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1zl0Sf5kHV0MORfQiES4Kcmkt9YAZzBt_/view?usp=drivesdk"
@@ -7975,14 +7970,14 @@
         </article>
         <article
           class="pair"
-          data-search="open pavilion &amp; walled pavilion open pavilion gain 3 ward. draw 1 card. release walled pavilion put another card from your hand on the bottom of your draw pile. gain 12 ward. binding"
+          data-search="open pavilion &amp; walled pavilion open pavilion scry. flip your hand. release walled pavilion put another card from your hand on the bottom of your draw pile. gain 12 ward. binding"
         >
           <h2>Open Pavilion &amp; Walled Pavilion</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Open Pavilion</h3>
-              <p class="effect">Gain 3 Ward. Draw 1 card.</p>
+              <p class="effect">Scry. Flip your hand.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/18or0lKE1yevFoCoq_HOPekYsKLPRnZbb/view?usp=drivesdk"
@@ -8045,7 +8040,7 @@
         </article>
         <article
           class="pair"
-          data-search="hedge garden &amp; wild thicket hedge garden heal 3 hp. gain 3 ward. banish this card. growth wild thicket gain 7 ward. draw 1 card. shadow"
+          data-search="hedge garden &amp; wild thicket hedge garden heal 3 hp. gain 3 ward. banish this card. growth wild thicket hush 3. gain 2 ward. shadow"
         >
           <h2>Hedge Garden &amp; Wild Thicket</h2>
           <div class="faces">
@@ -8065,7 +8060,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Wild Thicket</h3>
-              <p class="effect">Gain 7 Ward. Draw 1 card.</p>
+              <p class="effect">Hush 3. Gain 2 Ward.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/12rP35aIj8TDQuMmKGS2h3hVxbl2NmzuF/view?usp=drivesdk"
@@ -8113,7 +8108,7 @@
         </article>
         <article
           class="pair"
-          data-search="golden atrium &amp; black atrium golden atrium remove 2 enemy ward. deal 3 radiance damage. radiance black atrium gain 6 ward. shadow"
+          data-search="golden atrium &amp; black atrium golden atrium remove 2 enemy ward. deal 3 radiance damage. radiance black atrium hush 3. gain 2 ward. shadow"
         >
           <h2>Golden Atrium &amp; Black Atrium</h2>
           <div class="faces">
@@ -8133,7 +8128,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Black Atrium</h3>
-              <p class="effect">Gain 6 Ward.</p>
+              <p class="effect">Hush 3. Gain 2 Ward.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1f8GpT4vliE4eZub7g16tuty8_5DJ5eQU/view?usp=drivesdk"
@@ -8147,14 +8142,14 @@
         </article>
         <article
           class="pair"
-          data-search="moonlit pier &amp; sunlit pier moonlit pier flip your hand. draw 1 card. shadow sunlit pier deal 4 radiance damage. draw 1 card. radiance"
+          data-search="moonlit pier &amp; sunlit pier moonlit pier flip your hand. draw 1 card. shadow sunlit pier scry. mark 2. radiance"
         >
           <h2>Moonlit Pier &amp; Sunlit Pier</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Sunlit Pier</h3>
-              <p class="effect">Deal 4 Radiance damage. Draw 1 card.</p>
+              <p class="effect">Scry. Mark 2.</p>
               <p class="tag">Radiance</p>
               <a
                 href="https://drive.google.com/file/d/1hBViq9MICzyCOGiCt1U1ufYeoQIU73y8/view?usp=drivesdk"
@@ -8215,7 +8210,7 @@
         </article>
         <article
           class="pair"
-          data-search="watchtower &amp; collapsed watchtower watchtower gain 8 ward. draw 1 card. binding collapsed watchtower discard a card. deal 7 decay damage. decay"
+          data-search="watchtower &amp; collapsed watchtower watchtower gain 8 ward. draw 1 card. binding collapsed watchtower discard a card. mark 4. decay"
         >
           <h2>Watchtower &amp; Collapsed Watchtower</h2>
           <div class="faces">
@@ -8235,7 +8230,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Collapsed Watchtower</h3>
-              <p class="effect">Discard a card. Deal 7 Decay damage.</p>
+              <p class="effect">Discard a card. Mark 4.</p>
               <p class="tag">Decay</p>
               <a
                 href="https://drive.google.com/file/d/1aTEjSUcPVynfQN9Eswe6nwiNWueEz74e/view?usp=drivesdk"
@@ -8317,7 +8312,7 @@
         </article>
         <article
           class="pair"
-          data-search="frozen waterfall &amp; flowing waterfall frozen waterfall deal 7 frost damage. gain 3 ward. frost flowing waterfall deal 5 release damage. draw 1 card. release"
+          data-search="frozen waterfall &amp; flowing waterfall frozen waterfall deal 7 frost damage. gain 3 ward. frost flowing waterfall scry. deal 3 release damage. release"
         >
           <h2>Frozen Waterfall &amp; Flowing Waterfall</h2>
           <div class="faces">
@@ -8337,7 +8332,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Flowing Waterfall</h3>
-              <p class="effect">Deal 5 Release damage. Draw 1 card.</p>
+              <p class="effect">Scry. Deal 3 Release damage.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/198c930r4FN671-AnMTf_0ThNjTiuWIPN/view?usp=drivesdk"
@@ -8387,7 +8382,7 @@
         </article>
         <article
           class="pair"
-          data-search="ivory bridge &amp; obsidian bridge ivory bridge gain 5 ward. radiance obsidian bridge discard a card. gain 7 ward. shadow"
+          data-search="ivory bridge &amp; obsidian bridge ivory bridge gain 5 ward. radiance obsidian bridge discard a card. hush 4. shadow"
         >
           <h2>Ivory Bridge &amp; Obsidian Bridge</h2>
           <div class="faces">
@@ -8407,7 +8402,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Obsidian Bridge</h3>
-              <p class="effect">Discard a card. Gain 7 Ward.</p>
+              <p class="effect">Discard a card. Hush 4.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1FGwTBqRu1F-I_mGnjBSNpLdBt9Jw9G4b/view?usp=drivesdk"
@@ -8421,7 +8416,7 @@
         </article>
         <article
           class="pair"
-          data-search="glass stairway &amp; stone stairway glass stairway draw 1 card. flip your hand. release stone stairway put a card from your discard pile on the bottom of your draw pile. gain 8 ward. binding"
+          data-search="glass stairway &amp; stone stairway glass stairway draw 1 card. flip your hand. release stone stairway put a card from your discard on your draw pile. hush 3. binding"
         >
           <h2>Glass Stairway &amp; Stone Stairway</h2>
           <div class="faces">
@@ -8441,9 +8436,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Stone Stairway</h3>
-              <p class="effect">
-                Put a card from your discard pile on the bottom of your draw pile. Gain 8 Ward.
-              </p>
+              <p class="effect">Put a card from your discard on your draw pile. Hush 3.</p>
               <p class="tag">Binding</p>
               <a
                 href="https://drive.google.com/file/d/1JjfBKv27xuE5JWZJuTJGGMmfwCwYOuK0/view?usp=drivesdk"
@@ -8457,7 +8450,7 @@
         </article>
         <article
           class="pair"
-          data-search="candlelit theatre &amp; darkened theatre candlelit theatre deal 2 flame damage. apply 2 burn. flame darkened theatre flip your hand. draw 1 card. shadow"
+          data-search="candlelit theatre &amp; darkened theatre candlelit theatre deal 2 flame damage. apply 2 burn. flame darkened theatre hush 2. flip your hand. shadow"
         >
           <h2>Candlelit Theatre &amp; Darkened Theatre</h2>
           <div class="faces">
@@ -8477,7 +8470,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Darkened Theatre</h3>
-              <p class="effect">Flip your hand. Draw 1 card.</p>
+              <p class="effect">Hush 2. Flip your hand.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/1vgA8Mnf9k824jcRyON0BiLAk-wPPI0Uk/view?usp=drivesdk"
@@ -8525,7 +8518,7 @@
         </article>
         <article
           class="pair"
-          data-search="clock tower &amp; timeless tower clock tower look at the top card of your draw pile. you may put it on the bottom. draw 1 card. memory timeless tower return a card from your discard pile to your hand. oblivion"
+          data-search="clock tower &amp; timeless tower clock tower look at the top card of your draw pile. you may put it on the bottom. draw 1 card. memory timeless tower scry. return a card from your discard to your hand. oblivion"
         >
           <h2>Clock Tower &amp; Timeless Tower</h2>
           <div class="faces">
@@ -8547,7 +8540,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Timeless Tower</h3>
-              <p class="effect">Return a card from your discard pile to your hand.</p>
+              <p class="effect">Scry. Return a card from your discard to your hand.</p>
               <p class="tag">Oblivion</p>
               <a
                 href="https://drive.google.com/file/d/1M7urP1NG7qRIJpNJjqa-PXkjEAvrzYKN/view?usp=drivesdk"
@@ -8595,7 +8588,7 @@
         </article>
         <article
           class="pair"
-          data-search="stone circle &amp; scattered stones stone circle gain 8 ward. remove 2 enemy ward. binding scattered stones remove 3 enemy ward. deal 7 release damage. release"
+          data-search="stone circle &amp; scattered stones stone circle gain 8 ward. remove 2 enemy ward. binding scattered stones remove 3 enemy ward. mark 3. release"
         >
           <h2>Stone Circle &amp; Scattered Stones</h2>
           <div class="faces">
@@ -8615,7 +8608,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Scattered Stones</h3>
-              <p class="effect">Remove 3 enemy Ward. Deal 7 Release damage.</p>
+              <p class="effect">Remove 3 enemy Ward. Mark 3.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1R5NkIm5cbejZbf-6jN79JG3DupKNcGgH/view?usp=drivesdk"
@@ -8629,7 +8622,7 @@
         </article>
         <article
           class="pair"
-          data-search="shallow shore &amp; abyssal trench shallow shore look at the top card of your draw pile. gain 4 ward. release abyssal trench deal 7 shadow damage, ignoring ward. shadow"
+          data-search="shallow shore &amp; abyssal trench shallow shore look at the top card of your draw pile. gain 4 ward. release abyssal trench hush 3. deal 3 shadow damage. shadow"
         >
           <h2>Shallow Shore &amp; Abyssal Trench</h2>
           <div class="faces">
@@ -8649,7 +8642,7 @@
             <div>
               <span class="side">dark</span>
               <h3>Abyssal Trench</h3>
-              <p class="effect">Deal 7 Shadow damage, ignoring Ward.</p>
+              <p class="effect">Hush 3. Deal 3 Shadow damage.</p>
               <p class="tag">Shadow</p>
               <a
                 href="https://drive.google.com/file/d/167i8ayKaXrs_Y0WlPUXNoXn2BEnM7Jzt/view?usp=drivesdk"
@@ -8697,14 +8690,14 @@
         </article>
         <article
           class="pair"
-          data-search="open window &amp; shuttered window open window draw 2 cards. banish this card. release shuttered window put another card from your hand on the bottom of your draw pile. gain 12 ward. binding"
+          data-search="open window &amp; shuttered window open window scry. flip your hand. banish this card. release shuttered window put another card from your hand on the bottom of your draw pile. gain 12 ward. binding"
         >
           <h2>Open Window &amp; Shuttered Window</h2>
           <div class="faces">
             <div>
               <span class="side">light</span>
               <h3>Open Window</h3>
-              <p class="effect">Draw 2 cards. Banish this card.</p>
+              <p class="effect">Scry. Flip your hand. Banish this card.</p>
               <p class="tag">Release</p>
               <a
                 href="https://drive.google.com/file/d/1oTwsRMB7-OzEg1vn2a9Tl6cQEp5uPSZH/view?usp=drivesdk"

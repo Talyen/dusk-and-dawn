@@ -1201,9 +1201,9 @@
           <h3>One card, two faces</h3>
           <p>
             Spend 1 mana to play the visible face. It leaves the hand while resolving, then enters the discard
-            pile. A Flip turns only cards still in hand. It never flips its own source, draw pile, or discard
-            pile. Resolve sentences in order: “Draw 2. Flip.” turns the cards just drawn; “Flip. Draw 2.” does
-            not.
+            pile. A Flip turns only cards still in hand. An effect may specify one chosen card instead of the
+            whole hand. It never flips its own source, draw pile, or discard pile. Resolve sentences in order:
+            “Draw 2. Flip.” turns the cards just drawn; “Flip. Draw 2.” does not.
           </p>
           <p>
             A card keeps its current face through discard and reshuffle. A retrieved card comes back on its
@@ -1240,9 +1240,27 @@
               1. Burn does not stack: when applied, keep the higher of the current and new values. Enemy Ward
               absorbs Burn damage. It is the only ongoing damage effect in the first build.
             </dd>
+            <dt>Scry</dt>
+            <dd>
+              Look at the top card of the draw pile. You may put it on the bottom. If the draw pile is empty,
+              shuffle the discard first; if both are empty, do nothing.
+            </dd>
+            <dt>Mark</dt>
+            <dd>
+              Add the stated amount to the next direct card attack against the enemy, before Ward. The bonus
+              takes the attack’s damage type and is then spent. Multiple Marks add together. Mark does not
+              affect Burn.
+            </dd>
+            <dt>Hush</dt>
+            <dd>
+              Reduce the enemy’s next attack by the stated amount, to a minimum of zero, before Ward. Multiple
+              Hush amounts add together. Hush persists through non-attack intents and is spent by the next
+              attack; for a multi-hit action it reduces only the first hit.
+            </dd>
             <dt>Flip</dt>
             <dd>
-              Turn all cards currently in your hand to their other face. The card being played is not in hand.
+              Turn all cards currently in your hand to their other face, unless the effect specifies a chosen
+              card. The card being played is not in hand.
             </dd>
             <dt>Banish</dt>
             <dd>
@@ -1251,13 +1269,20 @@
             </dd>
           </dl>
           <p>
-            Draw, discard, heal, remove Ward and return a card from discard are written plainly. A card
-            returned from discard keeps its current face. Some effects may move a card to the top or bottom of
-            the draw pile, or pay HP for power. A top-card inspection can offer a simple choice to keep it,
-            put it on the bottom, or discard it as the effect says. A discarded card keeps its face. If there
-            is no card, inspection and its optional choice do nothing. Avoid adding a keyword for an effect
-            that appears once. In particular, the former “Bind” intent-skip needs special anti-stall
-            exceptions; test defense and enemy pressure without it first.
+            Scry, Mark and Hush are used by the wider catalogue; the initial starter and curated reward pool
+            can be tested without them. Show Mark and Hush near the enemy; they last until spent or the fight
+            ends. A card’s sentences resolve in order: “Mark 2. Deal 4 Radiance damage.” spends that Mark on
+            the same attack. “Flip a card in your hand” requires a chosen card and flips only that card.
+            “Cancel the enemy’s next non-attack intent” can be played only against a non-attack intent; the
+            enemy skips that action and advances its pattern normally. These interruption cards Banish
+            themselves to limit repeat use. “Put another card on your draw pile” means put another card from
+            your hand on top; it is a required choice. Draw, discard, heal, remove Ward and return a card from
+            discard are written plainly. A card returned from discard keeps its current face. Some effects may
+            move a card to the top or bottom of the draw pile, or pay HP for power. A top-card inspection can
+            offer a simple choice to keep it, put it on the bottom, or discard it as the effect says. A
+            discarded card keeps its face. If there is no card, inspection and its optional choice do nothing.
+            Avoid adding a keyword for an effect that appears once. In particular, the former “Bind”
+            intent-skip needs special anti-stall exceptions; test defense and enemy pressure without it first.
           </p>
           <h3>Theme pairs</h3>
           <p>
@@ -1692,9 +1717,9 @@
           </details>
           <h3>Small automated thought experiments</h3>
           <p>
-            Simple scripted runs using earlier variable costs and untyped damage exposed sensitivity to enemy
-            pressure, Flip incentives, Burn stacking and reward choices. They are not human playtests or
-            balance results, and must be rerun with the universal 1-mana cost.
+            Simple scripted runs using earlier effects, variable costs and untyped damage exposed sensitivity
+            to enemy pressure, Flip incentives, Burn stacking and reward choices. They are not human playtests
+            or balance results, and must be rerun with the universal 1-mana cost.
           </p>
           <details>
             <summary>Show simulation methods and numbers</summary>
@@ -1825,6 +1850,11 @@
             <li>
               With every face costing 1 mana, do formerly higher-cost effects dominate choices? Retest damage,
               Ward, draw, healing and mana-gain effects before adjusting their values.
+            </li>
+            <li>
+              Can repeated Hush prevent all pressure, or do stacked Marks make a single attack too strong?
+              Test long fights, recovery and draw combinations, and visible counters. Verify that one-use
+              interruptions skip a non-attack intent and then advance the pattern.
             </li>
             <li>
               Do players enjoy health attrition across fights, or prefer each fight to stand alone? Adjust run
