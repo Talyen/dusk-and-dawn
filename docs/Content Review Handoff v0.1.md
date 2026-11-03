@@ -20,10 +20,12 @@ These checks cover consistency and arithmetic boundaries, not a full combat mode
 
 Local-file browser preview was denied by the browser's policy permitting only HTTP(S). No alternate browser, local server or other workaround was attempted. Browser rendering, filter interaction and full visual layout remain unverified.
 
-## Integration pending
+## Main-project reconciliation
 
 Target: `/Users/ryanmcintire/Developer/Dusk & Dawn`.
 
-The main checkout remains dirty with existing design/card edits and earlier untracked enemy deliverables. Those files were not overwritten. Their hashes still matched the captured handoff baseline at the final read-only comparison.
+Main's existing three modified documents and sixteen untracked document/artwork files were checked against the exact captured review baseline. No newer edits or unrelated changes were present. All 19 files were preserved byte-for-byte in local checkpoint commit `d5bd86add7c3e4bc76b9871c6f4d4edb7fd9ebe7` before reconciliation. No dirty file was overwritten or discarded.
 
-[AGENTS.md](../AGENTS.md) requires: “Preserve unrelated work and never overwrite a dirty main checkout.” It also requires all integrations to use `node scripts/integrate.mjs <main-worktree> <verified-full-commit>` with clean worktrees and the shared lock. Integration has not been attempted and is pending preservation/commit of main's existing work. Do not copy the new documents over dirty main or reset its changes. Once main is clean, incorporate its latest commit in this task branch, resolve any document conflicts, rerun focused validation and verify the exact resulting commit before using the integration script. Do not remove another process's lock or push without authorization.
+That checkpoint was merged into this task branch. The nine expected document conflicts were resolved to the reviewed versions from `943399a28fff3c98ea91a1bb4d9d936ed828fe64`, which were authored from that same baseline. All 496 card identities, artwork links, sides, costs and source metadata are preserved; all 110 enemy identities, observed-artwork records, source hashes and explicit weakness definitions are preserved. The two historical review notes retain main's entire original text after an archival notice. The ten contact sheets merged unchanged. The original documents remain recoverable from the checkpoint commit; the new recipes and review records retain each prior effect and its replacement rationale.
+
+The reconciled document tree matched the already-verified review tree before this handoff update. AGENTS.md and all application files are unchanged. The final committed tree must be validated before integration using the required shared-lock command, `node scripts/integrate.mjs <main-worktree> <verified-full-commit>`. Both worktrees must remain clean and the verified commit must include current main. No push or publication is authorized or performed.
