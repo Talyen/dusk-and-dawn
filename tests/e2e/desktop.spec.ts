@@ -213,3 +213,45 @@ test("desktop quit closes only its application", async () => {
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("desktop resumes a saved combat after relaunch", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-run-"));
+  const launch = () =>
+    electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+  try {
+    const app = await launch();
+    try {
+      const page = await app.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+      await page.getByRole("button", { name: "End turn" }).click();
+      await expect
+        .poll(async () =>
+          page.evaluate(async () => {
+            const bridge = (window as unknown as { duskDesktop: { readSaveCandidates(): Promise<string[]> } })
+              .duskDesktop;
+            const [raw] = await bridge.readSaveCandidates();
+            return raw ? JSON.parse(raw).state.run.player.hp : null;
+          }),
+        )
+        .toBe(26);
+    } finally {
+      await app.close();
+    }
+    const reopened = await launch();
+    try {
+      const page = await reopened.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      await expect(page.getByText(/HP 26\/30/)).toBeVisible();
+      await expect(page.getByText(/Next: Open-Wing Dust/)).toBeVisible();
+    } finally {
+      await reopened.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

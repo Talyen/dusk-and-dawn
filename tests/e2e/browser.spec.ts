@@ -445,3 +445,25 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   await page.screenshot({ path: "/tmp/dusk-dawn-battle.png", fullPage: true });
   expect(errors).toEqual([]);
 });
+
+test("a run can be resumed after reloading", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByText(/HP 26\/30/)).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => {
+        const save = localStorage.getItem("dusk-and-dawn.save.v1");
+        return save ? JSON.parse(save).state.run.player.hp : null;
+      }),
+    )
+    .toBe(26);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await expect(page.getByText(/HP 26\/30/)).toBeVisible();
+  await expect(page.getByText(/Next: Open-Wing Dust/)).toBeVisible();
+});

@@ -172,5 +172,29 @@
     "output": "enemy-hollow-king.webp",
     "width": 720,
     "quality": 82
+  },
+  {
+    "source": "Artwork/Silence & Clamor - Silence.png",
+    "output": "card-silence.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Silence & Clamor - Clamor.png",
+    "output": "card-clamor.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Ice Crystal & Salt Crystal - Ice Crystal.png",
+    "output": "card-ice-crystal.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Ice Crystal & Salt Crystal - Salt Crystal.png",
+    "output": "card-salt-crystal.webp",
+    "width": 512,
+    "quality": 82
   }
 ]

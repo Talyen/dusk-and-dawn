@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   cards,
   createRun,
@@ -10,6 +10,14 @@ import {
 } from "../../lib/game/run";
 import { scryTop, type FightCard } from "../../lib/game/card-zones";
 import { attackValues, type DamageType } from "../../lib/game/combat-status";
+import { encodeRun, readRun, resumeRun } from "../../lib/game/run-save";
+import {
+  browserSaveBackend,
+  desktopSaveBackend,
+  type DesktopSaveBridge,
+  type SaveBackend,
+} from "../../lib/save/save";
+import type { Snapshot } from "../../lib/game/session";
 import { Button } from "../ui/controls";
 import { KeywordDescription } from "../effects/shine";
 import { keywordDefinitions } from "../../lib/keywords/keywords";
@@ -50,6 +58,9 @@ const keywordHelp: Record<string, string> = {
     "The next direct attack has reduced damage per stack; then all Curse is spent. This preview uses −1 per stack.",
   Keep: "A kept card stays in hand at end turn, then loses its Keep marker.",
   Reflect: "Redirect the first hit of the next attack back to its attacker, then remove Reflect.",
+  Hush: "Suppress the next action's trait, or skip its non-attack ability; then remove Hush.",
+  Freeze:
+    "If still active at the next enemy action, skip it and remove Freeze. Early thaw rules are undecided.",
   Leech: "Heal for the attack's final damage before Ward, including overkill, up to maximum HP.",
 };
 const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
@@ -62,12 +73,103 @@ const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = 
   Oblivion: { hits: [7], type: "Oblivion" },
 };
 
+function saveBackend(): SaveBackend {
+  const bridge = (window as unknown as { duskDesktop?: DesktopSaveBridge }).duskDesktop;
+  if (bridge) return desktopSaveBackend(bridge);
+  try {
+    return browserSaveBackend(window.localStorage);
+  } catch {
+    return {
+      readCandidates: async () => {
+        throw new Error("Storage unavailable");
+      },
+      write: async () => {
+        throw new Error("Storage unavailable");
+      },
+    };
+  }
+}
+
 export function Battle({ onExit }: { onExit: () => void }) {
-  const [game] = useState(() => createRun(Math.floor(Math.random() * 0x100000000)));
+  const [backend] = useState(saveBackend);
+  const [loaded, setLoaded] = useState(false);
+  const [saved, setSaved] = useState<Snapshot<RunState> | null>(null);
+  const [game, setGame] = useState<{ session: ReturnType<typeof createRun>; isNew: boolean } | null>(null);
+  const [loadError, setLoadError] = useState("");
+  useEffect(() => {
+    let active = true;
+    void readRun(backend)
+      .then((snapshot) => {
+        if (!active) return;
+        setSaved(snapshot);
+        if (!snapshot) setGame({ session: createRun(Math.floor(Math.random() * 0x100000000)), isNew: true });
+        setLoaded(true);
+      })
+      .catch(() => {
+        if (active) {
+          setLoadError("The saved run could not be read. Starting a new run will replace it.");
+          setLoaded(true);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [backend]);
+  if (!loaded)
+    return (
+      <main className="battle-screen">
+        <p role="status">Loading run…</p>
+      </main>
+    );
+  if (!game)
+    return (
+      <main className="battle-screen">
+        <h1>Play</h1>
+        {loadError && <p role="alert">{loadError}</p>}
+        {saved && (
+          <Button onClick={() => setGame({ session: resumeRun(saved), isNew: false })}>Continue run</Button>
+        )}
+        <Button
+          onClick={() =>
+            setGame({ session: createRun(Math.floor(Math.random() * 0x100000000)), isNew: true })
+          }
+        >
+          Start new run
+        </Button>
+        <Button onClick={onExit}>Main menu</Button>
+      </main>
+    );
+  return <BattleSession game={game.session} isNew={game.isNew} backend={backend} onExit={onExit} />;
+}
+
+function BattleSession({
+  game,
+  isNew,
+  backend,
+  onExit,
+}: {
+  game: ReturnType<typeof createRun>;
+  isNew: boolean;
+  backend: SaveBackend;
+  onExit: () => void;
+}) {
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
   const [selected, setSelected] = useState<string | null>(null);
   const [targets, setTargets] = useState<string[]>([]);
   const [error, setError] = useState("");
+  const [saveError, setSaveError] = useState(false);
+  const writes = useRef<Promise<void>>(Promise.resolve());
+  function persist(next: Snapshot<RunState>) {
+    const encoded = encodeRun(next);
+    writes.current = writes.current.catch(() => undefined).then(() => backend.write(encoded));
+    void writes.current.then(() => setSaveError(false)).catch(() => setSaveError(true));
+  }
+  useEffect(() => {
+    if (isNew) persist(game.getSnapshot());
+  }, [game, isNew]);
+  function exitBattle() {
+    void writes.current.catch(() => undefined).then(onExit);
+  }
   const s = snapshot.state;
   function dispatch(command: Command) {
     const result = game.dispatch(command);
@@ -77,6 +179,7 @@ export function Battle({ onExit }: { onExit: () => void }) {
       setSelected(null);
       setTargets([]);
       setSnapshot(result.snapshot);
+      persist(result.snapshot);
     }
   }
   const selectedCard = s.zones.hand.find((c) => c.id === selected);
@@ -84,7 +187,15 @@ export function Battle({ onExit }: { onExit: () => void }) {
   const targetZone = selectedName === "Memory" ? s.zones.discard : [];
   const needsTarget = selectedName === "Memory" && targetZone.length > 0;
   const maxTargets = 1;
-  const canPlay = !!selectedCard && s.mana > 0 && (!needsTarget || targets.length === 1);
+  const intent = route[s.fight]!.actions[s.action]!;
+  const unavailable =
+    selectedName === "Silence" &&
+    (s.enemy.hush || !(intent.ability || intent.traitBonus || intent.extra || intent.rider))
+      ? "Hush requires an unsuppressed ability or trait in the next intent."
+      : selectedName === "Ice Crystal" && s.enemy.freeze
+        ? "The enemy is already Frozen."
+        : "";
+  const canPlay = !!selectedCard && s.mana > 0 && !unavailable && (!needsTarget || targets.length === 1);
   function toggleTarget(id: string) {
     setTargets((t) =>
       t.includes(id)
@@ -133,7 +244,7 @@ export function Battle({ onExit }: { onExit: () => void }) {
                     : "Run ended"}
           </h1>
         </div>
-        {s.phase !== "battle" && <Button onClick={onExit}>Main menu</Button>}
+        {s.phase !== "battle" && <Button onClick={exitBattle}>Main menu</Button>}
       </div>
       <p className="battle-preview">
         Preview rules: Bless and Curse use the provisional flat model (+1/−1 per stack). The wider card and
@@ -142,6 +253,7 @@ export function Battle({ onExit }: { onExit: () => void }) {
       <p role="status" aria-live="polite">
         {error || s.message}
       </p>
+      {saveError && <p role="alert">The run could not be saved. Play can continue in this session.</p>}
       {s.phase === "battle" && (
         <>
           <div className="battle-board">
@@ -299,6 +411,7 @@ export function Battle({ onExit }: { onExit: () => void }) {
                   </div>
                 </>
               )}
+              {unavailable && <p>{unavailable}</p>}
               <Button
                 disabled={!canPlay}
                 onClick={() => dispatch({ type: "play", id: selectedCard.id, targets })}
@@ -347,7 +460,7 @@ export function Battle({ onExit }: { onExit: () => void }) {
           <p>
             Fights reached: {s.fight + 1} of {route.length}. Cards in deck: {s.deck.length}.
           </p>
-          <Button onClick={onExit}>Return to main menu</Button>
+          <Button onClick={exitBattle}>Return to main menu</Button>
         </section>
       )}
     </main>

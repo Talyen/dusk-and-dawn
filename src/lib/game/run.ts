@@ -30,7 +30,9 @@ type Pair =
   | "Seed & Ash"
   | "Lantern & Shroud"
   | "Feather & Chain"
-  | "Memory & Oblivion";
+  | "Memory & Oblivion"
+  | "Silence & Clamor"
+  | "Ice Crystal & Salt Crystal";
 interface FaceInfo {
   name: string;
   effect: string;
@@ -101,6 +103,14 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
     light: { name: "Feather", effect: "Draw 2 cards.", keywords: [] },
     dark: { name: "Chain", effect: "Curse 2.", keywords: ["Curse"] },
   },
+  "Silence & Clamor": {
+    light: { name: "Silence", effect: "Hush. Banish this card.", keywords: ["Hush", "Banish"] },
+    dark: { name: "Clamor", effect: "Curse 2.", keywords: ["Curse"] },
+  },
+  "Ice Crystal & Salt Crystal": {
+    light: { name: "Ice Crystal", effect: "Freeze. Banish this card.", keywords: ["Freeze", "Banish"] },
+    dark: { name: "Salt Crystal", effect: "Keep this card.", keywords: ["Keep"] },
+  },
   "Memory & Oblivion": {
     light: {
       name: "Memory",
@@ -123,6 +133,8 @@ const rewards: Pair[] = [
   "Lantern & Shroud",
   "Feather & Chain",
   "Memory & Oblivion",
+  "Silence & Clamor",
+  "Ice Crystal & Salt Crystal",
 ];
 interface Action {
   name: string;
@@ -422,6 +434,13 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   const source = s.zones.hand[index];
   if (!source || s.mana < 1) return no("Card unavailable or insufficient mana.");
   const name = face(source).name;
+  const nextAction = route[s.fight]!.actions[s.action]!;
+  if (
+    name === "Silence" &&
+    (s.enemy.hush || !(nextAction.ability || nextAction.traitBonus || nextAction.extra || nextAction.rider))
+  )
+    return no("Hush requires an unsuppressed ability or trait in the next intent.");
+  if (name === "Ice Crystal" && s.enemy.freeze) return no("The enemy is already Frozen.");
   const ids = command.targets ?? [];
   if (name === "Memory") {
     if (
@@ -458,6 +477,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     case "Frost":
     case "Ivy":
     case "Chain":
+    case "Clamor":
       s.enemy.curse += 2;
       break;
     case "Key":
@@ -465,10 +485,17 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       flipCards(s.zones, source, { kind: "hand" }, rng);
       break;
     case "Lock":
+    case "Salt Crystal":
       keepCards(s.zones, source, { kind: "source" }, rng);
       break;
     case "Thorns":
       attack(s, [2, 2], "Decay");
+      break;
+    case "Silence":
+      s.enemy.hush = true;
+      break;
+    case "Ice Crystal":
+      s.enemy.freeze = true;
       break;
     case "Mirror":
       s.player.reflect = true;
@@ -509,7 +536,18 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       break;
   }
   if (
-    ["Bloom", "Wither", "Mirror", "Candle", "Extinguished Candle", "Ash", "Memory", "Oblivion"].includes(name)
+    [
+      "Bloom",
+      "Wither",
+      "Mirror",
+      "Candle",
+      "Extinguished Candle",
+      "Ash",
+      "Memory",
+      "Oblivion",
+      "Silence",
+      "Ice Crystal",
+    ].includes(name)
   )
     s.zones.banished.push(source);
   else finishSource(s.zones, source);

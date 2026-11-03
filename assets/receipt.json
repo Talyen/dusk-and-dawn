@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "manifestHash": "4246ceee70abd34df0b83a0cfd4b13a3afbbefc661bc0f888517cc456b369b90",
+  "manifestHash": "0fc2950e7be04eb241476532ffcd49fb1681a6143f0eb90afcf9e256fbe29f21",
   "outputs": [
     {
       "output": "card-angel.webp",
@@ -146,6 +146,26 @@
       "output": "enemy-hollow-king.webp",
       "sourceHash": "f142c9707acff450aeb1c6aba8f14d73bd1b4dfe878a6868b9e94dc6d1f4fe98",
       "hash": "4a95436f36e81f03dcd69419126c9a3c828363f08af244a04e1ddf9b45e80f05"
+    },
+    {
+      "output": "card-silence.webp",
+      "sourceHash": "1066e8a06bfbc33b72e3e237ab7e21371eb1539c8d7c9eb5f1fbeaef40bd2321",
+      "hash": "3460fb0351f3c17dd0847886c695f17b9766f892da6a24c0e35bf36ef1b48119"
+    },
+    {
+      "output": "card-clamor.webp",
+      "sourceHash": "6b001b097c60f9fac78423d699fc408e013a8787729c7021ea3eb35d440547b1",
+      "hash": "ba61d98067370e6555b37b1bf36f9a07575abd31930552d3c31fcf3b37a19418"
+    },
+    {
+      "output": "card-ice-crystal.webp",
+      "sourceHash": "a7e508c81d1bad672baa69d8af5c6850f8f487a24ade3d260f296723e14b1da2",
+      "hash": "60da1d2bcb5fba50263bb62f763d6f00e4d357c6c42052fde4d0b8ef7667e37f"
+    },
+    {
+      "output": "card-salt-crystal.webp",
+      "sourceHash": "cacb290666dccfae642233b8b69e4410d8f14bd344915a0556d599a4cae54bca",
+      "hash": "fbc8abc150209feb444541eee06409eb40cc146ad324939b63f683bf12a11a2d"
     }
   ]
 }

@@ -141,4 +141,33 @@ describe("playable run", () => {
     expect(game.getSnapshot().state.zones.hand).toHaveLength(5);
     expect(game.getSnapshot().state.mana).toBe(3);
   });
+  it("plays Silence only against a suppressible intent and banishes it", () => {
+    const setup = structuredClone(createRun(8).getSnapshot());
+    const silence = { id: "silence", pair: "Silence & Clamor", face: "light" as const, kept: false };
+    setup.state.zones.hand = [silence];
+    setup.state.action = 0;
+    const game = restoreSession(setup, runHandler);
+    const before = game.getSnapshot();
+    expect(game.dispatch({ type: "play", id: silence.id }).decision.accepted).toBe(false);
+    expect(game.getSnapshot()).toEqual(before);
+    const eligible = structuredClone(before);
+    eligible.state.action = 1;
+    const game2 = restoreSession(eligible, runHandler);
+    expect(game2.dispatch({ type: "play", id: silence.id }).decision.accepted).toBe(true);
+    expect(game2.getSnapshot().state.enemy.hush).toBe(true);
+    expect(game2.getSnapshot().state.zones.banished.map((c) => c.id)).toContain("silence");
+    game2.dispatch({ type: "end" });
+    expect(game2.getSnapshot().state.player.hp).toBe(26);
+  });
+  it("plays Ice Crystal, skips the enemy action, and clears Freeze", () => {
+    const setup = structuredClone(createRun(9).getSnapshot());
+    setup.state.zones.hand = [{ id: "ice", pair: "Ice Crystal & Salt Crystal", face: "light", kept: false }];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "ice" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.banished.map((c) => c.id)).toContain("ice");
+    game.dispatch({ type: "end" });
+    expect(game.getSnapshot().state.player.hp).toBe(30);
+    expect(game.getSnapshot().state.enemy.freeze).toBe(false);
+    expect(game.getSnapshot().state.action).toBe(1);
+  });
 });

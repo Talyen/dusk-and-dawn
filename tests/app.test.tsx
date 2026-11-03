@@ -23,6 +23,6 @@ it("renders translated content and falls back to English", async () => {
   );
   expect(screen.getByRole("heading", { name: "Dusk & Dawn" })).toBeTruthy();
   fireEvent.click(screen.getByRole("button", { name: "[Plaaay]" }));
-  expect(screen.getByRole("heading", { name: "Radiant Moth" })).toBeTruthy();
+  expect(await screen.findByRole("heading", { name: "Radiant Moth" })).toBeTruthy();
   expect(localization.t("missing", { defaultValue: "Fallback" })).toBe("Fallback");
 });
