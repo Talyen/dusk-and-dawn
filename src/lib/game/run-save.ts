@@ -93,18 +93,23 @@ const payload = z
   .strict();
 
 /** Try both copies, including a valid envelope whose run data is malformed. */
-export async function readRun(backend: SaveBackend): Promise<Snapshot<RunState> | null> {
+export async function readRunWithRecovery(
+  backend: SaveBackend,
+): Promise<{ snapshot: Snapshot<RunState>; recovered: boolean } | null> {
   const candidates = await backend.readCandidates();
   if (!candidates.length) return null;
-  for (const candidate of candidates) {
+  for (const [index, candidate] of candidates.entries()) {
     try {
       const snapshot = snapshotFromSave(decodeSave(candidate), payload);
-      return { ...snapshot, state: snapshot.state.run };
+      return { snapshot: { ...snapshot, state: snapshot.state.run }, recovered: index > 0 };
     } catch {
       /* Try the retained copy. */
     }
   }
   throw new Error("No valid saved run was found.");
+}
+export async function readRun(backend: SaveBackend): Promise<Snapshot<RunState> | null> {
+  return (await readRunWithRecovery(backend))?.snapshot ?? null;
 }
 export function encodeRun(snapshot: Snapshot<RunState>): string {
   return encodeSave(

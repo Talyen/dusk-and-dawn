@@ -168,7 +168,7 @@ export function CardBrowser({
                   .map((item, offset) => {
                     const index = page * pageSize + row * columns + offset;
                     const label = item.discovered
-                      ? t(item.titleKey, { number: item.number })
+                      ? (item.title ?? t(item.titleKey, { number: item.number }))
                       : t(kind === "cards" ? "undiscoveredCardNumber" : "undiscoveredEnemyNumber", {
                           number: item.number,
                         });
@@ -180,11 +180,12 @@ export function CardBrowser({
                           title={label}
                           description={
                             item.discovered
-                              ? t(item.descriptionKey, {
+                              ? (item.description ??
+                                t(item.descriptionKey, {
                                   keywords: resolveKeywords(item.keywordIds)
                                     .map((keyword) => t(keyword.labelKey))
                                     .join(", "),
-                                })
+                                }))
                               : t("undiscoveredDescription")
                           }
                           {...(item.art ? { art: item.art } : {})}

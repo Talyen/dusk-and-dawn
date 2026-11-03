@@ -2,7 +2,6 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { _electron as electron, expect, test } from "@playwright/test";
-import sharp from "sharp";
 
 test("opens the built renderer and recovers a retained save", async () => {
   const directory = await mkdtemp(join(tmpdir(), "dusk-electron-"));
@@ -153,27 +152,14 @@ test("desktop Collection shows keyword inspection without opening a dialog", asy
       const page = await app.firstWindow();
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.getByRole("button", { name: "Collection" }).click();
-      await page.getByRole("img", { name: "Player card 1" }).hover();
-      await expect(page.getByRole("tooltip")).toContainText("Sample Keyword A");
-      await expect(page.locator(".ambient-background")).toHaveAttribute("data-primary", "#8dd9cb");
-      const first = (await page.getByRole("img", { name: "Player card 1" }).boundingBox())!;
-      const second = (await page.getByRole("img", { name: "Player card 2" }).boundingBox())!;
-      const viewportWidth = await page.evaluate(() => innerWidth);
-      const { data, info } = await sharp(await page.screenshot())
-        .raw()
-        .toBuffer({ resolveWithObject: true });
-      const scale = info.width / viewportWidth;
-      const center = (rect: { x: number; y: number; width: number; height: number }) => {
-        const x = Math.floor((rect.x + rect.width / 2) * scale);
-        const y = Math.floor((rect.y + rect.height / 2) * scale);
-        const offset = (y * info.width + x) * info.channels;
-        return [data[offset]!, data[offset + 1]!, data[offset + 2]!];
-      };
-      const hovered = center(first),
-        resting = center(second);
-      for (let channel = 0; channel < 3; channel++)
-        expect(Math.abs(hovered[channel]! - resting[channel]!)).toBeLessThan(8);
-      await page.getByRole("img", { name: "Player card 1" }).click();
+      await page.getByRole("img", { name: "Angel" }).hover();
+      await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
+      await expect(page.locator(".ambient-background")).toHaveAttribute("data-primary", "#8BCBFF");
+      await expect(page.getByRole("img", { name: "Angel" }).locator("img")).toHaveJSProperty(
+        "complete",
+        true,
+      );
+      await page.getByRole("img", { name: "Angel" }).click();
       await expect(page.getByRole("dialog")).toHaveCount(0);
       await page.getByRole("button", { name: "Open game menu" }).click();
       await page.getByRole("dialog", { name: "Game menu" }).getByRole("button", { name: "Options" }).click();

@@ -12,14 +12,17 @@ const envelopeSchema = z
 export type SaveEnvelope = z.infer<typeof envelopeSchema>;
 export interface SaveBackend {
   readCandidates(): Promise<string[]>;
-  write(data: string): Promise<void>;
+  write(data: string, options?: { preserveBackup?: boolean }): Promise<void>;
 }
 export interface DesktopSaveBridge {
   readSaveCandidates(): Promise<string[]>;
-  writeSave(data: string): Promise<void>;
+  writeSave(data: string, preserveBackup?: boolean): Promise<void>;
 }
 export function desktopSaveBackend(bridge: DesktopSaveBridge): SaveBackend {
-  return { readCandidates: () => bridge.readSaveCandidates(), write: (data) => bridge.writeSave(data) };
+  return {
+    readCandidates: () => bridge.readSaveCandidates(),
+    write: (data, options) => bridge.writeSave(data, options?.preserveBackup ?? false),
+  };
 }
 export async function readSave(backend: SaveBackend): Promise<SaveEnvelope | null> {
   const candidates = await backend.readCandidates();
@@ -45,10 +48,10 @@ export function browserSaveBackend(storage: Storage, key = "dusk-and-dawn.save.v
       [storage.getItem(key), storage.getItem(`${key}.backup`)].filter(
         (value): value is string => value !== null,
       ),
-    write: async (data) => {
+    write: async (data, options) => {
       decodeSave(data);
       const old = storage.getItem(key);
-      if (old !== null) {
+      if (old !== null && !options?.preserveBackup) {
         let valid = true;
         try {
           decodeSave(old);

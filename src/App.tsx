@@ -8,7 +8,7 @@ import { MenuAction } from "./components/navigation/menu-action";
 import { ScreenHeader } from "./components/navigation/screen-header";
 import { ScreenShell, Switch, TabBar } from "./components/ui/controls";
 import type { PlasmaColorPair } from "./lib/animation/plasma-colors";
-import { sampleCatalog, sampleDiscoveredIds } from "./lib/collection/catalog";
+import { readDiscoveries, realCatalog, saveDiscoveries } from "./lib/collection/catalog";
 import { getFullscreen, observeFullscreen, setFullscreen } from "./lib/display/fullscreen";
 import { useUiScale } from "./lib/display/scale";
 import { playUiCue } from "./lib/feedback/ui-feedback";
@@ -25,6 +25,25 @@ type Desktop = { quit(): Promise<void> };
 export function App() {
   const { t } = useTranslation();
   const [settings, setSettings] = useState(readSettings);
+  const [discoveries, setDiscoveries] = useState(() => {
+    try {
+      return readDiscoveries(window.localStorage);
+    } catch {
+      return readDiscoveries(null);
+    }
+  });
+  const onDiscover = useCallback((ids: readonly string[]) => {
+    setDiscoveries((current) => {
+      if (ids.every((id) => current.has(id))) return current;
+      const next = new Set([...current, ...ids]);
+      try {
+        saveDiscoveries(window.localStorage, next);
+      } catch {
+        /* Keep discoveries in memory. */
+      }
+      return next;
+    });
+  }, []);
   const [saveFailed, setSaveFailed] = useState(false);
   const [fullscreen, setFullscreenState] = useState(false);
   const [displayBusy, setDisplayBusy] = useState(false);
@@ -170,7 +189,7 @@ export function App() {
           </div>
         </section>
       ) : screen === "battle" ? (
-        <Battle onExit={home} />
+        <Battle onExit={home} onDiscover={onDiscover} />
       ) : screen === "cards" ? (
         <section
           className={`cards-screen${collectionView.kind === "enemies" ? " cards-screen--enemy" : ""}`}
@@ -178,8 +197,8 @@ export function App() {
         >
           <CardBrowser
             header={header}
-            catalog={sampleCatalog}
-            discoveredIds={sampleDiscoveredIds}
+            catalog={realCatalog}
+            discoveredIds={discoveries}
             view={collectionView}
             setView={setCollectionView}
             onInspectChange={onInspectChange}

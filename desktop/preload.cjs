@@ -9,5 +9,5 @@ contextBridge.exposeInMainWorld("duskDesktop", {
     return () => ipcRenderer.removeListener("display:changed", handler);
   },
   readSaveCandidates: () => ipcRenderer.invoke("save:read"),
-  writeSave: (data) => ipcRenderer.invoke("save:write", data),
+  writeSave: (data, preserveBackup = false) => ipcRenderer.invoke("save:write", data, preserveBackup),
 });

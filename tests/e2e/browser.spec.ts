@@ -3,6 +3,23 @@ import { expect, test } from "@playwright/test";
 import { createRun } from "../../src/lib/game/run";
 import { encodeRun } from "../../src/lib/game/run-save";
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    const key = "dusk-and-dawn.collection.v1";
+    if (!localStorage.getItem(key))
+      localStorage.setItem(
+        key,
+        JSON.stringify([
+          "card:Angel",
+          "card:Vampire",
+          "card:Seraph",
+          "card:Fallen Seraph",
+          "enemy:crowned-sun",
+        ]),
+      );
+  });
+});
+
 test("collection cards fit above pagination at different window and game sizes", async ({ page }) => {
   for (const { width, height, gameSize } of [
     { width: 1280, height: 720, gameSize: 100 },
@@ -69,7 +86,7 @@ test("card corners and inspection border widths follow Alchemy", async ({ page }
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/");
   await page.getByRole("button", { name: "Collection" }).click();
-  const card = page.getByRole("img", { name: "Player card 1" });
+  const card = page.getByRole("img", { name: "Angel" });
   expect(await card.evaluate((element) => getComputedStyle(element).borderRadius)).toBe("30px");
   expect(await card.evaluate((element) => getComputedStyle(element).borderWidth)).toBe("1px");
   await page.mouse.move(0, 0);
@@ -86,14 +103,14 @@ test("browses both card shapes by hover or keyboard without click inspection", a
   await page.goto("/");
   await expect(page.getByRole("button", { name: "Play" })).toBeEnabled();
   await page.getByRole("button", { name: "Collection" }).click();
-  const card = page.getByRole("img", { name: "Player card 1" });
+  const card = page.getByRole("img", { name: "Angel" });
   await expect(page.locator(".card-grid-item p")).toHaveCount(0);
   await expect(page.locator(".screen-header .eyebrow")).toHaveCount(0);
   const portrait = (await card.boundingBox())!;
   expect(portrait.width / portrait.height).toBeCloseTo(3 / 4, 2);
   await card.hover();
   const tooltip = page.getByRole("tooltip");
-  await expect(tooltip).toContainText("Placeholder description featuring Sample Keyword A.");
+  await expect(tooltip).toContainText("Gain 5 Ward.");
   await expect(card).toHaveAttribute("aria-describedby", (await tooltip.getAttribute("id"))!);
   await card.click();
   await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
@@ -102,23 +119,23 @@ test("browses both card shapes by hover or keyboard without click inspection", a
   await page.mouse.move(10, 10);
   await expect(tooltip).toBeHidden();
   await page.keyboard.press("Tab");
-  await expect(page.getByRole("img", { name: "Player card 2" })).toBeFocused();
-  await expect(tooltip).toContainText("Player card 2");
+  await expect(page.getByRole("img", { name: "Vampire" })).toBeFocused();
+  await expect(tooltip).toContainText("Vampire");
   await page.keyboard.press("ArrowRight");
-  await expect(page.getByRole("img", { name: "Player card 3" })).toBeFocused();
+  await expect(page.getByRole("img", { name: "Seraph", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(tooltip).toBeHidden();
   await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
   await page.getByRole("button", { name: "Next page" }).click();
   await expect(page.getByRole("img", { name: "Undiscovered card 9" })).toBeVisible();
-  await expect(page.getByText("2 / 2")).toBeVisible();
+  await expect(page.getByText("2 / 62")).toBeVisible();
   await page.getByRole("button", { name: "Enemies" }).click();
-  const enemy = page.getByRole("img", { name: "Enemy card 1" });
+  const enemy = page.getByRole("img", { name: "Crowned Sun" });
   const landscape = (await enemy.boundingBox())!;
   expect(landscape.width / landscape.height).toBeCloseTo(4 / 3, 2);
-  await expect(page.getByText("1 / 2")).toBeVisible();
+  await expect(page.getByText("1 / 19")).toBeVisible();
   await page.getByRole("button", { name: "Cards" }).click();
-  await expect(page.getByText("2 / 2")).toBeVisible();
+  await expect(page.getByText("2 / 62")).toBeVisible();
   await expect(page.getByRole("img", { name: "Undiscovered card 9" })).toBeVisible();
   const accessibility = await new AxeBuilder({ page }).analyze();
   expect(accessibility.violations).toEqual([]);
@@ -142,7 +159,7 @@ test("display and audio preferences persist and scale independently", async ({ p
   ).toBeLessThan(0.001);
   await page.getByRole("button", { name: "Back" }).click();
   await page.getByRole("button", { name: "Collection" }).click();
-  const card = page.getByRole("img", { name: "Player card 1" });
+  const card = page.getByRole("img", { name: "Angel" });
   const width = (await card.boundingBox())!.width;
   await card.hover();
   const tooltipSize = await page
@@ -169,7 +186,7 @@ test("flips tooltips at the viewport edge and dismisses on scroll", async ({ pag
   await page.setViewportSize({ width: 800, height: 600 });
   await page.goto("/");
   await page.getByRole("button", { name: "Collection" }).click();
-  const card = page.getByRole("img", { name: "Player card 1" });
+  const card = page.getByRole("img", { name: "Angel" });
   await card.evaluate((element) =>
     Object.assign(element.parentElement!.style, {
       width: `${element.getBoundingClientRect().width}px`,
@@ -216,15 +233,15 @@ test("keyboard navigation restores focus and recovers an inspected card after gr
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Collection" })).toBeFocused();
   await page.keyboard.press("Tab");
-  await page.getByRole("img", { name: "Player card 4" }).focus();
-  const card = page.getByRole("img", { name: "Player card 4" });
+  await page.getByRole("img", { name: "Fallen Seraph" }).focus();
+  const card = page.getByRole("img", { name: "Fallen Seraph" });
   await expect(card).toBeFocused();
   await page.locator(".card-grid-shell").evaluate((element) => {
     (element as HTMLElement).style.width = "150px";
   });
-  await expect(page.getByText("2 / 6")).toBeVisible();
+  await expect(page.getByText("2 / 248")).toBeVisible();
   await expect(card).toBeFocused();
-  await expect(page.getByRole("tooltip")).toContainText("Player card 4");
+  await expect(page.getByRole("tooltip")).toContainText("Fallen Seraph");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("tooltip")).toBeHidden();
   await page.keyboard.press("Escape");
@@ -278,40 +295,40 @@ test("collection masks discoveries and drives shine, plasma and particles from k
   await page.goto("/");
   await page.getByRole("button", { name: "Collection" }).click();
   const glow = page.locator(".ambient-background");
-  const first = page.getByRole("img", { name: "Player card 1" });
+  const first = page.getByRole("img", { name: "Angel" });
   await first.hover();
-  await expect(glow).toHaveAttribute("data-primary", "#8dd9cb");
-  await expect(first.locator(".shine-border stop").first()).toHaveAttribute("stop-color", "#8dd9cb");
+  await expect(glow).toHaveAttribute("data-primary", "#8BCBFF");
+  await expect(first.locator(".shine-border stop").first()).toHaveAttribute("stop-color", "#8BCBFF");
   await expect(first.locator(".shine-border stop").first()).toHaveCSS("animation-name", "border-color-shine");
   await expect(page.getByRole("tooltip").locator(".shine-text")).toHaveCount(2);
   await expect
     .poll(() =>
       page.evaluate(() =>
-        (window as unknown as { particleColors: string[] }).particleColors.includes("#8dd9cb"),
+        (window as unknown as { particleColors: string[] }).particleColors.includes("#8bcbff"),
       ),
     )
     .toBe(true);
-  await page.getByRole("img", { name: "Player card 2" }).hover();
-  await expect(glow).toHaveAttribute("data-primary", "#b8a0eb");
+  await page.getByRole("img", { name: "Vampire" }).hover();
+  await expect(glow).toHaveAttribute("data-primary", "#C7AEF1");
   await expect
     .poll(() =>
       page.evaluate(() =>
-        (window as unknown as { particleColors: string[] }).particleColors.includes("#b8a0eb"),
+        (window as unknown as { particleColors: string[] }).particleColors.includes("#c7aef1"),
       ),
     )
     .toBe(true);
-  await page.getByRole("img", { name: "Player card 3" }).hover();
-  await expect(glow).toHaveAttribute("data-primary", "#8dd9cb");
-  await expect(glow).toHaveAttribute("data-secondary", "#b8a0eb");
-  await expect(page.getByRole("tooltip").locator(".shine-text")).toHaveCount(3);
-  await page.getByRole("img", { name: "Player card 4" }).hover();
-  await expect(glow).toHaveAttribute("data-primary", "#e8be86");
+  await page.getByRole("img", { name: "Seraph", exact: true }).hover();
+  await expect(glow).toHaveAttribute("data-primary", "#F7D670");
+  await expect(glow).toHaveAttribute("data-secondary", "#F7D670");
+  await expect(page.getByRole("tooltip").locator(".shine-text")).toHaveCount(2);
+  await page.getByRole("img", { name: "Fallen Seraph" }).hover();
+  await expect(glow).toHaveAttribute("data-primary", "#C7AEF1");
   const locked = page.getByRole("img", { name: "Undiscovered card 6" });
   await locked.hover();
   await expect(locked).toHaveAttribute("data-discovered", "false");
-  await expect(locked.locator(".shine-border stop").first()).toHaveAttribute("stop-color", "#8dd9cb");
+  await expect(locked.locator(".shine-border stop").first()).toHaveAttribute("stop-color", "#D8ABFF");
   await expect(page.getByRole("tooltip")).toContainText("Discover this entry to reveal its details.");
-  await expect(page.getByRole("tooltip")).not.toContainText("Sample Keyword");
+  await expect(page.getByRole("tooltip")).not.toContainText("Flip");
   await expect(glow).toHaveAttribute("data-keyword-glow", "rest");
   await locked.click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
@@ -366,10 +383,10 @@ test("unavailable WebGL uses a keyword-colored static fallback", async ({ page }
   });
   await page.goto("/");
   await page.getByRole("button", { name: "Collection" }).click();
-  await page.getByRole("img", { name: "Player card 2" }).hover();
+  await page.getByRole("img", { name: "Vampire" }).hover();
   const fallback = page.getByTestId("plasma-fallback");
   await expect(fallback).toBeVisible();
-  await expect(fallback).toHaveAttribute("style", /rgb\(184, 160, 235\)/);
+  await expect(fallback).toHaveAttribute("style", /rgb\(199, 174, 241\)/);
   await expect(page.getByTestId("plasma-canvas")).toBeHidden();
 });
 
@@ -380,7 +397,7 @@ test("screen chrome menu preserves collection history and contains keyboard focu
   await page.getByRole("button", { name: "Collection" }).click();
   await expect(page.locator(".screen-header")).toContainText("Collection");
   await page.getByRole("button", { name: "Next page" }).click();
-  await expect(page.getByText("2 / 2")).toBeVisible();
+  await expect(page.getByText("2 / 62")).toBeVisible();
   const menuButton = page.getByRole("button", { name: "Open game menu" });
   await menuButton.click();
   const menu = page.getByRole("dialog", { name: "Game menu" });
@@ -402,7 +419,7 @@ test("screen chrome menu preserves collection history and contains keyboard focu
   await expect(page.getByRole("heading", { name: "Options" })).toBeVisible();
   await page.getByRole("button", { name: "Back" }).click();
   await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
-  await expect(page.getByText("2 / 2")).toBeVisible();
+  await expect(page.getByText("2 / 62")).toBeVisible();
   await page.getByRole("button", { name: "Open game menu" }).click();
   await menu.getByRole("button", { name: "Main Menu" }).click();
   await expect(page.getByRole("heading", { name: "Dusk & Dawn" })).toBeVisible();
@@ -589,4 +606,50 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
   expect(encountered.size).toBe(5);
   expect(errors).toEqual([]);
+});
+
+test("encountered enemies remain discovered in the real collection", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() =>
+        JSON.parse(localStorage.getItem("dusk-and-dawn.collection.v1") || "[]").includes(
+          "enemy:radiant-moth",
+        ),
+      ),
+    )
+    .toBe(true);
+  await page.reload();
+  await page.getByRole("button", { name: "Collection" }).click();
+  await page.getByRole("button", { name: "Enemies" }).click();
+  await page.getByRole("button", { name: "Next page" }).click();
+  await expect(page.getByRole("img", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await page.getByRole("img", { name: "Radiant Moth", exact: true }).hover();
+  await expect(page.getByRole("tooltip")).toContainText("Open Wings");
+});
+
+test("recovers a retained run without replacing its backup", async ({ page }) => {
+  const good = encodeRun(createRun(13).getSnapshot());
+  const broken = JSON.parse(good);
+  broken.state.run.player.hp = 999;
+  await page.addInitScript(
+    ({ good, bad }) => {
+      localStorage.setItem("dusk-and-dawn.save.v1", bad);
+      localStorage.setItem("dusk-and-dawn.save.v1.backup", good);
+    },
+    { good, bad: JSON.stringify(broken) },
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByText("A retained copy of the run was recovered.")).toBeVisible();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.player.hp),
+    )
+    .toBe(26);
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1.backup"))).toBe(good);
 });

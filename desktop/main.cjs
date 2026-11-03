@@ -51,9 +51,10 @@ app.whenReady().then(() => {
     authorize(event);
     return storage.readCandidates();
   });
-  ipcMain.handle("save:write", (event, data) => {
+  ipcMain.handle("save:write", (event, data, preserveBackup = false) => {
     authorize(event);
-    return storage.write(data);
+    if (typeof preserveBackup !== "boolean") throw new Error("Invalid backup option");
+    return storage.write(data, preserveBackup);
   });
   ipcMain.handle("app:quit", (event) => {
     authorize(event);

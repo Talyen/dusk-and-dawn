@@ -1,3 +1,4 @@
+import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
 import { useEffect, useRef, useState } from "react";
 import {
   cards,
@@ -12,7 +13,7 @@ import {
 } from "../../lib/game/run";
 import { scryTop, type FightCard } from "../../lib/game/card-zones";
 import { attackValues, type DamageType } from "../../lib/game/combat-status";
-import { encodeRun, readRun, resumeRun } from "../../lib/game/run-save";
+import { encodeRun, readRunWithRecovery, resumeRun } from "../../lib/game/run-save";
 import {
   browserSaveBackend,
   desktopSaveBackend,
@@ -93,19 +94,34 @@ function saveBackend(): SaveBackend {
   }
 }
 
-export function Battle({ onExit }: { onExit: () => void }) {
+export function Battle({
+  onExit,
+  onDiscover,
+}: {
+  onExit: () => void;
+  onDiscover: (ids: readonly string[]) => void;
+}) {
   const [backend] = useState(saveBackend);
   const [loaded, setLoaded] = useState(false);
-  const [saved, setSaved] = useState<Snapshot<RunState> | null>(null);
-  const [game, setGame] = useState<{ session: ReturnType<typeof createRun>; isNew: boolean } | null>(null);
+  const [saved, setSaved] = useState<{ snapshot: Snapshot<RunState>; recovered: boolean } | null>(null);
+  const [game, setGame] = useState<{
+    session: ReturnType<typeof createRun>;
+    isNew: boolean;
+    recovered: boolean;
+  } | null>(null);
   const [loadError, setLoadError] = useState("");
   useEffect(() => {
     let active = true;
-    void readRun(backend)
-      .then((snapshot) => {
+    void readRunWithRecovery(backend)
+      .then((savedRun) => {
         if (!active) return;
-        setSaved(snapshot);
-        if (!snapshot) setGame({ session: createRun(Math.floor(Math.random() * 0x100000000)), isNew: true });
+        setSaved(savedRun);
+        if (!savedRun)
+          setGame({
+            session: createRun(Math.floor(Math.random() * 0x100000000)),
+            isNew: true,
+            recovered: false,
+          });
         setLoaded(true);
       })
       .catch(() => {
@@ -129,12 +145,23 @@ export function Battle({ onExit }: { onExit: () => void }) {
       <main className="battle-screen">
         <h1>Play</h1>
         {loadError && <p role="alert">{loadError}</p>}
+        {saved?.recovered && <p>A retained copy of the run was recovered.</p>}
         {saved && (
-          <Button onClick={() => setGame({ session: resumeRun(saved), isNew: false })}>Continue run</Button>
+          <Button
+            onClick={() =>
+              setGame({ session: resumeRun(saved.snapshot), isNew: false, recovered: saved.recovered })
+            }
+          >
+            Continue run
+          </Button>
         )}
         <Button
           onClick={() =>
-            setGame({ session: createRun(Math.floor(Math.random() * 0x100000000)), isNew: true })
+            setGame({
+              session: createRun(Math.floor(Math.random() * 0x100000000)),
+              isNew: true,
+              recovered: false,
+            })
           }
         >
           Start new run
@@ -142,19 +169,32 @@ export function Battle({ onExit }: { onExit: () => void }) {
         <Button onClick={onExit}>Main menu</Button>
       </main>
     );
-  return <BattleSession game={game.session} isNew={game.isNew} backend={backend} onExit={onExit} />;
+  return (
+    <BattleSession
+      game={game.session}
+      isNew={game.isNew}
+      recovered={game.recovered}
+      backend={backend}
+      onExit={onExit}
+      onDiscover={onDiscover}
+    />
+  );
 }
 
 function BattleSession({
   game,
   isNew,
+  recovered,
   backend,
   onExit,
+  onDiscover,
 }: {
   game: ReturnType<typeof createRun>;
   isNew: boolean;
+  recovered: boolean;
   backend: SaveBackend;
   onExit: () => void;
+  onDiscover: (ids: readonly string[]) => void;
 }) {
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
   const [selected, setSelected] = useState<string | null>(null);
@@ -162,9 +202,15 @@ function BattleSession({
   const [error, setError] = useState("");
   const [saveError, setSaveError] = useState(false);
   const writes = useRef<Promise<void>>(Promise.resolve());
+  const preserveBackup = useRef(recovered);
   function persist(next: Snapshot<RunState>) {
     const encoded = encodeRun(next);
-    writes.current = writes.current.catch(() => undefined).then(() => backend.write(encoded));
+    writes.current = writes.current
+      .catch(() => undefined)
+      .then(async () => {
+        await backend.write(encoded, { preserveBackup: preserveBackup.current });
+        preserveBackup.current = false;
+      });
     void writes.current.then(() => setSaveError(false)).catch(() => setSaveError(true));
   }
   useEffect(() => {
@@ -174,6 +220,17 @@ function BattleSession({
     void writes.current.catch(() => undefined).then(onExit);
   }
   const s = snapshot.state;
+  useEffect(() => {
+    const visiblePairs = [...s.deck.map((card) => card.pair), ...s.offers];
+    const ids = visiblePairs.flatMap((pair) => [
+      `card:${cards[pair]!.light.name}`,
+      `card:${cards[pair]!.dark.name}`,
+    ]);
+    const enemy = getEnemy(s);
+    const enemyEntry = simpleEnemies.find((entry) => entry.name === enemy.name);
+    if (enemyEntry) ids.push(`enemy:${enemyEntry.id}`);
+    onDiscover(ids);
+  }, [snapshot, onDiscover]);
   function dispatch(command: Command) {
     const result = game.dispatch(command);
     if (!result.decision.accepted) setError(result.decision.reason);

@@ -66,12 +66,13 @@ function createSaveStorage(directory) {
       await pending;
       return (await Promise.all([readFile(primary), readFile(backup)])).filter((value) => value !== null);
     },
-    write(data) {
+    write(data, preserveBackup = false) {
+      if (typeof preserveBackup !== "boolean") return Promise.reject(new Error("Invalid backup option"));
       if (!validEnvelope(data)) return Promise.reject(new Error("Invalid save envelope"));
       const write = pending.then(async () => {
         await fs.mkdir(directory, { recursive: true });
         const previous = await readFile(primary);
-        if (previous && validEnvelope(previous)) await atomicWrite(backup, previous);
+        if (!preserveBackup && previous && validEnvelope(previous)) await atomicWrite(backup, previous);
         await atomicWrite(primary, data);
       });
       pending = write.catch(() => {});

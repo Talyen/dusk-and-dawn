@@ -37,3 +37,26 @@ it("rejects unrelated or malformed save data without overwriting it", async () =
   };
   await expect(readRun(backend)).rejects.toThrow("No valid saved run");
 });
+
+it("keeps the retained browser copy if the first recovered write fails", async () => {
+  const { browserSaveBackend } = await import("../../src/lib/save/save");
+  const { readRunWithRecovery } = await import("../../src/lib/game/run-save");
+  const good = encodeRun(createRun(10).getSnapshot());
+  const invalid = JSON.parse(good);
+  invalid.state.run.player.hp = 999;
+  const data = new Map([
+    ["dusk-and-dawn.save.v1", JSON.stringify(invalid)],
+    ["dusk-and-dawn.save.v1.backup", good],
+  ]);
+  const storage = {
+    getItem: (key: string) => data.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      if (key === "dusk-and-dawn.save.v1") throw new Error("storage failure");
+      data.set(key, value);
+    },
+  } as unknown as Storage;
+  const backend = browserSaveBackend(storage);
+  expect((await readRunWithRecovery(backend))?.recovered).toBe(true);
+  await expect(backend.write(good, { preserveBackup: true })).rejects.toThrow("storage failure");
+  expect(data.get("dusk-and-dawn.save.v1.backup")).toBe(good);
+});
