@@ -1,3 +1,4 @@
+import { simpleCards } from "./simple-cards.generated";
 import { shuffle, type Rng } from "../random";
 import { createSession, restoreSession, type Handler } from "./session";
 import {
@@ -18,27 +19,18 @@ import {
   type FightCard,
 } from "./card-zones";
 
-type Pair =
-  | "Angel & Vampire"
-  | "Sun & Moon"
-  | "Bloom & Wither"
-  | "Flame & Frost"
-  | "Key & Lock"
-  | "Ivy & Thorns"
-  | "Mirror & Shattered Mirror"
-  | "Candle & Extinguished Candle"
-  | "Seed & Ash"
-  | "Lantern & Shroud"
-  | "Feather & Chain"
-  | "Memory & Oblivion"
-  | "Silence & Clamor"
-  | "Ice Crystal & Salt Crystal";
+type Pair = string;
+type SimpleOp =
+  | (typeof simpleCards)[keyof typeof simpleCards]["light"]["ops"][number]
+  | (typeof simpleCards)[keyof typeof simpleCards]["dark"]["ops"][number];
 interface FaceInfo {
   name: string;
   effect: string;
-  keywords: string[];
+  keywords: readonly string[];
+  ops?: readonly SimpleOp[];
 }
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
+  ...simpleCards,
   "Angel & Vampire": {
     light: { name: "Angel", effect: "Gain 5 Ward.", keywords: ["Ward"] },
     dark: { name: "Vampire", effect: "Deal 4 Shadow damage. Leech.", keywords: ["Shadow", "Leech"] },
@@ -126,16 +118,16 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
 };
 const starter: Pair[] = ["Angel & Vampire", "Sun & Moon", "Bloom & Wither", "Flame & Frost", "Key & Lock"];
 const rewards: Pair[] = [
-  "Ivy & Thorns",
-  "Mirror & Shattered Mirror",
-  "Candle & Extinguished Candle",
-  "Seed & Ash",
-  "Lantern & Shroud",
-  "Feather & Chain",
-  "Memory & Oblivion",
-  "Silence & Clamor",
-  "Ice Crystal & Salt Crystal",
-];
+  ...new Set([
+    ...Object.keys(simpleCards),
+    "Seed & Ash",
+    "Lantern & Shroud",
+    "Memory & Oblivion",
+    "Silence & Clamor",
+    "Ice Crystal & Salt Crystal",
+  ]),
+].filter((pair) => !starter.includes(pair));
+
 interface Action {
   name: string;
   text: string;
@@ -284,7 +276,9 @@ const emptyZones = (): CardZones => ({ library: [], hand: [], discard: [], banis
 const yes = () => ({ accepted: true as const, effects: [] as string[] });
 const no = (reason: string) => ({ accepted: false as const, reason });
 export function face(card: FightCard): FaceInfo {
-  return cards[card.pair as Pair][card.face];
+  const pair = cards[card.pair];
+  if (!pair) throw new Error(`Unknown card pair: ${card.pair}`);
+  return pair[card.face];
 }
 function beginFight(s: RunState, rng: Rng) {
   const hp = s.player.hp;
@@ -452,6 +446,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   s.zones.hand.splice(index, 1);
   source.kept = false;
   s.mana--;
+  let banishSource = false;
   switch (name) {
     case "Angel":
       s.player.ward += 5;
@@ -534,8 +529,60 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     case "Seed":
       s.zones.library.unshift(...s.zones.discard.splice(0, 2));
       break;
+    default:
+      for (const op of face(source).ops ?? []) {
+        switch (op.op) {
+          case "banish":
+            banishSource = true;
+            break;
+          case "draw":
+            drawCards(s.zones, op.amount, rng);
+            break;
+          case "curse":
+            s.enemy.curse += op.amount;
+            break;
+          case "bless":
+            s.player.bless += op.amount;
+            break;
+          case "heal":
+            s.player.hp = Math.min(s.player.maxHp, s.player.hp + op.amount);
+            break;
+          case "ward":
+            s.player.ward += op.amount;
+            break;
+          case "mana":
+            s.mana = Math.min(3, s.mana + op.amount);
+            break;
+          case "burn":
+          case "poison":
+            applyDamageOverTime(s.enemy, op.op, op.amount);
+            break;
+          case "attack":
+            attack(s, Array(op.hits).fill(op.amount), op.type, op.leech);
+            break;
+          case "scry":
+            s.zones.scry = true;
+            break;
+          case "flip-hand":
+            flipCards(s.zones, source, { kind: "hand" }, rng);
+            break;
+          case "keep-hand":
+            keepCards(s.zones, source, { kind: "hand" }, rng);
+            break;
+          case "keep-self":
+            keepCards(s.zones, source, { kind: "source" }, rng);
+            break;
+          case "reflect":
+            s.player.reflect = true;
+            break;
+          case "turn-hand":
+            for (const card of s.zones.hand) card.face = op.face;
+            break;
+        }
+      }
   }
   if (
+    banishSource ||
     [
       "Bloom",
       "Wither",

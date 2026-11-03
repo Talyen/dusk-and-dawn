@@ -196,5 +196,1157 @@
     "output": "card-salt-crystal.webp",
     "width": 512,
     "quality": 82
+  },
+  {
+    "source": "Artwork/Winged Guardian & Revenant - Winged Guardian.png",
+    "output": "card-winged-guardian.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Winged Guardian & Revenant - Revenant.png",
+    "output": "card-revenant.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Absolution & Condemnation - Absolution.png",
+    "output": "card-absolution.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Absolution & Condemnation - Condemnation.png",
+    "output": "card-condemnation.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Stag & Black Stag - White Stag.png",
+    "output": "card-white-stag.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Stag & Black Stag - Black Stag.png",
+    "output": "card-black-stag.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Swan & Black Swan - White Swan.png",
+    "output": "card-white-swan.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Swan & Black Swan - Black Swan.png",
+    "output": "card-black-swan.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lamb & Wolf - Lamb.png",
+    "output": "card-lamb.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lamb & Wolf - Wolf.png",
+    "output": "card-wolf.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lark & Owl - Lark.png",
+    "output": "card-lark.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lark & Owl - Owl.png",
+    "output": "card-owl.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunrise & Eclipse - Sunrise.png",
+    "output": "card-sunrise.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunrise & Eclipse - Eclipse.png",
+    "output": "card-eclipse.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Censer & Plague Brazier - Censer.png",
+    "output": "card-censer.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Censer & Plague Brazier - Plague Brazier.png",
+    "output": "card-plague-brazier.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bell Tower & Fallen Bell - Bell Tower.png",
+    "output": "card-bell-tower.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bell Tower & Fallen Bell - Fallen Bell.png",
+    "output": "card-fallen-bell.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Gate & Sealed Gate - Open Gate.png",
+    "output": "card-open-gate.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Gate & Sealed Gate - Sealed Gate.png",
+    "output": "card-sealed-gate.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Benediction & Curse - Benediction.png",
+    "output": "card-benediction.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Benediction & Curse - Curse.png",
+    "output": "card-curse.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Dream & Nightmare - Dream.png",
+    "output": "card-dream.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Dream & Nightmare - Nightmare.png",
+    "output": "card-nightmare.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bound Soul & Unbound Spirit - Bound Soul.png",
+    "output": "card-bound-soul.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bound Soul & Unbound Spirit - Unbound Spirit.png",
+    "output": "card-unbound-spirit.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sovereign & Jester - Sovereign.png",
+    "output": "card-sovereign.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sovereign & Jester - Jester.png",
+    "output": "card-jester.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Goldfish & Anglerfish - Goldfish.png",
+    "output": "card-goldfish.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Goldfish & Anglerfish - Anglerfish.png",
+    "output": "card-anglerfish.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Caged Songbird & Wild Songbird - Caged Songbird.png",
+    "output": "card-caged-songbird.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Caged Songbird & Wild Songbird - Wild Songbird.png",
+    "output": "card-wild-songbird.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Tortoise & Hare - Tortoise.png",
+    "output": "card-tortoise.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Tortoise & Hare - Hare.png",
+    "output": "card-hare.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lighthouse & Shipwreck - Lighthouse.png",
+    "output": "card-lighthouse.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lighthouse & Shipwreck - Shipwreck.png",
+    "output": "card-shipwreck.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Glasshouse & Root Cellar - Glasshouse.png",
+    "output": "card-glasshouse.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Glasshouse & Root Cellar - Root Cellar.png",
+    "output": "card-root-cellar.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Salt Flat & Deep Marsh - Salt Flat.png",
+    "output": "card-salt-flat.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Salt Flat & Deep Marsh - Deep Marsh.png",
+    "output": "card-deep-marsh.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Frozen Lake & Boiling Lake - Frozen Lake.png",
+    "output": "card-frozen-lake.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Frozen Lake & Boiling Lake - Boiling Lake.png",
+    "output": "card-boiling-lake.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Desert & Black Forest - White Desert.png",
+    "output": "card-white-desert.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Desert & Black Forest - Black Forest.png",
+    "output": "card-black-forest.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Compass & Labyrinth - Compass.png",
+    "output": "card-compass.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Compass & Labyrinth - Labyrinth.png",
+    "output": "card-labyrinth.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Prism & Black Glass - Prism.png",
+    "output": "card-prism.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Prism & Black Glass - Black Glass.png",
+    "output": "card-black-glass.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Tuned Violin & Broken Violin - Tuned Violin.png",
+    "output": "card-tuned-violin.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Tuned Violin & Broken Violin - Broken Violin.png",
+    "output": "card-broken-violin.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wax Seal & Torn Letter - Wax Seal.png",
+    "output": "card-wax-seal.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wax Seal & Torn Letter - Torn Letter.png",
+    "output": "card-torn-letter.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Anchor & Kite - Anchor.png",
+    "output": "card-anchor.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Anchor & Kite - Kite.png",
+    "output": "card-kite.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lens & Blindfold - Lens.png",
+    "output": "card-lens.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lens & Blindfold - Blindfold.png",
+    "output": "card-blindfold.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Comb & Tangled Hair - Comb.png",
+    "output": "card-comb.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Comb & Tangled Hair - Tangled Hair.png",
+    "output": "card-tangled-hair.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Unity & Fragmentation - Unity.png",
+    "output": "card-unity.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Unity & Fragmentation - Fragmentation.png",
+    "output": "card-fragmentation.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Compression & Expansion - Compression.png",
+    "output": "card-compression.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Compression & Expansion - Expansion.png",
+    "output": "card-expansion.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Awakening & Slumber - Awakening.png",
+    "output": "card-awakening.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Awakening & Slumber - Slumber.png",
+    "output": "card-slumber.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Standard Bearer & Flag Burner - Standard Bearer.png",
+    "output": "card-standard-bearer.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Standard Bearer & Flag Burner - Flag Burner.png",
+    "output": "card-flag-burner.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Coral Reef & Kelp Forest - Coral Reef.png",
+    "output": "card-coral-reef.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Coral Reef & Kelp Forest - Kelp Forest.png",
+    "output": "card-kelp-forest.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Oyster & Cuttlefish - Oyster.png",
+    "output": "card-oyster.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Oyster & Cuttlefish - Cuttlefish.png",
+    "output": "card-cuttlefish.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Firefly & Cave Cricket - Firefly.png",
+    "output": "card-firefly.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Firefly & Cave Cricket - Cave Cricket.png",
+    "output": "card-cave-cricket.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Stalactite & Geyser - Stalactite.png",
+    "output": "card-stalactite.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Stalactite & Geyser - Geyser.png",
+    "output": "card-geyser.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Kingfisher & Bat - Kingfisher.png",
+    "output": "card-kingfisher.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Kingfisher & Bat - Bat.png",
+    "output": "card-bat.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunflower & Moonflower - Sunflower.png",
+    "output": "card-sunflower.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunflower & Moonflower - Moonflower.png",
+    "output": "card-moonflower.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Starfish & Sea Urchin - Starfish.png",
+    "output": "card-starfish.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Starfish & Sea Urchin - Sea Urchin.png",
+    "output": "card-sea-urchin.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sceptre & Begging Bowl - Sceptre.png",
+    "output": "card-sceptre.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sceptre & Begging Bowl - Begging Bowl.png",
+    "output": "card-begging-bowl.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Scabbard & Drawn Blade - Scabbard.png",
+    "output": "card-scabbard.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Scabbard & Drawn Blade - Drawn Blade.png",
+    "output": "card-drawn-blade.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sundial & Water Clock - Sundial.png",
+    "output": "card-sundial.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sundial & Water Clock - Water Clock.png",
+    "output": "card-water-clock.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Floodgate & Broken Dam - Floodgate.png",
+    "output": "card-floodgate.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Floodgate & Broken Dam - Broken Dam.png",
+    "output": "card-broken-dam.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wax Fruit & Rotting Fruit - Wax Fruit.png",
+    "output": "card-wax-fruit.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wax Fruit & Rotting Fruit - Rotting Fruit.png",
+    "output": "card-rotting-fruit.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Measuring Rod & Twisted Ribbon - Measuring Rod.png",
+    "output": "card-measuring-rod.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Measuring Rod & Twisted Ribbon - Twisted Ribbon.png",
+    "output": "card-twisted-ribbon.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Marble Quarry & Peat Bog - Marble Quarry.png",
+    "output": "card-marble-quarry.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Marble Quarry & Peat Bog - Peat Bog.png",
+    "output": "card-peat-bog.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Crystal Ballroom & Cinder Ballroom - Crystal Ballroom.png",
+    "output": "card-crystal-ballroom.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Crystal Ballroom & Cinder Ballroom - Cinder Ballroom.png",
+    "output": "card-cinder-ballroom.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Paved Road & Deer Trail - Paved Road.png",
+    "output": "card-paved-road.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Paved Road & Deer Trail - Deer Trail.png",
+    "output": "card-deer-trail.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Coin Minter & Coin Melter - Coin Minter.png",
+    "output": "card-coin-minter.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Coin Minter & Coin Melter - Coin Melter.png",
+    "output": "card-coin-melter.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Weather Watcher & Storm Chaser - Weather Watcher.png",
+    "output": "card-weather-watcher.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Weather Watcher & Storm Chaser - Storm Chaser.png",
+    "output": "card-storm-chaser.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Oath Keeper & Oath Breaker - Oath Keeper.png",
+    "output": "card-oath-keeper.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Oath Keeper & Oath Breaker - Oath Breaker.png",
+    "output": "card-oath-breaker.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Door Warden & Door Wanderer - Door Warden.png",
+    "output": "card-door-warden.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Door Warden & Door Wanderer - Door Wanderer.png",
+    "output": "card-door-wanderer.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Flying Beetle & Burrowing Beetle - Flying Beetle.png",
+    "output": "card-flying-beetle.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Flying Beetle & Burrowing Beetle - Burrowing Beetle.png",
+    "output": "card-burrowing-beetle.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Glass Snail & Stone Slug - Glass Snail.png",
+    "output": "card-glass-snail.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Glass Snail & Stone Slug - Stone Slug.png",
+    "output": "card-stone-slug.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Dawn Crane & Night Heron - Dawn Crane.png",
+    "output": "card-dawn-crane.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Dawn Crane & Night Heron - Night Heron.png",
+    "output": "card-night-heron.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunfish & Deep Sea Dragonfish - Sunfish.png",
+    "output": "card-sunfish.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunfish & Deep Sea Dragonfish - Deep Sea Dragonfish.png",
+    "output": "card-deep-sea-dragonfish.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Alabaster Spider & Obsidian Spider - Alabaster Spider.png",
+    "output": "card-alabaster-spider.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Alabaster Spider & Obsidian Spider - Obsidian Spider.png",
+    "output": "card-obsidian-spider.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Pearl Crab & Hermit Crab - Pearl Crab.png",
+    "output": "card-pearl-crab.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Pearl Crab & Hermit Crab - Hermit Crab.png",
+    "output": "card-hermit-crab.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Honey Ant & Army Ant - Honey Ant.png",
+    "output": "card-honey-ant.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Honey Ant & Army Ant - Army Ant.png",
+    "output": "card-army-ant.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Albino Serpent & Black Adder - Albino Serpent.png",
+    "output": "card-albino-serpent.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Albino Serpent & Black Adder - Black Adder.png",
+    "output": "card-black-adder.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Hard Coral & Soft Coral - Hard Coral.png",
+    "output": "card-hard-coral.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Hard Coral & Soft Coral - Soft Coral.png",
+    "output": "card-soft-coral.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Hummingbird & Hawk Moth - Hummingbird.png",
+    "output": "card-hummingbird.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Hummingbird & Hawk Moth - Hawk Moth.png",
+    "output": "card-hawk-moth.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Whole Egg & Cracked Egg - Whole Egg.png",
+    "output": "card-whole-egg.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Whole Egg & Cracked Egg - Cracked Egg.png",
+    "output": "card-cracked-egg.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Amber Frog & Indigo Toad - Amber Frog.png",
+    "output": "card-amber-frog.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Amber Frog & Indigo Toad - Indigo Toad.png",
+    "output": "card-indigo-toad.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Red Panda & Clouded Leopard - Red Panda.png",
+    "output": "card-red-panda.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Red Panda & Clouded Leopard - Clouded Leopard.png",
+    "output": "card-clouded-leopard.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Living Jellyfish & Jellyfish Fossil - Living Jellyfish.png",
+    "output": "card-living-jellyfish.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Living Jellyfish & Jellyfish Fossil - Jellyfish Fossil.png",
+    "output": "card-jellyfish-fossil.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Poppy & Black Tulip - White Poppy.png",
+    "output": "card-white-poppy.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Poppy & Black Tulip - Black Tulip.png",
+    "output": "card-black-tulip.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/River Pearl & Volcanic Obsidian - River Pearl.png",
+    "output": "card-river-pearl.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/River Pearl & Volcanic Obsidian - Volcanic Obsidian.png",
+    "output": "card-volcanic-obsidian.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Silver Crown & Rusty Crown - Silver Crown.png",
+    "output": "card-silver-crown.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Silver Crown & Rusty Crown - Rusty Crown.png",
+    "output": "card-rusty-crown.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Crystal Goblet & Clay Cup - Crystal Goblet.png",
+    "output": "card-crystal-goblet.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Crystal Goblet & Clay Cup - Clay Cup.png",
+    "output": "card-clay-cup.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Fan & Black Fan - White Fan.png",
+    "output": "card-white-fan.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/White Fan & Black Fan - Black Fan.png",
+    "output": "card-black-fan.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wooden Spool & Loose Thread - Wooden Spool.png",
+    "output": "card-wooden-spool.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wooden Spool & Loose Thread - Loose Thread.png",
+    "output": "card-loose-thread.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Glass Marble & Clay Marble - Glass Marble.png",
+    "output": "card-glass-marble.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Glass Marble & Clay Marble - Clay Marble.png",
+    "output": "card-clay-marble.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wax Key & Melted Key - Wax Key.png",
+    "output": "card-wax-key.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Wax Key & Melted Key - Melted Key.png",
+    "output": "card-melted-key.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Copper Coin & Hollow Coin - Copper Coin.png",
+    "output": "card-copper-coin.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Copper Coin & Hollow Coin - Hollow Coin.png",
+    "output": "card-hollow-coin.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lit Match & Spent Match - Lit Match.png",
+    "output": "card-lit-match.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Lit Match & Spent Match - Spent Match.png",
+    "output": "card-spent-match.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Paper Boat & Stone Boat - Paper Boat.png",
+    "output": "card-paper-boat.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Paper Boat & Stone Boat - Stone Boat.png",
+    "output": "card-stone-boat.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Iron Needlecase & Empty Needlecase - Iron Needlecase.png",
+    "output": "card-iron-needlecase.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Iron Needlecase & Empty Needlecase - Empty Needlecase.png",
+    "output": "card-empty-needlecase.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Ivory Chess King & Obsidian Chess Queen - Ivory Chess King.png",
+    "output": "card-ivory-chess-king.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Ivory Chess King & Obsidian Chess Queen - Obsidian Chess Queen.png",
+    "output": "card-obsidian-chess-queen.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunlit Gallery & Shadow Gallery - Sunlit Gallery.png",
+    "output": "card-sunlit-gallery.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Sunlit Gallery & Shadow Gallery - Shadow Gallery.png",
+    "output": "card-shadow-gallery.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Winter Conservatory & Summer Conservatory - Winter Conservatory.png",
+    "output": "card-winter-conservatory.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Winter Conservatory & Summer Conservatory - Summer Conservatory.png",
+    "output": "card-summer-conservatory.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/High Balcony & Hidden Basement - High Balcony.png",
+    "output": "card-high-balcony.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/High Balcony & Hidden Basement - Hidden Basement.png",
+    "output": "card-hidden-basement.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Pavilion & Walled Pavilion - Open Pavilion.png",
+    "output": "card-open-pavilion.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Pavilion & Walled Pavilion - Walled Pavilion.png",
+    "output": "card-walled-pavilion.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Crystal Grotto & Basalt Cave - Crystal Grotto.png",
+    "output": "card-crystal-grotto.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Crystal Grotto & Basalt Cave - Basalt Cave.png",
+    "output": "card-basalt-cave.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Marble Fountain & Dry Fountain - Marble Fountain.png",
+    "output": "card-marble-fountain.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Marble Fountain & Dry Fountain - Dry Fountain.png",
+    "output": "card-dry-fountain.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Golden Atrium & Black Atrium - Golden Atrium.png",
+    "output": "card-golden-atrium.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Golden Atrium & Black Atrium - Black Atrium.png",
+    "output": "card-black-atrium.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Moonlit Pier & Sunlit Pier - Moonlit Pier.png",
+    "output": "card-moonlit-pier.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Moonlit Pier & Sunlit Pier - Sunlit Pier.png",
+    "output": "card-sunlit-pier.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Watchtower & Collapsed Watchtower - Watchtower.png",
+    "output": "card-watchtower.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Watchtower & Collapsed Watchtower - Collapsed Watchtower.png",
+    "output": "card-collapsed-watchtower.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Courtyard & Roofed Courtyard - Open Courtyard.png",
+    "output": "card-open-courtyard.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Courtyard & Roofed Courtyard - Roofed Courtyard.png",
+    "output": "card-roofed-courtyard.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Candlelit Theatre & Darkened Theatre - Candlelit Theatre.png",
+    "output": "card-candlelit-theatre.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Candlelit Theatre & Darkened Theatre - Darkened Theatre.png",
+    "output": "card-darkened-theatre.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Silk Tent & Wicker Shelter - Silk Tent.png",
+    "output": "card-silk-tent.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Silk Tent & Wicker Shelter - Wicker Shelter.png",
+    "output": "card-wicker-shelter.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Stone Circle & Scattered Stones - Stone Circle.png",
+    "output": "card-stone-circle.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Stone Circle & Scattered Stones - Scattered Stones.png",
+    "output": "card-scattered-stones.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Shallow Shore & Abyssal Trench - Shallow Shore.png",
+    "output": "card-shallow-shore.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Shallow Shore & Abyssal Trench - Abyssal Trench.png",
+    "output": "card-abyssal-trench.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bright Clearing & Dense Canopy - Bright Clearing.png",
+    "output": "card-bright-clearing.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Bright Clearing & Dense Canopy - Dense Canopy.png",
+    "output": "card-dense-canopy.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Window & Shuttered Window - Open Window.png",
+    "output": "card-open-window.webp",
+    "width": 512,
+    "quality": 82
+  },
+  {
+    "source": "Artwork/Open Window & Shuttered Window - Shuttered Window.png",
+    "output": "card-shuttered-window.webp",
+    "width": 512,
+    "quality": 82
   }
 ]

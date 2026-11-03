@@ -214,7 +214,12 @@ function BattleSession({
     action.hit === undefined
       ? null
       : attackValues(enemyAttackHits(action, s.enemy.hush), s.enemy.bless, s.enemy.curse, 0, "flat-preview");
-  const cardAttack = directCardAttacks[selectedName];
+  const genericAttack = selectedCard ? face(selectedCard).ops?.find((op) => op.op === "attack") : undefined;
+  const cardAttack =
+    directCardAttacks[selectedName] ??
+    (genericAttack
+      ? { hits: Array(genericAttack.hits).fill(genericAttack.amount) as number[], type: genericAttack.type }
+      : undefined);
   const cardHits = cardAttack
     ? attackValues(
         cardAttack.hits,
@@ -225,7 +230,7 @@ function BattleSession({
       )
     : null;
   const opposite = selectedCard
-    ? cards[selectedCard.pair as keyof typeof cards][selectedCard.face === "light" ? "dark" : "light"]
+    ? cards[selectedCard.pair]![selectedCard.face === "light" ? "dark" : "light"]
     : null;
   return (
     <main className="battle-screen" aria-labelledby="battle-title">
@@ -354,20 +359,21 @@ function BattleSession({
                   Other face: <strong>{opposite.name}</strong> — <Description text={opposite.effect} />
                 </p>
               )}
-              {(selectedName === "Moon" || selectedName === "Key") && (
+              {(selectedName === "Moon" ||
+                selectedName === "Key" ||
+                face(selectedCard).ops?.some((op) => op.op === "flip-hand")) && (
                 <p>
                   Flip preview:{" "}
                   {s.zones.hand
                     .filter((card) => card.id !== selected)
                     .map((card) => {
-                      const other =
-                        cards[card.pair as keyof typeof cards][card.face === "light" ? "dark" : "light"];
+                      const other = cards[card.pair]![card.face === "light" ? "dark" : "light"];
                       return `${face(card).name} → ${other.name} (${other.effect})`;
                     })
                     .join("; ") || "no other cards in hand"}
                   .
-                  {selectedName === "Key" &&
-                    " The card drawn first will also flip; its identity is not revealed yet."}
+                  {(selectedName === "Key" || face(selectedCard).ops?.some((op) => op.op === "draw")) &&
+                    " Any card drawn first will also flip; its identity is not revealed yet."}
                 </p>
               )}
               {face(selectedCard).keywords.some((keyword) => keywordHelp[keyword]) && (
@@ -432,10 +438,10 @@ function BattleSession({
             <button key={pair} className="battle-reward" onClick={() => dispatch({ type: "reward", pair })}>
               <strong>{pair}</strong>
               <span>
-                {cards[pair].light.name}: {cards[pair].light.effect}
+                {cards[pair]!.light.name}: {cards[pair]!.light.effect}
               </span>
               <span>
-                {cards[pair].dark.name}: {cards[pair].dark.effect}
+                {cards[pair]!.dark.name}: {cards[pair]!.dark.effect}
               </span>
             </button>
           ))}

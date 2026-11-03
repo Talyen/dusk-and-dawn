@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "manifestHash": "0fc2950e7be04eb241476532ffcd49fb1681a6143f0eb90afcf9e256fbe29f21",
+  "manifestHash": "3b22ac2430c83a6f2431adb686b40cc599d425655be52ab876f6f68f3d442057",
   "outputs": [
     {
       "output": "card-angel.webp",
@@ -166,6 +166,966 @@
       "output": "card-salt-crystal.webp",
       "sourceHash": "cacb290666dccfae642233b8b69e4410d8f14bd344915a0556d599a4cae54bca",
       "hash": "fbc8abc150209feb444541eee06409eb40cc146ad324939b63f683bf12a11a2d"
+    },
+    {
+      "output": "card-winged-guardian.webp",
+      "sourceHash": "aa17d2fda216af64e8d2b211b619c0f90e516d12da02f831298fc6df35845d9b",
+      "hash": "655f1fe53af176f67e67742897807ea6160b19b6dc004629515340b9646c90b5"
+    },
+    {
+      "output": "card-revenant.webp",
+      "sourceHash": "2b0e1e214f3ed639ab587f48e897b628956ae334c197b2792e90f00accf70122",
+      "hash": "510c7c1f8b83be2d6c135f4e594619a4d2eaa0a80b80fe18d03380dd225953de"
+    },
+    {
+      "output": "card-absolution.webp",
+      "sourceHash": "c3b8eccd6eb78e2fc707b73a26f0b3fcf3b585180eed998be9faa169cbcd67bb",
+      "hash": "c5ccb2969f25ce8df92d92d641ed3107858e3f87c702defe66b343376e719e0b"
+    },
+    {
+      "output": "card-condemnation.webp",
+      "sourceHash": "258e4fd07f82fa07c35b3cc13a7686cb13d8a94bb48f88be31c168bd72483208",
+      "hash": "7f61e1d94fa8fdcfb22d49d0a90f97acca49392a5e180b9d2e1ab4135c881bf9"
+    },
+    {
+      "output": "card-white-stag.webp",
+      "sourceHash": "2b79cf7d8885d4ca2a2658a762d100ab165a55824c61fec5b492a270418ea1ab",
+      "hash": "a5acadef703c07b2f758589e8686fce561ae812579148971ba228a9c02de5437"
+    },
+    {
+      "output": "card-black-stag.webp",
+      "sourceHash": "f4808d30dde5baa2e080557119c6fedcb17c5fb3bd27caf56efdf977b6fce7e7",
+      "hash": "4f1cfa04e30ba26907f17e0c7f1ec8231d4e3faa29a4710f3e910ecc125632c9"
+    },
+    {
+      "output": "card-white-swan.webp",
+      "sourceHash": "9866da6df273c5a550148892d77222a998be9b87bc09819b471042a1fbeff710",
+      "hash": "2a06740e58104e95e815527e0233e99659c0abf4a391a6f4acd11cdc7da043d7"
+    },
+    {
+      "output": "card-black-swan.webp",
+      "sourceHash": "3cdf051818dac55108d38b2f794a8b29311da6ad3075d59c542a085a008011cd",
+      "hash": "09616a3646d455e0207145fbfb76f1d69dc2a6c274507f5d186c111029bc8880"
+    },
+    {
+      "output": "card-lamb.webp",
+      "sourceHash": "a1743b0bfad6f3454ace27827570ae797527aedab452e64b480b19bc24ac29fd",
+      "hash": "d603199cab0203640927708893b247cc7abeb0f83a5853495d9cfe1e2d611ff6"
+    },
+    {
+      "output": "card-wolf.webp",
+      "sourceHash": "d6f9b2718fe3ce483b8e95383a98718908889c3750914623a5b8e7adf9fe48b3",
+      "hash": "928d91a0a4a800810005cc49f0aac6ef9fda3abb03cb2e1cb9467ac65c6a7111"
+    },
+    {
+      "output": "card-lark.webp",
+      "sourceHash": "127ccbaa9516f596c3076b0aa175e1c05fa20e1c1d0c266a40e2141de47bfbbb",
+      "hash": "b653015105823bc91ae9cc90e2ddba9435c64bbded7aeb6598f2cb7856df3c76"
+    },
+    {
+      "output": "card-owl.webp",
+      "sourceHash": "9a76c2382f9b0221890a5dd90eaf885ca77bba254a210011e4f7f2063806eccc",
+      "hash": "082d2aaec4ea00b444188ed06af96f0a5ee441f3ce430f5d47d118bf9adfcbeb"
+    },
+    {
+      "output": "card-sunrise.webp",
+      "sourceHash": "d517e4562ac8a8ede528f52e127086e0b8d2dab25bb5cc88878a044deec66c62",
+      "hash": "2f5bb6bb0f595c62832ae8bca7e47199047fb5260b9a998a0b6bd37649eb5efe"
+    },
+    {
+      "output": "card-eclipse.webp",
+      "sourceHash": "f36db5da8ff1f8a396f269fdcd1897d56319edacab0500ebbabbb93ade5613ee",
+      "hash": "4e80ac179e4cb00fc1a17de50b79c152909d272539ff4d986b13e346e25ae05c"
+    },
+    {
+      "output": "card-censer.webp",
+      "sourceHash": "4c514104e47369c8496c64caa1732815c9e7368d04f57e3b134d5d286ad4b3bf",
+      "hash": "6de76a2f8bae71e3d6e55f67c12003392e52e904b5c267b1883d446ff2578948"
+    },
+    {
+      "output": "card-plague-brazier.webp",
+      "sourceHash": "66b280323b47ae8ed6001651b3f11c064f6c7ea074324a253ea454ea4003bf54",
+      "hash": "4d8f60600f4b914360210555628fb33824c35f72c8437226edacc274f6d6d1c3"
+    },
+    {
+      "output": "card-bell-tower.webp",
+      "sourceHash": "034ef60394af9d76fb2ddf5784d757c2a01fb50decf634ea5a907bbcdaad28ab",
+      "hash": "2a116eeecd417347b281e5f5f10e8dc427df72b315160c3e4e5aaf8701b07ea7"
+    },
+    {
+      "output": "card-fallen-bell.webp",
+      "sourceHash": "b7936d98f2ed3f977639ed5a73845dd2e6fbc0651658aecdeed0949fb3b13fad",
+      "hash": "ab633f15e0ea8ab80c0561e8976497deb4498a029e75ee66358eefe65e1ca83b"
+    },
+    {
+      "output": "card-open-gate.webp",
+      "sourceHash": "2e8e70a67fbb619de93406a75858443111a8a1c0cf4079dfbd2e95ab99f7f66d",
+      "hash": "d9be63d4ca8662540361001bd34b50f96d309ee0eb7922b2827a273b29abe3dc"
+    },
+    {
+      "output": "card-sealed-gate.webp",
+      "sourceHash": "7d191602f8ac2f46723ca8eb9e6c806c0eca57b8a563968f5470de21d99cd012",
+      "hash": "37007f6292663c1a1bd60fbbdb024225403e2b8127de38b155236e468e13f9c7"
+    },
+    {
+      "output": "card-benediction.webp",
+      "sourceHash": "27ee5f8c6182d132efaa674580fbc2b35f19e80d86039b6afb36c67bf36060cc",
+      "hash": "85662e273d4f526a84175d20c38689e269e1f6ed18064d2e4d3f22266047e0cc"
+    },
+    {
+      "output": "card-curse.webp",
+      "sourceHash": "a8500a2296a502015210e1d1e6a4c80a1fcc154f09dfaea1b567c355dc2b31e3",
+      "hash": "b162b3edc3e507ddc06bdda64e5925af8021e3c6e2ab3e5db5f4b89d3d9184cf"
+    },
+    {
+      "output": "card-dream.webp",
+      "sourceHash": "b6ef45c8ebfc0e4bd2efcce53866041bf9ab71e1be5bd8591acbe23214f4d93a",
+      "hash": "765270bb05d7b8799659caa29b4dfd28629b56b58ed1038c35523f694ca67518"
+    },
+    {
+      "output": "card-nightmare.webp",
+      "sourceHash": "ae010fc2b85fec7a34907d0fdbbe88ad3009710f16a1fdb439f512a21d980bdf",
+      "hash": "7ed612584ed7666d7b1416311955f704a0ed8bd3459f80b77b4a90ee122e7ac0"
+    },
+    {
+      "output": "card-bound-soul.webp",
+      "sourceHash": "996f15664630ca5cf166928e57d5a0a118b2bf3a6df36a2f5126436c885656c2",
+      "hash": "b13255d06b098238a6a82af247ca86f3b69b2666517a88ddc5cf98b94c845e24"
+    },
+    {
+      "output": "card-unbound-spirit.webp",
+      "sourceHash": "72dbaaa0e472403f4f1c6ae64222aac84cc9bb09ec473d15c86c3ee1f578c132",
+      "hash": "e0b7a4ba420ad42cbc6d061714541b68c12a631c174db4e786118126beb6c8e6"
+    },
+    {
+      "output": "card-sovereign.webp",
+      "sourceHash": "a435daed0573155194823e4749e5272eb5eb88247692c822c9c2313485514290",
+      "hash": "7b30b175fc215a4b9866245ed97edba40be1f119d9ba18a11fb0f0fae3b56b93"
+    },
+    {
+      "output": "card-jester.webp",
+      "sourceHash": "416e0a242c9d5f654e2b7a3fea28e26fb5715ee47a07daa67c52ae806e856e4e",
+      "hash": "691e2f4ec62f33f23ea7f74cfa28d4b7ac6644bfd37274ebf2bebae131d33e89"
+    },
+    {
+      "output": "card-goldfish.webp",
+      "sourceHash": "f8fba471dee872da40f31c6a9d910fc5ee206b5e34bd98cb3a4ee8479b8c2e80",
+      "hash": "2cacd4efe88a57b991ffe4d6ec215a10eecf9525d1d141eec1d55ac09bf596ce"
+    },
+    {
+      "output": "card-anglerfish.webp",
+      "sourceHash": "23c61786c3f29924d773da10ce15eeeede32d6d8a6b301c4101e2992c4145ea0",
+      "hash": "815f71fce27fa8aa29423bf5d60f038bddfdbd230061aa02651b75d93ceac5ca"
+    },
+    {
+      "output": "card-caged-songbird.webp",
+      "sourceHash": "87bd391d1a305a9d0e7ff63d38c67a573e84175cd0a1f6a8f1370dd81a4f51b7",
+      "hash": "06cbb29206d7c75fd39edff3fcb6281864282cd3dff77a2fab59a9ed4145ef9c"
+    },
+    {
+      "output": "card-wild-songbird.webp",
+      "sourceHash": "1684455607c04e3dff09a925b3256c5430dd3807608afddf1e19b1cb10cb31f9",
+      "hash": "53c1e27a33d965d2130f231ba8ba73507eb2f62bead9ee08862578d46839d002"
+    },
+    {
+      "output": "card-tortoise.webp",
+      "sourceHash": "04928705109cbbe95c52427cd197b3296a13500747a26fd6651dad19e3fe48af",
+      "hash": "709d6df7f0637d6e69553bff7fc8a0ff1a556c3a4cb3ce0d5dfb65dd121901e6"
+    },
+    {
+      "output": "card-hare.webp",
+      "sourceHash": "c4582bada254b3c924455ec9f5e584ee65990628101b181dade11eb59df2d5d1",
+      "hash": "2f940afa4a33dd52da03ae1a0629622ea0b24c1b14913409a3df2e852869fb52"
+    },
+    {
+      "output": "card-lighthouse.webp",
+      "sourceHash": "b45335a2018b3dfb13b2408c3c9113efeb45e7bef5c65b903814f8a8b0f00eee",
+      "hash": "30605f8bf7da7ce62154ff46ef51fb6d0a3735e061bd03915e54a846d82997de"
+    },
+    {
+      "output": "card-shipwreck.webp",
+      "sourceHash": "319f7f1364786f5cae2e7c096af1ad4d932032f10a61083892a3b120c62d9fb6",
+      "hash": "1e7e95e83b8fad90a32ff77edab9d4de17b95db0bfed8d8b2a3cb80f6adbe18a"
+    },
+    {
+      "output": "card-glasshouse.webp",
+      "sourceHash": "54db188c4b8684e680505e4ffec99cc549149e275d8f65588f80f84edb5f1f70",
+      "hash": "3a1f3e03bdda5daa5905608bff5fea7d473ee3a51d297526543f142dfaf32c53"
+    },
+    {
+      "output": "card-root-cellar.webp",
+      "sourceHash": "929a6688e164ebf07fdf7e9780e03b001ba0479018e755694af5907990da51c7",
+      "hash": "aa9fb77c2d4810cb894f5683ae447dfd3137bead5f20aff5a96462a36d4ecd4b"
+    },
+    {
+      "output": "card-salt-flat.webp",
+      "sourceHash": "73a97cbdb0a53cd57aa0923f7c9273c28e719ce9174f4c2bbeac1c385be0f599",
+      "hash": "f126316e471bc3e1e017f43b63a55ab038d180323f02240ee42e1050df76db5c"
+    },
+    {
+      "output": "card-deep-marsh.webp",
+      "sourceHash": "a6e7ea47cfc72913e997c000000f9c327cb6104e8bce610ecd1647f4ff93c233",
+      "hash": "8c46fbc4e1d3d3f7713bf18f34e7090a947a8a5610c8b8700a75ee30b88306ba"
+    },
+    {
+      "output": "card-frozen-lake.webp",
+      "sourceHash": "35c5b85c4c4088e43404a5bc3091189b6299a331b327552a20e9e56f359b4ae0",
+      "hash": "37cbcd5f8bc2b0114135ba492cb27aa225f45018bf24eaf25d65e1d3d75fb1fc"
+    },
+    {
+      "output": "card-boiling-lake.webp",
+      "sourceHash": "6108fdc9d4f3a4b451e64b671604fd12e4d318665fcdd90aa9625cbb74ae0bee",
+      "hash": "204e5f3ab25dc6fa043b20193c405fd1e42aa719370630880c3f7d1e7af6957b"
+    },
+    {
+      "output": "card-white-desert.webp",
+      "sourceHash": "7a060dc85d1e36a91ab25909c1cb1169fe21094ff719276b1d242d3d88b03b04",
+      "hash": "5e49e9493c576d7020f1b59bf7d78a93f2e5f409250271c4a91a040b1eb3138f"
+    },
+    {
+      "output": "card-black-forest.webp",
+      "sourceHash": "c8031562b05c3cbbfaf8ac20b829abf569c59135e2f36e9e65ea0a9d19e57203",
+      "hash": "5b9b72db139b2bac329ef4b1ee2a15e89c9c0a125d68bc9c3d8e8870392323a0"
+    },
+    {
+      "output": "card-compass.webp",
+      "sourceHash": "f84027a9fe1d9c4b2c0a3d96a8d45b99d54d730f0bd24a1964f8daa283cb5e7f",
+      "hash": "092156ee013009ce1684d51eba0685a83a18cbb73ea7737f0ddad58b9d14d13d"
+    },
+    {
+      "output": "card-labyrinth.webp",
+      "sourceHash": "b0fb1e48e08dfd4416b68372aefd3dad9e83d54a41b4946fffbbb54a7521c398",
+      "hash": "16d0bd10aafdf9d2b2ac4f3261e87db4f8c7c2dce9c7592c521077d523777a46"
+    },
+    {
+      "output": "card-prism.webp",
+      "sourceHash": "48fce0173694a8f4b2f315e411bb326140366c79b709e4f8811efffb15989f9a",
+      "hash": "95898f3358717fae9ed5b2fe52fd588c92ce937a6fa3ccad557b9db28241d2cb"
+    },
+    {
+      "output": "card-black-glass.webp",
+      "sourceHash": "72c7b8b139f4622c8284a8a2acc02e89bb5897a35b797201271459c2aa89b107",
+      "hash": "0427c87db1ce6df02084dd56b61ab602401e2271b7bbc437840ad0e8d1f7d56e"
+    },
+    {
+      "output": "card-tuned-violin.webp",
+      "sourceHash": "5765698805a8705be90181b79f91e0b4573fde52f7a5959a1c3cefd6c2ea1dc4",
+      "hash": "c4644fac656c36e9c798985ee1a18ca42044af393303634fc075aa3d67988850"
+    },
+    {
+      "output": "card-broken-violin.webp",
+      "sourceHash": "cc163e323bfa3b8c8c07497548406ac379e00224ac1ecafc3838eb347aa617be",
+      "hash": "b50d320faa2fdbc0f18ece3cbd8a6ef7fbc7eff08ffde010538e9ae833e5aa3c"
+    },
+    {
+      "output": "card-wax-seal.webp",
+      "sourceHash": "dad83caaf369155b460d134d698aa158e91bae0342bd52c8f3c98d6dfc9d6f81",
+      "hash": "4fd06a74d42fbf110f2fe8dd9bb8379a14517df18539e1d6f91b276141605b06"
+    },
+    {
+      "output": "card-torn-letter.webp",
+      "sourceHash": "d87497b313755f2ab82f7511d97c9577c4e5a4ef3613116ea8b1e54298753498",
+      "hash": "87e2af865a2bf8e4aaa3e492ad9eff7e47d3e798dbb13e9174819cff5c46cebf"
+    },
+    {
+      "output": "card-anchor.webp",
+      "sourceHash": "5a17b8d623baa6918ff0e396424b0d7363c0a410e298a763916bb21afc79527d",
+      "hash": "ce99f7c5e47474004e4f7404b9df80838d1f42206bf4cf0ddfc1f3230e9c8595"
+    },
+    {
+      "output": "card-kite.webp",
+      "sourceHash": "c1310469f10f25127ec3fdf33531ca271e8380eaf62c057b2ccf395fcc6af7d4",
+      "hash": "6b65e62a21fe50b703eb4669eadbe5979f474d396a652721511d3dbe2b5f246d"
+    },
+    {
+      "output": "card-lens.webp",
+      "sourceHash": "46ea435706f86815f09ee7e0b815ef71f70f12c600da57cdb24742729eb3f7b4",
+      "hash": "b100181f3e039fbf5c3e0340099c8fda7335cac7e172a7d4e1aa198b9d7a27c1"
+    },
+    {
+      "output": "card-blindfold.webp",
+      "sourceHash": "daed59c1f3378a24ccccfd48833c782d26b8c75e749d778e0292b50b3204819e",
+      "hash": "35feaf270d7c5451d044b0ce2085d420373bd079d62f234be7ce82b2f7d87e08"
+    },
+    {
+      "output": "card-comb.webp",
+      "sourceHash": "c9b30fbf59cff7a981a22c11c0261ce2b3bea2d2cb3a9840d60f0821450a2cff",
+      "hash": "915eca9f65a38992cc4e96dd0a5945a9541afc682f73e1086392abc0d3133ee8"
+    },
+    {
+      "output": "card-tangled-hair.webp",
+      "sourceHash": "27410d8f9da555736046d443a0a9aba3b037c4f2ac24861876e587c873248030",
+      "hash": "a64b824e0cb498404d8be5a404a432c0371a6b08b90a054f33f24745dbcda5a4"
+    },
+    {
+      "output": "card-unity.webp",
+      "sourceHash": "45c8daa8da832d837f228739383ba34a7e869c7e325750f4e47ab9289122ed5b",
+      "hash": "deb63bf3c89ed32034fad03d54c7e87c805c75340c8bb987a79e2fdeb0eef617"
+    },
+    {
+      "output": "card-fragmentation.webp",
+      "sourceHash": "a77e544f761a308bd4eb846ce6a74b5d04342f6a70bc1a2cc260aa0b7599183a",
+      "hash": "6c2d4773e4b06153920f8a8935f4505f94d02e9f83866f15f2fa1626e4a7243e"
+    },
+    {
+      "output": "card-compression.webp",
+      "sourceHash": "7743d3d7e36f69df891e9c5df44b8e10bbab4f2f5034854dd204ab39af39b116",
+      "hash": "0e84b5030db4ca67b42d05e9fb85ff56e94bfcd21a1f968731095c6d767fe762"
+    },
+    {
+      "output": "card-expansion.webp",
+      "sourceHash": "d0fc6267e6d5f905bb64eb354aa4ef44071da637d39df27e29701d33f8d531a5",
+      "hash": "6baf56a1f8adadd828b180d960e9c5929f51767def92d4d85a234fd926eee2a2"
+    },
+    {
+      "output": "card-awakening.webp",
+      "sourceHash": "0c80e00d4ff81093f5c0e0199788ce3c757ba10a603291e279ec1fe2231e1c79",
+      "hash": "9e7f0f8f756054c2d3030bd5c775ff62448ce370ee628dc38f9f3c72a90a854e"
+    },
+    {
+      "output": "card-slumber.webp",
+      "sourceHash": "d36172d9da468450a340e573c88b5fb5e2f0acbf1c66c3708294bc9b22402d6c",
+      "hash": "32eb78abb796b841050bfa3c95b32c7a689982ed6f157492ff9286cc5ad55752"
+    },
+    {
+      "output": "card-standard-bearer.webp",
+      "sourceHash": "6c7539cb0b6586d02b59a646cd0a4030b3d1024b62b97648af33d9a32057a2bd",
+      "hash": "50a39525eccea22a685e46e5b671fb70ac8e0957e2009654993fac95578c8ab0"
+    },
+    {
+      "output": "card-flag-burner.webp",
+      "sourceHash": "5d3aa3e3d199764572d7febaf54d044c0bea5f8d3aec949fe8cb05f57bf7f0cd",
+      "hash": "eee92a1b534e90618181c5bebdb359e785454c2a73ba760505a37eaade4f4f80"
+    },
+    {
+      "output": "card-coral-reef.webp",
+      "sourceHash": "a8820e666373cbb892dc881cc6788d135e87c1a4a94ad9c02b8fcd80b477b463",
+      "hash": "e994fd6f3563973397791fb39b7a655e1adc12489703446898e7ddfe1cf853db"
+    },
+    {
+      "output": "card-kelp-forest.webp",
+      "sourceHash": "1bbea632b3c66645050b61d24c8bdee8ad15f8e5d74c822f63355e02de1cc4d4",
+      "hash": "e096a85503b996f36990e1e50ee14683e56760f011bb1fe9d0e8f3d9971595fa"
+    },
+    {
+      "output": "card-oyster.webp",
+      "sourceHash": "70eebb3916e7aef3a83778f6513f2af7701461b24b39aceac76fe998b40cf61c",
+      "hash": "40f5e64fcc047c27bb9bcfcd6c85f79fc89a9a29cf1a48355111ca2baab967ff"
+    },
+    {
+      "output": "card-cuttlefish.webp",
+      "sourceHash": "15d0154f990eb6fc0d1ea40403b0b1861d56362b087ce65ef455e07dcd637c1e",
+      "hash": "b66810ff581ee9853d0ca427ef23358b461cb438f71caaddd826ef83f681e569"
+    },
+    {
+      "output": "card-firefly.webp",
+      "sourceHash": "8b80306a1f81f20d43feb4b957333485cfcd8753052af89d15e2515cdb13bb70",
+      "hash": "c5f3161339833e69b72c16a536ef37dfbfacb486c9b11855fa84b53b466af56c"
+    },
+    {
+      "output": "card-cave-cricket.webp",
+      "sourceHash": "0b4bc858c5fd28d0b82a97520f5444d2d188bc2f3da6b146b22a84b188c22e11",
+      "hash": "7bcc476873d0280d93cbb234adf3b563fabfa5dfba73b9b3e7fb6b948488c7ff"
+    },
+    {
+      "output": "card-stalactite.webp",
+      "sourceHash": "064b228547901886836ed0e49b66791bcd9e664cf8e64c1fc5a510bc3b424662",
+      "hash": "85fb4770d93d2e120cb79b0fdbf6baa17a964621762f67b0dadc9b4b0817290a"
+    },
+    {
+      "output": "card-geyser.webp",
+      "sourceHash": "1793166ceb764acebab9290a0f36bb7a2ed5026017c47ba1a20a57260bf41ad0",
+      "hash": "4966097720e099e93120787efef7c3518eba10af6596aeb81c27e052a1ce8e01"
+    },
+    {
+      "output": "card-kingfisher.webp",
+      "sourceHash": "88428decfb316c66faeae3a50d1b5f551c18a72e640cb97fa0ae80398e2b3ed3",
+      "hash": "f68641afe9da009b129302da9df66a9484217203456ca3546089a7f7f482c579"
+    },
+    {
+      "output": "card-bat.webp",
+      "sourceHash": "faf1d1075b583883eab9ee38baafc7e9a19ab46bd1253658d80dc6c8a733f190",
+      "hash": "76357aab09048710e56b89f02df446ee457f478bb578af98998d561089e41d14"
+    },
+    {
+      "output": "card-sunflower.webp",
+      "sourceHash": "0ec8ab21871ff92d903e6f9dcb90f7825d87f902ecce302f39085744956282ee",
+      "hash": "1e4c2f8e618c95a27c6a0bed0e5acead5483375dc69d9b40bf9bb60bf4dd0848"
+    },
+    {
+      "output": "card-moonflower.webp",
+      "sourceHash": "36ae3c650f31c35d81bb4cf99a4bee51fea968128fbbc6f91976aa526bf5fbbd",
+      "hash": "29059fe93c5d593cf964deab482fa17a61b8856bcaba5dfbb1eb70d19364f59a"
+    },
+    {
+      "output": "card-starfish.webp",
+      "sourceHash": "3ae84f4268db48f53981c6ff55e5f047049c89043bbd38c351f799a9b453f9b2",
+      "hash": "3e7cba2535c7e6290b25baea55053e6d96b08327ecb4070da52b35feef9792a6"
+    },
+    {
+      "output": "card-sea-urchin.webp",
+      "sourceHash": "bd8855c6dda753b8233940895ef6a4fd6f45310d3bd775962341b2cdf7a35fb9",
+      "hash": "0691b561761fb90cd4ab72b072c8b2821d4ab3366cc0d32bb1a4f258bca49fe2"
+    },
+    {
+      "output": "card-sceptre.webp",
+      "sourceHash": "bdf9817b53b3b59ed5b8316dc0aee509d8bcff9c9bc5354d33fa525b57ca6677",
+      "hash": "83295de0286e46391e69f6763610ef98a6ec2c8186dd0be91515965119f262dd"
+    },
+    {
+      "output": "card-begging-bowl.webp",
+      "sourceHash": "a4adeb2c3a47ea44119fbac532e2c9377aa3f9ef9ae1076582c4934753f044b3",
+      "hash": "491b1ed881b7414abd14d29c7040c538d2f4f27fcadfd8a536190ce15de7b687"
+    },
+    {
+      "output": "card-scabbard.webp",
+      "sourceHash": "a5dccd120ed18c4c67c13f9dc90eda9d4ed694193bda650ba2c87d152a9a0c0a",
+      "hash": "8c6c8467b1f0f451c0564ac0bb1db168eab164a77c0e0b299692a357dc9ef081"
+    },
+    {
+      "output": "card-drawn-blade.webp",
+      "sourceHash": "a2e8f8f14ec0c513003c0705a0c3906914fe0f03e845f7d05d3c14f903a658e1",
+      "hash": "58924aea2352fceb59717489724843cde370d3619f8a45d5f0a8baca5fe3e90d"
+    },
+    {
+      "output": "card-sundial.webp",
+      "sourceHash": "69d8afb4bdaab31b6e63eaa9a995b1b0d24ea4f1745175d6371b4f91e6a6f024",
+      "hash": "2cb2026df15488e92f54afbba1a35a0950d01a82c8482fa36667424e91adf052"
+    },
+    {
+      "output": "card-water-clock.webp",
+      "sourceHash": "f5db7614686352ecc2a594be77e3800c5fd3d95e2361574035505b12015eb8e5",
+      "hash": "8c974827259af7af3ed0170b39f9cc46a37d86ed915ef634063709548f244fdd"
+    },
+    {
+      "output": "card-floodgate.webp",
+      "sourceHash": "17dc712eeab4d923b7bef38caf052ddd7f20f2f98f77c3ba2155fcf31782d9d4",
+      "hash": "0bd479810dfc6487cc873cd70f63468a9c44641a91a3ef85914eac3866942927"
+    },
+    {
+      "output": "card-broken-dam.webp",
+      "sourceHash": "6b652bdac302cebdb7f2833bb7d996078128194c14602d2d7ca1c25476155268",
+      "hash": "b91b353bdadb738e289272b49456ff474f24002f88344a81e40473af7f0a21cd"
+    },
+    {
+      "output": "card-wax-fruit.webp",
+      "sourceHash": "8581b71c2a0a90ff75fc6e02fd342a6937bec0825aab8536db989e544e826f7e",
+      "hash": "3df8bc5bdd01b821cc7a7e43540248630f89910dbefccd9747f43a4edf3ded3d"
+    },
+    {
+      "output": "card-rotting-fruit.webp",
+      "sourceHash": "2e0b5c63dcf7c8e4366bb8ec508aa592535c9497a598315aec9810a7623553d1",
+      "hash": "aafc7d4c8ab1d06a605aa29fd7a5b6511f196540d726585a0b397776b3fa1a8e"
+    },
+    {
+      "output": "card-measuring-rod.webp",
+      "sourceHash": "0b86af8953616a06cfa39900f3fab77f3e99e6af33a1e46694b2aeb5dc65adfd",
+      "hash": "0272e7aa84088780f368332bf93f09df8915cb5daa514bae8696754a260810f7"
+    },
+    {
+      "output": "card-twisted-ribbon.webp",
+      "sourceHash": "6322f6c94f54cbd49f77adac57cf612ae281df5b1b1a60c7bc149d8d4f178208",
+      "hash": "4721d0b679d4e8d74213616b5e73e35958e681c14eb37af845b87c9acbcfa070"
+    },
+    {
+      "output": "card-marble-quarry.webp",
+      "sourceHash": "f7393059783e416f65df123c6ea705684db85529160e09d7e9425f74ca96d732",
+      "hash": "093ab72378e7b7b5bfccea4ea41620d21907069b839e310110d9777f684686ce"
+    },
+    {
+      "output": "card-peat-bog.webp",
+      "sourceHash": "74db6b5132adf0202649f1c74f2aac1bc431fb71dcd5d2146e2def4e06e2cfcd",
+      "hash": "0443af506d1766ea45b95e61ff7e09d982c5310d6553803edc9f2f82e4e36eff"
+    },
+    {
+      "output": "card-crystal-ballroom.webp",
+      "sourceHash": "7f0e53974efba91a0cd157398748008211fbc1b11863edbffeeb2c400d8b550d",
+      "hash": "388c8d99b6bd936184a68fce295e9df345160ae606b6897f63aa5210cd97349d"
+    },
+    {
+      "output": "card-cinder-ballroom.webp",
+      "sourceHash": "3f7941cb3e77a391c8bfa833f720e806b5ac06a6a8f444b76b88e4da879c288b",
+      "hash": "65cfe5858084acb4a1a4cb69ae0733c62b44796fd452ea8ed43efce4dd21058d"
+    },
+    {
+      "output": "card-paved-road.webp",
+      "sourceHash": "56dedd2bba3ef8c7cdb4f56192e82c78e463f208ac5fa637e4ab7e73284b0ae0",
+      "hash": "9e4e9f55d86f8681069a9cf05a3bee25360aeb828cd09e55d832b734b171f9fd"
+    },
+    {
+      "output": "card-deer-trail.webp",
+      "sourceHash": "d5f9df5eac4a19d33c15aca2e13a6eb951aa4b530ff2e0bb515c537882b0d21c",
+      "hash": "ab30320d0d34fb4ec8d95744f6e1276cedd79f5be3e0cdfba615ab2905c72750"
+    },
+    {
+      "output": "card-coin-minter.webp",
+      "sourceHash": "7646f3641a9b7289324ef964997b44e1bf059eab507b46838f2b0b9a5841a7f4",
+      "hash": "d4b18dbbe841812f24803ebf39f31d5759b656f0a2ecd4ff5c7d0043e1302b04"
+    },
+    {
+      "output": "card-coin-melter.webp",
+      "sourceHash": "afaa4074dea85a264e80909876ae2305d88899d8bf6c7010695fbd9f736eaf57",
+      "hash": "90e55e21398d6e57ae3b05f8b5da2588262534853acfb5f334be5029fe47928d"
+    },
+    {
+      "output": "card-weather-watcher.webp",
+      "sourceHash": "b42a8c1ee2779f045b608947abdfe4036dab891383d03bbe6ff24ee5b448ea0c",
+      "hash": "08c4d73f8950bc4d196d86991e67e7b3659f2b2182f27642c82fd52bbf4181f5"
+    },
+    {
+      "output": "card-storm-chaser.webp",
+      "sourceHash": "c8cc9f548250ad19d9f87e0dfad8aed6508f7d5070e1ab724392b95dbcd2f8a0",
+      "hash": "42a76dd9362019ae0edcbd6c527e6feffd28e9069d736fd3a09baf4f66148886"
+    },
+    {
+      "output": "card-oath-keeper.webp",
+      "sourceHash": "b26625d075cd66b8b8987c4fa7838170877aa1a1ecb657795f0838e216e1532a",
+      "hash": "c1e251ccffa6db182a889b3424a3d11361ef8c4e38b1f5e634d818d49ab860e4"
+    },
+    {
+      "output": "card-oath-breaker.webp",
+      "sourceHash": "0a2bf0e8855d207929e638dcf057ac51911ac3986df40c0e488828d175b48a71",
+      "hash": "c614061210c556509e7bc8fec2ef663c7136c830dee8f403b6d9f3d12f630b6e"
+    },
+    {
+      "output": "card-door-warden.webp",
+      "sourceHash": "2ffcf6971c5bfd27f541da387f1815320a53a0467aec50f0ea29a04a0e4d59a0",
+      "hash": "df0e4511d4335516d28fd9bbde269e2ca847c2d051be74aecfe9f39b72de57d4"
+    },
+    {
+      "output": "card-door-wanderer.webp",
+      "sourceHash": "dcbee1c9ea29dcd45733eb33e6c29ebf4a401fda6a326eead580ff89b43a0186",
+      "hash": "ae28f32cfd07a548c9ec631c6ef1ff4264368ce4b78c2ae68448e8fef9ca7981"
+    },
+    {
+      "output": "card-flying-beetle.webp",
+      "sourceHash": "a9bd49a4100ae82ecfd0a158b22f77ce068b8cadd3d91fc4651e9e63140db833",
+      "hash": "7fe574c9203af2da4cee164d81c21227d0dd0fa3d8b726198c28edb86bfd5952"
+    },
+    {
+      "output": "card-burrowing-beetle.webp",
+      "sourceHash": "6e5c998e3c4682971fce08960e62cb6c3ddf2eba2174bcf3c5e5d43e22617959",
+      "hash": "60288f4b39e20a09b6e38b8c09e3798af8754eabb65d4465cfc026de24240e64"
+    },
+    {
+      "output": "card-glass-snail.webp",
+      "sourceHash": "387d5b9b7d459a5c54de5c46b67943d19517f8216c6851b25cc02ed5d460809a",
+      "hash": "bcf129ef05fe0605a96cf73c8ef8318f494e34dcac451481792c2d9a87cd69a1"
+    },
+    {
+      "output": "card-stone-slug.webp",
+      "sourceHash": "73de17d9446ad62a7e1602879532aff01bc2e81577855da214ec12323e8dda8e",
+      "hash": "456ada7694658ce9be3206778d081cf90d95ca664fa32338572a2cdff1ac6500"
+    },
+    {
+      "output": "card-dawn-crane.webp",
+      "sourceHash": "45fc45ea12f6bc4b08f68498d7d5d7f2ae34377f37a7d42297a6ea1cde7441ca",
+      "hash": "c5c246b9ad189668ac8a1c0852dcf4df6123102ef2d6341fe8f7cfc091c2128c"
+    },
+    {
+      "output": "card-night-heron.webp",
+      "sourceHash": "b42521c21892c34286bb3181c6e2b2fca355cf2fdb5ba1d04342be32418ae6c1",
+      "hash": "ece34dbc423c74944ca326c7faed39ecd26a00122cd926c3521b1bcb218e9d04"
+    },
+    {
+      "output": "card-sunfish.webp",
+      "sourceHash": "ffcd2dda76ff3191e27726d14a34dfd05ff4073fa4a37e1257d3298c0dcb431c",
+      "hash": "0964c2e8a6183ace3181e46d86b3c4648ba2b06e61152e5b071eb4d096d1e6dd"
+    },
+    {
+      "output": "card-deep-sea-dragonfish.webp",
+      "sourceHash": "42ddf23d28932eb814d7a6ae60f4481882b643871fa26a5c20bdb393fce55437",
+      "hash": "34455927d0a1f6b7ddb5a1779e237f9bf158aad6992fa42ef7aad8ba0ea69cbe"
+    },
+    {
+      "output": "card-alabaster-spider.webp",
+      "sourceHash": "09ae1379161fef792bd0ce009b22aaac0e463634642819a5da3df7e8101176fe",
+      "hash": "3b9f57ea3d503dcece2bcb875913b1810dcee2b0a84b7a8945beb0ec6b5da14e"
+    },
+    {
+      "output": "card-obsidian-spider.webp",
+      "sourceHash": "ab37ba0802ceaa9fd8dff4d8b421f0afcbf700214673ac3b1c9e2a95bc682cb2",
+      "hash": "96c404c02c327caf6542bcf3ec18c2e85c46bdc0f9158092f13e57a4b794e2ca"
+    },
+    {
+      "output": "card-pearl-crab.webp",
+      "sourceHash": "b192daaa5160288b051dad2cd7b4bda74c5d45c96889f2b0a4997b4283092c57",
+      "hash": "51d1d0113491e62624d2f7063fe6a23d37be235eb14c719055e85eecd730b043"
+    },
+    {
+      "output": "card-hermit-crab.webp",
+      "sourceHash": "f09c3eb7309ec6709bdd686b98862ce51693a2a7800affe6bf61749a8b1afc93",
+      "hash": "4e492a89db73125c87ff5afa26584727dcffde09c9a3456d4461c7c4120304e8"
+    },
+    {
+      "output": "card-honey-ant.webp",
+      "sourceHash": "1d86690c01d48ea79b3110fcaedbfc990d007a413a9ed2d562647a650d518e8a",
+      "hash": "3ce62d28e1e081c0458ea066690af0b93083a1541a95d77200e7704409e123ca"
+    },
+    {
+      "output": "card-army-ant.webp",
+      "sourceHash": "ff5f327b67521a8e28ae9070be5e4fcc91c6baca9d5ac066f19620bd95d8624f",
+      "hash": "ccf660d050430cd1f0cadfd307795f39de26f3529d7f0e16ae15ede03398da61"
+    },
+    {
+      "output": "card-albino-serpent.webp",
+      "sourceHash": "5a89d0f11ddc2047143ab5a3415fe7bd784c198dfa821a09e8527e997f8f3bbc",
+      "hash": "f8f2ebc62604d14e7b0f669567e5891a1a5a0858806626c76e0b21d5c9ec763f"
+    },
+    {
+      "output": "card-black-adder.webp",
+      "sourceHash": "cb3fb016adb4064d889fcc45a95a9d3538d0dc507e22e32f1d74ad641d3429c6",
+      "hash": "a8320d8a041fdac2589adb3dc051beab2b9ea7eb189fc3d18e981b01a2ffd0cc"
+    },
+    {
+      "output": "card-hard-coral.webp",
+      "sourceHash": "161463542eff2706d3d3550d4eed0e6e48f1688eebde26d3883d98a0b68108c0",
+      "hash": "e0941431e1d76a0e8094f1cad7e5d2bd7c8f2387854d968879b2237fe13af743"
+    },
+    {
+      "output": "card-soft-coral.webp",
+      "sourceHash": "b71fbba243d22f8d8867ed52706a78f79e904c21bbcff87a10a12106864ad454",
+      "hash": "eeb84f458c2b35a49d67badd3a87d2b0f479c506a312b410f8beda90548f57cc"
+    },
+    {
+      "output": "card-hummingbird.webp",
+      "sourceHash": "567f5dede62d3c152296d9b44a938f6efcb1c83d7bd5721ed69447385da4878b",
+      "hash": "d038e438f65bfdfb44e0639589e95667f5db31d7560fcaac51b0fba458fd9569"
+    },
+    {
+      "output": "card-hawk-moth.webp",
+      "sourceHash": "74afa2c342882bd00729c5cf6ed8096470b157af4c0832a22232e7a52964561e",
+      "hash": "985da17d5ec30338aeba0abd492e599a524dfef8883adbad8f6e7280b2281e83"
+    },
+    {
+      "output": "card-whole-egg.webp",
+      "sourceHash": "018a902aad4bcc075cd4d3db5bb5fab41c124963f6b0e46c334506b51b52cc67",
+      "hash": "d6df57d419400ec334181969d41687ed745d773a48f4d673baa8ddbba146a9b8"
+    },
+    {
+      "output": "card-cracked-egg.webp",
+      "sourceHash": "12b4853eae31baf44879360febc1166a3972ea84f586e6e0626222a706426252",
+      "hash": "64200fefb263f98e8cf04404dab1552a37065a430ed6a8cd8f214fbe233f715b"
+    },
+    {
+      "output": "card-amber-frog.webp",
+      "sourceHash": "32b337beed66f506aac4d954cba6987b938aaa51d13237e0fdfd68a1661aa9a7",
+      "hash": "c4e6a602c6734dda874c26fd01fd50fecfff62557353c3f9192ba5c4c951bcaa"
+    },
+    {
+      "output": "card-indigo-toad.webp",
+      "sourceHash": "188253323b86ac524fd6a2c1d4f6a530b2e4b69074c06505b3c5e014ee9b2ccf",
+      "hash": "bfcb1260c6310886e9c0b46a92fb0175f13d23a7a1a163e1a82e863f19f874d8"
+    },
+    {
+      "output": "card-red-panda.webp",
+      "sourceHash": "7f9a8bd71491fa9108f485219660621e81bc55d9cabaf6521061ea71bddd3ea8",
+      "hash": "82da50205991ff7bbb1b89a5baeff27d58cd96bdc019009bfe06c5460ddb368e"
+    },
+    {
+      "output": "card-clouded-leopard.webp",
+      "sourceHash": "057b32f2caa5af84ad7cde21002fd0e0d2fc94199d57d5257e282a6f84eccafc",
+      "hash": "6aa2a11b5a1a12dd0368b9faaf66c69b0f94158dcd99378beaf60080f8f788d9"
+    },
+    {
+      "output": "card-living-jellyfish.webp",
+      "sourceHash": "6dbbf5a55a52c5c7b9ff906228fc054f897d73e01dcfc5dafcc67b31ff421212",
+      "hash": "b1f9c74fd6ee86f2728ddf39db0a8c64d5634527f22cfc0d476ff3798ce2921f"
+    },
+    {
+      "output": "card-jellyfish-fossil.webp",
+      "sourceHash": "4585b156683e7180ea9ca3ce372f67fb7455c1664fd96ae0642b2eec92f26b37",
+      "hash": "d1773e34a970656c3927dee6dee6f1cba43644585fbd4cdd52c593e215caa6ec"
+    },
+    {
+      "output": "card-white-poppy.webp",
+      "sourceHash": "8200917153db5681426e55ecc68f9db500c93638563bd06a96256ba256a2f43d",
+      "hash": "f44ed78c64ca573103ff78c5cc661a59e4d0cec2bbc7f4f7e22c606ceea4e70f"
+    },
+    {
+      "output": "card-black-tulip.webp",
+      "sourceHash": "4763ef77e4e17f5258797766b70482f7c8445faac3b7fb965102435736314aab",
+      "hash": "aa14f604bf0d84b19397200fc8abd012b462107ed93f104f857179821e54f9e1"
+    },
+    {
+      "output": "card-river-pearl.webp",
+      "sourceHash": "2d7ec407131d06db7f31c3317119503a214653742b93552fc3d13bedf3556582",
+      "hash": "d14d47db4f77528876886b15d00d5f46ec86d0652669d9e5c4e104ea221b6f74"
+    },
+    {
+      "output": "card-volcanic-obsidian.webp",
+      "sourceHash": "ce3f69f1eaa4078c626b6bb386234487573b90417dac6911315d32a4f596d0eb",
+      "hash": "ad1e93153e0904c94a4264a0653a6e39b01c9c3409b77532e8ee40dbe1eb6fe3"
+    },
+    {
+      "output": "card-silver-crown.webp",
+      "sourceHash": "551d818c0f605c6a0420713fece8052a1746d623f4c48ba7980b15c74c9442e6",
+      "hash": "272ad98b01cbc32e33c8ebea2ea4fb52fda254167be6753ad8645975b7b38d3c"
+    },
+    {
+      "output": "card-rusty-crown.webp",
+      "sourceHash": "df763d8af017d22dbbd3a1d29953572de42c3d9a84fb4099f07a1e73ea8b2e83",
+      "hash": "0597114e8f1233064d711fea6b1172bfb4ae026fdf7b502957cbcf02bb007412"
+    },
+    {
+      "output": "card-crystal-goblet.webp",
+      "sourceHash": "a3e18bdea32e97e499d4c67739fdeea30f7c34f3bff907b0c71754d79c64dea4",
+      "hash": "f1cda23351f016fd0e235d9b29ebe84d182a51104ede9fc9a49827d7f4070f8f"
+    },
+    {
+      "output": "card-clay-cup.webp",
+      "sourceHash": "c7e1973f1720d44bc1cae9171ad25841452aa5dd601b373bd7ca2ce85e55d248",
+      "hash": "c3a763300133939f4b3a6e12a4f6d86e04cdcc8f431e3f2754dff1011c61eac4"
+    },
+    {
+      "output": "card-white-fan.webp",
+      "sourceHash": "f30cce01e014e9aeb317f5286cbf2fe172a2802d12f24a335fff28442c08e2d0",
+      "hash": "ede9ccd4a5af9593acea18ed5699c10ff1d48b8eaabb369ff9579346c6226c1a"
+    },
+    {
+      "output": "card-black-fan.webp",
+      "sourceHash": "1b0b2070780f1a808de4d7452196fdf700ba2bf5d5dffa62340d8e3ea708493c",
+      "hash": "c14758e66ab96dd0f5ed764db49e72ea5b1499f2914e289b4257112561885c72"
+    },
+    {
+      "output": "card-wooden-spool.webp",
+      "sourceHash": "370458bf85e2ffcb4110bfd36d53d2372073c9fcea293ff8f13b1f9c4b8f2e87",
+      "hash": "c0862c8b2261fe2f031edaadbf8c1d90c286766b53564a5a435efe91ebc3a0a4"
+    },
+    {
+      "output": "card-loose-thread.webp",
+      "sourceHash": "4553270e2ec5c9d2b385fc006869a91c3aa73c4aa90205cb1a2ae929a1dbadac",
+      "hash": "b2b0a242bb4fa2dce9463c1b5e94e25d7d317c848f4ee7b8452e526ebb90cc11"
+    },
+    {
+      "output": "card-glass-marble.webp",
+      "sourceHash": "2cac9ec38a9408720262407b7ebe519d90d455dea58ba8ec854d83dbc43ae526",
+      "hash": "869aa2abe7ac9d966310c597b4c90db7ea9bfab65ff46b45536cdaf73c28caab"
+    },
+    {
+      "output": "card-clay-marble.webp",
+      "sourceHash": "fb354b639199484ed0cc4770f1ae5716b432acdbe97d106e329ac30707b88590",
+      "hash": "2cd29a4d21107786da4011577b87e2dabd9c79b048c89359f9d77bcf2edf0957"
+    },
+    {
+      "output": "card-wax-key.webp",
+      "sourceHash": "691e3adaf4fb75fe3649d5878fdaa7943a50c86b74995b7ffb85b00829685fb8",
+      "hash": "709dcb30b8c587e81b9fa6af4cabceaade21032074d40629118b43979dceda71"
+    },
+    {
+      "output": "card-melted-key.webp",
+      "sourceHash": "6d5a31030abf10c9e921d503c3421db2fda074b403d1df4416360559c66d9d78",
+      "hash": "470b662f019bd7d6270ebe86747360f794d592c2e9058a74116abe7ba8c7a26f"
+    },
+    {
+      "output": "card-copper-coin.webp",
+      "sourceHash": "3b7561bbedffe6b485948c7af64dc71ece46286599cfa33f3abde3d9f95e5085",
+      "hash": "a8e39a42e1dfe3d59cfef1ba9df048d5a21bc09dc18990df04e95658b16b4380"
+    },
+    {
+      "output": "card-hollow-coin.webp",
+      "sourceHash": "b6a39a286100be2be7b6bc0e7a66835318b12f972a6e885bc79f0596b68b31bd",
+      "hash": "486b3163c0efa0fa48074082622b8055bdaf2b09594864b023bc6818b4de5e57"
+    },
+    {
+      "output": "card-lit-match.webp",
+      "sourceHash": "336380ac1f0caccc9bb3a9c94e0e6ff72f3c5f34b1b848cb91270f58906a444a",
+      "hash": "f175a958379c15febff724fdadb208b022a62f679ba17696c8370495fcdd9e5e"
+    },
+    {
+      "output": "card-spent-match.webp",
+      "sourceHash": "edc2dbbc9071fae32304d9bb69d651caa4c1284151a897fe6e1949f75c2cad3c",
+      "hash": "fc66d456de4d6c970703ce4f1a5d210cf3dafb9bdb13b637d5d828f08d675666"
+    },
+    {
+      "output": "card-paper-boat.webp",
+      "sourceHash": "b81526030aea45119ba5d119a84fefd5a1867906ef3ba250db19cfed5e8f7611",
+      "hash": "1493ad258770dca030966f516d3ad9e011d38cad21ca75603d96f01d140c0369"
+    },
+    {
+      "output": "card-stone-boat.webp",
+      "sourceHash": "67f4c25c4a3225e98fa9c1a8b74d74cb55d58a20309bbc1a89d118e37c6df0a1",
+      "hash": "c16fa70755f2c71a01ae99e4ff5cb7c355faccfdea1c789d57186dd53b27c859"
+    },
+    {
+      "output": "card-iron-needlecase.webp",
+      "sourceHash": "69d583b2977ecf72ca3c7939eb00d388469048412df0e778e0a5f89fd7cd6074",
+      "hash": "8dd3464e2836dc5cfa9888a481f0a6a041b1850522ba237e90c6c1911f42cb61"
+    },
+    {
+      "output": "card-empty-needlecase.webp",
+      "sourceHash": "e08a50887ea317a3530d3a0da1ac3c9567e9c9da83a5b1df3f45736444428458",
+      "hash": "e62fa3b11447f6664be8f555e37c802c28cd39e73c4f7d2127dfc919d53704cf"
+    },
+    {
+      "output": "card-ivory-chess-king.webp",
+      "sourceHash": "baff2ffd192bf0fc08db5c2587285824c64eea018b1f0d657548b3049c84099e",
+      "hash": "377dfe72fd8531493ba435b4ac7474147ae6be88a11ba4a7c34c71e5b710616f"
+    },
+    {
+      "output": "card-obsidian-chess-queen.webp",
+      "sourceHash": "f12c8571ed37615c965edc21789b3374edf517a4e5b1fd8cc75ef6306e196c06",
+      "hash": "fe4c7af612a3efac7f7b1e839b46ee09dbaef03e4813dcf52ff4ba2bb76faf9a"
+    },
+    {
+      "output": "card-sunlit-gallery.webp",
+      "sourceHash": "79591d1e09472de75abb577a977582fafc60dceb69b0253573b183891d583b22",
+      "hash": "b668ebe8545c45780db497f2d0727251511d03afc831ffba2339c8fd536551f1"
+    },
+    {
+      "output": "card-shadow-gallery.webp",
+      "sourceHash": "fb121b0932b3fc4c4f546abd44bce72404c65bb6a9d0071b17314b3b94af630b",
+      "hash": "582fbd630161af3bb54047c261dbb200663e6d6309a88b1113d7e299158f40f4"
+    },
+    {
+      "output": "card-winter-conservatory.webp",
+      "sourceHash": "260616970f56510697f2d2af110593079ded64e6ffe3a98fd55138aa7ef1b13a",
+      "hash": "bf7e737caaee5143b81e7f56447e03af23f8a32f314e949a3ee06e013b4c0941"
+    },
+    {
+      "output": "card-summer-conservatory.webp",
+      "sourceHash": "67c6cc5fdcc7c005f2d98a718bc9b395e5af38d555204103fec8515b6305837a",
+      "hash": "f617fdbc8b65890f82c818d4c00c4731c54e7031b002d40dd1a4d65e35d8cb5a"
+    },
+    {
+      "output": "card-high-balcony.webp",
+      "sourceHash": "7ff64711c1fbc15bec86181b55346127818ceec34da2a12eaa53446c790a6dde",
+      "hash": "4941dea65ad1d3d542a3a88e58ff8dae5399c4b999f711913be700f866177afb"
+    },
+    {
+      "output": "card-hidden-basement.webp",
+      "sourceHash": "14b22f46562dd85dcc2ebba17fd8e1b7ef98281909a4f4fc9e3aabb1e1e3fcf1",
+      "hash": "c7de762a1057c9b127d952cdf21c8f7bff51503c71d858d81809cebfdaa3cdde"
+    },
+    {
+      "output": "card-open-pavilion.webp",
+      "sourceHash": "a774028bad66bd769ebffc6d4e89fd68cc55fa8cff7373504822c900f4375ab9",
+      "hash": "cb446d883f4f77ab97f931dda5f9d4457d8b370c2308af763b308e975f3f842f"
+    },
+    {
+      "output": "card-walled-pavilion.webp",
+      "sourceHash": "7333562ce23734bae31078f1d5e22df5b3624622dde91bb77d2dceb6906893a3",
+      "hash": "b341bc5ecd47b267a2f60eef6825d8e5184d0f9923073674878b9be5aecb722c"
+    },
+    {
+      "output": "card-crystal-grotto.webp",
+      "sourceHash": "1bb4ddbffa1e52afd40e48aa4985287b4e8e390decae04bb255c0b1d72f0606f",
+      "hash": "47c1205785d784cbb05a2dc8b8438eb32a231f0baa38f7d27a26e2e48483e33f"
+    },
+    {
+      "output": "card-basalt-cave.webp",
+      "sourceHash": "92bfc94493635167db253aab5f6dae3c19f9e5e8a706fb1556677eb3fab08505",
+      "hash": "d7230bdb06298235a2578ab955ea8cdfe738c89f5e309bf17c55423c200be058"
+    },
+    {
+      "output": "card-marble-fountain.webp",
+      "sourceHash": "204bb771e1ac8af75e6d5538022933860e08e9b86de34edb9d46d9e0eb8a308d",
+      "hash": "78c06ea976b4c6a2ed43c479cadacafcb5c7276e00140c9c82c2060293cf8a8d"
+    },
+    {
+      "output": "card-dry-fountain.webp",
+      "sourceHash": "7d7c319a2934281c9b6657cb868cfd601420f4dc7ec2987952f63296b703ce98",
+      "hash": "a9f1e3687bb81ad01bb65cddc94373d5158168b9ad341f55325e9b212b131ba5"
+    },
+    {
+      "output": "card-golden-atrium.webp",
+      "sourceHash": "ae252e7b72ae094392df8790a39cb643cdba426e06af7308d510ebcda4a31d55",
+      "hash": "f2d5b6ac5aa39386084b0f12abff0742270cd87fa0349f097d8cfd25ce4cbc17"
+    },
+    {
+      "output": "card-black-atrium.webp",
+      "sourceHash": "133c3c3a2f3b3047abe8d89b75fbde18dfdb6a564d88698d08475ea9fbe2a6b6",
+      "hash": "0f5db9d38e0f9425a42ff42e91fdc56becd78b0b9dcd4c1be8a791ba44f3d47c"
+    },
+    {
+      "output": "card-moonlit-pier.webp",
+      "sourceHash": "82754737590223623c500a22b3e7478bf402ae1b12adaf3ec3c0428344d8c6d0",
+      "hash": "473871bd63905880a82756195461416fca039dfedb037fcd67830f67e4dfbf83"
+    },
+    {
+      "output": "card-sunlit-pier.webp",
+      "sourceHash": "ac21dfd738e68496a9e189791994c05e4413b30aa74cc65e40ce57e11da977df",
+      "hash": "145c5a4455c830fc126487d5f99baeabcd8b3a07f7672857a69372c6a91dba69"
+    },
+    {
+      "output": "card-watchtower.webp",
+      "sourceHash": "32e390e7b1d98f2ac6411614f2b7ad976cdb7dbe75fd3abb2773a59c4c04c64f",
+      "hash": "1551539460315635b457fe086cd07e6d93f49a5450235c7e5988839a3398fb7d"
+    },
+    {
+      "output": "card-collapsed-watchtower.webp",
+      "sourceHash": "78a89e949245fd65046447d1ee69a0d9c92372cf44561122ff1576750e5d2c47",
+      "hash": "80ee3cfcc6c95980893f083e48a4ff50c5f9527d64dae3704097a5538766ec5a"
+    },
+    {
+      "output": "card-open-courtyard.webp",
+      "sourceHash": "7540563c946c7f649a8ae0b0d18c2993372d79318b69391397909790f027b61a",
+      "hash": "43d00db6681f21d7aa28b9ac34f2722ee4ca64e6d63dca2648372dd97b7e84b1"
+    },
+    {
+      "output": "card-roofed-courtyard.webp",
+      "sourceHash": "e58f3e1eb964cca46b6a63f18330401ab43c7d8838b567c30c33f2301bfe567c",
+      "hash": "1f2637a539099769c2a60f0e0561297e49cdfa8c58293201663193ccf4e8da2e"
+    },
+    {
+      "output": "card-candlelit-theatre.webp",
+      "sourceHash": "837ccc727768f34a691eb7b010b0dfb62ac1d6659491907e906c99c94a19bb4f",
+      "hash": "289e1e1c90ecf7f7357aeb8312f45a5a23c975ca572c52d1a45805e463d9b0da"
+    },
+    {
+      "output": "card-darkened-theatre.webp",
+      "sourceHash": "dc0a6aead3d24ce2c736770e5e22c955932e3fcec8c2c13eb1d20c1fe474c142",
+      "hash": "adf1083455674a4fc74e05b0a001ffabe24e91e04df2c399242431a7596cbeb1"
+    },
+    {
+      "output": "card-silk-tent.webp",
+      "sourceHash": "825ca7dc9c7fcaf094f0cbb705eaab1962da188abf4711b5e2511dc9186d9c58",
+      "hash": "a2a0769eaf95cc16daad6c59a4b30c15824bd589361bf5d77d76d892e1c4b911"
+    },
+    {
+      "output": "card-wicker-shelter.webp",
+      "sourceHash": "642f0808ee5c56974cb68fb9a3d48b5654f685230cdc607a2b32ed85e49912b4",
+      "hash": "bc86b5ecaa96a8762b26a4ee0eb8e65225ec2c8c6015b7cf894b2ccbed46f62d"
+    },
+    {
+      "output": "card-stone-circle.webp",
+      "sourceHash": "251f598db5f5f530ea70899b4b3d620e01f1afad633f904eaa4e1a02322d9fab",
+      "hash": "03f0b86832ab4750c80b94997a606237598402b349521ae52569ffc392d755ca"
+    },
+    {
+      "output": "card-scattered-stones.webp",
+      "sourceHash": "541133c48db4e250e5e678c8f7e6a5dd689608043403c88120459a50a5b215d2",
+      "hash": "9baec881e25bd8754992b879c9025764c99d7ecaaa1200b77c0478ba754f38d3"
+    },
+    {
+      "output": "card-shallow-shore.webp",
+      "sourceHash": "f209ca9ed2b70b7be38708ddc4f666c37ebbc4fce5af53b58bc8a3699bb7b022",
+      "hash": "c07c3cec6b7d72e400a37734f5b2db96e047afab3e60e442e072d378e2a496c5"
+    },
+    {
+      "output": "card-abyssal-trench.webp",
+      "sourceHash": "65221edb0472b8308cec1e4aa32036fc65c22136ea76fc43b4e960d7ce6fee8a",
+      "hash": "6be7175430729ce03c0a75e9630bc9cb02f88613ec71d98a0ca63ffeb80fe881"
+    },
+    {
+      "output": "card-bright-clearing.webp",
+      "sourceHash": "834b1ddb47e94a9ac53535264894486ad20a2611a6a8afb6d00e7a3ca1ecb580",
+      "hash": "478eed63abaacb8866375974bb6b7f4fc2b1bae6c5437099718dcfc75cf35faf"
+    },
+    {
+      "output": "card-dense-canopy.webp",
+      "sourceHash": "94c026444c2e472495830880f276b2c6d8e2bce493cd1150b08be36b57564eb4",
+      "hash": "08a04a650f20feac8d3878f73e1c2ec3f05d722a2ee2a69396e5d7fa4db6bc70"
+    },
+    {
+      "output": "card-open-window.webp",
+      "sourceHash": "e6c441bf634101c688fdb9814bd6f3a787d55ace5ab9ce9e084e1153e0d7a2d7",
+      "hash": "6f1f57543aaae02a53c13224795d610625077e9d6f3b79c5487b0d6038cb753d"
+    },
+    {
+      "output": "card-shuttered-window.webp",
+      "sourceHash": "23961bf6a09d60ab90f799f12aecafe485aef2145cccf5c9506f4c952328e0dd",
+      "hash": "23e6630a9cbb0fa1232c7296f363742fd67cf38af9cf0d0d3d2596ab7dabb194"
     }
   ]
 }
