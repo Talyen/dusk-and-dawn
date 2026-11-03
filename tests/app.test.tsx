@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { App } from "../src/App";
@@ -22,6 +22,7 @@ it("renders translated content and falls back to English", async () => {
     </I18nextProvider>,
   );
   expect(screen.getByRole("heading", { name: "Dusk & Dawn" })).toBeTruthy();
+  fireEvent.pointerEnter(screen.getByRole("button", { name: "[Plaaay]" }), { pointerType: "mouse" });
   expect(screen.getByText("[Plaaay wiiill beee avaaailaaable wheeen the gaaame is reaaady.]")).toBeTruthy();
   expect(localization.t("missing", { defaultValue: "Fallback" })).toBe("Fallback");
 });

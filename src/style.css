@@ -60,31 +60,12 @@ input:focus-visible,
   text-align: center;
   padding: calc(4 * var(--ui-unit)) calc(1.5 * var(--ui-unit));
 }
-.eyebrow,
-.status {
-  font-size: calc(0.7 * var(--ui-unit));
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #d7aa8e;
-}
 .intro h1 {
   margin: calc(1 * var(--ui-unit)) 0;
   font:
     400 clamp(calc(3.2 * var(--ui-unit)), calc(10vw * var(--ui-scale)), calc(7 * var(--ui-unit)))/1 Georgia,
     serif;
   letter-spacing: -0.045em;
-}
-.description {
-  color: #d8c9c0;
-  font:
-    calc(1.1 * var(--ui-unit)) Georgia,
-    serif;
-}
-.status {
-  margin: calc(1.5 * var(--ui-unit)) 0 0;
-  color: #bba9a6;
 }
 .menu-actions {
   display: grid;
@@ -244,15 +225,6 @@ input:focus-visible,
   padding: calc(3 * var(--ui-unit)) 0;
   text-align: center;
 }
-.options-header h1 {
-  margin: calc(0.5 * var(--ui-unit)) 0 calc(1.5 * var(--ui-unit));
-  font:
-    400 clamp(calc(2.8 * var(--ui-unit)), calc(7vw * var(--ui-scale)), calc(4 * var(--ui-unit)))/1.1 Georgia,
-    serif;
-}
-.options-header h1:focus {
-  outline: none;
-}
 .options-panel {
   padding: calc(1.5 * var(--ui-unit)) clamp(calc(1.25 * var(--ui-unit)), 4vw, calc(2 * var(--ui-unit)));
   margin-bottom: calc(1.5 * var(--ui-unit));
@@ -300,9 +272,6 @@ input:focus-visible,
   color: #ffb3a7;
   font-size: calc(0.875 * var(--ui-unit));
 }
-.options-screen > .ui-button {
-  min-width: calc(14 * var(--ui-unit));
-}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -335,9 +304,6 @@ input:focus-visible,
   width: min(100% - calc(3 * var(--ui-unit)), calc(48 * var(--ui-unit)));
   padding: calc(1 * var(--ui-unit)) 0;
   text-align: center;
-}
-.cards-screen > .ui-button {
-  min-width: calc(14 * var(--ui-unit));
 }
 .card-grid-shell {
   position: relative;
@@ -378,11 +344,6 @@ input:focus-visible,
 }
 .card-grid-shell--enemy .card-grid-item {
   width: calc(10 * var(--ui-unit));
-}
-.card-grid-item p {
-  margin: 0;
-  color: var(--color-muted-foreground);
-  font-size: calc(0.875 * var(--ui-unit));
 }
 .card-grid-item .card-wrap--portrait {
   width: min(100%, calc(7.25 * var(--ui-unit)));
@@ -569,15 +530,8 @@ input:focus-visible,
   }
 }
 
-.cards-screen .options-header h1 {
-  font-size: calc(2.75 * var(--ui-unit));
-  margin: calc(0.25 * var(--ui-unit)) 0 calc(0.75 * var(--ui-unit));
-}
 .cards-screen .ui-tab-bar .ui-button {
   min-height: calc(2.75 * var(--ui-unit));
-}
-.cards-screen > .ui-button {
-  min-height: calc(3 * var(--ui-unit));
 }
 
 .ambient-background {
@@ -620,26 +574,26 @@ input:focus-visible,
 .shine-border {
   position: absolute;
   inset: -1px;
-  border-radius: inherit;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  overflow: visible;
   pointer-events: none;
   z-index: 2;
-  animation: border-shine 14s linear infinite;
 }
-.shine-border > span {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 3px;
-  background-size: 300% 300%;
-  background-position: inherit;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
+.shine-border stop {
+  animation: border-color-shine 14s linear infinite;
+}
+@keyframes border-color-shine {
+  0%,
+  100% {
+    stop-color: var(--shine-a);
+  }
+  33% {
+    stop-color: var(--shine-b);
+  }
+  66% {
+    stop-color: var(--shine-c);
+  }
 }
 .shine-text {
   background-size: 200% 100%;
@@ -649,15 +603,6 @@ input:focus-visible,
   -webkit-text-stroke: 0;
   animation: text-shine 4.8s linear infinite;
 }
-@keyframes border-shine {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
 @keyframes text-shine {
   from {
     background-position: 0% 50%;
@@ -665,4 +610,200 @@ input:focus-visible,
   to {
     background-position: 200% 50%;
   }
+}
+
+/* Shared screen chrome follows Alchemy's centered title and corner controls. */
+.screen-header {
+  width: 100%;
+  margin-bottom: calc(1.5 * var(--ui-unit));
+}
+.screen-header__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+}
+.screen-header__row > div {
+  display: flex;
+  align-items: center;
+}
+.screen-header__trailing {
+  justify-content: flex-end;
+}
+.screen-header h1 {
+  margin: 0;
+  padding: 0 calc(0.75 * var(--ui-unit));
+  color: var(--color-gold-pale);
+  font-size: calc(1.875 * var(--ui-unit));
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.screen-header h1:focus {
+  outline: none;
+}
+.screen-header__rule {
+  width: calc(11 * var(--ui-unit));
+  height: 1px;
+  margin: calc(0.5 * var(--ui-unit)) auto 0;
+  background: linear-gradient(to right, transparent, #f3e4cabf, transparent);
+}
+.chrome-button.ui-button {
+  width: calc(2.75 * var(--ui-unit));
+  height: calc(2.75 * var(--ui-unit));
+  color: var(--color-muted-foreground);
+}
+.chrome-button svg {
+  width: calc(1.25 * var(--ui-unit));
+  height: calc(1.25 * var(--ui-unit));
+}
+.chrome-button[aria-expanded="true"] {
+  color: var(--color-foreground);
+  background: var(--color-muted);
+}
+.menu-actions {
+  width: min(100%, calc(39.15 * var(--ui-unit)));
+  justify-items: center;
+  margin-top: calc(2 * var(--ui-unit));
+}
+.menu-action {
+  width: min(100%, calc(19.2 * var(--ui-unit)));
+  position: relative;
+  transition: scale 200ms ease-out;
+}
+.menu-action:has(.ui-button:hover),
+.menu-action:has(.ui-button:focus-visible) {
+  scale: 1.035;
+  z-index: 1;
+}
+.menu-action:has(.ui-button:active:not([aria-disabled="true"])) {
+  scale: 0.98;
+}
+.menu-action > .ui-button {
+  width: 100%;
+}
+.menu-icon {
+  width: 1em;
+  height: 1em;
+  flex: none;
+}
+.menu-icon--collection {
+  color: var(--color-gold-light);
+}
+.menu-icon--options {
+  color: #a1a1aa;
+}
+.menu-icon--quit {
+  color: #fb7185;
+}
+.menu-bottom {
+  display: flex;
+  justify-content: center;
+  gap: calc(0.75 * var(--ui-unit));
+  width: 100%;
+}
+.menu-bottom--desktop .menu-action {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.intro {
+  width: min(100%, calc(43 * var(--ui-unit)));
+}
+.intro h1 {
+  margin: 0;
+}
+.options-screen {
+  padding: calc(1.75 * var(--ui-unit)) 0;
+}
+.options-screen .ui-tab-bar .ui-button {
+  min-height: calc(2.75 * var(--ui-unit));
+}
+.options-panel {
+  padding: calc(1.25 * var(--ui-unit)) calc(1 * var(--ui-unit)) 0;
+  margin-bottom: 0;
+  box-shadow: none;
+}
+.options-panel h2 {
+  display: flex;
+  align-items: center;
+  gap: calc(1 * var(--ui-unit));
+}
+.options-panel h2::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, #f3e4ca66, transparent);
+}
+.options-panel h2:not(:first-child) {
+  border: 0;
+  margin-top: calc(1.25 * var(--ui-unit));
+  padding-top: 0;
+}
+.setting-row + .setting-row {
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 55%, transparent);
+}
+.card-grid {
+  min-height: calc(20.5 * var(--ui-unit));
+}
+.card-grid-item {
+  gap: 0;
+}
+.pagination {
+  gap: calc(0.5 * var(--ui-unit));
+}
+.pagination .ui-button {
+  width: calc(2.5 * var(--ui-unit));
+  height: calc(2.5 * var(--ui-unit));
+  color: var(--color-muted-foreground);
+  border-color: color-mix(in srgb, var(--color-border) 65%, transparent);
+}
+.pagination .ui-button svg {
+  width: calc(1 * var(--ui-unit));
+  height: calc(1 * var(--ui-unit));
+}
+.pagination span {
+  min-width: calc(2.5 * var(--ui-unit));
+  color: var(--color-muted-foreground);
+  font-size: calc(0.75 * var(--ui-unit));
+}
+.game-menu {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  width: min(calc(24.5 * var(--ui-unit)), calc(100vw - 16px));
+  max-height: min(calc(80vh), calc(100vh - 16px));
+  overflow: auto;
+  padding: calc(0.75 * var(--ui-unit));
+  border: 1px solid var(--color-border);
+  border-radius: calc(1.625 * var(--ui-unit));
+  color: var(--color-foreground);
+  background: var(--color-card);
+  box-shadow: 0 16px 48px #0009;
+}
+.game-menu::backdrop {
+  background: transparent;
+}
+.game-menu--centered {
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+}
+.game-menu__item.ui-button {
+  width: 100%;
+  min-height: calc(2.75 * var(--ui-unit));
+  justify-content: flex-start;
+  gap: calc(0.75 * var(--ui-unit));
+  padding: calc(0.5 * var(--ui-unit)) calc(0.75 * var(--ui-unit));
+  background: transparent;
+}
+.game-menu__item.ui-button:hover {
+  background: var(--color-muted);
+}
+.game-menu__item svg {
+  width: calc(1.25 * var(--ui-unit));
+  height: calc(1.25 * var(--ui-unit));
+  flex: none;
+  color: var(--color-muted-foreground);
 }

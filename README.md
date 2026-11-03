@@ -94,12 +94,16 @@ Collection contains placeholder player and enemy entries in adaptive,
 paginated grids. Hover or keyboard focus reveals card details; clicking a card
 has no inspection or selection action. Arrow keys move among visible controls,
 Tab follows the normal focus order, and Back/Escape return through screen history.
-A focused card is retained when grid capacity changes where possible.
+A focused card is retained when grid capacity changes where possible. Card titles
+and descriptions appear in tooltips, with no captions beneath the artwork.
+Collection and Options use a shared header with Back and a game menu. The menu
+links between those screens and Main Menu; Back follows browsing history and
+Collection retains its tab and page during the visit.
 
 Tooltip Size is stored locally (90–125%, in 5% steps) independently of Game
 Size. Fullscreen is a per-session display control: the browser uses its native
 fullscreen API, and Electron uses the native window (simple fullscreen on macOS).
-A failed mode change is reported in Options. Screen fades follow the existing
+Options groups settings under Display and Sound tabs. A failed mode change is reported in Options. Screen fades follow the existing
 reduced-motion preference. UI sound cue hooks are ready for approved assets; no
 sounds are registered or included yet. The browsing and navigation patterns are
 adapted from Alchemy's shared UI (CC BY-NC 4.0).

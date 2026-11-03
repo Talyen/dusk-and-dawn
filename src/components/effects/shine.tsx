@@ -1,12 +1,40 @@
-import type { CSSProperties, ReactNode } from "react";
+import { useId, type CSSProperties, type ReactNode } from "react";
 import { keywordColors, resolveKeywords, splitKeywordText } from "../../lib/keywords/keywords";
 
 export function ShineBorder({ keywordIds }: { keywordIds: readonly string[] }) {
   const colors = keywordColors(keywordIds);
+  const gradientId = useId();
   return (
-    <span aria-hidden="true" className="shine-border">
-      <span style={{ backgroundImage: `radial-gradient(${colors.join(", ")})` }} />
-    </span>
+    <svg aria-hidden="true" className="shine-border">
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+          {colors.map((color, index) => (
+            <stop
+              key={index}
+              offset={`${(index / (colors.length - 1)) * 100}%`}
+              stopColor={color}
+              style={
+                {
+                  "--shine-a": color,
+                  "--shine-b": colors[(index + 1) % colors.length],
+                  "--shine-c": colors[(index + 2) % colors.length],
+                } as CSSProperties
+              }
+            />
+          ))}
+        </linearGradient>
+      </defs>
+      <rect
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+        rx="calc(1.875 * var(--ui-unit))"
+        fill="none"
+        stroke={`url(#${gradientId})`}
+        strokeWidth="3"
+      />
+    </svg>
   );
 }
 

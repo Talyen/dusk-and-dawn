@@ -44,5 +44,10 @@
   "background": "[Baaackgrooound]",
   "backgroundGlow": "[Baaackgrooound glooow]",
   "backgroundParticles": "[Baaackgrooound paaarticles]",
-  "sampleCollection": "[Saaample cooolleeectiiion]"
+  "sampleCollection": "[Saaample cooolleeectiiion]",
+  "openGameMenu": "[Ooopeeen gaaame meeenooo]",
+  "gameMenu": "[Gaaame meeenooo]",
+  "mainMenu": "[Maaain meeenooo]",
+  "soundTab": "[Sooound]",
+  "quit": "[Quiiit]"
 }

@@ -2,6 +2,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { _electron as electron, expect, test } from "@playwright/test";
+import sharp from "sharp";
 
 test("opens the built renderer and recovers a retained save", async () => {
   const directory = await mkdtemp(join(tmpdir(), "dusk-electron-"));
@@ -150,14 +151,63 @@ test("desktop Collection shows keyword inspection without opening a dialog", asy
     });
     try {
       const page = await app.firstWindow();
+      await page.emulateMedia({ reducedMotion: "reduce" });
       await page.getByRole("button", { name: "Collection" }).click();
       await page.getByRole("img", { name: "Player card 1" }).hover();
       await expect(page.getByRole("tooltip")).toContainText("Sample Keyword A");
       await expect(page.locator(".ambient-background")).toHaveAttribute("data-primary", "#8dd9cb");
+      const first = (await page.getByRole("img", { name: "Player card 1" }).boundingBox())!;
+      const second = (await page.getByRole("img", { name: "Player card 2" }).boundingBox())!;
+      const viewportWidth = await page.evaluate(() => innerWidth);
+      const { data, info } = await sharp(await page.screenshot())
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+      const scale = info.width / viewportWidth;
+      const center = (rect: { x: number; y: number; width: number; height: number }) => {
+        const x = Math.floor((rect.x + rect.width / 2) * scale);
+        const y = Math.floor((rect.y + rect.height / 2) * scale);
+        const offset = (y * info.width + x) * info.channels;
+        return [data[offset]!, data[offset + 1]!, data[offset + 2]!];
+      };
+      const hovered = center(first),
+        resting = center(second);
+      for (let channel = 0; channel < 3; channel++)
+        expect(Math.abs(hovered[channel]! - resting[channel]!)).toBeLessThan(8);
       await page.getByRole("img", { name: "Player card 1" }).click();
       await expect(page.getByRole("dialog")).toHaveCount(0);
+      await page.getByRole("button", { name: "Open game menu" }).click();
+      await page.getByRole("dialog", { name: "Game menu" }).getByRole("button", { name: "Options" }).click();
+      await expect(page.getByRole("heading", { name: "Options" })).toBeVisible();
+      await page.getByRole("button", { name: "Back" }).click();
+      await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
     } finally {
       await app.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("desktop quit closes only its application", async () => {
+  test.skip(
+    Boolean(process.env.DUSK_ELECTRON_EXECUTABLE),
+    "Packaged application coverage uses its own build",
+  );
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-quit-"));
+  try {
+    const app = await electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+    const desktopProcess = app.process();
+    const exited = new Promise<void>((resolve) => desktopProcess.once("exit", () => resolve()));
+    try {
+      const page = await app.firstWindow();
+      await expect(page.getByRole("button", { name: "Quit" })).toBeVisible();
+      await page.getByRole("button", { name: "Quit" }).click({ noWaitAfter: true });
+      await exited;
+    } finally {
+      if (desktopProcess.exitCode === null && desktopProcess.signalCode === null) await app.close();
     }
   } finally {
     await rm(directory, { recursive: true, force: true });

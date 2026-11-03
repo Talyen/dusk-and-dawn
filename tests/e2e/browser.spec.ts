@@ -5,11 +5,14 @@ test("browses both card shapes by hover or keyboard without click inspection", a
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/");
   await expect(page.getByRole("button", { name: "Play" })).toHaveAttribute("aria-disabled", "true");
+  await page.getByRole("button", { name: "Play" }).hover();
   await expect(page.getByRole("button", { name: "Play" })).toHaveAccessibleDescription(
     "Play will be available when the game is ready.",
   );
   await page.getByRole("button", { name: "Collection" }).click();
   const card = page.getByRole("img", { name: "Player card 1" });
+  await expect(page.locator(".card-grid-item p")).toHaveCount(0);
+  await expect(page.locator(".screen-header .eyebrow")).toHaveCount(0);
   const portrait = (await card.boundingBox())!;
   expect(portrait.width / portrait.height).toBeCloseTo(3 / 4, 2);
   await card.hover();
@@ -49,7 +52,9 @@ test("display and audio preferences persist and scale independently", async ({ p
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/");
   await page.getByRole("button", { name: "Options" }).click();
+  await page.getByRole("button", { name: "Sound" }).click();
   await page.getByRole("slider", { name: "Music" }).fill("35");
+  await page.getByRole("button", { name: "Display" }).click();
   await page.getByRole("slider", { name: "Game size" }).fill("120");
   await page.getByRole("slider", { name: "Tooltip size" }).fill("125");
   await page.getByRole("switch", { name: "Reduce motion" }).check();
@@ -72,7 +77,9 @@ test("display and audio preferences persist and scale independently", async ({ p
   await expect.poll(async () => (await card.boundingBox())!.width / width).toBeCloseTo(1.36, 1);
   await page.reload();
   await page.getByRole("button", { name: "Options" }).click();
+  await page.getByRole("button", { name: "Sound" }).click();
   await expect(page.getByRole("slider", { name: "Music" })).toHaveValue("35");
+  await page.getByRole("button", { name: "Display" }).click();
   await expect(page.getByRole("slider", { name: "Game size" })).toHaveValue("120");
   await expect(page.getByRole("slider", { name: "Tooltip size" })).toHaveValue("125");
   await expect(page.getByRole("switch", { name: "Reduce motion" })).toBeChecked();
@@ -190,7 +197,8 @@ test("collection masks discoveries and drives shine, plasma and particles from k
   const first = page.getByRole("img", { name: "Player card 1" });
   await first.hover();
   await expect(glow).toHaveAttribute("data-primary", "#8dd9cb");
-  await expect(first.locator(".shine-border > span")).toHaveCSS("background-image", /141, 217, 203/);
+  await expect(first.locator(".shine-border stop").first()).toHaveAttribute("stop-color", "#8dd9cb");
+  await expect(first.locator(".shine-border stop").first()).toHaveCSS("animation-name", "border-color-shine");
   await expect(page.getByRole("tooltip").locator(".shine-text")).toHaveCount(2);
   await expect
     .poll(() =>
@@ -217,7 +225,7 @@ test("collection masks discoveries and drives shine, plasma and particles from k
   const locked = page.getByRole("img", { name: "Undiscovered card 6" });
   await locked.hover();
   await expect(locked).toHaveAttribute("data-discovered", "false");
-  await expect(locked.locator(".shine-border > span")).toHaveCSS("background-image", /141, 217, 203/);
+  await expect(locked.locator(".shine-border stop").first()).toHaveAttribute("stop-color", "#8dd9cb");
   await expect(page.getByRole("tooltip")).toContainText("Discover this entry to reveal its details.");
   await expect(page.getByRole("tooltip")).not.toContainText("Sample Keyword");
   await expect(glow).toHaveAttribute("data-keyword-glow", "rest");
@@ -279,4 +287,58 @@ test("unavailable WebGL uses a keyword-colored static fallback", async ({ page }
   await expect(fallback).toBeVisible();
   await expect(fallback).toHaveAttribute("style", /rgb\(184, 160, 235\)/);
   await expect(page.getByTestId("plasma-canvas")).toBeHidden();
+});
+
+test("screen chrome menu preserves collection history and contains keyboard focus", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await expect(page.locator(".intro .eyebrow")).toHaveCount(0);
+  await page.getByRole("button", { name: "Collection" }).click();
+  await expect(page.locator(".screen-header")).toContainText("Collection");
+  await page.getByRole("button", { name: "Next page" }).click();
+  await expect(page.getByText("2 / 2")).toBeVisible();
+  const menuButton = page.getByRole("button", { name: "Open game menu" });
+  await menuButton.click();
+  const menu = page.getByRole("dialog", { name: "Game menu" });
+  await expect(menu).toBeVisible();
+  await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("ArrowDown");
+  await expect(menu.getByRole("button", { name: "Options" })).toBeFocused();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await expect.poll(() => page.evaluate(() => document.activeElement?.closest("dialog") !== null)).toBe(true);
+  const accessibility = await new AxeBuilder({ page }).analyze();
+  expect(accessibility.violations).toEqual([]);
+  await page.keyboard.press("Escape");
+  await expect(menu).toBeHidden();
+  await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
+  await expect(menuButton).toBeFocused();
+  await menuButton.click();
+  await menu.getByRole("button", { name: "Options" }).click();
+  await expect(page.getByRole("heading", { name: "Options" })).toBeVisible();
+  await page.getByRole("button", { name: "Back" }).click();
+  await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
+  await expect(page.getByText("2 / 2")).toBeVisible();
+  await page.getByRole("button", { name: "Open game menu" }).click();
+  await menu.getByRole("button", { name: "Main Menu" }).click();
+  await expect(page.getByRole("heading", { name: "Dusk & Dawn" })).toBeVisible();
+  await page.getByRole("button", { name: "Options" }).click();
+  await page.getByRole("button", { name: "Back" }).click();
+  await expect(page.getByRole("heading", { name: "Dusk & Dawn" })).toBeVisible();
+});
+
+test("game menu dismisses on backdrop and centers after a resize", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Collection" }).click();
+  await page.getByRole("button", { name: "Open game menu" }).click();
+  const menu = page.getByRole("dialog", { name: "Game menu" });
+  await expect(menu).toBeVisible();
+  await page.mouse.click(10, 10);
+  await expect(menu).toBeHidden();
+  await expect(page.getByRole("heading", { name: "Collection" })).toBeVisible();
+  await page.getByRole("button", { name: "Open game menu" }).click();
+  await page.setViewportSize({ width: 1000, height: 700 });
+  await expect(menu).toHaveClass(/game-menu--centered/);
+  await page.keyboard.press("Escape");
+  await expect(menu).toBeHidden();
 });

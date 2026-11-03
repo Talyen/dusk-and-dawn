@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
+import { useState } from "react";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { CardBrowser } from "../../src/components/browsing/card-browser";
+import { CardBrowser, initialCollectionView } from "../../src/components/browsing/card-browser";
 import { localization } from "../../src/lib/localization";
 import type { CollectionEntry } from "../../src/lib/collection/catalog";
 
@@ -30,11 +31,21 @@ it("masks an entry until its supplied discovery ID is present", () => {
     art: "/example.webp",
     keywordIds: [],
   };
-  const draw = (ids: ReadonlySet<string>) => (
-    <I18nextProvider i18n={localization}>
-      <CardBrowser catalog={[entry]} discoveredIds={ids} onInspectChange={() => {}} />
-    </I18nextProvider>
-  );
+  function Harness({ ids }: { ids: ReadonlySet<string> }) {
+    const [state, setState] = useState(initialCollectionView);
+    return (
+      <I18nextProvider i18n={localization}>
+        <CardBrowser
+          catalog={[entry]}
+          discoveredIds={ids}
+          view={state}
+          setView={setState}
+          onInspectChange={() => {}}
+        />
+      </I18nextProvider>
+    );
+  }
+  const draw = (ids: ReadonlySet<string>) => <Harness ids={ids} />;
   const view = render(draw(new Set()));
   expect(screen.getByRole("img", { name: "Undiscovered card 1" })).toBeTruthy();
   expect(view.container.querySelector("img")).toBeNull();

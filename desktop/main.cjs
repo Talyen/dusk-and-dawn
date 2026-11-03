@@ -14,7 +14,7 @@ function createWindow() {
     height: 800,
     minWidth: 640,
     minHeight: 480,
-    backgroundColor: "#11121d",
+    backgroundColor: "#08080c",
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
@@ -54,6 +54,10 @@ app.whenReady().then(() => {
   ipcMain.handle("save:write", (event, data) => {
     authorize(event);
     return storage.write(data);
+  });
+  ipcMain.handle("app:quit", (event) => {
+    authorize(event);
+    app.quit();
   });
   ipcMain.handle("display:get-fullscreen", (event) => {
     const window = authorize(event);

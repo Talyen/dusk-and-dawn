@@ -44,5 +44,10 @@
   "background": "Background",
   "backgroundGlow": "Background glow",
   "backgroundParticles": "Background particles",
-  "sampleCollection": "Sample collection"
+  "sampleCollection": "Sample collection",
+  "openGameMenu": "Open game menu",
+  "gameMenu": "Game menu",
+  "mainMenu": "Main Menu",
+  "soundTab": "Sound",
+  "quit": "Quit"
 }

@@ -1,33 +1,42 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../cards/card";
+import { Icon } from "../navigation/icons";
 import { Button, TabBar } from "../ui/controls";
 import { anchorPage, getPagination } from "./pagination";
 import { collectionItems, type CollectionEntry, type CollectionKind } from "../../lib/collection/catalog";
 import { resolveKeywords } from "../../lib/keywords/keywords";
 
 type Kind = CollectionKind;
+export interface CollectionViewState {
+  kind: Kind;
+  pages: Record<Kind, { page: number; pageSize: number }>;
+}
+export const initialCollectionView: CollectionViewState = {
+  kind: "cards",
+  pages: { cards: { page: 0, pageSize: 8 }, enemies: { page: 0, pageSize: 6 } },
+};
 
 export function CardBrowser({
   discoveredIds,
   catalog,
+  view,
+  setView,
   onInspectChange,
 }: {
   discoveredIds: ReadonlySet<string>;
   catalog: readonly CollectionEntry[];
+  view: CollectionViewState;
+  setView: Dispatch<SetStateAction<CollectionViewState>>;
   onInspectChange: (id: string, keywords: readonly string[] | null) => void;
 }) {
   const { t } = useTranslation();
-  const [kind, setKind] = useState<Kind>("cards");
+  const { kind, pages } = view;
   const [columnCounts, setColumnCounts] = useState<Record<Kind, number>>({ cards: 4, enemies: 3 });
   const columns = columnCounts[kind];
-  const [pages, setPages] = useState<Record<Kind, { page: number; pageSize: number }>>({
-    cards: { page: 0, pageSize: 8 },
-    enemies: { page: 0, pageSize: 6 },
-  });
   const paging = pages[kind];
   const setPaging = (next: { page: number; pageSize: number }) =>
-    setPages((current) => ({ ...current, [kind]: next }));
+    setView((current) => ({ ...current, pages: { ...current.pages, [kind]: next } }));
   const items = collectionItems(kind, discoveredIds, catalog);
   const itemCount = items.length;
   const gridRef = useRef<HTMLDivElement>(null);
@@ -45,7 +54,10 @@ export function CardBrowser({
         : anchorPage(paging.page, paging.pageSize, pageSize, itemCount),
     pageSize,
   ).page;
-  if (paging.page !== page || paging.pageSize !== pageSize) setPaging({ page, pageSize });
+  useLayoutEffect(() => {
+    if (paging.page !== page || paging.pageSize !== pageSize)
+      setView((current) => ({ ...current, pages: { ...current.pages, [kind]: { page, pageSize } } }));
+  }, [paging.page, paging.pageSize, page, pageSize, kind, setView]);
   const totalPages = getPagination(itemCount, page, pageSize).totalPages;
 
   useLayoutEffect(() => {
@@ -123,7 +135,7 @@ export function CardBrowser({
         ]}
         activeTab={kind}
         onSelectTab={(next) => {
-          setKind(next);
+          setView((current) => ({ ...current, kind: next }));
         }}
       />
       <div
@@ -169,7 +181,6 @@ export function CardBrowser({
                           discovered={item.discovered}
                           onInspectChange={onInspectChange}
                         />
-                        <p>{item.discovered ? label : t("undiscovered")}</p>
                       </div>
                     );
                   })}
@@ -187,7 +198,7 @@ export function CardBrowser({
           disabled={page === 0}
           onClick={() => changePage(page - 1)}
         >
-          ‹
+          <Icon name="previous" />
         </Button>
         <span aria-live="polite">{t("pageOf", { page: page + 1, total: totalPages })}</span>
         <Button
@@ -198,7 +209,7 @@ export function CardBrowser({
           disabled={page === totalPages - 1}
           onClick={() => changePage(page + 1)}
         >
-          ›
+          <Icon name="next" />
         </Button>
       </nav>
     </>

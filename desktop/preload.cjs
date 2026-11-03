@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require("electron");
 contextBridge.exposeInMainWorld("duskDesktop", {
+  quit: () => ipcRenderer.invoke("app:quit"),
   getFullscreen: () => ipcRenderer.invoke("display:get-fullscreen"),
   setFullscreen: (enabled) => ipcRenderer.invoke("display:set-fullscreen", enabled),
   onFullscreenChange: (listener) => {

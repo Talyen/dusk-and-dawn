@@ -32,8 +32,9 @@ export function useNavigation(heading: RefObject<HTMLHeadingElement | null>) {
             !["range", "checkbox"].includes(active.type)))
       )
         return;
+      const root: ParentNode = document.querySelector("dialog[open]") ?? document;
       const controls = [
-        ...document.querySelectorAll<HTMLElement>(
+        ...root.querySelectorAll<HTMLElement>(
           'button:not(:disabled), input:not(:disabled), select:not(:disabled), [role="img"][tabindex="0"]',
         ),
       ].filter(
@@ -100,8 +101,8 @@ export function useNavigation(heading: RefObject<HTMLHeadingElement | null>) {
     restore.current = null;
   }, [screen, heading]);
 
-  function open(next: Screen) {
-    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  function open(next: Screen, origin?: HTMLElement | null) {
+    const opener = origin ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
     setHistory((current) => [...current, { screen: next, opener }]);
   }
   function back() {
@@ -110,5 +111,10 @@ export function useNavigation(heading: RefObject<HTMLHeadingElement | null>) {
     restore.current = opener ? { element: opener, id: opener.id } : null;
     setHistory((current) => current.slice(0, -1));
   }
-  return { screen, open, back };
+  function home() {
+    const active = document.activeElement instanceof HTMLElement ? document.activeElement : document.body;
+    restore.current = { element: active, id: "menu-collection" };
+    setHistory([{ screen: "menu", opener: null }]);
+  }
+  return { screen, open, back, home };
 }
