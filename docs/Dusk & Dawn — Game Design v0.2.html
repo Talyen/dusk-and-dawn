@@ -1067,7 +1067,29 @@
           display: block;
         }
       }
-    </style>
+    
+/* Keyword text uses a neutral dark background; labels remain visible. */
+.kw-ward{color:#8BCBFF;}
+.kw-burn{color:#FF966B;}
+.kw-flip{color:#D8ABFF;}
+.kw-banish{color:#F3A5B6;}
+.kw-scry{color:#86D8D0;}
+.kw-mark{color:#FFB3A6;}
+.kw-weaken{color:#D5C58A;}
+.kw-hush{color:#B5BCD1;}
+.kw-keep{color:#B6E1A8;}
+.kw-radiance{color:#F7D670;}
+.kw-shadow{color:#C7AEF1;}
+.kw-growth{color:#9DDA97;}
+.kw-decay{color:#C7CD78;}
+.kw-binding{color:#80D1BE;}
+.kw-release{color:#7DDDEC;}
+.kw-flame{color:#FFAD66;}
+.kw-frost{color:#A8E5FA;}
+.kw-memory{color:#B8C7FF;}
+.kw-oblivion{color:#C5C5CD;}
+@media print { .kw-ward, .kw-burn, .kw-flip, .kw-banish, .kw-scry, .kw-mark, .kw-weaken, .kw-hush, .kw-keep, .kw-radiance, .kw-shadow, .kw-growth, .kw-decay, .kw-binding, .kw-release, .kw-flame, .kw-frost, .kw-memory, .kw-oblivion { color:#111 !important; text-decoration:underline; } }
+</style>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -1148,7 +1170,7 @@
               inspection reveals its exact value.
             </li>
             <li>
-              <strong>Draw five cards and refill to three mana.</strong> Click a card to play its visible
+              <strong>Draw up to five new cards and refill to three mana.</strong> Click a card to play its visible
               face. Spend mana and resolve its effect.
             </li>
             <li>
@@ -1156,7 +1178,7 @@
               other faces become your options immediately.
             </li>
             <li>
-              <strong>End the turn.</strong> Discard the remaining hand. Burn resolves, then the enemy acts if
+              <strong>End the turn.</strong> Discard unkept cards. Burn resolves, then the enemy acts if
               still alive. Repeat until either side reaches zero health.
             </li>
           </ol>
@@ -1168,36 +1190,13 @@
         <section id="rules">
           <h2>03 · The rules</h2>
           <h3>Cards, draw and mana</h3>
-          <p>
-            Start each fight with the run deck shuffled, light faces up, and no temporary effects. Draw five
-            at the start of each turn; discard unplayed cards at the end. The first test has no free manual
-            discard action; card effects can still instruct a discard. If the draw pile is empty, shuffle the
-            discard pile when a draw is needed. If both are empty, draw as many as possible. Looking at the
-            top card uses the same reshuffle rule. If the required number of targets is unavailable, the card
-            cannot be played; optional effects simply do nothing. A hand holds up to eight cards; excess draws
-            stay in the draw pile.
-          </p>
-          <p>
-            Mana refills to 3 each turn; unspent mana does not carry over. Every card costs 1 mana to play,
-            regardless of face; this fixed cost need not appear on the card or in its description. A card
-            requires at least 1 mana and any required cost target before it can be played. Explain an
-            unavailable cost on inspection, such as “Needs a card in discard”; do not silently ignore a
-            mandatory cost. For hand capacity, evaluate the hand after the played source leaves it: playing
-            from a full eight-card hand opens one slot. A required return from discard also needs a free slot;
-            an optional return does nothing if the hand is full. Put required returns before any draws on the
-            card. Print required costs first: “Banish another card. Deal 8 Decay damage.” The resolving card
-            cannot pay its own “another card” cost. An HP cost cannot be paid if it would reduce you to zero
-            health. A canceled target selection spends nothing. For the first prototype, mana gained cannot
-            exceed 3. A card can gain at most 1 mana and must explicitly Banish itself when it does; there is
-            no copying or Banish recovery in the first build. This keeps mana-neutral cantrips finite: every
-            play either spends mana or removes one of those one-use cards. Copying or recovering banished
-            cards would break that guarantee. Test whether too many cantrips still make turns drag. For the
-            initial catalogue, pure healing cards explicitly Banish themselves; some damage-and-heal cards may
-            repeat. Healing restores the printed amount up to maximum HP regardless of the attack’s outcome.
-            This is a balance experiment, not a hidden rule. Compare a weak repeatable heal and a heal that
-            banishes a different discarded card: both may be more interesting than making every pure heal
-            single-use, but they can also enable slow healing farms.
-          </p>
+          <p>Start each fight with the run deck shuffled, light faces up, and no temporary effects. Draw up to five new cards at the start of each turn, stopping at the eight-card hand limit; discard unkept cards at the end. There is no free manual discard action in the first test.</p>
+          <p>The hand holds up to eight cards. Excess draws stay in the draw pile. If the draw pile is empty when drawing or looking at its top card, shuffle the discard pile first. If both piles are empty, draw as many as possible or do nothing.</p>
+          <p>Mana refills to 3 each turn; unspent mana does not carry over. Every card costs 1 mana, so its cost need not appear on the card or in its description. Mana cannot exceed 3.</p>
+          <p>Before playing, check for 1 mana and all required targets or costs. A required return from discard also needs a free hand slot. The played card leaves your hand while resolving, so playing from a full hand opens one slot. Optional actions do nothing when unavailable. A canceled target selection spends nothing; explain unavailable costs when the card is inspected.</p>
+          <p>Resolve sentences in order. Put required costs and returns before draws in the card text. The resolving card cannot be chosen as “another card.” An HP cost cannot be paid if it would reduce you to zero health.</p>
+          <p>For the first prototype, a card can gain at most 1 mana and must Banish itself when it does. Cards cannot be copied, and banished cards cannot be recovered during a fight. These limits keep mana-gain combinations finite; test whether they still make turns too long.</p>
+          <p>As a balance experiment, pure healing faces Banish themselves, while some attacks also heal and can repeat. Healing restores the printed amount up to maximum HP. Test whether repeatable healing makes fights stall before changing this approach.</p>
           <h3>One card, two faces</h3>
           <p>
             Spend 1 mana to play the visible face. It leaves the hand while resolving, then enters the discard
@@ -1212,7 +1211,7 @@
           </p>
           <h3>Damage and the end of a fight</h3>
           <p>
-            Every attack specifies at least one damage type. Ward absorbs incoming damage before health. “Lose
+            Every damage instance has exactly one type; each direct attack specifies its type. Ward absorbs incoming damage before health. “Lose
             HP” is a direct payment rather than damage, so Ward and weakness do not affect it. An enemy at
             zero health cannot act; finish the current card’s effects, then win. Player health at zero ends
             the run immediately. Healing restores the printed amount, up to maximum health, regardless of the
@@ -1220,7 +1219,7 @@
           </p>
           <p>
             <strong>Enemy intent:</strong> show the next attack or other action before the turn begins. The
-            enemy performs it after the hand is discarded, unless it has already been defeated. The next
+            enemy performs it after unkept cards are discarded, unless it has already been defeated. The next
             intent is then revealed. Begin with short, predictable sequences rather than a hidden AI deck.
           </p>
         </section>
@@ -1231,8 +1230,7 @@
             <dt>Ward</dt>
             <dd>
               Absorbs incoming damage before health. Remaining player Ward disappears at the start of your
-              next turn. Enemy Ward disappears at the start of the enemy’s next action, even if that intent is
-              not an attack. It still protects during the preceding player turn and Burn tick.
+              next turn. Enemy Ward lasts through the player turn and Burn tick, then expires at the start of the enemy action step, even if the intent is canceled.
             </dd>
             <dt>Burn</dt>
             <dd>
@@ -1251,12 +1249,12 @@
               takes the attack’s damage type and is then spent. Multiple Marks add together. Mark does not
               affect Burn.
             </dd>
+            <dt>Weaken</dt>
+            <dd>Reduce the enemy’s next attack by the stated amount, to a minimum of zero, before Ward. Weaken amounts add. Weaken persists through non-attack intents and is spent by the next attack; for a multi-hit action it reduces only the first hit.</dd>
             <dt>Hush</dt>
-            <dd>
-              Reduce the enemy’s next attack by the stated amount, to a minimum of zero, before Ward. Multiple
-              Hush amounts add together. Hush persists through non-attack intents and is spent by the next
-              attack; for a multi-hit action it reduces only the first hit.
-            </dd>
+            <dd>Silence the currently displayed non-attack intent, including a telegraphed trait or ability. Play Hush only against such an intent and only if it is not already Hushed. The enemy skips that action and advances its pattern; Hush then ends. It does not affect attacks, attack riders, passive traits or future intents. Every Hush card Banishes itself.</dd>
+            <dt>Keep</dt>
+            <dd>Choose another card in hand to keep through this turn’s end. At turn end discard all unkept cards; kept cards remain on their current faces and lose their Keep markers. Next turn draw up to five new cards, stopping at the eight-card hand cap. Multiple cards may be kept; keeping one twice does not stack. If a kept card leaves hand, its marker ends immediately. All markers clear at fight end.</dd>
             <dt>Flip</dt>
             <dd>
               Turn all cards currently in your hand to their other face, unless the effect specifies a chosen
@@ -1268,29 +1266,12 @@
               encounter. When choosing a card to Banish, show that it returns after the fight.
             </dd>
           </dl>
-          <p>
-            Scry, Mark and Hush are used by the wider catalogue; the initial starter and curated reward pool
-            can be tested without them. Show Mark and Hush near the enemy; they last until spent or the fight
-            ends. A card’s sentences resolve in order: “Mark 2. Deal 4 Radiance damage.” spends that Mark on
-            the same attack. “Flip a card in your hand” requires a chosen card and flips only that card.
-            “Cancel the enemy’s next non-attack intent” can be played only against a non-attack intent; the
-            enemy skips that action and advances its pattern normally. These interruption cards Banish
-            themselves to limit repeat use. “Put another card on your draw pile” means put another card from
-            your hand on top; it is a required choice. Draw, discard, heal, remove Ward and return a card from
-            discard are written plainly. A card returned from discard keeps its current face. Some effects may
-            move a card to the top or bottom of the draw pile, or pay HP for power. A top-card inspection can
-            offer a simple choice to keep it, put it on the bottom, or discard it as the effect says. A
-            discarded card keeps its face. If there is no card, inspection and its optional choice do nothing.
-            Avoid adding a keyword for an effect that appears once. In particular, the former “Bind”
-            intent-skip needs special anti-stall exceptions; test defense and enemy pressure without it first.
-          </p>
+          <p>The starter introduces Keep on Lock; the reward pool introduces Weaken on Chain. Scry appears on reward-pool Lantern; Mark and Hush appear in the wider catalogue. Show Mark, Weaken and Hush beside the enemy and Keep beside the chosen card, outside the artwork. Mark and Weaken last until spent or the fight ends. A card’s sentences resolve in order: “Mark 2. Deal 4 Radiance damage.” spends that Mark on the same attack. “Flip a card in your hand” requires a chosen card. “Put another card on your draw pile” means put another card from your hand on top; it is a required choice. Draw, discard, heal, remove Ward and return a card from discard are written plainly. A returned or discarded card keeps its current face. Inspection does nothing if neither draw nor discard contains a card. Test one-use Hush cards for stalls, especially when several are in a deck.</p>
+          <h3>Keyword colors</h3>
+          <p>Use these colors on a neutral dark surface, with the written keyword always visible. Never rely on color alone or place labels or symbols over card artwork. A theme and its identically named damage type share one color; mechanical keywords have separate colors.</p><h4>Mechanical keywords</h4><ul><li><span class="kw-ward">Ward</span> — protective blue <code>#8BCBFF</code></li><li><span class="kw-burn">Burn</span> — glowing ember <code>#FF966B</code></li><li><span class="kw-flip">Flip</span> — shifting violet <code>#D8ABFF</code></li><li><span class="kw-banish">Banish</span> — fading rose <code>#F3A5B6</code></li><li><span class="kw-scry">Scry</span> — clear teal <code>#86D8D0</code></li><li><span class="kw-mark">Mark</span> — target coral <code>#FFB3A6</code></li><li><span class="kw-weaken">Weaken</span> — dulled ochre <code>#D5C58A</code></li><li><span class="kw-hush">Hush</span> — muted slate <code>#B5BCD1</code></li><li><span class="kw-keep">Keep</span> — preserved green <code>#B6E1A8</code></li></ul><h4>Themes and damage types</h4><ul><li><span class="kw-radiance">Radiance</span> — sun gold <code>#F7D670</code></li><li><span class="kw-shadow">Shadow</span> — twilight violet <code>#C7AEF1</code></li><li><span class="kw-growth">Growth</span> — leaf green <code>#9DDA97</code></li><li><span class="kw-decay">Decay</span> — fading olive <code>#C7CD78</code></li><li><span class="kw-binding">Binding</span> — woven teal <code>#80D1BE</code></li><li><span class="kw-release">Release</span> — open sky cyan <code>#7DDDEC</code></li><li><span class="kw-flame">Flame</span> — fire orange <code>#FFAD66</code></li><li><span class="kw-frost">Frost</span> — ice blue <code>#A8E5FA</code></li><li><span class="kw-memory">Memory</span> — dream periwinkle <code>#B8C7FF</code></li><li><span class="kw-oblivion">Oblivion</span> — vanishing ash <code>#C5C5CD</code></li></ul>
           <h3>Theme pairs</h3>
           <p>
-            Each face carries one or two themes. The ten themes are also the damage types: Radiance, Shadow,
-            Growth, Decay, Binding, Release, Flame, Frost, Memory and Oblivion. A face’s direct attack uses
-            its listed themes as its damage types. A slash, as in Shadow/Decay damage, means one attack
-            carries both types, not two damage events. Burn always deals Flame damage. Themes also determine
-            enemy weaknesses, and cards tend toward recognizable kinds of effects. Binding often grants Ward;
+            Each face carries one or two themes. The ten themes are also the damage types: Radiance, Shadow, Growth, Decay, Binding, Release, Flame, Frost, Memory and Oblivion. Each direct attack has exactly one printed damage type, chosen from the face’s themes. Additional themes describe the face but do not give its hit another type. Burn always deals Flame damage, even if the applying face has other themes. Themes also determine enemy weaknesses, and cards tend toward recognizable kinds of effects. Binding often grants Ward;
             Release often draws or flips. The effect is printed explicitly in the tooltip rather than
             triggered by a hidden theme rule. These are tendencies, not restrictions: a dark face can protect
             and a light face can attack. <strong>Radiance / Shadow</strong> can expose or conceal;
@@ -1301,10 +1282,9 @@
             Memory/Oblivion for the reward pool. Expand only when a theme creates a useful decision.
           </p>
           <p>
-            Each enemy has a theme; its opposing theme is its weakness. When a direct card attack has a type
-            matching that weakness, add a provisional <strong>+2 damage</strong> of the matching type once per
-            played card, before Ward. A dual-type attack matching either type receives the bonus only once.
-            This bonus does not apply to Burn, healing or other utility. Every other type still works. Enemy
+            Each enemy has a theme; its opposing theme is its weakness. When a direct card attack’s single damage type matches that weakness, add a provisional <strong>+2 damage</strong> of the matching type once per
+            played card, before Ward. A face’s other theme does not grant a weakness bonus to that hit.
+            This bonus applies only to direct card attacks, not Burn ticks or utility. Every other type still works. Enemy
             attacks have an explicit type, normally the enemy’s theme; Ward works against every type. Show the
             actual damage preview on inspection and always name the theme in text, not color alone.
           </p>
@@ -1334,27 +1314,27 @@
                 <tr>
                   <td>Angel / Vampire</td>
                   <td>Gain 5 Ward.</td>
-                  <td>Deal 4 Shadow/Decay damage. Heal 4 HP.</td>
+                  <td>Deal 4 Shadow damage. Heal 4 HP.</td>
                 </tr>
                 <tr>
                   <td>Sun / Moon</td>
                   <td>Deal 6 Radiance damage.</td>
-                  <td>Draw 2 cards. Flip your hand.</td>
+                  <td>Flip your hand.</td>
                 </tr>
                 <tr>
                   <td>Bloom / Wither</td>
-                  <td>Heal 4. Banish this card.</td>
+                  <td>Heal 4 HP. Banish this card.</td>
                   <td>Deal 7 Decay damage. Banish this card.</td>
                 </tr>
                 <tr>
                   <td>Key / Lock</td>
                   <td>Draw 1 card. Flip your hand.</td>
-                  <td>Gain 5 Ward.</td>
+                  <td>Keep a card in your hand.</td>
                 </tr>
                 <tr>
                   <td>Mirror / Shattered Mirror</td>
-                  <td>Gain 4 Ward.</td>
-                  <td>Deal 4 Release/Decay damage. Flip your hand.</td>
+                  <td>Flip a card in your hand.</td>
+                  <td>Deal 4 Release damage. Flip your hand.</td>
                 </tr>
                 <tr>
                   <td>Flame / Frost</td>
@@ -1368,16 +1348,15 @@
                 </tr>
                 <tr>
                   <td>Executioner / Resurrector · later</td>
-                  <td>Lose 2 HP. Deal 11 Radiance damage.</td>
-                  <td>Return a card from your discard pile to your hand. Heal 2. Banish this card.</td>
+                  <td>Deal 7 Radiance damage.</td>
+                  <td>Return a card from your discard to your hand.</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p>
             Light can attack: Sun deals Radiance damage and Flame applies Burn that deals Flame damage, and
-            the reward-pool Lantern breaks Ward. Dark can protect: Frost, Lock and Shroud grant Ward, while
-            Vampire heals through its attack. These are thematic examples, not fixed roles; test whether
+            the reward-pool Lantern looks ahead. Dark can protect: Frost and Shroud grant Ward, Lock keeps a card for later, and Vampire heals through its attack. These are thematic examples, not fixed roles; test whether
             players actually perceive both sides as morally ambiguous. The shared mana cost keeps the choice
             focused on each face’s effect.
           </p>
@@ -1395,7 +1374,7 @@
               encounter teaches Ward.
             </li>
             <li>
-              <strong>Glass Judge:</strong> gains Ward on a quiet turn, then attacks twice with rising force.
+              <strong>Glass Judge:</strong> gains Ward on a quiet turn, then attacks on each of the next two turns with rising force.
               The player can prepare or push for a kill.
             </li>
             <li>
@@ -1640,7 +1619,7 @@
               </li>
               <li>
                 <strong>The patient vampire:</strong> Against a 40-health enemy attacking for 5 Radiance
-                damage every turn, a Vampire that deals 4 Shadow/Decay damage and heals 4 HP, paired with
+                damage every turn, a Vampire that deals 4 Shadow damage and heals 4 HP, paired with
                 Angel granting 5 Ward, has 40 points of nominal healing over ten turns while the enemy
                 steadily dies. These two plays now spend only 2 of the 3 starting mana, leaving room for
                 another play each turn. Healing cannot exceed maximum health, but fixed healing can still work
@@ -1675,10 +1654,7 @@
                 rules; this default is provisional.
               </li>
               <li>
-                <strong>The last card:</strong> Oracle looks at the only card in the draw pile, discards it,
-                then draws. If the discard pile otherwise was empty, drawing reshuffles and returns that same
-                card. Discarding does not destroy a card; Banish is the separate removal action. Test whether
-                this is clear before keeping several top-card effects.
+                <strong>The last card:</strong> Oracle uses Scry while the draw pile is empty and the discard pile contains one card. Shuffle that card into the draw pile, then look at it; putting it on the bottom leaves it where it is. Oracle then draws it. If both piles are empty, Scry and the draw do nothing. Test whether this reshuffle is clear.
               </li>
               <li>
                 <strong>An opening without a Flip:</strong> Against an intent to deal 4 Radiance damage,
@@ -1717,16 +1693,16 @@
           </details>
           <h3>Small automated thought experiments</h3>
           <p>
-            Simple scripted runs using earlier effects, variable costs and untyped damage exposed sensitivity
+            Simple scripted runs using earlier effects, variable costs and older damage rules exposed sensitivity
             to enemy pressure, Flip incentives, Burn stacking and reward choices. They are not human playtests
-            or balance results, and must be rerun with the universal 1-mana cost.
+            or balance results, and must be rerun with the universal 1-mana cost and single-type damage.
           </p>
           <details>
             <summary>Show simulation methods and numbers</summary>
             <p>
               As a stress test, a simple scripted player attempted 1,000 seeded five-fight runs per
               difficulty. It used a ten-card deck with two copies each of Angel/Vampire, Sun/Moon,
-              Bloom/Wither, Flame/Frost and Key/Lock, with the sample effects above. The test predates the
+              Bloom/Wither, Flame/Frost and Key/Lock, with an earlier version of the sample effects. The test predates the
               universal 1-mana rule and used the earlier variable card costs and additive Burn rule, fixed
               attacks, no rewards, weaknesses or enemy Ward, a 50-turn-per-fight cutoff, and a greedy policy
               rather than a human. Its results do not validate the current costs and need to be rerun. A low
@@ -1779,7 +1755,7 @@
           <p>
             <strong>First playable:</strong> build one enemy, a ten-card starter with two copies each of the
             five pairs in the fixture, and a small reward pool and the core turn/flip flow. Include Ward,
-            Burn, Flip and Banish because the proposed starter uses all four. For a still smaller technical
+            Burn, Flip, Banish and Keep because the proposed starter uses all five. Add Weaken when testing Chain in the reward pool. For a still smaller technical
             smoke test, temporarily substitute simpler card effects; do not call that substitute the full
             starter. Measure whether players can predict what flips, understand intent, and explain why they
             won or lost. Also record turns with no useful legal play, no available damage, and no available
@@ -1852,7 +1828,7 @@
               Ward, draw, healing and mana-gain effects before adjusting their values.
             </li>
             <li>
-              Can repeated Hush prevent all pressure, or do stacked Marks make a single attack too strong?
+              Can repeated Weaken or several one-use Hush cards prevent too much pressure, or do stacked Marks make a single attack too strong?
               Test long fights, recovery and draw combinations, and visible counters. Verify that one-use
               interruptions skip a non-attack intent and then advance the pattern.
             </li>
@@ -1872,8 +1848,7 @@
               currently pay off less often. Test that imbalance before adding exceptions or hidden bonuses.
             </li>
             <li>
-              Is +2 weakness damage meaningful without making matching mandatory? Test against decks with and
-              without a matching attack.
+              Is +2 weakness damage meaningful without making matching mandatory? A face with two themes matches only its attack’s printed type. Burn is Flame damage but receives no weakness bonus; test this exception before changing it, because adding +2 to each tick would double Burn 3’s total from 6 to 12 if all three ticks resolve.
             </li>
           </ul>
         </section>

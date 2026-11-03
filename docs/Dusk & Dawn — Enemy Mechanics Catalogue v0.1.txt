@@ -1,0 +1,1144 @@
+DUSK & DAWN — ENEMY MECHANICS CATALOGUE v0.1
+3 November 2026 · PROPOSAL, NOT PLAYTESTED
+110 / 110 existing enemy artworks inspected; no resistances.
+One typed base attack per enemy. Apply the named trait and displayed rhythm.
+Weakness: +2 once per played direct-attack card, before Ward; no Burn bonus.
+Current Hush cancels displayed non-attack intents only. Weaken reduces the first hit of the next attack.
+Light and dark are moods, not moral alignments. All numbers are provisional.
+
+001  Crowned Sun
+  Trait — High Noon: On every third attack, add 3 damage as the rays converge.
+  Weakness — Shadow: Shade breaks the sun's direct glare.
+  Attack — Crown Rays: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Save Ward or Weaken for the third attack; its rays are visible in advance.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Crowned Sun.png. A crowned sun fills the sky above reaching figures.
+  Review: No special pool gate; balance remains untested.
+
+002  Glass Judge
+  Trait — Deliberation: On turn 1 of each three-turn cycle, gain 4 Ward instead of attacking.
+  Weakness — Shadow: Shadow clouds the glass and blunts its glare.
+  Attack — Glass Verdict: 6 Radiance damage before trait modifiers.
+  Rhythm: Deliberate → attack → attack.
+  Choice: Prepare during deliberation, or silence the protection and push damage.
+  Hush now: Can cancel this displayed non-attack step: Deliberate: gain 4 Ward. It cannot cancel the attack or its riders.
+  Art inspected: Glass Judge.png. A transparent judge holds a pair of scales.
+  Review: No special pool gate; balance remains untested.
+
+003  Hollow King
+  Trait — Empty Coronation: On the second step, gain 5 Ward instead of attacking; on the third step, add 3 damage.
+  Weakness — Radiance: Radiance illuminates the empty spaces beneath the crown.
+  Attack — Throne's Reach: 6 Shadow damage before trait modifiers.
+  Rhythm: Attack → coronation → attack.
+  Choice: A boss rhythm with a clear window before its long reach.
+  Hush now: Can cancel this displayed non-attack step: Coronation: gain 5 Ward. It cannot cancel the attack or its riders.
+  Art inspected: Hollow King.png. A huge crowned, hollow figure looms over a ruined throne.
+  Review: No special pool gate; balance remains untested.
+
+004  Ink Leviathan
+  Trait — Black Tide: Immediately before attacking, remove up to 3 player Ward.
+  Weakness — Radiance: Radiance exposes the ink-dark body.
+  Attack — Ink Surge: 6 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: One small shield is unreliable; combine Ward or use Weaken against the tide.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Ink Leviathan.png. An inky sea creature rises with a vast mouth and sweeping tendrils.
+  Review: No special pool gate; balance remains untested.
+
+005  Ivory Colossus
+  Trait — Living Buttress: After its attack, gain 4 Ward.
+  Weakness — Release: Release prises apart the supporting structure.
+  Attack — Vaulting Hand: 7 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Break its fresh buttresses next turn, or use a Ward-removing card before a strong hit.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Ivory Colossus.png. An ivory giant is built from monumental arches.
+  Review: weakness-needs-wider-pool
+
+006  Lantern Eater
+  Trait — Swallow the Lantern: On feeding turns, remove up to 4 player Ward and gain that much Ward instead of attacking.
+  Weakness — Radiance: Radiance exposes the creature beyond the lantern's small glow.
+  Attack — Dark Gulp: 7 Shadow damage before trait modifiers.
+  Rhythm: Feed → attack → attack.
+  Choice: Avoid feeding it unnecessary protection; prepare damage on the quiet turn.
+  Hush now: Can cancel this displayed non-attack step: Feed: transfer up to 4 player Ward to enemy Ward. It cannot cancel the attack or its riders.
+  Art inspected: Lantern Eater.png. A huge mouth reaches toward a lantern offered by a traveler.
+  Review: No special pool gate; balance remains untested.
+
+007  Mourning Tree
+  Trait — Deep Roots: On rooting turns, gain 5 Ward instead of attacking. After attacking, heal 3 HP if no direct card attack damaged its HP this turn.
+  Weakness — Decay: Decay withers the living roots.
+  Attack — Root Lash: 8 Growth damage before trait modifiers.
+  Rhythm: Root → attack.
+  Choice: Reach its HP through Ward to stop it recovering.
+  Hush now: Can cancel this displayed non-attack step: Root: gain 5 Ward. It cannot cancel the attack or its riders.
+  Art inspected: Mourning Tree.png. A weeping tree sheds drops into a pool beneath tangled roots.
+  Review: recovery-stall-check
+
+008  Porcelain Choir
+  Trait — Three Voices: Every attack has 2 additional hits as the voices sing together.
+  Weakness — Release: Release breaks the fragile arrangement of the chorus.
+  Attack — Porcelain Refrain: 2 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Ward handles all three voices; Weaken reduces only the first voice. Hush cannot cancel this attack.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Porcelain Choir.png. Several porcelain singers lift their faces together.
+  Review: weakness-needs-wider-pool
+
+009  Radiant Moth
+  Trait — Wingbeat: Every second attack deals 1 extra damage as the wings open fully.
+  Weakness — Shadow: Shadow dims the light on its wings.
+  Attack — Luminous Dust: 4 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn; folded → open.
+  Choice: A gentle, visible 4/5 rhythm for learning Ward.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Radiant Moth.png. A luminous moth spreads broad wings before an eclipse.
+  Review: No special pool gate; balance remains untested.
+
+010  Seven-Eyed Heron
+  Trait — Seven Watches: If the player is carrying a card with Keep, add 2 damage.
+  Weakness — Shadow: Shadow hides a target from its many eyes.
+  Attack — Searching Beak: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Keeping a useful card costs exposure, not permission to play it.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Seven-Eyed Heron.png. Eyes run down a heron's long neck beneath a solar disk.
+  Review: keep-interaction
+
+011  Sunbleached Harlequin
+  Trait — Over the Guard: Every third attack ignores up to 3 player Ward; any remaining Ward works normally.
+  Weakness — Binding: Binding arrests the jester's tumbling motion.
+  Attack — Tumbling Kick: 5 Release damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Use Weaken when the jester vaults the guard, or build more than 3 Ward.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Sunbleached Harlequin.png. A sunlit jester balances beneath curling architecture.
+  Review: weakness-needs-wider-pool
+
+012  The Amber Bailiff
+  Trait — Amber Custody: After every third attack, Banish the last physical card played this turn for this fight, if it is still in discard.
+  Weakness — Release: Release frees what amber encloses.
+  Attack — Resin Grasp: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: An advanced foe: play an expendable card last on the arrest turn; nothing is lost permanently.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Amber Bailiff.png. An amber ruler holds a glowing amber orb.
+  Review: weakness-needs-wider-pool, temporary-deck-loss-advanced
+
+013  The Ashen Gardener
+  Trait — Ash Bed: After attacking, remove its remaining Burn and gain Ward equal to the Burn removed, up to 3.
+  Weakness — Growth: Growth brings life back into the spent garden.
+  Attack — Ash Rake: 5 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Burn still ticks first; choose between a quick burn and persistent pressure.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Ashen Gardener.png. An ashen gardener scatters gray matter over skeletal plants.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+014  The Ashen Puppeteer
+  Trait — Tugged Hands: After each second attack, flip all player cards currently carried with Keep.
+  Weakness — Release: Release cuts the controlling strings.
+  Attack — String Jerk: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Inspect both faces before carrying a card into the string-pull turn.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Ashen Puppeteer.png. A towering puppeteer holds red strings over small figures.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+015  The Astral Custodian
+  Trait — Sweeping Orbit: Every third attack sweeps twice instead of once.
+  Weakness — Shadow: Shadow hides the small paths from its watch.
+  Attack — Orbital Sweep: 4 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A predictable broad sweep rewards saving a larger shield.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Astral Custodian.png. An astral keeper reaches across floating spheres and bridges.
+  Review: No special pool gate; balance remains untested.
+
+016  The Bathtub Oracle
+  Trait — Foretold Card: At the start of the player turn, reveal the draw pile's top card. If that physical card is played this turn, add 3 damage.
+  Weakness — Oblivion: Oblivion erases the future it has divined.
+  Attack — Foretold Drowning: 5 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: You know the foretold card before deciding whether to draw and play it.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Bathtub Oracle.png. A reclining oracle gestures from a moonlit bathtub.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+017  The Bellflower Magistrate
+  Trait — Closing Bell: If the player ends with unspent mana, heal 2 HP after attacking.
+  Weakness — Decay: Decay wilts the living bells.
+  Attack — Bellflower Lash: 5 Growth damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Spend the last useful play to interrupt the garden's closing ritual.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Bellflower Magistrate.png. Bell-shaped flowers cover a magistrate's robe and outstretched hand.
+  Review: recovery-stall-check
+
+018  The Black Jellyfish
+  Trait — Trailing Sting: If its attack deals any HP damage, the same attack gains one final 2-damage hit.
+  Weakness — Radiance: Radiance outlines the otherwise obscure tendrils.
+  Attack — Tendril Sting: 4 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Block the first sting completely to avoid the second.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Black Jellyfish.png. A black jellyfish trails long tendrils through the sky.
+  Review: No special pool gate; balance remains untested.
+
+019  The Blackwater Bison
+  Trait — Wallow: On wallow turns, gain 5 Ward; the next fixed turn is its charge.
+  Weakness — Radiance: Radiance reveals the beast in black water.
+  Attack — Blackwater Charge: 8 Shadow damage before trait modifiers.
+  Rhythm: Wallow → attack.
+  Choice: A large shield on the charge matters more than defending the wallow.
+  Hush now: Can cancel this displayed non-attack step: Wallow: gain 5 Ward. It cannot cancel the attack or its riders.
+  Art inspected: The Blackwater Bison.png. A dark bison lowers its head beside rippling water.
+  Review: No special pool gate; balance remains untested.
+
+020  The Bleak Carousel
+  Trait — Another Circuit: After each third attack, return the top card of the player's discard to the bottom of their draw pile.
+  Weakness — Oblivion: Oblivion interrupts the carousel's repeated circuit.
+  Attack — Carousel Trample: 6 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The last discarded face circles back later; its identity is shown.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Bleak Carousel.png. Pale carousel horses circle under a ragged canopy.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+021  The Blooming Executioner
+  Trait — Blooming Edge: On blooming turns, heal 3 HP instead of attacking; on the following turn, add 3 damage.
+  Weakness — Decay: Decay withers the blossoms feeding the axe.
+  Attack — Petal Axe: 6 Growth damage before trait modifiers.
+  Rhythm: Bloom → attack → attack.
+  Choice: Silence the bloom or its first empowered strike; both are shown in the cycle.
+  Hush now: Can cancel this displayed non-attack step: Bloom: heal 3 HP. It cannot cancel the attack or its riders.
+  Art inspected: The Blooming Executioner.png. A flowering executioner holds an enormous axe.
+  Review: recovery-stall-check
+
+022  The Blue Jackal
+  Trait — Scent of Blood: If the player is below half maximum HP, add 2 damage.
+  Weakness — Radiance: Radiance exposes the moonlit hunter.
+  Attack — Moonlit Bite: 5 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Healing above half removes the bonus before it bites.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Blue Jackal.png. A lean blue jackal stands alert in moonlit ruins.
+  Review: No special pool gate; balance remains untested.
+
+023  The Bone Cartographer
+  Trait — Measured Route: If the player played the same number of cards as on their previous turn, add 2 damage.
+  Weakness — Oblivion: Oblivion erases the route it has measured.
+  Attack — Divider Point: 5 Memory damage before trait modifiers.
+  Rhythm: Attack each turn; turn 1 has no comparison.
+  Choice: Change the length of a turn; the previous count is always visible.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Bone Cartographer.png. A skeletal cartographer measures a map with long dividers.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+024  The Brass Cicada
+  Trait — Summer Rattle: On each third attack, add one hit for each unused player mana, up to 2 extra hits.
+  Weakness — Shadow: Shadow muffles its sun-bright resonance.
+  Attack — Brass Rattle: 2 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Use available plays before the rattling crescendo.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Brass Cicada.png. A huge brass cicada spreads perforated wings in a golden sky.
+  Review: No special pool gate; balance remains untested.
+
+025  The Brass Matron
+  Trait — Gathering Apron: After attacking, gain 2 Ward for each card the player carried with Keep, up to 4 Ward.
+  Weakness — Release: Release loosens the rigid enclosure.
+  Attack — Brass Embrace: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Carry selectively: a larger saved hand gives her a larger shelter.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Brass Matron.png. A brass matron's rigid robes shelter small reaching figures.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+026  The Buried Violinist
+  Trait — Unfinished Phrase: After every second attack, move the last physical card the player played this turn from discard to the top of their draw pile, if still there.
+  Weakness — Oblivion: Oblivion ends the tune that persists underground.
+  Attack — Buried Bow: 6 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The buried melody repeats your final play next turn; choose which card closes the phrase.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Buried Violinist.png. A buried violinist plays among roots and exposed bones.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+027  The Candlewax Duchess
+  Trait — Guttering Candles: After every second attack, gain 3 Ward from freshly pooled wax.
+  Weakness — Frost: Frost cools the candles and stiffens the dripping wax.
+  Attack — Wax Scald: 6 Flame damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Time attacks around the alternating pools; do not expect player Burn.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Candlewax Duchess.png. Candles burn along a duchess's melting wax body.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+028  The Celestial Fisher
+  Trait — Set the Hook: If its previous attack damaged player HP, remove up to 3 player Ward before this attack.
+  Weakness — Release: Release slips the hook and slackens the line.
+  Attack — Star Hook: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn; no hook set at entry.
+  Choice: Fully blocking one strike breaks the hook's follow-through.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Celestial Fisher.png. A celestial fisher holds a line attached to a huge fish.
+  Review: weakness-needs-wider-pool
+
+029  The Cellar Duchess
+  Trait — Aged Vintage: On drinking turns, heal 4 HP instead of attacking.
+  Weakness — Growth: Growth renews the stale, enclosed cellar.
+  Attack — Cellar Draught: 6 Decay damage before trait modifiers.
+  Rhythm: Attack → drink → attack.
+  Choice: Hush can deny a recovery window without also erasing an attack.
+  Hush now: Can cancel this displayed non-attack step: Drink: heal 4 HP. It cannot cancel the attack or its riders.
+  Art inspected: The Cellar Duchess.png. A duchess sits among barrels holding a red drink.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks, recovery-stall-check
+
+030  The Chalk Giant
+  Trait — Dustfall: If a direct card attack had at least 8 damage after bonuses but before Ward this turn, add one 2-damage hit to its attack.
+  Weakness — Release: Release crumbles the chalk structure.
+  Attack — Chalk Hand: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A large blow shakes debris loose; compare the burst with its small cost.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Chalk Giant.png. A vast chalk-white giant reaches over pale cliffs.
+  Review: weakness-needs-wider-pool
+
+031  The Clockwork Peacock
+  Trait — Winding Tail: Each winding turn gains 2 more Ward than the last, capped at 6.
+  Weakness — Release: Release unmeshes the tail's mechanisms.
+  Attack — Geared Peck: 7 Binding damage before trait modifiers.
+  Rhythm: Wind → attack → attack; winding begins at 2 Ward.
+  Choice: A finite cap keeps the mechanism readable; don't let winding become free recovery.
+  Hush now: Can cancel this displayed non-attack step: Wind: gain the displayed winding Ward, capped at 6. It cannot cancel the attack or its riders.
+  Art inspected: The Clockwork Peacock.png. Gears fill a clockwork peacock's tail.
+  Review: weakness-needs-wider-pool
+
+032  The Cobweb Admiral
+  Trait — Webbed Rigging: After each second attack, the player must choose one Kept card to release to discard, if any.
+  Weakness — Release: Release parts the rigging and webbing.
+  Attack — Rigging Snare: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Keep a disposable option with a valuable one; nothing is banished.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Cobweb Admiral.png. A web-covered admiral stands before a ship caught in cobwebs.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+033  The Coin-Eyed Stag
+  Trait — Glittering Lure: If the player drew cards using card effects this turn, add 2 damage.
+  Weakness — Shadow: Shadow conceals a target from the shining coin eyes.
+  Attack — Gilded Antlers: 6 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Drawing still finds answers; its glint also draws the stag's charge.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Coin-Eyed Stag.png. Gold coins cover a stag's eyes beneath branching antlers.
+  Review: No special pool gate; balance remains untested.
+
+034  The Cracked Moon
+  Trait — Falling Fragment: After every third attack, put the top card of the player's draw pile into discard, face unchanged.
+  Weakness — Oblivion: Oblivion removes the moon's familiar returning shape.
+  Attack — Moon Shard: 6 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The fragment changes the next draw but can help a discard-retrieval plan.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Cracked Moon.png. A moon is split by large cracks above a dark landscape.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+035  The Crystal Beetle
+  Trait — Prism Flash: If at least 2 direct card attacks hit it this turn, add 2 damage.
+  Weakness — Shadow: Shadow dulls the beetle's prismatic glare.
+  Attack — Crystal Horn: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Repeated blows scatter a flash through its facets; a single strong hit avoids it.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Crystal Beetle.png. A jewel-like beetle stands between watching stone faces.
+  Review: No special pool gate; balance remains untested.
+
+036  The Drowned Pianist
+  Trait — Sustained Note: If the player carried any card with Keep from the previous turn, add 2 damage.
+  Weakness — Oblivion: Oblivion ends the submerged melody.
+  Attack — Drowned Chord: 6 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Letting a note linger empowers the pianist; fresh hands avoid it.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Drowned Pianist.png. A drowned figure plays a piano beneath tentacles and water.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks, keep-interaction
+
+037  The Dusk Fisher
+  Trait — Reel In: Before every second attack, remove up to 4 player Ward.
+  Weakness — Release: Release frees the line caught beneath the water.
+  Attack — Dusk Hook: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn; cast → reel.
+  Choice: The cast announces when to use Weaken or a shield larger than the line can pull.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Dusk Fisher.png. A lone fisher casts into a dark sea beneath the setting sun.
+  Review: weakness-needs-wider-pool
+
+038  The Fogbound Weaver
+  Trait — Closing Weave: If the player carried at least 2 cards with Keep, add 3 damage.
+  Weakness — Release: Release loosens the supporting threads.
+  Attack — Fog Loom: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Carry one answer safely, or pay the risk of keeping a larger bundle.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Fogbound Weaver.png. A weaver holds crossing threads over a tightrope figure in fog.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+039  The Folded Stranger
+  Trait — Refold: After attacking, gain 2 Ward for each Flip effect the player used this turn, capped at 4.
+  Weakness — Release: Release unfolds its creased paper body.
+  Attack — Paper Edge: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Turning your hand gives the paper stranger a chance to refold its own shelter.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Folded Stranger.png. A sharply folded humanoid stands beside reflecting water.
+  Review: weakness-needs-wider-pool
+
+040  The Gilded Pelican
+  Trait — Filled Pouch: If its attack removes at least 3 player Ward, heal 2 HP afterward.
+  Weakness — Shadow: Shadow dims the pelican's brilliant silhouette.
+  Attack — Pelican Scoop: 6 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A small block or full prevention avoids filling its pouch.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Gilded Pelican.png. A golden pelican stretches a broad beak and wide wings.
+  Review: recovery-stall-check
+
+041  The Glasshouse Matriarch
+  Trait — Sheltered Shoots: On tending turns, heal 2 HP and gain 3 Ward instead of attacking.
+  Weakness — Decay: Decay withers the sheltered growth.
+  Attack — Glasshouse Briar: 7 Growth damage before trait modifiers.
+  Rhythm: Tend → attack → attack.
+  Choice: Burst or silence the tending step; both defense and regrowth are visible.
+  Hush now: Can cancel this displayed non-attack step: Tend: heal 2 HP and gain 3 Ward. It cannot cancel the attack or its riders.
+  Art inspected: The Glasshouse Matriarch.png. A matriarch encloses red plants in a glasshouse body.
+  Review: recovery-stall-check
+
+042  The Golden Menagerie
+  Trait — Menagerie Procession: Its second attack has 2 hits and its third has 3 hits; each hit is 3 damage.
+  Weakness — Shadow: Shadow breaks the shared golden display.
+  Attack — Gilded Stampede: 3 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn; 1 → 2 → 3 hits, repeat.
+  Choice: A larger shield is most efficient when the whole menagerie passes.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Golden Menagerie.png. Several gilded animals crowd around one central sun-face.
+  Review: No special pool gate; balance remains untested.
+
+043  The Golden Millipede
+  Trait — Many Feet: If its base hit is fully absorbed by Ward, add two 1-damage hits to the same attack.
+  Weakness — Release: Release breaks its coordinated grip.
+  Attack — Golden Tread: 4 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A thin shield invites the remaining feet; a slightly larger one covers them.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Golden Millipede.png. A golden millipede curls many short legs around a bridge.
+  Review: weakness-needs-wider-pool
+
+044  The Gravel Baron
+  Trait — Loose Scree: If the player removed enemy Ward using a card effect this turn, add 2 damage.
+  Weakness — Release: Release scatters the pile before it compacts.
+  Attack — Gravel Slide: 6 Binding damage before trait modifiers.
+  Rhythm: Gain 4 Ward → attack → attack.
+  Choice: Removing a cairn opens it up but sends loose stones down.
+  Hush now: Can cancel this displayed non-attack step: Gain 4 Ward. It cannot cancel the attack or its riders.
+  Art inspected: The Gravel Baron.png. A ragged baron lets gravel fall from one hand.
+  Review: weakness-needs-wider-pool
+
+045  The Hollow Anemone
+  Trait — Closing Mouth: Before every second attack, remove up to 2 player Ward for each card kept this turn, capped at 4.
+  Weakness — Decay: Decay wilts its living tentacles.
+  Attack — Anemone Grasp: 5 Growth damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Keeping fewer cards leaves fewer tentacles wrapped around your protection.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Hollow Anemone.png. A hollow anemone spreads pale tentacles around a dark mouth.
+  Review: keep-interaction
+
+046  The Hollow Harvester
+  Trait — Empty Harvest: After an attack that damages player HP, gain 3 Ward.
+  Weakness — Growth: Growth fills the emptied, blighted harvest.
+  Attack — Hollow Sickle: 6 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A full block denies both injury and the harvester's next shield.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Hollow Harvester.png. A hollow, antlered harvester dangles emptied pods above a field.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+047  The Honey Tyrant
+  Trait — Sticky Tribute: If the player played no Flip effect this turn, remove up to 2 player Ward before attacking.
+  Weakness — Release: Release frees a target from sticky honey.
+  Attack — Honey Grip: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Changing the hand loosens the grip; Flip is helpful without becoming mandatory.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Honey Tyrant.png. Honeycombs and dripping honey cover a winged ruler.
+  Review: weakness-needs-wider-pool
+
+048  The Ink Jackrabbit
+  Trait — Bounding Trail: After every second attack, move the top card of the player's draw pile to its bottom.
+  Weakness — Radiance: Radiance reveals the bounding ink silhouette.
+  Attack — Inkbound Kick: 5 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Scry before its leap lets you see which card is about to be displaced.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Ink Jackrabbit.png. An ink-dark jackrabbit leaps above bridges beneath a moon.
+  Review: No special pool gate; balance remains untested.
+
+049  The Ivory Dentist
+  Trait — Extraction: Immediately before attacking, remove up to 5 player Ward.
+  Weakness — Binding: Binding holds the tooth firm against extraction.
+  Attack — Ivory Pliers: 4 Release damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Weaken answers the pliers efficiently; building more than 5 Ward also works.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Ivory Dentist.png. A gigantic dentist holds a mirror and a tooth-pulling tool over a chair.
+  Review: weakness-needs-wider-pool
+
+050  The Knotted Giant
+  Trait — Tightening Knot: After an attack that deals no player HP damage, gain 5 Ward.
+  Weakness — Release: Release loosens the knots holding the giant together.
+  Attack — Knotted Fist: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A full block is safe but lets it tighten; plan how to break its next shield.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Knotted Giant.png. Thick red knots wrap a huge pale body.
+  Review: weakness-needs-wider-pool
+
+051  The Lacquered Admiral
+  Trait — Broadside Order: Every third attack gains two additional 2-damage hits.
+  Weakness — Release: Release disrupts the rigid command and rigging.
+  Attack — Lacquered Broadside: 4 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The broadside asks for broad defense rather than only first-hit Weaken.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Lacquered Admiral.png. A lacquered admiral stands before ships and dark tentacles.
+  Review: weakness-needs-wider-pool
+
+052  The Linen Lioness
+  Trait — Gathered Linen: On crouching turns, gain 4 Ward; the following attack ignores up to 2 player Ward.
+  Weakness — Release: Release unravels the cloth body.
+  Attack — Linen Pounce: 6 Binding damage before trait modifiers.
+  Rhythm: Crouch → attack.
+  Choice: Silence whichever half of the gather-and-pounce matters more.
+  Hush now: Can cancel this displayed non-attack step: Crouch: gain 4 Ward. It cannot cancel the attack or its riders.
+  Art inspected: The Linen Lioness.png. A lioness is formed from trailing woven linen.
+  Review: weakness-needs-wider-pool
+
+053  The Majestic Janitor
+  Trait — Clean Sweep: After each second attack, remove all its remaining Burn.
+  Weakness — Binding: Binding arrests the sweeping motion.
+  Attack — Royal Mop: 6 Release damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Apply Burn just after cleaning so more of its ticks can resolve.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Majestic Janitor.png. A crowned janitor carries a mop amid flowing golden surfaces.
+  Review: weakness-needs-wider-pool
+
+054  The Marble Nurse
+  Trait — Sedating Dose: If its attack deals HP damage, the player draws 1 fewer card at the next turn's normal draw.
+  Weakness — Release: Release escapes the restraining treatment.
+  Attack — Marble Needle: 4 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Fully block or Weaken the needle to preserve the next hand; no mana is removed.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Marble Nurse.png. A marble nurse holds a syringe above reaching patients.
+  Review: weakness-needs-wider-pool
+
+055  The Masked Midday
+  Trait — No Hiding Place: If the player played no direct card attack this turn, add 3 damage.
+  Weakness — Shadow: Shadow veils the mask's midday glare.
+  Attack — Midday Stare: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Include one attack when practical; pure defense stays legal.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Masked Midday.png. A theatrical mask sits within the sun's curling rays.
+  Review: No special pool gate; balance remains untested.
+
+056  The Maskless Acrobat
+  Trait — Tightrope Rebound: If the player played exactly 2 cards this turn, add 2 damage.
+  Weakness — Binding: Binding stills the swinging rope.
+  Attack — Rope Kick: 5 Release damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Break its balancing beat with one or three plays when the hand permits.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Maskless Acrobat.png. A bare-faced acrobat balances on a thin rope.
+  Review: weakness-needs-wider-pool
+
+057  The Midnight Oyster
+  Trait — Pearl Shutter: On closing turns, gain 7 Ward instead of attacking.
+  Weakness — Release: Release prises the shell apart.
+  Attack — Shell Snap: 7 Binding damage before trait modifiers.
+  Rhythm: Attack → close → attack → attack.
+  Choice: The shell protects briefly; an open stretch gives two damage windows.
+  Hush now: Can cancel this displayed non-attack step: Close: gain 7 Ward. It cannot cancel the attack or its riders.
+  Art inspected: The Midnight Oyster.png. An open oyster holds a bright pearl in moonlit water.
+  Review: weakness-needs-wider-pool
+
+058  The Midnight Tailor
+  Trait — Sewn Shut: After each third attack, the player discards 1 chosen card carried with Keep, if any.
+  Weakness — Release: Release cuts the thread and opens the seam.
+  Attack — Midnight Needle: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Keep an alternative if you need to preserve a particular answer on the stitch turn.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Midnight Tailor.png. A nocturnal tailor stitches long cloth beside a sewing machine.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+059  The Mirror-Eyed Swan
+  Trait — Mirrored Wing: If the player gained at least 5 Ward this turn, gain 3 Ward after attacking.
+  Weakness — Shadow: Shadow disrupts the shining mirrored image.
+  Attack — Mirror Beak: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A large shield invites a small reflection; plan its removal or your next damage burst.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Mirror-Eyed Swan.png. A white swan looks into bright, patterned reflections.
+  Review: No special pool gate; balance remains untested.
+
+060  The Mirrored Sphinx
+  Trait — The Same Answer: If the first card played matches the pair of last turn's first card, add 3 damage.
+  Weakness — Oblivion: Oblivion erases the answer the mirrored guardians share.
+  Attack — Sphinx Question: 5 Memory damage before trait modifiers.
+  Rhythm: Attack each turn; no comparison on turn 1.
+  Choice: Open with a different pair; the remembered answer is displayed.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Mirrored Sphinx.png. Two matching sphinxes face one another above a stair.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+061  The Morrow Thief
+  Trait — Stolen Morrow: On stealing turns, Banish the top draw-pile card for this fight instead of attacking.
+  Weakness — Radiance: Radiance reveals the thief and the stolen dawn.
+  Attack — Dawn Snatch: 6 Shadow damage before trait modifiers.
+  Rhythm: Attack → steal → attack.
+  Choice: An advanced encounter: Scry can position a less vital card before the theft.
+  Hush now: Can cancel this displayed non-attack step: Steal: Banish the top draw-pile card for this fight. It cannot cancel the attack or its riders.
+  Art inspected: The Morrow Thief.png. A running thief carries a stolen piece of sunrise.
+  Review: temporary-deck-loss-advanced
+
+062  The Mossback Ogre
+  Trait — Moss Drinks: If the player healed HP this turn, heal 3 HP after attacking.
+  Weakness — Decay: Decay withers its living moss.
+  Attack — Mossback Swing: 6 Growth damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Heal when needed; account for the moss drinking from the same recovery.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Mossback Ogre.png. A hunched ogre is covered in hanging moss beside a pool.
+  Review: recovery-stall-check
+
+063  The Moth-Eaten Regent
+  Trait — Tattered Tribute: If the player banished a card this turn, gain 4 Ward after attacking.
+  Weakness — Growth: Growth renews what the moths have eaten.
+  Attack — Ragged Scepter: 6 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A strong self-banishing play still works, but gives the regent scraps.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Moth-Eaten Regent.png. A monarch's robe and crown are riddled with moth holes.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+064  The Mould Harpist
+  Trait — Growing Refrain: On refrain turns, heal 5 HP instead of attacking if no direct card attack damaged its HP this turn.
+  Weakness — Decay: Decay consumes the living fungal growth.
+  Attack — Spore Chord: 6 Growth damage before trait modifiers.
+  Rhythm: Attack → refrain → attack.
+  Choice: Let a direct blow interrupt the growing phrase, or silence the strings.
+  Hush now: Can cancel this displayed non-attack step: Refrain: heal 5 HP if its HP was not damaged by a direct card attack this turn. It cannot cancel the attack or its riders.
+  Art inspected: The Mould Harpist.png. Mould coats a skeletal harpist and the harp's long strings.
+  Review: recovery-stall-check
+
+065  The Noon Dancer
+  Trait — Turning Step: If the player used Flip at least twice this turn, add 3 damage.
+  Weakness — Shadow: Shadow dims the sunlit dance.
+  Attack — Noon Pirouette: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: One turn of the hand is safe; repeated turning matches its dangerous spin.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Noon Dancer.png. A dancer rises before the sun with broad flowing fabric.
+  Review: No special pool gate; balance remains untested.
+
+066  The Obsidian Otter
+  Trait — Dive for Cover: After each second attack, gain 5 Ward if the player has no Mark on it.
+  Weakness — Radiance: Radiance reveals the animal beneath the dark water.
+  Attack — Obsidian Bite: 5 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Leave a Mark unspent to track the dive, or prepare to break its next shield.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Obsidian Otter.png. A sleek black otter perches above a pool.
+  Review: No special pool gate; balance remains untested.
+
+067  The Opal Centipede
+  Trait — Ripple of Light: Each attack gains one extra 1-damage hit per direct card attack played this turn, capped at 3 extra hits.
+  Weakness — Shadow: Shadow dulls its many reflective segments.
+  Attack — Opal Mandibles: 3 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Concentrate damage in fewer plays, or bring enough Ward for the ripple.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Opal Centipede.png. An opalescent centipede arches through illuminated bridges.
+  Review: No special pool gate; balance remains untested.
+
+068  The Painted Elephant
+  Trait — Remembered Footfall: If the player used a direct attack from the pair that last damaged its HP on the previous turn, add 3 damage.
+  Weakness — Oblivion: Oblivion erases the pattern the elephant remembers.
+  Attack — Painted Tusk: 6 Memory damage before trait modifiers.
+  Rhythm: Attack each turn; no comparison on turn 1.
+  Choice: The elephant remembers the last striking pair; vary the approach or guard its answer.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Painted Elephant.png. A brightly painted elephant stands with raised trunk and long tusks.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+069  The Painted Raven
+  Trait — Stolen Pigment: If the player used a direct card attack this turn, raise its base damage to that last attack's pre-Ward amount, to a maximum of 8 and minimum of 3.
+  Weakness — Oblivion: Oblivion wipes away the raven's collected colors.
+  Attack — Pigment Beak: 3 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The mimic copies the last attack's strength; follow a large strike with a small one if useful.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Painted Raven.png. A multicolored raven stands beside a traveler holding a palette.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+070  The Paper Nautilus
+  Trait — Nested Folds: After attacking, gain 1 Ward per card left in the player's hand, capped at 4.
+  Weakness — Release: Release unfolds the paper spiral.
+  Attack — Paper Tentacle: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Keeping a large hand gives the spiral more layers to fold.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Paper Nautilus.png. A pale nautilus has a visibly folded, spiral shell.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+071  The Pearl Taxman
+  Trait — Pearl Levy: If the player ends with unspent mana, remove up to 4 player Ward before attacking.
+  Weakness — Release: Release breaks the string that binds the collection.
+  Attack — Levying Hand: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Spend spare mana on a useful card before the collection comes due.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Pearl Taxman.png. A pearl-clad taxman offers one bead from a long string.
+  Review: weakness-needs-wider-pool
+
+072  The Porcelain Hound
+  Trait — Crack and Lunge: If a direct card attack damaged its HP this turn, add 2 damage.
+  Weakness — Release: Release breaks the porcelain joints.
+  Attack — Porcelain Bite: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Expect a small snap-back when pressing damage; no damage is reflected.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Porcelain Hound.png. A white porcelain hound carries a blue floral pattern.
+  Review: weakness-needs-wider-pool
+
+073  The Radiant Undertow
+  Trait — Drawing Current: Before every second attack, remove 2 player Ward per card kept this turn, capped at 6.
+  Weakness — Shadow: Shadow dims the pull of the bright center.
+  Attack — Sunlit Surge: 6 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn; ebb → undertow.
+  Choice: Too much carried weight lets the current pull protection away before the surge.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Radiant Undertow.png. A bright face looms above a spiraling, sunlit wave.
+  Review: keep-interaction
+
+074  The Ragged Conductor
+  Trait — Following the Baton: If the player played 3 or more cards this turn, add an extra 2-damage hit after the base hit.
+  Weakness — Release: Release breaks the ensemble's coordination.
+  Attack — Baton Cut: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A full sequence calls in the ensemble; budget one extra beat when using all three plays.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Ragged Conductor.png. A ragged conductor directs an orchestra of skeletal musicians.
+  Review: weakness-needs-wider-pool
+
+075  The Ribbon General
+  Trait — Ribbon Formation: After attacking, gain Ward equal to the player Ward that absorbed that attack, capped at 4.
+  Weakness — Release: Release parts the commander's ribbons.
+  Attack — Ribbon Lash: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The ribbons catch your guard and fold it into the general's shelter; Weaken limits what they can catch.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Ribbon General.png. A general is wrapped in broad flying red ribbons.
+  Review: weakness-needs-wider-pool
+
+076  The Rootbound Organist
+  Trait — Root Pedal: On swelling turns, heal 2 HP and remove its remaining Burn instead of attacking.
+  Weakness — Decay: Decay rots the roots feeding the pipes.
+  Attack — Root Organ Chord: 7 Growth damage before trait modifiers.
+  Rhythm: Swell → attack → attack.
+  Choice: Burn ticks before the roots damp it; silence the swell for sustained damage.
+  Hush now: Can cancel this displayed non-attack step: Swell: heal 2 HP and remove remaining Burn. It cannot cancel the attack or its riders.
+  Art inspected: The Rootbound Organist.png. Roots grow from an organist into an immense pipe organ.
+  Review: recovery-stall-check
+
+077  The Rooted Acrobat
+  Trait — Rooted Landing: If its attack is fully absorbed by Ward, heal 2 HP afterward.
+  Weakness — Decay: Decay withers the anchoring roots.
+  Attack — Anchored Kick: 6 Growth damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A full block is safe but lets the roots settle; compare that recovery with taking HP damage.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Rooted Acrobat.png. An acrobat reaches upward while thick roots anchor the legs.
+  Review: recovery-stall-check
+
+078  The Sable Locksmith
+  Trait — Turn the Key: Every second attack ignores all player Ward.
+  Weakness — Release: Release opens what the locks hold shut.
+  Attack — Sable Key: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn; key turns on even attacks.
+  Choice: Weaken dulls the strike; extra Ward cannot block the turning key. Hush cannot cancel this attack.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Sable Locksmith.png. A locksmith carries keys before a giant keyhole tower.
+  Review: weakness-needs-wider-pool, full-ward-bypass-advanced
+
+079  The Saffron Spider
+  Trait — Saffron Snare: If the player used Keep this turn, add one additional hit.
+  Weakness — Decay: Decay withers its living, plantlike body.
+  Attack — Saffron Fang: 3 Growth damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Kept prey gives both fangs a target; save enough Ward to block both hits.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Saffron Spider.png. A huge orange spider towers over a saffron-colored landscape.
+  Review: keep-interaction
+
+080  The Salt Crown
+  Trait — Crystallize: If no direct card attack damaged its HP this turn, gain 4 Ward after attacking.
+  Weakness — Release: Release disperses the crystals holding the crown together.
+  Attack — Salt Shard: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Reach its core before new crystals grow over it; Burn alone does not stop the formation.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Salt Crown.png. A crystalline salt crown rises above white terraces.
+  Review: weakness-needs-wider-pool
+
+081  The Shadow Puppeteer
+  Trait — Borrowed Gesture: After attacking, turn one chosen card carried with Keep to its opposite face; the player chooses, if any.
+  Weakness — Radiance: Radiance reveals the controlling hands and strings.
+  Attack — Shadow String: 6 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Choose which carried card takes the forced gesture; it can occasionally help.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Shadow Puppeteer.png. An inky puppeteer holds strings over dancing silhouettes.
+  Review: keep-interaction
+
+082  The Shivering Cabinet
+  Trait — Hands Within: If a direct card attack removed all of its Ward this turn, add one extra 3-damage hit.
+  Weakness — Release: Release opens the cabinet's confinement.
+  Attack — Cabinet Slam: 5 Binding damage before trait modifiers.
+  Rhythm: Gain 4 Ward → attack → attack.
+  Choice: Breaking its door exposes the hands inside; save enough protection for their reply.
+  Hush now: Can cancel this displayed non-attack step: Gain 4 Ward. It cannot cancel the attack or its riders.
+  Art inspected: The Shivering Cabinet.png. A tall cabinet's partly open door reveals reaching hands.
+  Review: weakness-needs-wider-pool
+
+083  The Silver Orchard
+  Trait — Silver Harvest: On harvesting turns, heal up to 4 HP and gain Ward equal to HP actually healed instead of attacking.
+  Weakness — Decay: Decay withers the fruiting branches.
+  Attack — Silver Bough: 7 Growth damage before trait modifiers.
+  Rhythm: Harvest → attack → attack.
+  Choice: The orchard stores its recovered vitality as shelter; Hush can stop the harvest before it ripens.
+  Hush now: Can cancel this displayed non-attack step: Harvest: heal up to 4 HP and gain Ward equal to HP actually healed. It cannot cancel the attack or its riders.
+  Art inspected: The Silver Orchard.png. Silver trees carry shining leaves in a pale orchard.
+  Review: recovery-stall-check
+
+084  The Sleep Merchant
+  Trait — Drowsy Bargain: After each second attack, one chosen Kept card goes to the bottom of the player's draw pile, if any.
+  Weakness — Oblivion: Oblivion breaks the stored dream.
+  Attack — Dream Toll: 5 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: You choose what sleeps; the merchant delays a card without destroying it.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Sleep Merchant.png. A merchant offers glowing vessels containing sleeping shapes.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks, keep-interaction
+
+085  The Sleepwalking Bridge
+  Trait — Follow the Sleepwalkers: If the player carried at least 1 card from last turn and played none of those carried cards, add 3 damage.
+  Weakness — Release: Release breaks the compulsory procession.
+  Attack — Bridge Tilt: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Use an answer you saved instead of sleepwalking it through another turn.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Sleepwalking Bridge.png. Sleepwalkers cross a bridge shaped by a looming pale figure.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+086  The Smiling Kiln
+  Trait — Feed the Fire: If it still has Burn after the tick, add damage equal to that Burn, capped at 3.
+  Weakness — Frost: Frost cools the kiln's furnace.
+  Attack — Kiln Breath: 6 Flame damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Burn damages it normally but also stokes the breath; use Weaken or more Ward when feeding the fire.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Smiling Kiln.png. A smiling kiln glows with fire beneath a smoking chimney.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+087  The Soot Bride
+  Trait — Soot Veil: If the player used Scry this turn, gain 5 Ward after attacking.
+  Weakness — Growth: Growth restores what the soot has blighted.
+  Attack — Soot Kiss: 5 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Looking through the smoke remains useful, but the bride closes her veil afterward.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Soot Bride.png. A soot-dark veil trails from a pale bride under a black plume.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+088  The Starved Banquet
+  Trait — Hungry Table: After attacking, heal HP equal to the player HP damage dealt, capped at 4.
+  Weakness — Growth: Growth replenishes the starved table.
+  Attack — Banquet Maw: 6 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A full block leaves the table hungry; a partial block also reduces how much it can eat.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Starved Banquet.png. An enormous crowned diner presides over an empty banquet table.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks, recovery-stall-check
+
+089  The Stilt Walker
+  Trait — Step Over: If the player has 3 or fewer Ward before the attack, the attack ignores that Ward.
+  Weakness — Binding: Binding fixes the stilts in place.
+  Attack — Stilt Stamp: 5 Release damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Build a real barrier or use Weaken; tiny shields sit below its stride.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Stilt Walker.png. A very tall figure walks on narrow stilts.
+  Review: weakness-needs-wider-pool
+
+090  The Sunken Sun
+  Trait — Rising Tide: On each third attack, add 2 damage for each player card carried with Keep, capped at 4.
+  Weakness — Shadow: Shadow dims the reflected sunlight.
+  Attack — Submerged Ray: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Carry fewer cards when the reflected tide is about to rise.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Sunken Sun.png. A sun's face lies half submerged in a glowing sea.
+  Review: keep-interaction
+
+091  The Sunstruck Crocodile
+  Trait — Basking Jaws: On basking turns, gain 3 Ward; its next attack adds 3 damage.
+  Weakness — Shadow: Shadow deprives its sunlit charge of a clear target.
+  Attack — Sunstruck Snap: 5 Radiance damage before trait modifiers.
+  Rhythm: Bask → attack.
+  Choice: Hush can cancel the bask. The next scheduled snap still has its bonus; Weaken can reduce that snap.
+  Hush now: Can cancel this displayed non-attack step: Bask: gain 3 Ward. It cannot cancel the attack or its riders.
+  Art inspected: The Sunstruck Crocodile.png. A pale crocodile basks with open jaws beneath the sun.
+  Review: No special pool gate; balance remains untested.
+
+092  The Tall Seamstress
+  Trait — Hem the Hand: After attacking, put one chosen Kept card on top of the player's draw pile, if any.
+  Weakness — Release: Release cuts the long seam.
+  Attack — Tall Needle: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The card remains available next draw, but carrying it no longer adds a hand slot.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Tall Seamstress.png. A towering seamstress stitches a long red span between arches.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+093  The Tangle Guest
+  Trait — Tangled Reply: If the player played 2 consecutive copies of the same pair this turn, add 3 damage.
+  Weakness — Release: Release untangles the guest's woven body.
+  Attack — Tangle Clutch: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Separate duplicate pairs with another play to avoid knotting the sequence.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Tangle Guest.png. A pale guest is woven from looping strands and openings.
+  Review: weakness-needs-wider-pool
+
+094  The Tar Albatross
+  Trait — Heavy Feathers: After each third attack, move up to 2 chosen Kept cards to discard.
+  Weakness — Growth: Growth reclaims the tar-stained living surface.
+  Attack — Tar Wing: 6 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: The heavy downbeat tests Keep planning without deleting deck cards.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Tar Albatross.png. Black tar drips from a spread-winged albatross.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks, keep-interaction
+
+095  The Thorned Librarian
+  Trait — Closed Chapter: If the player returned a card from discard to hand this turn, remove up to 3 player Ward before attacking.
+  Weakness — Release: Release pulls the book free of its constraining thorns.
+  Attack — Thorn Page: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Reopening a chapter catches the thorns; save more Ward for a retrieval turn.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Thorned Librarian.png. A thorn-crowned librarian holds an open book among shelves.
+  Review: weakness-needs-wider-pool, keep-interaction
+
+096  The Threadbare Duke
+  Trait — Scraps of Shelter: Gain 1 Ward per card the player discarded through card effects this turn, capped at 4, after attacking.
+  Weakness — Growth: Growth renews the wasted cloth and body.
+  Attack — Frayed Rapier: 6 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Ordinary end-turn discards do not count; only deliberate card effects feed the scraps.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Threadbare Duke.png. A ragged duke's garments hang in long, fraying strips.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+097  The Threaded Monarch
+  Trait — Royal Choreography: If the player played cards in light → dark → light or dark → light → dark order among their first 3 plays, add 3 damage.
+  Weakness — Release: Release cuts the monarch's commanding threads.
+  Attack — Golden Thread: 6 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Break the imposed choreography; the three visible face labels show the pattern.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Threaded Monarch.png. A radiant monarch controls figures with taut golden threads.
+  Review: weakness-needs-wider-pool
+
+098  The Tooth Collector
+  Trait — Another Tooth: If the player lost HP through a card payment this turn, gain 4 Ward after attacking.
+  Weakness — Growth: Growth restores what has been extracted and lost.
+  Attack — Tooth Hook: 5 Decay damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Power paid in HP leaves a trophy, but never triggers extra HP loss.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Tooth Collector.png. A dark collector carries a bag filled with teeth.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+099  The Umbrella Beast
+  Trait — Open Canopy: On canopy turns, gain Ward equal to player Ward, capped at 6, instead of attacking.
+  Weakness — Release: Release collapses the umbrellas' supporting frames.
+  Attack — Umbrella Rib: 7 Binding damage before trait modifiers.
+  Rhythm: Canopy → attack.
+  Choice: A shelter-copying quiet turn asks for setup rather than unnecessary shielding.
+  Hush now: Can cancel this displayed non-attack step: Canopy: gain the displayed Ward, capped at 6. It cannot cancel the attack or its riders.
+  Art inspected: The Umbrella Beast.png. Umbrellas hang from a towering long-limbed beast.
+  Review: weakness-needs-wider-pool
+
+100  The Unblinking Shepherd
+  Trait — No Straying: If the player moved a card to the bottom of the draw pile this turn, add 3 damage.
+  Weakness — Shadow: Shadow conceals a stray from its unblinking eye.
+  Attack — Shepherd's Crook: 5 Radiance damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Scry's keep-on-top option avoids straying; bottoming remains legal.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Unblinking Shepherd.png. A single bright eye watches sheep moving along a narrow path.
+  Review: No special pool gate; balance remains untested.
+
+101  The Unquiet Whelk
+  Trait — Shell Echo: If the player returned a card from discard this turn, add one additional 3-damage hit.
+  Weakness — Oblivion: Oblivion ends the sea-echo held in the shell.
+  Attack — Whelk Call: 4 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: A returning card wakes the echo; guard both notes rather than relying on first-hit Weaken.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Unquiet Whelk.png. An open spiral whelk shell releases curling shapes over water.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+102  The Unseen Horse
+  Trait — Passing Shadow: If the player did not use Scry this turn, its attack ignores up to 3 player Ward.
+  Weakness — Radiance: Radiance outlines the otherwise unseen animal.
+  Attack — Unseen Hoof: 5 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Looking ahead locates the approaching hoofbeats; Weaken also answers the unseen charge.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Unseen Horse.png. A horse's silhouette appears as a gap in the sweeping landscape.
+  Review: No special pool gate; balance remains untested.
+
+103  The Velvet Eel
+  Trait — Velvet Coil: If the player played no draw effect this turn, remove up to 3 player Ward before attacking.
+  Weakness — Release: Release slips the eel's encircling coils.
+  Attack — Coiling Bite: 5 Binding damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Drawing wriggles free of the coil; a normal five-card draw does not count.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Velvet Eel.png. A long velvet eel curves around arches above water.
+  Review: weakness-needs-wider-pool
+
+104  The Velvet Mole
+  Trait — Burrow Under: Every second attack ignores up to 4 player Ward.
+  Weakness — Binding: Binding pins the digging claws and closes the tunnel.
+  Attack — Velvet Claw: 5 Release damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Its alternating tunnel turn favors Weaken or a shield larger than 4 Ward.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Velvet Mole.png. A velvet mole pushes great claws out of dark soil.
+  Review: weakness-needs-wider-pool
+
+105  The Velvet Skeleton
+  Trait — Remembered Courtesy: If the player ends with 0 mana, gain 3 Ward after attacking.
+  Weakness — Oblivion: Oblivion releases the remembered courtly gesture.
+  Attack — Velvet Finger: 5 Memory damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Leaving one mana can deny a shield, but costs a play; preview that trade.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Velvet Skeleton.png. A velvet-robed skeleton raises a bare hand beneath the moon.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+106  The Wax Regent
+  Trait — Wax Seal: After an attack that deals player HP damage, put every card currently carried with Keep on top of the draw pile, in the player's chosen order.
+  Weakness — Frost: Frost cools the ruler's burning wax.
+  Attack — Regent's Scald: 6 Flame damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Fully block the scald to preserve the extra carried hand; otherwise choose the sealed cards' order.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Wax Regent.png. A candle-covered ruler melts into broad wax drapes.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks, keep-interaction
+
+107  The Whispering Casket
+  Trait — Whispered Name: If a card with the same pair as last turn's final played card is played this turn, add 2 damage.
+  Weakness — Oblivion: Oblivion lays the lingering whispers to rest.
+  Attack — Casket Murmur: 5 Memory damage before trait modifiers.
+  Rhythm: Attack each turn; no remembered name on turn 1.
+  Choice: The last named pair is displayed; choose another voice when possible.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The Whispering Casket.png. Smoke-like spirits curl from an open casket.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks
+
+108  The White Furnace
+  Trait — Open Furnace: Every third attack ignores all player Ward.
+  Weakness — Frost: Frost cools the exposed furnace core.
+  Attack — White Heat: 7 Flame damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: An advanced threat: save Weaken or finish the fight before the clearly signaled open-core blast.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: The White Furnace.png. A giant pale figure holds an intense furnace-like light in its chest.
+  Review: weakness-needs-wider-pool, sparse-weakness-attacks, full-ward-bypass-advanced
+
+109  The Wicker Sleeper
+  Trait — Dreaming Cradle: On sleeping turns, heal 5 HP instead of attacking.
+  Weakness — Decay: Decay rots the cradle's living plant fibers.
+  Attack — Wicker Reach: 7 Growth damage before trait modifiers.
+  Rhythm: Sleep → attack → attack.
+  Choice: Hush turns the nap into a clean damage window; watch repeat-healing stalls.
+  Hush now: Can cancel this displayed non-attack step: Sleep: heal 5 HP. It cannot cancel the attack or its riders.
+  Art inspected: The Wicker Sleeper.png. A sleeping figure lies inside a woven wicker cradle.
+  Review: recovery-stall-check
+
+110  Velvet Widow
+  Trait — Patient Web: If the player played 1 or fewer cards this turn, add 2 damage.
+  Weakness — Radiance: Radiance exposes the hunter beneath the moonlit velvet.
+  Attack — Velvet Fang: 5 Shadow damage before trait modifiers.
+  Rhythm: Attack each turn.
+  Choice: Keep pressure with useful plays; Ward or Weaken covers an unavoidable slow turn.
+  Hush now: No non-attack intent in this proposal. Current Hush cannot be played against it.
+  Art inspected: Velvet Widow.png. A velvet-clad woman has long spider legs beneath her dress.
+  Review: keep-interaction
+
+TIMING AND ASSUMPTIONS
+
+• This is a local design proposal for all 110 existing enemy artworks, not runtime content or playtested balance. No main design or card catalogue was edited.
+• Each enemy has exactly one named trait, one opposing-theme weakness and one named base attack. Rhythm is the schedule of that trait and attack. Some traits have two phases within one short rhythm. Related materials can share familiar operations; unique means a distinct named rule and encounter combination, not 110 new keywords.
+• Attack numbers are provisional damage per hit. An attack has the enemy's single printed type throughout all its hits; added damage and additional hits keep that type. No damage resistance, immunity, retaliation damage or player Burn is introduced.
+• A matching direct card attack gets the current +2 weakness bonus once per played card, before Ward. Burn is always Flame and never receives the weakness bonus. Utility themes do not secretly deal damage.
+• Latest rule contract: Weaken adds together, persists to the next attack and reduces its first hit only, before Ward. Hush cancels only the currently displayed non-attack intent and advances the pattern; every Hush card Banishes itself. It does not silence passive traits, attacks or attack riders. Any earlier trait-silence sketch is superseded here.
+• Design decision to revisit: 90 enemies have no non-attack intent in this proposal, so current Hush is not playable against them. The roster does not assume the broader trait-silence behavior discussed earlier. That would require a separate rules change and new previews.
+• Keep follows the updated rule: marked cards survive end-turn discard, lose their markers, and remain in hand; draw up to five new cards next turn within the eight-card cap. A card leaving hand loses its marker. Enemy effects moving a kept card do not Banish it unless Banish is explicitly stated.
+• For these proposed triggers, snapshot cards kept this turn immediately after end-turn discard, before their markers clear. A reference to currently kept/carried cards means this snapshot intersected with cards still in hand. A reference to cards carried from the previous turn instead means physical cards already in hand before this turn's normal draw. Show both counts when relevant.
+• All player-turn counters record successfully resolved card effects only, including extra plays from mana gain. Normal turn draw and automatic end-turn discard are not draw/discard card effects. Record physical IDs and pair IDs, current face on play, direct damage types, HP payments, HP healing, Ward gained, and the stated history from the immediately previous turn. No comparison is made on turn 1 unless specified.
+• Exact order: inspect dynamic intent during the player turn; snapshot/discard the hand; tick and reduce Burn; if the enemy survives, expire its old Ward at the start of its action even if Hushed; resolve either the displayed non-attack action or pre-attack trait, base attack and post-attack trait. Stop immediately if player HP reaches zero. Enemy healing is capped at its configured maximum HP.
+• Once an action starts, evaluate each condition at its stated point. A base-hit trigger uses the leading hit after Weaken and Ward, before any extra hit; it cannot trigger itself recursively. Fully absorbed by Ward requires positive damage to have been absorbed and zero HP damage; Weaken reducing a hit to zero alone is not Ward absorption.
+• If a pattern advances by turns or attacks, display its step explicitly. A canceled non-attack action still advances. Suppressing a preparation action does not remove a separately scheduled next-turn bonus: for example, canceling Basking Jaws' Ward turn does not cancel the next snap's +3. No hidden charge status is implied.
+• For top-card effects, reshuffle discard when draw is empty, as in the main rules. If both are empty, do nothing. Moved cards preserve their faces. Player-chosen card moves show targets; no legal target means that trait clause does nothing. When an enemy moves multiple kept cards to the top, the player chooses the order.
+• Conditional effects change the intent preview as cards are played. Before ending the turn, show each hit after Weaken, Ward removed or ignored, the predicted HP loss, healing/Ward afterward, and any card movement. Keep the conditions readable outside the art.
+• No enemy HP, unlock order or finalized run difficulty is assigned here. The existing five-fight route remains a separate fixture; this broader roster proposes different rhythms for some of those enemies. The parent task should reconcile them before implementing a route.
+
+THOUGHT EXPERIMENTS — MANUAL REASONING, NOT PLAYTEST RESULTS
+
+• Porcelain Choir and Weaken: Three Voices: 3 hits of 2 Binding; player has Weaken 3 and 3 Ward. Hits become 0, 2, 2. Ward absorbs 3 total; player loses 1 HP. Current Hush cannot be played against the attack. Multi-hit pressure makes Ward and Weaken meaningfully different without bypassing the damage rules.
+• Dentist extracts the shield: Ivory Dentist: 4 Release damage; player has 7 Ward and no Weaken. Extraction removes 5 Ward, leaving 2. The hit consumes those 2 and deals 2 HP damage. Weaken 4 would prevent the HP loss. The pull has intuitive counterplay; extra small shields are inefficient, but all damage still has one type.
+• Basking is canceled: Hush cancels the Crocodile's displayed Bask action. It gains no 3 Ward and advances to its attack. Its next scheduled snap is still 8 Radiance, because the trait uses a fixed rhythm, not a stored charge. Preview this explicitly; if players expect Hush to remove the next bonus too, revise the trait to use a charge or simplify it.
+• Burn before the ash bed: Ashen Gardener has 3 Burn and 0 Ward at player turn end. It first takes 3 Flame damage and Burn falls to 2. If alive, it attacks, then removes the remaining 2 Burn and gains 2 Ward. Burn is never retroactively prevented; the conversion is a visible trait, not a resistance.
+• Wax seals a carried hand: The player keeps two cards, then the Wax Regent deals HP damage. Wax Seal puts those physical cards on top of draw in the player's chosen order. Next turn they are part of the normal five-card draw, not two extra carried cards. The sticky seal delays the benefit of Keep without permanently destroying cards.
+• Raven copies strength: Player uses a 9-damage direct attack, then a 4-damage direct attack against Painted Raven. Its Memory hit becomes 4; if the 9 were last it would be capped at 8. Weaken is applied afterward. It never copies both damage types or the attack's heal. Play order creates a readable choice; damage remains single-type.
+• Ward does not carry through quiet turns: Player gains 6 Ward against an enemy's non-attack action. Unused player Ward expires next turn. The roster therefore does not treat merely removing player Ward on a quiet turn as a threatening trait. Ward-stripping traits now act immediately before attacks, where they have a real effect.
+• No Keep in the pool: Saffron Spider faces a deck with no Keep cards. Its second fang never triggers; it becomes a 3-damage single-hit foe. Keep-responsive enemies belong in a pool where Keep is obtainable; do not count their full trait pressure in a starter fixture.
+• Untyped utility is not a weakness attack: A Frost-weak enemy faces the starter's Frost face, which only grants Ward. Frost deals no direct damage and earns no +2 bonus. Flame enemies need a wider reward pool containing actual Frost attacks; thematic names alone are insufficient.
+• An arrest without a valid card: On the Amber Bailiff's third attack turn, the last player card played Banishes itself. It is already outside discard, so Amber Custody takes no card. Otherwise the exact last played physical card is banished for this fight and returns afterward. A visible last-play target gives the player a deliberate way to protect a vital pair.
+
+VERIFICATION
+110 / 110 source filenames and SHA-256 hashes match; 110 unique IDs, trait names, attack names and trait texts.
+HTML contains all 110 corresponding entries and embedded review thumbnails. No enemy art remains uninspected.
+Browser preview was denied because file:// is blocked. HTML layout and interactive filters remain unverified in a running browser.
+Only the new catalogue and coverage files were authored. Existing game rules and card catalogue were read, not edited.
