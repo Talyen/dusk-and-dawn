@@ -1,6 +1,65 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+test("collection cards fit above pagination at different window and game sizes", async ({ page }) => {
+  for (const { width, height, gameSize } of [
+    { width: 1280, height: 720, gameSize: 100 },
+    { width: 1280, height: 720, gameSize: 120 },
+    { width: 640, height: 480, gameSize: 120 },
+    { width: 1920, height: 1080, gameSize: 120 },
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.goto("/");
+    await page.evaluate((size) => {
+      localStorage.setItem(
+        "dusk-and-dawn.settings.v1",
+        JSON.stringify({ gameSizePercent: size, reducedMotion: true }),
+      );
+    }, gameSize);
+    await page.reload();
+    await page.getByRole("button", { name: "Collection" }).click();
+    for (const tab of ["Cards", "Enemies"]) {
+      await page.getByRole("button", { name: tab, exact: true }).click();
+      const cards = page.locator(".game-card");
+      const pagination = page.getByRole("navigation", { name: "Card pages" });
+      await expect(pagination).toBeInViewport({ ratio: 1 });
+      const bounds = await page.evaluate(() => {
+        const pagination = document.querySelector(".pagination")!.getBoundingClientRect();
+        const cards = [...document.querySelectorAll(".game-card")].map((card) =>
+          card.getBoundingClientRect(),
+        );
+        return {
+          scrollHeight: document.documentElement.scrollHeight,
+          bottom: Math.max(...cards.map((card) => card.bottom)),
+          paginationTop: pagination.top,
+        };
+      });
+      expect(bounds.scrollHeight).toBeLessThanOrEqual(height);
+      expect(bounds.bottom).toBeLessThanOrEqual(bounds.paginationTop);
+      if (width === 1280 && gameSize === 100) {
+        const box = (await cards.first().boundingBox())!;
+        expect(box.width).toBeGreaterThan(tab === "Cards" ? 150 : 200);
+      }
+    }
+  }
+});
+
+test("card corners and inspection border widths follow Alchemy", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Collection" }).click();
+  const card = page.getByRole("img", { name: "Player card 1" });
+  expect(await card.evaluate((element) => getComputedStyle(element).borderRadius)).toBe("30px");
+  expect(await card.evaluate((element) => getComputedStyle(element).borderWidth)).toBe("1px");
+  await page.mouse.move(0, 0);
+  await page.keyboard.press("Tab");
+  await card.focus();
+  const shine = card.locator(".shine-border rect");
+  await expect(shine).toHaveCSS("stroke-width", "2px");
+  await card.hover();
+  await expect(shine).toHaveCSS("stroke-width", "3px");
+});
+
 test("browses both card shapes by hover or keyboard without click inspection", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/");
@@ -74,7 +133,9 @@ test("display and audio preferences persist and scale independently", async ({ p
     .evaluate((element) => parseFloat(getComputedStyle(element).fontSize));
   expect(tooltipSize).toBeCloseTo(16 * 1.2 * 1.25, 1);
   await page.setViewportSize({ width: 1920, height: 1080 });
-  await expect.poll(async () => (await card.boundingBox())!.width / width).toBeCloseTo(1.36, 1);
+  // The smaller window caps card size to keep pagination in view; a larger
+  // window can use the additional height as well as the normal UI scale.
+  await expect.poll(async () => (await card.boundingBox())!.width / width).toBeGreaterThan(1.36);
   await page.reload();
   await page.getByRole("button", { name: "Options" }).click();
   await page.getByRole("button", { name: "Sound" }).click();
@@ -93,7 +154,13 @@ test("flips tooltips at the viewport edge and dismisses on scroll", async ({ pag
   await page.getByRole("button", { name: "Collection" }).click();
   const card = page.getByRole("img", { name: "Player card 1" });
   await card.evaluate((element) =>
-    Object.assign(element.parentElement!.style, { position: "fixed", top: "1px", left: "1px", zIndex: "2" }),
+    Object.assign(element.parentElement!.style, {
+      width: `${element.getBoundingClientRect().width}px`,
+      position: "fixed",
+      top: "1px",
+      left: "1px",
+      zIndex: "2",
+    }),
   );
   await card.hover();
   const tooltip = page.getByRole("tooltip");

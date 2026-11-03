@@ -306,19 +306,21 @@ input:focus-visible,
   text-align: center;
 }
 .card-grid-shell {
+  /* Reserve space for the header, tabs, row gap and pagination before sizing two rows. */
+  --collection-card-width: min(calc(10 * var(--ui-unit)), calc((100vh - 15.5 * var(--ui-unit)) * 3 / 8));
   position: relative;
   width: 100%;
   margin: calc(0.75 * var(--ui-unit)) auto 0;
 }
+.card-grid-shell--enemy {
+  --collection-card-width: min(calc(13.5 * var(--ui-unit)), calc((100vh - 15.5 * var(--ui-unit)) * 2 / 3));
+}
 .card-grid-measure {
   position: absolute;
-  width: calc(7.25 * var(--ui-unit));
+  width: min(100%, var(--collection-card-width));
   height: 1px;
   visibility: hidden;
   pointer-events: none;
-}
-.card-grid-shell--enemy .card-grid-measure {
-  width: calc(10 * var(--ui-unit));
 }
 .card-grid {
   display: flex;
@@ -339,17 +341,11 @@ input:focus-visible,
   justify-items: center;
   gap: calc(0.5 * var(--ui-unit));
   min-width: 0;
-  width: calc(7.25 * var(--ui-unit));
+  width: var(--collection-card-width);
   flex: 0 1 auto;
 }
-.card-grid-shell--enemy .card-grid-item {
-  width: calc(10 * var(--ui-unit));
-}
-.card-grid-item .card-wrap--portrait {
-  width: min(100%, calc(7.25 * var(--ui-unit)));
-}
-.card-grid-item .card-wrap--landscape {
-  width: min(100%, calc(10 * var(--ui-unit)));
+.card-grid-item .card-wrap {
+  width: 100%;
 }
 .pagination {
   display: flex;
@@ -372,12 +368,13 @@ input:focus-visible,
   width: calc(16 * var(--ui-unit));
 }
 .game-card {
+  --card-radius: calc(1.875 * var(--ui-unit));
   display: block;
   position: relative;
   width: 100%;
   padding: 0;
-  border: 1px solid var(--color-border);
-  border-radius: calc(1.875 * var(--ui-unit));
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  border-radius: var(--card-radius);
   background: #0d0c12;
   cursor: default;
   scale: 1;
@@ -412,7 +409,7 @@ input:focus-visible,
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border-radius: max(0px, calc(1.875 * var(--ui-unit) - 1px));
+  border-radius: max(0px, calc(var(--card-radius) - 1px));
 }
 .game-card__blank {
   display: block;
@@ -572,6 +569,7 @@ input:focus-visible,
   opacity: 0.6;
 }
 .shine-border {
+  --shine-width: 2px;
   position: absolute;
   inset: -1px;
   width: calc(100% + 2px);
@@ -579,6 +577,17 @@ input:focus-visible,
   overflow: visible;
   pointer-events: none;
   z-index: 2;
+}
+.game-card:hover .shine-border {
+  --shine-width: 3px;
+}
+.shine-border rect {
+  x: calc(var(--shine-width) / 2);
+  y: calc(var(--shine-width) / 2);
+  width: calc(100% - var(--shine-width));
+  height: calc(100% - var(--shine-width));
+  rx: max(0px, calc(var(--card-radius) - var(--shine-width) / 2));
+  stroke-width: var(--shine-width);
 }
 .shine-border stop {
   animation: border-color-shine 14s linear infinite;

@@ -24,16 +24,7 @@ export function ShineBorder({ keywordIds }: { keywordIds: readonly string[] }) {
           ))}
         </linearGradient>
       </defs>
-      <rect
-        x="0"
-        y="0"
-        width="100%"
-        height="100%"
-        rx="calc(1.875 * var(--ui-unit))"
-        fill="none"
-        stroke={`url(#${gradientId})`}
-        strokeWidth="3"
-      />
+      <rect fill="none" stroke={`url(#${gradientId})`} />
     </svg>
   );
 }

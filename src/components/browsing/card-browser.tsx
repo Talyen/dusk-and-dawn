@@ -66,7 +66,7 @@ export function CardBrowser({
     if (!grid || !measure) return;
     const update = () => {
       const width = measure.getBoundingClientRect().width;
-      const gap = width / (kind === "cards" ? 7.25 : 10);
+      const gap = parseFloat(getComputedStyle(grid.querySelector(".card-grid")!).rowGap) || 0;
       if (width > 0 && grid.clientWidth > 0) {
         const next = Math.max(
           1,
