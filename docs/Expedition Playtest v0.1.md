@@ -1,0 +1,11 @@
+# Expedition playtest v0.1
+
+This optional mode implements the small route, run-only relic and starting-orientation experiments in the game design. It is a provisional playtest, not a settled progression or balance model. The original linear fixture and its saved runs remain available.
+
+- The five scheduled fights and midpoint rest remain. After fights one and three, choose a previewed optional combat detour with an extra reward, a rest that heals 4 HP, or an event that costs 4 HP and adds the shown unowned pair. All paths rejoin before the next scheduled fight. The event cannot reduce HP to zero.
+- One selected relic applies for a run: Many Eyes offers up to four reward pairs, Spare Thread permits a second midpoint card removal, and Cracked Vessel starts at 24 of 30 HP with one randomly selected unowned pair from that run's pool.
+- Lamplighter starts each encounter light-side up. Nocturne starts each encounter dark-side up and unlocks after one qualifying expedition; this explicitly overrides the usual reset.
+- Finishing an expedition after reaching the second scheduled fight qualifies, win or loss. The first two qualifying expeditions expand the future card and enemy pools through three tiers. The pool tier is captured at run creation, and unlocks never insert cards into a current deck. The complete original starter deck is always present. Progress and saves are local to the browser or desktop profile.
+- Flat Bless/Curse scaling and the absence of early Freeze thaw remain previews of open design questions. The tier boundaries, event, healing, qualification threshold and unlock cadence are provisional product choices for testing; cosmetics and additional bespoke starting decks have no specified content yet.
+
+Automated policies are useful for finding dominant interactions, not estimating human win rates. Initial 50-seed samples using the same attack-oriented policy produced 49 wins on the rest route, 46 with combat detours, 45 with combat plus Many Eyes, 45 with event plus Spare Thread, and 50 with a dark start plus Cracked Vessel. The last combination ended with more health on average (22.7) than the light/rest sample (19.1); test these combinations with people before settling their values.

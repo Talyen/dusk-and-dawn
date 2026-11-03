@@ -308,8 +308,8 @@ const enemyIndex = new Map<string, Enemy>(simpleEnemies.map((enemy) => [enemy.id
 export function validEncounter(id: string): boolean {
   return id === "fixture:0" || id === "fixture:4" || enemyIndex.has(id);
 }
-export function getEnemy(s: Pick<RunState, "fight" | "encounters">): Enemy {
-  const id = s.encounters?.[s.fight];
+export function getEnemy(s: Pick<RunState, "fight" | "encounters" | "experiment">): Enemy {
+  const id = s.experiment?.route?.active ? s.experiment.route.enemy : s.encounters?.[s.fight];
   if (id === "fixture:0") return route[0]!;
   if (id === "fixture:4") return route[4]!;
   if (id) {
@@ -319,10 +319,25 @@ export function getEnemy(s: Pick<RunState, "fight" | "encounters">): Enemy {
   }
   return route[s.fight]!;
 }
-function chooseEncounters(rng: Rng): string[] {
-  const regular = simpleEnemies.filter((enemy) => enemy.hp <= 30 && enemy.name !== "Radiant Moth");
-  const elites = simpleEnemies.filter((enemy) => enemy.hp >= 32 && enemy.hp < 42);
-  const bosses = simpleEnemies.filter((enemy) => enemy.hp >= 42);
+function unlocked<T>(items: readonly T[], tier: number): T[] {
+  return items.slice(0, Math.ceil((items.length * Math.min(3, Math.max(1, tier))) / 3));
+}
+function rewardPool(tier: number) {
+  return unlocked(rewards, tier);
+}
+function chooseEncounters(rng: Rng, tier = 3): string[] {
+  const regular = unlocked(
+    simpleEnemies.filter((enemy) => enemy.hp <= 30 && enemy.name !== "Radiant Moth"),
+    tier,
+  );
+  const elites = unlocked(
+    simpleEnemies.filter((enemy) => enemy.hp >= 32 && enemy.hp < 42),
+    tier,
+  );
+  const bosses = unlocked(
+    simpleEnemies.filter((enemy) => enemy.hp >= 42),
+    tier,
+  );
   const regulars = shuffle(regular, rng)
     .slice(0, 2)
     .map((enemy) => enemy.id);
@@ -341,7 +356,17 @@ export interface PendingChoice {
   required: number;
 }
 export interface RunState {
-  phase: "battle" | "reward" | "rest" | "victory" | "defeat";
+  phase: "battle" | "reward" | "rest" | "route" | "victory" | "defeat";
+  experiment?:
+    | {
+        id: string;
+        tier: number;
+        orientation: "light" | "dark";
+        relic: "none" | "many-eyes" | "spare-thread" | "cracked-vessel";
+        route?: { enemy: string; pair: Pair; active: boolean } | undefined;
+        restRemovals?: number | undefined;
+      }
+    | undefined;
   fight: number;
   encounters?: string[] | undefined;
   deck: DeckCard[];
@@ -362,6 +387,7 @@ export type Command =
   | { type: "end" }
   | { type: "reward"; pair: Pair | null }
   | { type: "rest"; remove?: string }
+  | { type: "route"; choice: "combat" | "rest" | "event" }
   | { type: "concede" };
 const combatant = (hp: number): Combatant => ({
   hp,
@@ -396,7 +422,7 @@ function beginFight(s: RunState, rng: Rng) {
   s.mana = 3;
   s.zones = emptyZones();
   s.zones.library = shuffle(
-    s.deck.map((c) => ({ ...c, face: "light" as const, kept: false })),
+    s.deck.map((c) => ({ ...c, face: s.experiment?.orientation ?? ("light" as const), kept: false })),
     rng,
   );
   drawCards(s.zones, 5, rng);
@@ -404,16 +430,16 @@ function beginFight(s: RunState, rng: Rng) {
   s.message = `Fight ${s.fight + 1}: ${getEnemy(s).name}`;
 }
 function victory(s: RunState, rng: Rng) {
-  if (s.fight === route.length - 1) {
+  if (s.fight === route.length - 1 && !s.experiment?.route?.active) {
     s.phase = "victory";
     s.message = `${getEnemy(s).name} falls.`;
     return;
   }
   const owned = new Set(s.deck.map((c) => c.pair));
   s.offers = shuffle(
-    rewards.filter((p) => !owned.has(p)),
+    rewardPool(s.experiment?.tier ?? 3).filter((p) => !owned.has(p)),
     rng,
-  ).slice(0, 3);
+  ).slice(0, s.experiment?.relic === "many-eyes" ? 4 : 3);
   s.phase = "reward";
   s.message = "Choose a card pair or skip.";
 }
@@ -624,6 +650,30 @@ function resolveInspection(s: RunState, ids: string[]): boolean {
   delete s.pending;
   return true;
 }
+function continueRoute(s: RunState, rng: Rng) {
+  if (s.experiment) delete s.experiment.route;
+  s.fight++;
+  beginFight(s, rng);
+}
+function offerRoute(s: RunState, rng: Rng) {
+  const experiment = s.experiment!;
+  const candidates = unlocked(
+    simpleEnemies.filter((enemy) => enemy.hp <= 30 && enemy.name !== "Radiant Moth"),
+    experiment.tier,
+  ).filter((enemy) => !s.encounters?.includes(enemy.id));
+  const pairs = rewardPool(experiment.tier).filter((pair) => !s.deck.some((card) => card.pair === pair));
+  if (!candidates.length || !pairs.length) {
+    continueRoute(s, rng);
+    return;
+  }
+  experiment.route = {
+    enemy: candidates[rngInt(rng, candidates.length)]!.id,
+    pair: pairs[rngInt(rng, pairs.length)]!,
+    active: false,
+  };
+  s.phase = "route";
+  s.message = "Choose a path. The routes rejoin before the next encounter.";
+}
 export const runHandler: Handler<RunState, Command, string> = (s, command, rng) => {
   if (command.type === "concede") {
     if (s.pending) return no("Finish the committed inspection first.");
@@ -642,12 +692,29 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       return no("Invalid reward.");
     if (command.pair) s.deck.push({ id: `card-${s.nextId++}`, pair: command.pair });
     s.offers = [];
-    if (s.fight === 1) {
+    if (s.experiment?.route?.active) continueRoute(s, rng);
+    else if (s.fight === 1) {
       s.phase = "rest";
       s.message = "Heal 6 HP or remove one card.";
-    } else {
-      s.fight++;
+    } else if (s.experiment && (s.fight === 0 || s.fight === 2)) offerRoute(s, rng);
+    else continueRoute(s, rng);
+    return yes();
+  }
+  if (command.type === "route") {
+    const path = s.experiment?.route;
+    if (s.phase !== "route" || !path || path.active || !["combat", "rest", "event"].includes(command.choice))
+      return no("No path is available.");
+    if (command.choice === "event" && s.player.hp <= 4) return no("The event requires more than 4 HP.");
+    if (command.choice === "combat") {
+      path.active = true;
       beginFight(s, rng);
+    } else {
+      if (command.choice === "rest") s.player.hp = Math.min(s.player.maxHp, s.player.hp + 4);
+      else {
+        s.player.hp -= 4;
+        s.deck.push({ id: `card-${s.nextId++}`, pair: path.pair });
+      }
+      continueRoute(s, rng);
     }
     return yes();
   }
@@ -657,9 +724,13 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       const i = s.deck.findIndex((c) => c.id === command.remove);
       if (i < 0) return no("Choose a card in the deck.");
       s.deck.splice(i, 1);
-    } else s.player.hp = Math.min(s.player.maxHp, s.player.hp + 6);
-    s.fight++;
-    beginFight(s, rng);
+      if (s.experiment?.relic === "spare-thread" && !s.experiment.restRemovals) {
+        s.experiment.restRemovals = 1;
+        s.message = "Remove one more card or continue.";
+        return yes();
+      }
+    } else if (!s.experiment?.restRemovals) s.player.hp = Math.min(s.player.maxHp, s.player.hp + 6);
+    continueRoute(s, rng);
     return yes();
   }
   if (s.phase !== "battle") return no("No active battle.");
@@ -1198,7 +1269,13 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   else s.message = `Played ${name}.`;
   return yes();
 };
-export function createRun(seed: number) {
+export type ExperimentOptions = {
+  id: string;
+  tier: number;
+  orientation: "light" | "dark";
+  relic: "none" | "many-eyes" | "spare-thread" | "cracked-vessel";
+};
+export function createRun(seed: number, experiment?: ExperimentOptions) {
   const deck = starter.flatMap((pair, i) => [
     { id: `card-${i * 2}`, pair },
     { id: `card-${i * 2 + 1}`, pair },
@@ -1215,10 +1292,18 @@ export function createRun(seed: number) {
     action: 0,
     offers: [],
     message: "",
+    ...(experiment
+      ? { experiment: { ...experiment, tier: Math.min(3, Math.max(1, Math.floor(experiment.tier))) } }
+      : {}),
   };
   // Initialization consumes the same serializable RNG stream as later commands.
   const boot: Handler<RunState, { type: "boot" }, string> = (s, _c, rng) => {
-    s.encounters = chooseEncounters(rng);
+    s.encounters = chooseEncounters(rng, s.experiment?.tier ?? 3);
+    if (s.experiment?.relic === "cracked-vessel") {
+      const pool = rewardPool(s.experiment.tier).filter((pair) => !s.deck.some((card) => card.pair === pair));
+      s.deck.push({ id: `card-${s.nextId++}`, pair: pool[rngInt(rng, pool.length)]! });
+      s.player.hp = 24;
+    }
     beginFight(s, rng);
     return yes();
   };

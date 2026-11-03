@@ -212,6 +212,7 @@ test("desktop resumes a saved combat after relaunch", async () => {
     try {
       const page = await app.firstWindow();
       await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Start new run" }).click();
       await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
       await page.getByRole("button", { name: "End turn" }).click();
       await expect
@@ -234,6 +235,38 @@ test("desktop resumes a saved combat after relaunch", async () => {
       await page.getByRole("button", { name: "Continue run" }).click();
       await expect(page.getByText(/HP 26\/30/)).toBeVisible();
       await expect(page.getByText(/Next: Open-Wing Dust/)).toBeVisible();
+    } finally {
+      await reopened.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("desktop retains expedition unlocks after relaunch", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-expedition-"));
+  const launch = () =>
+    electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+  try {
+    const app = await launch();
+    try {
+      const page = await app.firstWindow();
+      await page.evaluate(() =>
+        localStorage.setItem("dusk-and-dawn.expeditions.v1", JSON.stringify({ completed: ["test-run"] })),
+      );
+    } finally {
+      await app.close();
+    }
+    const reopened = await launch();
+    try {
+      const page = await reopened.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Configure expedition" }).click();
+      await expect(page.getByText(/Pool tier 2\/3/)).toBeVisible();
+      await expect(page.getByRole("option", { name: /Nocturne/ })).toBeEnabled();
     } finally {
       await reopened.close();
     }

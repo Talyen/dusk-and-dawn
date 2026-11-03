@@ -1,6 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { createRun } from "../../src/lib/game/run";
+import { createRun, runHandler } from "../../src/lib/game/run";
+import { restoreSession } from "../../src/lib/game/session";
 import { encodeRun } from "../../src/lib/game/run-save";
 
 test.beforeEach(async ({ page }) => {
@@ -450,6 +451,7 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
   const card = page.locator(".battle-card").first();
@@ -470,6 +472,7 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
 test("a run can be resumed after reloading", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.getByText(/HP 26\/30/)).toBeVisible();
@@ -552,6 +555,7 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   const encountered = new Set<string>();
   for (let step = 0; step < 300; step++) {
@@ -613,6 +617,7 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
 test("encountered enemies remain discovered in the real collection", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await expect
     .poll(async () =>
@@ -707,6 +712,7 @@ test("battle actions stay usable on a small viewport", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 480 });
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
   await page.locator(".battle-card").first().click();
   const play = page.getByRole("button", { name: /^Play / });
@@ -714,4 +720,130 @@ test("battle actions stay usable on a small viewport", async ({ page }) => {
   await play.click();
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
+});
+
+test("expedition event survives reload and unlocks the dark start for a future run", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(31, { id: "browser-expedition", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = game.getSnapshot().state.experiment!.route!;
+  const saved = encodeRun(game.getSnapshot());
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+  await expect(page.getByText(`Event pair:`, { exact: false })).toContainText(route.pair.split(" & ")[0]!);
+  await page.getByRole("button", { name: /^Event: lose 4 HP/ }).click();
+  await expect(page.getByText(/HP 26\/30/)).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.fight,
+      ),
+    )
+    .toBe(1);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByText(/HP 26\/30/)).toBeVisible();
+  await page.getByRole("button", { name: "Concede" }).click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.expeditions.v1") || "{}")),
+    )
+    .toEqual({ completed: ["browser-expedition"] });
+  await page.getByRole("button", { name: "Return to main menu" }).click();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Configure expedition" }).click();
+  await expect(page.getByText(/Pool tier 2\/3/)).toBeVisible();
+  await page.getByLabel("Starting orientation").selectOption("dark");
+  await page.getByLabel("Run relic").selectOption("cracked-vessel");
+  await page.getByRole("button", { name: "Start expedition" }).click();
+  await expect(page.getByText(/HP 24\/30/)).toBeVisible();
+  await expect(page.locator(".battle-card").first()).toContainText("dark");
+});
+
+test("plays a full branching expedition through the browser", async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.addInitScript(() => {
+    Math.random = () => 0;
+  });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Configure expedition" }).click();
+  await page.getByLabel("Run relic").selectOption("many-eyes");
+  await page.getByRole("button", { name: "Start expedition" }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  const encountered = new Set<string>();
+  let branches = 0;
+  for (let step = 0; step < 300; step++) {
+    const title = (await page.locator("#battle-title").innerText()).trim();
+    if (title === "Victory") break;
+    if (title === "Run ended") throw new Error(`Seeded browser run ended in defeat after ${step} decisions`);
+    if (title === "Choose a path") {
+      branches++;
+      await page.getByRole("button", { name: branches === 1 ? /^Combat:/ : /^Rest: heal 4/ }).click();
+      continue;
+    }
+    if (title === "Choose a reward") {
+      await page.getByRole("button", { name: "Skip reward" }).click();
+      continue;
+    }
+    if (title === "A moment of rest") {
+      await page.getByRole("button", { name: "Heal 6 HP" }).click();
+      continue;
+    }
+    encountered.add(title);
+    const player = page.locator(".battle-board .battle-panel").first();
+    const enemy = page.locator(".battle-enemy");
+    const playerStats = await player.locator("p").first().innerText();
+    const playerStatus = await player.locator("p").nth(1).innerText();
+    const enemyStatus = await enemy.locator("p").nth(1).innerText();
+    const hp = Number(/HP\s*(\d+)/.exec(playerStats)?.[1]);
+    const mana = Number(/Mana\s*(\d+)/.exec(playerStats)?.[1]);
+    const ward = Number(/ward\s+(\d+)/i.exec(playerStatus)?.[1] ?? 0);
+    const burn = Number(/burn\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
+    const curse = Number(/curse\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
+    const priority: Record<string, number> = {
+      Sun: 20,
+      Vampire: 19,
+      Wither: 18,
+      Flame: burn < 3 ? 16 : 1,
+      Angel: ward < 5 ? 12 : 2,
+      Frost: curse < 2 ? 11 : 1,
+      Key: 10,
+      Moon: 9,
+      Bloom: hp <= 24 ? 6 : 0,
+    };
+    const choices = page.locator(".battle-card");
+    let best = -1,
+      score = 0;
+    for (let index = 0; index < (await choices.count()); index++) {
+      const name = (await choices.nth(index).locator("strong").first().innerText()).trim();
+      if ((priority[name] ?? 0) > score) {
+        best = index;
+        score = priority[name]!;
+      }
+    }
+    if (!mana || best < 0) {
+      await page.getByRole("button", { name: "End turn" }).click();
+      continue;
+    }
+    await choices.nth(best).click();
+    await page.getByRole("button", { name: /^Play / }).click();
+  }
+  await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
+  expect(encountered.size).toBe(6);
+  expect(branches).toBe(2);
+  expect(errors).toEqual([]);
 });

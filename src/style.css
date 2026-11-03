@@ -828,6 +828,33 @@ input:focus-visible,
   padding: 0.6rem 0 9rem;
   color: #eee9df;
 }
+.battle-setup h1 {
+  font:
+    1.9rem Georgia,
+    serif;
+  margin: 0.2rem 0 0.8rem;
+}
+.battle-setup__actions,
+.battle-setup__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.battle-setup__fields label {
+  display: grid;
+  gap: 0.35rem;
+  flex: 1 1 18rem;
+}
+.battle-setup__fields select {
+  color: #eee9df;
+  background: #24232e;
+  border: 1px solid #777081;
+  border-radius: 0.35rem;
+  padding: 0.55rem;
+}
+.battle-setup .battle-panel > .ui-button {
+  margin-top: 0.6rem;
+}
 .battle-head {
   display: flex;
   justify-content: space-between;

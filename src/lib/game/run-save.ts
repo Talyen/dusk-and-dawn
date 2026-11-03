@@ -26,7 +26,25 @@ const combatant = z
   .refine((value) => value.hp <= value.maxHp);
 const runSchema = z
   .object({
-    phase: z.enum(["battle", "reward", "rest", "victory", "defeat"]),
+    phase: z.enum(["battle", "reward", "rest", "route", "victory", "defeat"]),
+    experiment: z
+      .object({
+        id: z.string().min(1).max(128),
+        tier: z.number().int().min(1).max(3),
+        orientation: z.enum(["light", "dark"]),
+        relic: z.enum(["none", "many-eyes", "spare-thread", "cracked-vessel"]),
+        restRemovals: z.literal(1).optional(),
+        route: z
+          .object({
+            enemy: z.string().refine((id) => validEncounter(id) && !id.startsWith("fixture:")),
+            pair: cardPair,
+            active: z.boolean(),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict()
+      .optional(),
     fight: integer.max(route.length - 1),
     encounters: z.array(z.string().refine(validEncounter)).length(route.length).optional(),
     deck: z.array(deckCard),
@@ -59,6 +77,13 @@ const runSchema = z
   })
   .strict()
   .superRefine((run, ctx) => {
+    if (
+      (run.phase === "route" && (!run.experiment?.route || run.experiment.route.active)) ||
+      (run.experiment?.route && !run.experiment.route.active && run.phase !== "route") ||
+      (run.experiment?.route?.active && run.phase !== "battle" && run.phase !== "reward") ||
+      (run.experiment?.route && run.fight !== 0 && run.fight !== 2)
+    )
+      ctx.addIssue({ code: "custom", message: "Invalid route state" });
     if (run.action >= getEnemy(run).actions.length)
       ctx.addIssue({ code: "custom", message: "Invalid enemy action" });
     const deck = new Map(run.deck.map((card) => [card.id, card.pair]));

@@ -14,6 +14,7 @@ import {
 import { scryTop, type FightCard } from "../../lib/game/card-zones";
 import { attackValues, type DamageType } from "../../lib/game/combat-status";
 import { encodeRun, readRunWithRecovery, resumeRun } from "../../lib/game/run-save";
+import { readProgression, recordExpedition, unlockTier } from "../../lib/game/progression";
 import {
   browserSaveBackend,
   desktopSaveBackend,
@@ -103,6 +104,17 @@ export function Battle({
 }) {
   const [backend] = useState(saveBackend);
   const [loaded, setLoaded] = useState(false);
+  const [configuring, setConfiguring] = useState(false);
+  const [orientation, setOrientation] = useState<"light" | "dark">("light");
+  const [relic, setRelic] = useState<"none" | "many-eyes" | "spare-thread" | "cracked-vessel">("none");
+  const [progress, setProgress] = useState(() => {
+    try {
+      return readProgression(window.localStorage);
+    } catch {
+      return readProgression(null);
+    }
+  });
+  const tier = unlockTier(progress);
   const [saved, setSaved] = useState<{ snapshot: Snapshot<RunState>; recovered: boolean } | null>(null);
   const [game, setGame] = useState<{
     session: ReturnType<typeof createRun>;
@@ -116,12 +128,6 @@ export function Battle({
       .then((savedRun) => {
         if (!active) return;
         setSaved(savedRun);
-        if (!savedRun)
-          setGame({
-            session: createRun(Math.floor(Math.random() * 0x100000000)),
-            isNew: true,
-            recovered: false,
-          });
         setLoaded(true);
       })
       .catch(() => {
@@ -142,30 +148,90 @@ export function Battle({
     );
   if (!game)
     return (
-      <main className="battle-screen">
+      <main className="battle-screen battle-setup">
         <h1>Play</h1>
         {loadError && <p role="alert">{loadError}</p>}
         {saved?.recovered && <p>A retained copy of the run was recovered.</p>}
-        {saved && (
+        {saved && <p>Starting a new run replaces the current saved run.</p>}
+        <div className="battle-setup__actions">
+          {saved && (
+            <Button
+              onClick={() =>
+                setGame({ session: resumeRun(saved.snapshot), isNew: false, recovered: saved.recovered })
+              }
+            >
+              Continue run
+            </Button>
+          )}
           <Button
             onClick={() =>
-              setGame({ session: resumeRun(saved.snapshot), isNew: false, recovered: saved.recovered })
+              setGame({
+                session: createRun(Math.floor(Math.random() * 0x100000000)),
+                isNew: true,
+                recovered: false,
+              })
             }
           >
-            Continue run
+            Start new run
           </Button>
+          <Button onClick={() => setConfiguring(!configuring)}>
+            {configuring ? "Hide expedition options" : "Configure expedition"}
+          </Button>
+        </div>
+        {configuring && (
+          <section className="battle-panel" aria-label="Expedition options">
+            <h2>Experimental expedition</h2>
+            <p>
+              Two optional branching detours. Complete expeditions to expand future card and enemy pools; the
+              current deck never changes from an unlock.
+            </p>
+            <p>
+              Pool tier {tier}/3 · {progress.completed.length} qualifying expedition
+              {progress.completed.length === 1 ? "" : "s"} completed.
+            </p>
+            <div className="battle-setup__fields">
+              <label>
+                Starting orientation{" "}
+                <select
+                  value={orientation}
+                  onChange={(event) => setOrientation(event.target.value as "light" | "dark")}
+                >
+                  <option value="light">Lamplighter · light each fight</option>
+                  <option value="dark" disabled={tier < 2}>
+                    Nocturne · dark each fight{tier < 2 ? " (unlock after one expedition)" : ""}
+                  </option>
+                </select>
+              </label>
+              <label>
+                {" "}
+                Run relic{" "}
+                <select value={relic} onChange={(event) => setRelic(event.target.value as typeof relic)}>
+                  <option value="none">None</option>
+                  <option value="many-eyes">Many Eyes · four reward offers</option>
+                  <option value="spare-thread">Spare Thread · a second midpoint removal</option>
+                  <option value="cracked-vessel">Cracked Vessel · start at 24 HP with an extra pair</option>
+                </select>
+              </label>
+            </div>
+            <p>Provisional values; reaching the second fight qualifies for progression.</p>
+            <Button
+              onClick={() =>
+                setGame({
+                  session: createRun(Math.floor(Math.random() * 0x100000000), {
+                    id: crypto.randomUUID(),
+                    tier,
+                    orientation,
+                    relic,
+                  }),
+                  isNew: true,
+                  recovered: false,
+                })
+              }
+            >
+              Start expedition
+            </Button>
+          </section>
         )}
-        <Button
-          onClick={() =>
-            setGame({
-              session: createRun(Math.floor(Math.random() * 0x100000000)),
-              isNew: true,
-              recovered: false,
-            })
-          }
-        >
-          Start new run
-        </Button>
         <Button onClick={onExit}>Main menu</Button>
       </main>
     );
@@ -177,6 +243,13 @@ export function Battle({
       backend={backend}
       onExit={onExit}
       onDiscover={onDiscover}
+      onComplete={(id) => {
+        try {
+          setProgress(recordExpedition(window.localStorage, id));
+        } catch {
+          /* Keep playing without progression storage. */
+        }
+      }}
     />
   );
 }
@@ -188,6 +261,7 @@ function BattleSession({
   backend,
   onExit,
   onDiscover,
+  onComplete,
 }: {
   game: ReturnType<typeof createRun>;
   isNew: boolean;
@@ -195,6 +269,7 @@ function BattleSession({
   backend: SaveBackend;
   onExit: () => void;
   onDiscover: (ids: readonly string[]) => void;
+  onComplete: (id: string) => void;
 }) {
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
   const [selected, setSelected] = useState<string | null>(null);
@@ -220,6 +295,18 @@ function BattleSession({
     void writes.current.catch(() => undefined).then(onExit);
   }
   const s = snapshot.state;
+  const completed = useRef(false);
+  useEffect(() => {
+    if (
+      !completed.current &&
+      s.experiment &&
+      s.fight >= 1 &&
+      (s.phase === "victory" || s.phase === "defeat")
+    ) {
+      completed.current = true;
+      onComplete(s.experiment.id);
+    }
+  }, [s.experiment, s.fight, s.phase, onComplete]);
   useEffect(() => {
     const visiblePairs = [...s.deck.map((card) => card.pair), ...s.offers];
     const ids = visiblePairs.flatMap((pair) => [
@@ -350,9 +437,11 @@ function BattleSession({
                 ? "Choose a reward"
                 : s.phase === "rest"
                   ? "A moment of rest"
-                  : s.phase === "victory"
-                    ? "Victory"
-                    : "Run ended"}
+                  : s.phase === "route"
+                    ? "Choose a path"
+                    : s.phase === "victory"
+                      ? "Victory"
+                      : "Run ended"}
           </h1>
         </div>
         {s.phase !== "battle" && <Button onClick={exitBattle}>Main menu</Button>}
@@ -665,10 +754,43 @@ function BattleSession({
           <Button onClick={() => dispatch({ type: "reward", pair: null })}>Skip reward</Button>
         </div>
       )}
+      {s.phase === "route" &&
+        s.experiment?.route &&
+        (() => {
+          const path = s.experiment.route;
+          const enemy = simpleEnemies.find((entry) => entry.id === path.enemy)!;
+          return (
+            <section className="battle-panel" aria-label="Route choices">
+              <p>All paths lead to the next scheduled fight. The detour grants an extra card reward.</p>
+              <div className="battle-targets">
+                <button onClick={() => dispatch({ type: "route", choice: "combat" })}>
+                  Combat: {enemy.name} · {enemy.hp} HP · weakness {enemy.weakness} · extra reward
+                </button>
+                <button onClick={() => dispatch({ type: "route", choice: "rest" })}>Rest: heal 4 HP</button>
+                <button
+                  disabled={s.player.hp <= 4}
+                  onClick={() => dispatch({ type: "route", choice: "event" })}
+                >
+                  Event: lose 4 HP, add {path.pair}
+                </button>
+              </div>
+              <p>
+                Combat preview: {enemy.trait}: {enemy.traitEffect} Pattern:{" "}
+                {enemy.actions.map((action) => `${action.name}: ${action.text}`).join(" → ")}
+              </p>
+              <p>
+                Event pair: {cards[path.pair]!.light.name}: {cards[path.pair]!.light.effect} /{" "}
+                {cards[path.pair]!.dark.name}: {cards[path.pair]!.dark.effect}
+              </p>
+            </section>
+          );
+        })()}
       {s.phase === "rest" && (
         <section className="battle-panel">
-          <Button onClick={() => dispatch({ type: "rest" })}>Heal 6 HP</Button>
-          <h2>Or remove one card</h2>
+          <Button onClick={() => dispatch({ type: "rest" })}>
+            {s.experiment?.restRemovals ? "Continue without another removal" : "Heal 6 HP"}
+          </Button>
+          <h2>{s.experiment?.restRemovals ? "Remove one more card" : "Or remove one card"}</h2>
           <div className="battle-targets">
             {s.deck.map((card) => (
               <button key={card.id} onClick={() => dispatch({ type: "rest", remove: card.id })}>
@@ -681,7 +803,7 @@ function BattleSession({
       {(s.phase === "victory" || s.phase === "defeat") && (
         <section className="battle-panel">
           <p>
-            Fights reached: {s.fight + 1} of {route.length}. Cards in deck: {s.deck.length}.
+            Scheduled fights reached: {s.fight + 1} of {route.length}. Cards in deck: {s.deck.length}.
           </p>
           <Button onClick={exitBattle}>Return to main menu</Button>
         </section>
