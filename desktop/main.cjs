@@ -23,6 +23,13 @@ function createWindow() {
     },
   });
 
+  const reportFullscreen = () => {
+    const enabled = process.platform === "darwin" ? window.isSimpleFullScreen() : window.isFullScreen();
+    window.webContents.send("display:changed", enabled);
+  };
+  window.on("enter-full-screen", reportFullscreen);
+  window.on("leave-full-screen", reportFullscreen);
+  window.on("resize", reportFullscreen);
   window.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
   window.webContents.on("will-navigate", (event) => event.preventDefault());
 
@@ -37,7 +44,8 @@ app.whenReady().then(() => {
   const storage = createSaveStorage(path.join(app.getPath("userData"), "saves"));
   const authorize = (event) => {
     const window = BrowserWindow.fromWebContents(event.sender);
-    if (!window || event.senderFrame !== event.sender.mainFrame) throw new Error("Unauthorized save request");
+    if (!window || event.senderFrame !== event.sender.mainFrame) throw new Error("Unauthorized request");
+    return window;
   };
   ipcMain.handle("save:read", (event) => {
     authorize(event);
@@ -46,6 +54,17 @@ app.whenReady().then(() => {
   ipcMain.handle("save:write", (event, data) => {
     authorize(event);
     return storage.write(data);
+  });
+  ipcMain.handle("display:get-fullscreen", (event) => {
+    const window = authorize(event);
+    return process.platform === "darwin" ? window.isSimpleFullScreen() : window.isFullScreen();
+  });
+  ipcMain.handle("display:set-fullscreen", (event, enabled) => {
+    const window = authorize(event);
+    if (typeof enabled !== "boolean") throw new Error("Invalid display mode");
+    if (process.platform === "darwin") window.setSimpleFullScreen(enabled);
+    else window.setFullScreen(enabled);
+    return enabled;
   });
   createWindow();
   app.on("activate", () => {

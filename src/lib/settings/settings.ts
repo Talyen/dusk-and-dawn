@@ -5,9 +5,16 @@ export interface Settings {
   sound: number;
   reducedMotion: boolean;
   gameSizePercent: number;
+  tooltipSizePercent: number;
 }
 
-export const defaultSettings: Settings = { music: 1, sound: 1, reducedMotion: false, gameSizePercent: 100 };
+export const defaultSettings: Settings = {
+  music: 1,
+  sound: 1,
+  reducedMotion: false,
+  gameSizePercent: 100,
+  tooltipSizePercent: 100,
+};
 export const audio = createAudioManager();
 const key = "dusk-and-dawn.settings.v1";
 
@@ -22,8 +29,13 @@ export function readSettings(): Settings {
       typeof candidate.gameSizePercent === "number" && Number.isFinite(candidate.gameSizePercent)
         ? Math.max(80, Math.min(120, Math.round(candidate.gameSizePercent / 5) * 5))
         : defaultSettings.gameSizePercent;
+    const tooltipSizePercent =
+      typeof candidate.tooltipSizePercent === "number" && Number.isFinite(candidate.tooltipSizePercent)
+        ? Math.max(90, Math.min(125, Math.round(candidate.tooltipSizePercent / 5) * 5))
+        : defaultSettings.tooltipSizePercent;
     return {
       gameSizePercent,
+      tooltipSizePercent,
       music: validVolume(candidate.music) ? candidate.music : defaultSettings.music,
       sound: validVolume(candidate.sound) ? candidate.sound : defaultSettings.sound,
       reducedMotion:
@@ -39,6 +51,7 @@ export function readSettings(): Settings {
 export function applySettings(settings: Settings) {
   audio.setVolume("music", settings.music);
   audio.setVolume("sound", settings.sound);
+  document.documentElement.style.setProperty("--tooltip-size", String(settings.tooltipSizePercent / 100));
   document.documentElement.dataset.reducedMotion = String(settings.reducedMotion);
 }
 

@@ -81,3 +81,58 @@ test("opens the development renderer in Electron", async () => {
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("desktop fullscreen control changes the native window and rejects invalid input", async () => {
+  test.skip(
+    Boolean(process.env.DUSK_ELECTRON_EXECUTABLE),
+    "Packaged application coverage uses its own build",
+  );
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-display-"));
+  try {
+    const app = await electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+    try {
+      const page = await app.firstWindow();
+      await page.getByRole("button", { name: "Options" }).click();
+      const toggle = page.getByRole("switch", { name: "Fullscreen" });
+      await toggle.click();
+      await expect(toggle).toBeChecked();
+      await expect
+        .poll(() =>
+          app.evaluate(({ BrowserWindow }) => {
+            const window = BrowserWindow.getAllWindows()[0];
+            return process.platform === "darwin" ? window?.isSimpleFullScreen() : window?.isFullScreen();
+          }),
+        )
+        .toBe(true);
+      await toggle.click();
+      await expect(toggle).not.toBeChecked();
+      await expect
+        .poll(() =>
+          app.evaluate(({ BrowserWindow }) => {
+            const window = BrowserWindow.getAllWindows()[0];
+            return process.platform === "darwin" ? window?.isSimpleFullScreen() : window?.isFullScreen();
+          }),
+        )
+        .toBe(false);
+      expect(
+        await page.evaluate(async () => {
+          try {
+            await (
+              globalThis as unknown as { duskDesktop: { setFullscreen(value: unknown): Promise<boolean> } }
+            ).duskDesktop.setFullscreen("bad");
+            return false;
+          } catch {
+            return true;
+          }
+        }),
+      ).toBe(true);
+    } finally {
+      await app.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

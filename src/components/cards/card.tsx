@@ -6,13 +6,11 @@ export interface CardProps {
   description: string;
   aspect: "portrait" | "landscape";
   art?: string;
-  selected?: boolean;
-  onSelect: () => void;
 }
 
 /** Image-led, selectable card with the same pointer and keyboard inspection. */
-export function Card({ title, description, aspect, art, selected = false, onSelect }: CardProps) {
-  const trigger = useRef<HTMLButtonElement>(null);
+export function Card({ title, description, aspect, art }: CardProps) {
+  const trigger = useRef<HTMLDivElement>(null);
   const id = useId();
   const pointer = useRef(false);
   const focus = useRef(false);
@@ -66,13 +64,13 @@ export function Card({ title, description, aspect, art, selected = false, onSele
 
   return (
     <div className={`card-wrap card-wrap--${aspect}`}>
-      <button
+      <div
         ref={trigger}
-        type="button"
+        role="img"
+        tabIndex={0}
         className="game-card"
         data-inspecting={open || undefined}
         aria-label={title}
-        aria-pressed={selected}
         aria-describedby={open ? id : undefined}
         onPointerEnter={(event) => {
           if (event.pointerType !== "touch") {
@@ -94,13 +92,12 @@ export function Card({ title, description, aspect, art, selected = false, onSele
           focus.current = false;
           if (!pointer.current) setOpen(false);
         }}
-        onClick={onSelect}
       >
         <span className="game-card__clip" aria-hidden="true">
           {art ? <img src={art} alt="" /> : <span className="game-card__blank" />}
           {shimmer > 0 && <span className="game-card__shimmer" key={shimmer} />}
         </span>
-      </button>
+      </div>
       <Tooltip triggerRef={trigger} id={id} open={open}>
         <strong>{title}</strong>
         <p>{description}</p>

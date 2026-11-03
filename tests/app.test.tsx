@@ -17,6 +17,6 @@ it("renders translated content and falls back to English", async () => {
     </I18nextProvider>,
   );
   expect(screen.getByRole("heading", { name: "Dusk & Dawn" })).toBeTruthy();
-  expect(screen.getByText("[Prooototype fouuundation]")).toBeTruthy();
+  expect(screen.getByText("[Plaaay wiiill beee avaaailaaable wheeen the gaaame is reaaady.]")).toBeTruthy();
   expect(localization.t("missing", { defaultValue: "Fallback" })).toBe("Fallback");
 });

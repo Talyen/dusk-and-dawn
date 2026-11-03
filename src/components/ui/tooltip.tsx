@@ -50,7 +50,7 @@ export function Tooltip({
           size({
             padding: 8,
             apply({ availableWidth, elements }) {
-              elements.floating.style.maxWidth = `min(calc(20 * var(--ui-unit)), ${Math.max(0, availableWidth)}px)`;
+              elements.floating.style.maxWidth = `min(calc(20 * var(--tooltip-unit)), ${Math.max(0, availableWidth)}px)`;
             },
           }),
         ],

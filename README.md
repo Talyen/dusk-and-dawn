@@ -76,8 +76,8 @@ not been specified here.
 
 The Card preview on the main menu demonstrates image-led player (3:4) and enemy
 (4:3) cards with blank placeholder art and copy. `src/components/cards/card.tsx`
-accepts artwork and description data, and supplies selection, hover and keyboard
-focus feedback, shimmer, and a root-space tooltip. Tooltip placement flips and
+accepts artwork and description data, and supplies hover and keyboard focus
+feedback, shimmer, and a root-space tooltip. Tooltip placement flips and
 shifts at viewport edges; Escape, scrolling, an outside press, and window blur
 dismiss inspection. Cards do not implement combat, hand layout, keyword effects,
 or inspection overlays yet.
@@ -87,3 +87,19 @@ uses Alchemy's 1280 × 720 fit and 72% large-window growth curve, normalized to
 Dusk & Dawn's existing authored sizes; it responds to viewport changes. This
 includes tooltips, which scale once in root space. Source patterns are adapted
 from Alchemy's card, tooltip, and virtual-resolution UI (CC BY-NC 4.0).
+
+## Browsing and display
+
+The preview contains placeholder player and enemy collections in adaptive,
+paginated grids. Hover or keyboard focus reveals card details; clicking a card
+has no inspection or selection action. Arrow keys move among visible controls,
+Tab follows the normal focus order, and Back/Escape return through screen history.
+A focused card is retained when grid capacity changes where possible.
+
+Tooltip Size is stored locally (90–125%, in 5% steps) independently of Game
+Size. Fullscreen is a per-session display control: the browser uses its native
+fullscreen API, and Electron uses the native window (simple fullscreen on macOS).
+A failed mode change is reported in Options. Screen fades follow the existing
+reduced-motion preference. UI sound cue hooks are ready for approved assets; no
+sounds are registered or included yet. The browsing and navigation patterns are
+adapted from Alchemy's shared UI (CC BY-NC 4.0).

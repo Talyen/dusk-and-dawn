@@ -16,5 +16,18 @@
   "playerCard": "Player card",
   "enemyCard": "Enemy card",
   "placeholderDescription": "Placeholder card description.",
-  "gameSize": "Game size"
+  "gameSize": "Game size",
+  "playerCards": "Player cards",
+  "enemyCards": "Enemy cards",
+  "playerCardNumber": "Player card {{number}}",
+  "enemyCardNumber": "Enemy card {{number}}",
+  "cardTypes": "Card types",
+  "cardPages": "Card pages",
+  "previousPage": "Previous page",
+  "nextPage": "Next page",
+  "pageOf": "{{page}} / {{total}}",
+  "tooltipSize": "Tooltip size",
+  "fullscreen": "Fullscreen",
+  "displayError": "Could not change display mode.",
+  "playUnavailable": "Play will be available when the game is ready."
 }

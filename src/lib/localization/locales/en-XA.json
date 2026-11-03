@@ -16,5 +16,18 @@
   "playerCard": "[Plaaayer caaard]",
   "enemyCard": "[Eeenemy caaard]",
   "placeholderDescription": "[Plaaaceholder caaard descriiiption.]",
-  "gameSize": "[Gaaame siiize]"
+  "gameSize": "[Gaaame siiize]",
+  "playerCards": "[Plaaayer caaards]",
+  "enemyCards": "[Eeenemy caaards]",
+  "playerCardNumber": "[Plaaayer caaard {{number}}]",
+  "enemyCardNumber": "[Eeenemy caaard {{number}}]",
+  "cardTypes": "[Caaard tyyypes]",
+  "cardPages": "[Caaard paaages]",
+  "previousPage": "[Preeeviooous paaage]",
+  "nextPage": "[Neeext paaage]",
+  "pageOf": "[{{page}} / {{total}}]",
+  "tooltipSize": "[Tooooltip siiize]",
+  "fullscreen": "[Fuuullscreeen]",
+  "displayError": "[Cooould noooot chaaange diiisplaaay mooode.]",
+  "playUnavailable": "[Plaaay wiiill beee avaaailaaable wheeen the gaaame is reaaady.]"
 }

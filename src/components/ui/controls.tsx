@@ -1,8 +1,10 @@
 import type { ComponentProps, ReactNode } from "react";
+import { playUiCue, type UiCue } from "../../lib/feedback/ui-feedback";
 
 type ButtonProps = ComponentProps<"button"> & {
   variant?: "primary" | "outline" | "ghost" | "destructive";
   size?: "default" | "sm" | "lg" | "icon";
+  cue?: UiCue;
 };
 
 export function Button({
@@ -10,12 +12,22 @@ export function Button({
   size = "default",
   className = "",
   type = "button",
+  onClick,
+  cue = "activate",
   ...props
 }: ButtonProps) {
   return (
     <button
       type={type}
       className={`ui-button ui-button--${variant} ui-button--${size} ${className}`}
+      onClick={(event) => {
+        if (props["aria-disabled"] === true || props["aria-disabled"] === "true") {
+          event.preventDefault();
+          return;
+        }
+        playUiCue(cue);
+        onClick?.(event);
+      }}
       {...props}
     />
   );

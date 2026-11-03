@@ -1,44 +1,66 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Card } from "./components/cards/card";
+import { CardBrowser } from "./components/browsing/card-browser";
+import { getFullscreen, observeFullscreen, setFullscreen } from "./lib/display/fullscreen";
+import { useNavigation } from "./lib/navigation/use-navigation";
+import { playUiCue } from "./lib/feedback/ui-feedback";
 import { useUiScale } from "./lib/display/scale";
 import { Button, ScreenShell, Surface, Switch } from "./components/ui/controls";
 import { applySettings, readSettings, saveSettings, type Settings } from "./lib/settings/settings";
 
 export function App() {
   const { t } = useTranslation();
-  const [screen, setScreen] = useState<"menu" | "options" | "cards">("menu");
   const [settings, setSettings] = useState(readSettings);
   const [saveFailed, setSaveFailed] = useState(false);
-  const [selectedCards, setSelectedCards] = useState({ player: false, enemy: false });
+  const [fullscreen, setFullscreenState] = useState(false);
+  const [displayBusy, setDisplayBusy] = useState(false);
+  const [displayFailed, setDisplayFailed] = useState(false);
   useUiScale(settings.gameSizePercent);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const optionsRef = useRef<HTMLButtonElement>(null);
-  const cardsRef = useRef<HTMLButtonElement>(null);
-  const previousScreen = useRef<"options" | "cards" | null>(null);
+  const { screen, open, back } = useNavigation(headingRef);
 
   useEffect(() => {
     applySettings(settings);
   }, [settings]);
   useEffect(() => {
-    if (screen !== "menu") {
-      headingRef.current?.focus();
-      previousScreen.current = screen;
-    } else if (previousScreen.current) {
-      (previousScreen.current === "options" ? optionsRef : cardsRef).current?.focus();
-      previousScreen.current = null;
-    }
-  }, [screen]);
+    let active = true;
+    void getFullscreen()
+      .then((value) => {
+        if (active) setFullscreenState(value);
+      })
+      .catch(() => {
+        if (active) setDisplayFailed(true);
+      });
+    const unsubscribe = observeFullscreen(setFullscreenState);
+    return () => {
+      active = false;
+      unsubscribe();
+    };
+  }, []);
   useEffect(() => {
     if (screen === "menu") return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setScreen("menu");
+      if (event.key === "Escape" && !document.fullscreenElement) back();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [screen]);
+  });
+
+  async function changeFullscreen(enabled: boolean) {
+    setDisplayBusy(true);
+    setDisplayFailed(false);
+    try {
+      setFullscreenState(await setFullscreen(enabled));
+      playUiCue("change");
+    } catch {
+      setDisplayFailed(true);
+    } finally {
+      setDisplayBusy(false);
+    }
+  }
 
   function updateSettings(next: Settings) {
+    playUiCue("change");
     setSettings(next);
     setSaveFailed(!saveSettings(next));
   }
@@ -54,18 +76,18 @@ export function App() {
           <h1 id="title">{t("title")}</h1>
           <p className="description">{t("description")}</p>
           <div className="menu-actions">
-            <Button size="lg" disabled aria-describedby="play-status">
+            <Button size="lg" aria-disabled="true" aria-describedby="play-status">
               {t("play")}
             </Button>
-            <Button ref={cardsRef} variant="outline" onClick={() => setScreen("cards")}>
+            <Button id="menu-cards" variant="outline" onClick={() => open("cards")}>
               {t("cardPreview")}
             </Button>
-            <Button ref={optionsRef} variant="outline" onClick={() => setScreen("options")}>
+            <Button id="menu-options" variant="outline" onClick={() => open("options")}>
               {t("options")}
             </Button>
           </div>
           <p className="status" id="play-status">
-            {t("status")}
+            {t("playUnavailable")}
           </p>
         </section>
       ) : screen === "cards" ? (
@@ -76,21 +98,8 @@ export function App() {
               {t("cardPreview")}
             </h1>
           </header>
-          <div className="card-preview-grid">
-            {(["player", "enemy"] as const).map((kind) => (
-              <div className="card-preview-item" key={kind}>
-                <Card
-                  title={t(kind === "player" ? "playerCard" : "enemyCard")}
-                  description={t("placeholderDescription")}
-                  aspect={kind === "player" ? "portrait" : "landscape"}
-                  selected={selectedCards[kind]}
-                  onSelect={() => setSelectedCards((current) => ({ ...current, [kind]: !current[kind] }))}
-                />
-                <p>{t(kind === "player" ? "playerCard" : "enemyCard")}</p>
-              </div>
-            ))}
-          </div>
-          <Button variant="outline" onClick={() => setScreen("menu")}>
+          <CardBrowser />
+          <Button variant="outline" onClick={back}>
             {t("back")}
           </Button>
         </section>
@@ -140,6 +149,37 @@ export function App() {
               </span>
             </label>
             <label className="setting-row">
+              <span>{t("tooltipSize")}</span>
+              <span className="range-control">
+                <input
+                  type="range"
+                  min="90"
+                  max="125"
+                  step="5"
+                  value={settings.tooltipSizePercent}
+                  onChange={(event) =>
+                    updateSettings({ ...settings, tooltipSizePercent: Number(event.target.value) })
+                  }
+                />
+                <output>{settings.tooltipSizePercent}%</output>
+              </span>
+            </label>
+            <label className="setting-row">
+              <span>{t("fullscreen")}</span>
+              <Switch
+                checked={fullscreen}
+                disabled={displayBusy}
+                onCheckedChange={(enabled) => {
+                  void changeFullscreen(enabled);
+                }}
+              />
+            </label>
+            {displayFailed && (
+              <p className="save-error" role="status">
+                {t("displayError")}
+              </p>
+            )}
+            <label className="setting-row">
               <span>{t("reducedMotion")}</span>
               <Switch
                 checked={settings.reducedMotion}
@@ -152,7 +192,7 @@ export function App() {
               </p>
             )}
           </Surface>
-          <Button variant="outline" onClick={() => setScreen("menu")}>
+          <Button variant="outline" onClick={back}>
             {t("back")}
           </Button>
         </section>
