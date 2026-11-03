@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { createRun, runHandler } from "../../src/lib/game/run";
 import { restoreSession } from "../../src/lib/game/session";
+import { stateRng } from "../../src/lib/game/random-state";
 import { encodeRun } from "../../src/lib/game/run-save";
 
 test.beforeEach(async ({ page }) => {
@@ -930,4 +931,47 @@ test("enemy pattern inspection preserves repeated actions without console errors
   await expect(page.locator(".battle-enemy details li")).toHaveCount(3);
   await expect(page.locator(".battle-enemy details li").filter({ hasText: "Bitter Goblet" })).toHaveCount(2);
   expect(errors).toEqual([]);
+});
+
+test("Fogbound Weaver previews retained cards and preserves their order during a browser turn", async ({
+  page,
+}) => {
+  const setup = structuredClone(createRun(42).getSnapshot());
+  setup.random.value = 0;
+  setup.state.encounters![0] = "the-fogbound-weaver";
+  setup.state.action = 1;
+  setup.state.enemy.hp = 28;
+  setup.state.enemy.maxHp = 28;
+  setup.state.player.nextDrawPenalty = 5;
+  setup.state.zones.hand.forEach((card) => {
+    card.kept = true;
+  });
+  const original = setup.state.zones.hand.slice();
+  const pool = original.slice();
+  const random = stateRng({ ...setup.random });
+  const chosen = new Set(
+    Array.from({ length: 2 }, () => pool.splice(Math.floor(random() * pool.length), 1)[0]!.id),
+  );
+  const ordered = original.filter((card) => chosen.has(card.id)).map((card) => card.id);
+  const save = encodeRun(setup);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), save);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "The Fogbound Weaver", exact: true })).toBeVisible();
+  await expect(page.getByText(/Held-card hazard pool if you end turn now:/)).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByText(/HP 26\/30/)).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => {
+        const data = JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}");
+        const library = data.state?.run?.zones?.library;
+        return library
+          ?.slice(-2)
+          .reverse()
+          .map((card: { id: string }) => card.id);
+      }),
+    )
+    .toEqual(ordered);
 });

@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { createRun, getEnemy, runHandler } from "../../src/lib/game/run";
 import { restoreSession } from "../../src/lib/game/session";
+import { stateRng } from "../../src/lib/game/random-state";
 
 function encounter(id: string, action: number) {
   const snapshot = structuredClone(createRun(9).getSnapshot());
@@ -113,4 +114,67 @@ it("keeps the larger queued penalty instead of adding enemy reductions", () => {
   manaGame.dispatch({ type: "end" });
   expect(manaGame.getSnapshot().state.mana).toBe(1);
   expect(manaGame.getSnapshot().state.player.nextManaPenalty).toBe(0);
+});
+
+it("the Fogbound Weaver samples held cards randomly but puts them in original hand order", () => {
+  for (const seed of Array.from({ length: 32 }, (_, index) => index)) {
+    const snapshot = encounter("the-fogbound-weaver", 1);
+    snapshot.random.value = seed;
+    snapshot.state.player.nextDrawPenalty = 5;
+    snapshot.state.zones.hand = Array.from({ length: 4 }, (_, index) => ({
+      id: `held-${index}`,
+      pair: "Sun & Moon",
+      face: index % 2 ? ("dark" as const) : ("light" as const),
+      kept: true,
+    }));
+    snapshot.state.zones.library = [{ id: "existing", pair: "Angel & Vampire", face: "light", kept: false }];
+    snapshot.state.zones.discard = [];
+    const rng = stateRng({ ...snapshot.random });
+    const pool = snapshot.state.zones.hand.slice();
+    const chosen = new Set(
+      Array.from({ length: 2 }, () => pool.splice(Math.floor(rng() * pool.length), 1)[0]!.id),
+    );
+    const expected = snapshot.state.zones.hand
+      .filter((card) => chosen.has(card.id))
+      .map((card) => ({ ...card, kept: false }));
+    const game = restoreSession(snapshot, runHandler);
+    expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    const zones = game.getSnapshot().state.zones;
+    expect(zones.library.slice(-2).reverse(), `seed ${seed}`).toEqual(expected);
+    expect(zones.library[0]!.id).toBe("existing");
+    expect(zones.hand.map((card) => card.id)).toEqual(
+      snapshot.state.zones.hand.filter((card) => !chosen.has(card.id)).map((card) => card.id),
+    );
+  }
+});
+
+it("the Fogbound Weaver handles fewer than two held cards and Hush suppresses movement", () => {
+  for (const count of [0, 1] as const) {
+    const snapshot = encounter("the-fogbound-weaver", 1);
+    snapshot.state.player.nextDrawPenalty = 5;
+    snapshot.state.zones.hand = Array.from({ length: count }, (_, index) => ({
+      id: `held-${index}`,
+      pair: "Sun & Moon",
+      face: "dark" as const,
+      kept: true,
+    }));
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.discard = [];
+    const game = restoreSession(snapshot, runHandler);
+    game.dispatch({ type: "end" });
+    expect(game.getSnapshot().state.zones.library.map((card) => card.id)).toEqual(count ? ["held-0"] : []);
+    expect(game.getSnapshot().state.zones.hand).toHaveLength(0);
+    expect(game.getSnapshot().state.player.hp).toBe(26);
+  }
+  const snapshot = encounter("the-fogbound-weaver", 1);
+  snapshot.state.player.nextDrawPenalty = 5;
+  snapshot.state.enemy.hush = true;
+  snapshot.state.zones.hand = [{ id: "held", pair: "Sun & Moon", face: "dark", kept: true }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "end" });
+  expect(game.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual(["held"]);
+  expect(game.getSnapshot().state.zones.library).toHaveLength(0);
+  expect(game.getSnapshot().state.player.hp).toBe(26);
 });

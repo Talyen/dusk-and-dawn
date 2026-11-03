@@ -538,12 +538,15 @@ function applyEnemyEffect(
       break;
     }
     case "move_held": {
-      const moved: FightCard[] = [];
-      for (let i = 0; i < amount && s.zones.hand.length; i++) {
-        const [card] = s.zones.hand.splice(rngInt(rng, s.zones.hand.length), 1);
-        card!.kept = false;
-        moved.push(card!);
+      const candidates = [...s.zones.hand];
+      const selected = new Set<string>();
+      for (let i = 0; i < amount && candidates.length; i++) {
+        const [card] = candidates.splice(rngInt(rng, candidates.length), 1);
+        selected.add(card!.id);
       }
+      const moved = s.zones.hand.filter((card) => selected.has(card.id));
+      s.zones.hand = s.zones.hand.filter((card) => !selected.has(card.id));
+      for (const card of moved) card.kept = false;
       if (effect.to === "player_draw_top") s.zones.library.push(...moved.reverse());
       else if (effect.to === "player_draw_bottom") s.zones.library.unshift(...moved.reverse());
       else if (effect.to === "player_discard") s.zones.discard.push(...moved.reverse());

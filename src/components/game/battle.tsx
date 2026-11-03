@@ -607,6 +607,20 @@ function BattleSession({
                   ; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
                 </p>
               )}
+              {!s.enemy.hush &&
+                !s.enemy.freeze &&
+                action.effects?.some((effect) =>
+                  ["move_held", "flip_held", "turn_held"].includes(effect.op),
+                ) && (
+                  <p>
+                    Held-card hazard pool if you end turn now:{" "}
+                    {s.zones.hand
+                      .filter((card) => card.kept)
+                      .map((card) => face(card).name)
+                      .join(", ") || "none"}
+                    . Unkept cards are discarded before the enemy acts.
+                  </p>
+                )}
               <p>
                 Trait: {enemy.trait} — {enemy.traitEffect} Pattern:{" "}
                 {enemy.actions.map((a) => a.name).join(" → ")}
