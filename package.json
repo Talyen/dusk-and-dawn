@@ -28,6 +28,7 @@
     "localization:check": "node scripts/check-localization.mjs"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.8.0",
     "i18next": "^26.7.1",
     "immer": "^11.2.9",
     "react": "^19.3.1",

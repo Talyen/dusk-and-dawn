@@ -71,3 +71,19 @@ The UI palette, controls, and interaction conventions are adapted from Alchemy's
 `src/styles/theme.css`, `src/components/ui/`, `src/features/alchemy/shared/ui/`,
 and `Docs/UI.md` (Alchemy source is CC BY-NC 4.0); Dusk & Dawn's own license has
 not been specified here.
+
+## Card and display foundations
+
+The Card preview on the main menu demonstrates image-led player (3:4) and enemy
+(4:3) cards with blank placeholder art and copy. `src/components/cards/card.tsx`
+accepts artwork and description data, and supplies selection, hover and keyboard
+focus feedback, shimmer, and a root-space tooltip. Tooltip placement flips and
+shifts at viewport edges; Escape, scrolling, an outside press, and window blur
+dismiss inspection. Cards do not implement combat, hand layout, keyword effects,
+or inspection overlays yet.
+
+Game Size is saved on this device from 80% to 120% in 5% steps. The interface
+uses Alchemy's 1280 × 720 fit and 72% large-window growth curve, normalized to
+Dusk & Dawn's existing authored sizes; it responds to viewport changes. This
+includes tooltips, which scale once in root space. Source patterns are adapted
+from Alchemy's card, tooltip, and virtual-resolution UI (CC BY-NC 4.0).

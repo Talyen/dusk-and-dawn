@@ -73,7 +73,12 @@ export function Progress({ value, className = "", ...props }: ProgressProps) {
 }
 
 export function ScreenShell({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <main className={`ui-screen ${className}`}>{children}</main>;
+  return (
+    <main className={`ui-screen ${className}`}>
+      {children}
+      <div id="tooltip-root" />
+    </main>
+  );
 }
 
 interface TabBarProps<T extends string> {

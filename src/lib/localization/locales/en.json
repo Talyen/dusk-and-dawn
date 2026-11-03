@@ -11,5 +11,10 @@
   "display": "Display",
   "reducedMotion": "Reduce motion",
   "back": "Back",
-  "settingsSaveError": "Settings could not be saved. Changes apply for this session."
+  "settingsSaveError": "Settings could not be saved. Changes apply for this session.",
+  "cardPreview": "Card preview",
+  "playerCard": "Player card",
+  "enemyCard": "Enemy card",
+  "placeholderDescription": "Placeholder card description.",
+  "gameSize": "Game size"
 }

@@ -1,31 +1,36 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Card } from "./components/cards/card";
+import { useUiScale } from "./lib/display/scale";
 import { Button, ScreenShell, Surface, Switch } from "./components/ui/controls";
 import { applySettings, readSettings, saveSettings, type Settings } from "./lib/settings/settings";
 
 export function App() {
   const { t } = useTranslation();
-  const [screen, setScreen] = useState<"menu" | "options">("menu");
+  const [screen, setScreen] = useState<"menu" | "options" | "cards">("menu");
   const [settings, setSettings] = useState(readSettings);
   const [saveFailed, setSaveFailed] = useState(false);
+  const [selectedCards, setSelectedCards] = useState({ player: false, enemy: false });
+  useUiScale(settings.gameSizePercent);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const optionsRef = useRef<HTMLButtonElement>(null);
-  const wasInOptions = useRef(false);
+  const cardsRef = useRef<HTMLButtonElement>(null);
+  const previousScreen = useRef<"options" | "cards" | null>(null);
 
   useEffect(() => {
     applySettings(settings);
   }, [settings]);
   useEffect(() => {
-    if (screen === "options") {
+    if (screen !== "menu") {
       headingRef.current?.focus();
-      wasInOptions.current = true;
-    } else if (wasInOptions.current) {
-      optionsRef.current?.focus();
-      wasInOptions.current = false;
+      previousScreen.current = screen;
+    } else if (previousScreen.current) {
+      (previousScreen.current === "options" ? optionsRef : cardsRef).current?.focus();
+      previousScreen.current = null;
     }
   }, [screen]);
   useEffect(() => {
-    if (screen !== "options") return;
+    if (screen === "menu") return;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setScreen("menu");
     };
@@ -52,6 +57,9 @@ export function App() {
             <Button size="lg" disabled aria-describedby="play-status">
               {t("play")}
             </Button>
+            <Button ref={cardsRef} variant="outline" onClick={() => setScreen("cards")}>
+              {t("cardPreview")}
+            </Button>
             <Button ref={optionsRef} variant="outline" onClick={() => setScreen("options")}>
               {t("options")}
             </Button>
@@ -59,6 +67,32 @@ export function App() {
           <p className="status" id="play-status">
             {t("status")}
           </p>
+        </section>
+      ) : screen === "cards" ? (
+        <section className="cards-screen" aria-labelledby="cards-title">
+          <header className="options-header">
+            <p className="eyebrow">{t("title")}</p>
+            <h1 id="cards-title" ref={headingRef} tabIndex={-1}>
+              {t("cardPreview")}
+            </h1>
+          </header>
+          <div className="card-preview-grid">
+            {(["player", "enemy"] as const).map((kind) => (
+              <div className="card-preview-item" key={kind}>
+                <Card
+                  title={t(kind === "player" ? "playerCard" : "enemyCard")}
+                  description={t("placeholderDescription")}
+                  aspect={kind === "player" ? "portrait" : "landscape"}
+                  selected={selectedCards[kind]}
+                  onSelect={() => setSelectedCards((current) => ({ ...current, [kind]: !current[kind] }))}
+                />
+                <p>{t(kind === "player" ? "playerCard" : "enemyCard")}</p>
+              </div>
+            ))}
+          </div>
+          <Button variant="outline" onClick={() => setScreen("menu")}>
+            {t("back")}
+          </Button>
         </section>
       ) : (
         <section className="options-screen" aria-labelledby="options-title">
@@ -89,6 +123,22 @@ export function App() {
               </label>
             ))}
             <h2>{t("display")}</h2>
+            <label className="setting-row">
+              <span>{t("gameSize")}</span>
+              <span className="range-control">
+                <input
+                  type="range"
+                  min="80"
+                  max="120"
+                  step="5"
+                  value={settings.gameSizePercent}
+                  onChange={(event) =>
+                    updateSettings({ ...settings, gameSizePercent: Number(event.target.value) })
+                  }
+                />
+                <output>{settings.gameSizePercent}%</output>
+              </span>
+            </label>
             <label className="setting-row">
               <span>{t("reducedMotion")}</span>
               <Switch

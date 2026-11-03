@@ -10,9 +10,14 @@ afterEach(() => {
 it("validates persisted preferences independently and applies motion", () => {
   localStorage.setItem(
     "dusk-and-dawn.settings.v1",
-    JSON.stringify({ music: 2, sound: 0.35, reducedMotion: true }),
+    JSON.stringify({ music: 2, sound: 0.35, reducedMotion: true, gameSizePercent: 127 }),
   );
-  expect(readSettings()).toEqual({ ...defaultSettings, sound: 0.35, reducedMotion: true });
+  expect(readSettings()).toEqual({
+    ...defaultSettings,
+    sound: 0.35,
+    reducedMotion: true,
+    gameSizePercent: 120,
+  });
   applySettings(readSettings());
   expect(document.documentElement.dataset.reducedMotion).toBe("true");
   expect(saveSettings(defaultSettings)).toBe(true);

@@ -4,9 +4,10 @@ export interface Settings {
   music: number;
   sound: number;
   reducedMotion: boolean;
+  gameSizePercent: number;
 }
 
-export const defaultSettings: Settings = { music: 1, sound: 1, reducedMotion: false };
+export const defaultSettings: Settings = { music: 1, sound: 1, reducedMotion: false, gameSizePercent: 100 };
 export const audio = createAudioManager();
 const key = "dusk-and-dawn.settings.v1";
 
@@ -17,7 +18,12 @@ export function readSettings(): Settings {
     const candidate = value as Partial<Settings>;
     const validVolume = (volume: unknown): volume is number =>
       typeof volume === "number" && Number.isFinite(volume) && volume >= 0 && volume <= 1;
+    const gameSizePercent =
+      typeof candidate.gameSizePercent === "number" && Number.isFinite(candidate.gameSizePercent)
+        ? Math.max(80, Math.min(120, Math.round(candidate.gameSizePercent / 5) * 5))
+        : defaultSettings.gameSizePercent;
     return {
+      gameSizePercent,
       music: validVolume(candidate.music) ? candidate.music : defaultSettings.music,
       sound: validVolume(candidate.sound) ? candidate.sound : defaultSettings.sound,
       reducedMotion:
