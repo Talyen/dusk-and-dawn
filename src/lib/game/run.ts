@@ -410,8 +410,11 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     if (s.enemy.freeze) s.enemy.freeze = false;
     s.action = (s.action + 1) % route[s.fight]!.actions.length;
     halveWard(s.player);
-    s.mana = 3;
-    drawCards(s.zones, 5, rng);
+    s.mana = Math.max(0, 3 - s.player.nextManaPenalty);
+    const drawCount = Math.max(0, 5 - s.player.nextDrawPenalty);
+    s.player.nextManaPenalty = 0;
+    s.player.nextDrawPenalty = 0;
+    drawCards(s.zones, drawCount, rng);
     s.message = skipped ? `${a.name} skipped.` : `${a.name} resolved.`;
     return yes();
   }

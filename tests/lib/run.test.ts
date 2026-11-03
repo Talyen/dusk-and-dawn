@@ -127,4 +127,18 @@ describe("playable run", () => {
     expect(game2.getSnapshot().state.action).toBe(2);
     expect(game2.getSnapshot().state.enemy.freeze).toBe(false);
   });
+  it("applies queued draw and mana penalties once at the next turn", () => {
+    const setup = structuredClone(createRun(1).getSnapshot());
+    setup.state.player.nextDrawPenalty = 2;
+    setup.state.player.nextManaPenalty = 1;
+    const game = restoreSession(setup, runHandler);
+    game.dispatch({ type: "end" });
+    expect(game.getSnapshot().state.zones.hand).toHaveLength(3);
+    expect(game.getSnapshot().state.mana).toBe(2);
+    expect(game.getSnapshot().state.player.nextDrawPenalty).toBe(0);
+    expect(game.getSnapshot().state.player.nextManaPenalty).toBe(0);
+    game.dispatch({ type: "end" });
+    expect(game.getSnapshot().state.zones.hand).toHaveLength(5);
+    expect(game.getSnapshot().state.mana).toBe(3);
+  });
 });

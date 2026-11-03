@@ -35,6 +35,8 @@ function statuses(holder: RunState["player"]) {
   if (holder.reflect) result.push("Reflect");
   if (holder.hush) result.push("Hush");
   if (holder.freeze) result.push("Freeze");
+  if (holder.nextDrawPenalty) result.push(`Next draw −${holder.nextDrawPenalty}`);
+  if (holder.nextManaPenalty) result.push(`Next mana −${holder.nextManaPenalty}`);
   return result.join(" · ") || "None";
 }
 const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
