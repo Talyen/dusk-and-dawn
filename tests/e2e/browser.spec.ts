@@ -23,6 +23,21 @@ test("collection cards fit above pagination at different window and game sizes",
       const cards = page.locator(".game-card");
       const pagination = page.getByRole("navigation", { name: "Card pages" });
       await expect(pagination).toBeInViewport({ ratio: 1 });
+      await expect
+        .poll(async () =>
+          page.evaluate(() => {
+            const row = [...document.querySelectorAll(".card-grid-row:first-child .game-card")].map((card) =>
+              card.getBoundingClientRect(),
+            );
+            const back = document.querySelector('[aria-label="Back"]')!.getBoundingClientRect();
+            const menu = document.querySelector('[aria-label="Open game menu"]')!.getBoundingClientRect();
+            return Math.max(
+              Math.abs(back.left - row[0]!.left),
+              Math.abs(menu.right - row[row.length - 1]!.right),
+            );
+          }),
+        )
+        .toBeLessThan(1);
       const bounds = await page.evaluate(() => {
         const pagination = document.querySelector(".pagination")!.getBoundingClientRect();
         const cards = [...document.querySelectorAll(".game-card")].map((card) =>

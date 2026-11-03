@@ -169,9 +169,12 @@ export function App() {
           </div>
         </section>
       ) : screen === "cards" ? (
-        <section className="cards-screen" aria-labelledby="cards-title">
-          {header}
+        <section
+          className={`cards-screen${collectionView.kind === "enemies" ? " cards-screen--enemy" : ""}`}
+          aria-labelledby="cards-title"
+        >
           <CardBrowser
+            header={header}
             catalog={sampleCatalog}
             discoveredIds={sampleDiscoveredIds}
             view={collectionView}

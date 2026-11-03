@@ -300,20 +300,24 @@ input:focus-visible,
 }
 
 .cards-screen {
+  /* Reserve space for the header, tabs, row gap and pagination before sizing two rows. */
+  --collection-card-width: min(calc(10 * var(--ui-unit)), calc((100vh - 17 * var(--ui-unit)) * 3 / 8));
   position: relative;
   width: min(100% - calc(3 * var(--ui-unit)), calc(48 * var(--ui-unit)));
   padding: calc(1 * var(--ui-unit)) 0;
   text-align: center;
 }
+.cards-screen--enemy {
+  --collection-card-width: min(calc(13.5 * var(--ui-unit)), calc((100vh - 17 * var(--ui-unit)) * 2 / 3));
+}
+.collection-header {
+  display: flow-root;
+  margin: 0 auto;
+}
 .card-grid-shell {
-  /* Reserve space for the header, tabs, row gap and pagination before sizing two rows. */
-  --collection-card-width: min(calc(10 * var(--ui-unit)), calc((100vh - 17 * var(--ui-unit)) * 3 / 8));
   position: relative;
   width: 100%;
   margin: calc(1.5 * var(--ui-unit)) auto 0;
-}
-.card-grid-shell--enemy {
-  --collection-card-width: min(calc(13.5 * var(--ui-unit)), calc((100vh - 17 * var(--ui-unit)) * 2 / 3));
 }
 .card-grid-measure {
   position: absolute;

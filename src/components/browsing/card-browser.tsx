@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
+import { useLayoutEffect, useRef, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../cards/card";
 import { Icon } from "../navigation/icons";
@@ -18,12 +18,14 @@ export const initialCollectionView: CollectionViewState = {
 };
 
 export function CardBrowser({
+  header,
   discoveredIds,
   catalog,
   view,
   setView,
   onInspectChange,
 }: {
+  header?: ReactNode;
   discoveredIds: ReadonlySet<string>;
   catalog: readonly CollectionEntry[];
   view: CollectionViewState;
@@ -127,6 +129,16 @@ export function CardBrowser({
 
   return (
     <>
+      {header && (
+        <div
+          className="collection-header"
+          style={{
+            width: `min(100%, calc(${columns} * var(--collection-card-width) + ${columns - 1} * var(--ui-unit)))`,
+          }}
+        >
+          {header}
+        </div>
+      )}
       <TabBar
         label={t("cardTypes")}
         tabs={[
