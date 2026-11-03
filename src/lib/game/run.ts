@@ -911,7 +911,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     case "Funnel": {
       const moved = s.zones.hand.splice(0);
       for (const card of moved) card.kept = false;
-      s.zones.library.push(...moved);
+      s.zones.library.push(...moved.reverse());
       drawCards(s.zones, 1, rng);
       break;
     }
@@ -1029,8 +1029,8 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
           case "hand-library": {
             const moved = s.zones.hand.splice(0);
             for (const card of moved) card.kept = false;
-            if (op.position === "top") s.zones.library.push(...moved);
-            else s.zones.library.unshift(...moved);
+            if (op.position === "top") s.zones.library.push(...moved.reverse());
+            else s.zones.library.unshift(...moved.reverse());
             break;
           }
           case "discard-library-top": {
@@ -1239,22 +1239,24 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
             for (const card of s.zones.hand) card.face = op.face;
             break;
         }
+        if (s.player.hp === 0) break;
       }
   }
   if (
     banishSource ||
-    [
-      "Bloom",
-      "Wither",
-      "Mirror",
-      "Candle",
-      "Extinguished Candle",
-      "Ash",
-      "Memory",
-      "Oblivion",
-      "Silence",
-      "Ice Crystal",
-    ].includes(name)
+    (s.player.hp > 0 &&
+      [
+        "Bloom",
+        "Wither",
+        "Mirror",
+        "Candle",
+        "Extinguished Candle",
+        "Ash",
+        "Memory",
+        "Oblivion",
+        "Silence",
+        "Ice Crystal",
+      ].includes(name))
   )
     s.zones.banished.push(source);
   else if (!sourceMoved) finishSource(s.zones, source);

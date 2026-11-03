@@ -178,3 +178,125 @@ it("the Fogbound Weaver handles fewer than two held cards and Hush suppresses mo
   expect(game.getSnapshot().state.zones.library).toHaveLength(0);
   expect(game.getSnapshot().state.player.hp).toBe(26);
 });
+
+it("the Regent moves the top library block to discard without reversing it", () => {
+  const snapshot = encounter("the-moth-eaten-regent", 1);
+  snapshot.state.zones.hand = Array.from({ length: 8 }, (_, index) => ({
+    id: `held-${index}`,
+    pair: "Sun & Moon",
+    face: "light" as const,
+    kept: true,
+  }));
+  snapshot.state.zones.library = ["bottom", "middle", "next", "top"].map((id) => ({
+    id,
+    pair: "Angel & Vampire",
+    face: "dark" as const,
+    kept: false,
+  }));
+  snapshot.state.zones.discard = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "end" });
+  const state = game.getSnapshot().state;
+  expect(state.player.hp).toBe(26);
+  expect(state.zones.library.map((card) => card.id)).toEqual(["bottom", "middle"]);
+  expect(state.zones.discard.map((card) => card.id)).toEqual(["next", "top"]);
+  expect(state.zones.discard.every((card) => card.face === "dark")).toBe(true);
+});
+
+it("the Violinist recovers the current top discard after end-turn discard", () => {
+  const snapshot = encounter("the-buried-violinist", 1);
+  snapshot.state.player.nextDrawPenalty = 5;
+  snapshot.state.zones.hand = [
+    { id: "kept", pair: "Sun & Moon", face: "light", kept: true },
+    { id: "discard-first", pair: "Sun & Moon", face: "light", kept: false },
+    { id: "discard-last", pair: "Angel & Vampire", face: "dark", kept: false },
+  ];
+  snapshot.state.zones.library = [{ id: "old-top", pair: "Sun & Moon", face: "light", kept: false }];
+  snapshot.state.zones.discard = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "end" });
+  const zones = game.getSnapshot().state.zones;
+  expect(zones.library.map((card) => card.id)).toEqual(["old-top", "discard-last"]);
+  expect(zones.library.at(-1)?.face).toBe("dark");
+  expect(zones.discard.map((card) => card.id)).toEqual(["discard-first"]);
+  expect(zones.hand.map((card) => card.id)).toEqual(["kept"]);
+});
+
+it("the Dentist removes Ward before attacking, while Hush preserves it", () => {
+  const snapshot = encounter("the-ivory-dentist", 1);
+  snapshot.state.player.ward = 8;
+  const normal = restoreSession(snapshot, runHandler);
+  normal.dispatch({ type: "end" });
+  expect(normal.getSnapshot().state.player).toMatchObject({ hp: 29, ward: 0 });
+  const suppressed = structuredClone(snapshot);
+  suppressed.state.enemy.hush = true;
+  const muted = restoreSession(suppressed, runHandler);
+  muted.dispatch({ type: "end" });
+  expect(muted.getSnapshot().state.player).toMatchObject({ hp: 30, ward: 2 });
+});
+
+it("the Starved Banquet Leeches through Ward, unless its trait is Hushed", () => {
+  const snapshot = encounter("the-starved-banquet", 1);
+  snapshot.state.player.ward = 10;
+  const normal = restoreSession(snapshot, runHandler);
+  normal.dispatch({ type: "end" });
+  expect(normal.getSnapshot().state.enemy.hp).toBe(25);
+  expect(normal.getSnapshot().state.player).toMatchObject({ hp: 30, ward: 2 });
+  const suppressed = structuredClone(snapshot);
+  suppressed.state.enemy.hush = true;
+  const muted = restoreSession(suppressed, runHandler);
+  muted.dispatch({ type: "end" });
+  expect(muted.getSnapshot().state.enemy.hp).toBe(20);
+});
+
+it("the Janitor clears both enemy statuses after they tick, unless Hushed", () => {
+  const snapshot = encounter("the-majestic-janitor", 1);
+  snapshot.state.enemy.burn = 4;
+  snapshot.state.enemy.poison = 3;
+  const normal = restoreSession(snapshot, runHandler);
+  normal.dispatch({ type: "end" });
+  expect(normal.getSnapshot().state.enemy).toMatchObject({ hp: 13, burn: 0, poison: 0 });
+  const suppressed = structuredClone(snapshot);
+  suppressed.state.enemy.hush = true;
+  const muted = restoreSession(suppressed, runHandler);
+  muted.dispatch({ type: "end" });
+  expect(muted.getSnapshot().state.enemy).toMatchObject({ hp: 13, burn: 2, poison: 1 });
+});
+
+it("the Wax Regent's new Burn begins ticking on the next turn", () => {
+  const snapshot = encounter("the-wax-regent", 1);
+  snapshot.state.player.nextDrawPenalty = 5;
+  snapshot.state.zones.hand = [{ id: "kept", pair: "Sun & Moon", face: "dark", kept: true }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "end" });
+  expect(game.getSnapshot().state.player).toMatchObject({ hp: 26, burn: 1 });
+  expect(game.getSnapshot().state.zones.library.map((card) => card.id)).toEqual(["kept"]);
+  game.dispatch({ type: "end" });
+  expect(game.getSnapshot().state.player).toMatchObject({ hp: 20, burn: 0 });
+});
+
+it("turning held cards occurs before draw, whereas the Sunken Sun turns after draw", () => {
+  const snapshot = encounter("the-threaded-monarch", 1);
+  snapshot.state.player.nextDrawPenalty = 4;
+  snapshot.state.zones.hand = [{ id: "kept", pair: "Sun & Moon", face: "dark", kept: true }];
+  snapshot.state.zones.library = [{ id: "drawn", pair: "Angel & Vampire", face: "dark", kept: false }];
+  snapshot.state.zones.discard = [];
+  const monarch = restoreSession(snapshot, runHandler);
+  monarch.dispatch({ type: "end" });
+  expect(monarch.getSnapshot().state.zones.hand.map((card) => [card.id, card.face])).toEqual([
+    ["kept", "light"],
+    ["drawn", "dark"],
+  ]);
+  const sun = structuredClone(snapshot);
+  sun.state.encounters![0] = "the-sunken-sun";
+  sun.state.zones.hand[0]!.face = "light";
+  sun.state.zones.library[0]!.face = "light";
+  const afterDraw = restoreSession(sun, runHandler);
+  afterDraw.dispatch({ type: "end" });
+  expect(afterDraw.getSnapshot().state.zones.hand.map((card) => [card.id, card.face])).toEqual([
+    ["kept", "dark"],
+    ["drawn", "dark"],
+  ]);
+});

@@ -474,6 +474,12 @@ function BattleSession({
         return [{ position: "top", cards: s.zones.discard.slice(-1) }];
       return [];
     }) ?? [];
+  const handMove =
+    selectedName === "Funnel"
+      ? "top"
+      : selectedCard
+        ? face(selectedCard).ops?.find((op) => op.op === "hand-library")?.position
+        : undefined;
   const maxTargets = s.pending ? s.pending.required : 1;
   const unavailable = selectedCard ? cardRestriction(s, selectedCard) : "";
   const canPlay = !!selectedCard && s.mana > 0 && !unavailable && (!needsTarget || targets.length === 1);
@@ -749,6 +755,16 @@ function BattleSession({
                     })
                     .join("; ") || "none"}
                   . The random selection happens after play.
+                </p>
+              )}
+              {handMove && (
+                <p>
+                  Hand to library {handMove} (draw order within moved cards):{" "}
+                  {s.zones.hand
+                    .filter((card) => card.id !== selected)
+                    .map((card) => face(card).name)
+                    .join(", ") || "none"}
+                  . Keep markers on moved cards are cleared.
                 </p>
               )}
               {fixedDiscard.map((target, index) => (

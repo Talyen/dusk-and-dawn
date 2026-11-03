@@ -975,3 +975,34 @@ test("Fogbound Weaver previews retained cards and preserves their order during a
     )
     .toEqual(ordered);
 });
+
+test("Funnel previews and draws the first card in the visible hand order", async ({ page }) => {
+  const snapshot = structuredClone(createRun(9).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Sieve & Funnel" },
+    { id: "first", pair: "Sun & Moon" },
+    { id: "second", pair: "Angel & Vampire" },
+    { id: "old", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "dark", kept: false },
+    { ...snapshot.state.deck[1]!, face: "dark", kept: true },
+    { ...snapshot.state.deck[2]!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.library = [{ ...snapshot.state.deck[3]!, face: "light", kept: false }];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  const save = encodeRun(snapshot);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), save);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Funnel dark/ }).click();
+  await expect(
+    page.getByText(/Hand to library top \(draw order within moved cards\): Moon, Angel/),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Play Funnel" }).click();
+  await expect(page.locator(".battle-card")).toHaveCount(1);
+  await expect(page.locator(".battle-card").first()).toContainText("Moon");
+  await expect(page.locator(".battle-card").first()).not.toContainText("Kept");
+});
