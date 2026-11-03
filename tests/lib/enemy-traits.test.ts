@@ -98,3 +98,19 @@ it("moves only a card retained after discard for a held-card trait", () => {
   expect([...state.zones.library, ...state.zones.hand].map((card) => card.id)).toContain("kept");
   expect(getEnemy(state).name).toBe("The Brass Matron");
 });
+
+it("keeps the larger queued penalty instead of adding enemy reductions", () => {
+  const draw = encounter("the-marble-nurse", 1);
+  draw.state.player.nextDrawPenalty = 3;
+  const drawGame = restoreSession(draw, runHandler);
+  drawGame.dispatch({ type: "end" });
+  expect(drawGame.getSnapshot().state.zones.hand).toHaveLength(2);
+  expect(drawGame.getSnapshot().state.player.nextDrawPenalty).toBe(0);
+
+  const mana = encounter("the-pearl-taxman", 1);
+  mana.state.player.nextManaPenalty = 2;
+  const manaGame = restoreSession(mana, runHandler);
+  manaGame.dispatch({ type: "end" });
+  expect(manaGame.getSnapshot().state.mana).toBe(1);
+  expect(manaGame.getSnapshot().state.player.nextManaPenalty).toBe(0);
+});

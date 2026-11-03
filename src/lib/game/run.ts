@@ -491,10 +491,10 @@ function applyEnemyEffect(
       s.player.ward = Math.max(0, s.player.ward - amount);
       break;
     case "reduce_next_draw":
-      s.player.nextDrawPenalty += amount;
+      s.player.nextDrawPenalty = Math.max(s.player.nextDrawPenalty, amount);
       break;
     case "reduce_next_mana":
-      s.player.nextManaPenalty += amount;
+      s.player.nextManaPenalty = Math.max(s.player.nextManaPenalty, amount);
       break;
     case "turn_after_draw":
       if (effect.face) context.nextFace = effect.face;
@@ -759,7 +759,14 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     ) || !!playedFace.ops?.some((op) => op.op === "attack" || op.op === "attack-ignore-ward");
   const restriction = cardRestriction(s, source);
   if (restriction) return no(restriction);
-  const ids = command.targets ?? [];
+  const requestedIds = command.targets ?? [];
+  const eligible =
+    name === "Sacrifice"
+      ? s.zones.hand.filter((card) => card.id !== source.id)
+      : name === "Memory"
+        ? s.zones.discard
+        : [];
+  const ids = requestedIds.length === 0 && eligible.length === 1 ? [eligible[0]!.id] : requestedIds;
   if (name === "Sacrifice") {
     if (ids.length !== 1 || ids[0] === source.id || !findTargets(s.zones.hand, ids))
       return no("Choose another card in hand to Banish.");

@@ -89,7 +89,10 @@ describe("playable run", () => {
   it("requires a real Memory choice when discard contains cards and banishes Memory", () => {
     const setup = structuredClone(createRun(1).getSnapshot());
     setup.state.zones.hand = [{ id: "memory", pair: "Memory & Oblivion", face: "light", kept: false }];
-    setup.state.zones.discard = [{ id: "target", pair: "Sun & Moon", face: "dark", kept: false }];
+    setup.state.zones.discard = [
+      { id: "other", pair: "Angel & Vampire", face: "light", kept: false },
+      { id: "target", pair: "Sun & Moon", face: "dark", kept: false },
+    ];
     const game = restoreSession(setup, runHandler);
     const before = game.getSnapshot();
     expect(game.dispatch({ type: "play", id: "memory" }).decision.accepted).toBe(false);
@@ -97,6 +100,23 @@ describe("playable run", () => {
     expect(game.dispatch({ type: "play", id: "memory", targets: ["target"] }).decision.accepted).toBe(true);
     expect(game.getSnapshot().state.zones.hand.map((c) => c.id)).toEqual(["target"]);
     expect(game.getSnapshot().state.zones.banished.map((c) => c.id)).toContain("memory");
+  });
+  it("automatically resolves the only eligible Memory or Sacrifice target", () => {
+    const setup = structuredClone(createRun(1).getSnapshot());
+    setup.state.zones.hand = [{ id: "memory", pair: "Memory & Oblivion", face: "light", kept: false }];
+    setup.state.zones.discard = [{ id: "target", pair: "Sun & Moon", face: "dark", kept: false }];
+    const memory = restoreSession(setup, runHandler);
+    expect(memory.dispatch({ type: "play", id: "memory" }).decision.accepted).toBe(true);
+    expect(memory.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual(["target"]);
+
+    const offering = structuredClone(setup);
+    offering.state.zones.hand = [
+      { id: "sacrifice", pair: "Sacrifice & Self-Preservation", face: "light", kept: false },
+      { id: "offering", pair: "Sun & Moon", face: "light", kept: false },
+    ];
+    const sacrifice = restoreSession(offering, runHandler);
+    expect(sacrifice.dispatch({ type: "play", id: "sacrifice" }).decision.accepted).toBe(true);
+    expect(sacrifice.getSnapshot().state.zones.banished.map((card) => card.id)).toContain("offering");
   });
   it("Hush suppresses the trait but preserves the base attack, then expires", () => {
     const setup = structuredClone(createRun(1).getSnapshot());

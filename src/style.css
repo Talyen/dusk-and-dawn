@@ -825,7 +825,7 @@ input:focus-visible,
   z-index: 1;
   width: min(1120px, 96vw);
   margin: 0 auto;
-  padding: 1rem 0 3rem;
+  padding: 0.6rem 0 9rem;
   color: #eee9df;
 }
 .battle-head {
@@ -837,7 +837,7 @@ input:focus-visible,
 .battle-head h1 {
   margin: 0.2rem 0;
   font:
-    2.3rem Georgia,
+    1.9rem Georgia,
     serif;
 }
 .battle-eyebrow {
@@ -852,15 +852,16 @@ input:focus-visible,
 }
 .battle-board {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(11rem, 1fr) minmax(0, 2fr);
+  align-items: start;
   gap: 1rem;
 }
 .battle-panel {
   background: rgba(27, 30, 39, 0.94);
   border: 1px solid #56505f;
   border-radius: 0.5rem;
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: 0.8rem;
+  margin: 0.55rem 0;
 }
 .battle-panel h2,
 .battle-screen section h2 {
@@ -870,7 +871,7 @@ input:focus-visible,
   margin: 0 0 0.6rem;
 }
 .battle-panel p {
-  margin: 0.4rem 0;
+  margin: 0.3rem 0;
 }
 .battle-hand,
 .battle-rewards,
@@ -895,7 +896,7 @@ input:focus-visible,
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: min(10rem, 45vw);
+  width: min(7rem, 45vw);
   min-height: 9rem;
 }
 .battle-card span,
@@ -941,9 +942,48 @@ input:focus-visible,
 .battle-enemy-art {
   float: right;
   display: block;
-  width: min(38%, 12rem);
+  width: min(30%, 9rem);
   aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: 0.3rem;
   margin: 0 0 0.5rem 1rem;
+}
+
+.battle-details {
+  scroll-margin-block: 1rem 9rem;
+}
+.battle-actions {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  bottom: max(0.5rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(1120px, 96vw);
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid #56505f;
+  border-radius: 0.6rem;
+  background: rgba(27, 30, 39, 0.98);
+  box-shadow: 0 0.25rem 1rem #0009;
+}
+.battle-actions__selection {
+  margin-right: auto;
+}
+.battle-actions a {
+  color: #e9c58b;
+  padding: 0.4rem;
+}
+.battle-actions .ui-button {
+  min-height: 2.75rem;
+}
+@media (max-width: 700px) {
+  .battle-actions__selection {
+    flex-basis: 100%;
+  }
+  .battle-actions .ui-button {
+    padding-inline: 0.8rem;
+  }
+  .battle-screen {
+    padding-bottom: 11rem;
+  }
 }

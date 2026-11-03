@@ -451,12 +451,14 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
   const card = page.locator(".battle-card").first();
   await expect(card.locator("img")).toHaveJSProperty("complete", true);
   expect(await card.locator("img").evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   await expect(page.getByText(/Current attack:.*Radiance damage before Ward and Reflect/)).toBeVisible();
   await card.click();
   await expect(page.getByText(/Other face:/)).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Play / })).toBeInViewport();
   await page.getByRole("button", { name: /^Play / }).click();
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
   await page.getByRole("button", { name: "End turn" }).click();
@@ -652,4 +654,64 @@ test("recovers a retained run without replacing its backup", async ({ page }) =>
     )
     .toBe(26);
   expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1.backup"))).toBe(good);
+});
+
+test("automatically retrieves Memory's only eligible discard target", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck[0]!.pair = "Memory & Oblivion";
+  snapshot.state.deck[1]!.pair = "Sun & Moon";
+  const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+  snapshot.state.zones.hand = [fight[0]!];
+  snapshot.state.zones.discard = [{ ...fight[1]!, face: "dark" }];
+  snapshot.state.zones.library = fight.slice(2);
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Memory light/ }).click();
+  await expect(page.getByText("Automatic target: Moon.")).toBeVisible();
+  await expect(page.getByText("Choose a card from your discard pile.")).toHaveCount(0);
+  await page.getByRole("button", { name: "Play Memory" }).click();
+  await expect(page.getByRole("button", { name: /Moon dark/ })).toBeVisible();
+});
+
+test("previews when Water Clock cannot Keep itself after filling the hand", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck[0]!.pair = "Sundial & Water Clock";
+  const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+  snapshot.state.zones.hand = [{ ...fight[0]!, face: "dark" }, ...fight.slice(1, 8)];
+  snapshot.state.zones.library = fight.slice(8);
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Water Clock dark/ }).click();
+  await expect(
+    page.getByText("Drawing will fill your hand, so this card cannot return to it with Keep."),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Play Water Clock" }).click();
+  await expect(page.getByRole("button", { name: /Water Clock dark/ })).toHaveCount(0);
+  await expect(page.locator(".battle-card")).toHaveCount(8);
+});
+
+test("battle actions stay usable on a small viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 480 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
+  await page.locator(".battle-card").first().click();
+  const play = page.getByRole("button", { name: /^Play / });
+  await expect(play).toBeInViewport();
+  await play.click();
+  await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
+  await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
 });

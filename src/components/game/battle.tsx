@@ -250,7 +250,42 @@ function BattleSession({
       : selectedName === "Sacrifice"
         ? s.zones.hand.filter((card) => card.id !== selected)
         : [];
-  const needsTarget = (selectedName === "Memory" || selectedName === "Sacrifice") && targetZone.length > 0;
+  const needsTarget = (selectedName === "Memory" || selectedName === "Sacrifice") && targetZone.length > 1;
+  const fixedDiscard =
+    (selectedCard ? face(selectedCard).ops : undefined)?.flatMap((op) => {
+      if (op.op === "banish-discard" || op.op === "return-discard")
+        return [
+          {
+            position: op.position,
+            cards: op.position === "top" ? s.zones.discard.slice(-1).reverse() : s.zones.discard.slice(0, 1),
+          },
+        ];
+      if (op.op === "discard-library-top")
+        return [
+          {
+            position: op.position,
+            cards:
+              op.position === "top"
+                ? s.zones.discard.slice(-op.count).reverse()
+                : s.zones.discard.slice(0, op.count).reverse(),
+          },
+        ];
+      if (op.op === "discard-library-bottom")
+        return [{ position: "bottom", cards: s.zones.discard.slice(0, op.count).reverse() }];
+      if (op.op === "return-top-discard")
+        return [
+          {
+            position: "top",
+            cards: s.zones.discard
+              .slice(-op.count)
+              .reverse()
+              .slice(0, 8 - (s.zones.hand.length - 1)),
+          },
+        ];
+      if (op.op === "flip-discard-top" || op.op === "light-discard-top")
+        return [{ position: "top", cards: s.zones.discard.slice(-1) }];
+      return [];
+    }) ?? [];
   const maxTargets = s.pending ? s.pending.required : 1;
   const unavailable = selectedCard ? cardRestriction(s, selectedCard) : "";
   const canPlay = !!selectedCard && s.mana > 0 && !unavailable && (!needsTarget || targets.length === 1);
@@ -323,8 +358,7 @@ function BattleSession({
         {s.phase !== "battle" && <Button onClick={exitBattle}>Main menu</Button>}
       </div>
       <p className="battle-preview">
-        Preview rules: Bless and Curse use the provisional flat model (+1/−1 per stack). The wider card and
-        enemy catalogues are still in progress.
+        Preview rules: Bless and Curse use the provisional flat model (+1/−1 per stack).
       </p>
       <p role="status" aria-live="polite">
         {error || s.message}
@@ -415,7 +449,11 @@ function BattleSession({
             </div>
           </section>
           {s.pending && (
-            <section className="battle-panel" aria-label="Committed inspection">
+            <section
+              id="committed-inspection"
+              className="battle-panel battle-details"
+              aria-label="Committed inspection"
+            >
               <h2>
                 {s.pending.kind === "order"
                   ? "Choose top-to-bottom order"
@@ -451,7 +489,11 @@ function BattleSession({
             </section>
           )}
           {selectedCard && !s.pending && (
-            <section className="battle-panel" aria-label="Selected card">
+            <section
+              id="selected-card-details"
+              className="battle-panel battle-details"
+              aria-label="Selected card"
+            >
               <h2>{face(selectedCard).name}</h2>
               <p>
                 <Description text={face(selectedCard).effect} />
@@ -502,17 +544,29 @@ function BattleSession({
                   . The random selection happens after play.
                 </p>
               )}
+              {fixedDiscard.map((target, index) => (
+                <p key={index}>
+                  {target.position === "top" ? "Top" : "Bottom"} of discard (top to bottom):{" "}
+                  {target.cards.map((card) => face(card).name).join(", ") || "empty"}.
+                </p>
+              ))}
               {face(selectedCard)
-                .ops?.filter((op) => op.op === "banish-discard" || op.op === "return-discard")
-                .map((op, index) => {
-                  const card = op.position === "top" ? s.zones.discard.at(-1) : s.zones.discard[0];
-                  return (
-                    <p key={index}>
-                      {op.position === "top" ? "Top" : "Bottom"} of discard:{" "}
-                      {card ? face(card).name : "empty"}.
-                    </p>
-                  );
-                })}
+                .ops?.filter((op) => op.op === "turn-random")
+                .map((op, index) => (
+                  <p key={index}>
+                    Eligible {op.from} cards:{" "}
+                    {s.zones.hand
+                      .filter((card) => card.id !== selected && card.face === op.from)
+                      .map((card) => face(card).name)
+                      .join(", ") || "none"}
+                    . A card is chosen after play.
+                  </p>
+                ))}
+              {selectedName === "Water Clock" &&
+                s.zones.hand.length === 8 &&
+                (s.zones.library.length > 0 || s.zones.discard.length > 0) && (
+                  <p>Drawing will fill your hand, so this card cannot return to it with Keep.</p>
+                )}
               {face(selectedCard).keywords.some((keyword) => keywordHelp[keyword]) && (
                 <ul aria-label="Keyword explanations">
                   {face(selectedCard)
@@ -529,10 +583,15 @@ function BattleSession({
                   Bottom of discard:{" "}
                   {s.zones.discard
                     .slice(0, 2)
+                    .reverse()
                     .map((card) => face(card).name)
                     .join(", ") || "empty"}
                 </p>
               )}
+              {(selectedName === "Memory" || selectedName === "Sacrifice") && targetZone.length === 1 && (
+                <p>Automatic target: {face(targetZone[0]!).name}.</p>
+              )}
+              {selectedName === "Memory" && targetZone.length === 0 && <p>No cards in the discard pile.</p>}
               {needsTarget && (
                 <>
                   <p>
@@ -559,15 +618,28 @@ function BattleSession({
                 </>
               )}
               {unavailable && <p>{unavailable}</p>}
-              <Button
-                disabled={!canPlay}
-                onClick={() => dispatch({ type: "play", id: selectedCard.id, targets })}
-              >
-                Play {face(selectedCard).name}
-              </Button>
             </section>
           )}
-          <div className="battle-actions">
+          <div className="battle-actions" role="group" aria-label="Battle actions">
+            {s.pending ? (
+              <a href="#committed-inspection">Choose cards</a>
+            ) : selectedCard ? (
+              <>
+                <span className="battle-actions__selection">
+                  {face(selectedCard).name}
+                  {needsTarget && !targets.length ? " · choose a target" : ""}
+                </span>
+                <a href="#selected-card-details">Details</a>
+                <Button
+                  disabled={!canPlay}
+                  onClick={() => dispatch({ type: "play", id: selectedCard.id, targets })}
+                >
+                  Play {face(selectedCard).name}
+                </Button>
+              </>
+            ) : (
+              <span className="battle-actions__selection">Select a card to play</span>
+            )}
             <Button disabled={!!s.pending} onClick={() => dispatch({ type: "end" })}>
               End turn
             </Button>
