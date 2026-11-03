@@ -37,6 +37,30 @@ const parse = (effect) => {
         leech: false,
       });
     else if (text === "Leech." && result.at(-1)?.op === "attack") result.at(-1).leech = true;
+    else if ((match = /^Banish the (top|bottom) card of your discard pile\.$/.exec(text)))
+      result.push({ op: "banish-discard", position: match[1] });
+    else if ((match = /^Return the (top|bottom) card of your discard pile to your hand\.$/.exec(text)))
+      result.push({ op: "return-discard", position: match[1] });
+    else if (text === "Flip a random card in your hand.") result.push({ op: "flip-random", count: 1 });
+    else if ((match = /^Flip (\d+) random cards in your hand\.$/.exec(text)))
+      result.push({ op: "flip-random", count: +match[1] });
+    else if (text === "Flip this card.") result.push({ op: "flip-self" });
+    else if (text === "Discard a random card.") result.push({ op: "discard-random" });
+    else if (text === "Keep a random card in your hand.") result.push({ op: "keep-random", count: 1 });
+    else if ((match = /^Keep (\d+) random cards in your hand\.$/.exec(text)))
+      result.push({ op: "keep-random", count: +match[1] });
+    else if ((match = /^Remove all your (Burn|Poison|Curse)\.$/.exec(text)))
+      result.push({ op: "remove-status", status: match[1].toLowerCase() });
+    else if (text === "Remove all Burn from both combatants.") result.push({ op: "remove-burn-both" });
+    else if (text === "Cleanse all harmful statuses from yourself.") result.push({ op: "cleanse-all" });
+    else if (text === "Cleanse one random harmful status from yourself.") result.push({ op: "cleanse-one" });
+    else if (text === "Purge all beneficial statuses from the enemy.") result.push({ op: "purge-all" });
+    else if (text === "Purge one random beneficial status from the enemy.") result.push({ op: "purge-one" });
+    else if ((match = /^Lose (\d+) HP\.$/.exec(text))) result.push({ op: "lose-hp", amount: +match[1] });
+    else if ((match = /^Remove (\d+) enemy Ward\.$/.exec(text)))
+      result.push({ op: "remove-ward", amount: +match[1] });
+    else if (text === "Hush.") result.push({ op: "hush" });
+    else if (text === "Freeze.") result.push({ op: "freeze" });
     else if (text === "Scry.") result.push({ op: "scry" });
     else if (text === "Flip your hand.") result.push({ op: "flip-hand" });
     else if (text === "Keep your hand.") result.push({ op: "keep-hand" });

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   cards,
+  cardRestriction,
   createRun,
   enemyAttackHits,
   face,
@@ -187,14 +188,7 @@ function BattleSession({
   const targetZone = selectedName === "Memory" ? s.zones.discard : [];
   const needsTarget = selectedName === "Memory" && targetZone.length > 0;
   const maxTargets = 1;
-  const intent = route[s.fight]!.actions[s.action]!;
-  const unavailable =
-    selectedName === "Silence" &&
-    (s.enemy.hush || !(intent.ability || intent.traitBonus || intent.extra || intent.rider))
-      ? "Hush requires an unsuppressed ability or trait in the next intent."
-      : selectedName === "Ice Crystal" && s.enemy.freeze
-        ? "The enemy is already Frozen."
-        : "";
+  const unavailable = selectedCard ? cardRestriction(s, selectedCard) : "";
   const canPlay = !!selectedCard && s.mana > 0 && !unavailable && (!needsTarget || targets.length === 1);
   function toggleTarget(id: string) {
     setTargets((t) =>
@@ -376,6 +370,30 @@ function BattleSession({
                     " Any card drawn first will also flip; its identity is not revealed yet."}
                 </p>
               )}
+              {face(selectedCard).ops?.some((op) => op.op === "flip-random") && (
+                <p>
+                  Random Flip eligible cards:{" "}
+                  {s.zones.hand
+                    .filter((card) => card.id !== selected)
+                    .map((card) => {
+                      const other = cards[card.pair]![card.face === "light" ? "dark" : "light"];
+                      return `${face(card).name} → ${other.name} (${other.effect})`;
+                    })
+                    .join("; ") || "none"}
+                  . The random selection happens after play.
+                </p>
+              )}
+              {face(selectedCard)
+                .ops?.filter((op) => op.op === "banish-discard" || op.op === "return-discard")
+                .map((op, index) => {
+                  const card = op.position === "top" ? s.zones.discard.at(-1) : s.zones.discard[0];
+                  return (
+                    <p key={index}>
+                      {op.position === "top" ? "Top" : "Bottom"} of discard:{" "}
+                      {card ? face(card).name : "empty"}.
+                    </p>
+                  );
+                })}
               {face(selectedCard).keywords.some((keyword) => keywordHelp[keyword]) && (
                 <ul aria-label="Keyword explanations">
                   {face(selectedCard)

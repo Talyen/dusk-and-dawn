@@ -1,10 +1,11 @@
 import { simpleCards } from "./simple-cards.generated";
-import { shuffle, type Rng } from "../random";
+import { rngInt, shuffle, type Rng } from "../random";
 import { createSession, restoreSession, type Handler } from "./session";
 import {
   applyDamageOverTime,
   halveWard,
   resolveDamageOverTime,
+  removeStatuses,
   type Combatant,
   type DamageType,
 } from "./combat-status";
@@ -326,6 +327,29 @@ export function enemyAttackHits(action: Action, hush: boolean): number[] {
     ...(!hush && action.extra !== undefined ? [action.extra] : []),
   ];
 }
+/** Visible preflight checks never consume mana or reveal random outcomes. */
+export function cardRestriction(s: RunState, source: FightCard): string {
+  const info = face(source);
+  const ops = info.ops ?? [];
+  const action = route[s.fight]!.actions[s.action]!;
+  if (
+    (info.name === "Silence" || ops.some((op) => op.op === "hush")) &&
+    (s.enemy.hush || !(action.ability || action.traitBonus || action.extra || action.rider))
+  )
+    return "Hush requires an unsuppressed ability or trait in the next intent.";
+  if ((info.name === "Ice Crystal" || ops.some((op) => op.op === "freeze")) && s.enemy.freeze)
+    return "The enemy is already Frozen.";
+  const loss = ops.find((op) => op.op === "lose-hp");
+  if (loss && s.player.hp <= loss.amount) return "Not enough HP to pay this cost.";
+  const first = ops[0];
+  if (first && ops.slice(1).some((op) => op.op !== "banish")) {
+    if (first.op === "discard-random" && s.zones.hand.length <= 1)
+      return "Another card in hand is required as payment.";
+    if (first.op === "banish-discard" && !s.zones.discard.length)
+      return "A card in the discard pile is required as payment.";
+  }
+  return "";
+}
 function findTargets(list: FightCard[], ids: string[]): FightCard[] | null {
   if (new Set(ids).size !== ids.length) return null;
   const result = ids.map((id) => list.find((c) => c.id === id));
@@ -428,13 +452,8 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   const source = s.zones.hand[index];
   if (!source || s.mana < 1) return no("Card unavailable or insufficient mana.");
   const name = face(source).name;
-  const nextAction = route[s.fight]!.actions[s.action]!;
-  if (
-    name === "Silence" &&
-    (s.enemy.hush || !(nextAction.ability || nextAction.traitBonus || nextAction.extra || nextAction.rider))
-  )
-    return no("Hush requires an unsuppressed ability or trait in the next intent.");
-  if (name === "Ice Crystal" && s.enemy.freeze) return no("The enemy is already Frozen.");
+  const restriction = cardRestriction(s, source);
+  if (restriction) return no(restriction);
   const ids = command.targets ?? [];
   if (name === "Memory") {
     if (
@@ -532,6 +551,69 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     default:
       for (const op of face(source).ops ?? []) {
         switch (op.op) {
+          case "banish-discard": {
+            const card = op.position === "top" ? s.zones.discard.pop() : s.zones.discard.shift();
+            if (card) {
+              card.kept = false;
+              s.zones.banished.push(card);
+            }
+            break;
+          }
+          case "return-discard": {
+            if (s.zones.hand.length < 8) {
+              const card = op.position === "top" ? s.zones.discard.pop() : s.zones.discard.shift();
+              if (card) s.zones.hand.push(card);
+            }
+            break;
+          }
+          case "flip-random":
+            flipCards(s.zones, source, { kind: "random-hand", count: op.count }, rng);
+            break;
+          case "flip-self":
+            flipCards(s.zones, source, { kind: "source" }, rng);
+            break;
+          case "discard-random": {
+            if (s.zones.hand.length) {
+              const [card] = s.zones.hand.splice(rngInt(rng, s.zones.hand.length), 1);
+              card!.kept = false;
+              s.zones.discard.push(card!);
+            }
+            break;
+          }
+          case "keep-random":
+            keepCards(s.zones, source, { kind: "random-hand", count: op.count }, rng);
+            break;
+          case "remove-status":
+            s.player[op.status] = 0;
+            break;
+          case "remove-burn-both":
+            s.player.burn = 0;
+            s.enemy.burn = 0;
+            break;
+          case "cleanse-all":
+            removeStatuses(s.player, "cleanse", "all", rng);
+            break;
+          case "cleanse-one":
+            removeStatuses(s.player, "cleanse", "one-random", rng);
+            break;
+          case "purge-all":
+            removeStatuses(s.enemy, "purge", "all", rng);
+            break;
+          case "purge-one":
+            removeStatuses(s.enemy, "purge", "one-random", rng);
+            break;
+          case "lose-hp":
+            s.player.hp -= op.amount;
+            break;
+          case "remove-ward":
+            s.enemy.ward = Math.max(0, s.enemy.ward - op.amount);
+            break;
+          case "hush":
+            s.enemy.hush = true;
+            break;
+          case "freeze":
+            s.enemy.freeze = true;
+            break;
           case "banish":
             banishSource = true;
             break;

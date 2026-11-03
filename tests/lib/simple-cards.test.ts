@@ -32,6 +32,8 @@ describe("supported catalogue cards", () => {
           { id: "source", pair, face: side, kept: false },
           { id: "other", pair: "Sun & Moon", face: "light", kept: false },
         ];
+        setup.state.zones.discard = [{ id: "discarded", pair: "Sun & Moon", face: "light", kept: false }];
+        setup.state.action = 1;
         setup.state.enemy.hp = 1000;
         setup.state.enemy.maxHp = 1000;
         const game = restoreSession(setup, runHandler);
@@ -57,5 +59,38 @@ describe("supported catalogue cards", () => {
   it("retains independent physical pairs in the reward catalogue", () => {
     expect(cards["Winged Guardian & Revenant"]?.dark.name).toBe("Revenant");
     expect(cards["Goldfish & Anglerfish"]?.dark.name).toBe("Anglerfish");
+  });
+  it("rejects unavailable random and HP payments without spending mana or randomness", () => {
+    const setup = structuredClone(createRun(7).getSnapshot());
+    setup.state.zones.hand = [{ id: "exile", pair: "Pilgrim & Exile", face: "dark", kept: false }];
+    const game = restoreSession(setup, runHandler);
+    const before = game.getSnapshot();
+    expect(game.dispatch({ type: "play", id: "exile" }).decision.accepted).toBe(false);
+    expect(game.getSnapshot()).toEqual(before);
+    const low = structuredClone(before);
+    low.state.player.hp = 2;
+    low.state.zones.hand = [{ id: "fallen", pair: "Seraph & Fallen Seraph", face: "dark", kept: false }];
+    const game2 = restoreSession(low, runHandler);
+    expect(game2.dispatch({ type: "play", id: "fallen" }).decision.accepted).toBe(false);
+    expect(game2.getSnapshot()).toEqual(low);
+  });
+  it("uses the fixed bottom discard target and retains its current face", () => {
+    const setup = structuredClone(createRun(7).getSnapshot());
+    setup.state.zones.hand = [
+      { id: "library", pair: "Grand Library & Forgotten Archive", face: "light", kept: false },
+    ];
+    setup.state.zones.discard = [
+      { id: "bottom", pair: "Sun & Moon", face: "dark", kept: false },
+      { id: "top", pair: "Angel & Vampire", face: "light", kept: false },
+    ];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "library" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand).toContainEqual({
+      id: "bottom",
+      pair: "Sun & Moon",
+      face: "dark",
+      kept: false,
+    });
+    expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["top", "library"]);
   });
 });
