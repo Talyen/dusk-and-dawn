@@ -6,9 +6,9 @@ from html.parser import HTMLParser
 import json,re,html,hashlib,collections
 ROOT=Path(__file__).resolve().parents[2];DOCS=ROOT/'docs';HERE=Path(__file__).parent
 CARD='Dusk & Dawn — Card Effect Catalogue v0.2';ENEMY='Dusk & Dawn — Enemy Mechanics Catalogue v0.1';GAME='Dusk & Dawn — Game Design v0.2'
-TYPES=['Radiance','Shadow','Growth','Decay','Binding','Release','Flame','Frost','Memory','Oblivion']
-MECHANICS=['Ward','Burn','Flip','Banish','Scry','Mark','Weaken','Hush','Keep','Reflect','Leech']
-COLORS=dict(zip(TYPES+MECHANICS,['#F7D670','#C7AEF1','#9DDA97','#C7CD78','#80D1BE','#7DDDEC','#FFAD66','#A8E5FA','#B8C7FF','#C5C5CD','#8BCBFF','#FF966B','#D8ABFF','#F3A5B6','#86D8D0','#FFB3A6','#D5C58A','#B5BCD1','#B6E1A8','#9DDDFF','#EF9EAC']))
+TYPES=['Radiance','Shadow','Growth','Decay','Binding','Release','Fire','Frost','Memory','Oblivion']
+MECHANICS=['Ward','Burn','Poison','Flip','Banish','Scry','Mark','Weaken','Hush','Keep','Reflect','Leech']
+COLORS={'Radiance': '#F7D670', 'Shadow': '#C7AEF1', 'Growth': '#9DDA97', 'Decay': '#C7CD78', 'Binding': '#80D1BE', 'Release': '#7DDDEC', 'Fire': '#FFAD66', 'Frost': '#A8E5FA', 'Memory': '#B8C7FF', 'Oblivion': '#C5C5CD', 'Ward': '#8BCBFF', 'Burn': '#FF966B', 'Poison': '#B2D67C', 'Flip': '#D8ABFF', 'Banish': '#F3A5B6', 'Scry': '#86D8D0', 'Mark': '#FFB3A6', 'Weaken': '#D5C58A', 'Hush': '#B5BCD1', 'Keep': '#B6E1A8', 'Reflect': '#9DDDFF', 'Leech': '#EF9EAC'}
 BASELINE=ROOT/'test-results/content-review-baseline'
 def readjson(p):return json.loads(p.read_text())
 def writejson(p,x):p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
@@ -19,9 +19,31 @@ def mark(s):
  return re.sub(r'\b('+'|'.join(MECHANICS+TYPES)+r')\b',lambda m:f'<span class="kw-{m[0].lower()}">{m[0]}</span>',s)
 def styles():return '\n'.join(f'.kw-{k.lower()}{{color:{v};font-weight:650}}' for k,v in COLORS.items())
 def normalize(s):
+ s=s.replace('Flame damage','Fire damage').replace('draw pile','library')
  s=s.replace('from your discard to','from your discard pile to').replace('from your discard.','from your discard pile.')
- s=s.replace('from your discard on','from your discard pile on').replace('on your draw pile.','on top of your draw pile.')
+ s=s.replace('from your discard on','from your discard pile on').replace('on your library.','on top of your library.')
  return s
+
+def automatic_target_index(effect):
+ out=[]
+ patterns=[
+  (r'Keep this card\.',{'op':'Keep','target':'self'}),
+  (r'Keep your hand\.',{'op':'Keep','target':'whole_hand'}),
+  (r'Keep (a|\d+) random cards? in your hand\.',{'op':'Keep','target':'random_hand'}),
+  (r'Flip this card\.',{'op':'Flip','target':'self'}),
+  (r'Flip your hand\.',{'op':'Flip','target':'whole_hand'}),
+  (r'Flip (a|\d+) random cards? in your hand\.',{'op':'Flip','target':'random_hand'}),
+  (r'Flip the top card of your discard pile\.',{'op':'Flip','target':'top_discard'}),
+  (r'Turn your hand to its (light|dark) faces\.',{'op':'Turn','target':'whole_hand'}),
+  (r'Turn a random (dark|light) card in your hand to its (light|dark) face\.',{'op':'Turn','target':'random_opposite_face'})
+ ]
+ for pattern,base in patterns:
+  for m in re.finditer(pattern,effect):
+   row=dict(base,selection_prompts=0,at=m.start())
+   if 'random' in row['target']:row['count']=1 if m[1] in ['a','light','dark'] else int(m[1]);row['without_replacement']=True
+   if row['op']=='Turn':row['face']=m[2] if len(m.groups())==2 else m[1]
+   out.append(row)
+ return sorted(out,key=lambda x:x.pop('at'))
 
 def cards():
  current=readjson(DOCS/(CARD+'.json'));old=readjson(BASELINE/(CARD+'.json')) if (BASELINE/(CARD+'.json')).exists() else current
@@ -30,7 +52,7 @@ def cards():
  evidence=[];result=[]
  for n,effect,reason in rows:
   n=int(n);c=current[n-1].copy();original=readjson(HERE/'baseline.json')['card_effects'][c['face']];effect=normalize(original if effect=='=' else effect)
-  c.pop('tags',None);c['effect']=effect;c['keywords']=keywords(effect);c['status']='proposed';result.append(c)
+  c.pop('tags',None);c['effect']=effect;c['keywords']=keywords(effect);c['status']='proposed';c['automatic_targets']=automatic_target_index(effect);result.append(c)
   evidence.append({'number':n,'face':c['face'],'artwork_id':c['artwork_id'],'before':original,'after':effect,'changed':original!=effect,'judgment':'strong-fit-proposal','reason':reason,'sheet':f'card-artwork-review/cards-{(n-1)//16+1:02}.jpg'})
  writejson(DOCS/(CARD+'.json'),result)
  return result,evidence,old
@@ -57,9 +79,11 @@ def trait_atoms(spec,typ):
   elif code.startswith('strip'):a={'op':'remove_ward','amount':int(code[5:]),'target':'player','stage':'before_attack'}
   elif code.startswith('weaken'):a={'op':'weaken','amount':int(code[6:]),'target':'player','stage':'after_attack'}
   elif code.startswith('mark'):a={'op':'mark','amount':int(code[4:]),'target':'player','stage':'after_attack'}
+  elif code.startswith('poison'):a={'op':'poison','amount':int(code[6:]),'target':'player','stage':'after_attack'}
   elif code.startswith('burn'):a={'op':'burn','amount':int(code[4:]),'target':'player','stage':'after_attack'}
   elif code.startswith('heal'):a={'op':'heal','amount':int(code[4:]),'target':'enemy','stage':'after_attack'}
   elif code.startswith('ward'):a={'op':'ward','amount':int(code[4:]),'target':'enemy','stage':'after_attack'}
+  elif code=='cleanpoison':a={'op':'remove_poison','target':'enemy','stage':'after_attack'}
   elif code=='clean':a={'op':'remove_burn','target':'enemy','stage':'after_attack'}
   elif code.startswith('mill'):a={'op':'move_top','amount':int(code[4:]),'from':'player_draw','to':'player_discard','stage':'after_attack'}
   elif code.startswith('bottom'):a={'op':'move_top','amount':int(code[6:]),'from':'player_draw','to':'player_draw_bottom','stage':'after_attack'}
@@ -68,7 +92,7 @@ def trait_atoms(spec,typ):
   elif code.startswith('discard'):a={'op':'move_held','amount':int(code[7:]),'to':'player_discard','chooser':'player','stage':'after_attack'}
   elif code.startswith('stow'):a={'op':'move_held','amount':int(code[4:]),'to':'player_draw_top','chooser':'player','stage':'after_attack'}
   elif code.startswith('bury'):a={'op':'move_held','amount':int(code[4:]),'to':'player_draw_bottom','chooser':'player','stage':'after_attack'}
-  elif code.startswith('flip'):a={'op':'flip_held','amount':'all' if code[4:]=='all' else int(code[4:]),'chooser':'player','stage':'after_attack'}
+  elif code.startswith('flip'):a={'op':'flip_held','amount':'all' if code[4:]=='all' else int(code[4:]),'chooser':'random','stage':'after_attack'}
   elif code=='lightnow':a={'op':'turn_held','face':'light','stage':'after_attack'}
   elif code in ['dark','light']:a={'op':'turn_after_draw','face':code,'target':'player','stage':'after_attack'}
   elif code=='leech':a={'op':'leech','stage':'attack'}
@@ -90,6 +114,8 @@ def optext(a):
  elif op=='heal':s=f'Heal {v} HP.'
  elif op=='mark':s=f'Apply {v} Mark to the player.'
  elif op=='weaken':s=f'Apply {v} Weaken to the player.'
+ elif op=='poison':s=f'Apply {v} Poison to the player.'
+ elif op=='remove_poison':s='Remove all enemy Poison.'
  elif op=='burn':s=f'Apply {v} Burn to the player.'
  elif op=='bonus_damage':s=f"Add {v} {a['damage_type']} damage to the base hit."
  elif op=='extra_hits':s=f"Add {a['count']} {'hit' if a['count']==1 else 'hits'} of {v} {a['damage_type']} damage."
@@ -99,20 +125,20 @@ def optext(a):
  elif op=='move_top':
   dest={'player_discard':"the player's discard pile",'player_draw_bottom':'the bottom of that pile','player_banished':'Banish'}[a['to']]
   noun='card' if v==1 else 'cards'
-  s=(f'Banish the top {v} {noun} of the player\'s draw pile.' if dest=='Banish' else f'Move the top {v} {noun} of the player\'s draw pile to {dest}.')
+  s=(f'Banish the top {v} {noun} of the player\'s library.' if dest=='Banish' else f'Move the top {v} {noun} of the player\'s library to {dest}.')
  elif op=='move_held':
-  noun='card' if v==1 else 'cards';dest={'player_discard':'their discard pile','player_draw_top':'the top of their draw pile','player_draw_bottom':'the bottom of their draw pile','player_banished':'Banish'}[a['to']]
+  noun='card' if v==1 else 'cards';dest={'player_discard':'their discard pile','player_draw_top':'the top of their library','player_draw_bottom':'the bottom of their library','player_banished':'Banish'}[a['to']]
   tail=', if any.' if v==1 else ', or all held cards if fewer.'
   if dest=='Banish':s=f'The player Banishes {v} held {noun} of their choice'+tail
   elif a['to']=='player_discard':s=f'The player discards {v} held {noun} of their choice'+tail
   else:s=f'The player puts {v} held {noun} of their choice on '+dest+tail
- elif op=='flip_held':s=('Flip all cards still in the player\'s hand.' if v=='all' else f'The player flips {v} held card of their choice, if any.')
+ elif op=='flip_held':s=('Flip all cards still in the player\'s hand.' if v=='all' else f'Flip {v} random card still in the player\'s hand, if any.')
  elif op=='turn_held':s=f"Turn the cards still in the player's hand to their {a['face']} faces."
  elif op=='turn_after_draw':s=f"After the player's next normal draw, turn their hand to its {a['face']} faces."
  elif op=='leech':s='The base attack has Leech.'
  elif op=='reduce_next_draw':s=f'The player draws {v} fewer card on their next normal draw.'
  elif op=='reduce_next_mana':s=f'The player starts their next turn with {v} less mana.'
- elif op=='recover_to_top':s=f'The player may put {v} card of their choice from their discard pile on top of their draw pile.'
+ elif op=='recover_to_top':s=f'The player may put {v} card of their choice from their discard pile on top of their library.'
  elif op=='copy_latest_hit':s='Use the latest direct hit\'s final damage this turn for the base hit: minimum 3, maximum 8. Use 3 if there was no direct hit.'
  elif op=='reflect_once':s='Reflect the first hit of the next direct card attack against this enemy. This ends when the hit is reflected or this intent ends.'
  elif op=='reaction_damage':s=f"After each of the player's direct attack cards, if this enemy survives, deal {v} {a['damage_type']} damage to the player. This is trait damage, not a base attack."
@@ -165,10 +191,11 @@ def enemies():
   if any(x['op']=='move_top' and x['to']=='player_banished' or x['op']=='move_held' and x['to']=='player_banished' for a in actions for x in a['base']) or any(x['op'] in ['move_top','move_held'] and x['to']=='player_banished' for atoms in keyed.values() for x in atoms):flags.append('temporary-card-loss')
   if n in [59,95]:flags.append('reactive-trait')
   if n in [54,55,71,84,90,94]:flags.append('visible-next-turn-effect')
+  if any(x['op'] in ['burn','poison'] for atoms in keyed.values() for x in atoms):flags.append('damage-over-time')
   if n in [26,105]:flags.append('helpful-trait')
   if n in [78]:flags.append('full-Ward-bypass')
   if any(x['op']=='heal' for a in actions for x in a['base']) or any(x['op'] in ['heal','leech'] for atoms in keyed.values() for x in atoms):flags.append('recovery-stall-check')
-  weak=old['weakness'].copy();weak.pop('available_direct_face_count',None);weak.pop('example_direct_faces',None)
+  weak=old['weakness'].copy();weak['type']='Fire' if weak['type']=='Flame' else weak['type'];weak.pop('available_direct_face_count',None);weak.pop('example_direct_faces',None)
   r={'id':old['id'],'number':n,'name':old['name'],'status':'proposal-not-playtested','health':HEALTH[n-1],
      'artwork':old['artwork'],'weakness':weak,'trait':trait,'actions':actions,'pattern':pattern,
      'keywords':keywords(' '.join([trait['effect']]+[a['effect'] for a in actions]+[weak['type']])),'review_flags':flags,'thematic_reason':reason}

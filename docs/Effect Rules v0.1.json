@@ -1,30 +1,101 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "status_policy": {
+    "status": "provisional-timing-and-rounding; values-not-playtested",
+    "rounding": "floor",
+    "minimum": 0,
+    "remove_at_zero": true,
+    "Ward": {
+      "decay": "floor(value/2)",
+      "player_timing": "before player mana refill and normal draw",
+      "enemy_timing": "enemy action start, after all damage-over-time ticks, including skipped actions",
+      "gain": "add"
+    },
+    "damage_over_time": {
+      "order": [
+        "player Burn",
+        "player Poison",
+        "enemy Burn",
+        "enemy Poison"
+      ],
+      "timing": "player turn end, after unkept cards are discarded",
+      "damage_types": {
+        "Burn": "Fire",
+        "Poison": "Decay"
+      },
+      "tick": "current amount, then floor(amount/2)",
+      "application": "maximum of existing and incoming value, separately per status",
+      "blocked_damage_still_decays": true,
+      "modified_by_Mark_weakness_Weaken_Reflect_Leech": false,
+      "defeat": "stop immediately"
+    },
+    "Scry": {
+      "scope": "current top of library, follows changes",
+      "duration": "until End Turn begins",
+      "choices": 0,
+      "forces_reshuffle": false,
+      "stacking": "does not stack"
+    },
+    "Keep": {
+      "source": "return marked source after resolution, within hand cap",
+      "whole_hand": "current hand only, source excluded",
+      "random": "automatic, uniformly without replacement",
+      "empty_random_pool": "do nothing",
+      "insufficient_random_pool": "use all available",
+      "marker_loss": "leaving hand or after end-turn discard",
+      "self_return_when_full": "discard instead"
+    },
+    "Flip": {
+      "self": "resolving physical source; finish original played description",
+      "whole_hand": "current hand, source excluded",
+      "top_of_pile": "visible named top card, no choice",
+      "random": "automatic, uniformly without replacement after payment",
+      "empty_random_pool": "do nothing",
+      "insufficient_random_pool": "use all available"
+    },
+    "not_approved_keywords": [
+      "Freeze",
+      "Curse",
+      "Bless",
+      "Purge",
+      "Cleanse"
+    ]
+  },
   "status": "proposed",
   "keyword_rules": {
     "Ward": {
-      "definition": "Absorb incoming damage before HP. Player Ward expires at the start of the next player turn. Old enemy Ward expires when its next action begins, after Burn, even if Hush skips that action.",
+      "definition": "Absorb incoming damage before HP. At the start of its holder’s turn, halve remaining Ward, rounding down. Remove it at 0.",
       "notes": [
-        "Ward stops damage, not separate status or card-movement effects.",
-        "No trait checks whether damage reached Ward or HP."
+        "Player Ward halves before mana refill and draw. Enemy Ward halves when its action begins, after damage-over-time ticks, even if Hush skips the action.",
+        "New Ward adds to remaining Ward. Ward absorbs direct damage, Burn and Poison, but does not stop separate status or card-movement effects. No effect tests whether damage reached Ward or HP."
       ]
     },
     "Burn": {
-      "definition": "At player turn end, deal Flame damage equal to Burn, then reduce it by 1. Resolve player Burn first, then enemy Burn. Applying Burn keeps the higher value; it does not add.",
+      "definition": "At player turn end, deal Fire damage equal to Burn, then halve Burn, rounding down. Remove it at 0. Applying Burn keeps the higher value; it does not add.",
       "notes": [
-        "Ward absorbs Burn. Burn receives no Mark, weakness, Leech or Reflect effect.",
-        "An enemy applies Burn after this tick; that Burn first ticks at the following player turn end."
+        "Resolve player Burn, player Poison, enemy Burn, then enemy Poison. Stop if a combatant is defeated.",
+        "Ward absorbs the tick. Mark, weakness, Weaken, Reflect and Leech do not modify it. An enemy applies Burn after the tick step; it first ticks at the following player turn end."
+      ]
+    },
+    "Poison": {
+      "definition": "At player turn end, deal Decay damage equal to Poison, then halve Poison, rounding down. Remove it at 0. Applying Poison keeps the higher value; it does not add.",
+      "notes": [
+        "Poison and Burn are separate counters and can coexist. Neither application replaces the other.",
+        "Use the same timing and damage rules as Burn, including Ward absorption. Poison represents venom, toxic contamination or lingering sickness where the artwork supports it."
       ]
     },
     "Scry": {
-      "definition": "Look at the top card of your draw pile. You may put it on the bottom. If the draw pile is empty, shuffle the discard pile first; if both are empty, do nothing.",
-      "notes": []
+      "definition": "Reveal the top card of your library for the rest of this player turn. If the top changes, reveal the new top.",
+      "notes": [
+        "Scry has no choice, discard, movement or reshuffle. An empty library shows no card; reveal its top if another effect refills it before the turn ends.",
+        "Repeated Scry does not stack. Clear it when End Turn begins, before discarding cards. The library is the draw pile."
+      ]
     },
     "Mark": {
       "definition": "Add Mark to the next direct attack against its holder, before Ward, then remove Mark. Mark adds together and affects only the first hit.",
       "notes": [
         "The player normally Marks the enemy; an enemy effect explicitly names the player when it Marks them.",
-        "Mark does not affect Burn or separate trait damage."
+        "Mark does not affect Burn, Poison or separate trait damage."
       ]
     },
     "Weaken": {
@@ -38,23 +109,26 @@
       "definition": "Suppress the enemy’s labeled trait through its next action. Skip a non-attack ability; an attack keeps its base hits. Advance the pattern normally.",
       "notes": [
         "Hush starts immediately and ends after the action’s aftereffects, including traits active while the intent is shown.",
-        "Hush does not undo existing Ward, damage, revealed cards, or an already-applied next-turn effect.",
+        "Hush does not undo existing Ward, damage, revealed cards, or an already-applied next-turn effect. Ward still halves at the enemy action start.",
         "Hush does not stack. A pure Hush card needs a suppressible ability or trait in the current intent. A conditional trait counts even before its condition is met.",
         "Every current Hush face Banishes its source."
       ]
     },
     "Keep": {
-      "definition": "Keep the chosen card through this turn’s discard. It remains on its current face and loses its Keep marker. Next turn draw up to 5 new cards within the 8-card hand cap.",
+      "definition": "Mark the stated cards to survive this turn’s discard on their current faces. “Keep this card” returns the resolving source to your hand, marked, when its effect finishes.",
       "notes": [
-        "The resolving source is outside the hand and cannot be kept. A card leaving the hand loses its marker.",
-        "Enemy references to held cards check the actual hand after unkept cards are discarded; no retained-card snapshot or prior identity is stored."
+        "“Keep your hand” marks the cards currently in hand and excludes the resolving source. Random targets are picked automatically without replacement; use all available cards if fewer exist.",
+        "Kept cards remain playable and count toward the 8-card cap. A source returning through Keep also obeys the cap; if no slot remains, discard it instead. Every current self-Keep effect leaves room for its source.",
+        "A card leaving the hand loses its marker. Kept cards lose their markers after the end-turn discard. Next turn draw up to 5 new cards within the 8-card cap.",
+        "Enemy held-card effects check the actual hand after discard. There is no retained-card snapshot or prior identity tracking."
       ]
     },
     "Flip": {
-      "definition": "Turn cards to their other faces. “Flip your hand” affects only cards currently in hand; other zones change only when explicitly named.",
+      "definition": "Turn the stated cards to their other faces. Whole-hand, self, top-of-pile and random targets are explicit and require no selection prompt.",
       "notes": [
-        "The resolving source never flips with its own hand effect.",
-        "Cards keep their faces through movement and reshuffling."
+        "“Flip your hand” changes only the current hand and excludes the resolving source. “Flip this card” changes the resolving physical source; finish the effect printed on the face that was played.",
+        "Pick random cards after paying, uniformly without replacement. If fewer exist, use all available cards. Show the eligible pool before play and the result afterward; do not reveal or reroll a hidden outcome on hover or cancellation.",
+        "Cards keep their faces through movement and reshuffling. A flipped source normally enters the discard pile on its new face; self-Keep instead returns it to hand on that face."
       ]
     },
     "Banish": {
@@ -68,7 +142,7 @@
       "definition": "Redirect the next attack’s first hit to its attacker, keeping its final damage and type. Then Reflect ends. Reflect does not stack.",
       "notes": [
         "Apply Mark, weakness and Weaken before reflection; do not apply them again at the new target. The attacker’s Ward can absorb the returned hit unless the hit ignores Ward.",
-        "A reflected hit cannot be reflected again. A 0-damage hit still spends Reflect. Burn and separate trait damage are not attacks.",
+        "A reflected hit cannot be reflected again. A 0-damage hit still spends Reflect. Burn, Poison and separate trait damage are not attacks.",
         "A trait may specify an earlier expiry, such as the end of its displayed intent. Hush suspends that trait’s reflection immediately."
       ]
     },
@@ -88,7 +162,7 @@
     "Decay",
     "Binding",
     "Release",
-    "Flame",
+    "Fire",
     "Frost",
     "Memory",
     "Oblivion"
@@ -100,12 +174,13 @@
     "Decay": "#C7CD78",
     "Binding": "#80D1BE",
     "Release": "#7DDDEC",
-    "Flame": "#FFAD66",
+    "Fire": "#FFAD66",
     "Frost": "#A8E5FA",
     "Memory": "#B8C7FF",
     "Oblivion": "#C5C5CD",
     "Ward": "#8BCBFF",
     "Burn": "#FF966B",
+    "Poison": "#B2D67C",
     "Flip": "#D8ABFF",
     "Banish": "#F3A5B6",
     "Scry": "#86D8D0",

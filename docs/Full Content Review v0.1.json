@@ -5,10 +5,10 @@
     "reviewed_card_faces": 496,
     "reviewed_enemies": 110,
     "enemy_actions": 243,
-    "changed_card_faces": 215,
-    "distinct_card_descriptions": 152,
+    "changed_card_faces": 279,
+    "distinct_card_descriptions": 157,
     "card_Ward_before": 93,
-    "card_Ward_after": 42,
+    "card_Ward_after": 41,
     "card_Ward_grants_before": 65,
     "card_Ward_grants_after": 28,
     "enemy_mechanics_Ward_before": 52,
@@ -16,14 +16,15 @@
     "card_Leech_faces": 4,
     "Hush_usable_enemies": 110,
     "keyword_free_faces": 104,
+    "card_Poison_faces": 7,
     "direct_player_damage_type_counts": {
       "Radiance": 13,
       "Shadow": 15,
       "Growth": 2,
-      "Decay": 23,
+      "Decay": 22,
       "Binding": 10,
       "Release": 9,
-      "Flame": 1,
+      "Fire": 1,
       "Frost": 3,
       "Memory": 0,
       "Oblivion": 1
@@ -35,12 +36,12 @@
     "No current combat simulation, balance validation or human playtest was performed.",
     "Browser refused local-file preview; no bypass attempted. HTML rendering and filter interactions remain unverified.",
     "Binding and Release remain provisional; their replacement needs Ryan’s choice.",
-    "Main checkout integration is separate from the isolated worktree deliverables."
+    "All current status and automatic-targeting choices are proposals; no combat runtime is implemented."
   ],
   "keyword_migration": [
     "Removed separate thematic tags; actual description is the whole effect.",
     "Keywords, search, colors and proposed borders derive only from printed effect words.",
-    "No speculative taxonomy or automatic damage name replacement.",
+    "No speculative taxonomy; Fire replaces Flame as the damage label, while card and artwork names remain unchanged.",
     "Leech uses final damage before Ward, including overkill; fixed food and medicine heals remain fixed."
   ],
   "ward_count_method": "Card counts search actual descriptions. Enemy counts search actual traits and base actions; the earlier whole-entry count of 59 included incidental advice, while the comparable mechanical baseline is 52.",
@@ -87,13 +88,33 @@
     },
     {
       "case": "Burn feeds the mouth",
-      "setup_and_result": "Lantern Eater has 3 Burn at turn end. Burn deals 3 Flame and falls to 2. On Devour the Glow, the remaining Burn satisfies one condition for the whole trait: remove it and heal 3. With Hush, Burn stays at 2 and no feeding heal occurs.",
+      "setup_and_result": "Lantern Eater has 3 Burn at turn end. Burn deals 3 Fire and falls to 1. On Devour the Glow, the remaining Burn satisfies one condition for the whole trait: remove it and heal 3. With Hush, Burn stays at 1 and no feeding heal occurs.",
       "implication": "The Burn condition is checked once for the action, not again after clearing Burn."
+    },
+    {
+      "case": "Ward carryover",
+      "setup_and_result": "End a turn with 7 Ward after all damage. At the next player turn start it becomes 3; if untouched, later starts leave 1 then 0. Enemy Ward follows the same floor rule at enemy action start, after damage-over-time ticks, even when Hush skips the action.",
+      "implication": "Only remaining Ward halves; new Ward adds normally."
+    },
+    {
+      "case": "Poison alongside Burn",
+      "setup_and_result": "A player with 5 Ward, 4 Burn and 3 Poison takes a 4 Fire tick, then a 3 Decay tick. Ward absorbs the first 4 and 1 of the second: lose 2 HP. Burn becomes 2 and Poison becomes 1.",
+      "implication": "Separate typed instances; both counters halve even when Ward absorbs damage."
+    },
+    {
+      "case": "Scry without a choice",
+      "setup_and_result": "Scry enables the library-top reveal. If the library is empty, it does not reshuffle. Drawing or moving cards later may refill it; reveal its current top until End Turn begins.",
+      "implication": "Changing the top changes the reveal; no selection or bottom-card prompt."
+    },
+    {
+      "case": "Self transformation",
+      "setup_and_result": "Cocoon flips its own resolving physical card to Shed Skin, then Keeps that same card in hand on its new face. Finish the original played description; do not start the new face’s effect.",
+      "implication": "Every later play still costs mana; no copy, free replay or extra turn is granted."
     },
     {
       "case": "A player Burn",
       "setup_and_result": "The Kiln applies 2 Burn after the current turn’s Burn step. It first ticks at the end of the next player turn. A Rain played before then removes Burn from both combatants; Bathhouse removes only the player’s Burn.",
-      "implication": "Player Ward can absorb that tick before it expires at the next turn start."
+      "implication": "Player Ward can absorb that tick, then its remainder halves at the next turn start."
     },
     {
       "case": "A visible tax",
@@ -107,7 +128,7 @@
     },
     {
       "case": "Returning a changed form",
-      "setup_and_result": "Pottery Workshop chooses a card in the discard pile, flips that physical card there, then returns it to hand. Its source is resolving outside the hand and cannot be chosen.",
+      "setup_and_result": "Pottery Workshop flips the top card of the discard pile, then returns that physical card to hand, without a selection prompt. Its source is resolving outside the hand and cannot be chosen.",
       "implication": "Explicit zone text is the exception to ordinary hand-only Flip."
     },
     {
@@ -117,7 +138,7 @@
     },
     {
       "case": "A cost without a target",
-      "setup_and_result": "Oblivion requires another card in hand to Banish. If it is the only card, it cannot be played and spends no mana. A pure Scry with both piles empty simply does nothing.",
+      "setup_and_result": "Oblivion requires another card in hand to Banish. If it is the only card, it cannot be played and spends no mana. Scry with an empty library reveals nothing until another effect supplies a top card during that turn.",
       "implication": "Required costs differ from instructions that operate on whatever is available."
     }
   ],
@@ -182,10 +203,10 @@
       "face": "Imp",
       "artwork_id": "1w678nha_7CQax0ANweJ_wd9-ALeY44tw",
       "before": "Deal 4 Shadow damage. Flip a card in your hand.",
-      "after": "Deal 4 Shadow damage. Flip a card in your hand.",
-      "changed": false,
+      "after": "Deal 4 Shadow damage. Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The crouching imp combines a clawed threat with a change-of-face trick.",
+      "reason": "The imp combines its claw strike with an unpredictable change-of-face trick.",
       "sheet": "card-artwork-review/cards-01.jpg"
     },
     {
@@ -248,10 +269,10 @@
       "face": "Deceiver",
       "artwork_id": "1B442rTJ-G88RgKLVkzyLF7QJ5v5XrAbh",
       "before": "Flip a card in your hand. Draw 1 card.",
-      "after": "Flip a card in your hand.",
+      "after": "Flip a random card in your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The deceiver holds a separate mask; changing one identity is the whole depicted action.",
+      "reason": "The deceiver disguises one unpredictable held face.",
       "sheet": "card-artwork-review/cards-01.jpg"
     },
     {
@@ -314,10 +335,10 @@
       "face": "Secrecy",
       "artwork_id": "1BJhBLdhlJkPVk0FzcfWD99alhe72SGD9",
       "before": "Gain 4 Ward. Flip your hand.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The shadow hides the small traveler and their secrets rather than transforming everything.",
+      "reason": "A secret stays held rather than being revealed or discarded.",
       "sheet": "card-artwork-review/cards-02.jpg"
     },
     {
@@ -446,10 +467,10 @@
       "face": "Black Swan",
       "artwork_id": "1hqB4hlGncbJEHgG5L4FwD0pZyntMsJuw",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The black swan and the dancer's curving body suggest a single transformation.",
+      "reason": "The unexpected black swan overturns the visible set of possibilities.",
       "sheet": "card-artwork-review/cards-02.jpg"
     },
     {
@@ -479,10 +500,10 @@
       "face": "Butterfly",
       "artwork_id": "13ftDB_VQrowQtLLCX3c8g0BRX-_CG0YX",
       "before": "Flip a card in your hand. Scry.",
-      "after": "Flip up to 2 cards in your hand.",
+      "after": "Flip 2 random cards in your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The butterfly's paired wings express metamorphosis without an unrelated foresight bonus.",
+      "reason": "Two fluttering wings turn two held faces without a target prompt.",
       "sheet": "card-artwork-review/cards-03.jpg"
     },
     {
@@ -490,10 +511,10 @@
       "face": "Moth",
       "artwork_id": "1BnAd0FJlK_jFJ7kK323ipJKsA_LUc4vY",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The moth is another transformed winged form, with no visible flame.",
+      "reason": "The moth flutters one held face toward its other appearance.",
       "sheet": "card-artwork-review/cards-03.jpg"
     },
     {
@@ -666,10 +687,10 @@
       "face": "Plague Brazier",
       "artwork_id": "13FHe9prWQiGRuFejiKjsyLAFTjYISdWz",
       "before": "Lose 1 HP. Apply 5 Burn.",
-      "after": "Weaken 3. Deal 3 Decay damage.",
+      "after": "Apply 3 Poison.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "Green plague fumes both debilitate and blight; neither fire nor a player HP payment is depicted.",
+      "reason": "The plague brazier releases a lingering toxic cloud rather than a generic direct strike.",
       "sheet": "card-artwork-review/cards-04.jpg"
     },
     {
@@ -677,10 +698,10 @@
       "face": "Reliquary",
       "artwork_id": "1Ku4P8G2kPu_v_aB-QUjAuhELnGSv5eHC",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The reliquary encloses and preserves its small central treasure.",
+      "reason": "The reliquary preserves its own enclosed relic for another turn.",
       "sheet": "card-artwork-review/cards-04.jpg"
     },
     {
@@ -721,7 +742,7 @@
       "face": "Seed",
       "artwork_id": "1hq7Z2h0vTOQXJsoUXVOXZ_e4wJ3V-_jo",
       "before": "Heal 3 HP. Banish this card.",
-      "after": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
+      "after": "Put up to 2 cards from your discard pile on the bottom of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The seed and its new roots plant spent material for future growth.",
@@ -776,10 +797,10 @@
       "face": "Lock",
       "artwork_id": "1gvt-G8h2VZFBId3Rau5lhdLU8T5A69t-",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The great lock holds something shut for later.",
+      "reason": "The lock stays closed and held; its Key face remains a future option.",
       "sheet": "card-artwork-review/cards-04.jpg"
     },
     {
@@ -842,10 +863,10 @@
       "face": "Sealed Book",
       "artwork_id": "1w929N_nB6UcmuNSiLC8xBw5Q8nKJSyaY",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The sealed book keeps its contents closed and preserved.",
+      "reason": "The book remains sealed and available for a later opening.",
       "sheet": "card-artwork-review/cards-05.jpg"
     },
     {
@@ -864,7 +885,7 @@
       "face": "Broken Hourglass",
       "artwork_id": "1YIbHQw8lhUngqqFt3tuv6FHulyXxYSNi",
       "before": "Discard a card. Draw 3 cards.",
-      "after": "Shuffle your hand into your draw pile. Draw 5 cards. Banish this card.",
+      "after": "Shuffle your hand into your library. Draw 5 cards. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The broken hourglass spills its ordered contents and resets the present hand.",
@@ -952,7 +973,7 @@
       "face": "Overgrown Ruins",
       "artwork_id": "1InIc2aV9Wmf5vZhgoguHedyACD6PKZPb",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your draw pile.",
+      "after": "Put a card from your discard pile on top of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "Living vines bring the ruined structure back toward use.",
@@ -1106,8 +1127,8 @@
       "face": "Descent",
       "artwork_id": "1C-8YBOZoTOsB59IzAwGQSiElgVuOQ4Ei",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "changed": false,
+      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The figure descends to a lower layer, moving one card down and making way for another.",
       "sheet": "card-artwork-review/cards-06.jpg"
@@ -1205,10 +1226,10 @@
       "face": "Puppeteer",
       "artwork_id": "1zV99UfETJda9F_gUFVtUe-x8AR7IeKrM",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The puppeteer's strings directly turn one chosen figure/card.",
+      "reason": "The puppeteer pulls the whole set of strings together.",
       "sheet": "card-artwork-review/cards-07.jpg"
     },
     {
@@ -1216,8 +1237,8 @@
       "face": "Marionette",
       "artwork_id": "1NeJQqnh1Pl6Saath5Nl7Gg5zSwGFtPc2",
       "before": "Put another card from your hand on top of your draw pile.",
-      "after": "Put another card from your hand on top of your draw pile.",
-      "changed": false,
+      "after": "Put another card from your hand on top of your library.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The marionette is placed on a prescribed next step by its strings.",
       "sheet": "card-artwork-review/cards-07.jpg"
@@ -1227,7 +1248,7 @@
       "face": "Weaver",
       "artwork_id": "1aASOTkSbtNGOfBdm_YpZBpVghMKG3il2",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your draw pile.",
+      "after": "Put a card from your discard pile on top of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The weaver gathers old strands and places them back into an ordered future.",
@@ -1282,7 +1303,7 @@
       "face": "Sleepwalker",
       "artwork_id": "1z78FLzBeNQjie9jJmTj9LT-WjRFGQfO0",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Shuffle your hand into your draw pile. Draw 3 cards.",
+      "after": "Shuffle your hand into your library. Draw 3 cards.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The sleepwalker loses the current plan and wanders into an unchosen new hand.",
@@ -1293,7 +1314,7 @@
       "face": "Cartographer",
       "artwork_id": "1d8R3rePBF0N2lncfN7BLvW_fkqY0GoQa",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The cartographer maps and orders the coming route instead of merely drawing an incidental card.",
@@ -1304,7 +1325,7 @@
       "face": "Lost Wanderer",
       "artwork_id": "1Pe_8uMrrJH7ycH_OlnxE9DSHxHltgrmk",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Shuffle your draw pile. Draw 2 cards.",
+      "after": "Shuffle your library. Draw 2 cards.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The winding, uncertain path loses its order and presents new directions.",
@@ -1403,10 +1424,10 @@
       "face": "Caged Songbird",
       "artwork_id": "1hXUjPdPlAUxWZfHmD48gw7vkINSc3MYJ",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The cage holds and preserves the songbird inside it.",
+      "reason": "The caged songbird remains in its own enclosure.",
       "sheet": "card-artwork-review/cards-08.jpg"
     },
     {
@@ -1480,10 +1501,10 @@
       "face": "Root Cellar",
       "artwork_id": "1KLhKYrRLx3iqvKeRjuLT-BOG97sv8uim",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The root cellar stores something safely for a later turn.",
+      "reason": "The cellar preserves the whole stored hand, at the cost of space for fresh draws.",
       "sheet": "card-artwork-review/cards-08.jpg"
     },
     {
@@ -1502,7 +1523,7 @@
       "face": "Wilderness",
       "artwork_id": "1eUJ97rgiHPjATfsrZQtd8kFaiXzYlMKl",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The wilderness offers several paths and lets the traveler choose one to explore.",
@@ -1590,7 +1611,7 @@
       "face": "Underground Cavern",
       "artwork_id": "1eJ8a89R42I9ZtySh5OSKWVvTVTCKSMCb",
       "before": "Gain 5 Ward.",
-      "after": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The cavern reveals hidden possibilities to explore; its pictured depth matters more than an unseen shield.",
@@ -1634,8 +1655,8 @@
       "face": "Boiling Lake",
       "artwork_id": "1eqFrNAPQmHTMSvk5eoPRPrbeF1KsZZ1X",
       "before": "Deal 5 Flame damage. Apply 2 Burn.",
-      "after": "Deal 5 Flame damage. Apply 2 Burn.",
-      "changed": false,
+      "after": "Deal 5 Fire damage. Apply 2 Burn.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The boiling water scalds immediately and leaves a continuing burn.",
       "sheet": "card-artwork-review/cards-09.jpg"
@@ -1678,10 +1699,10 @@
       "face": "Black Forest",
       "artwork_id": "1nMM5KwyGHjVaEcxJTSXc0FZdldqAV1CG",
       "before": "Gain 6 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The dark trees conceal and hold resources out of sight rather than adding another numerical shield.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-09.jpg"
     },
     {
@@ -1689,7 +1710,7 @@
       "face": "Clockwork City",
       "artwork_id": "1fqx350oCraaM7aHIOVa-vZCyutbl_VoO",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The city's gears and clock arrange the sequence of what comes next.",
@@ -1700,7 +1721,7 @@
       "face": "Wandering Village",
       "artwork_id": "13HQGtGI22pkD9xgauTiROywV2gvJzuJ-",
       "before": "Flip your hand.",
-      "after": "Shuffle your hand into your draw pile. Draw 4 cards.",
+      "after": "Shuffle your hand into your library. Draw 4 cards.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The entire village changes location, moving the current hand onward and arriving at a new one.",
@@ -1711,7 +1732,7 @@
       "face": "Sewing Needle",
       "artwork_id": "1YTm73MZEZf7Vb82UJQ_NJ4yT627Sp4rR",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your draw pile.",
+      "after": "Put a card from your discard pile on top of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The needle stitches a spent strand back into the coming sequence.",
@@ -1733,7 +1754,7 @@
       "face": "Compass",
       "artwork_id": "15ZTFaNh20J0f2Mm_DfpfHjGATjfN9MnP",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The compass selects one direction from several visible possibilities.",
@@ -1766,10 +1787,10 @@
       "face": "Shroud",
       "artwork_id": "11Tw0W1sgKfa4CjDRCV932__yD4o8GrHK",
       "before": "Gain 6 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The shroud conceals and preserves what it covers rather than generating another numerical shield.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1832,7 +1853,7 @@
       "face": "Loaded Dice",
       "artwork_id": "1cgciAvubcOyBfEALrGgF0OpQuF7ot3sh",
       "before": "Lose 2 HP. Draw 2 cards.",
-      "after": "Look at the top 3 cards of your draw pile. Put 2 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "Loaded dice let the player favor the outcome instead of paying an unrelated HP fee.",
@@ -1854,7 +1875,7 @@
       "face": "Scattered Chess Pieces",
       "artwork_id": "1nLHviCCObV9i1YZx5wyWEoG4gWEHzJe7",
       "before": "Flip your hand.",
-      "after": "Shuffle your hand into your draw pile. Draw 4 cards.",
+      "after": "Shuffle your hand into your library. Draw 4 cards.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "Scattered pieces break the existing arrangement and produce a new one.",
@@ -1865,10 +1886,10 @@
       "face": "Wax Seal",
       "artwork_id": "1fCSB-Gdr1dCZW8jN4LGx63z9XCvXJCZR",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The intact wax seal preserves its contents for later.",
+      "reason": "The intact wax seal keeps its own letter closed.",
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1887,10 +1908,10 @@
       "face": "Anchor",
       "artwork_id": "11IP2UlKOWLM5dPLI-DLSKFvF_AF15o0C",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The anchor holds a chosen thing in place.",
+      "reason": "The anchor stays put instead of drifting into the discard pile.",
       "sheet": "card-artwork-review/cards-11.jpg"
     },
     {
@@ -1909,7 +1930,7 @@
       "face": "Metronome",
       "artwork_id": "1cwht9HIaWBasTTSD_uN3i18d0HijYmUr",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The metronome imposes an exact rhythm on the upcoming sequence.",
@@ -1931,7 +1952,7 @@
       "face": "Lens",
       "artwork_id": "1fbKDfvoy2Y-YFWh9w-bne0EAYMum8zco",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The lens resolves several obscured possibilities and selects a clear one.",
@@ -1953,7 +1974,7 @@
       "face": "Comb",
       "artwork_id": "1Rlagj-2tt1HaBIh_0Sn_HM6fBBd0T1vs",
       "before": "Put another card from your hand on top of your draw pile.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The comb orders tangled strands into a clear sequence.",
@@ -1975,10 +1996,10 @@
       "face": "Porcelain Doll",
       "artwork_id": "1VmJDUYtjdOhJy5xY7aUi1Zx5N15Jt0wp",
       "before": "Gain 4 Ward. Draw 1 card.",
-      "after": "Keep a card in your hand.",
+      "after": "Keep this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The rigid porcelain doll encloses a tiny interior and preserves its contents; neither a shield nor an extra draw was directly shown.",
+      "reason": "The porcelain doll is kept intact for another turn.",
       "sheet": "card-artwork-review/cards-11.jpg"
     },
     {
@@ -2041,7 +2062,7 @@
       "face": "Convergence",
       "artwork_id": "1gJ9V42OxqrI7UCAfVTWzTp8Ub_1zGnr6",
       "before": "Put another card from your hand on top of your draw pile.",
-      "after": "Put up to 2 cards from your discard pile on top of your draw pile in any order.",
+      "after": "Put up to 2 cards from your discard pile on top of your library in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "Two diverging routes converge into one ordered destination.",
@@ -2052,8 +2073,8 @@
       "face": "Divergence",
       "artwork_id": "1pU83ryPe0XqGb7vQ3aID5exGM0jwbRsx",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "changed": false,
+      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "A held card takes the lower route while another possibility is drawn from the upper route.",
       "sheet": "card-artwork-review/cards-11.jpg"
@@ -2096,8 +2117,8 @@
       "face": "Repulsion",
       "artwork_id": "17pKqlexRWT_dYxR9QFVXEExZys9prDgl",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "changed": false,
+      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The recoiling figure pushes a held thing away and makes room for another.",
       "sheet": "card-artwork-review/cards-12.jpg"
@@ -2250,7 +2271,7 @@
       "face": "Low Tide",
       "artwork_id": "1G5Hb4whf2nT0ktQNK9ROz9nPu4p-d8Cq",
       "before": "Remove 5 enemy Ward.",
-      "after": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The receding water reveals hidden objects to choose among rather than removing an unrelated shield.",
@@ -2272,10 +2293,10 @@
       "face": "Concealment",
       "artwork_id": "1r8Ci8WSz_9tj31GT563rt5MQL9D_sss7",
       "before": "Gain 6 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The mask and shadows conceal held secrets rather than adding a generic shield.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2294,8 +2315,8 @@
       "face": "Smuggler",
       "artwork_id": "1xPIW0RThJW4T_quQNNZTI9Gvk7AA13Yp",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 2 cards.",
-      "after": "Put another card from your hand on the bottom of your draw pile. Draw 2 cards.",
-      "changed": false,
+      "after": "Put another card from your hand on the bottom of your library. Draw 2 cards.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The smuggler conceals one held item while bringing new goods into hand.",
       "sheet": "card-artwork-review/cards-13.jpg"
@@ -2338,10 +2359,10 @@
       "face": "Shapeshifter",
       "artwork_id": "1VNSg4QzycaFpB_-y8j7QL1axNp6A0I7O",
       "before": "Flip your hand.",
-      "after": "Flip your hand.",
-      "changed": false,
+      "after": "Flip this card. Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The many animal bodies visibly transform into one another.",
+      "reason": "The shapeshifter changes its own appearance and remains held in that new form.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2349,10 +2370,10 @@
       "face": "Mask Maker",
       "artwork_id": "18EcvYegKBcNie-hlC7j2oTcjS4XYUheW",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The maker deliberately supplies a new face.",
+      "reason": "The mask maker gives one held subject a different face.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2360,10 +2381,10 @@
       "face": "Face Thief",
       "artwork_id": "1-SJTrMnA90Wq8C0Nl5Mst5YPqbad_O9d",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The thief lifts away a face, changing the victim's identity.",
+      "reason": "The face thief replaces one unpredictable held appearance.",
       "sheet": "card-artwork-review/cards-13.jpg"
     },
     {
@@ -2448,10 +2469,10 @@
       "face": "Contortionist",
       "artwork_id": "18HTeADbrfOoNTbEc4GS_gJMyQ-fnHp2H",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip this card. Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The contortionist folds and reverses one body into another orientation.",
+      "reason": "The contortionist turns its own pose into the paired dancer and holds that pose.",
       "sheet": "card-artwork-review/cards-14.jpg"
     },
     {
@@ -2481,7 +2502,7 @@
       "face": "Archivist",
       "artwork_id": "1WDzj7JbcIsjO5yNv7x8hpYGZ9q8Fhm44",
       "before": "Put a card from your discard on your draw pile. Scry.",
-      "after": "Put a card from your discard pile on top of your draw pile. Scry.",
+      "after": "Put a card from your discard pile on top of your library. Scry.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The archivist retrieves an earlier record and checks its position in the coming sequence.",
@@ -2503,7 +2524,7 @@
       "face": "Surveyor",
       "artwork_id": "1UdPhmWsyVJyKxkdr88SQixr3e7Gpl9NH",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The surveyor measures and arranges the routes ahead.",
@@ -2569,10 +2590,10 @@
       "face": "Oyster",
       "artwork_id": "1AcuP5GhRkulKD3Op3G5K6K_3IWstVBvQ",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The shell preserves the visible pearl for later.",
+      "reason": "The closed oyster preserves its pearl within its own card.",
       "sheet": "card-artwork-review/cards-14.jpg"
     },
     {
@@ -2580,10 +2601,10 @@
       "face": "Cuttlefish",
       "artwork_id": "1xIWKJgYYrJFarHfGnm79VGiP_Pg0iLrt",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The cuttlefish's changing surface directly supplies camouflage and a changed face.",
+      "reason": "The cuttlefish sweeps a camouflage change across the visible hand.",
       "sheet": "card-artwork-review/cards-14.jpg"
     },
     {
@@ -2635,7 +2656,7 @@
       "face": "Dandelion",
       "artwork_id": "1yjS7U6v6vGk_XLVZcClKcbJFHBy7jYug",
       "before": "Flip your hand.",
-      "after": "Put up to 2 other cards from your hand on the bottom of your draw pile. Draw that many cards.",
+      "after": "Put up to 2 other cards from your hand on the bottom of your library. Draw that many cards.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The dandelion disperses held seeds into the future and makes room for new growth.",
@@ -2679,10 +2700,10 @@
       "face": "Cocoon",
       "artwork_id": "1KGoybZxq0G4xJz4RlYDPxoZjtgLBVSoC",
       "before": "Keep a card in your hand.",
-      "after": "Flip a card in your hand. Keep it.",
+      "after": "Flip this card. Keep this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The cocoon changes a form and preserves that same developing form for the next turn.",
+      "reason": "The cocoon opens into its own shed skin, which remains held.",
       "sheet": "card-artwork-review/cards-15.jpg"
     },
     {
@@ -2756,10 +2777,10 @@
       "face": "Moonflower",
       "artwork_id": "1d9n9s4RWlOuv5cshT3w0HOn2XGpRZPv9",
       "before": "Flip a card in your hand.",
-      "after": "Turn a card in your hand to its dark face.",
+      "after": "Turn your hand to its dark faces.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The moonflower opens into its specifically nocturnal form.",
+      "reason": "The moonflower opens under nightfall, turning the held scene toward its night faces.",
       "sheet": "card-artwork-review/cards-15.jpg"
     },
     {
@@ -2789,10 +2810,10 @@
       "face": "Silkworm",
       "artwork_id": "1P0keoJxTo7V5gyqOVl96HlN-YzHJRa0A",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The silkworm spins a preserving enclosure around its developing form.",
+      "reason": "The silkworm keeps itself inside protective silk.",
       "sheet": "card-artwork-review/cards-16.jpg"
     },
     {
@@ -2833,7 +2854,7 @@
       "face": "Quill",
       "artwork_id": "13J34Vvfd1nJaQpefINMLTEkqMnNBKR6K",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your draw pile.",
+      "after": "Put a card from your discard pile on top of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The quill rewrites an earlier record into the coming sequence.",
@@ -2877,7 +2898,7 @@
       "face": "Sieve",
       "artwork_id": "1ALdZ4b7FTVjRC_Gv6Ggc1PKnb2u3J5Bl",
       "before": "Discard 2 cards. Draw 3 cards.",
-      "after": "Look at the top 4 cards of your draw pile. Put 1 in your hand and discard the rest.",
+      "after": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The sieve filters a group, retains one useful piece, and lets the rest fall away.",
@@ -2888,8 +2909,8 @@
       "face": "Funnel",
       "artwork_id": "1JcVKTUwrmY78HD2-H4ENkqGiSsOcTF24",
       "before": "Put another card from your hand on top of your draw pile.",
-      "after": "Put another card from your hand on top of your draw pile.",
-      "changed": false,
+      "after": "Put another card from your hand on top of your library.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The funnel narrows a held stream into one next card.",
       "sheet": "card-artwork-review/cards-16.jpg"
@@ -2899,10 +2920,10 @@
       "face": "Scabbard",
       "artwork_id": "1q8UO8pAVxAkX9sWE61CAsA5EgCIE7evV",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The scabbard preserves the sheathed blade until later.",
+      "reason": "The sheathed blade remains stored in its own scabbard card.",
       "sheet": "card-artwork-review/cards-16.jpg"
     },
     {
@@ -2954,7 +2975,7 @@
       "face": "Water Clock",
       "artwork_id": "1UNUw01VqZegkknVDUC1WaA7XDaQUn1nY",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The measured water flow arranges a predictable upcoming sequence.",
@@ -3009,10 +3030,10 @@
       "face": "Wax Fruit",
       "artwork_id": "11uWvNYOgbgjFwkRs9J6X_2sHJfLdYyYJ",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The wax keeps a fruit-shaped thing preserved rather than nourishing anyone.",
+      "reason": "Wax fruit preserves its own shape instead of rotting away.",
       "sheet": "card-artwork-review/cards-17.jpg"
     },
     {
@@ -3020,10 +3041,10 @@
       "face": "Rotting Fruit",
       "artwork_id": "1PSDlQcd2nH136wJJLo3AhaEC4KUeBomz",
       "before": "Deal 6 Decay damage.",
-      "after": "Deal 6 Decay damage.",
-      "changed": false,
+      "after": "Apply 3 Poison.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The visibly rotten fruit spreads Decay.",
+      "reason": "The spoiled fruit sickens its target over time.",
       "sheet": "card-artwork-review/cards-17.jpg"
     },
     {
@@ -3053,10 +3074,10 @@
       "face": "Glass Slipper",
       "artwork_id": "12kJJoPusWxNANRVcyzMls9GQh7W0gNuJ",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The glass slipper directly evokes a changed identity and form.",
+      "reason": "The enchanted slipper transforms a held subject as in a change of costume.",
       "sheet": "card-artwork-review/cards-17.jpg"
     },
     {
@@ -3075,10 +3096,10 @@
       "face": "Wedding Veil",
       "artwork_id": "12m5SVFFDGMKpzzC8IRjMet7yKJUzUziR",
       "before": "Keep a card in your hand.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The wedding veil shelters a lasting pair rather than creating a generic shield.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-17.jpg"
     },
     {
@@ -3130,8 +3151,8 @@
       "face": "Spiral Well",
       "artwork_id": "1Gc9YRIv8991PBI8DZ3-Ox4umn86zwYj3",
       "before": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "after": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
-      "changed": false,
+      "after": "Put another card from your hand on the bottom of your library. Draw 1 card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "A held thing descends into the well while another is drawn upward.",
       "sheet": "card-artwork-review/cards-18.jpg"
@@ -3196,10 +3217,10 @@
       "face": "Icehouse",
       "artwork_id": "1R9zc4drUBtyQoHfMpTfAhTvT0leow1rz",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The icehouse preserves what is held inside it.",
+      "reason": "The icehouse keeps the stored hand cold and intact.",
       "sheet": "card-artwork-review/cards-18.jpg"
     },
     {
@@ -3218,10 +3239,10 @@
       "face": "Thieves Den",
       "artwork_id": "1WPX7NllTsJ9z1G4Ue6OrKhnV5dlO1Zmk",
       "before": "Gain 5 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The thieves store hidden booty in their den rather than generating an unexplained shield.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-18.jpg"
     },
     {
@@ -3229,10 +3250,10 @@
       "face": "Dovecote",
       "artwork_id": "1OXNNCnOsGMDY75wLDFgWZxBSjwZM2taI",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep 2 random cards in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The dovecote gives a held bird a place to remain.",
+      "reason": "The dovecote shelters two birds represented by two random held cards.",
       "sheet": "card-artwork-review/cards-18.jpg"
     },
     {
@@ -3240,10 +3261,10 @@
       "face": "Spider Nursery",
       "artwork_id": "1HqviJ1BPxtmnhZalCib5l32f8riJCtdZ",
       "before": "Weaken 4.",
-      "after": "Weaken 4.",
-      "changed": false,
+      "after": "Apply 2 Poison.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The nursery's webs restrict the approaching attacker.",
+      "reason": "The nursery delivers a small dose of spider venom.",
       "sheet": "card-artwork-review/cards-18.jpg"
     },
     {
@@ -3262,7 +3283,7 @@
       "face": "Drifting Island",
       "artwork_id": "1sEZapKPehgryHyEr5Bz7DRAIhK-dxMrR",
       "before": "Flip your hand.",
-      "after": "Shuffle your hand into your draw pile. Draw 4 cards.",
+      "after": "Shuffle your hand into your library. Draw 4 cards.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The whole island changes its place, moving the current hand onward rather than changing identities.",
@@ -3295,10 +3316,10 @@
       "face": "Pottery Workshop",
       "artwork_id": "1FE4Gm0LAKvXg5iR6njdw44UkgAZNc0dV",
       "before": "Keep a card in your hand.",
-      "after": "Flip a card in your discard pile. Return it to your hand.",
+      "after": "Flip the top card of your discard pile. Return it to your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The potter reshapes used material into a new, usable form.",
+      "reason": "The workshop reshapes the visible discarded piece before returning that same physical card.",
       "sheet": "card-artwork-review/cards-19.jpg"
     },
     {
@@ -3361,7 +3382,7 @@
       "face": "Paved Road",
       "artwork_id": "1FHAPCT-BCgAiNtSTo0ONANc3Qzg_j_Kh",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The paved route deliberately orders the next steps.",
@@ -3438,10 +3459,10 @@
       "face": "Shade Keeper",
       "artwork_id": "1KDuG399WnWIxxHB2_QNSbLgJqaUXjX4t",
       "before": "Gain 6 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep 2 random cards in your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The keeper wraps held things in concealing shade rather than a generic shield.",
+      "reason": "The shade keeper shelters two random held cards under its cover.",
       "sheet": "card-artwork-review/cards-19.jpg"
     },
     {
@@ -3471,7 +3492,7 @@
       "face": "Clockmaker",
       "artwork_id": "1JyKasXM8Cb6P3ZKMsIakkU3l97YAwi07",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The maker assembles the exact order of a clock's next movements.",
@@ -3504,10 +3525,10 @@
       "face": "Plague Doctor",
       "artwork_id": "1ecQsE6EwlpQxQwMe0b5nSVHbl_k0QB9L",
       "before": "Heal 4 HP. Banish this card.",
-      "after": "Remove all your Weaken. Heal 3 HP. Banish this card.",
+      "after": "Remove all your Poison. Heal 3 HP. Banish this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The doctor treats both debilitation and bodily injury without assigning a moral role to the dark figure.",
+      "reason": "The plague doctor treats poisoning with a single restorative dose.",
       "sheet": "card-artwork-review/cards-20.jpg"
     },
     {
@@ -3515,7 +3536,7 @@
       "face": "Parchment Scribe",
       "artwork_id": "1Vn9YVctGlGbIiHRW87aMGSytf-ZCyBEx",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your draw pile.",
+      "after": "Put a card from your discard pile on top of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The scribe restores an earlier text to the next page of the sequence.",
@@ -3537,10 +3558,10 @@
       "face": "Portrait Painter",
       "artwork_id": "1s4wNcZo9iAO14duzvbtyVTpKoF90loJO",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The painter changes the face represented on the canvas.",
+      "reason": "The painter gives one held subject a newly painted appearance.",
       "sheet": "card-artwork-review/cards-20.jpg"
     },
     {
@@ -3559,10 +3580,10 @@
       "face": "Glassblower",
       "artwork_id": "1HWHAd4-tDPGj5DVmXiQ4ukqAhsyEZeQ0",
       "before": "Keep a card in your hand.",
-      "after": "Flip a card in your discard pile. Return it to your hand.",
+      "after": "Flip the top card of your discard pile. Return it to your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The blower turns used glass into a new shape and returns it to use.",
+      "reason": "The glassblower reshapes the visible discarded piece and returns it, without choosing a target.",
       "sheet": "card-artwork-review/cards-20.jpg"
     },
     {
@@ -3625,10 +3646,10 @@
       "face": "Bird Keeper",
       "artwork_id": "1kfXGl4cJUiDeKByBem_T_2rHaz5_r2vF",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The keeper houses birds in visible cages until later.",
+      "reason": "The keeper shelters a random held bird-card without a separate target choice.",
       "sheet": "card-artwork-review/cards-20.jpg"
     },
     {
@@ -3647,10 +3668,10 @@
       "face": "Cage Builder",
       "artwork_id": "1iamq-p5-ep0pY3sM7KbmbV3CI0junRHP",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The builder constructs a place to hold one figure.",
+      "reason": "The cage builder contains a random held card in a newly built cage.",
       "sheet": "card-artwork-review/cards-21.jpg"
     },
     {
@@ -3713,7 +3734,7 @@
       "face": "Thread Spinner",
       "artwork_id": "1EazCD6RwTC_mfdjOMgQNzDZehRc-Oufk",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your draw pile.",
+      "after": "Put a card from your discard pile on top of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The spinner gathers an old strand into the coming sequence.",
@@ -3823,10 +3844,10 @@
       "face": "Oath Keeper",
       "artwork_id": "1TzBUjm4F1Gi_rg-AWN-sgEl2vd11Vcnr",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The oath keeper preserves an existing commitment for the next turn.",
+      "reason": "The oath keeper remains on duty instead of leaving at turn end.",
       "sheet": "card-artwork-review/cards-22.jpg"
     },
     {
@@ -3889,7 +3910,7 @@
       "face": "Music Conductor",
       "artwork_id": "1Mn7_mn_iW_PfoBah2xOc_PjTXJEZE6tU",
       "before": "Put another card from your hand on top of your draw pile.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The conductor orders several coming entries with the baton.",
@@ -3966,10 +3987,10 @@
       "face": "Black Fox",
       "artwork_id": "1RiNVVluuNccpFCFK0KK6d4pqDgeeOnqE",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The fox's shadowy, shifting appearance supports a changed face.",
+      "reason": "The fox tricks one held subject into a different appearance.",
       "sheet": "card-artwork-review/cards-22.jpg"
     },
     {
@@ -3977,10 +3998,10 @@
       "face": "Glass Snail",
       "artwork_id": "1SWJ0EEnpm9prx-EBz71I7o7JZ-c7jFOn",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The transparent shell preserves what is held inside its spiral.",
+      "reason": "The glass snail retains its own fragile, sheltered body.",
       "sheet": "card-artwork-review/cards-22.jpg"
     },
     {
@@ -4043,10 +4064,10 @@
       "face": "Day Moth",
       "artwork_id": "1p4it5LaxryL3TiiGlyxmsIryUNlFsq94",
       "before": "Apply 2 Burn.",
-      "after": "Turn a card in your hand to its light face.",
+      "after": "Turn a random dark card in your hand to its light face.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The sunlit moth opens a specifically day-facing form; no flames are visible.",
+      "reason": "The day moth brings one dark-held subject into its light appearance, without a target choice.",
       "sheet": "card-artwork-review/cards-23.jpg"
     },
     {
@@ -4054,10 +4075,10 @@
       "face": "Night Moth",
       "artwork_id": "17586F8r29xroqth0JbJlOtm3rbrX4JGu",
       "before": "Flip a card in your hand.",
-      "after": "Turn a card in your hand to its dark face.",
+      "after": "Turn a random light card in your hand to its dark face.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The nocturnal moth opens a specifically night-facing form.",
+      "reason": "The night moth draws one light-held subject into its night appearance, without a target choice.",
       "sheet": "card-artwork-review/cards-23.jpg"
     },
     {
@@ -4076,10 +4097,10 @@
       "face": "Obsidian Spider",
       "artwork_id": "1Yv6wB8F8uV34d8HykX2TyEiN9-5n8X1u",
       "before": "Mark 3.",
-      "after": "Mark 3.",
-      "changed": false,
+      "after": "Deal 2 Decay damage. Apply 2 Poison.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The lurking spider fixes on a vulnerable point before striking.",
+      "reason": "The spider bites once, then its venom keeps harming the target.",
       "sheet": "card-artwork-review/cards-23.jpg"
     },
     {
@@ -4142,10 +4163,10 @@
       "face": "Black Adder",
       "artwork_id": "1RDqP2COPwgDGYbfOC7mc0ko5AC_jTvyl",
       "before": "Deal 5 Decay damage, ignoring Ward.",
-      "after": "Deal 5 Decay damage, ignoring Ward.",
-      "changed": false,
+      "after": "Deal 3 Decay damage. Apply 2 Poison.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The adder's venom reaches through an outer guard.",
+      "reason": "The adder delivers a bite followed by lingering venom.",
       "sheet": "card-artwork-review/cards-23.jpg"
     },
     {
@@ -4164,10 +4185,10 @@
       "face": "Soft Coral",
       "artwork_id": "1ac4bI3qhlCwOyRZUhSEgSS9c-yvtJwnM",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The soft coral's flowing, malleable form supports a single change of shape.",
+      "reason": "The soft coral bends its many branches together, turning the held array.",
       "sheet": "card-artwork-review/cards-23.jpg"
     },
     {
@@ -4197,10 +4218,10 @@
       "face": "Whole Egg",
       "artwork_id": "1KxET2X_ziAbUV8KYITXJch3mcy-IqBt7",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The intact egg preserves a future form inside its shell.",
+      "reason": "The whole egg stays intact until a later turn.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4208,10 +4229,10 @@
       "face": "Cracked Egg",
       "artwork_id": "1SXMPLUCdIpmaCugGWkoyNLmxTVmr9947",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Draw 2 cards. Banish this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The cracked shell releases a transformed form.",
+      "reason": "The cracked shell releases what it contained; the spent shell is gone for this fight.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4219,10 +4240,10 @@
       "face": "Butterfly Wing",
       "artwork_id": "1SO6ZvlWewqOOPkGGx8SkmHGt1DQiXrm0",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The butterfly wing is the visible result of metamorphosis.",
+      "reason": "The fluttering wing turns one held face.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4241,10 +4262,10 @@
       "face": "Amber Frog",
       "artwork_id": "1NnmuykqMoHgI3lMoiYk0QFfFmTB2Z54W",
       "before": "Weaken 3.",
-      "after": "Keep a card in your hand.",
+      "after": "Keep this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The translucent amber body holds a form preserved; neither flames nor a separate attack are shown.",
+      "reason": "The amber frog is preserved inside its own resin.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4252,10 +4273,10 @@
       "face": "Indigo Toad",
       "artwork_id": "1INmwR23IDUbhf_S75f2ttFT9tadXjB95",
       "before": "Weaken 3.",
-      "after": "Weaken 3.",
-      "changed": false,
+      "after": "Apply 3 Poison.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The toad's heavy, drowsy presence and toxic association support debilitation rather than fire.",
+      "reason": "The toad secretes a lingering toxin rather than abstractly weakening an attack.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4296,10 +4317,10 @@
       "face": "Jellyfish Fossil",
       "artwork_id": "1BBGJNpL6J2ux-Aly5Voheu4IUgUUmiU4",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The fossil preserves a fragile past form intact.",
+      "reason": "The fossil keeps its own impression across time.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4329,7 +4350,7 @@
       "face": "Silver Birch",
       "artwork_id": "1Ba3r-p3rdnjjA2YL1mCLQRF2qh5-LMyC",
       "before": "Gain 6 Ward.",
-      "after": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
+      "after": "Put up to 2 cards from your discard pile on the bottom of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The branching, renewing birch turns spent material into future growth instead of generic armor.",
@@ -4340,10 +4361,10 @@
       "face": "Hollow Oak",
       "artwork_id": "1pn36xtbcYGzue-gBCkFT9k6CbowF9E3e",
       "before": "Gain 6 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep 2 random cards in your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The oak's visible hollow shelters what is kept inside it.",
+      "reason": "The hollow trunk shelters two random held cards in its cavity.",
       "sheet": "card-artwork-review/cards-24.jpg"
     },
     {
@@ -4351,10 +4372,10 @@
       "face": "Fern Fiddlehead",
       "artwork_id": "1_Ad7LqNoFEuIUl0RpxuSCDjlgK5clY68",
       "before": "Heal 4 HP. Banish this card.",
-      "after": "Flip a card in your hand.",
+      "after": "Flip this card. Keep this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The tightly furled frond visibly opens into a different form rather than acting as unexplained medicine.",
+      "reason": "The fiddlehead matures into its own leaf form and remains held.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4373,10 +4394,10 @@
       "face": "Flower Bud",
       "artwork_id": "1htErAmPRp1eIIzpzJz6M7b1ItlvItEx4",
       "before": "Keep a card in your hand.",
-      "after": "Flip a card in your hand. Keep it.",
+      "after": "Flip this card. Keep this card.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The closed bud changes and shelters the same developing form for later.",
+      "reason": "The bud matures into its own seed pod and stays available.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4406,7 +4427,7 @@
       "face": "Wild Mushroom",
       "artwork_id": "1u57t1Z7lLWnPd-kNChIF5JV_Yu0gjU0y",
       "before": "Flip your hand.",
-      "after": "Shuffle your hand into your draw pile. Draw 4 cards.",
+      "after": "Shuffle your hand into your library. Draw 4 cards.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The uncanny, distorted fungus rearranges the current perception and plan.",
@@ -4450,10 +4471,10 @@
       "face": "Salt Crystal",
       "artwork_id": "1LD72ZKhcE_h4dj402xcOEKjBkfbQTtx5",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "Salt preserves what is held rather than transforming it.",
+      "reason": "Salt preserves its own stored material for another turn.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4461,10 +4482,10 @@
       "face": "River Pearl",
       "artwork_id": "1LdcYvSobZ6jvNqIr1Gv5GWvgtXgW5hFF",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The precious river pearl is kept as a protected treasure.",
+      "reason": "The pearl keeps its own polished, durable form.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4483,10 +4504,10 @@
       "face": "Golden Mask",
       "artwork_id": "1jINNmrpN1E8Jml7CJUtT_DZJHSb2CTNA",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip this card. Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The intact golden mask presents a chosen new face.",
+      "reason": "The worn golden mask cracks into its own other face and stays held.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4494,10 +4515,10 @@
       "face": "Cracked Mask",
       "artwork_id": "1at4wsEWspmF3d7SvCp-PNRlJVZpUzJng",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The crack changes the identity shown by the mask.",
+      "reason": "The broken mask reveals the other appearances hidden across the hand.",
       "sheet": "card-artwork-review/cards-25.jpg"
     },
     {
@@ -4571,10 +4592,10 @@
       "face": "Woven Basket",
       "artwork_id": "13UA0GE_yN6sF3kHC1-s7mzkH3Av9A7QZ",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep 2 random cards in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The woven basket holds and preserves a chosen thing.",
+      "reason": "The basket holds two random cards in its woven enclosure.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4615,10 +4636,10 @@
       "face": "Closed Parasol",
       "artwork_id": "11Xnq_-YSm4gYNyBmDyHGeIY_zNdShnmx",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip this card. Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The closed parasol can turn into its open form.",
+      "reason": "The closed parasol opens into its own other face and remains held.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4637,10 +4658,10 @@
       "face": "White Fan",
       "artwork_id": "1aghUy0aUrQDb_gDwUPvTrDixhn0R1gFy",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The opened fan turns a held card with a deliberate movement.",
+      "reason": "The broad fan turns the held array with its sweep.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4648,10 +4669,10 @@
       "face": "Black Fan",
       "artwork_id": "1VryJ6zAyPAHtd63KNLlP9-JFw9O5Wh4M",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The dark fan changes the shown face with the same deliberate turning gesture.",
+      "reason": "The dark fan turns the held array with its sweep.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4659,10 +4680,10 @@
       "face": "Wooden Spool",
       "artwork_id": "1O7JYQCnT63P26D-2r_ANzLGaC5FL-WTM",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The spool stores its thread for later use.",
+      "reason": "The spool keeps its own thread wound for later.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4681,10 +4702,10 @@
       "face": "Gilded Cage",
       "artwork_id": "103u7kJ08876rjT6ttB5ta4OaGU-l19xm",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The gilded bars visibly preserve and confine a held figure.",
+      "reason": "The cage holds a random card inside its bars.",
       "sheet": "card-artwork-review/cards-26.jpg"
     },
     {
@@ -4714,10 +4735,10 @@
       "face": "Tarnished Mirror",
       "artwork_id": "11fSJYjFVg9xFaL4AQY9NpHn_hxTn0L0u",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your discard pile. Return it to your hand.",
+      "after": "Flip the top card of your discard pile. Return it to your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The aged, distorted reflection brings an earlier identity back in an altered form.",
+      "reason": "The tarnished reflection changes the visible discarded subject before returning it.",
       "sheet": "card-artwork-review/cards-27.jpg"
     },
     {
@@ -4747,10 +4768,10 @@
       "face": "Silver Locket",
       "artwork_id": "1WXDNTeVa33vWlZjLcmnEhlU8S2QYg844",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The locket encloses and preserves its keepsake.",
+      "reason": "The closed locket preserves its own keepsake.",
       "sheet": "card-artwork-review/cards-27.jpg"
     },
     {
@@ -4835,7 +4856,7 @@
       "face": "Feather Quill",
       "artwork_id": "1XdodTpAeoJ6GXQJlmboZJ1T39B_MW8Fr",
       "before": "Put a card from your discard on top of your draw pile.",
-      "after": "Put a card from your discard pile on top of your draw pile.",
+      "after": "Put a card from your discard pile on top of your library.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The writing feather places an earlier record back into the coming sequence.",
@@ -4857,10 +4878,10 @@
       "face": "Paintbrush",
       "artwork_id": "1nCXwA4NtHzRlo4wdshVitxcmMM1SgyS8",
       "before": "Flip a card in your hand.",
-      "after": "Flip a card in your hand.",
-      "changed": false,
+      "after": "Flip a random card in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The brush repaints the chosen face.",
+      "reason": "The brush repaints one held subject into its other appearance.",
       "sheet": "card-artwork-review/cards-27.jpg"
     },
     {
@@ -4923,10 +4944,10 @@
       "face": "Iron Needlecase",
       "artwork_id": "1JP3bPU1OloYFstRaBUxEQEpQeDzvDijA",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep this card.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The needlecase holds and protects its contents for later.",
+      "reason": "The needlecase keeps its own tool safely enclosed.",
       "sheet": "card-artwork-review/cards-28.jpg"
     },
     {
@@ -4945,10 +4966,10 @@
       "face": "White Ribbon",
       "artwork_id": "1wNNucUyzSzEJ7DG2r1ToKSbGZZf97cxk",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep 2 random cards in your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The white ribbon binds and preserves a held thing.",
+      "reason": "The ribbon binds two random held cards to keep together.",
       "sheet": "card-artwork-review/cards-28.jpg"
     },
     {
@@ -5044,10 +5065,10 @@
       "face": "Shadow Gallery",
       "artwork_id": "1fwRyYd2iEwpF5q4woiIEJSgDuXkLtaNv",
       "before": "Gain 5 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The shadowed alcoves conceal held things rather than adding another shield.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-28.jpg"
     },
     {
@@ -5055,10 +5076,10 @@
       "face": "Winter Conservatory",
       "artwork_id": "1ou6BOrZnkOHjNDRvwWwH1d2BV5wHpcSf",
       "before": "Gain 6 Ward.",
-      "after": "Keep up to 2 cards in your hand.",
+      "after": "Keep your hand.",
       "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The winter enclosure preserves dormant growth until a later turn.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-29.jpg"
     },
     {
@@ -5088,10 +5109,10 @@
       "face": "Hidden Basement",
       "artwork_id": "1jcQ9HpPZwVD1SfMpPnX8oL1_gjBIcfiz",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The concealed room stores things safely out of sight.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-29.jpg"
     },
     {
@@ -5143,7 +5164,7 @@
       "face": "Hedge Garden",
       "artwork_id": "1Qzg8Dn-urRmDberiEL8C-xkimdI-DsZ9",
       "before": "Gain 5 Ward.",
-      "after": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+      "after": "Look at the top 3 cards of your library. Put them back in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The deliberately arranged hedge paths organize the coming route.",
@@ -5187,7 +5208,7 @@
       "face": "Golden Atrium",
       "artwork_id": "14VvdDhU-fiiaJ81VezlDk-bMljuTob7C",
       "before": "Scry. Draw 1 card.",
-      "after": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+      "after": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
       "changed": true,
       "judgment": "strong-fit-proposal",
       "reason": "The atrium offers several clear openings and lets the traveler choose one route.",
@@ -5198,10 +5219,10 @@
       "face": "Black Atrium",
       "artwork_id": "1f8GpT4vliE4eZub7g16tuty8_5DJ5eQU",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The dark interior conceals a resource that can be held for later.",
+      "reason": "The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.",
       "sheet": "card-artwork-review/cards-29.jpg"
     },
     {
@@ -5572,10 +5593,10 @@
       "face": "Shuttered Window",
       "artwork_id": "1nBvpPWDdN24U2WoF060JUiwkKkgqtBL6",
       "before": "Keep a card in your hand.",
-      "after": "Keep a card in your hand.",
-      "changed": false,
+      "after": "Keep your hand.",
+      "changed": true,
       "judgment": "strong-fit-proposal",
-      "reason": "The closed shutters preserve what remains inside until later.",
+      "reason": "The shutters close around the whole held hand.",
       "sheet": "card-artwork-review/cards-31.jpg"
     }
   ],
@@ -5617,7 +5638,7 @@
       "after_trait": "On Hollow Clutch: Apply 2 Weaken to the player.",
       "actions": [
         "Deal 6 Shadow damage.",
-        "Banish the top 1 card of the player's draw pile.",
+        "Banish the top 1 card of the player's library.",
         "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 2 Weaken to the player."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
@@ -5737,7 +5758,7 @@
       "actions": [
         "Deal 5 Binding damage.",
         "Deal 4 Binding damage. Trait — Amber Custody: Apply 3 Weaken to the player.",
-        "Banish the top 1 card of the player's draw pile."
+        "Banish the top 1 card of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-01.jpg"
     },
@@ -5747,10 +5768,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The scattered ash obscures aim and buries one approaching card in the spent pile.",
       "before_trait": "After attacking, remove its remaining Burn and gain Ward equal to the Burn removed, up to 3.",
-      "after_trait": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile.",
+      "after_trait": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile.",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile."
+        "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5760,10 +5781,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The puppeteer's strings turn one of the cards the player actually still holds.",
       "before_trait": "After each second attack, flip all player cards currently carried with Keep.",
-      "after_trait": "On Puppet Dance: The player flips 1 held card of their choice, if any.",
+      "after_trait": "On Puppet Dance: Flip 1 random card still in the player's hand, if any.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Tugged Hands: The player flips 1 held card of their choice, if any."
+        "Deal 4 Binding damage. Trait — Tugged Hands: Flip 1 random card still in the player's hand, if any."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5786,10 +5807,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The oracle reveals a coming card and sends it below into the discard pile; it does not remember a hidden physical identity.",
       "before_trait": "At the start of the player turn, reveal the draw pile's top card. If that physical card is played this turn, add 3 damage.",
-      "after_trait": "On Foretold Drowning: Move the top 1 card of the player's draw pile to the player's discard pile.",
+      "after_trait": "On Foretold Drowning: Move the top 1 card of the player's library to the player's discard pile.",
       "actions": [
         "Deal 4 Memory damage.",
-        "Deal 5 Memory damage. Trait — Drowned Prophecy: Move the top 1 card of the player's draw pile to the player's discard pile."
+        "Deal 5 Memory damage. Trait — Drowned Prophecy: Move the top 1 card of the player's library to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5838,10 +5859,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The carousel carries the approaching card around to the far end of the draw pile.",
       "before_trait": "After each third attack, return the top card of the player's discard to the bottom of their draw pile.",
-      "after_trait": "On Round Again: Move the top 1 card of the player's draw pile to the bottom of that pile.",
+      "after_trait": "On Round Again: Move the top 1 card of the player's library to the bottom of that pile.",
       "actions": [
         "Deal 5 Memory damage.",
-        "Deal 4 Memory damage. Trait — Another Circuit: Move the top 1 card of the player's draw pile to the bottom of that pile."
+        "Deal 4 Memory damage. Trait — Another Circuit: Move the top 1 card of the player's library to the bottom of that pile."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5878,10 +5899,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The cartographer reroutes the next two cards to the far end of the known path instead of comparing old play counts.",
       "before_trait": "If the player played the same number of cards as on their previous turn, add 2 damage.",
-      "after_trait": "On Change the Map: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+      "after_trait": "On Change the Map: Move the top 2 cards of the player's library to the bottom of that pile.",
       "actions": [
         "Deal 5 Memory damage.",
-        "Deal 4 Memory damage. Trait — Redrawn Route: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+        "Deal 4 Memory damage. Trait — Redrawn Route: Move the top 2 cards of the player's library to the bottom of that pile."
       ],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
@@ -5904,10 +5925,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The matron tucks one still-held card into the next draw rather than copying an unrelated Ward total.",
       "before_trait": "After attacking, gain 2 Ward for each card the player carried with Keep, up to 4 Ward.",
-      "after_trait": "On Gather the Apron: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "after_trait": "On Gather the Apron: The player puts 1 held card of their choice on the top of their library, if any.",
       "actions": [
         "Deal 6 Binding damage.",
-        "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their draw pile, if any."
+        "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their library, if any."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -5917,10 +5938,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The buried melody brings one visible discarded card back to the next draw; this strange courtesy can help the player.",
       "before_trait": "After every second attack, move the last physical card the player played this turn from discard to the top of their draw pile, if still there.",
-      "after_trait": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
+      "after_trait": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their library.",
       "actions": [
         "Deal 6 Memory damage.",
-        "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their draw pile."
+        "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their library."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -5932,8 +5953,8 @@
       "before_trait": "After every second attack, gain 3 Ward from freshly pooled wax.",
       "after_trait": "On Pour the Wax: Gain 3 Ward.",
       "actions": [
-        "Deal 5 Flame damage.",
-        "Deal 5 Flame damage. Trait — Pooled Wax: Gain 3 Ward."
+        "Deal 5 Fire damage.",
+        "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."
       ],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
@@ -6076,10 +6097,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The crossing threads sew up to two actually held cards into the next draw's order.",
       "before_trait": "If the player carried at least 2 cards with Keep, add 3 damage.",
-      "after_trait": "On Close the Loom: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer.",
+      "after_trait": "On Close the Loom: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer."
+        "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6182,10 +6203,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The harvester removes one future growth from the draw pile as a temporary harvest.",
       "before_trait": "After an attack that damages player HP, gain 3 Ward.",
-      "after_trait": "On Reap Tomorrow: Banish the top 1 card of the player's draw pile.",
+      "after_trait": "On Reap Tomorrow: Banish the top 1 card of the player's library.",
       "actions": [
         "Deal 6 Decay damage.",
-        "Deal 5 Decay damage. Trait — Empty Harvest: Banish the top 1 card of the player's draw pile."
+        "Deal 5 Decay damage. Trait — Empty Harvest: Banish the top 1 card of the player's library."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6195,10 +6216,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The sticky honey seals one actually held card into the next draw instead of demanding an unrelated Flip.",
       "before_trait": "If the player played no Flip effect this turn, remove up to 2 player Ward before attacking.",
-      "after_trait": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "after_trait": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their library, if any.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their draw pile, if any."
+        "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their library, if any."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6208,10 +6229,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The leaping ink body blots the immediate route and sends the approaching card around to the draw pile's bottom.",
       "before_trait": "After every second attack, move the top card of the player's draw pile to its bottom.",
-      "after_trait": "On Leave an Ink Trail: Move the top 1 card of the player's draw pile to the bottom of that pile.",
+      "after_trait": "On Leave an Ink Trail: Move the top 1 card of the player's library to the bottom of that pile.",
       "actions": [
         "Deal 4 Shadow damage.",
-        "Deal 5 Shadow damage. Trait — Bounding Trail: Move the top 1 card of the player's draw pile to the bottom of that pile."
+        "Deal 5 Shadow damage. Trait — Bounding Trail: Move the top 1 card of the player's library to the bottom of that pile."
       ],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
@@ -6272,12 +6293,12 @@
       "number": 53,
       "name": "The Majestic Janitor",
       "judgment": "strong-fit-proposal",
-      "reason": "The mop clears its owner's lingering Burn after a deliberate sweep.",
+      "reason": "The janitor mops away burning residue and toxic contamination, without removing unrelated statuses.",
       "before_trait": "After each second attack, remove all its remaining Burn.",
-      "after_trait": "On Sweep the Floor: Remove all enemy Burn.",
+      "after_trait": "On Sweep the Floor: Remove all enemy Burn. Remove all enemy Poison.",
       "actions": [
         "Deal 5 Release damage.",
-        "Deal 4 Release damage. Trait — Clean Sweep: Remove all enemy Burn."
+        "Deal 4 Release damage. Trait — Clean Sweep: Remove all enemy Burn. Remove all enemy Poison."
       ],
       "sheet": "enemy-artwork-review/contact-05.jpg"
     },
@@ -6379,11 +6400,11 @@
       "judgment": "strong-fit-proposal",
       "reason": "The thief takes one future card and conceals the next approach while escaping.",
       "before_trait": "On stealing turns, Banish the top draw-pile card for this fight instead of attacking.",
-      "after_trait": "On Escape into Dusk: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+      "after_trait": "On Escape into Dusk: Move the top 2 cards of the player's library to the bottom of that pile.",
       "actions": [
         "Deal 5 Shadow damage.",
-        "Banish the top 1 card of the player's draw pile.",
-        "Deal 4 Shadow damage. Trait — Stolen Morrow: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+        "Banish the top 1 card of the player's library.",
+        "Deal 4 Shadow damage. Trait — Stolen Morrow: Move the top 2 cards of the player's library to the bottom of that pile."
       ],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
@@ -6406,10 +6427,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The moths consume the next two pages of the draw sequence into the spent pile.",
       "before_trait": "If the player banished a card this turn, gain 4 Ward after attacking.",
-      "after_trait": "On Loose the Moths: Move the top 2 cards of the player's draw pile to the player's discard pile.",
+      "after_trait": "On Loose the Moths: Move the top 2 cards of the player's library to the player's discard pile.",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Moth-Eaten Tribute: Move the top 2 cards of the player's draw pile to the player's discard pile."
+        "Deal 4 Decay damage. Trait — Moth-Eaten Tribute: Move the top 2 cards of the player's library to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
@@ -6417,13 +6438,13 @@
       "number": 64,
       "name": "The Mould Harpist",
       "judgment": "strong-fit-proposal",
-      "reason": "The mould visibly regrows and sends a debilitating spore-note after the harpist's touch.",
+      "reason": "The mould-coated harp throws toxic spores from its vibrating strings; Poison follows the visible fungal growth.",
       "before_trait": "On refrain turns, heal 5 HP instead of attacking if no direct card attack damaged its HP this turn.",
-      "after_trait": "On Pluck the Mould: Apply 3 Weaken to the player.",
+      "after_trait": "On Pluck the Mould: Apply 2 Poison to the player.",
       "actions": [
         "Deal 5 Growth damage.",
         "Heal 4 HP.",
-        "Deal 4 Growth damage. Trait — Spore Chord: Apply 3 Weaken to the player."
+        "Deal 4 Growth damage. Trait — Mould Spores: Apply 2 Poison to the player."
       ],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
@@ -6446,10 +6467,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The otter carries one held card down to the draw pile's bottom instead of checking an unspent Mark.",
       "before_trait": "After each second attack, gain 5 Ward if the player has no Mark on it.",
-      "after_trait": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+      "after_trait": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their library, if any.",
       "actions": [
         "Deal 5 Shadow damage.",
-        "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their draw pile, if any."
+        "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their library, if any."
       ],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
@@ -6538,10 +6559,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The visible undertow carries the next two draw-pile cards away to the bottom.",
       "before_trait": "Before every second attack, remove 2 player Ward per card kept this turn, capped at 6.",
-      "after_trait": "On Turn the Current: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+      "after_trait": "On Turn the Current: Move the top 2 cards of the player's library to the bottom of that pile.",
       "actions": [
         "Deal 6 Radiance damage.",
-        "Deal 4 Radiance damage. Trait — Drawing Current: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+        "Deal 4 Radiance damage. Trait — Drawing Current: Move the top 2 cards of the player's library to the bottom of that pile."
       ],
       "sheet": "enemy-artwork-review/contact-07.jpg"
     },
@@ -6615,12 +6636,12 @@
       "number": 79,
       "name": "The Saffron Spider",
       "judgment": "strong-fit-proposal",
-      "reason": "The web catches one visibly held card, rather than adding a fang solely because Keep was played.",
+      "reason": "The huge spider delivers venom through its bite rather than manipulating an arbitrary held card.",
       "before_trait": "If the player used Keep this turn, add one additional hit.",
-      "after_trait": "On Close the Snare: The player discards 1 held card of their choice, if any.",
+      "after_trait": "On Venomous Bite: Apply 2 Poison to the player.",
       "actions": [
         "Deal 5 Growth damage.",
-        "Deal 4 Growth damage. Trait — Saffron Snare: The player discards 1 held card of their choice, if any."
+        "Deal 4 Growth damage. Trait — Saffron Venom: Apply 2 Poison to the player."
       ],
       "sheet": "enemy-artwork-review/contact-07.jpg"
     },
@@ -6657,10 +6678,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The wooden door is real cover; the hands hide one held card at the back of the draw pile.",
       "before_trait": "If a direct card attack removed all of its Ward this turn, add one extra 3-damage hit.",
-      "after_trait": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+      "after_trait": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their library, if any.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+        "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their library, if any.",
         "Gain 4 Ward."
       ],
       "sheet": "enemy-artwork-review/contact-07.jpg"
@@ -6713,8 +6734,8 @@
       "before_trait": "If it still has Burn after the tick, add damage equal to that Burn, capped at 3.",
       "after_trait": "On Open the Firemouth: Apply 2 Burn to the player.",
       "actions": [
-        "Deal 6 Flame damage.",
-        "Deal 5 Flame damage. Trait — Feed the Fire: Apply 2 Burn to the player."
+        "Deal 6 Fire damage.",
+        "Deal 5 Fire damage. Trait — Feed the Fire: Apply 2 Burn to the player."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
     },
@@ -6789,10 +6810,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The seamstress sews one held card into the top of the next draw rather than erasing it.",
       "before_trait": "After attacking, put one chosen Kept card on top of the player's draw pile, if any.",
-      "after_trait": "On Close the Hem: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "after_trait": "On Close the Hem: The player puts 1 held card of their choice on the top of their library, if any.",
       "actions": [
         "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their draw pile, if any."
+        "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their library, if any."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
     },
@@ -6841,10 +6862,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The ragged hem takes the next page out of the coming draw sequence and leaves it among spent scraps.",
       "before_trait": "Gain 1 Ward per card the player discarded through card effects this turn, capped at 4, after attacking.",
-      "after_trait": "On Unravel the Hem: Move the top 1 card of the player's draw pile to the player's discard pile.",
+      "after_trait": "On Unravel the Hem: Move the top 1 card of the player's library to the player's discard pile.",
       "actions": [
         "Deal 5 Decay damage.",
-        "Deal 4 Decay damage. Trait — Fraying Court: Move the top 1 card of the player's draw pile to the player's discard pile."
+        "Deal 4 Decay damage. Trait — Fraying Court: Move the top 1 card of the player's library to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-08.jpg"
     },
@@ -6960,10 +6981,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The courtly skeleton invites a discarded memory back to the next draw; a dark figure can offer real help.",
       "before_trait": "If the player ends with 0 mana, gain 3 Ward after attacking.",
-      "after_trait": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
+      "after_trait": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their library.",
       "actions": [
         "Deal 5 Memory damage.",
-        "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their draw pile."
+        "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their library."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -6973,10 +6994,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "Hot wax leaves a Burn and seals one held card into the next draw, without testing HP damage.",
       "before_trait": "After an attack that deals player HP damage, put every card currently carried with Keep on top of the draw pile, in the player's chosen order.",
-      "after_trait": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "after_trait": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any.",
       "actions": [
-        "Deal 5 Flame damage.",
-        "Deal 4 Flame damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any."
+        "Deal 5 Fire damage.",
+        "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -6986,10 +7007,10 @@
       "judgment": "strong-fit-proposal",
       "reason": "The whispers draw two coming cards into the spent past without tracking the identity of last turn's final card.",
       "before_trait": "If a card with the same pair as last turn's final played card is played this turn, add 2 damage.",
-      "after_trait": "On Speak the Names: Move the top 2 cards of the player's draw pile to the player's discard pile.",
+      "after_trait": "On Speak the Names: Move the top 2 cards of the player's library to the player's discard pile.",
       "actions": [
         "Deal 5 Memory damage.",
-        "Deal 4 Memory damage. Trait — Whispered Names: Move the top 2 cards of the player's draw pile to the player's discard pile."
+        "Deal 4 Memory damage. Trait — Whispered Names: Move the top 2 cards of the player's library to the player's discard pile."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -7001,8 +7022,8 @@
       "before_trait": "Every third attack ignores all player Ward.",
       "after_trait": "On Expose the Core: Apply 3 Burn to the player.",
       "actions": [
-        "Deal 6 Flame damage.",
-        "Deal 5 Flame damage. Trait — Open Furnace: Apply 3 Burn to the player."
+        "Deal 6 Fire damage.",
+        "Deal 5 Fire damage. Trait — Open Furnace: Apply 3 Burn to the player."
       ],
       "sheet": "enemy-artwork-review/contact-09.jpg"
     },
@@ -7024,12 +7045,12 @@
       "number": 110,
       "name": "Velvet Widow",
       "judgment": "strong-fit-proposal",
-      "reason": "The widow's web restrains the next attack after its physical lunge, without punishing a remembered play count.",
+      "reason": "The widow’s spider limbs deliver a venomous strike; the toxin lingers after the base hit.",
       "before_trait": "If the player played 1 or fewer cards this turn, add 2 damage.",
-      "after_trait": "On Silken Lunge: Apply 3 Weaken to the player.",
+      "after_trait": "On Venomous Lunge: Apply 3 Poison to the player.",
       "actions": [
         "Deal 5 Shadow damage.",
-        "Deal 5 Shadow damage. Trait — Patient Web: Apply 3 Weaken to the player."
+        "Deal 5 Shadow damage. Trait — Widow Venom: Apply 3 Poison to the player."
       ],
       "sheet": "enemy-artwork-review/contact-10.jpg"
     }

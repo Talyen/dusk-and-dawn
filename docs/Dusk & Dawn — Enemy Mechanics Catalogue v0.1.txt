@@ -33,7 +33,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
   Trait — Empty Grasp: On Hollow Clutch: Apply 2 Weaken to the player.
   Royal Reach: Deal 6 Shadow damage.
     Hush: Deal 6 Shadow damage. No suppressible effect in this intent.
-  Empty Decree: Banish the top 1 card of the player's draw pile.
+  Empty Decree: Banish the top 1 card of the player's library.
     Hush: Skip this ability. Advance the pattern.
   Hollow Clutch: Deal 7 Shadow damage. Uses the trait.
     Hush: Deal 7 Shadow damage. Suppress the labeled trait. Advance the pattern.
@@ -129,14 +129,14 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
   Amber Clasp: Deal 4 Binding damage. Uses the trait.
     Hush: Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.
-  Seal an Offering: Banish the top 1 card of the player's draw pile.
+  Seal an Offering: Banish the top 1 card of the player's library.
     Hush: Skip this ability. Advance the pattern.
   Pattern: Resin Hand → Amber Clasp → Seal an Offering. Repeat.
   Artwork fit: Amber restrains a grasped limb and preserves one surrendered future card in a visible seal.
 
 013 The Ashen Gardener · 26 HP
   Weakness: Growth. Growth brings life back into the spent garden.
-  Trait — Ashen Dust: On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile.
+  Trait — Ashen Dust: On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile.
   Ash Rake: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
   Scatter Ash: Deal 4 Decay damage. Uses the trait.
@@ -146,7 +146,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 014 The Ashen Puppeteer · 28 HP
   Weakness: Release. Release cuts the controlling strings.
-  Trait — Tugged Hands: On Puppet Dance: The player flips 1 held card of their choice, if any.
+  Trait — Tugged Hands: On Puppet Dance: Flip 1 random card still in the player's hand, if any.
   String Jerk: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
   Puppet Dance: Deal 4 Binding damage. Uses the trait.
@@ -166,7 +166,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 016 The Bathtub Oracle · 28 HP
   Weakness: Oblivion. Oblivion erases the future it has divined.
-  Trait — Drowned Prophecy: On Foretold Drowning: Move the top 1 card of the player's draw pile to the player's discard pile.
+  Trait — Drowned Prophecy: On Foretold Drowning: Move the top 1 card of the player's library to the player's discard pile.
   Oracle's Touch: Deal 4 Memory damage.
     Hush: Deal 4 Memory damage. No suppressible effect in this intent.
   Foretold Drowning: Deal 5 Memory damage. Uses the trait.
@@ -206,7 +206,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 020 The Bleak Carousel · 24 HP
   Weakness: Oblivion. Oblivion interrupts the carousel's repeated circuit.
-  Trait — Another Circuit: On Round Again: Move the top 1 card of the player's draw pile to the bottom of that pile.
+  Trait — Another Circuit: On Round Again: Move the top 1 card of the player's library to the bottom of that pile.
   Carousel Hoof: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
   Round Again: Deal 4 Memory damage. Uses the trait.
@@ -238,7 +238,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 023 The Bone Cartographer · 28 HP
   Weakness: Oblivion. Oblivion erases the route it has measured.
-  Trait — Redrawn Route: On Change the Map: Move the top 2 cards of the player's draw pile to the bottom of that pile.
+  Trait — Redrawn Route: On Change the Map: Move the top 2 cards of the player's library to the bottom of that pile.
   Divider Point: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
   Change the Map: Deal 4 Memory damage. Uses the trait.
@@ -258,7 +258,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 025 The Brass Matron · 28 HP
   Weakness: Release. Release loosens the rigid enclosure.
-  Trait — Gathering Apron: On Gather the Apron: The player puts 1 held card of their choice on the top of their draw pile, if any.
+  Trait — Gathering Apron: On Gather the Apron: The player puts 1 held card of their choice on the top of their library, if any.
   Brass Embrace: Deal 6 Binding damage.
     Hush: Deal 6 Binding damage. No suppressible effect in this intent.
   Gather the Apron: Deal 5 Binding damage. Uses the trait.
@@ -268,7 +268,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 026 The Buried Violinist · 24 HP
   Weakness: Oblivion. Oblivion ends the tune that persists underground.
-  Trait — Unfinished Phrase: On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their draw pile.
+  Trait — Unfinished Phrase: On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their library.
   Buried Fingers: Deal 6 Memory damage.
     Hush: Deal 6 Memory damage. No suppressible effect in this intent.
   Play the Refrain: Deal 4 Memory damage. Uses the trait.
@@ -279,10 +279,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 027 The Candlewax Duchess · 30 HP
   Weakness: Frost. Frost cools the candles and stiffens the dripping wax.
   Trait — Pooled Wax: On Pour the Wax: Gain 3 Ward.
-  Candle Scald: Deal 5 Flame damage.
-    Hush: Deal 5 Flame damage. No suppressible effect in this intent.
-  Pour the Wax: Deal 5 Flame damage. Uses the trait.
-    Hush: Deal 5 Flame damage. Suppress the labeled trait. Advance the pattern.
+  Candle Scald: Deal 5 Fire damage.
+    Hush: Deal 5 Fire damage. No suppressible effect in this intent.
+  Pour the Wax: Deal 5 Fire damage. Uses the trait.
+    Hush: Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.
   Pattern: Candle Scald → Pour the Wax. Repeat.
   Artwork fit: The poured wax hardens into a fresh covering after the scald.
 
@@ -394,7 +394,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 038 The Fogbound Weaver · 28 HP
   Weakness: Release. Release loosens the supporting threads.
-  Trait — Closing Weave: On Close the Loom: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer.
+  Trait — Closing Weave: On Close the Loom: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer.
   Fog Needle: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
   Close the Loom: Deal 4 Binding damage. Uses the trait.
@@ -478,7 +478,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 046 The Hollow Harvester · 30 HP
   Weakness: Growth. Growth fills the emptied, blighted harvest.
-  Trait — Empty Harvest: On Reap Tomorrow: Banish the top 1 card of the player's draw pile.
+  Trait — Empty Harvest: On Reap Tomorrow: Banish the top 1 card of the player's library.
   Hollow Sickle: Deal 6 Decay damage.
     Hush: Deal 6 Decay damage. No suppressible effect in this intent.
   Reap Tomorrow: Deal 5 Decay damage. Uses the trait.
@@ -488,7 +488,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 047 The Honey Tyrant · 36 HP
   Weakness: Release. Release frees a target from sticky honey.
-  Trait — Sticky Tribute: On Close the Honey Trap: The player puts 1 held card of their choice on the top of their draw pile, if any.
+  Trait — Sticky Tribute: On Close the Honey Trap: The player puts 1 held card of their choice on the top of their library, if any.
   Honey Grip: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
   Close the Honey Trap: Deal 4 Binding damage. Uses the trait.
@@ -498,7 +498,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 048 The Ink Jackrabbit · 22 HP
   Weakness: Radiance. Radiance reveals the bounding ink silhouette.
-  Trait — Bounding Trail: On Leave an Ink Trail: Move the top 1 card of the player's draw pile to the bottom of that pile.
+  Trait — Bounding Trail: On Leave an Ink Trail: Move the top 1 card of the player's library to the bottom of that pile.
   Inkbound Kick: Deal 4 Shadow damage.
     Hush: Deal 4 Shadow damage. No suppressible effect in this intent.
   Leave an Ink Trail: Deal 5 Shadow damage. Uses the trait.
@@ -550,13 +550,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 053 The Majestic Janitor · 28 HP
   Weakness: Binding. Binding arrests the sweeping motion.
-  Trait — Clean Sweep: On Sweep the Floor: Remove all enemy Burn.
+  Trait — Clean Sweep: On Sweep the Floor: Remove all enemy Burn. Remove all enemy Poison.
   Royal Mop: Deal 5 Release damage.
     Hush: Deal 5 Release damage. No suppressible effect in this intent.
   Sweep the Floor: Deal 4 Release damage. Uses the trait.
     Hush: Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.
   Pattern: Royal Mop → Sweep the Floor. Repeat.
-  Artwork fit: The mop clears its owner's lingering Burn after a deliberate sweep.
+  Artwork fit: The janitor mops away burning residue and toxic contamination, without removing unrelated statuses.
 
 054 The Marble Nurse · 24 HP
   Weakness: Release. Release escapes the restraining treatment.
@@ -632,10 +632,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 061 The Morrow Thief · 26 HP
   Weakness: Radiance. Radiance reveals the thief and the stolen dawn.
-  Trait — Stolen Morrow: On Escape into Dusk: Move the top 2 cards of the player's draw pile to the bottom of that pile.
+  Trait — Stolen Morrow: On Escape into Dusk: Move the top 2 cards of the player's library to the bottom of that pile.
   Dawn Snatch: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
-  Steal Tomorrow: Banish the top 1 card of the player's draw pile.
+  Steal Tomorrow: Banish the top 1 card of the player's library.
     Hush: Skip this ability. Advance the pattern.
   Escape into Dusk: Deal 4 Shadow damage. Uses the trait.
     Hush: Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.
@@ -654,7 +654,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 063 The Moth-Eaten Regent · 28 HP
   Weakness: Growth. Growth renews what the moths have eaten.
-  Trait — Moth-Eaten Tribute: On Loose the Moths: Move the top 2 cards of the player's draw pile to the player's discard pile.
+  Trait — Moth-Eaten Tribute: On Loose the Moths: Move the top 2 cards of the player's library to the player's discard pile.
   Tattered Scepter: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
   Loose the Moths: Deal 4 Decay damage. Uses the trait.
@@ -664,15 +664,15 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 064 The Mould Harpist · 30 HP
   Weakness: Decay. Decay consumes the living fungal growth.
-  Trait — Spore Chord: On Pluck the Mould: Apply 3 Weaken to the player.
+  Trait — Mould Spores: On Pluck the Mould: Apply 2 Poison to the player.
   Bony Fingers: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
-  Grow the Refrain: Heal 4 HP.
+  Pluck the Mould: Heal 4 HP.
     Hush: Skip this ability. Advance the pattern.
   Pluck the Mould: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
-  Pattern: Bony Fingers → Grow the Refrain → Pluck the Mould. Repeat.
-  Artwork fit: The mould visibly regrows and sends a debilitating spore-note after the harpist's touch.
+  Pattern: Bony Fingers → Pluck the Mould → Pluck the Mould. Repeat.
+  Artwork fit: The mould-coated harp throws toxic spores from its vibrating strings; Poison follows the visible fungal growth.
 
 065 The Noon Dancer · 26 HP
   Weakness: Shadow. Shadow dims the sunlit dance.
@@ -686,7 +686,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 066 The Obsidian Otter · 24 HP
   Weakness: Radiance. Radiance reveals the animal beneath the dark water.
-  Trait — Dive for Cover: On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their draw pile, if any.
+  Trait — Dive for Cover: On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their library, if any.
   Obsidian Bite: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
   Dive with the Prize: Deal 4 Shadow damage. Uses the trait.
@@ -758,7 +758,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 073 The Radiant Undertow · 36 HP
   Weakness: Shadow. Shadow dims the pull of the bright center.
-  Trait — Drawing Current: On Turn the Current: Move the top 2 cards of the player's draw pile to the bottom of that pile.
+  Trait — Drawing Current: On Turn the Current: Move the top 2 cards of the player's library to the bottom of that pile.
   Sunlit Surge: Deal 6 Radiance damage.
     Hush: Deal 6 Radiance damage. No suppressible effect in this intent.
   Turn the Current: Deal 4 Radiance damage. Uses the trait.
@@ -820,13 +820,13 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 079 The Saffron Spider · 26 HP
   Weakness: Decay. Decay withers its living, plantlike body.
-  Trait — Saffron Snare: On Close the Snare: The player discards 1 held card of their choice, if any.
+  Trait — Saffron Venom: On Venomous Bite: Apply 2 Poison to the player.
   Saffron Fang: Deal 5 Growth damage.
     Hush: Deal 5 Growth damage. No suppressible effect in this intent.
-  Close the Snare: Deal 4 Growth damage. Uses the trait.
+  Venomous Bite: Deal 4 Growth damage. Uses the trait.
     Hush: Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.
-  Pattern: Saffron Fang → Close the Snare. Repeat.
-  Artwork fit: The web catches one visibly held card, rather than adding a fang solely because Keep was played.
+  Pattern: Saffron Fang → Venomous Bite. Repeat.
+  Artwork fit: The huge spider delivers venom through its bite rather than manipulating an arbitrary held card.
 
 080 The Salt Crown · 36 HP
   Weakness: Release. Release disperses the crystals holding the crown together.
@@ -852,7 +852,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 082 The Shivering Cabinet · 28 HP
   Weakness: Release. Release opens the cabinet's confinement.
-  Trait — Hands Within: On Open the Hands: The player puts 1 held card of their choice on the bottom of their draw pile, if any.
+  Trait — Hands Within: On Open the Hands: The player puts 1 held card of their choice on the bottom of their library, if any.
   Cabinet Slam: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
   Open the Hands: Deal 4 Binding damage. Uses the trait.
@@ -897,10 +897,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 086 The Smiling Kiln · 30 HP
   Weakness: Frost. Frost cools the kiln's furnace.
   Trait — Feed the Fire: On Open the Firemouth: Apply 2 Burn to the player.
-  Kiln Breath: Deal 6 Flame damage.
-    Hush: Deal 6 Flame damage. No suppressible effect in this intent.
-  Open the Firemouth: Deal 5 Flame damage. Uses the trait.
-    Hush: Deal 5 Flame damage. Suppress the labeled trait. Advance the pattern.
+  Kiln Breath: Deal 6 Fire damage.
+    Hush: Deal 6 Fire damage. No suppressible effect in this intent.
+  Open the Firemouth: Deal 5 Fire damage. Uses the trait.
+    Hush: Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.
   Pattern: Kiln Breath → Open the Firemouth. Repeat.
   Artwork fit: Real fire from the kiln leaves a Burn after the first breath.
 
@@ -956,7 +956,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 092 The Tall Seamstress · 28 HP
   Weakness: Release. Release cuts the long seam.
-  Trait — Hem the Hand: On Close the Hem: The player puts 1 held card of their choice on the top of their draw pile, if any.
+  Trait — Hem the Hand: On Close the Hem: The player puts 1 held card of their choice on the top of their library, if any.
   Tall Needle: Deal 5 Binding damage.
     Hush: Deal 5 Binding damage. No suppressible effect in this intent.
   Close the Hem: Deal 4 Binding damage. Uses the trait.
@@ -996,7 +996,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 096 The Threadbare Duke · 26 HP
   Weakness: Growth. Growth renews the wasted cloth and body.
-  Trait — Fraying Court: On Unravel the Hem: Move the top 1 card of the player's draw pile to the player's discard pile.
+  Trait — Fraying Court: On Unravel the Hem: Move the top 1 card of the player's library to the player's discard pile.
   Frayed Rapier: Deal 5 Decay damage.
     Hush: Deal 5 Decay damage. No suppressible effect in this intent.
   Unravel the Hem: Deal 4 Decay damage. Uses the trait.
@@ -1090,7 +1090,7 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 105 The Velvet Skeleton · 24 HP
   Weakness: Oblivion. Oblivion releases the remembered courtly gesture.
-  Trait — Remembered Courtesy: On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their draw pile.
+  Trait — Remembered Courtesy: On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their library.
   Velvet Finger: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
   Invite the Memory: Deal 3 Memory damage. Uses the trait.
@@ -1100,17 +1100,17 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 106 The Wax Regent · 36 HP
   Weakness: Frost. Frost cools the ruler's burning wax.
-  Trait — Wax Seal: On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any.
-  Regent's Scald: Deal 5 Flame damage.
-    Hush: Deal 5 Flame damage. No suppressible effect in this intent.
-  Pour the Seal: Deal 4 Flame damage. Uses the trait.
-    Hush: Deal 4 Flame damage. Suppress the labeled trait. Advance the pattern.
+  Trait — Wax Seal: On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any.
+  Regent's Scald: Deal 5 Fire damage.
+    Hush: Deal 5 Fire damage. No suppressible effect in this intent.
+  Pour the Seal: Deal 4 Fire damage. Uses the trait.
+    Hush: Deal 4 Fire damage. Suppress the labeled trait. Advance the pattern.
   Pattern: Regent's Scald → Pour the Seal. Repeat.
   Artwork fit: Hot wax leaves a Burn and seals one held card into the next draw, without testing HP damage.
 
 107 The Whispering Casket · 28 HP
   Weakness: Oblivion. Oblivion lays the lingering whispers to rest.
-  Trait — Whispered Names: On Speak the Names: Move the top 2 cards of the player's draw pile to the player's discard pile.
+  Trait — Whispered Names: On Speak the Names: Move the top 2 cards of the player's library to the player's discard pile.
   Casket Murmur: Deal 5 Memory damage.
     Hush: Deal 5 Memory damage. No suppressible effect in this intent.
   Speak the Names: Deal 4 Memory damage. Uses the trait.
@@ -1121,10 +1121,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 108 The White Furnace · 42 HP
   Weakness: Frost. Frost cools the exposed furnace core.
   Trait — Open Furnace: On Expose the Core: Apply 3 Burn to the player.
-  White Heat: Deal 6 Flame damage.
-    Hush: Deal 6 Flame damage. No suppressible effect in this intent.
-  Expose the Core: Deal 5 Flame damage. Uses the trait.
-    Hush: Deal 5 Flame damage. Suppress the labeled trait. Advance the pattern.
+  White Heat: Deal 6 Fire damage.
+    Hush: Deal 6 Fire damage. No suppressible effect in this intent.
+  Expose the Core: Deal 5 Fire damage. Uses the trait.
+    Hush: Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.
   Pattern: White Heat → Expose the Core. Repeat.
   Artwork fit: The uncovered furnace leaves a strong continuing Burn; it need not ignore every possible shield.
 
@@ -1142,10 +1142,10 @@ Leech: Heal for the attack’s final damage after bonuses and Weaken, before War
 
 110 Velvet Widow · 30 HP
   Weakness: Radiance. Radiance exposes the hunter beneath the moonlit velvet.
-  Trait — Patient Web: On Silken Lunge: Apply 3 Weaken to the player.
+  Trait — Widow Venom: On Venomous Lunge: Apply 3 Poison to the player.
   Velvet Fang: Deal 5 Shadow damage.
     Hush: Deal 5 Shadow damage. No suppressible effect in this intent.
-  Silken Lunge: Deal 5 Shadow damage. Uses the trait.
+  Venomous Lunge: Deal 5 Shadow damage. Uses the trait.
     Hush: Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.
-  Pattern: Velvet Fang → Silken Lunge. Repeat.
-  Artwork fit: The widow's web restrains the next attack after its physical lunge, without punishing a remembered play count.
+  Pattern: Velvet Fang → Venomous Lunge. Repeat.
+  Artwork fit: The widow’s spider limbs deliver a venomous strike; the toxin lingers after the base hit.

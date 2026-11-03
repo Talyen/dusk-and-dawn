@@ -3,19 +3,19 @@
 3|=|The many-eyed seraph radiates a concentrated shaft of light.
 4|=|Torn wings make the fallen figure's power visibly costly.
 5|=|The cherub offers a small, single blessing with open hands.
-6|=|The crouching imp combines a clawed threat with a change-of-face trick.
+6|Deal 4 Shadow damage. Flip a random card in your hand.|The imp combines its claw strike with an unpredictable change-of-face trick.
 7|=|The guardian spreads its wings across the path as a physical barrier.
 8|=|A revenant rises from what was lost; its attack and optional return express that return from death.
 9|=|The pilgrim follows a visible road toward the next destination.
 10|=|The exile abandons a former place and moves toward new possibilities.
 11|=|The oracle's watching eyes and dark central orb show foresight.
-12|Flip a card in your hand.|The deceiver holds a separate mask; changing one identity is the whole depicted action.
+12|Flip a random card in your hand.|The deceiver disguises one unpredictable held face.
 13|Heal 5 HP. Banish this card.|The abbess gives a blessing; a second, unrelated shield was unnecessary.
 14|Deal 5 Shadow damage. Leech. Banish this card.|The countess takes one substantial feeding; the whole attack value supplies vitality without tracking HP loss.
 15|=|The gardener tends a living flower with an open hand.
 16|=|The gravedigger buries a body rather than bringing it back.
 17|=|The bowed figure relinquishes a burden and receives relief.
-18|Keep up to 2 cards in your hand.|The shadow hides the small traveler and their secrets rather than transforming everything.
+18|Keep this card.|A secret stays held rather than being revealed or discarded.
 19|=|Light falls over a kneeling figure receiving absolution.
 20|=|The pointing, looming judge singles out a condemned target.
 21|=|The offered fruit promises a gain with a personal cost.
@@ -27,11 +27,11 @@
 27|=|The white stag stands as a guide along the visible path.
 28|=|The dark antlered silhouette looms as a shadow threat.
 29|Reflect the first hit of the enemy's next attack. Banish this card.|The swan and dancer are mirrored in the water; returning a strike gives the reflection a direct function.
-30|=|The black swan and the dancer's curving body suggest a single transformation.
+30|Flip your hand.|The unexpected black swan overturns the visible set of possibilities.
 31|Weaken 4.|The small lamb's gentleness softens the approaching threat rather than acting as unexplained medicine.
 32|Deal 6 Shadow damage.|The wolf's raised muzzle and dark body support a shadow attack; harming the player had no depicted cause.
-33|Flip up to 2 cards in your hand.|The butterfly's paired wings express metamorphosis without an unrelated foresight bonus.
-34|=|The moth is another transformed winged form, with no visible flame.
+33|Flip 2 random cards in your hand.|Two fluttering wings turn two held faces without a target prompt.
+34|Flip a random card in your hand.|The moth flutters one held face toward its other appearance.
 35|Draw 2 cards.|The open-beaked dawn singer calls new possibilities into the hand; it is singing, not reading the future.
 36|=|The owl watches attentively from a high perch before selecting the next card.
 37|=|The sun's face and radiating rays are the source of the Radiance strike.
@@ -47,8 +47,8 @@
 47|=|The raised chalice offers one restorative draught.
 48|Lose 2 HP. Gain 1 mana. Banish this card.|The blood-filled goblet makes a single offering of life for power.
 49|Weaken 4.|The censer releases veiling incense; obscured aim fits the smoke better than unseen flames.
-50|Weaken 3. Deal 3 Decay damage.|Green plague fumes both debilitate and blight; neither fire nor a player HP payment is depicted.
-51|=|The reliquary encloses and preserves its small central treasure.
+50|Apply 3 Poison.|The plague brazier releases a lingering toxic cloud rather than a generic direct strike.
+51|Keep this card.|The reliquary preserves its own enclosed relic for another turn.
 52|=|The reliquary is visibly empty: something once kept is gone.
 53|=|A flower opens into vigorous new life.
 54|=|A crumbling body and drooping flowers visibly wither away.
@@ -57,13 +57,13 @@
 57|Weaken 4.|The ivy visibly wraps and restrains limbs.
 58|Deal 2 Decay damage twice.|Two thorned branches cut across the scene; repeated pricks replace an unrelated shield.
 59|=|The raised key opens the path to another card and its other face.
-60|=|The great lock holds something shut for later.
+60|Keep this card.|The lock stays closed and held; its Key face remains a future option.
 61|Reflect the first hit of the enemy's next attack. Banish this card.|The mirror visibly returns the figure's image, so it returns a single strike.
 62|Deal 2 Release damage twice.|Separate mirror shards supply two sharp strikes; no unrelated whole-hand transformation is needed.
 63|=|The candle supplies both light-energy and flame, then burns away.
 64|Turn your hand to its dark faces. Banish this card.|The spent candle removes the light and leaves the scene in darkness.
 65|=|Opening the book brings an earlier story back into reach.
-66|=|The sealed book keeps its contents closed and preserved.
+66|Keep this card.|The book remains sealed and available for a later opening.
 67|=|The hourglass slows the approach of the next attack.
 68|Shuffle your hand into your draw pile. Draw 5 cards. Banish this card.|The broken hourglass spills its ordered contents and resets the present hand.
 69|Draw 2 cards.|The feather rises free of the enclosing hands, opening new movement and options.
@@ -96,7 +96,7 @@
 96|Draw 2 cards.|The spirit breaks free of its constraining form and opens new options.
 97|Weaken 5.|The sovereign's commanding pose restrains opposition; a large generic shield did not express command.
 98|Flip your hand.|The jester turns the whole situation upside down; the extra draw was incidental.
-99|=|The puppeteer's strings directly turn one chosen figure/card.
+99|Flip your hand.|The puppeteer pulls the whole set of strings together.
 100|=|The marionette is placed on a prescribed next step by its strings.
 101|=|The weaver gathers old strands and places them back into an ordered future.
 102|=|A held strand is pulled apart to drive further unraveling.
@@ -114,14 +114,14 @@
 114|=|The vulture consumes what is already dead to recover vitality.
 115|Draw 2 cards.|The fish's flowing fins and forward movement bring new options; an unexplained shell-like shield was removed.
 116|=|The anglerfish both bites and marks a target with its unmistakable lure.
-117|=|The cage holds and preserves the songbird inside it.
+117|Keep this card.|The caged songbird remains in its own enclosure.
 118|Draw 2 cards.|The bird escapes into open movement; its body is not being transformed.
 119|=|The tortoise carries its own protective shell.
 120|Gain 1 mana. Draw 1 card. Banish this card.|The hare's single sprint supplies a brief burst of speed and another immediate option.
 121|=|The lighthouse's visible beam guides the next approach.
 122|=|The wreck destroys a carried resource in a violent Decay impact.
 123|Heal 5 HP. Banish this card.|The glasshouse nurtures its living plants; the extra shield obscured that main action.
-124|=|The root cellar stores something safely for a later turn.
+124|Keep your hand.|The cellar preserves the whole stored hand, at the cost of space for fresh draws.
 125|=|The city is visibly enclosed by massive defensive walls.
 126|Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.|The wilderness offers several paths and lets the traveler choose one to explore.
 127|=|The orchard offers restorative fruit.
@@ -139,7 +139,7 @@
 139|=|The open, suspended books provide knowledge of the coming card.
 140|=|Lost books are retrieved from beneath the water.
 141|Weaken 3. Deal 3 Radiance damage.|The white glare blinds and harms; no barrier-breaking action was depicted.
-142|Keep up to 2 cards in your hand.|The dark trees conceal and hold resources out of sight rather than adding another numerical shield.
+142|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
 143|Look at the top 3 cards of your draw pile. Put them back in any order.|The city's gears and clock arrange the sequence of what comes next.
 144|Shuffle your hand into your draw pile. Draw 4 cards.|The entire village changes location, moving the current hand onward and arriving at a new one.
 145|=|The needle stitches a spent strand back into the coming sequence.
@@ -147,7 +147,7 @@
 147|Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.|The compass selects one direction from several visible possibilities.
 148|=|The winding labyrinth obstructs a direct approach.
 149|=|The lantern illuminates the path just ahead.
-150|Keep up to 2 cards in your hand.|The shroud conceals and preserves what it covers rather than generating another numerical shield.
+150|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
 151|Deal 2 Radiance damage three times.|The prism visibly splits one beam into several rays of the same damage type.
 152|Reflect the first hit of the enemy's next attack. Banish this card.|The dark glass returns an image; reflection is more direct than an identity change.
 153|=|The tuned violin's controlled music calms and reduces the coming attack.
@@ -156,9 +156,9 @@
 156|Look at the top 3 cards of your draw pile. Put 2 in your hand and the rest on the bottom in any order.|Loaded dice let the player favor the outcome instead of paying an unrelated HP fee.
 157|=|The chessboard joins foresight with a restrained opposing move.
 158|Shuffle your hand into your draw pile. Draw 4 cards.|Scattered pieces break the existing arrangement and produce a new one.
-159|=|The intact wax seal preserves its contents for later.
+159|Keep this card.|The intact wax seal keeps its own letter closed.
 160|Banish another card from your hand.|The torn message is deliberately destroyed; it does not conjure two unrelated messages.
-161|=|The anchor holds a chosen thing in place.
+161|Keep this card.|The anchor stays put instead of drifting into the discard pile.
 162|=|The kite's rising motion opens new options while remaining a simple draw effect.
 163|Look at the top 3 cards of your draw pile. Put them back in any order.|The metronome imposes an exact rhythm on the upcoming sequence.
 164|Weaken 3.|The chime's gentle ringing soothes the coming attack rather than changing an identity.
@@ -166,7 +166,7 @@
 166|=|The blindfold interferes directly with aim.
 167|Look at the top 3 cards of your draw pile. Put them back in any order.|The comb orders tangled strands into a clear sequence.
 168|=|The mass of hair entangles and obstructs movement.
-169|Keep a card in your hand.|The rigid porcelain doll encloses a tiny interior and preserves its contents; neither a shield nor an extra draw was directly shown.
+169|Keep this card.|The porcelain doll is kept intact for another turn.
 170|=|The patched rag doll is made useful again from discarded material.
 171|=|The two matched halves produce equal offensive and defensive adjustments.
 172|Draw 2 cards. Discard a card.|The unequal exchange deliberately leaves an asymmetric arrangement without an incidental Ward bonus.
@@ -193,15 +193,15 @@
 193|Return up to 2 cards from your discard pile to your hand.|The incoming tide brings stranded things back within reach.
 194|Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.|The receding water reveals hidden objects to choose among rather than removing an unrelated shield.
 195|=|The figure is stripped of cover and singled out in full light, matching both removal and Mark.
-196|Keep up to 2 cards in your hand.|The mask and shadows conceal held secrets rather than adding a generic shield.
+196|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
 197|Mark 3.|The herald's trumpet announces a target for the next strike.
 198|=|The smuggler conceals one held item while bringing new goods into hand.
 199|Gain 1 mana. Draw 1 card. Banish this card.|The raised banner rallies one brief surge of energy and new action.
 200|=|The visible flag is sacrificed as fuel for real flames.
 201|=|The tamer's lines and controlled beasts directly restrain force.
-202|=|The many animal bodies visibly transform into one another.
-203|=|The maker deliberately supplies a new face.
-204|=|The thief lifts away a face, changing the victim's identity.
+202|Flip this card. Keep this card.|The shapeshifter changes its own appearance and remains held in that new form.
+203|Flip a random card in your hand.|The mask maker gives one held subject a different face.
+204|Flip a random card in your hand.|The face thief replaces one unpredictable held appearance.
 205|=|The fencer's small precise thrust prepares a marked opening for the following strike.
 206|=|The exposed fists and close brawl make the heavy blow costly to its user as well.
 207|=|The sunlit team and speeding chariot deliver a direct charge.
@@ -209,7 +209,7 @@
 209|=|The auction exchanges one held good for a new offer.
 210|=|The scavenger retrieves an abandoned object from the pile of masks.
 211|=|The dancer's full turn rotates the whole hand.
-212|=|The contortionist folds and reverses one body into another orientation.
+212|Flip this card. Keep this card.|The contortionist turns its own pose into the paired dancer and holds that pose.
 213|Mark 3.|The alert royal hound fixes on a quarry; a protective shield was not the dog's depicted action.
 214|=|The stray hound searches among what has been left behind.
 215|=|The archivist retrieves an earlier record and checks its position in the coming sequence.
@@ -220,8 +220,8 @@
 220|=|The smoke spirit veils the attacker and interferes with aim.
 221|=|The reef is a dense, physical breakwater sheltering what is behind it.
 222|=|Long kelp strands entangle movement.
-223|=|The shell preserves the visible pearl for later.
-224|=|The cuttlefish's changing surface directly supplies camouflage and a changed face.
+223|Keep this card.|The closed oyster preserves its pearl within its own card.
+224|Flip your hand.|The cuttlefish sweeps a camouflage change across the visible hand.
 225|=|The bright lure-like glow illuminates a marked target.
 226|Scry. Draw 1 card.|The cricket's long antennae perceive what approaches; its legs do not make a protective shell.
 227|=|The large downward stone spike threatens a heavy Binding impact.
@@ -230,17 +230,17 @@
 230|Weaken 6. Banish this card.|The uprooted mandrake gives one overwhelming, debilitating cry rather than an arbitrary projectile.
 231|=|The flower's emergence from winter expresses restoration.
 232|=|The poisonous berries harm through an outer barrier.
-233|Flip a card in your hand. Keep it.|The cocoon changes a form and preserves that same developing form for the next turn.
+233|Flip this card. Keep this card.|The cocoon opens into its own shed skin, which remains held.
 234|=|A discarded skin is left behind and a renewed form takes its place.
 235|=|The open lotus provides a single restorative bloom.
 236|=|The corpse flower consumes spent matter and spreads its Decay.
 237|=|The kingfisher's bright, pointed beak supplies a precise Radiance strike.
 238|Deal 3 Shadow damage. Leech.|The fanged night-flyer feeds through its bite; Leech uses the final attack value before Ward.
 239|=|The flower receives sunlight and converts it into a brief burst of usable energy and growth.
-240|Turn a card in your hand to its dark face.|The moonflower opens into its specifically nocturnal form.
+240|Turn your hand to its dark faces.|The moonflower opens under nightfall, turning the held scene toward its night faces.
 241|=|The starfish's living arms express regeneration.
 242|=|The urchin's many rigid spikes supply a direct Binding strike.
-243|=|The silkworm spins a preserving enclosure around its developing form.
+243|Keep this card.|The silkworm keeps itself inside protective silk.
 244|=|The silverfish eats old paper and other spent material.
 245|=|The sceptre commands and restrains opposing force.
 246|=|The offered bowl receives a single gift of new possibilities.
@@ -250,7 +250,7 @@
 250|=|The single thrown harpoon pierces the barrier in front of its target.
 251|Look at the top 4 cards of your draw pile. Put 1 in your hand and discard the rest.|The sieve filters a group, retains one useful piece, and lets the rest fall away.
 252|=|The funnel narrows a held stream into one next card.
-253|=|The scabbard preserves the sheathed blade until later.
+253|Keep this card.|The sheathed blade remains stored in its own scabbard card.
 254|=|The bare blade has been released from its sheath and is ready to cut.
 255|Remove all your Weaken.|The tuning fork restores a disturbed instrument's proper strength rather than changing its identity.
 256|Weaken 3.|The rattle's distracting noise interrupts aim; it does not transform the whole hand.
@@ -260,13 +260,13 @@
 260|=|The concealed opening drops a target beneath its frontal protection.
 261|=|The floodgate physically holds back a moving force.
 262|=|The broken wall releases a single powerful flood.
-263|=|The wax keeps a fruit-shaped thing preserved rather than nourishing anyone.
-264|=|The visibly rotten fruit spreads Decay.
+263|Keep this card.|Wax fruit preserves its own shape instead of rotting away.
+264|Apply 3 Poison.|The spoiled fruit sickens its target over time.
 265|=|The straight measure identifies a precise target for a later strike.
 266|=|The twisted ribbon wraps and restricts movement.
-267|=|The glass slipper directly evokes a changed identity and form.
+267|Flip a random card in your hand.|The enchanted slipper transforms a held subject as in a change of costume.
 268|=|The massive iron boot supplies a heavy Binding stomp.
-269|Keep up to 2 cards in your hand.|The wedding veil shelters a lasting pair rather than creating a generic shield.
+269|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
 270|=|The funeral veil lays what is spent to rest.
 271|=|The open theatre calls new possibilities into the performance.
 272|=|A previous performer waits behind the curtain to return.
@@ -277,16 +277,16 @@
 277|Deal 7 Binding damage.|The quarry's huge cut blocks supply weight and impact; the picture shows extraction rather than a finished defensive wall.
 278|=|The peat both bogs down movement and spreads wasting Decay.
 279|Remove all your Burn. Heal 4 HP. Banish this card.|Bathing washes off a lingering burn and restores the bather.
-280|=|The icehouse preserves what is held inside it.
+280|Keep your hand.|The icehouse keeps the stored hand cold and intact.
 281|=|The counting house exchanges a paid resource for new resources.
-282|Keep up to 2 cards in your hand.|The thieves store hidden booty in their den rather than generating an unexplained shield.
-283|=|The dovecote gives a held bird a place to remain.
-284|=|The nursery's webs restrict the approaching attacker.
+282|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
+283|Keep 2 random cards in your hand.|The dovecote shelters two birds represented by two random held cards.
+284|Apply 2 Poison.|The nursery delivers a small dose of spider venom.
 285|Exchange a card in your hand with one in your discard pile.|The causeway connects two sides while the tide carries things between them.
 286|Shuffle your hand into your draw pile. Draw 4 cards.|The whole island changes its place, moving the current hand onward rather than changing identities.
 287|Reflect the first hit of the enemy's next attack. Banish this card.|The faceted ballroom and mirrored floor return a single incoming movement.
 288|=|Visible embers and fire beneath the dancers supply a fleeting Burn.
-289|Flip a card in your discard pile. Return it to your hand.|The potter reshapes used material into a new, usable form.
+289|Flip the top card of your discard pile. Return it to your hand.|The workshop reshapes the visible discarded piece before returning that same physical card.
 290|Deal 2 Decay damage three times.|Several visible shards supply several separate cuts.
 291|=|The circus performance turns the whole scene through changing acts.
 292|=|The abandoned rides recall a previous performance and bring it back.
@@ -299,26 +299,26 @@
 299|=|The jeweler restores an earlier ornament to use.
 300|Hush. Banish this card.|Snatching the crown temporarily removes the enemy's special authority rather than treating every crown as armor.
 301|Deal 2 Radiance damage three times.|The held prism visibly divides light into several rays.
-302|Keep up to 2 cards in your hand.|The keeper wraps held things in concealing shade rather than a generic shield.
+302|Keep 2 random cards in your hand.|The shade keeper shelters two random held cards under its cover.
 303|=|The dream binder's threads restrain the sleeping form.
 304|Remove all your Weaken.|The unbinder frees the figure from its binding impairment.
 305|Look at the top 3 cards of your draw pile. Put them back in any order.|The maker assembles the exact order of a clock's next movements.
 306|Gain 1 mana. Draw 1 card. Banish this card.|The thief steals one usable moment, giving a brief extra opportunity instead of retrieving an unrelated old object.
 307|=|The physician administers one restorative treatment.
-308|Remove all your Weaken. Heal 3 HP. Banish this card.|The doctor treats both debilitation and bodily injury without assigning a moral role to the dark figure.
+308|Remove all your Poison. Heal 3 HP. Banish this card.|The plague doctor treats poisoning with a single restorative dose.
 309|=|The scribe restores an earlier text to the next page of the sequence.
 310|=|The drinker consumes a written remnant as nourishment.
-311|=|The painter changes the face represented on the canvas.
+311|Flip a random card in your hand.|The painter gives one held subject a newly painted appearance.
 312|=|The scraper visibly erases the old portrait.
-313|Flip a card in your discard pile. Return it to your hand.|The blower turns used glass into a new shape and returns it to use.
+313|Flip the top card of your discard pile. Return it to your hand.|The glassblower reshapes the visible discarded piece and returns it, without choosing a target.
 314|=|Crushed glass becomes sharp fragments capable of cutting through protection.
 315|Weaken 4.|The visible perfume clouds soothe and distract the attacker; healing an unexplained wound was less direct.
 316|=|The thief removes a lingering trace of something already gone.
 317|=|The mason builds a genuine stone barrier.
 318|=|The stone eater consumes a barrier and is nourished by that same material.
-319|=|The keeper houses birds in visible cages until later.
+319|Keep a random card in your hand.|The keeper shelters a random held bird-card without a separate target choice.
 320|Draw 3 cards. Banish this card.|Several birds are released into new possibilities; no enemy shield needs to be invented.
-321|=|The builder constructs a place to hold one figure.
+321|Keep a random card in your hand.|The cage builder contains a random held card in a newly built cage.
 322|Remove all your Weaken. Draw 2 cards. Banish this card.|Breaking the cage removes restraint and frees new options in one act.
 323|=|The teller studies an explicit image of the coming future.
 324|Draw 3 cards. Discard a random card.|Visible dice make the exchange a genuine gamble rather than a fully controlled trade.
@@ -334,7 +334,7 @@
 334|=|The eraser removes one currently available route.
 335|=|The watcher reads the approaching weather.
 336|Gain 1 mana. Draw 1 card. Banish this card.|The raised rod catches a storm's energy for one brief burst of action.
-337|=|The oath keeper preserves an existing commitment for the next turn.
+337|Keep this card.|The oath keeper remains on duty instead of leaving at turn end.
 338|=|The visibly broken red bond is surrendered, opening a new possibility.
 339|=|The warden's body forms a solid defensive doorway.
 340|=|The traveler inspects the next opening before passing through it.
@@ -347,78 +347,78 @@
 347|=|The open wings and long horns deliver a released, airborne strike.
 348|=|The beetle's segmented shell and enclosing tunnel provide real cover.
 349|=|The pale fox guides the small traveler through the winding scene.
-350|=|The fox's shadowy, shifting appearance supports a changed face.
-351|=|The transparent shell preserves what is held inside its spiral.
+350|Flip a random card in your hand.|The fox tricks one held subject into a different appearance.
+351|Keep this card.|The glass snail retains its own fragile, sheltered body.
 352|=|The slug's thick stone body supplies physical protection.
 353|=|The crane's upward flight opens new possibilities with the dawn.
 354|=|The night hunter's long beak gives a precise Shadow strike.
 355|=|The bright, sun-backed fish projects the image's radiant force.
 356|Deal 5 Decay damage. Leech. Banish this card.|The long, fanged predator takes one substantial feeding through its attack, using Leech rather than a different fixed heal.
-357|Turn a card in your hand to its light face.|The sunlit moth opens a specifically day-facing form; no flames are visible.
-358|Turn a card in your hand to its dark face.|The nocturnal moth opens a specifically night-facing form.
+357|Turn a random dark card in your hand to its light face.|The day moth brings one dark-held subject into its light appearance, without a target choice.
+358|Turn a random light card in your hand to its dark face.|The night moth draws one light-held subject into its night appearance, without a target choice.
 359|=|The white spider's web and limbs restrain the next attack.
-360|=|The lurking spider fixes on a vulnerable point before striking.
+360|Deal 2 Decay damage. Apply 2 Poison.|The spider bites once, then its venom keeps harming the target.
 361|=|The crab's hard pearlescent armor is an actual shield.
 362|=|The hermit crab shelters inside its borrowed shell.
 363|=|The stored honey is a single nourishing resource.
 364|Deal 2 Decay damage three times.|The marching ant army supplies several separate bites rather than one oversized impact.
 365|=|The pale serpent's bright, open fangs supply the Radiance attack.
-366|=|The adder's venom reaches through an outer guard.
+366|Deal 3 Decay damage. Apply 2 Poison.|The adder delivers a bite followed by lingering venom.
 367|=|The hard coral forms a rigid physical barrier.
-368|=|The soft coral's flowing, malleable form supports a single change of shape.
+368|Flip your hand.|The soft coral bends its many branches together, turning the held array.
 369|Gain 1 mana. Draw 1 card. Banish this card.|The hummingbird's rapid wingbeat produces one brief burst of speed and opportunity.
 370|Weaken 4.|The moth's large false eyespots confuse the attacker's aim rather than predict the future.
-371|=|The intact egg preserves a future form inside its shell.
-372|=|The cracked shell releases a transformed form.
-373|=|The butterfly wing is the visible result of metamorphosis.
+371|Keep this card.|The whole egg stays intact until a later turn.
+372|Draw 2 cards. Banish this card.|The cracked shell releases what it contained; the spent shell is gone for this fight.
+373|Flip a random card in your hand.|The fluttering wing turns one held face.
 374|=|The empty but rigid beetle shell remains a protective covering.
-375|Keep a card in your hand.|The translucent amber body holds a form preserved; neither flames nor a separate attack are shown.
-376|=|The toad's heavy, drowsy presence and toxic association support debilitation rather than fire.
+375|Keep this card.|The amber frog is preserved inside its own resin.
+376|Apply 3 Poison.|The toad secretes a lingering toxin rather than abstractly weakening an attack.
 377|Weaken 3.|The curled, restful red panda calms the coming violence; an armor shield and extra draw were incidental.
 378|=|The poised, spotted predator threatens a stealthy Shadow pounce.
 379|=|The jellyfish's trailing stingers debilitate movement.
-380|=|The fossil preserves a fragile past form intact.
+380|Keep this card.|The fossil keeps its own impression across time.
 381|=|The poppy's restful, restorative bloom supplies one dose of recovery.
 382|=|The dark tulip is living, healthy growth and may restore rather than harm.
 383|Put up to 2 cards from your discard pile on the bottom of your draw pile.|The branching, renewing birch turns spent material into future growth instead of generic armor.
-384|Keep up to 2 cards in your hand.|The oak's visible hollow shelters what is kept inside it.
-385|Flip a card in your hand.|The tightly furled frond visibly opens into a different form rather than acting as unexplained medicine.
+384|Keep 2 random cards in your hand.|The hollow trunk shelters two random held cards in its cavity.
+385|Flip this card. Keep this card.|The fiddlehead matures into its own leaf form and remains held.
 386|=|The fallen leaf is allowed to pass out of the spent pile.
-387|Flip a card in your hand. Keep it.|The closed bud changes and shelters the same developing form for later.
+387|Flip this card. Keep this card.|The bud matures into its own seed pod and stays available.
 388|Draw 2 cards.|The opened pod releases its visible seeds into new possibilities.
 389|=|The cultivated mushrooms are a deliberate, nourishing crop.
 390|Shuffle your hand into your draw pile. Draw 4 cards.|The uncanny, distorted fungus rearranges the current perception and plan.
 391|=|The living cactus's long thorns supply a direct organic strike.
 392|=|The thin desert thorn pierces an outer guard.
 393|Weaken 2. Deal 3 Frost damage.|The pointed ice both slows movement and supplies a cold strike.
-394|=|Salt preserves what is held rather than transforming it.
-395|=|The precious river pearl is kept as a protected treasure.
+394|Keep this card.|Salt preserves its own stored material for another turn.
+395|Keep this card.|The pearl keeps its own polished, durable form.
 396|=|The visible lava supplies real continuing heat.
-397|=|The intact golden mask presents a chosen new face.
-398|=|The crack changes the identity shown by the mask.
+397|Flip this card. Keep this card.|The worn golden mask cracks into its own other face and stays held.
+398|Flip your hand.|The broken mask reveals the other appearances hidden across the hand.
 399|Mark 3.|The crown declares authority over a chosen target; it is not depicted as armor.
 400|Weaken 4.|The rust weakens strength directly rather than removing an unrelated barrier.
 401|=|The goblet offers a single clear, restorative draught.
 402|=|The steaming clay cup supplies one comforting drink.
 403|Return a card from your discard pile to your hand.|The delicate, offered gloved hand lifts something back into reach instead of blocking a blow.
 404|=|The heavy iron knuckles supply a direct Binding impact.
-405|=|The woven basket holds and preserves a chosen thing.
+405|Keep 2 random cards in your hand.|The basket holds two random cards in its woven enclosure.
 406|Banish another card from your hand.|The woven form comes apart into separate reeds; no unrelated new draw is needed.
 407|=|The turning dancer and music offer a calming, controlled refrain.
 408|=|The empty, silent mechanism suppresses a special effect once.
-409|=|The closed parasol can turn into its open form.
+409|Flip this card. Keep this card.|The closed parasol opens into its own other face and remains held.
 410|=|The opened canopy is an actual shelter.
-411|=|The opened fan turns a held card with a deliberate movement.
-412|=|The dark fan changes the shown face with the same deliberate turning gesture.
-413|=|The spool stores its thread for later use.
+411|Flip your hand.|The broad fan turns the held array with its sweep.
+412|Flip your hand.|The dark fan turns the held array with its sweep.
+413|Keep this card.|The spool keeps its own thread wound for later.
 414|Banish another card from your hand.|Pulling the loose strand removes the held piece without an incidental draw.
-415|=|The gilded bars visibly preserve and confine a held figure.
+415|Keep a random card in your hand.|The cage holds a random card inside its bars.
 416|Remove all your Weaken. Draw 1 card.|The broken bars release restraint and allow a fresh possibility through.
 417|Reflect the first hit of the enemy's next attack. Banish this card.|The polished bronze surface returns the image and a single incoming strike.
-418|Flip a card in your discard pile. Return it to your hand.|The aged, distorted reflection brings an earlier identity back in an altered form.
+418|Flip the top card of your discard pile. Return it to your hand.|The tarnished reflection changes the visible discarded subject before returning it.
 419|Reflect the first hit of the enemy's next attack. Banish this card.|The curved glass surface returns incoming light; a solid armor shield was less direct.
 420|Deal 6 Binding damage.|The large clay ball threatens a heavy rolling impact, not a shield and unrelated draw.
-421|=|The locket encloses and preserves its keepsake.
+421|Keep this card.|The closed locket preserves its own keepsake.
 422|=|The empty compartments express a memory that has been removed.
 423|Draw 1 card. Flip your hand. Banish this card.|The fragile wax key opens new faces once, then melts away.
 424|Banish a card from your discard pile. Banish this card.|The melted, unusable key is cleared away with another spent remnant rather than opening a barrier it can no longer unlock.
@@ -428,15 +428,15 @@
 428|=|The empty coin cannot supply mana; spending it simply clears the way for another card.
 429|=|The writing feather places an earlier record back into the coming sequence.
 430|=|The blot obliterates a previously written thing.
-431|=|The brush repaints the chosen face.
+431|Flip a random card in your hand.|The brush repaints one held subject into its other appearance.
 432|=|The scraper removes the old image from the spent pile.
 433|=|The lit match supplies a single brief flame before being spent.
 434|=|The last curl of smoke obscures aim without claiming that an extinguished match is still burning.
 435|=|The paper boat carries new possibilities along the open water.
 436|=|The solid stone hull provides actual cover to the figure inside it.
-437|=|The needlecase holds and protects its contents for later.
+437|Keep this card.|The needlecase keeps its own tool safely enclosed.
 438|=|The empty case records that something formerly kept is gone.
-439|=|The white ribbon binds and preserves a held thing.
+439|Keep 2 random cards in your hand.|The ribbon binds two random held cards to keep together.
 440|=|The black ribbon wraps around and restrains movement.
 441|=|The bell and its visible hourglass mark the approaching moment.
 442|=|The silent bell stills a special effect once.
@@ -445,11 +445,11 @@
 445|=|The chess king considers the next move before advancing.
 446|=|The looming dark queen threatens a powerful Shadow move.
 447|=|The clear gallery provides a view along the coming path and its openings.
-448|Keep up to 2 cards in your hand.|The shadowed alcoves conceal held things rather than adding another shield.
-449|Keep up to 2 cards in your hand.|The winter enclosure preserves dormant growth until a later turn.
+448|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
+449|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
 450|Heal 4 HP. Banish this card.|The summer enclosure nurtures vigorous, living growth rather than keeping it dormant.
 451|=|The balcony's height gives an explicit view of what lies ahead.
-452|=|The concealed room stores things safely out of sight.
+452|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
 453|Draw 2 cards.|The open pavilion admits new possibilities without changing their identities.
 454|=|The surrounding wall is a genuine defensive barrier.
 455|Reflect the first hit of the enemy's next attack. Banish this card.|The many crystal facets return incoming light and movement.
@@ -459,7 +459,7 @@
 459|=|The flowing fountain offers a restorative drink during this visit.
 460|Banish a card from your discard pile.|The dry basin has nothing left to give and clears away a spent remnant; foresight was incidental.
 461|Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.|The atrium offers several clear openings and lets the traveler choose one route.
-462|=|The dark interior conceals a resource that can be held for later.
+462|Keep your hand.|The depicted shelter or covering preserves the whole held group; keeping a crowded hand limits the next draw.
 463|=|The pier gives a clear view toward the next shore.
 464|=|The illuminated pier reveals the way forward before the next step.
 465|Gain 1 mana. Draw 1 card. Banish this card.|The moving windmill converts wind into one burst of usable power and output.
@@ -493,4 +493,4 @@
 493|=|The bright clearing gives a single opportunity for rest and recovery.
 494|=|The dense overhead leaves provide real covering and shelter.
 495|=|The opened shutters reveal the view beyond.
-496|=|The closed shutters preserve what remains inside until later.
+496|Keep your hand.|The shutters close around the whole held hand.

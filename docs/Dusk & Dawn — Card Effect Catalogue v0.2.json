@@ -11,7 +11,8 @@
     "artwork_url": "https://drive.google.com/file/d/1gf2mh7TkrIfloWCPQ7eM-Yy7B_sqTXCM/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Angel & Vampire",
@@ -26,7 +27,8 @@
     "keywords": [
       "Leech",
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Seraph & Fallen Seraph",
@@ -40,7 +42,8 @@
     "artwork_url": "https://drive.google.com/file/d/1eaeOAnVrVANKAIEe7XLH8vmtvu-pFWcN/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Seraph & Fallen Seraph",
@@ -54,7 +57,8 @@
     "artwork_url": "https://drive.google.com/file/d/1VHEVaXE_I5CPs8eTdyrVAHP1lJR6PU12/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cherub & Imp",
@@ -68,13 +72,14 @@
     "artwork_url": "https://drive.google.com/file/d/1kWjOLG3VHPoi4PwYNu0fI5k5pEX1DzuO/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cherub & Imp",
     "face": "Imp",
     "cost": 1,
-    "effect": "Deal 4 Shadow damage. Flip a card in your hand.",
+    "effect": "Deal 4 Shadow damage. Flip a random card in your hand.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -83,6 +88,15 @@
     "keywords": [
       "Flip",
       "Shadow"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -97,7 +111,8 @@
     "artwork_url": "https://drive.google.com/file/d/1b1QyOMNnc_ltlChW2zjG7exmVdiUAc7i/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Winged Guardian & Revenant",
@@ -111,7 +126,8 @@
     "artwork_url": "https://drive.google.com/file/d/1z2fjM5pY9iySrwye0xU-hcXfkK_C-sNm/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Pilgrim & Exile",
@@ -125,7 +141,8 @@
     "artwork_url": "https://drive.google.com/file/d/1wLeBlGBqKxXhCP6q8VMu9V06zfqBg4rv/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Pilgrim & Exile",
@@ -137,7 +154,8 @@
     "side": "dark",
     "artwork_id": "11RvqLjp30KsSBwPDzY2KLvC5OyCcv1fz",
     "artwork_url": "https://drive.google.com/file/d/11RvqLjp30KsSBwPDzY2KLvC5OyCcv1fz/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Oracle & Deceiver",
@@ -151,13 +169,14 @@
     "artwork_url": "https://drive.google.com/file/d/1HzcE3Sz2jfUacwPg0SOcXK-LruOL56Og/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Oracle & Deceiver",
     "face": "Deceiver",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -165,6 +184,15 @@
     "artwork_url": "https://drive.google.com/file/d/1B442rTJ-G88RgKLVkzyLF7QJ5v5XrAbh/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -179,7 +207,8 @@
     "artwork_url": "https://drive.google.com/file/d/1d_X8Jst2cKr2SJb0_Rn4WvYHQWCArgt5/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Abbess & Vampire Countess",
@@ -195,7 +224,8 @@
       "Banish",
       "Leech",
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Gardener & Gravedigger",
@@ -209,7 +239,8 @@
     "artwork_url": "https://drive.google.com/file/d/1pDYifJsl73qJcT0o0SlT-N38Vpm6imzn/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Gardener & Gravedigger",
@@ -223,7 +254,8 @@
     "artwork_url": "https://drive.google.com/file/d/14oRUk765jv4fojMiIGbxfSE7cJ8jNr7h/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Confession & Secrecy",
@@ -237,13 +269,14 @@
     "artwork_url": "https://drive.google.com/file/d/1hiYS5Fahg8J0eD7__6xik6EcRDoXNqM4/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Confession & Secrecy",
     "face": "Secrecy",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -251,6 +284,13 @@
     "artwork_url": "https://drive.google.com/file/d/1BJhBLdhlJkPVk0FzcfWD99alhe72SGD9/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -265,7 +305,8 @@
     "artwork_url": "https://drive.google.com/file/d/1LWZWgu3YdLS4TgPQ4MUIdaV1oLOKE718/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Absolution & Condemnation",
@@ -280,7 +321,8 @@
     "keywords": [
       "Banish",
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Temptation & Resolve",
@@ -292,7 +334,8 @@
     "side": "dark",
     "artwork_id": "1p2XZppEyXP05vhRAL-V4gQGptApjFmaB",
     "artwork_url": "https://drive.google.com/file/d/1p2XZppEyXP05vhRAL-V4gQGptApjFmaB/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Temptation & Resolve",
@@ -306,7 +349,8 @@
     "artwork_url": "https://drive.google.com/file/d/1W1dk7oEX0qYVBDXXpSdNb51otyqxqksA/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sacrifice & Self-Preservation",
@@ -321,7 +365,8 @@
     "keywords": [
       "Banish",
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sacrifice & Self-Preservation",
@@ -335,7 +380,8 @@
     "artwork_url": "https://drive.google.com/file/d/1izaIhpfTEhP5UNnS4VxODD4wLIlRlWZF/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dove & Raven",
@@ -349,7 +395,8 @@
     "artwork_url": "https://drive.google.com/file/d/1vvmtMlRmLAT1YmECVRJYFnQ4EVZru0TW/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dove & Raven",
@@ -361,7 +408,8 @@
     "side": "dark",
     "artwork_id": "11b0rjCD8g8Dkf7hn-3CTIDs9D19AOzmk",
     "artwork_url": "https://drive.google.com/file/d/11b0rjCD8g8Dkf7hn-3CTIDs9D19AOzmk/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "White Stag & Black Stag",
@@ -375,7 +423,8 @@
     "artwork_url": "https://drive.google.com/file/d/1maFl73KL3A1pmsjOmk_1TWerytqMnq0O/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Stag & Black Stag",
@@ -389,7 +438,8 @@
     "artwork_url": "https://drive.google.com/file/d/1hFaqiYvmkgm2eoU4HwC0ENUiit55MLLd/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Swan & Black Swan",
@@ -404,13 +454,14 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Swan & Black Swan",
     "face": "Black Swan",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip your hand.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -418,6 +469,13 @@
     "artwork_url": "https://drive.google.com/file/d/1hqB4hlGncbJEHgG5L4FwD0pZyntMsJuw/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -432,7 +490,8 @@
     "artwork_url": "https://drive.google.com/file/d/1qoTQy2Xz8H817rIVr5-ZsZ4IfykRB0-M/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lamb & Wolf",
@@ -446,13 +505,14 @@
     "artwork_url": "https://drive.google.com/file/d/1QcK3stH8gCQbwojdWmJbX-AlLEaJteY4/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Butterfly & Moth",
     "face": "Butterfly",
     "cost": 1,
-    "effect": "Flip up to 2 cards in your hand.",
+    "effect": "Flip 2 random cards in your hand.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
@@ -460,13 +520,22 @@
     "artwork_url": "https://drive.google.com/file/d/13ftDB_VQrowQtLLCX3c8g0BRX-_CG0YX/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 2,
+        "without_replacement": true
+      }
     ]
   },
   {
     "pair": "Butterfly & Moth",
     "face": "Moth",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -474,6 +543,15 @@
     "artwork_url": "https://drive.google.com/file/d/1BnAd0FJlK_jFJ7kK323ipJKsA_LUc4vY/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -486,7 +564,8 @@
     "side": "light",
     "artwork_id": "1qOWAx0TkwwVP9QgcihY8zzZndCt_aJsn",
     "artwork_url": "https://drive.google.com/file/d/1qOWAx0TkwwVP9QgcihY8zzZndCt_aJsn/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Lark & Owl",
@@ -500,7 +579,8 @@
     "artwork_url": "https://drive.google.com/file/d/1r3hSe3EiTQfJwIUi9Hm2ExGFqmVsbZ1p/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sun & Moon",
@@ -514,7 +594,8 @@
     "artwork_url": "https://drive.google.com/file/d/14yQROs_jIBKhE-ZgkBOsb7Cv2x3DQu-K/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sun & Moon",
@@ -528,6 +609,13 @@
     "artwork_url": "https://drive.google.com/file/d/1-guil20XD-fPnf9L1A6mu_-04ojJhsmz/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -540,7 +628,15 @@
     "side": "light",
     "artwork_id": "1f9zkN0265i2N1bnmmHBt8cHvWRA5Cte3",
     "artwork_url": "https://drive.google.com/file/d/1f9zkN0265i2N1bnmmHBt8cHvWRA5Cte3/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "light"
+      }
+    ]
   },
   {
     "pair": "Sunrise & Eclipse",
@@ -552,7 +648,15 @@
     "side": "dark",
     "artwork_id": "1jbLour-iqkjz63nX5iSaKOIhVCyVyjZU",
     "artwork_url": "https://drive.google.com/file/d/1jbLour-iqkjz63nX5iSaKOIhVCyVyjZU/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "dark"
+      }
+    ]
   },
   {
     "pair": "Flame & Frost",
@@ -566,7 +670,8 @@
     "artwork_url": "https://drive.google.com/file/d/1m9vvaP5gxE_iXTeAWzKWPrJU0dqVqW3C/view?usp=drivesdk",
     "keywords": [
       "Burn"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Flame & Frost",
@@ -580,7 +685,8 @@
     "artwork_url": "https://drive.google.com/file/d/167voktusMUlZ37aYbLz5rcqiOuepYXgo/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Rain & Drought",
@@ -595,7 +701,8 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Rain & Drought",
@@ -609,7 +716,8 @@
     "artwork_url": "https://drive.google.com/file/d/1T02mBuBiSqe_tEGZt-TedhuCFug01x_V/view?usp=drivesdk",
     "keywords": [
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bell Ringer & Silenced Bell Ringer",
@@ -623,7 +731,8 @@
     "artwork_url": "https://drive.google.com/file/d/1weJMD7YujS38lFI9Q2-KIWth3yFzjPpU/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bell Ringer & Silenced Bell Ringer",
@@ -638,7 +747,8 @@
     "keywords": [
       "Banish",
       "Hush"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sacred Chalice & Blood Goblet",
@@ -652,7 +762,8 @@
     "artwork_url": "https://drive.google.com/file/d/1BXDLCQd1vMN8wkBe9kdAjZzvL-LJvI1_/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sacred Chalice & Blood Goblet",
@@ -666,7 +777,8 @@
     "artwork_url": "https://drive.google.com/file/d/1YJCkmg_2gzl88aMkcSBh_Y9Ryl5Cn6Iv/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Censer & Plague Brazier",
@@ -680,28 +792,29 @@
     "artwork_url": "https://drive.google.com/file/d/1580yzY8NaonMm1PAX7pA77gqGvo7QqY2/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Censer & Plague Brazier",
     "face": "Plague Brazier",
     "cost": 1,
-    "effect": "Weaken 3. Deal 3 Decay damage.",
+    "effect": "Apply 3 Poison.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "13FHe9prWQiGRuFejiKjsyLAFTjYISdWz",
     "artwork_url": "https://drive.google.com/file/d/13FHe9prWQiGRuFejiKjsyLAFTjYISdWz/view?usp=drivesdk",
     "keywords": [
-      "Weaken",
-      "Decay"
-    ]
+      "Poison"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Reliquary & Empty Reliquary",
     "face": "Reliquary",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
@@ -709,6 +822,13 @@
     "artwork_url": "https://drive.google.com/file/d/1Ku4P8G2kPu_v_aB-QUjAuhELnGSv5eHC/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -723,7 +843,8 @@
     "artwork_url": "https://drive.google.com/file/d/14jo6saxL26SVfCRgGqApBwlkOdNyUWJf/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bloom & Wither",
@@ -737,7 +858,8 @@
     "artwork_url": "https://drive.google.com/file/d/1HqyEfdoDiIcmGZhxNTfsiTZ7S93QnWYG/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bloom & Wither",
@@ -752,19 +874,21 @@
     "keywords": [
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Seed & Ash",
     "face": "Seed",
     "cost": 1,
-    "effect": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
+    "effect": "Put up to 2 cards from your discard pile on the bottom of your library.",
     "status": "proposed",
     "source": "first-set",
     "side": "light",
     "artwork_id": "1hq7Z2h0vTOQXJsoUXVOXZ_e4wJ3V-_jo",
     "artwork_url": "https://drive.google.com/file/d/1hq7Z2h0vTOQXJsoUXVOXZ_e4wJ3V-_jo/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Seed & Ash",
@@ -779,7 +903,8 @@
     "keywords": [
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Ivy & Thorns",
@@ -793,7 +918,8 @@
     "artwork_url": "https://drive.google.com/file/d/138xstSsSzp9zxkITDplEZrtnHEypteK0/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Ivy & Thorns",
@@ -807,7 +933,8 @@
     "artwork_url": "https://drive.google.com/file/d/1IbLIZHFI7QLkpjSlz9nUoq5oAaB9vzRZ/view?usp=drivesdk",
     "keywords": [
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Key & Lock",
@@ -821,13 +948,20 @@
     "artwork_url": "https://drive.google.com/file/d/1mI4_Cw888c9nSU8tRauyiwz453HNdHp0/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
     "pair": "Key & Lock",
     "face": "Lock",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -835,6 +969,13 @@
     "artwork_url": "https://drive.google.com/file/d/1gvt-G8h2VZFBId3Rau5lhdLU8T5A69t-/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -850,7 +991,8 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Mirror & Shattered Mirror",
@@ -864,7 +1006,8 @@
     "artwork_url": "https://drive.google.com/file/d/1XcxPW2ZUlBlB6JgPzXtygIGOV0rHURYF/view?usp=drivesdk",
     "keywords": [
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Candle & Extinguished Candle",
@@ -879,7 +1022,8 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Candle & Extinguished Candle",
@@ -893,6 +1037,14 @@
     "artwork_url": "https://drive.google.com/file/d/1ci6cugdzMShKb7UUcQvTWbPfrYtOcpT8/view?usp=drivesdk",
     "keywords": [
       "Banish"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "dark"
+      }
     ]
   },
   {
@@ -905,13 +1057,14 @@
     "side": "light",
     "artwork_id": "1jzo2HVLksRmqzad9Nt93qaGtj_V-qUQa",
     "artwork_url": "https://drive.google.com/file/d/1jzo2HVLksRmqzad9Nt93qaGtj_V-qUQa/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Open Book & Sealed Book",
     "face": "Sealed Book",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -919,6 +1072,13 @@
     "artwork_url": "https://drive.google.com/file/d/1w929N_nB6UcmuNSiLC8xBw5Q8nKJSyaY/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -933,13 +1093,14 @@
     "artwork_url": "https://drive.google.com/file/d/1oPMBgpZbq-VdwPd-W9Sc777BAlUowr4P/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hourglass & Broken Hourglass",
     "face": "Broken Hourglass",
     "cost": 1,
-    "effect": "Shuffle your hand into your draw pile. Draw 5 cards. Banish this card.",
+    "effect": "Shuffle your hand into your library. Draw 5 cards. Banish this card.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
@@ -947,7 +1108,8 @@
     "artwork_url": "https://drive.google.com/file/d/1YIbHQw8lhUngqqFt3tuv6FHulyXxYSNi/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Feather & Chain",
@@ -959,7 +1121,8 @@
     "side": "light",
     "artwork_id": "1Mo5WmDlAA84MUF4zaZ6kojt2hASl1dJ0",
     "artwork_url": "https://drive.google.com/file/d/1Mo5WmDlAA84MUF4zaZ6kojt2hASl1dJ0/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Feather & Chain",
@@ -973,7 +1136,8 @@
     "artwork_url": "https://drive.google.com/file/d/15sUIxgGzo0ap_DXgHm8hoEuyBUFIgadu/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cathedral & Ruined Cathedral",
@@ -987,7 +1151,8 @@
     "artwork_url": "https://drive.google.com/file/d/1o2tLAnfaToEKcrvvPPHuf2xDogT1Q0pa/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cathedral & Ruined Cathedral",
@@ -999,7 +1164,8 @@
     "side": "dark",
     "artwork_id": "1YazAvHLbtM2ALOysSRZQsHGEVbJ7Pqaz",
     "artwork_url": "https://drive.google.com/file/d/1YazAvHLbtM2ALOysSRZQsHGEVbJ7Pqaz/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Sunlit Chapel & Moonlit Crypt",
@@ -1013,7 +1179,8 @@
     "artwork_url": "https://drive.google.com/file/d/1JuqHF1P1zHu-SsKVjioLSBX_0uOv6GGi/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sunlit Chapel & Moonlit Crypt",
@@ -1025,7 +1192,8 @@
     "side": "dark",
     "artwork_id": "1_WeR4trqH6GCZd2D8O5jgipIv7pekmdw",
     "artwork_url": "https://drive.google.com/file/d/1_WeR4trqH6GCZd2D8O5jgipIv7pekmdw/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Cloister Garden & Overgrown Ruins",
@@ -1039,19 +1207,21 @@
     "artwork_url": "https://drive.google.com/file/d/1rlHrBKfevYfpMk_o3h0lJQhWX-ZoVwLC/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cloister Garden & Overgrown Ruins",
     "face": "Overgrown Ruins",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile.",
+    "effect": "Put a card from your discard pile on top of your library.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "1InIc2aV9Wmf5vZhgoguHedyACD6PKZPb",
     "artwork_url": "https://drive.google.com/file/d/1InIc2aV9Wmf5vZhgoguHedyACD6PKZPb/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Bell Tower & Fallen Bell",
@@ -1065,7 +1235,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ZOHVqQbdvFgb-0oZBigbRkwDW2ha1lzm/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bell Tower & Fallen Bell",
@@ -1079,7 +1250,8 @@
     "artwork_url": "https://drive.google.com/file/d/1RqoykT4WLSi9zf6RAB7xa3_67MfUjT6C/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bridge & Chasm",
@@ -1091,7 +1263,8 @@
     "side": "light",
     "artwork_id": "1lJMLtbw3MXsoKOmXvPeQ0pMUUDondkui",
     "artwork_url": "https://drive.google.com/file/d/1lJMLtbw3MXsoKOmXvPeQ0pMUUDondkui/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Bridge & Chasm",
@@ -1106,7 +1279,8 @@
     "keywords": [
       "Ward",
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Open Gate & Sealed Gate",
@@ -1118,7 +1292,8 @@
     "side": "light",
     "artwork_id": "16EZ4goDDhzdeFeyAcDwRSEteUf2ZnMlH",
     "artwork_url": "https://drive.google.com/file/d/16EZ4goDDhzdeFeyAcDwRSEteUf2ZnMlH/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Open Gate & Sealed Gate",
@@ -1132,7 +1307,8 @@
     "artwork_url": "https://drive.google.com/file/d/1r4TA80YCa8JMFwHtVNIxX4v-gvzPYO9v/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sanctuary & Prison",
@@ -1146,7 +1322,8 @@
     "artwork_url": "https://drive.google.com/file/d/19v2hhOQhYK8XgnOufG9HUQiGDGl_DJbD/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sanctuary & Prison",
@@ -1161,7 +1338,8 @@
     "keywords": [
       "Banish",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Mountain Monastery & Sunken Shrine",
@@ -1175,7 +1353,8 @@
     "artwork_url": "https://drive.google.com/file/d/108Im1Ah97nWNM7JTDYXuIpqwHHtZFr9o/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Mountain Monastery & Sunken Shrine",
@@ -1187,7 +1366,8 @@
     "side": "dark",
     "artwork_id": "1QmYGAqsxrTucOFoqCaoAVkPhP6I1ykGP",
     "artwork_url": "https://drive.google.com/file/d/1QmYGAqsxrTucOFoqCaoAVkPhP6I1ykGP/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Benediction & Curse",
@@ -1201,7 +1381,8 @@
     "artwork_url": "https://drive.google.com/file/d/1XVqqqNmQ5OF-m6yoZiWbs_h7_Nh8rUCD/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Benediction & Curse",
@@ -1215,7 +1396,8 @@
     "artwork_url": "https://drive.google.com/file/d/1WgakSgo92a19dVli80QHeKmM9GV1MK-Q/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Ascension & Descent",
@@ -1227,19 +1409,21 @@
     "side": "light",
     "artwork_id": "1N_1boWi9mVR033thbfw25sQkhtPGP4kH",
     "artwork_url": "https://drive.google.com/file/d/1N_1boWi9mVR033thbfw25sQkhtPGP4kH/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Ascension & Descent",
     "face": "Descent",
     "cost": 1,
-    "effect": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
     "status": "proposed",
     "source": "first-set",
     "side": "dark",
     "artwork_id": "1C-8YBOZoTOsB59IzAwGQSiElgVuOQ4Ei",
     "artwork_url": "https://drive.google.com/file/d/1C-8YBOZoTOsB59IzAwGQSiElgVuOQ4Ei/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Memory & Oblivion",
@@ -1251,7 +1435,8 @@
     "side": "light",
     "artwork_id": "1PLDRJ9CG9_He7SfDctxvFBABymm8uN3j",
     "artwork_url": "https://drive.google.com/file/d/1PLDRJ9CG9_He7SfDctxvFBABymm8uN3j/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Memory & Oblivion",
@@ -1266,7 +1451,8 @@
     "keywords": [
       "Banish",
       "Oblivion"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dream & Nightmare",
@@ -1280,7 +1466,8 @@
     "artwork_url": "https://drive.google.com/file/d/164u6Y8WxgoZAEyJVbb92kL5U_linS8d6/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dream & Nightmare",
@@ -1294,7 +1481,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ESInrS0cKlRm4dq3pHBgYNGO_1jTwrvG/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bound Soul & Unbound Spirit",
@@ -1308,7 +1496,8 @@
     "artwork_url": "https://drive.google.com/file/d/1kOQ8OsYrRzPv_k7YqeF3SDNx1gVHfLTG/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bound Soul & Unbound Spirit",
@@ -1320,7 +1509,8 @@
     "side": "light",
     "artwork_id": "1KBVXFPdntLliAfO7JgXE8kSHl5oLZtR8",
     "artwork_url": "https://drive.google.com/file/d/1KBVXFPdntLliAfO7JgXE8kSHl5oLZtR8/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Sovereign & Jester",
@@ -1334,7 +1524,8 @@
     "artwork_url": "https://drive.google.com/file/d/1O8FBT6cKAQTXiADvORymx5I1HuyBHSkz/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sovereign & Jester",
@@ -1348,6 +1539,13 @@
     "artwork_url": "https://drive.google.com/file/d/1fUUEm0VWJLih7cOj-CzhWPxOfqoDHoAL/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -1355,13 +1553,20 @@
     "face": "Puppeteer",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1zV99UfETJda9F_gUFVtUe-x8AR7IeKrM",
     "artwork_url": "https://drive.google.com/file/d/1zV99UfETJda9F_gUFVtUe-x8AR7IeKrM/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -1369,24 +1574,26 @@
     "face": "Marionette",
     "side": "dark",
     "cost": 1,
-    "effect": "Put another card from your hand on top of your draw pile.",
+    "effect": "Put another card from your hand on top of your library.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1NeJQqnh1Pl6Saath5Nl7Gg5zSwGFtPc2",
     "artwork_url": "https://drive.google.com/file/d/1NeJQqnh1Pl6Saath5Nl7Gg5zSwGFtPc2/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Weaver & Unraveler",
     "face": "Weaver",
     "side": "light",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile.",
+    "effect": "Put a card from your discard pile on top of your library.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1aASOTkSbtNGOfBdm_YpZBpVghMKG3il2",
     "artwork_url": "https://drive.google.com/file/d/1aASOTkSbtNGOfBdm_YpZBpVghMKG3il2/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Weaver & Unraveler",
@@ -1401,7 +1608,8 @@
     "keywords": [
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Midwife & Undertaker",
@@ -1415,7 +1623,8 @@
     "artwork_url": "https://drive.google.com/file/d/1SR3rd6Xtot7-tB_QYnaY8w0V8O9aCOTk/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Midwife & Undertaker",
@@ -1429,7 +1638,8 @@
     "artwork_url": "https://drive.google.com/file/d/1z6xEFUV5CiqjUgx4IceUpJvV3KbO2_Aq/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sentinel & Sleepwalker",
@@ -1443,43 +1653,47 @@
     "artwork_url": "https://drive.google.com/file/d/1cTS95GO922qcICKs00Yfc2Dl27VU7kLt/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sentinel & Sleepwalker",
     "face": "Sleepwalker",
     "side": "dark",
     "cost": 1,
-    "effect": "Shuffle your hand into your draw pile. Draw 3 cards.",
+    "effect": "Shuffle your hand into your library. Draw 3 cards.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1z78FLzBeNQjie9jJmTj9LT-WjRFGQfO0",
     "artwork_url": "https://drive.google.com/file/d/1z78FLzBeNQjie9jJmTj9LT-WjRFGQfO0/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Cartographer & Lost Wanderer",
     "face": "Cartographer",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1d8R3rePBF0N2lncfN7BLvW_fkqY0GoQa",
     "artwork_url": "https://drive.google.com/file/d/1d8R3rePBF0N2lncfN7BLvW_fkqY0GoQa/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Cartographer & Lost Wanderer",
     "face": "Lost Wanderer",
     "side": "dark",
     "cost": 1,
-    "effect": "Shuffle your draw pile. Draw 2 cards.",
+    "effect": "Shuffle your library. Draw 2 cards.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1Pe_8uMrrJH7ycH_OlnxE9DSHxHltgrmk",
     "artwork_url": "https://drive.google.com/file/d/1Pe_8uMrrJH7ycH_OlnxE9DSHxHltgrmk/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Executioner & Resurrector",
@@ -1493,7 +1707,8 @@
     "artwork_url": "https://drive.google.com/file/d/1aENIZ2cNoVCyF-6m2fqcAnUXNxbj2QFV/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Executioner & Resurrector",
@@ -1505,7 +1720,8 @@
     "status": "proposed",
     "artwork_id": "17EarPF1aXRzj6uj_4sWBOtVpf9Bb6jtw",
     "artwork_url": "https://drive.google.com/file/d/17EarPF1aXRzj6uj_4sWBOtVpf9Bb6jtw/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Honeybee & Locust",
@@ -1520,7 +1736,8 @@
     "keywords": [
       "Banish",
       "Growth"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Honeybee & Locust",
@@ -1535,7 +1752,8 @@
     "keywords": [
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Peacock & Vulture",
@@ -1549,7 +1767,8 @@
     "artwork_url": "https://drive.google.com/file/d/1kahEnL1cbpSgErZtSVa1ug2kxS0AYf0h/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Peacock & Vulture",
@@ -1563,7 +1782,8 @@
     "artwork_url": "https://drive.google.com/file/d/16uNNWR7MkEfXi2L0qJ_FOfdbQNE3cNmB/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Goldfish & Anglerfish",
@@ -1575,7 +1795,8 @@
     "status": "proposed",
     "artwork_id": "1bQQ0wb2VAI-shxeYmIeDfqzGG4Iih-1D",
     "artwork_url": "https://drive.google.com/file/d/1bQQ0wb2VAI-shxeYmIeDfqzGG4Iih-1D/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Goldfish & Anglerfish",
@@ -1590,20 +1811,28 @@
     "keywords": [
       "Mark",
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Caged Songbird & Wild Songbird",
     "face": "Caged Songbird",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1hXUjPdPlAUxWZfHmD48gw7vkINSc3MYJ",
     "artwork_url": "https://drive.google.com/file/d/1hXUjPdPlAUxWZfHmD48gw7vkINSc3MYJ/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -1616,7 +1845,8 @@
     "status": "proposed",
     "artwork_id": "1Sq9HV-v4Kdjq_--47PXbjNL2YxWiQf9X",
     "artwork_url": "https://drive.google.com/file/d/1Sq9HV-v4Kdjq_--47PXbjNL2YxWiQf9X/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Tortoise & Hare",
@@ -1630,7 +1860,8 @@
     "artwork_url": "https://drive.google.com/file/d/1j7sWF2Nc_2t4tjK6BoKTocBv9vE-Qfit/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tortoise & Hare",
@@ -1644,7 +1875,8 @@
     "artwork_url": "https://drive.google.com/file/d/1NICbiA54f07pUljFXszyUfIPaWBvSqHP/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lighthouse & Shipwreck",
@@ -1658,7 +1890,8 @@
     "artwork_url": "https://drive.google.com/file/d/1mz09Ei9VD3KlvjPZzOjQY2f-Upgi344x/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lighthouse & Shipwreck",
@@ -1673,7 +1906,8 @@
     "keywords": [
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Glasshouse & Root Cellar",
@@ -1687,20 +1921,28 @@
     "artwork_url": "https://drive.google.com/file/d/1ZtY-zD5UOL4YoHmNKdWfaNgr5eyl73bC/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Glasshouse & Root Cellar",
     "face": "Root Cellar",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1KLhKYrRLx3iqvKeRjuLT-BOG97sv8uim",
     "artwork_url": "https://drive.google.com/file/d/1KLhKYrRLx3iqvKeRjuLT-BOG97sv8uim/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -1715,19 +1957,21 @@
     "artwork_url": "https://drive.google.com/file/d/1tOMfqJUUW7-Y6xicvYbKnol0oFGvtFQR/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Walled City & Wilderness",
     "face": "Wilderness",
     "side": "dark",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1eUJ97rgiHPjATfsrZQtd8kFaiXzYlMKl",
     "artwork_url": "https://drive.google.com/file/d/1eUJ97rgiHPjATfsrZQtd8kFaiXzYlMKl/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Orchard & Bone Orchard",
@@ -1741,7 +1985,8 @@
     "artwork_url": "https://drive.google.com/file/d/18vHVACNt3nBVHxl7ebvq1c3zbHGQH1OV/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Orchard & Bone Orchard",
@@ -1755,7 +2000,8 @@
     "artwork_url": "https://drive.google.com/file/d/1BmvMha_J_iU7XXg9wtC3YIO3Q4C031y2/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dawn Market & Night Market",
@@ -1767,7 +2013,8 @@
     "status": "proposed",
     "artwork_id": "1IDa8z7yA0kbjfJElxcGIsnDIzqMlbYnb",
     "artwork_url": "https://drive.google.com/file/d/1IDa8z7yA0kbjfJElxcGIsnDIzqMlbYnb/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Dawn Market & Night Market",
@@ -1781,7 +2028,8 @@
     "artwork_url": "https://drive.google.com/file/d/1-JkE_E8LG6Jp3_UQlUW6IiqfBTpz5ElC/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Banquet Hall & Empty Banquet Hall",
@@ -1795,7 +2043,8 @@
     "artwork_url": "https://drive.google.com/file/d/13UCRQeQ1y4V1PgvpKUjdz1fUhyuL-_Ul/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Banquet Hall & Empty Banquet Hall",
@@ -1809,7 +2058,8 @@
     "artwork_url": "https://drive.google.com/file/d/10-VsWyB_iTiTpUnKsYK8d76d0tN9Jtd4/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Observatory & Underground Cavern",
@@ -1823,19 +2073,21 @@
     "artwork_url": "https://drive.google.com/file/d/1y9AodrYRVJyI8r2oDkj0FeUpfGHHDoy5/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Observatory & Underground Cavern",
     "face": "Underground Cavern",
     "side": "dark",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1eJ8a89R42I9ZtySh5OSKWVvTVTCKSMCb",
     "artwork_url": "https://drive.google.com/file/d/1eJ8a89R42I9ZtySh5OSKWVvTVTCKSMCb/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Salt Flat & Deep Marsh",
@@ -1849,7 +2101,8 @@
     "artwork_url": "https://drive.google.com/file/d/1tDKi2PpbBuJREcnxQrIxVVbudNv-wSxp/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Salt Flat & Deep Marsh",
@@ -1863,7 +2116,8 @@
     "artwork_url": "https://drive.google.com/file/d/16AoI0C9m9ImwOkRMNd0BZsPOvIgja4c6/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Frozen Lake & Boiling Lake",
@@ -1878,22 +2132,24 @@
     "keywords": [
       "Weaken",
       "Frost"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Frozen Lake & Boiling Lake",
     "face": "Boiling Lake",
     "side": "dark",
     "cost": 1,
-    "effect": "Deal 5 Flame damage. Apply 2 Burn.",
+    "effect": "Deal 5 Fire damage. Apply 2 Burn.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1eqFrNAPQmHTMSvk5eoPRPrbeF1KsZZ1X",
     "artwork_url": "https://drive.google.com/file/d/1eqFrNAPQmHTMSvk5eoPRPrbeF1KsZZ1X/view?usp=drivesdk",
     "keywords": [
       "Burn",
-      "Flame"
-    ]
+      "Fire"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Floating Library & Sunken Library",
@@ -1907,7 +2163,8 @@
     "artwork_url": "https://drive.google.com/file/d/1VH2RCjfCcjgSm8oW0Ze0wermIxIsOy9M/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Floating Library & Sunken Library",
@@ -1919,7 +2176,8 @@
     "status": "proposed",
     "artwork_id": "1yhaUGcH7L_Pd2t5Ep8ejKbOCyQ0KODfY",
     "artwork_url": "https://drive.google.com/file/d/1yhaUGcH7L_Pd2t5Ep8ejKbOCyQ0KODfY/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "White Desert & Black Forest",
@@ -1934,20 +2192,28 @@
     "keywords": [
       "Weaken",
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Desert & Black Forest",
     "face": "Black Forest",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1nMM5KwyGHjVaEcxJTSXc0FZdldqAV1CG",
     "artwork_url": "https://drive.google.com/file/d/1nMM5KwyGHjVaEcxJTSXc0FZdldqAV1CG/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -1955,36 +2221,39 @@
     "face": "Clockwork City",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1fqx350oCraaM7aHIOVa-vZCyutbl_VoO",
     "artwork_url": "https://drive.google.com/file/d/1fqx350oCraaM7aHIOVa-vZCyutbl_VoO/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Clockwork City & Wandering Village",
     "face": "Wandering Village",
     "side": "dark",
     "cost": 1,
-    "effect": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "effect": "Shuffle your hand into your library. Draw 4 cards.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "13HQGtGI22pkD9xgauTiROywV2gvJzuJ-",
     "artwork_url": "https://drive.google.com/file/d/13HQGtGI22pkD9xgauTiROywV2gvJzuJ-/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Sewing Needle & Scissors",
     "face": "Sewing Needle",
     "side": "light",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile.",
+    "effect": "Put a card from your discard pile on top of your library.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1YTm73MZEZf7Vb82UJQ_NJ4yT627Sp4rR",
     "artwork_url": "https://drive.google.com/file/d/1YTm73MZEZf7Vb82UJQ_NJ4yT627Sp4rR/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Sewing Needle & Scissors",
@@ -2000,19 +2269,21 @@
       "Ward",
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Compass & Labyrinth",
     "face": "Compass",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "15ZTFaNh20J0f2Mm_DfpfHjGATjfN9MnP",
     "artwork_url": "https://drive.google.com/file/d/15ZTFaNh20J0f2Mm_DfpfHjGATjfN9MnP/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Compass & Labyrinth",
@@ -2026,7 +2297,8 @@
     "artwork_url": "https://drive.google.com/file/d/1A3OuMOkvTX_55q0Rz9NeLUN-dxkYXEGU/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lantern & Shroud",
@@ -2040,20 +2312,28 @@
     "artwork_url": "https://drive.google.com/file/d/1OQ1ABFj8KkQDY6up5ZCdg8-PhFlC1ala/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lantern & Shroud",
     "face": "Shroud",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "11Tw0W1sgKfa4CjDRCV932__yD4o8GrHK",
     "artwork_url": "https://drive.google.com/file/d/11Tw0W1sgKfa4CjDRCV932__yD4o8GrHK/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2068,7 +2348,8 @@
     "artwork_url": "https://drive.google.com/file/d/1FN4vtJKlb88-WrQPRGpWMX77Z4Qbqf4Q/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Prism & Black Glass",
@@ -2083,7 +2364,8 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tuned Violin & Broken Violin",
@@ -2097,7 +2379,8 @@
     "artwork_url": "https://drive.google.com/file/d/1baely1s9BmqmKnBO2DwVmWRx1nnhQBWa/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tuned Violin & Broken Violin",
@@ -2112,7 +2395,8 @@
     "keywords": [
       "Banish",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Balance Scales & Loaded Dice",
@@ -2127,19 +2411,21 @@
     "keywords": [
       "Mark",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Balance Scales & Loaded Dice",
     "face": "Loaded Dice",
     "side": "dark",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put 2 in your hand and the rest on the bottom in any order.",
+    "effect": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1cgciAvubcOyBfEALrGgF0OpQuF7ot3sh",
     "artwork_url": "https://drive.google.com/file/d/1cgciAvubcOyBfEALrGgF0OpQuF7ot3sh/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Chessboard & Scattered Chess Pieces",
@@ -2154,32 +2440,41 @@
     "keywords": [
       "Scry",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Chessboard & Scattered Chess Pieces",
     "face": "Scattered Chess Pieces",
     "side": "dark",
     "cost": 1,
-    "effect": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "effect": "Shuffle your hand into your library. Draw 4 cards.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1nLHviCCObV9i1YZx5wyWEoG4gWEHzJe7",
     "artwork_url": "https://drive.google.com/file/d/1nLHviCCObV9i1YZx5wyWEoG4gWEHzJe7/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Wax Seal & Torn Letter",
     "face": "Wax Seal",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1fCSB-Gdr1dCZW8jN4LGx63z9XCvXJCZR",
     "artwork_url": "https://drive.google.com/file/d/1fCSB-Gdr1dCZW8jN4LGx63z9XCvXJCZR/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2194,20 +2489,28 @@
     "artwork_url": "https://drive.google.com/file/d/13pFtoRmLIzXYzbpcpqagg2itPIp9zPtD/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Anchor & Kite",
     "face": "Anchor",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "11IP2UlKOWLM5dPLI-DLSKFvF_AF15o0C",
     "artwork_url": "https://drive.google.com/file/d/11IP2UlKOWLM5dPLI-DLSKFvF_AF15o0C/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2220,19 +2523,21 @@
     "status": "proposed",
     "artwork_id": "13aYGAArz0fNn75IF2Y9qTPu4xJTCkLpi",
     "artwork_url": "https://drive.google.com/file/d/13aYGAArz0fNn75IF2Y9qTPu4xJTCkLpi/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Metronome & Wind Chime",
     "face": "Metronome",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1cwht9HIaWBasTTSD_uN3i18d0HijYmUr",
     "artwork_url": "https://drive.google.com/file/d/1cwht9HIaWBasTTSD_uN3i18d0HijYmUr/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Metronome & Wind Chime",
@@ -2246,19 +2551,21 @@
     "artwork_url": "https://drive.google.com/file/d/1j2YDTZA0r7Yj7DChzrwIaXzhygpmrpGq/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lens & Blindfold",
     "face": "Lens",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1fbKDfvoy2Y-YFWh9w-bne0EAYMum8zco",
     "artwork_url": "https://drive.google.com/file/d/1fbKDfvoy2Y-YFWh9w-bne0EAYMum8zco/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Lens & Blindfold",
@@ -2272,19 +2579,21 @@
     "artwork_url": "https://drive.google.com/file/d/1dKztkN0t59NW-zbenT4smgLsToZP0BFD/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Comb & Tangled Hair",
     "face": "Comb",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1Rlagj-2tt1HaBIh_0Sn_HM6fBBd0T1vs",
     "artwork_url": "https://drive.google.com/file/d/1Rlagj-2tt1HaBIh_0Sn_HM6fBBd0T1vs/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Comb & Tangled Hair",
@@ -2298,20 +2607,28 @@
     "artwork_url": "https://drive.google.com/file/d/1Tegjhx0D4gHYRbg3xVQNoVxdQguQfwK5/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Porcelain Doll & Rag Doll",
     "face": "Porcelain Doll",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1VmJDUYtjdOhJy5xY7aUi1Zx5N15Jt0wp",
     "artwork_url": "https://drive.google.com/file/d/1VmJDUYtjdOhJy5xY7aUi1Zx5N15Jt0wp/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2324,7 +2641,8 @@
     "status": "proposed",
     "artwork_id": "1QG79Z_khsW9ugx9I60doTXq3GkTpDFiq",
     "artwork_url": "https://drive.google.com/file/d/1QG79Z_khsW9ugx9I60doTXq3GkTpDFiq/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Symmetry & Asymmetry",
@@ -2339,7 +2657,8 @@
     "keywords": [
       "Mark",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Symmetry & Asymmetry",
@@ -2351,7 +2670,8 @@
     "status": "proposed",
     "artwork_id": "1zK1gkS--WrvphatYhVH2vFsXQ95O0ISK",
     "artwork_url": "https://drive.google.com/file/d/1zK1gkS--WrvphatYhVH2vFsXQ95O0ISK/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Unity & Fragmentation",
@@ -2363,7 +2683,8 @@
     "status": "proposed",
     "artwork_id": "14X_kRQam3rXAXDhS6lDRRvkcFxQlLfno",
     "artwork_url": "https://drive.google.com/file/d/14X_kRQam3rXAXDhS6lDRRvkcFxQlLfno/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Unity & Fragmentation",
@@ -2378,31 +2699,34 @@
     "keywords": [
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Convergence & Divergence",
     "face": "Convergence",
     "side": "light",
     "cost": 1,
-    "effect": "Put up to 2 cards from your discard pile on top of your draw pile in any order.",
+    "effect": "Put up to 2 cards from your discard pile on top of your library in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1gJ9V42OxqrI7UCAfVTWzTp8Ub_1zGnr6",
     "artwork_url": "https://drive.google.com/file/d/1gJ9V42OxqrI7UCAfVTWzTp8Ub_1zGnr6/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Convergence & Divergence",
     "face": "Divergence",
     "side": "dark",
     "cost": 1,
-    "effect": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1pU83ryPe0XqGb7vQ3aID5exGM0jwbRsx",
     "artwork_url": "https://drive.google.com/file/d/1pU83ryPe0XqGb7vQ3aID5exGM0jwbRsx/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Compression & Expansion",
@@ -2416,7 +2740,8 @@
     "artwork_url": "https://drive.google.com/file/d/1nmN6_fJHOsqzZQkZi_3_b4GARRi3_zYc/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Compression & Expansion",
@@ -2428,7 +2753,8 @@
     "status": "proposed",
     "artwork_id": "1SVuCrIGR9aM1GtQWsicaA5mKt_c8ER44",
     "artwork_url": "https://drive.google.com/file/d/1SVuCrIGR9aM1GtQWsicaA5mKt_c8ER44/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Attraction & Repulsion",
@@ -2440,19 +2766,21 @@
     "status": "proposed",
     "artwork_id": "1KBdam-pfVi55cUb9rtjWVAZyjU8BLmfj",
     "artwork_url": "https://drive.google.com/file/d/1KBdam-pfVi55cUb9rtjWVAZyjU8BLmfj/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Attraction & Repulsion",
     "face": "Repulsion",
     "side": "dark",
     "cost": 1,
-    "effect": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "17pKqlexRWT_dYxR9QFVXEExZys9prDgl",
     "artwork_url": "https://drive.google.com/file/d/17pKqlexRWT_dYxR9QFVXEExZys9prDgl/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Gravity & Levitation",
@@ -2466,7 +2794,8 @@
     "artwork_url": "https://drive.google.com/file/d/1YQl4C3YEK-zl-iIO1AEaKcZIyqAPcKYU/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Gravity & Levitation",
@@ -2478,7 +2807,8 @@
     "status": "proposed",
     "artwork_id": "1FDEVFMTsvP2yiYvbjNrk6gjNvngRVJZw",
     "artwork_url": "https://drive.google.com/file/d/1FDEVFMTsvP2yiYvbjNrk6gjNvngRVJZw/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Stillness & Frenzy",
@@ -2493,7 +2823,8 @@
     "keywords": [
       "Banish",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Stillness & Frenzy",
@@ -2507,7 +2838,8 @@
     "artwork_url": "https://drive.google.com/file/d/1oXVkVVhKD3gGFICNyWdGvWQZuWe_hHAd/view?usp=drivesdk",
     "keywords": [
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silence & Clamor",
@@ -2522,7 +2854,8 @@
     "keywords": [
       "Banish",
       "Hush"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silence & Clamor",
@@ -2536,7 +2869,8 @@
     "artwork_url": "https://drive.google.com/file/d/1dNFUoCjW4VowLKqKgULxCRs5m6Cuakvy/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Awakening & Slumber",
@@ -2550,6 +2884,14 @@
     "artwork_url": "https://drive.google.com/file/d/1nkwXC5ky0hMR0eoy17U88GzS2rgrwxDN/view?usp=drivesdk",
     "keywords": [
       "Banish"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "light"
+      }
     ]
   },
   {
@@ -2564,7 +2906,8 @@
     "artwork_url": "https://drive.google.com/file/d/19k98fCMN5rMQyUpYTLpWi_Afdn625-YY/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Multiplicity & Solitude",
@@ -2578,7 +2921,8 @@
     "artwork_url": "https://drive.google.com/file/d/1BllolN1BifC_jIP4LVk6-dFbrbyREyw8/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Multiplicity & Solitude",
@@ -2592,7 +2936,8 @@
     "artwork_url": "https://drive.google.com/file/d/1SWKAxTy-aFYVNluBm01asDypGl2tA5TT/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Plenty & Famine",
@@ -2606,7 +2951,8 @@
     "artwork_url": "https://drive.google.com/file/d/1739gVPPt7kRvZVk-zVKlC1tafzlgcWTy/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Plenty & Famine",
@@ -2620,7 +2966,8 @@
     "artwork_url": "https://drive.google.com/file/d/15GvNDRJ6KTqftLyuM5KAex1-Tkpa0vDs/view?usp=drivesdk",
     "keywords": [
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "High Tide & Low Tide",
@@ -2632,19 +2979,21 @@
     "status": "proposed",
     "artwork_id": "1EqX_oYPSRIG2gpA_ekNqqHM7Xrq8AMRe",
     "artwork_url": "https://drive.google.com/file/d/1EqX_oYPSRIG2gpA_ekNqqHM7Xrq8AMRe/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "High Tide & Low Tide",
     "face": "Low Tide",
     "side": "dark",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1G5Hb4whf2nT0ktQNK9ROz9nPu4p-d8Cq",
     "artwork_url": "https://drive.google.com/file/d/1G5Hb4whf2nT0ktQNK9ROz9nPu4p-d8Cq/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Exposure & Concealment",
@@ -2659,20 +3008,28 @@
     "keywords": [
       "Ward",
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Exposure & Concealment",
     "face": "Concealment",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1r8Ci8WSz_9tj31GT563rt5MQL9D_sss7",
     "artwork_url": "https://drive.google.com/file/d/1r8Ci8WSz_9tj31GT563rt5MQL9D_sss7/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2687,19 +3044,21 @@
     "artwork_url": "https://drive.google.com/file/d/1uFPL0WYkTGKChGPjeCI17Bofth0w-8bm/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Herald & Smuggler",
     "face": "Smuggler",
     "side": "dark",
     "cost": 1,
-    "effect": "Put another card from your hand on the bottom of your draw pile. Draw 2 cards.",
+    "effect": "Put another card from your hand on the bottom of your library. Draw 2 cards.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1xPIW0RThJW4T_quQNNZTI9Gvk7AA13Yp",
     "artwork_url": "https://drive.google.com/file/d/1xPIW0RThJW4T_quQNNZTI9Gvk7AA13Yp/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Standard Bearer & Flag Burner",
@@ -2713,7 +3072,8 @@
     "artwork_url": "https://drive.google.com/file/d/10mNhqLt5HmvcJiYXHxvIVV-ZGiUhTX8l/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Standard Bearer & Flag Burner",
@@ -2728,7 +3088,8 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Animal Tamer & Shapeshifter",
@@ -2742,20 +3103,34 @@
     "artwork_url": "https://drive.google.com/file/d/1PdHHfLIBYmwPoKpsgVLdy7vzOlba6Cct/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Animal Tamer & Shapeshifter",
     "face": "Shapeshifter",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip your hand.",
+    "effect": "Flip this card. Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1VNSg4QzycaFpB_-y8j7QL1axNp6A0I7O",
     "artwork_url": "https://drive.google.com/file/d/1VNSg4QzycaFpB_-y8j7QL1axNp6A0I7O/view?usp=drivesdk",
     "keywords": [
-      "Flip"
+      "Flip",
+      "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "self",
+        "selection_prompts": 0
+      },
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2763,13 +3138,22 @@
     "face": "Mask Maker",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "18EcvYegKBcNie-hlC7j2oTcjS4XYUheW",
     "artwork_url": "https://drive.google.com/file/d/18EcvYegKBcNie-hlC7j2oTcjS4XYUheW/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -2777,13 +3161,22 @@
     "face": "Face Thief",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1-SJTrMnA90Wq8C0Nl5Mst5YPqbad_O9d",
     "artwork_url": "https://drive.google.com/file/d/1-SJTrMnA90Wq8C0Nl5Mst5YPqbad_O9d/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -2799,7 +3192,8 @@
     "keywords": [
       "Mark",
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Fencer & Brawler",
@@ -2813,7 +3207,8 @@
     "artwork_url": "https://drive.google.com/file/d/1fx15jhYL5fT_AuS_bIjTVdxDZqVpnDzA/view?usp=drivesdk",
     "keywords": [
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Charioteer & Ferryman",
@@ -2827,7 +3222,8 @@
     "artwork_url": "https://drive.google.com/file/d/12SQv7ooUvU__YDTea4nq2bW2r3eRr533/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Charioteer & Ferryman",
@@ -2839,7 +3235,8 @@
     "status": "proposed",
     "artwork_id": "1uQ7c4-tzQzni-dZjWAhRmigZPh_7I_3P",
     "artwork_url": "https://drive.google.com/file/d/1uQ7c4-tzQzni-dZjWAhRmigZPh_7I_3P/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Auctioneer & Scavenger",
@@ -2851,7 +3248,8 @@
     "status": "proposed",
     "artwork_id": "1JXqS_Np_ZkgandfIEVTYV4ME_5Jqdtzm",
     "artwork_url": "https://drive.google.com/file/d/1JXqS_Np_ZkgandfIEVTYV4ME_5Jqdtzm/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Auctioneer & Scavenger",
@@ -2863,7 +3261,8 @@
     "status": "proposed",
     "artwork_id": "18JWCyiJKKdpDklg9Y7r0NXBU7yupJka3",
     "artwork_url": "https://drive.google.com/file/d/18JWCyiJKKdpDklg9Y7r0NXBU7yupJka3/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Ballerina & Contortionist",
@@ -2877,6 +3276,13 @@
     "artwork_url": "https://drive.google.com/file/d/1gAvzazmYiekgx_hZy5SZaHWnPw2DYNJg/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2884,13 +3290,26 @@
     "face": "Contortionist",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip this card. Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "18HTeADbrfOoNTbEc4GS_gJMyQ-fnHp2H",
     "artwork_url": "https://drive.google.com/file/d/18HTeADbrfOoNTbEc4GS_gJMyQ-fnHp2H/view?usp=drivesdk",
     "keywords": [
-      "Flip"
+      "Flip",
+      "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "self",
+        "selection_prompts": 0
+      },
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -2905,7 +3324,8 @@
     "artwork_url": "https://drive.google.com/file/d/1mWtIgbjgzkthfNBIAE97xb6HQZsx189c/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Royal Hound & Stray Hound",
@@ -2917,21 +3337,23 @@
     "status": "proposed",
     "artwork_id": "1eXIVmo1oql0MNT1J73BFSDg3HN_7_jwm",
     "artwork_url": "https://drive.google.com/file/d/1eXIVmo1oql0MNT1J73BFSDg3HN_7_jwm/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Archivist & Bookworm",
     "face": "Archivist",
     "side": "light",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile. Scry.",
+    "effect": "Put a card from your discard pile on top of your library. Scry.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1WDzj7JbcIsjO5yNv7x8hpYGZ9q8Fhm44",
     "artwork_url": "https://drive.google.com/file/d/1WDzj7JbcIsjO5yNv7x8hpYGZ9q8Fhm44/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Archivist & Bookworm",
@@ -2945,19 +3367,21 @@
     "artwork_url": "https://drive.google.com/file/d/1w4SfSSfnLcIVuQbLxFvuRUk3s9OgjUUK/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Surveyor & Trespasser",
     "face": "Surveyor",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1UdPhmWsyVJyKxkdr88SQixr3e7Gpl9NH",
     "artwork_url": "https://drive.google.com/file/d/1UdPhmWsyVJyKxkdr88SQixr3e7Gpl9NH/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Surveyor & Trespasser",
@@ -2971,7 +3395,8 @@
     "artwork_url": "https://drive.google.com/file/d/1QsdyaQaCR3FXLB6vnUftADn_sIzio1rv/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Chimney Sweep & Smoke Spirit",
@@ -2986,7 +3411,8 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Chimney Sweep & Smoke Spirit",
@@ -3000,7 +3426,8 @@
     "artwork_url": "https://drive.google.com/file/d/1bl8JrbiSwNjR2iPGSNkql-f1DnsBDrDb/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Coral Reef & Kelp Forest",
@@ -3014,7 +3441,8 @@
     "artwork_url": "https://drive.google.com/file/d/1gGztQN5stDyoG1aUkqx9MBElDoBruSfl/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Coral Reef & Kelp Forest",
@@ -3028,20 +3456,28 @@
     "artwork_url": "https://drive.google.com/file/d/1ENL48xfaEFYEfrmMvndA2rNPSsEv2__c/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Oyster & Cuttlefish",
     "face": "Oyster",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1AcuP5GhRkulKD3Op3G5K6K_3IWstVBvQ",
     "artwork_url": "https://drive.google.com/file/d/1AcuP5GhRkulKD3Op3G5K6K_3IWstVBvQ/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3049,13 +3485,20 @@
     "face": "Cuttlefish",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1xIWKJgYYrJFarHfGnm79VGiP_Pg0iLrt",
     "artwork_url": "https://drive.google.com/file/d/1xIWKJgYYrJFarHfGnm79VGiP_Pg0iLrt/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3070,7 +3513,8 @@
     "artwork_url": "https://drive.google.com/file/d/1g736w3O4ty_TfbL8-Qmlku5aYz8S-YQJ/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Firefly & Cave Cricket",
@@ -3084,7 +3528,8 @@
     "artwork_url": "https://drive.google.com/file/d/1w4V-iszHEpIcj9kpqSdYRmvB74zXrodE/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Stalactite & Geyser",
@@ -3098,7 +3543,8 @@
     "artwork_url": "https://drive.google.com/file/d/11wqM0NaqCXkDJTLLOtD-f5mgv0eluvz4/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Stalactite & Geyser",
@@ -3113,19 +3559,21 @@
     "keywords": [
       "Banish",
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dandelion & Mandrake",
     "face": "Dandelion",
     "side": "light",
     "cost": 1,
-    "effect": "Put up to 2 other cards from your hand on the bottom of your draw pile. Draw that many cards.",
+    "effect": "Put up to 2 other cards from your hand on the bottom of your library. Draw that many cards.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1yjS7U6v6vGk_XLVZcClKcbJFHBy7jYug",
     "artwork_url": "https://drive.google.com/file/d/1yjS7U6v6vGk_XLVZcClKcbJFHBy7jYug/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Dandelion & Mandrake",
@@ -3140,7 +3588,8 @@
     "keywords": [
       "Banish",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Snowdrop & Nightshade",
@@ -3154,7 +3603,8 @@
     "artwork_url": "https://drive.google.com/file/d/16251RrxPKuLoYKEeQwf0RYmvCa5E9e91/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Snowdrop & Nightshade",
@@ -3170,14 +3620,15 @@
       "Ward",
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cocoon & Shed Skin",
     "face": "Cocoon",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand. Keep it.",
+    "effect": "Flip this card. Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1KGoybZxq0G4xJz4RlYDPxoZjtgLBVSoC",
@@ -3185,6 +3636,18 @@
     "keywords": [
       "Flip",
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "self",
+        "selection_prompts": 0
+      },
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3199,7 +3662,8 @@
     "artwork_url": "https://drive.google.com/file/d/1z-AWt7ktim6aKVC84o392W6qj1k8jc-R/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lotus & Corpse Flower",
@@ -3213,7 +3677,8 @@
     "artwork_url": "https://drive.google.com/file/d/1uGX-ECkdoIb0DRM9D-xS6ZlivVNz5c97/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lotus & Corpse Flower",
@@ -3228,7 +3693,8 @@
     "keywords": [
       "Banish",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Kingfisher & Bat",
@@ -3242,7 +3708,8 @@
     "artwork_url": "https://drive.google.com/file/d/1Aq9jicBE1l3wMyv3mQUFS-_ZJjRXkWk2/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Kingfisher & Bat",
@@ -3257,7 +3724,8 @@
     "keywords": [
       "Leech",
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sunflower & Moonflower",
@@ -3271,19 +3739,28 @@
     "artwork_url": "https://drive.google.com/file/d/1ZIsjuHpo29eppd3hwW7VFXOLz46Ipx49/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sunflower & Moonflower",
     "face": "Moonflower",
     "side": "dark",
     "cost": 1,
-    "effect": "Turn a card in your hand to its dark face.",
+    "effect": "Turn your hand to its dark faces.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1d9n9s4RWlOuv5cshT3w0HOn2XGpRZPv9",
     "artwork_url": "https://drive.google.com/file/d/1d9n9s4RWlOuv5cshT3w0HOn2XGpRZPv9/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "dark"
+      }
+    ]
   },
   {
     "pair": "Starfish & Sea Urchin",
@@ -3297,7 +3774,8 @@
     "artwork_url": "https://drive.google.com/file/d/1RtXoBB5B6632MJ2XRUkaXMyJq288ZxTV/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Starfish & Sea Urchin",
@@ -3311,20 +3789,28 @@
     "artwork_url": "https://drive.google.com/file/d/1LqFQ3TwN6iZwrIk71jPj-UxEb9wOq-F-/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silkworm & Silverfish",
     "face": "Silkworm",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1P0keoJxTo7V5gyqOVl96HlN-YzHJRa0A",
     "artwork_url": "https://drive.google.com/file/d/1P0keoJxTo7V5gyqOVl96HlN-YzHJRa0A/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3339,7 +3825,8 @@
     "artwork_url": "https://drive.google.com/file/d/13jynn7l2gc2XaGyVdvaBN9DTpXQ-94C9/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sceptre & Begging Bowl",
@@ -3353,7 +3840,8 @@
     "artwork_url": "https://drive.google.com/file/d/1hloy-jxu4ZSie6l01Kyy9OIaOg6wTlTh/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sceptre & Begging Bowl",
@@ -3367,19 +3855,21 @@
     "artwork_url": "https://drive.google.com/file/d/1UhljPiyfbXwDyivQvi5yOf785lalJcXo/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Quill & Eraser",
     "face": "Quill",
     "side": "light",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile.",
+    "effect": "Put a card from your discard pile on top of your library.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "13J34Vvfd1nJaQpefINMLTEkqMnNBKR6K",
     "artwork_url": "https://drive.google.com/file/d/13J34Vvfd1nJaQpefINMLTEkqMnNBKR6K/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Quill & Eraser",
@@ -3393,7 +3883,8 @@
     "artwork_url": "https://drive.google.com/file/d/1IQj_UoOoCSV7FebIkgon5iA4XqZTRLpn/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Fishing Net & Harpoon",
@@ -3407,7 +3898,8 @@
     "artwork_url": "https://drive.google.com/file/d/16CoBFJwN3eZSFQ3DjdTpE69OIuzS7Cm4/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Fishing Net & Harpoon",
@@ -3423,44 +3915,54 @@
       "Ward",
       "Banish",
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sieve & Funnel",
     "face": "Sieve",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 4 cards of your draw pile. Put 1 in your hand and discard the rest.",
+    "effect": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1ALdZ4b7FTVjRC_Gv6Ggc1PKnb2u3J5Bl",
     "artwork_url": "https://drive.google.com/file/d/1ALdZ4b7FTVjRC_Gv6Ggc1PKnb2u3J5Bl/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Sieve & Funnel",
     "face": "Funnel",
     "side": "dark",
     "cost": 1,
-    "effect": "Put another card from your hand on top of your draw pile.",
+    "effect": "Put another card from your hand on top of your library.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1JcVKTUwrmY78HD2-H4ENkqGiSsOcTF24",
     "artwork_url": "https://drive.google.com/file/d/1JcVKTUwrmY78HD2-H4ENkqGiSsOcTF24/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Scabbard & Drawn Blade",
     "face": "Scabbard",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1q8UO8pAVxAkX9sWE61CAsA5EgCIE7evV",
     "artwork_url": "https://drive.google.com/file/d/1q8UO8pAVxAkX9sWE61CAsA5EgCIE7evV/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3475,7 +3977,8 @@
     "artwork_url": "https://drive.google.com/file/d/1qt1r1_8_oBHRo-0v4z-hmR7Y9Q-NdAHB/view?usp=drivesdk",
     "keywords": [
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tuning Fork & Rattle",
@@ -3489,7 +3992,8 @@
     "artwork_url": "https://drive.google.com/file/d/1pOWrkSHqk4dOazmvUYGVysSSpWU2v-X3/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tuning Fork & Rattle",
@@ -3503,7 +4007,8 @@
     "artwork_url": "https://drive.google.com/file/d/19TAUN3hRrXB6FnNCy3hc40hE8bWijPLa/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sundial & Water Clock",
@@ -3517,19 +4022,21 @@
     "artwork_url": "https://drive.google.com/file/d/1QS_GxhDZxhSFWAFwCk1iFzQDfX_PtDoo/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sundial & Water Clock",
     "face": "Water Clock",
     "side": "dark",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1UNUw01VqZegkknVDUC1WaA7XDaQUn1nY",
     "artwork_url": "https://drive.google.com/file/d/1UNUw01VqZegkknVDUC1WaA7XDaQUn1nY/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Rope Ladder & Trapdoor",
@@ -3541,7 +4048,8 @@
     "status": "proposed",
     "artwork_id": "1_K8jV7GgoYT54gXo2wMPtE00DnqoKS73",
     "artwork_url": "https://drive.google.com/file/d/1_K8jV7GgoYT54gXo2wMPtE00DnqoKS73/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Rope Ladder & Trapdoor",
@@ -3556,7 +4064,8 @@
     "keywords": [
       "Ward",
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Floodgate & Broken Dam",
@@ -3570,7 +4079,8 @@
     "artwork_url": "https://drive.google.com/file/d/1Ta2kSWANHatk5acjjpeO2w_lxQJtlXn6/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Floodgate & Broken Dam",
@@ -3584,20 +4094,28 @@
     "artwork_url": "https://drive.google.com/file/d/17P8t2aFwouFg5cuScxyvOqL8jSWSd9no/view?usp=drivesdk",
     "keywords": [
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Wax Fruit & Rotting Fruit",
     "face": "Wax Fruit",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "11uWvNYOgbgjFwkRs9J6X_2sHJfLdYyYJ",
     "artwork_url": "https://drive.google.com/file/d/11uWvNYOgbgjFwkRs9J6X_2sHJfLdYyYJ/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3605,14 +4123,15 @@
     "face": "Rotting Fruit",
     "side": "dark",
     "cost": 1,
-    "effect": "Deal 6 Decay damage.",
+    "effect": "Apply 3 Poison.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1PSDlQcd2nH136wJJLo3AhaEC4KUeBomz",
     "artwork_url": "https://drive.google.com/file/d/1PSDlQcd2nH136wJJLo3AhaEC4KUeBomz/view?usp=drivesdk",
     "keywords": [
-      "Decay"
-    ]
+      "Poison"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Measuring Rod & Twisted Ribbon",
@@ -3626,7 +4145,8 @@
     "artwork_url": "https://drive.google.com/file/d/13XGoQ3PUp7ORGsn8xI270thZNaDGmiuZ/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Measuring Rod & Twisted Ribbon",
@@ -3640,20 +4160,30 @@
     "artwork_url": "https://drive.google.com/file/d/1K7O0tFADVa-Uz2oQvpcj-fj5r-KCL56d/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Glass Slipper & Iron Boot",
     "face": "Glass Slipper",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "12kJJoPusWxNANRVcyzMls9GQh7W0gNuJ",
     "artwork_url": "https://drive.google.com/file/d/12kJJoPusWxNANRVcyzMls9GQh7W0gNuJ/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -3668,20 +4198,28 @@
     "artwork_url": "https://drive.google.com/file/d/1YEPDmPs2yl3ZDAjiPj9eD5ZdIhBQkiIT/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Wedding Veil & Funeral Veil",
     "face": "Wedding Veil",
     "side": "light",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "12m5SVFFDGMKpzzC8IRjMet7yKJUzUziR",
     "artwork_url": "https://drive.google.com/file/d/12m5SVFFDGMKpzzC8IRjMet7yKJUzUziR/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3696,7 +4234,8 @@
     "artwork_url": "https://drive.google.com/file/d/1z4c7EynRaTexalizCZdNJJZheF8WFb2U/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Amphitheatre & Backstage",
@@ -3708,7 +4247,8 @@
     "status": "proposed",
     "artwork_id": "1ku9IQvvTR22MVWIBTVjEH6TgHGqF7Yjf",
     "artwork_url": "https://drive.google.com/file/d/1ku9IQvvTR22MVWIBTVjEH6TgHGqF7Yjf/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Amphitheatre & Backstage",
@@ -3720,7 +4260,8 @@
     "status": "proposed",
     "artwork_id": "1vngTRKavMUZCoZxw-Hp2AcIFobl3Zd4H",
     "artwork_url": "https://drive.google.com/file/d/1vngTRKavMUZCoZxw-Hp2AcIFobl3Zd4H/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Grand Staircase & Spiral Well",
@@ -3732,19 +4273,21 @@
     "status": "proposed",
     "artwork_id": "1FUF1M8NFp_5igSQJYkhPRjYB1dRs-7FE",
     "artwork_url": "https://drive.google.com/file/d/1FUF1M8NFp_5igSQJYkhPRjYB1dRs-7FE/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Grand Staircase & Spiral Well",
     "face": "Spiral Well",
     "side": "dark",
     "cost": 1,
-    "effect": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "effect": "Put another card from your hand on the bottom of your library. Draw 1 card.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1Gc9YRIv8991PBI8DZ3-Ox4umn86zwYj3",
     "artwork_url": "https://drive.google.com/file/d/1Gc9YRIv8991PBI8DZ3-Ox4umn86zwYj3/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Aqueduct & Sewer",
@@ -3758,7 +4301,8 @@
     "artwork_url": "https://drive.google.com/file/d/1Gxa2HmV8GSKU411UdnC-BnfJRmiMqVWh/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Aqueduct & Sewer",
@@ -3772,7 +4316,8 @@
     "artwork_url": "https://drive.google.com/file/d/1Vn0fqXm-OlFD48D-dxQzsSDkRXmphvZl/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Marble Quarry & Peat Bog",
@@ -3786,7 +4331,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ZM8kSuKY6AMSuRyw2nu0fKA0ofuqAi6g/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Marble Quarry & Peat Bog",
@@ -3801,7 +4347,8 @@
     "keywords": [
       "Weaken",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bathhouse & Icehouse",
@@ -3816,20 +4363,28 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bathhouse & Icehouse",
     "face": "Icehouse",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1R9zc4drUBtyQoHfMpTfAhTvT0leow1rz",
     "artwork_url": "https://drive.google.com/file/d/1R9zc4drUBtyQoHfMpTfAhTvT0leow1rz/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3844,20 +4399,28 @@
     "artwork_url": "https://drive.google.com/file/d/13bsyxeRp4VQVkjXDdisUghr6kigOca_l/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Counting House & Thieves Den",
     "face": "Thieves Den",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1WPX7NllTsJ9z1G4Ue6OrKhnV5dlO1Zmk",
     "artwork_url": "https://drive.google.com/file/d/1WPX7NllTsJ9z1G4Ue6OrKhnV5dlO1Zmk/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3865,13 +4428,22 @@
     "face": "Dovecote",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep 2 random cards in your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1OXNNCnOsGMDY75wLDFgWZxBSjwZM2taI",
     "artwork_url": "https://drive.google.com/file/d/1OXNNCnOsGMDY75wLDFgWZxBSjwZM2taI/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 2,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -3879,14 +4451,15 @@
     "face": "Spider Nursery",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 4.",
+    "effect": "Apply 2 Poison.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1HqviJ1BPxtmnhZalCib5l32f8riJCtdZ",
     "artwork_url": "https://drive.google.com/file/d/1HqviJ1BPxtmnhZalCib5l32f8riJCtdZ/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
-    ]
+      "Poison"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tidal Causeway & Drifting Island",
@@ -3898,19 +4471,21 @@
     "status": "proposed",
     "artwork_id": "15pupYMUgcSur_9JRSbxXk52G4cOF8OJe",
     "artwork_url": "https://drive.google.com/file/d/15pupYMUgcSur_9JRSbxXk52G4cOF8OJe/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Tidal Causeway & Drifting Island",
     "face": "Drifting Island",
     "side": "dark",
     "cost": 1,
-    "effect": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "effect": "Shuffle your hand into your library. Draw 4 cards.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1sEZapKPehgryHyEr5Bz7DRAIhK-dxMrR",
     "artwork_url": "https://drive.google.com/file/d/1sEZapKPehgryHyEr5Bz7DRAIhK-dxMrR/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Crystal Ballroom & Cinder Ballroom",
@@ -3925,7 +4500,8 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Crystal Ballroom & Cinder Ballroom",
@@ -3940,20 +4516,28 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Pottery Workshop & Shard Heap",
     "face": "Pottery Workshop",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your discard pile. Return it to your hand.",
+    "effect": "Flip the top card of your discard pile. Return it to your hand.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1FE4Gm0LAKvXg5iR6njdw44UkgAZNc0dV",
     "artwork_url": "https://drive.google.com/file/d/1FE4Gm0LAKvXg5iR6njdw44UkgAZNc0dV/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "top_discard",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3968,7 +4552,8 @@
     "artwork_url": "https://drive.google.com/file/d/1GM9mPjlVDEXeDRrNr9mI39Fze5S9xoTL/view?usp=drivesdk",
     "keywords": [
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Circus Ring & Abandoned Fairground",
@@ -3982,6 +4567,13 @@
     "artwork_url": "https://drive.google.com/file/d/1rwVSsCNPVsOHbJ3_8VjPeGmU0hxrJJDP/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -3994,7 +4586,8 @@
     "status": "proposed",
     "artwork_id": "12OZBnRPlip34hZiDHN1VCKcStfiCh2m2",
     "artwork_url": "https://drive.google.com/file/d/12OZBnRPlip34hZiDHN1VCKcStfiCh2m2/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Beehive Palace & Termite Palace",
@@ -4008,7 +4601,8 @@
     "artwork_url": "https://drive.google.com/file/d/18t2mj1PGyuj7X0KT-BUhMtB68X_gV7rN/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Beehive Palace & Termite Palace",
@@ -4022,19 +4616,21 @@
     "artwork_url": "https://drive.google.com/file/d/16FGArJB5LFjBHXuJCaa_L_8Xf9yCJmsh/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Paved Road & Deer Trail",
     "face": "Paved Road",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "source": "existing",
     "status": "proposed",
     "artwork_id": "1FHAPCT-BCgAiNtSTo0ONANc3Qzg_j_Kh",
     "artwork_url": "https://drive.google.com/file/d/1FHAPCT-BCgAiNtSTo0ONANc3Qzg_j_Kh/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Paved Road & Deer Trail",
@@ -4048,7 +4644,8 @@
     "artwork_url": "https://drive.google.com/file/d/1mMl1nEb2tJ-nXxHtAbXCm9g1obIak-zG/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bell Founder & Bell Breaker",
@@ -4061,7 +4658,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ftMufZKisD0RKlmQA5DWZ8wLYL1MTNHf/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bell Founder & Bell Breaker",
@@ -4075,7 +4673,8 @@
     "keywords": [
       "Banish",
       "Hush"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Crown Jeweler & Crown Snatcher",
@@ -4086,7 +4685,8 @@
     "status": "proposed",
     "artwork_id": "1heE7o2V5wI-SkZlhsbG8q0mGdWHUv6zS",
     "artwork_url": "https://drive.google.com/file/d/1heE7o2V5wI-SkZlhsbG8q0mGdWHUv6zS/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Crown Jeweler & Crown Snatcher",
@@ -4100,7 +4700,8 @@
     "keywords": [
       "Banish",
       "Hush"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Prism Keeper & Shade Keeper",
@@ -4113,19 +4714,29 @@
     "artwork_url": "https://drive.google.com/file/d/1dBYyxiy9TgL8H6_R4OdcMnhl9eRE6tlK/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Prism Keeper & Shade Keeper",
     "face": "Shade Keeper",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep 2 random cards in your hand.",
     "status": "proposed",
     "artwork_id": "1KDuG399WnWIxxHB2_QNSbLgJqaUXjX4t",
     "artwork_url": "https://drive.google.com/file/d/1KDuG399WnWIxxHB2_QNSbLgJqaUXjX4t/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 2,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -4139,7 +4750,8 @@
     "artwork_url": "https://drive.google.com/file/d/1usk09I5PHy15lv9UFidJBnx_KIfgVjDT/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dream Binder & Dream Unbinder",
@@ -4152,18 +4764,20 @@
     "artwork_url": "https://drive.google.com/file/d/1KF8RnbOzRK41-tKzNgQXNR6IcorIohhi/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Clockmaker & Clock Thief",
     "face": "Clockmaker",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "status": "proposed",
     "artwork_id": "1JyKasXM8Cb6P3ZKMsIakkU3l97YAwi07",
     "artwork_url": "https://drive.google.com/file/d/1JyKasXM8Cb6P3ZKMsIakkU3l97YAwi07/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Clockmaker & Clock Thief",
@@ -4176,7 +4790,8 @@
     "artwork_url": "https://drive.google.com/file/d/135e3z8-KfovDxwwLCzMpj8EY4BuBdzkY/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Court Physician & Plague Doctor",
@@ -4189,32 +4804,35 @@
     "artwork_url": "https://drive.google.com/file/d/19i04EwYFN5DXEQ6X0AXwzUAPbvFnkzUF/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Court Physician & Plague Doctor",
     "face": "Plague Doctor",
     "side": "dark",
     "cost": 1,
-    "effect": "Remove all your Weaken. Heal 3 HP. Banish this card.",
+    "effect": "Remove all your Poison. Heal 3 HP. Banish this card.",
     "status": "proposed",
     "artwork_id": "1ecQsE6EwlpQxQwMe0b5nSVHbl_k0QB9L",
     "artwork_url": "https://drive.google.com/file/d/1ecQsE6EwlpQxQwMe0b5nSVHbl_k0QB9L/view?usp=drivesdk",
     "keywords": [
-      "Banish",
-      "Weaken"
-    ]
+      "Poison",
+      "Banish"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Parchment Scribe & Ink Drinker",
     "face": "Parchment Scribe",
     "side": "light",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile.",
+    "effect": "Put a card from your discard pile on top of your library.",
     "status": "proposed",
     "artwork_id": "1Vn9YVctGlGbIiHRW87aMGSytf-ZCyBEx",
     "artwork_url": "https://drive.google.com/file/d/1Vn9YVctGlGbIiHRW87aMGSytf-ZCyBEx/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Parchment Scribe & Ink Drinker",
@@ -4227,19 +4845,29 @@
     "artwork_url": "https://drive.google.com/file/d/1oRwuEphhSN0OEiKRlANKABJ5Ct4EYTH1/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Portrait Painter & Portrait Eraser",
     "face": "Portrait Painter",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "status": "proposed",
     "artwork_id": "1s4wNcZo9iAO14duzvbtyVTpKoF90loJO",
     "artwork_url": "https://drive.google.com/file/d/1s4wNcZo9iAO14duzvbtyVTpKoF90loJO/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -4253,19 +4881,27 @@
     "artwork_url": "https://drive.google.com/file/d/1eNNcQ_QdR_InAMPREwXBdFyixPz7pfHF/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Glassblower & Glass Crusher",
     "face": "Glassblower",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your discard pile. Return it to your hand.",
+    "effect": "Flip the top card of your discard pile. Return it to your hand.",
     "status": "proposed",
     "artwork_id": "1HWHAd4-tDPGj5DVmXiQ4ukqAhsyEZeQ0",
     "artwork_url": "https://drive.google.com/file/d/1HWHAd4-tDPGj5DVmXiQ4ukqAhsyEZeQ0/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "top_discard",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -4280,7 +4916,8 @@
     "keywords": [
       "Ward",
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Perfumer & Scent Thief",
@@ -4293,7 +4930,8 @@
     "artwork_url": "https://drive.google.com/file/d/1K9OtvTkXWemHbbFhrTcbXxeP1EdBau2Y/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Perfumer & Scent Thief",
@@ -4306,7 +4944,8 @@
     "artwork_url": "https://drive.google.com/file/d/1qanLMdF8qC96JfeCp5_CLYK9FtSkhCmy/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Stone Mason & Stone Eater",
@@ -4319,7 +4958,8 @@
     "artwork_url": "https://drive.google.com/file/d/18kMtxpJwyiqyWzFXm6-swUWVKJPNO_LF/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Stone Mason & Stone Eater",
@@ -4333,19 +4973,29 @@
     "keywords": [
       "Ward",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bird Keeper & Bird Liberator",
     "face": "Bird Keeper",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep a random card in your hand.",
     "status": "proposed",
     "artwork_id": "1kfXGl4cJUiDeKByBem_T_2rHaz5_r2vF",
     "artwork_url": "https://drive.google.com/file/d/1kfXGl4cJUiDeKByBem_T_2rHaz5_r2vF/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -4359,19 +5009,29 @@
     "artwork_url": "https://drive.google.com/file/d/1fS4OyYag95k1if-kzuG9vbsHt5L51IF-/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cage Builder & Cage Breaker",
     "face": "Cage Builder",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep a random card in your hand.",
     "status": "proposed",
     "artwork_id": "1iamq-p5-ep0pY3sM7KbmbV3CI0junRHP",
     "artwork_url": "https://drive.google.com/file/d/1iamq-p5-ep0pY3sM7KbmbV3CI0junRHP/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -4386,7 +5046,8 @@
     "keywords": [
       "Banish",
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Fortune Teller & Fortune Gambler",
@@ -4399,7 +5060,8 @@
     "artwork_url": "https://drive.google.com/file/d/1kSVM03Z5jobRlxqKWOs5nAoRErKNIJkk/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Fortune Teller & Fortune Gambler",
@@ -4410,7 +5072,8 @@
     "status": "proposed",
     "artwork_id": "1YyKsOq8kKVsVK7fIhEN0bno_hejs_PeZ",
     "artwork_url": "https://drive.google.com/file/d/1YyKsOq8kKVsVK7fIhEN0bno_hejs_PeZ/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Lantern Lighter & Lantern Snuffer",
@@ -4423,7 +5086,8 @@
     "artwork_url": "https://drive.google.com/file/d/1IWQD5FmLBMeq_rOwu2IqefisdF0uemRo/view?usp=drivesdk",
     "keywords": [
       "Burn"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lantern Lighter & Lantern Snuffer",
@@ -4436,6 +5100,14 @@
     "artwork_url": "https://drive.google.com/file/d/1LVaaUnrEn8JrSzSuqygrDu0F8b4orTc3/view?usp=drivesdk",
     "keywords": [
       "Burn"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "dark"
+      }
     ]
   },
   {
@@ -4443,11 +5115,12 @@
     "face": "Thread Spinner",
     "side": "light",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile.",
+    "effect": "Put a card from your discard pile on top of your library.",
     "status": "proposed",
     "artwork_id": "1EazCD6RwTC_mfdjOMgQNzDZehRc-Oufk",
     "artwork_url": "https://drive.google.com/file/d/1EazCD6RwTC_mfdjOMgQNzDZehRc-Oufk/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Thread Spinner & Thread Cutter",
@@ -4460,7 +5133,8 @@
     "artwork_url": "https://drive.google.com/file/d/1TWvk4_6t2QhPZn6IJGd0fUX-Ch9oX7bV/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Storyteller & Story Swallower",
@@ -4473,7 +5147,8 @@
     "artwork_url": "https://drive.google.com/file/d/1hq5b8_BJsm3WuDp4uU7FXJ1LuPlqa9Fo/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Storyteller & Story Swallower",
@@ -4486,7 +5161,8 @@
     "artwork_url": "https://drive.google.com/file/d/1XbBHCmpEHe8sKENFSjXXOCIzQ1ZAxjNA/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Coin Minter & Coin Melter",
@@ -4499,7 +5175,8 @@
     "artwork_url": "https://drive.google.com/file/d/1HyjoExEDPI97wcuambSj5U5Y6zDRgs_u/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Coin Minter & Coin Melter",
@@ -4513,7 +5190,8 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Path Maker & Path Eraser",
@@ -4526,7 +5204,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ZhM4zwAmEZs2xeUbyvqJaMf7XsrS5WnV/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Path Maker & Path Eraser",
@@ -4539,7 +5218,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ne8OrqEIQQHYrsM0NGuXDyVZy-q7Nw1V/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Weather Watcher & Storm Chaser",
@@ -4552,7 +5232,8 @@
     "artwork_url": "https://drive.google.com/file/d/1A8lXu2_7ogkG4UkrkXU3fEMV2kjw9ygV/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Weather Watcher & Storm Chaser",
@@ -4565,19 +5246,27 @@
     "artwork_url": "https://drive.google.com/file/d/1gkUBSNHblmrEOc5ocZwQYXvAaeltstLz/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Oath Keeper & Oath Breaker",
     "face": "Oath Keeper",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1TzBUjm4F1Gi_rg-AWN-sgEl2vd11Vcnr",
     "artwork_url": "https://drive.google.com/file/d/1TzBUjm4F1Gi_rg-AWN-sgEl2vd11Vcnr/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -4591,7 +5280,8 @@
     "artwork_url": "https://drive.google.com/file/d/1whoFB6Jcg9gTqNg3YofufncixbWhNHic/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Door Warden & Door Wanderer",
@@ -4604,7 +5294,8 @@
     "artwork_url": "https://drive.google.com/file/d/1zgkEjrAT1dTQSw6s6LxGTkfo5PPwVCVw/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Door Warden & Door Wanderer",
@@ -4617,7 +5308,8 @@
     "artwork_url": "https://drive.google.com/file/d/1H-C4EPxB9DyzIx1IuZAZ1uPZfTxU6U8E/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Doll Mender & Doll Thief",
@@ -4628,7 +5320,8 @@
     "status": "proposed",
     "artwork_id": "1YWSAylQfCxk39ligca8X4ZzaUEUJtVK2",
     "artwork_url": "https://drive.google.com/file/d/1YWSAylQfCxk39ligca8X4ZzaUEUJtVK2/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Doll Mender & Doll Thief",
@@ -4639,18 +5332,20 @@
     "status": "proposed",
     "artwork_id": "1F9nmO1WuIpqu67DCa0Y-ThpKra3sVXJK",
     "artwork_url": "https://drive.google.com/file/d/1F9nmO1WuIpqu67DCa0Y-ThpKra3sVXJK/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Music Conductor & Improviser",
     "face": "Music Conductor",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "status": "proposed",
     "artwork_id": "1Mn7_mn_iW_PfoBah2xOc_PjTXJEZE6tU",
     "artwork_url": "https://drive.google.com/file/d/1Mn7_mn_iW_PfoBah2xOc_PjTXJEZE6tU/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Music Conductor & Improviser",
@@ -4661,7 +5356,8 @@
     "status": "proposed",
     "artwork_id": "1UzYd5yGf6EO2X2t4h0H8RGf8HJYc1WPC",
     "artwork_url": "https://drive.google.com/file/d/1UzYd5yGf6EO2X2t4h0H8RGf8HJYc1WPC/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Tide Keeper & Tide Wanderer",
@@ -4674,7 +5370,8 @@
     "artwork_url": "https://drive.google.com/file/d/1606cBStbiYN2jX9hzSBQufu7kobpl4u6/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tide Keeper & Tide Wanderer",
@@ -4685,7 +5382,8 @@
     "status": "proposed",
     "artwork_id": "1haDWKPs1W_bfYqHoS532Pmz40jBMXVVk",
     "artwork_url": "https://drive.google.com/file/d/1haDWKPs1W_bfYqHoS532Pmz40jBMXVVk/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Flying Beetle & Burrowing Beetle",
@@ -4698,7 +5396,8 @@
     "artwork_url": "https://drive.google.com/file/d/1fwCYD4LMMMeSJSaXXuaBmsHVSAUR19As/view?usp=drivesdk",
     "keywords": [
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Flying Beetle & Burrowing Beetle",
@@ -4711,7 +5410,8 @@
     "artwork_url": "https://drive.google.com/file/d/1xFPSkUSpyFNCd4rpcSpEyO1ZLSpkOVjP/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Fox & Black Fox",
@@ -4724,19 +5424,29 @@
     "artwork_url": "https://drive.google.com/file/d/1JTB93usDflGZnky7IVhFuiZj3ogKJ83S/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Fox & Black Fox",
     "face": "Black Fox",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "status": "proposed",
     "artwork_id": "1RiNVVluuNccpFCFK0KK6d4pqDgeeOnqE",
     "artwork_url": "https://drive.google.com/file/d/1RiNVVluuNccpFCFK0KK6d4pqDgeeOnqE/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -4744,12 +5454,19 @@
     "face": "Glass Snail",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1SWJ0EEnpm9prx-EBz71I7o7JZ-c7jFOn",
     "artwork_url": "https://drive.google.com/file/d/1SWJ0EEnpm9prx-EBz71I7o7JZ-c7jFOn/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -4763,7 +5480,8 @@
     "artwork_url": "https://drive.google.com/file/d/181yMOSb5X_u7PM26NXFLrgiVjMi-GNUN/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Dawn Crane & Night Heron",
@@ -4774,7 +5492,8 @@
     "status": "proposed",
     "artwork_id": "1DwSujKdCKUgx97vqm4GLA4jYS5KbuUXf",
     "artwork_url": "https://drive.google.com/file/d/1DwSujKdCKUgx97vqm4GLA4jYS5KbuUXf/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Dawn Crane & Night Heron",
@@ -4787,7 +5506,8 @@
     "artwork_url": "https://drive.google.com/file/d/1cVHio-tqD5eEo3TFfJGVgaonEWlcG6kI/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sunfish & Deep Sea Dragonfish",
@@ -4800,7 +5520,8 @@
     "artwork_url": "https://drive.google.com/file/d/1wC1uHhSpaz4nLTgHrqVWtJcybhmdXPEt/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sunfish & Deep Sea Dragonfish",
@@ -4815,29 +5536,50 @@
       "Banish",
       "Leech",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Day Moth & Night Moth",
     "face": "Day Moth",
     "side": "light",
     "cost": 1,
-    "effect": "Turn a card in your hand to its light face.",
+    "effect": "Turn a random dark card in your hand to its light face.",
     "status": "proposed",
     "artwork_id": "1p4it5LaxryL3TiiGlyxmsIryUNlFsq94",
     "artwork_url": "https://drive.google.com/file/d/1p4it5LaxryL3TiiGlyxmsIryUNlFsq94/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "random_opposite_face",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true,
+        "face": "light"
+      }
+    ]
   },
   {
     "pair": "Day Moth & Night Moth",
     "face": "Night Moth",
     "side": "dark",
     "cost": 1,
-    "effect": "Turn a card in your hand to its dark face.",
+    "effect": "Turn a random light card in your hand to its dark face.",
     "status": "proposed",
     "artwork_id": "17586F8r29xroqth0JbJlOtm3rbrX4JGu",
     "artwork_url": "https://drive.google.com/file/d/17586F8r29xroqth0JbJlOtm3rbrX4JGu/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "random_opposite_face",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true,
+        "face": "dark"
+      }
+    ]
   },
   {
     "pair": "Alabaster Spider & Obsidian Spider",
@@ -4850,20 +5592,23 @@
     "artwork_url": "https://drive.google.com/file/d/1ripPvZY9bYhV5uLL-7YZOXm5FzowxPvd/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Alabaster Spider & Obsidian Spider",
     "face": "Obsidian Spider",
     "side": "dark",
     "cost": 1,
-    "effect": "Mark 3.",
+    "effect": "Deal 2 Decay damage. Apply 2 Poison.",
     "status": "proposed",
     "artwork_id": "1Yv6wB8F8uV34d8HykX2TyEiN9-5n8X1u",
     "artwork_url": "https://drive.google.com/file/d/1Yv6wB8F8uV34d8HykX2TyEiN9-5n8X1u/view?usp=drivesdk",
     "keywords": [
-      "Mark"
-    ]
+      "Poison",
+      "Decay"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Pearl Crab & Hermit Crab",
@@ -4876,7 +5621,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ZrG7_64gGAms4Ib1B-k5axwyeE0rbT1i/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Pearl Crab & Hermit Crab",
@@ -4889,7 +5635,8 @@
     "artwork_url": "https://drive.google.com/file/d/1k7yY2JB0AHf-_1M0HE5irMYKvkN01SKy/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Honey Ant & Army Ant",
@@ -4902,7 +5649,8 @@
     "artwork_url": "https://drive.google.com/file/d/1CxJ-3PfJMNHxUsMPwHixphDMvdhNjgYL/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Honey Ant & Army Ant",
@@ -4915,7 +5663,8 @@
     "artwork_url": "https://drive.google.com/file/d/1hgS7Jf68GqwH3fmXDsWvjR49Xuy6GjMD/view?usp=drivesdk",
     "keywords": [
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Albino Serpent & Black Adder",
@@ -4928,21 +5677,23 @@
     "artwork_url": "https://drive.google.com/file/d/1R_8IrKM8lHUbAUwYNc3uA4PY28RwqFgH/view?usp=drivesdk",
     "keywords": [
       "Radiance"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Albino Serpent & Black Adder",
     "face": "Black Adder",
     "side": "dark",
     "cost": 1,
-    "effect": "Deal 5 Decay damage, ignoring Ward.",
+    "effect": "Deal 3 Decay damage. Apply 2 Poison.",
     "status": "proposed",
     "artwork_id": "1RDqP2COPwgDGYbfOC7mc0ko5AC_jTvyl",
     "artwork_url": "https://drive.google.com/file/d/1RDqP2COPwgDGYbfOC7mc0ko5AC_jTvyl/view?usp=drivesdk",
     "keywords": [
-      "Ward",
+      "Poison",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hard Coral & Soft Coral",
@@ -4955,19 +5706,27 @@
     "artwork_url": "https://drive.google.com/file/d/12SLJgmtqcxVKxVFxwH8oIJKqrm0Dj3ZE/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hard Coral & Soft Coral",
     "face": "Soft Coral",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip your hand.",
     "status": "proposed",
     "artwork_id": "1ac4bI3qhlCwOyRZUhSEgSS9c-yvtJwnM",
     "artwork_url": "https://drive.google.com/file/d/1ac4bI3qhlCwOyRZUhSEgSS9c-yvtJwnM/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -4981,7 +5740,8 @@
     "artwork_url": "https://drive.google.com/file/d/1OusX_XcVrHsPyhWUKiaklqAFhOoVqc60/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hummingbird & Hawk Moth",
@@ -4994,19 +5754,27 @@
     "artwork_url": "https://drive.google.com/file/d/1Rb-ixxPTJd5GUvynvzKwDQdeiEBJda2g/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Whole Egg & Cracked Egg",
     "face": "Whole Egg",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1KxET2X_ziAbUV8KYITXJch3mcy-IqBt7",
     "artwork_url": "https://drive.google.com/file/d/1KxET2X_ziAbUV8KYITXJch3mcy-IqBt7/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5014,25 +5782,35 @@
     "face": "Cracked Egg",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Draw 2 cards. Banish this card.",
     "status": "proposed",
     "artwork_id": "1SXMPLUCdIpmaCugGWkoyNLmxTVmr9947",
     "artwork_url": "https://drive.google.com/file/d/1SXMPLUCdIpmaCugGWkoyNLmxTVmr9947/view?usp=drivesdk",
     "keywords": [
-      "Flip"
-    ]
+      "Banish"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Butterfly Wing & Beetle Shell",
     "face": "Butterfly Wing",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "status": "proposed",
     "artwork_id": "1SO6ZvlWewqOOPkGGx8SkmHGt1DQiXrm0",
     "artwork_url": "https://drive.google.com/file/d/1SO6ZvlWewqOOPkGGx8SkmHGt1DQiXrm0/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -5046,19 +5824,27 @@
     "artwork_url": "https://drive.google.com/file/d/107HAMuwazg9r0-6K06jCWAOe39H5sLDq/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Amber Frog & Indigo Toad",
     "face": "Amber Frog",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1NnmuykqMoHgI3lMoiYk0QFfFmTB2Z54W",
     "artwork_url": "https://drive.google.com/file/d/1NnmuykqMoHgI3lMoiYk0QFfFmTB2Z54W/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5066,13 +5852,14 @@
     "face": "Indigo Toad",
     "side": "dark",
     "cost": 1,
-    "effect": "Weaken 3.",
+    "effect": "Apply 3 Poison.",
     "status": "proposed",
     "artwork_id": "1INmwR23IDUbhf_S75f2ttFT9tadXjB95",
     "artwork_url": "https://drive.google.com/file/d/1INmwR23IDUbhf_S75f2ttFT9tadXjB95/view?usp=drivesdk",
     "keywords": [
-      "Weaken"
-    ]
+      "Poison"
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Red Panda & Clouded Leopard",
@@ -5085,7 +5872,8 @@
     "artwork_url": "https://drive.google.com/file/d/19BYSHsdWX7113diKEUd-xzlp_B9l-nh3/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Red Panda & Clouded Leopard",
@@ -5098,7 +5886,8 @@
     "artwork_url": "https://drive.google.com/file/d/1JuwzBeCTfjXfX1ySHjUhwP_f6LYQ5jiP/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Living Jellyfish & Jellyfish Fossil",
@@ -5111,19 +5900,27 @@
     "artwork_url": "https://drive.google.com/file/d/1QbwX7iffDIJGlYuqZJjWVGjHI32qql3m/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Living Jellyfish & Jellyfish Fossil",
     "face": "Jellyfish Fossil",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1BBGJNpL6J2ux-Aly5Voheu4IUgUUmiU4",
     "artwork_url": "https://drive.google.com/file/d/1BBGJNpL6J2ux-Aly5Voheu4IUgUUmiU4/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5137,7 +5934,8 @@
     "artwork_url": "https://drive.google.com/file/d/1PGk_mbDkf__jEUgyY3zvAVKoO6zv-2et/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Poppy & Black Tulip",
@@ -5150,30 +5948,41 @@
     "artwork_url": "https://drive.google.com/file/d/1j83OxtFSENp0P4aEnxRsTxW8RAiTxdGp/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silver Birch & Hollow Oak",
     "face": "Silver Birch",
     "side": "light",
     "cost": 1,
-    "effect": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
+    "effect": "Put up to 2 cards from your discard pile on the bottom of your library.",
     "status": "proposed",
     "artwork_id": "1Ba3r-p3rdnjjA2YL1mCLQRF2qh5-LMyC",
     "artwork_url": "https://drive.google.com/file/d/1Ba3r-p3rdnjjA2YL1mCLQRF2qh5-LMyC/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Silver Birch & Hollow Oak",
     "face": "Hollow Oak",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep 2 random cards in your hand.",
     "status": "proposed",
     "artwork_id": "1pn36xtbcYGzue-gBCkFT9k6CbowF9E3e",
     "artwork_url": "https://drive.google.com/file/d/1pn36xtbcYGzue-gBCkFT9k6CbowF9E3e/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 2,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -5181,12 +5990,25 @@
     "face": "Fern Fiddlehead",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip this card. Keep this card.",
     "status": "proposed",
     "artwork_id": "1_Ad7LqNoFEuIUl0RpxuSCDjlgK5clY68",
     "artwork_url": "https://drive.google.com/file/d/1_Ad7LqNoFEuIUl0RpxuSCDjlgK5clY68/view?usp=drivesdk",
     "keywords": [
-      "Flip"
+      "Flip",
+      "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "self",
+        "selection_prompts": 0
+      },
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5200,20 +6022,33 @@
     "artwork_url": "https://drive.google.com/file/d/1BJfTl2iBu801GsAT9OJyk_irM5iTV8yB/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Flower Bud & Seed Pod",
     "face": "Flower Bud",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand. Keep it.",
+    "effect": "Flip this card. Keep this card.",
     "status": "proposed",
     "artwork_id": "1htErAmPRp1eIIzpzJz6M7b1ItlvItEx4",
     "artwork_url": "https://drive.google.com/file/d/1htErAmPRp1eIIzpzJz6M7b1ItlvItEx4/view?usp=drivesdk",
     "keywords": [
       "Flip",
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "self",
+        "selection_prompts": 0
+      },
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5225,7 +6060,8 @@
     "status": "proposed",
     "artwork_id": "1m6-NIkR2SryWPMGbrfoN3lFZNyor8LY7",
     "artwork_url": "https://drive.google.com/file/d/1m6-NIkR2SryWPMGbrfoN3lFZNyor8LY7/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Cultivated Mushroom & Wild Mushroom",
@@ -5238,18 +6074,20 @@
     "artwork_url": "https://drive.google.com/file/d/1YUEo3PFO0d10NV5BEmc3fizObWANY6CX/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cultivated Mushroom & Wild Mushroom",
     "face": "Wild Mushroom",
     "side": "dark",
     "cost": 1,
-    "effect": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "effect": "Shuffle your hand into your library. Draw 4 cards.",
     "status": "proposed",
     "artwork_id": "1u57t1Z7lLWnPd-kNChIF5JV_Yu0gjU0y",
     "artwork_url": "https://drive.google.com/file/d/1u57t1Z7lLWnPd-kNChIF5JV_Yu0gjU0y/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Cactus Flower & Desert Thorn",
@@ -5262,7 +6100,8 @@
     "artwork_url": "https://drive.google.com/file/d/1Leo4wy_fhMqsjhHS_-Ro5dHacsR3evX4/view?usp=drivesdk",
     "keywords": [
       "Growth"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Cactus Flower & Desert Thorn",
@@ -5276,7 +6115,8 @@
     "keywords": [
       "Ward",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Ice Crystal & Salt Crystal",
@@ -5290,19 +6130,27 @@
     "keywords": [
       "Weaken",
       "Frost"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Ice Crystal & Salt Crystal",
     "face": "Salt Crystal",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1LD72ZKhcE_h4dj402xcOEKjBkfbQTtx5",
     "artwork_url": "https://drive.google.com/file/d/1LD72ZKhcE_h4dj402xcOEKjBkfbQTtx5/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5310,12 +6158,19 @@
     "face": "River Pearl",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1LdcYvSobZ6jvNqIr1Gv5GWvgtXgW5hFF",
     "artwork_url": "https://drive.google.com/file/d/1LdcYvSobZ6jvNqIr1Gv5GWvgtXgW5hFF/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5329,19 +6184,33 @@
     "artwork_url": "https://drive.google.com/file/d/1VIWyc7aEuTbeg85pWO3YO8HTVWBhFhEX/view?usp=drivesdk",
     "keywords": [
       "Burn"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Golden Mask & Cracked Mask",
     "face": "Golden Mask",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip this card. Keep this card.",
     "status": "proposed",
     "artwork_id": "1jINNmrpN1E8Jml7CJUtT_DZJHSb2CTNA",
     "artwork_url": "https://drive.google.com/file/d/1jINNmrpN1E8Jml7CJUtT_DZJHSb2CTNA/view?usp=drivesdk",
     "keywords": [
-      "Flip"
+      "Flip",
+      "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "self",
+        "selection_prompts": 0
+      },
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5349,12 +6218,19 @@
     "face": "Cracked Mask",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip your hand.",
     "status": "proposed",
     "artwork_id": "1at4wsEWspmF3d7SvCp-PNRlJVZpUzJng",
     "artwork_url": "https://drive.google.com/file/d/1at4wsEWspmF3d7SvCp-PNRlJVZpUzJng/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5368,7 +6244,8 @@
     "artwork_url": "https://drive.google.com/file/d/1TGqO5fSWv4OGY4UzujXRvte9tixKRn1T/view?usp=drivesdk",
     "keywords": [
       "Mark"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silver Crown & Rusty Crown",
@@ -5381,7 +6258,8 @@
     "artwork_url": "https://drive.google.com/file/d/1AiCyPh6b14Ge33dWfdJNlPVIVHj_s4oQ/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Crystal Goblet & Clay Cup",
@@ -5394,7 +6272,8 @@
     "artwork_url": "https://drive.google.com/file/d/1XI3u4CEgbOgiLfkUOgS1PuCEGbQo8qM3/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Crystal Goblet & Clay Cup",
@@ -5407,7 +6286,8 @@
     "artwork_url": "https://drive.google.com/file/d/1X3P9gG2bv1harmubVCY6UfFDCdgDEQjZ/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silk Glove & Iron Gauntlet",
@@ -5418,7 +6298,8 @@
     "status": "proposed",
     "artwork_id": "1LMpEzjDUrNyJZPFMib4dXHjMJOwlpUMe",
     "artwork_url": "https://drive.google.com/file/d/1LMpEzjDUrNyJZPFMib4dXHjMJOwlpUMe/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Silk Glove & Iron Gauntlet",
@@ -5431,19 +6312,29 @@
     "artwork_url": "https://drive.google.com/file/d/1ofIAmxihLiEebOQ65Naw6oKWziq6p-qz/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Woven Basket & Unwoven Reeds",
     "face": "Woven Basket",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep 2 random cards in your hand.",
     "status": "proposed",
     "artwork_id": "13UA0GE_yN6sF3kHC1-s7mzkH3Av9A7QZ",
     "artwork_url": "https://drive.google.com/file/d/13UA0GE_yN6sF3kHC1-s7mzkH3Av9A7QZ/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 2,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -5457,7 +6348,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ICjWTvL2KwQo7r3iiB9ePkenTORSN-hI/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Music Box & Silent Music Box",
@@ -5470,7 +6362,8 @@
     "artwork_url": "https://drive.google.com/file/d/1_fGrLWnpVbjF0glvj5pftEpy1rvIoUWy/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Music Box & Silent Music Box",
@@ -5484,19 +6377,33 @@
     "keywords": [
       "Banish",
       "Hush"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Closed Parasol & Open Parasol",
     "face": "Closed Parasol",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip this card. Keep this card.",
     "status": "proposed",
     "artwork_id": "11Xnq_-YSm4gYNyBmDyHGeIY_zNdShnmx",
     "artwork_url": "https://drive.google.com/file/d/11Xnq_-YSm4gYNyBmDyHGeIY_zNdShnmx/view?usp=drivesdk",
     "keywords": [
-      "Flip"
+      "Flip",
+      "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "self",
+        "selection_prompts": 0
+      },
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5510,19 +6417,27 @@
     "artwork_url": "https://drive.google.com/file/d/1bcKehOyA-lfB-KUjlG8h6yaG3cD_1M1X/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Fan & Black Fan",
     "face": "White Fan",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip your hand.",
     "status": "proposed",
     "artwork_id": "1aghUy0aUrQDb_gDwUPvTrDixhn0R1gFy",
     "artwork_url": "https://drive.google.com/file/d/1aghUy0aUrQDb_gDwUPvTrDixhn0R1gFy/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5530,12 +6445,19 @@
     "face": "Black Fan",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip your hand.",
     "status": "proposed",
     "artwork_id": "1VryJ6zAyPAHtd63KNLlP9-JFw9O5Wh4M",
     "artwork_url": "https://drive.google.com/file/d/1VryJ6zAyPAHtd63KNLlP9-JFw9O5Wh4M/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5543,12 +6465,19 @@
     "face": "Wooden Spool",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1O7JYQCnT63P26D-2r_ANzLGaC5FL-WTM",
     "artwork_url": "https://drive.google.com/file/d/1O7JYQCnT63P26D-2r_ANzLGaC5FL-WTM/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5562,19 +6491,29 @@
     "artwork_url": "https://drive.google.com/file/d/1oxU-wll1CkaG7YjJq7lJMxHJDu779r55/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Gilded Cage & Broken Cage",
     "face": "Gilded Cage",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep a random card in your hand.",
     "status": "proposed",
     "artwork_id": "103u7kJ08876rjT6ttB5ta4OaGU-l19xm",
     "artwork_url": "https://drive.google.com/file/d/103u7kJ08876rjT6ttB5ta4OaGU-l19xm/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -5588,7 +6527,8 @@
     "artwork_url": "https://drive.google.com/file/d/15kEUzzTziwujXCihrEmx8-od-P0KKOZm/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bronze Mirror & Tarnished Mirror",
@@ -5602,19 +6542,27 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bronze Mirror & Tarnished Mirror",
     "face": "Tarnished Mirror",
     "side": "dark",
     "cost": 1,
-    "effect": "Flip a card in your discard pile. Return it to your hand.",
+    "effect": "Flip the top card of your discard pile. Return it to your hand.",
     "status": "proposed",
     "artwork_id": "11fSJYjFVg9xFaL4AQY9NpHn_hxTn0L0u",
     "artwork_url": "https://drive.google.com/file/d/11fSJYjFVg9xFaL4AQY9NpHn_hxTn0L0u/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "top_discard",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5629,7 +6577,8 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Glass Marble & Clay Marble",
@@ -5642,19 +6591,27 @@
     "artwork_url": "https://drive.google.com/file/d/1wuBMQUxkX0OxwJo7RbPYvRXmfn0bg5VZ/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silver Locket & Empty Locket",
     "face": "Silver Locket",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1WXDNTeVa33vWlZjLcmnEhlU8S2QYg844",
     "artwork_url": "https://drive.google.com/file/d/1WXDNTeVa33vWlZjLcmnEhlU8S2QYg844/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5668,7 +6625,8 @@
     "artwork_url": "https://drive.google.com/file/d/1qYi_R3rb0F9WcR7V4A6Rkba0384vfCUO/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Wax Key & Melted Key",
@@ -5682,6 +6640,13 @@
     "keywords": [
       "Flip",
       "Banish"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5695,7 +6660,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ISo1yLH0d5S37qMT_T-Su3XkqVWcWp3I/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Golden Shears & Blunt Shears",
@@ -5709,7 +6675,8 @@
     "keywords": [
       "Ward",
       "Release"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Golden Shears & Blunt Shears",
@@ -5722,7 +6689,8 @@
     "artwork_url": "https://drive.google.com/file/d/1UsDofhQcqZT54-nWnBPjy9WdjFVFe755/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Copper Coin & Hollow Coin",
@@ -5735,7 +6703,8 @@
     "artwork_url": "https://drive.google.com/file/d/1s4Mfgli8Rm0UZ-SAs00iMQDnqxu5MDrG/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Copper Coin & Hollow Coin",
@@ -5748,18 +6717,20 @@
     "artwork_url": "https://drive.google.com/file/d/1Z6vHYRqKOIqeRCGPM-ENUcU5RXQJ38aT/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Feather Quill & Ink Blot",
     "face": "Feather Quill",
     "side": "light",
     "cost": 1,
-    "effect": "Put a card from your discard pile on top of your draw pile.",
+    "effect": "Put a card from your discard pile on top of your library.",
     "status": "proposed",
     "artwork_id": "1XdodTpAeoJ6GXQJlmboZJ1T39B_MW8Fr",
     "artwork_url": "https://drive.google.com/file/d/1XdodTpAeoJ6GXQJlmboZJ1T39B_MW8Fr/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Feather Quill & Ink Blot",
@@ -5772,19 +6743,29 @@
     "artwork_url": "https://drive.google.com/file/d/1lARfmjzBugRkExhtWUYfp8zb7lRCgc79/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Paintbrush & Paint Scraper",
     "face": "Paintbrush",
     "side": "light",
     "cost": 1,
-    "effect": "Flip a card in your hand.",
+    "effect": "Flip a random card in your hand.",
     "status": "proposed",
     "artwork_id": "1nCXwA4NtHzRlo4wdshVitxcmMM1SgyS8",
     "artwork_url": "https://drive.google.com/file/d/1nCXwA4NtHzRlo4wdshVitxcmMM1SgyS8/view?usp=drivesdk",
     "keywords": [
       "Flip"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Flip",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 1,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -5798,7 +6779,8 @@
     "artwork_url": "https://drive.google.com/file/d/1-aHwrBxzfb77j27vzpRtrF1HG8QUAYLM/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lit Match & Spent Match",
@@ -5812,7 +6794,8 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Lit Match & Spent Match",
@@ -5825,7 +6808,8 @@
     "artwork_url": "https://drive.google.com/file/d/1l-d2OFwKN7END4RfAaKY1zxeayt40eFz/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Paper Boat & Stone Boat",
@@ -5836,7 +6820,8 @@
     "status": "proposed",
     "artwork_id": "1yJulHd86gHzj4pg3Nz65bqTmclTnW_Xx",
     "artwork_url": "https://drive.google.com/file/d/1yJulHd86gHzj4pg3Nz65bqTmclTnW_Xx/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Paper Boat & Stone Boat",
@@ -5849,19 +6834,27 @@
     "artwork_url": "https://drive.google.com/file/d/17pTXhd7qHQCGZ1zvte4t0hi4NTOlvBk0/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Iron Needlecase & Empty Needlecase",
     "face": "Iron Needlecase",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep this card.",
     "status": "proposed",
     "artwork_id": "1JP3bPU1OloYFstRaBUxEQEpQeDzvDijA",
     "artwork_url": "https://drive.google.com/file/d/1JP3bPU1OloYFstRaBUxEQEpQeDzvDijA/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "self",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -5875,19 +6868,29 @@
     "artwork_url": "https://drive.google.com/file/d/1O23i9vRqtY9c6Ocw3INf3aG93fcjZoif/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "White Ribbon & Black Ribbon",
     "face": "White Ribbon",
     "side": "light",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep 2 random cards in your hand.",
     "status": "proposed",
     "artwork_id": "1wNNucUyzSzEJ7DG2r1ToKSbGZZf97cxk",
     "artwork_url": "https://drive.google.com/file/d/1wNNucUyzSzEJ7DG2r1ToKSbGZZf97cxk/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "random_hand",
+        "selection_prompts": 0,
+        "count": 2,
+        "without_replacement": true
+      }
     ]
   },
   {
@@ -5901,7 +6904,8 @@
     "artwork_url": "https://drive.google.com/file/d/1ATSsBmCgv8SqavIlxSCQBnirCFcU8Cj3/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hour Bell & Silent Bell",
@@ -5914,7 +6918,8 @@
     "artwork_url": "https://drive.google.com/file/d/1-gYxAh1MKrrGbvf4VnBwinEDKyfwuTx7/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hour Bell & Silent Bell",
@@ -5928,7 +6933,8 @@
     "keywords": [
       "Banish",
       "Hush"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Intact Sapphire & Cracked Sapphire",
@@ -5942,7 +6948,8 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Intact Sapphire & Cracked Sapphire",
@@ -5956,7 +6963,8 @@
     "keywords": [
       "Ward",
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Ivory Chess King & Obsidian Chess Queen",
@@ -5969,7 +6977,8 @@
     "artwork_url": "https://drive.google.com/file/d/1m3quWQOP8a5bwZ5hBIm-Bia7a2z41c6w/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Ivory Chess King & Obsidian Chess Queen",
@@ -5982,7 +6991,8 @@
     "artwork_url": "https://drive.google.com/file/d/1X1n17_3-gGK6I572QrPECmJzrHldewET/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sunlit Gallery & Shadow Gallery",
@@ -5995,19 +7005,27 @@
     "artwork_url": "https://drive.google.com/file/d/1vJPRrUVC_HIlUqqGctHVqwIKFyY8qWAs/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Sunlit Gallery & Shadow Gallery",
     "face": "Shadow Gallery",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep your hand.",
     "status": "proposed",
     "artwork_id": "1fwRyYd2iEwpF5q4woiIEJSgDuXkLtaNv",
     "artwork_url": "https://drive.google.com/file/d/1fwRyYd2iEwpF5q4woiIEJSgDuXkLtaNv/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -6015,12 +7033,19 @@
     "face": "Winter Conservatory",
     "side": "light",
     "cost": 1,
-    "effect": "Keep up to 2 cards in your hand.",
+    "effect": "Keep your hand.",
     "status": "proposed",
     "artwork_id": "1ou6BOrZnkOHjNDRvwWwH1d2BV5wHpcSf",
     "artwork_url": "https://drive.google.com/file/d/1ou6BOrZnkOHjNDRvwWwH1d2BV5wHpcSf/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -6034,7 +7059,8 @@
     "artwork_url": "https://drive.google.com/file/d/1wmz5myUWFCXpAQ0v1TypvWaD000yJuAV/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "High Balcony & Hidden Basement",
@@ -6047,19 +7073,27 @@
     "artwork_url": "https://drive.google.com/file/d/1zl0Sf5kHV0MORfQiES4Kcmkt9YAZzBt_/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "High Balcony & Hidden Basement",
     "face": "Hidden Basement",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep your hand.",
     "status": "proposed",
     "artwork_id": "1jcQ9HpPZwVD1SfMpPnX8oL1_gjBIcfiz",
     "artwork_url": "https://drive.google.com/file/d/1jcQ9HpPZwVD1SfMpPnX8oL1_gjBIcfiz/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -6071,7 +7105,8 @@
     "status": "proposed",
     "artwork_id": "18or0lKE1yevFoCoq_HOPekYsKLPRnZbb",
     "artwork_url": "https://drive.google.com/file/d/18or0lKE1yevFoCoq_HOPekYsKLPRnZbb/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Open Pavilion & Walled Pavilion",
@@ -6084,7 +7119,8 @@
     "artwork_url": "https://drive.google.com/file/d/1t00_0N50Z-XG_fmJkwOT0tSGncPx5jLi/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Crystal Grotto & Basalt Cave",
@@ -6098,7 +7134,8 @@
     "keywords": [
       "Banish",
       "Reflect"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Crystal Grotto & Basalt Cave",
@@ -6111,18 +7148,20 @@
     "artwork_url": "https://drive.google.com/file/d/1qb4J2KKZqi0ulUomnwtaB_M50EYSfTJz/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hedge Garden & Wild Thicket",
     "face": "Hedge Garden",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "effect": "Look at the top 3 cards of your library. Put them back in any order.",
     "status": "proposed",
     "artwork_id": "1Qzg8Dn-urRmDberiEL8C-xkimdI-DsZ9",
     "artwork_url": "https://drive.google.com/file/d/1Qzg8Dn-urRmDberiEL8C-xkimdI-DsZ9/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Hedge Garden & Wild Thicket",
@@ -6135,7 +7174,8 @@
     "artwork_url": "https://drive.google.com/file/d/12rP35aIj8TDQuMmKGS2h3hVxbl2NmzuF/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Marble Fountain & Dry Fountain",
@@ -6148,7 +7188,8 @@
     "artwork_url": "https://drive.google.com/file/d/1oP6wlq_SHODPgVcHQMiV0GxGAE5UAJaX/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Marble Fountain & Dry Fountain",
@@ -6161,30 +7202,39 @@
     "artwork_url": "https://drive.google.com/file/d/13jnjBNWIe390h83r6omH6hH8g5t3s0yN/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Golden Atrium & Black Atrium",
     "face": "Golden Atrium",
     "side": "light",
     "cost": 1,
-    "effect": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in any order.",
     "status": "proposed",
     "artwork_id": "14VvdDhU-fiiaJ81VezlDk-bMljuTob7C",
     "artwork_url": "https://drive.google.com/file/d/14VvdDhU-fiiaJ81VezlDk-bMljuTob7C/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Golden Atrium & Black Atrium",
     "face": "Black Atrium",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep your hand.",
     "status": "proposed",
     "artwork_id": "1f8GpT4vliE4eZub7g16tuty8_5DJ5eQU",
     "artwork_url": "https://drive.google.com/file/d/1f8GpT4vliE4eZub7g16tuty8_5DJ5eQU/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   },
   {
@@ -6198,7 +7248,8 @@
     "artwork_url": "https://drive.google.com/file/d/1mIOG4DXz7gnqM9iE3qAUdq7biIuqWR0W/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Moonlit Pier & Sunlit Pier",
@@ -6211,7 +7262,8 @@
     "artwork_url": "https://drive.google.com/file/d/1hBViq9MICzyCOGiCt1U1ufYeoQIU73y8/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hilltop Windmill & Underground Mill",
@@ -6224,7 +7276,8 @@
     "artwork_url": "https://drive.google.com/file/d/1c0MWpYjOhR6qMoZLHcy6D2Q3InFIbLXZ/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Hilltop Windmill & Underground Mill",
@@ -6235,7 +7288,8 @@
     "status": "proposed",
     "artwork_id": "16X1E-66cEwHbapSIMTrjNC91UZmbAtDv",
     "artwork_url": "https://drive.google.com/file/d/16X1E-66cEwHbapSIMTrjNC91UZmbAtDv/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Watchtower & Collapsed Watchtower",
@@ -6248,7 +7302,8 @@
     "artwork_url": "https://drive.google.com/file/d/13eKKMD9cTJ04e_QvHO0vTu-Bj2QBiPu3/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Watchtower & Collapsed Watchtower",
@@ -6261,7 +7316,8 @@
     "artwork_url": "https://drive.google.com/file/d/1aTEjSUcPVynfQN9Eswe6nwiNWueEz74e/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Open Courtyard & Roofed Courtyard",
@@ -6272,7 +7328,8 @@
     "status": "proposed",
     "artwork_id": "1ZrHhikduod_Ugb4-J_XaA4ZX6CBUHhm8",
     "artwork_url": "https://drive.google.com/file/d/1ZrHhikduod_Ugb4-J_XaA4ZX6CBUHhm8/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Open Courtyard & Roofed Courtyard",
@@ -6285,7 +7342,8 @@
     "artwork_url": "https://drive.google.com/file/d/1X5muc5W2DTUj11z4UBJYkWjtkKiC4diM/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Grand Library & Forgotten Archive",
@@ -6296,7 +7354,8 @@
     "status": "proposed",
     "artwork_id": "1VjNdQSs6b9vkupqUw6AwRaPNsx6Rna3c",
     "artwork_url": "https://drive.google.com/file/d/1VjNdQSs6b9vkupqUw6AwRaPNsx6Rna3c/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Grand Library & Forgotten Archive",
@@ -6309,7 +7368,8 @@
     "artwork_url": "https://drive.google.com/file/d/1d1TRR2rcTsJ-J8MDwuvp_8ehiid9ob16/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Frozen Waterfall & Flowing Waterfall",
@@ -6323,7 +7383,8 @@
     "keywords": [
       "Weaken",
       "Frost"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Frozen Waterfall & Flowing Waterfall",
@@ -6336,7 +7397,8 @@
     "artwork_url": "https://drive.google.com/file/d/198c930r4FN671-AnMTf_0ThNjTiuWIPN/view?usp=drivesdk",
     "keywords": [
       "Burn"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Coral Palace & Ship Graveyard",
@@ -6349,7 +7411,8 @@
     "artwork_url": "https://drive.google.com/file/d/1Pu_zhmbVPTEyQVTrHlxzrSP1Ffc4NNJ_/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Coral Palace & Ship Graveyard",
@@ -6360,7 +7423,8 @@
     "status": "proposed",
     "artwork_id": "107pt5Z4ogYQhYIGqdhkatZd-IWRKeUUr",
     "artwork_url": "https://drive.google.com/file/d/107pt5Z4ogYQhYIGqdhkatZd-IWRKeUUr/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Ivory Bridge & Obsidian Bridge",
@@ -6371,7 +7435,8 @@
     "status": "proposed",
     "artwork_id": "10LYmE38ofUKoLiaYEOCMMjbJhiSwI5Ty",
     "artwork_url": "https://drive.google.com/file/d/10LYmE38ofUKoLiaYEOCMMjbJhiSwI5Ty/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Ivory Bridge & Obsidian Bridge",
@@ -6384,7 +7449,8 @@
     "artwork_url": "https://drive.google.com/file/d/1FGwTBqRu1F-I_mGnjBSNpLdBt9Jw9G4b/view?usp=drivesdk",
     "keywords": [
       "Weaken"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Glass Stairway & Stone Stairway",
@@ -6397,7 +7463,8 @@
     "artwork_url": "https://drive.google.com/file/d/1o-dkTiZ0h3XR0uM16LjLdWhgNsAEkrVc/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Glass Stairway & Stone Stairway",
@@ -6408,7 +7475,8 @@
     "status": "proposed",
     "artwork_id": "1JjfBKv27xuE5JWZJuTJGGMmfwCwYOuK0",
     "artwork_url": "https://drive.google.com/file/d/1JjfBKv27xuE5JWZJuTJGGMmfwCwYOuK0/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Candlelit Theatre & Darkened Theatre",
@@ -6419,7 +7487,15 @@
     "status": "proposed",
     "artwork_id": "1XcN29hm2nR4ZHWWKCFCGWWFDzU72FGko",
     "artwork_url": "https://drive.google.com/file/d/1XcN29hm2nR4ZHWWKCFCGWWFDzU72FGko/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "light"
+      }
+    ]
   },
   {
     "pair": "Candlelit Theatre & Darkened Theatre",
@@ -6430,7 +7506,15 @@
     "status": "proposed",
     "artwork_id": "1vgA8Mnf9k824jcRyON0BiLAk-wPPI0Uk",
     "artwork_url": "https://drive.google.com/file/d/1vgA8Mnf9k824jcRyON0BiLAk-wPPI0Uk/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": [
+      {
+        "op": "Turn",
+        "target": "whole_hand",
+        "selection_prompts": 0,
+        "face": "dark"
+      }
+    ]
   },
   {
     "pair": "Tiled Bath & Broken Bath",
@@ -6444,7 +7528,8 @@
     "keywords": [
       "Burn",
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Tiled Bath & Broken Bath",
@@ -6457,7 +7542,8 @@
     "artwork_url": "https://drive.google.com/file/d/1XYTvAxxjPY_X_nT4YS80IQhF4Piu93UR/view?usp=drivesdk",
     "keywords": [
       "Decay"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Clock Tower & Timeless Tower",
@@ -6470,7 +7556,8 @@
     "artwork_url": "https://drive.google.com/file/d/1l1KGiZRbTHGf-klaCItchDG3h1YQegfA/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Clock Tower & Timeless Tower",
@@ -6481,7 +7568,8 @@
     "status": "proposed",
     "artwork_id": "1M7urP1NG7qRIJpNJjqa-PXkjEAvrzYKN",
     "artwork_url": "https://drive.google.com/file/d/1M7urP1NG7qRIJpNJjqa-PXkjEAvrzYKN/view?usp=drivesdk",
-    "keywords": []
+    "keywords": [],
+    "automatic_targets": []
   },
   {
     "pair": "Silk Tent & Wicker Shelter",
@@ -6494,7 +7582,8 @@
     "artwork_url": "https://drive.google.com/file/d/1vrnC1LfHR5y8Z7v90h47fDvm8FtoeNeT/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Silk Tent & Wicker Shelter",
@@ -6507,7 +7596,8 @@
     "artwork_url": "https://drive.google.com/file/d/1fTkI3f9m1JEeHbCNXj-jyuqVEoXl_MaR/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Stone Circle & Scattered Stones",
@@ -6520,7 +7610,8 @@
     "artwork_url": "https://drive.google.com/file/d/1pj0jmUuw-gjzsZzJguUKWWNskSK6ubV6/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Stone Circle & Scattered Stones",
@@ -6533,7 +7624,8 @@
     "artwork_url": "https://drive.google.com/file/d/1R5NkIm5cbejZbf-6jN79JG3DupKNcGgH/view?usp=drivesdk",
     "keywords": [
       "Binding"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Shallow Shore & Abyssal Trench",
@@ -6546,7 +7638,8 @@
     "artwork_url": "https://drive.google.com/file/d/1rNReDA-OZzIU8yF-lJNAHPFCDAqUxjwR/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Shallow Shore & Abyssal Trench",
@@ -6559,7 +7652,8 @@
     "artwork_url": "https://drive.google.com/file/d/167i8ayKaXrs_Y0WlPUXNoXn2BEnM7Jzt/view?usp=drivesdk",
     "keywords": [
       "Shadow"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bright Clearing & Dense Canopy",
@@ -6572,7 +7666,8 @@
     "artwork_url": "https://drive.google.com/file/d/18LGNndyVDWXwXCR0jMCN-53oW7fuxrc0/view?usp=drivesdk",
     "keywords": [
       "Banish"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Bright Clearing & Dense Canopy",
@@ -6585,7 +7680,8 @@
     "artwork_url": "https://drive.google.com/file/d/1XOjsIF3ds7gVZNGfVG2xF5md2KqK6qXa/view?usp=drivesdk",
     "keywords": [
       "Ward"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Open Window & Shuttered Window",
@@ -6598,19 +7694,27 @@
     "artwork_url": "https://drive.google.com/file/d/1oTwsRMB7-OzEg1vn2a9Tl6cQEp5uPSZH/view?usp=drivesdk",
     "keywords": [
       "Scry"
-    ]
+    ],
+    "automatic_targets": []
   },
   {
     "pair": "Open Window & Shuttered Window",
     "face": "Shuttered Window",
     "side": "dark",
     "cost": 1,
-    "effect": "Keep a card in your hand.",
+    "effect": "Keep your hand.",
     "status": "proposed",
     "artwork_id": "1nBvpPWDdN24U2WoF060JUiwkKkgqtBL6",
     "artwork_url": "https://drive.google.com/file/d/1nBvpPWDdN24U2WoF060JUiwkKkgqtBL6/view?usp=drivesdk",
     "keywords": [
       "Keep"
+    ],
+    "automatic_targets": [
+      {
+        "op": "Keep",
+        "target": "whole_hand",
+        "selection_prompts": 0
+      }
     ]
   }
 ]

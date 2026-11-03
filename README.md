@@ -146,3 +146,5 @@ python3 scripts/content-review/validate.py
 The versioned recipes contain one thematic rationale per artwork. Rebuilding preserves the embedded enemy thumbnails. Artwork hash checks require the original local Google Drive artwork folders recorded in the coverage manifests. To refresh the contact sheets from those masters, run `python3 scripts/content-review/prepare.py` before the renderer and validator. The 41 project-local contact sheets remain readable without that source folder.
 
 The validation report checks document/data consistency and arithmetic boundary cases. It does not establish combat balance or player enjoyment. Local-file browser preview was denied by policy, so browser rendering and filter interaction remain unverified.
+
+The latest status/target revision is `docs/Status and Targeting Revision v0.1.html`: Ward, Burn and Poison halve with rounding down; Scry reveals the changing library top for one player turn; Keep/Flip use automatic targets; Fire is the damage label. The five additional keyword candidates are discussion only. `scripts/content-review/status_model.py` is a focused reference for timing tests, not the game engine.

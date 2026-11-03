@@ -1,3 +1,5 @@
+> Historical integration handoff for the first full review. The current [status and targeting revision](Status%20and%20Targeting%20Revision%20v0.1.html) supersedes the earlier Ward/Burn/Scry/Keep/Flip rules and validation count quoted below. Current counts are in Content Validation v0.1.json.
+
 # Content review handoff
 
 The revised design, card catalogue and enemy catalogue are complete in this project worktree on `codex/enemy-art-mechanics-20261103`. They remain design proposals; no combat runtime or human playtest is claimed.

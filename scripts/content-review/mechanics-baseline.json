@@ -1,0 +1,1407 @@
+{
+  "status": "historical-input-before-halving-and-targeting-revision",
+  "source_commit": "97f77b0712aa256d95286b07f6a7eec175c64afd",
+  "cards": {
+    "Angel": "Gain 5 Ward.",
+    "Vampire": "Deal 4 Shadow damage. Leech.",
+    "Seraph": "Deal 7 Radiance damage.",
+    "Fallen Seraph": "Lose 2 HP. Deal 9 Shadow damage.",
+    "Cherub": "Heal 3 HP. Banish this card.",
+    "Imp": "Deal 4 Shadow damage. Flip a card in your hand.",
+    "Winged Guardian": "Gain 7 Ward.",
+    "Revenant": "Deal 5 Shadow damage. You may return a card from your discard pile to your hand.",
+    "Pilgrim": "Scry. Draw 1 card.",
+    "Exile": "Discard a card. Draw 2 cards.",
+    "Oracle": "Scry. Draw 1 card.",
+    "Deceiver": "Flip a card in your hand.",
+    "Abbess": "Heal 5 HP. Banish this card.",
+    "Vampire Countess": "Deal 5 Shadow damage. Leech. Banish this card.",
+    "Gardener": "Heal 4 HP. Banish this card.",
+    "Gravedigger": "Banish a card from your discard pile.",
+    "Confession": "Discard a card. Heal 3 HP. Banish this card.",
+    "Secrecy": "Keep up to 2 cards in your hand.",
+    "Absolution": "Heal 5 HP. Banish this card.",
+    "Condemnation": "Mark 4. Banish this card.",
+    "Temptation": "Lose 2 HP. Draw 2 cards.",
+    "Resolve": "Gain 6 Ward.",
+    "Sacrifice": "Banish another card from your hand. Deal 8 Radiance damage.",
+    "Self-Preservation": "Gain 6 Ward.",
+    "Dove": "Weaken 4.",
+    "Raven": "Return a card from your discard pile to your hand.",
+    "White Stag": "Scry. Draw 1 card.",
+    "Black Stag": "Deal 6 Shadow damage.",
+    "White Swan": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Black Swan": "Flip a card in your hand.",
+    "Lamb": "Weaken 4.",
+    "Wolf": "Deal 6 Shadow damage.",
+    "Butterfly": "Flip up to 2 cards in your hand.",
+    "Moth": "Flip a card in your hand.",
+    "Lark": "Draw 2 cards.",
+    "Owl": "Scry. Draw 1 card.",
+    "Sun": "Deal 6 Radiance damage.",
+    "Moon": "Flip your hand.",
+    "Sunrise": "Turn your hand to its light faces.",
+    "Eclipse": "Turn your hand to its dark faces.",
+    "Flame": "Apply 3 Burn.",
+    "Frost": "Weaken 4.",
+    "Rain": "Remove all Burn from both combatants. Heal 3 HP. Banish this card.",
+    "Drought": "Deal 6 Decay damage.",
+    "Bell Ringer": "Mark 3.",
+    "Silenced Bell Ringer": "Hush. Banish this card.",
+    "Sacred Chalice": "Heal 5 HP. Banish this card.",
+    "Blood Goblet": "Lose 2 HP. Gain 1 mana. Banish this card.",
+    "Censer": "Weaken 4.",
+    "Plague Brazier": "Weaken 3. Deal 3 Decay damage.",
+    "Reliquary": "Keep a card in your hand.",
+    "Empty Reliquary": "Banish a card from your discard pile.",
+    "Bloom": "Heal 4 HP. Banish this card.",
+    "Wither": "Deal 7 Decay damage. Banish this card.",
+    "Seed": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
+    "Ash": "Banish another card from your hand. Deal 7 Decay damage.",
+    "Ivy": "Weaken 4.",
+    "Thorns": "Deal 2 Decay damage twice.",
+    "Key": "Draw 1 card. Flip your hand.",
+    "Lock": "Keep a card in your hand.",
+    "Mirror": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Shattered Mirror": "Deal 2 Release damage twice.",
+    "Candle": "Gain 1 mana. Apply 2 Burn. Banish this card.",
+    "Extinguished Candle": "Turn your hand to its dark faces. Banish this card.",
+    "Open Book": "Return a card from your discard pile to your hand.",
+    "Sealed Book": "Keep a card in your hand.",
+    "Hourglass": "Weaken 4.",
+    "Broken Hourglass": "Shuffle your hand into your draw pile. Draw 5 cards. Banish this card.",
+    "Feather": "Draw 2 cards.",
+    "Chain": "Weaken 4.",
+    "Cathedral": "Gain 7 Ward.",
+    "Ruined Cathedral": "Return a card from your discard pile to your hand.",
+    "Sunlit Chapel": "Heal 5 HP. Banish this card.",
+    "Moonlit Crypt": "Return a card from your discard pile to your hand.",
+    "Cloister Garden": "Heal 5 HP. Banish this card.",
+    "Overgrown Ruins": "Put a card from your discard pile on top of your draw pile.",
+    "Bell Tower": "Mark 3.",
+    "Fallen Bell": "Deal 7 Binding damage.",
+    "Bridge": "Return a card from your discard pile to your hand.",
+    "Chasm": "Deal 5 Shadow damage, ignoring Ward.",
+    "Open Gate": "Draw 2 cards.",
+    "Sealed Gate": "Weaken 4.",
+    "Sanctuary": "Heal 5 HP. Banish this card.",
+    "Prison": "Weaken 6. Banish this card.",
+    "Mountain Monastery": "Gain 7 Ward.",
+    "Sunken Shrine": "Return a card from your discard pile to your hand.",
+    "Benediction": "Heal 4 HP. Banish this card.",
+    "Curse": "Weaken 4.",
+    "Ascension": "Return a card from your discard pile to your hand.",
+    "Descent": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "Memory": "Return a card from your discard pile to your hand.",
+    "Oblivion": "Banish another card from your hand. Deal 7 Oblivion damage.",
+    "Dream": "Scry. Draw 1 card.",
+    "Nightmare": "Weaken 4.",
+    "Bound Soul": "Weaken 4.",
+    "Unbound Spirit": "Draw 2 cards.",
+    "Sovereign": "Weaken 5.",
+    "Jester": "Flip your hand.",
+    "Puppeteer": "Flip a card in your hand.",
+    "Marionette": "Put another card from your hand on top of your draw pile.",
+    "Weaver": "Put a card from your discard pile on top of your draw pile.",
+    "Unraveler": "Banish another card from your hand. Deal 8 Decay damage.",
+    "Midwife": "Heal 5 HP. Draw 1 card. Banish this card.",
+    "Undertaker": "Banish a card from your discard pile.",
+    "Sentinel": "Gain 6 Ward.",
+    "Sleepwalker": "Shuffle your hand into your draw pile. Draw 3 cards.",
+    "Cartographer": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Lost Wanderer": "Shuffle your draw pile. Draw 2 cards.",
+    "Executioner": "Deal 7 Radiance damage.",
+    "Resurrector": "Return a card from your discard pile to your hand.",
+    "Honeybee": "Deal 5 Growth damage. Banish this card.",
+    "Locust": "Banish another card from your hand. Deal 11 Decay damage.",
+    "Peacock": "Weaken 4.",
+    "Vulture": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
+    "Goldfish": "Draw 2 cards.",
+    "Anglerfish": "Deal 3 Shadow damage. Mark 2.",
+    "Caged Songbird": "Keep a card in your hand.",
+    "Wild Songbird": "Draw 2 cards.",
+    "Tortoise": "Gain 6 Ward.",
+    "Hare": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Lighthouse": "Scry. Draw 1 card.",
+    "Shipwreck": "Banish another card from your hand. Deal 10 Decay damage.",
+    "Glasshouse": "Heal 5 HP. Banish this card.",
+    "Root Cellar": "Keep a card in your hand.",
+    "Walled City": "Gain 10 Ward.",
+    "Wilderness": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "Orchard": "Heal 5 HP. Banish this card.",
+    "Bone Orchard": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
+    "Dawn Market": "Discard a card. Draw 2 cards.",
+    "Night Market": "Banish another card from your hand. Draw 3 cards.",
+    "Banquet Hall": "Heal 5 HP. Banish this card.",
+    "Empty Banquet Hall": "Banish a card from your discard pile.",
+    "Observatory": "Scry. Draw 1 card.",
+    "Underground Cavern": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "Salt Flat": "Deal 6 Radiance damage.",
+    "Deep Marsh": "Weaken 4.",
+    "Frozen Lake": "Weaken 3. Deal 2 Frost damage.",
+    "Boiling Lake": "Deal 5 Flame damage. Apply 2 Burn.",
+    "Floating Library": "Scry. Draw 1 card.",
+    "Sunken Library": "Return a card from your discard pile to your hand.",
+    "White Desert": "Weaken 3. Deal 3 Radiance damage.",
+    "Black Forest": "Keep up to 2 cards in your hand.",
+    "Clockwork City": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Wandering Village": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "Sewing Needle": "Put a card from your discard pile on top of your draw pile.",
+    "Scissors": "Banish another card from your hand. Deal 7 Decay damage, ignoring Ward.",
+    "Compass": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "Labyrinth": "Weaken 4.",
+    "Lantern": "Scry. Draw 1 card.",
+    "Shroud": "Keep up to 2 cards in your hand.",
+    "Prism": "Deal 2 Radiance damage three times.",
+    "Black Glass": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Tuned Violin": "Weaken 4.",
+    "Broken Violin": "Weaken 5. Banish this card.",
+    "Balance Scales": "Mark 2. Weaken 2.",
+    "Loaded Dice": "Look at the top 3 cards of your draw pile. Put 2 in your hand and the rest on the bottom in any order.",
+    "Chessboard": "Scry. Weaken 2.",
+    "Scattered Chess Pieces": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "Wax Seal": "Keep a card in your hand.",
+    "Torn Letter": "Banish another card from your hand.",
+    "Anchor": "Keep a card in your hand.",
+    "Kite": "Draw 2 cards.",
+    "Metronome": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Wind Chime": "Weaken 3.",
+    "Lens": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "Blindfold": "Weaken 4.",
+    "Comb": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Tangled Hair": "Weaken 4.",
+    "Porcelain Doll": "Keep a card in your hand.",
+    "Rag Doll": "Return a card from your discard pile to your hand.",
+    "Symmetry": "Mark 2. Weaken 2.",
+    "Asymmetry": "Draw 2 cards. Discard a card.",
+    "Unity": "Return a card from your discard pile to your hand.",
+    "Fragmentation": "Banish another card from your hand. Deal 4 Decay damage twice.",
+    "Convergence": "Put up to 2 cards from your discard pile on top of your draw pile in any order.",
+    "Divergence": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "Compression": "Weaken 4.",
+    "Expansion": "Draw 3 cards.",
+    "Attraction": "Return a card from your discard pile to your hand.",
+    "Repulsion": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "Gravity": "Deal 7 Binding damage.",
+    "Levitation": "Return a card from your discard pile to your hand.",
+    "Stillness": "Weaken 6. Banish this card.",
+    "Frenzy": "Discard a card. Deal 10 Release damage.",
+    "Silence": "Hush. Banish this card.",
+    "Clamor": "Weaken 4.",
+    "Awakening": "Draw 1 card. Turn your hand to its light faces. Banish this card.",
+    "Slumber": "Heal 4 HP. Banish this card.",
+    "Multiplicity": "Draw 3 cards. Banish this card.",
+    "Solitude": "Banish all other cards in your hand.",
+    "Plenty": "Heal 5 HP. Draw 1 card. Banish this card.",
+    "Famine": "Lose 2 HP. Deal 8 Decay damage.",
+    "High Tide": "Return up to 2 cards from your discard pile to your hand.",
+    "Low Tide": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "Exposure": "Remove 3 enemy Ward. Mark 3.",
+    "Concealment": "Keep up to 2 cards in your hand.",
+    "Herald": "Mark 3.",
+    "Smuggler": "Put another card from your hand on the bottom of your draw pile. Draw 2 cards.",
+    "Standard Bearer": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Flag Burner": "Banish another card from your hand. Apply 3 Burn.",
+    "Animal Tamer": "Weaken 4.",
+    "Shapeshifter": "Flip your hand.",
+    "Mask Maker": "Flip a card in your hand.",
+    "Face Thief": "Flip a card in your hand.",
+    "Fencer": "Deal 3 Radiance damage. Mark 2.",
+    "Brawler": "Lose 2 HP. Deal 11 Decay damage.",
+    "Charioteer": "Deal 7 Radiance damage.",
+    "Ferryman": "Return a card from your discard pile to your hand.",
+    "Auctioneer": "Discard a card. Draw 2 cards.",
+    "Scavenger": "Return a card from your discard pile to your hand.",
+    "Ballerina": "Flip your hand.",
+    "Contortionist": "Flip a card in your hand.",
+    "Royal Hound": "Mark 3.",
+    "Stray Hound": "Return a card from your discard pile to your hand.",
+    "Archivist": "Put a card from your discard pile on top of your draw pile. Scry.",
+    "Bookworm": "Banish a card from your discard pile.",
+    "Surveyor": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Trespasser": "Remove 5 enemy Ward.",
+    "Chimney Sweep": "Remove all your Burn. Banish a card from your discard pile.",
+    "Smoke Spirit": "Weaken 3.",
+    "Coral Reef": "Gain 9 Ward.",
+    "Kelp Forest": "Weaken 4.",
+    "Oyster": "Keep a card in your hand.",
+    "Cuttlefish": "Flip a card in your hand.",
+    "Firefly": "Mark 3.",
+    "Cave Cricket": "Scry. Draw 1 card.",
+    "Stalactite": "Deal 6 Binding damage.",
+    "Geyser": "Deal 7 Release damage. Banish this card.",
+    "Dandelion": "Put up to 2 other cards from your hand on the bottom of your draw pile. Draw that many cards.",
+    "Mandrake": "Weaken 6. Banish this card.",
+    "Snowdrop": "Heal 4 HP. Banish this card.",
+    "Nightshade": "Deal 5 Decay damage, ignoring Ward. Banish this card.",
+    "Cocoon": "Flip a card in your hand. Keep it.",
+    "Shed Skin": "Banish another card from your hand. Draw 1 card.",
+    "Lotus": "Heal 4 HP. Banish this card.",
+    "Corpse Flower": "Banish a card from your discard pile. Deal 6 Decay damage.",
+    "Kingfisher": "Deal 5 Radiance damage.",
+    "Bat": "Deal 3 Shadow damage. Leech.",
+    "Sunflower": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Moonflower": "Turn a card in your hand to its dark face.",
+    "Starfish": "Heal 4 HP. Banish this card.",
+    "Sea Urchin": "Deal 5 Binding damage.",
+    "Silkworm": "Keep a card in your hand.",
+    "Silverfish": "Banish a card from your discard pile.",
+    "Sceptre": "Weaken 4.",
+    "Begging Bowl": "Draw 2 cards. Banish this card.",
+    "Quill": "Put a card from your discard pile on top of your draw pile.",
+    "Eraser": "Banish a card from your discard pile.",
+    "Fishing Net": "Weaken 4.",
+    "Harpoon": "Deal 7 Release damage, ignoring Ward. Banish this card.",
+    "Sieve": "Look at the top 4 cards of your draw pile. Put 1 in your hand and discard the rest.",
+    "Funnel": "Put another card from your hand on top of your draw pile.",
+    "Scabbard": "Keep a card in your hand.",
+    "Drawn Blade": "Deal 6 Release damage.",
+    "Tuning Fork": "Remove all your Weaken.",
+    "Rattle": "Weaken 3.",
+    "Sundial": "Scry. Draw 1 card.",
+    "Water Clock": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Rope Ladder": "Return a card from your discard pile to your hand.",
+    "Trapdoor": "Deal 5 Shadow damage, ignoring Ward.",
+    "Floodgate": "Weaken 4.",
+    "Broken Dam": "Deal 7 Release damage.",
+    "Wax Fruit": "Keep a card in your hand.",
+    "Rotting Fruit": "Deal 6 Decay damage.",
+    "Measuring Rod": "Mark 3.",
+    "Twisted Ribbon": "Weaken 4.",
+    "Glass Slipper": "Flip a card in your hand.",
+    "Iron Boot": "Deal 7 Binding damage.",
+    "Wedding Veil": "Keep up to 2 cards in your hand.",
+    "Funeral Veil": "Banish a card from your discard pile.",
+    "Amphitheatre": "Draw 2 cards.",
+    "Backstage": "Return a card from your discard pile to your hand.",
+    "Grand Staircase": "Return a card from your discard pile to your hand.",
+    "Spiral Well": "Put another card from your hand on the bottom of your draw pile. Draw 1 card.",
+    "Aqueduct": "Heal 4 HP. Banish this card.",
+    "Sewer": "Banish a card from your discard pile.",
+    "Marble Quarry": "Deal 7 Binding damage.",
+    "Peat Bog": "Weaken 3. Deal 2 Decay damage.",
+    "Bathhouse": "Remove all your Burn. Heal 4 HP. Banish this card.",
+    "Icehouse": "Keep a card in your hand.",
+    "Counting House": "Banish another card from your hand. Draw 2 cards.",
+    "Thieves Den": "Keep up to 2 cards in your hand.",
+    "Dovecote": "Keep a card in your hand.",
+    "Spider Nursery": "Weaken 4.",
+    "Tidal Causeway": "Exchange a card in your hand with one in your discard pile.",
+    "Drifting Island": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "Crystal Ballroom": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Cinder Ballroom": "Apply 3 Burn. Banish this card.",
+    "Pottery Workshop": "Flip a card in your discard pile. Return it to your hand.",
+    "Shard Heap": "Deal 2 Decay damage three times.",
+    "Circus Ring": "Flip your hand.",
+    "Abandoned Fairground": "Return a card from your discard pile to your hand.",
+    "Beehive Palace": "Heal 5 HP. Banish this card.",
+    "Termite Palace": "Remove 6 enemy Ward.",
+    "Paved Road": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Deer Trail": "Scry. Draw 1 card.",
+    "Bell Founder": "Mark 3.",
+    "Bell Breaker": "Hush. Banish this card.",
+    "Crown Jeweler": "Return a card from your discard pile to your hand.",
+    "Crown Snatcher": "Hush. Banish this card.",
+    "Prism Keeper": "Deal 2 Radiance damage three times.",
+    "Shade Keeper": "Keep up to 2 cards in your hand.",
+    "Dream Binder": "Weaken 4.",
+    "Dream Unbinder": "Remove all your Weaken.",
+    "Clockmaker": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Clock Thief": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Court Physician": "Heal 5 HP. Banish this card.",
+    "Plague Doctor": "Remove all your Weaken. Heal 3 HP. Banish this card.",
+    "Parchment Scribe": "Put a card from your discard pile on top of your draw pile.",
+    "Ink Drinker": "Banish a card from your discard pile. Heal 3 HP. Banish this card.",
+    "Portrait Painter": "Flip a card in your hand.",
+    "Portrait Eraser": "Banish a card from your discard pile.",
+    "Glassblower": "Flip a card in your discard pile. Return it to your hand.",
+    "Glass Crusher": "Deal 6 Release damage, ignoring Ward.",
+    "Perfumer": "Weaken 4.",
+    "Scent Thief": "Banish a card from your discard pile.",
+    "Stone Mason": "Gain 6 Ward.",
+    "Stone Eater": "Remove 4 enemy Ward. Heal 3 HP. Banish this card.",
+    "Bird Keeper": "Keep a card in your hand.",
+    "Bird Liberator": "Draw 3 cards. Banish this card.",
+    "Cage Builder": "Keep a card in your hand.",
+    "Cage Breaker": "Remove all your Weaken. Draw 2 cards. Banish this card.",
+    "Fortune Teller": "Scry. Draw 1 card.",
+    "Fortune Gambler": "Draw 3 cards. Discard a random card.",
+    "Lantern Lighter": "Apply 3 Burn.",
+    "Lantern Snuffer": "Remove all Burn from both combatants. Turn your hand to its dark faces.",
+    "Thread Spinner": "Put a card from your discard pile on top of your draw pile.",
+    "Thread Cutter": "Banish another card from your hand.",
+    "Storyteller": "Draw 2 cards. Banish this card.",
+    "Story Swallower": "Banish a card from your discard pile.",
+    "Coin Minter": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Coin Melter": "Apply 1 Burn. Gain 1 mana. Banish this card.",
+    "Path Maker": "Scry. Draw 1 card.",
+    "Path Eraser": "Banish another card from your hand.",
+    "Weather Watcher": "Scry. Draw 1 card.",
+    "Storm Chaser": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Oath Keeper": "Keep a card in your hand.",
+    "Oath Breaker": "Banish another card from your hand. Draw 1 card.",
+    "Door Warden": "Gain 6 Ward.",
+    "Door Wanderer": "Scry. Draw 1 card.",
+    "Doll Mender": "Return a card from your discard pile to your hand.",
+    "Doll Thief": "Return a card from your discard pile to your hand.",
+    "Music Conductor": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Improviser": "Draw 2 cards. Discard a card.",
+    "Tide Keeper": "Weaken 4.",
+    "Tide Wanderer": "Exchange a card in your hand with one in your discard pile.",
+    "Flying Beetle": "Deal 5 Release damage.",
+    "Burrowing Beetle": "Gain 5 Ward.",
+    "White Fox": "Scry. Draw 1 card.",
+    "Black Fox": "Flip a card in your hand.",
+    "Glass Snail": "Keep a card in your hand.",
+    "Stone Slug": "Gain 6 Ward.",
+    "Dawn Crane": "Draw 2 cards.",
+    "Night Heron": "Deal 5 Shadow damage.",
+    "Sunfish": "Deal 6 Radiance damage.",
+    "Deep Sea Dragonfish": "Deal 5 Decay damage. Leech. Banish this card.",
+    "Day Moth": "Turn a card in your hand to its light face.",
+    "Night Moth": "Turn a card in your hand to its dark face.",
+    "Alabaster Spider": "Weaken 4.",
+    "Obsidian Spider": "Mark 3.",
+    "Pearl Crab": "Gain 6 Ward.",
+    "Hermit Crab": "Gain 5 Ward.",
+    "Honey Ant": "Heal 4 HP. Banish this card.",
+    "Army Ant": "Deal 2 Decay damage three times.",
+    "Albino Serpent": "Deal 6 Radiance damage.",
+    "Black Adder": "Deal 5 Decay damage, ignoring Ward.",
+    "Hard Coral": "Gain 6 Ward.",
+    "Soft Coral": "Flip a card in your hand.",
+    "Hummingbird": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Hawk Moth": "Weaken 4.",
+    "Whole Egg": "Keep a card in your hand.",
+    "Cracked Egg": "Flip a card in your hand.",
+    "Butterfly Wing": "Flip a card in your hand.",
+    "Beetle Shell": "Gain 6 Ward.",
+    "Amber Frog": "Keep a card in your hand.",
+    "Indigo Toad": "Weaken 3.",
+    "Red Panda": "Weaken 3.",
+    "Clouded Leopard": "Deal 6 Shadow damage.",
+    "Living Jellyfish": "Weaken 4.",
+    "Jellyfish Fossil": "Keep a card in your hand.",
+    "White Poppy": "Heal 4 HP. Banish this card.",
+    "Black Tulip": "Heal 4 HP. Banish this card.",
+    "Silver Birch": "Put up to 2 cards from your discard pile on the bottom of your draw pile.",
+    "Hollow Oak": "Keep up to 2 cards in your hand.",
+    "Fern Fiddlehead": "Flip a card in your hand.",
+    "Fallen Leaf": "Banish a card from your discard pile.",
+    "Flower Bud": "Flip a card in your hand. Keep it.",
+    "Seed Pod": "Draw 2 cards.",
+    "Cultivated Mushroom": "Heal 5 HP. Banish this card.",
+    "Wild Mushroom": "Shuffle your hand into your draw pile. Draw 4 cards.",
+    "Cactus Flower": "Deal 6 Growth damage.",
+    "Desert Thorn": "Deal 5 Decay damage, ignoring Ward.",
+    "Ice Crystal": "Weaken 2. Deal 3 Frost damage.",
+    "Salt Crystal": "Keep a card in your hand.",
+    "River Pearl": "Keep a card in your hand.",
+    "Volcanic Obsidian": "Apply 3 Burn.",
+    "Golden Mask": "Flip a card in your hand.",
+    "Cracked Mask": "Flip a card in your hand.",
+    "Silver Crown": "Mark 3.",
+    "Rusty Crown": "Weaken 4.",
+    "Crystal Goblet": "Heal 5 HP. Banish this card.",
+    "Clay Cup": "Heal 4 HP. Banish this card.",
+    "Silk Glove": "Return a card from your discard pile to your hand.",
+    "Iron Gauntlet": "Deal 6 Binding damage.",
+    "Woven Basket": "Keep a card in your hand.",
+    "Unwoven Reeds": "Banish another card from your hand.",
+    "Music Box": "Weaken 4.",
+    "Silent Music Box": "Hush. Banish this card.",
+    "Closed Parasol": "Flip a card in your hand.",
+    "Open Parasol": "Gain 6 Ward.",
+    "White Fan": "Flip a card in your hand.",
+    "Black Fan": "Flip a card in your hand.",
+    "Wooden Spool": "Keep a card in your hand.",
+    "Loose Thread": "Banish another card from your hand.",
+    "Gilded Cage": "Keep a card in your hand.",
+    "Broken Cage": "Remove all your Weaken. Draw 1 card.",
+    "Bronze Mirror": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Tarnished Mirror": "Flip a card in your discard pile. Return it to your hand.",
+    "Glass Marble": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Clay Marble": "Deal 6 Binding damage.",
+    "Silver Locket": "Keep a card in your hand.",
+    "Empty Locket": "Banish a card from your discard pile.",
+    "Wax Key": "Draw 1 card. Flip your hand. Banish this card.",
+    "Melted Key": "Banish a card from your discard pile. Banish this card.",
+    "Golden Shears": "Deal 6 Release damage, ignoring Ward.",
+    "Blunt Shears": "Deal 3 Binding damage.",
+    "Copper Coin": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Hollow Coin": "Draw 1 card. Banish this card.",
+    "Feather Quill": "Put a card from your discard pile on top of your draw pile.",
+    "Ink Blot": "Banish a card from your discard pile.",
+    "Paintbrush": "Flip a card in your hand.",
+    "Paint Scraper": "Banish a card from your discard pile.",
+    "Lit Match": "Apply 3 Burn. Banish this card.",
+    "Spent Match": "Weaken 3.",
+    "Paper Boat": "Draw 2 cards.",
+    "Stone Boat": "Gain 6 Ward.",
+    "Iron Needlecase": "Keep a card in your hand.",
+    "Empty Needlecase": "Banish a card from your discard pile.",
+    "White Ribbon": "Keep a card in your hand.",
+    "Black Ribbon": "Weaken 4.",
+    "Hour Bell": "Scry. Draw 1 card.",
+    "Silent Bell": "Hush. Banish this card.",
+    "Intact Sapphire": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Cracked Sapphire": "Deal 6 Decay damage, ignoring Ward.",
+    "Ivory Chess King": "Scry. Draw 1 card.",
+    "Obsidian Chess Queen": "Deal 7 Shadow damage.",
+    "Sunlit Gallery": "Scry. Draw 1 card.",
+    "Shadow Gallery": "Keep up to 2 cards in your hand.",
+    "Winter Conservatory": "Keep up to 2 cards in your hand.",
+    "Summer Conservatory": "Heal 4 HP. Banish this card.",
+    "High Balcony": "Scry. Draw 1 card.",
+    "Hidden Basement": "Keep a card in your hand.",
+    "Open Pavilion": "Draw 2 cards.",
+    "Walled Pavilion": "Gain 8 Ward.",
+    "Crystal Grotto": "Reflect the first hit of the enemy's next attack. Banish this card.",
+    "Basalt Cave": "Gain 6 Ward.",
+    "Hedge Garden": "Look at the top 3 cards of your draw pile. Put them back in any order.",
+    "Wild Thicket": "Weaken 3.",
+    "Marble Fountain": "Heal 6 HP. Banish this card.",
+    "Dry Fountain": "Banish a card from your discard pile.",
+    "Golden Atrium": "Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.",
+    "Black Atrium": "Keep a card in your hand.",
+    "Moonlit Pier": "Scry.",
+    "Sunlit Pier": "Scry. Draw 1 card.",
+    "Hilltop Windmill": "Gain 1 mana. Draw 1 card. Banish this card.",
+    "Underground Mill": "Discard a card. Draw 2 cards.",
+    "Watchtower": "Scry. Draw 1 card.",
+    "Collapsed Watchtower": "Weaken 3.",
+    "Open Courtyard": "Draw 2 cards.",
+    "Roofed Courtyard": "Gain 6 Ward.",
+    "Grand Library": "Return a card from your discard pile to your hand.",
+    "Forgotten Archive": "Banish a card from your discard pile.",
+    "Frozen Waterfall": "Weaken 2. Deal 3 Frost damage.",
+    "Flowing Waterfall": "Remove all your Burn. Draw 1 card.",
+    "Coral Palace": "Gain 6 Ward.",
+    "Ship Graveyard": "Return a card from your discard pile to your hand.",
+    "Ivory Bridge": "Exchange a card in your hand with one in your discard pile.",
+    "Obsidian Bridge": "Weaken 3.",
+    "Glass Stairway": "Scry. Draw 1 card.",
+    "Stone Stairway": "Return a card from your discard pile to your hand.",
+    "Candlelit Theatre": "Turn your hand to its light faces.",
+    "Darkened Theatre": "Turn your hand to its dark faces.",
+    "Tiled Bath": "Remove all your Burn. Heal 4 HP. Banish this card.",
+    "Broken Bath": "Deal 2 Decay damage twice.",
+    "Clock Tower": "Scry. Draw 1 card.",
+    "Timeless Tower": "Return a card from your discard pile to your hand.",
+    "Silk Tent": "Gain 6 Ward.",
+    "Wicker Shelter": "Gain 6 Ward.",
+    "Stone Circle": "Gain 6 Ward.",
+    "Scattered Stones": "Deal 2 Binding damage three times.",
+    "Shallow Shore": "Scry.",
+    "Abyssal Trench": "Deal 5 Shadow damage.",
+    "Bright Clearing": "Heal 4 HP. Banish this card.",
+    "Dense Canopy": "Gain 7 Ward.",
+    "Open Window": "Scry.",
+    "Shuttered Window": "Keep a card in your hand."
+  },
+  "enemies": {
+    "1": {
+      "trait": "On High Noon Ray: Add 3 Radiance damage to the base hit.",
+      "actions": [
+        "Deal 6 Radiance damage.",
+        "Deal 6 Radiance damage. Trait — High Noon: Add 3 Radiance damage to the base hit.",
+        "Gain 4 Ward."
+      ],
+      "weakness": "Shadow"
+    },
+    "2": {
+      "trait": "On Prismatic Sentence: Add 1 hit of 2 Radiance damage.",
+      "actions": [
+        "Deal 4 Radiance damage.",
+        "Deal 5 Radiance damage. Trait — Split Verdict: Add 1 hit of 2 Radiance damage.",
+        "Apply 2 Mark to the player."
+      ],
+      "weakness": "Shadow"
+    },
+    "3": {
+      "trait": "On Hollow Clutch: Apply 2 Weaken to the player.",
+      "actions": [
+        "Deal 6 Shadow damage.",
+        "Banish the top 1 card of the player's draw pile.",
+        "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 2 Weaken to the player."
+      ],
+      "weakness": "Radiance"
+    },
+    "4": {
+      "trait": "On Ink Surge: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 6 Shadow damage.",
+        "Deal 5 Shadow damage. Trait — Black Tide: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Radiance"
+    },
+    "5": {
+      "trait": "On Archfall: Add 1 hit of 2 Binding damage.",
+      "actions": [
+        "Deal 7 Binding damage.",
+        "Gain 5 Ward.",
+        "Deal 6 Binding damage. Trait — Falling Arch: Add 1 hit of 2 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "6": {
+      "trait": "On Devour the Glow: If the enemy has Burn after the tick, remove all its Burn and heal 3 HP.",
+      "actions": [
+        "Deal 6 Shadow damage.",
+        "Deal 4 Shadow damage. Trait — Swallow the Lantern: If the enemy has Burn after the tick, remove all its Burn and heal 3 HP."
+      ],
+      "weakness": "Radiance"
+    },
+    "7": {
+      "trait": "On Root Lash: Apply 2 Weaken to the player.",
+      "actions": [
+        "Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player.",
+        "Heal 3 HP."
+      ],
+      "weakness": "Decay"
+    },
+    "8": {
+      "trait": "On Chorus and Clutch: Add 2 hits of 2 Binding damage.",
+      "actions": [
+        "Deal 3 Binding damage.",
+        "Deal 2 Binding damage. Trait — Joining Voices: Add 2 hits of 2 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "9": {
+      "trait": "On Open-Wing Dust: Add 1 Radiance damage to the base hit.",
+      "actions": [
+        "Deal 4 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Open Wings: Add 1 Radiance damage to the base hit."
+      ],
+      "weakness": "Shadow"
+    },
+    "10": {
+      "trait": "On Seven-Eyed Gaze: Apply 3 Mark to the player.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 3 Radiance damage. Trait — Seven Watches: Apply 3 Mark to the player."
+      ],
+      "weakness": "Shadow"
+    },
+    "11": {
+      "trait": "On Vaulting Kick: The base hit ignores up to 3 player Ward.",
+      "actions": [
+        "Deal 4 Release damage.",
+        "Deal 5 Release damage. Trait — Over the Guard: The base hit ignores up to 3 player Ward."
+      ],
+      "weakness": "Binding"
+    },
+    "12": {
+      "trait": "On Amber Clasp: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Amber Custody: Apply 3 Weaken to the player.",
+        "Banish the top 1 card of the player's draw pile."
+      ],
+      "weakness": "Release"
+    },
+    "13": {
+      "trait": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile.",
+      "actions": [
+        "Deal 5 Decay damage.",
+        "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile."
+      ],
+      "weakness": "Growth"
+    },
+    "14": {
+      "trait": "On Puppet Dance: The player flips 1 held card of their choice, if any.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Tugged Hands: The player flips 1 held card of their choice, if any."
+      ],
+      "weakness": "Release"
+    },
+    "15": {
+      "trait": "On Swing the Spheres: Add 1 hit of 3 Radiance damage.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Sweeping Orbit: Add 1 hit of 3 Radiance damage."
+      ],
+      "weakness": "Shadow"
+    },
+    "16": {
+      "trait": "On Foretold Drowning: Move the top 1 card of the player's draw pile to the player's discard pile.",
+      "actions": [
+        "Deal 4 Memory damage.",
+        "Deal 5 Memory damage. Trait — Drowned Prophecy: Move the top 1 card of the player's draw pile to the player's discard pile."
+      ],
+      "weakness": "Oblivion"
+    },
+    "17": {
+      "trait": "On Ring the Blossoms: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Growth damage.",
+        "Deal 4 Growth damage. Trait — Closing Bell: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Decay"
+    },
+    "18": {
+      "trait": "On Tendril Pulse: Add 2 hits of 1 Shadow damage.",
+      "actions": [
+        "Deal 4 Shadow damage.",
+        "Deal 4 Shadow damage. Trait — Trailing Tendrils: Add 2 hits of 1 Shadow damage."
+      ],
+      "weakness": "Radiance"
+    },
+    "19": {
+      "trait": "On Blackwater Charge: Apply 2 Weaken to the player.",
+      "actions": [
+        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player.",
+        "Heal 4 HP."
+      ],
+      "weakness": "Radiance"
+    },
+    "20": {
+      "trait": "On Round Again: Move the top 1 card of the player's draw pile to the bottom of that pile.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 4 Memory damage. Trait — Another Circuit: Move the top 1 card of the player's draw pile to the bottom of that pile."
+      ],
+      "weakness": "Oblivion"
+    },
+    "21": {
+      "trait": "On Floral Beheading: Add 1 hit of 2 Growth damage.",
+      "actions": [
+        "Deal 6 Growth damage.",
+        "Heal 3 HP.",
+        "Deal 6 Growth damage. Trait — Flowering Blade: Add 1 hit of 2 Growth damage."
+      ],
+      "weakness": "Decay"
+    },
+    "22": {
+      "trait": "On Moon Howl: Apply 2 Mark to the player.",
+      "actions": [
+        "Deal 5 Shadow damage.",
+        "Deal 4 Shadow damage. Trait — Marked Quarry: Apply 2 Mark to the player."
+      ],
+      "weakness": "Radiance"
+    },
+    "23": {
+      "trait": "On Change the Map: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 4 Memory damage. Trait — Redrawn Route: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+      ],
+      "weakness": "Oblivion"
+    },
+    "24": {
+      "trait": "On Rattling Wings: Add 3 hits of 1 Radiance damage.",
+      "actions": [
+        "Deal 3 Radiance damage.",
+        "Deal 3 Radiance damage. Trait — Summer Rattle: Add 3 hits of 1 Radiance damage."
+      ],
+      "weakness": "Shadow"
+    },
+    "25": {
+      "trait": "On Gather the Apron: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "actions": [
+        "Deal 6 Binding damage.",
+        "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their draw pile, if any."
+      ],
+      "weakness": "Release"
+    },
+    "26": {
+      "trait": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
+      "actions": [
+        "Deal 6 Memory damage.",
+        "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their draw pile."
+      ],
+      "weakness": "Oblivion"
+    },
+    "27": {
+      "trait": "On Pour the Wax: Gain 3 Ward.",
+      "actions": [
+        "Deal 5 Flame damage.",
+        "Deal 5 Flame damage. Trait — Pooled Wax: Gain 3 Ward."
+      ],
+      "weakness": "Frost"
+    },
+    "28": {
+      "trait": "On Reel the Line: The player discards 1 held card of their choice, if any.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Set the Hook: The player discards 1 held card of their choice, if any."
+      ],
+      "weakness": "Release"
+    },
+    "29": {
+      "trait": "On Bitter Goblet: Apply 2 Weaken to the player.",
+      "actions": [
+        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player.",
+        "Heal 4 HP."
+      ],
+      "weakness": "Growth"
+    },
+    "30": {
+      "trait": "On Shake the Chalk: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 6 Binding damage.",
+        "Deal 5 Binding damage. Trait — Dustfall: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Release"
+    },
+    "31": {
+      "trait": "On Tail Sweep: Add 1 hit of 2 Binding damage.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Apply 2 Mark to the player.",
+        "Deal 4 Binding damage. Trait — Geared Fan: Add 1 hit of 2 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "32": {
+      "trait": "On Draw the Rigging: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Release"
+    },
+    "33": {
+      "trait": "On Fix the Gaze: Apply 3 Mark to the player.",
+      "actions": [
+        "Deal 6 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 3 Mark to the player."
+      ],
+      "weakness": "Shadow"
+    },
+    "34": {
+      "trait": "On Split the Moon: Add 2 hits of 2 Memory damage.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 3 Memory damage. Trait — Falling Fragments: Add 2 hits of 2 Memory damage.",
+        "After the player's next normal draw, turn their hand to its dark faces."
+      ],
+      "weakness": "Oblivion"
+    },
+    "35": {
+      "trait": "On Scatter the Rays: Add 2 hits of 2 Radiance damage.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Prism Flash: Add 2 hits of 2 Radiance damage.",
+        "Gain 4 Ward."
+      ],
+      "weakness": "Shadow"
+    },
+    "36": {
+      "trait": "On Play the Arpeggio: Add 2 hits of 1 Memory damage.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 4 Memory damage. Trait — Submerged Arpeggio: Add 2 hits of 1 Memory damage."
+      ],
+      "weakness": "Oblivion"
+    },
+    "37": {
+      "trait": "On Pull the Guard: Remove up to 4 player Ward before the base hit.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Reel In: Remove up to 4 player Ward before the base hit."
+      ],
+      "weakness": "Release"
+    },
+    "38": {
+      "trait": "On Close the Loom: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer."
+      ],
+      "weakness": "Release"
+    },
+    "39": {
+      "trait": "On Fold the Shelter: Gain 3 Ward.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."
+      ],
+      "weakness": "Release"
+    },
+    "40": {
+      "trait": "On Scoop the Offering: The player Banishes 1 held card of their choice, if any.",
+      "actions": [
+        "Deal 6 Radiance damage.",
+        "Deal 5 Radiance damage. Trait — Filled Pouch: The player Banishes 1 held card of their choice, if any."
+      ],
+      "weakness": "Shadow"
+    },
+    "41": {
+      "trait": "On Glasshouse Briar: Apply 2 Weaken to the player.",
+      "actions": [
+        "Deal 6 Growth damage. Trait — Green Fingers: Apply 2 Weaken to the player.",
+        "Heal 4 HP.",
+        "Gain 3 Ward."
+      ],
+      "weakness": "Decay"
+    },
+    "42": {
+      "trait": "On Loose the Menagerie: Add 3 hits of 2 Radiance damage.",
+      "actions": [
+        "Deal 4 Radiance damage.",
+        "Deal 3 Radiance damage. Trait — Menagerie Procession: Add 3 hits of 2 Radiance damage."
+      ],
+      "weakness": "Shadow"
+    },
+    "43": {
+      "trait": "On March the Segments: Add 4 hits of 1 Binding damage.",
+      "actions": [
+        "Deal 4 Binding damage.",
+        "Deal 3 Binding damage. Trait — Many Feet: Add 4 hits of 1 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "44": {
+      "trait": "On Release the Scree: Add 2 hits of 2 Binding damage.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Loose Scree: Add 2 hits of 2 Binding damage.",
+        "Gain 4 Ward."
+      ],
+      "weakness": "Release"
+    },
+    "45": {
+      "trait": "On Close the Tentacles: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Growth damage.",
+        "Deal 4 Growth damage. Trait — Closing Mouth: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Decay"
+    },
+    "46": {
+      "trait": "On Reap Tomorrow: Banish the top 1 card of the player's draw pile.",
+      "actions": [
+        "Deal 6 Decay damage.",
+        "Deal 5 Decay damage. Trait — Empty Harvest: Banish the top 1 card of the player's draw pile."
+      ],
+      "weakness": "Growth"
+    },
+    "47": {
+      "trait": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their draw pile, if any."
+      ],
+      "weakness": "Release"
+    },
+    "48": {
+      "trait": "On Leave an Ink Trail: Move the top 1 card of the player's draw pile to the bottom of that pile.",
+      "actions": [
+        "Deal 4 Shadow damage.",
+        "Deal 5 Shadow damage. Trait — Bounding Trail: Move the top 1 card of the player's draw pile to the bottom of that pile."
+      ],
+      "weakness": "Radiance"
+    },
+    "49": {
+      "trait": "On Pull: Remove up to 5 player Ward before the base hit.",
+      "actions": [
+        "Deal 4 Release damage.",
+        "Deal 4 Release damage. Trait — Extraction: Remove up to 5 player Ward before the base hit."
+      ],
+      "weakness": "Binding"
+    },
+    "50": {
+      "trait": "On Tighten the Cords: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 6 Binding damage.",
+        "Deal 5 Binding damage. Trait — Tightening Knot: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Release"
+    },
+    "51": {
+      "trait": "On Fire the Broadside: Add 2 hits of 2 Binding damage.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Broadside Order: Add 2 hits of 2 Binding damage.",
+        "Apply 2 Mark to the player."
+      ],
+      "weakness": "Release"
+    },
+    "52": {
+      "trait": "On Linen Pounce: Apply 2 Weaken to the player.",
+      "actions": [
+        "Deal 6 Binding damage. Trait — Gathered Linen: Apply 2 Weaken to the player.",
+        "Gain 4 Ward."
+      ],
+      "weakness": "Release"
+    },
+    "53": {
+      "trait": "On Sweep the Floor: Remove all enemy Burn.",
+      "actions": [
+        "Deal 5 Release damage.",
+        "Deal 4 Release damage. Trait — Clean Sweep: Remove all enemy Burn."
+      ],
+      "weakness": "Binding"
+    },
+    "54": {
+      "trait": "On Administer the Dose: The player draws 1 fewer card on their next normal draw.",
+      "actions": [
+        "Deal 4 Binding damage.",
+        "Deal 4 Binding damage. Trait — Sedating Presence: The player draws 1 fewer card on their next normal draw."
+      ],
+      "weakness": "Release"
+    },
+    "55": {
+      "trait": "On Present the Mask: After the player's next normal draw, turn their hand to its light faces.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Midday Mask: After the player's next normal draw, turn their hand to its light faces."
+      ],
+      "weakness": "Shadow"
+    },
+    "56": {
+      "trait": "On Vault the Rope: The base hit ignores up to 2 player Ward.",
+      "actions": [
+        "Deal 5 Release damage.",
+        "Deal 4 Release damage. Trait — Tightrope Rebound: The base hit ignores up to 2 player Ward."
+      ],
+      "weakness": "Binding"
+    },
+    "57": {
+      "trait": "On Show the Pearl: Apply 2 Mark to the player.",
+      "actions": [
+        "Deal 6 Binding damage.",
+        "Gain 7 Ward.",
+        "Deal 4 Binding damage. Trait — Pearl Glint: Apply 2 Mark to the player."
+      ],
+      "weakness": "Release"
+    },
+    "58": {
+      "trait": "On Sew the Hem: The player discards 1 held card of their choice, if any.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Closing Stitch: The player discards 1 held card of their choice, if any."
+      ],
+      "weakness": "Release"
+    },
+    "59": {
+      "trait": "While Raise the Mirror Wing is shown: Reflect the first hit of the next direct card attack against this enemy. This ends when the hit is reflected or this intent ends.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Mirrored Wing: Reflect the first hit of the next direct card attack against this enemy. This ends when the hit is reflected or this intent ends."
+      ],
+      "weakness": "Shadow"
+    },
+    "60": {
+      "trait": "On Ask Both Sphinxes: Add 1 hit of 3 Memory damage.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 3 Memory damage. Trait — Twin Questions: Add 1 hit of 3 Memory damage."
+      ],
+      "weakness": "Oblivion"
+    },
+    "61": {
+      "trait": "On Escape into Dusk: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+      "actions": [
+        "Deal 5 Shadow damage.",
+        "Banish the top 1 card of the player's draw pile.",
+        "Deal 4 Shadow damage. Trait — Stolen Morrow: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+      ],
+      "weakness": "Radiance"
+    },
+    "62": {
+      "trait": "On Let the Moss Drink: Heal 3 HP.",
+      "actions": [
+        "Deal 6 Growth damage.",
+        "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."
+      ],
+      "weakness": "Decay"
+    },
+    "63": {
+      "trait": "On Loose the Moths: Move the top 2 cards of the player's draw pile to the player's discard pile.",
+      "actions": [
+        "Deal 5 Decay damage.",
+        "Deal 4 Decay damage. Trait — Moth-Eaten Tribute: Move the top 2 cards of the player's draw pile to the player's discard pile."
+      ],
+      "weakness": "Growth"
+    },
+    "64": {
+      "trait": "On Pluck the Mould: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Growth damage.",
+        "Heal 4 HP.",
+        "Deal 4 Growth damage. Trait — Spore Chord: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Decay"
+    },
+    "65": {
+      "trait": "On Light Pirouette: Turn the cards still in the player's hand to their light faces.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Turning Step: Turn the cards still in the player's hand to their light faces."
+      ],
+      "weakness": "Shadow"
+    },
+    "66": {
+      "trait": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+      "actions": [
+        "Deal 5 Shadow damage.",
+        "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their draw pile, if any."
+      ],
+      "weakness": "Radiance"
+    },
+    "67": {
+      "trait": "On Ripple the Segments: Add 3 hits of 1 Radiance damage.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 3 Radiance damage. Trait — Ripple of Light: Add 3 hits of 1 Radiance damage."
+      ],
+      "weakness": "Shadow"
+    },
+    "68": {
+      "trait": "On Stamp the Pattern: Apply 3 Mark to the player.",
+      "actions": [
+        "Deal 6 Memory damage.",
+        "Deal 5 Memory damage. Trait — Painted Touch: Apply 3 Mark to the player."
+      ],
+      "weakness": "Oblivion"
+    },
+    "69": {
+      "trait": "On Mimic the Stroke: Use the latest direct hit's final damage this turn for the base hit: minimum 3, maximum 8. Use 3 if there was no direct hit.",
+      "actions": [
+        "Deal 3 Memory damage.",
+        "Deal 3 Memory damage. Trait — Stolen Pigment: Use the latest direct hit's final damage this turn for the base hit: minimum 3, maximum 8. Use 3 if there was no direct hit.",
+        "Heal 3 HP."
+      ],
+      "weakness": "Oblivion"
+    },
+    "70": {
+      "trait": "On Fold the Spiral: Gain 3 Ward.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."
+      ],
+      "weakness": "Release"
+    },
+    "71": {
+      "trait": "On Collect the Pearl: The player starts their next turn with 1 less mana.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Pearl Levy: The player starts their next turn with 1 less mana."
+      ],
+      "weakness": "Release"
+    },
+    "72": {
+      "trait": "On Shattering Bite: Add 1 hit of 2 Binding damage.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Porcelain Splinters: Add 1 hit of 2 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "73": {
+      "trait": "On Turn the Current: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+      "actions": [
+        "Deal 6 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Drawing Current: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+      ],
+      "weakness": "Shadow"
+    },
+    "74": {
+      "trait": "On Bring in the Orchestra: Add 2 hits of 2 Binding damage.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 3 Binding damage. Trait — Following the Baton: Add 2 hits of 2 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "75": {
+      "trait": "On Bind the Formation: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Release"
+    },
+    "76": {
+      "trait": "On Sound the Organ: Add 1 hit of 2 Growth damage.",
+      "actions": [
+        "Deal 6 Growth damage.",
+        "Deal 4 Growth damage. Trait — Root Pedal: Add 1 hit of 2 Growth damage.",
+        "Heal 3 HP."
+      ],
+      "weakness": "Decay"
+    },
+    "77": {
+      "trait": "On Land in the Roots: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Growth damage.",
+        "Deal 4 Growth damage. Trait — Anchored Landing: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Decay"
+    },
+    "78": {
+      "trait": "On Unlocking Thrust: The base hit ignores all player Ward.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 5 Binding damage. Trait — Turn the Key: The base hit ignores all player Ward."
+      ],
+      "weakness": "Release"
+    },
+    "79": {
+      "trait": "On Close the Snare: The player discards 1 held card of their choice, if any.",
+      "actions": [
+        "Deal 5 Growth damage.",
+        "Deal 4 Growth damage. Trait — Saffron Snare: The player discards 1 held card of their choice, if any."
+      ],
+      "weakness": "Decay"
+    },
+    "80": {
+      "trait": "On Raise the Spires: Add 2 hits of 2 Binding damage.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Gain 5 Ward.",
+        "Deal 4 Binding damage. Trait — Crystalline Spires: Add 2 hits of 2 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "81": {
+      "trait": "On Borrow the Hands: Flip all cards still in the player's hand.",
+      "actions": [
+        "Deal 5 Shadow damage.",
+        "Deal 4 Shadow damage. Trait — Borrowed Gesture: Flip all cards still in the player's hand."
+      ],
+      "weakness": "Radiance"
+    },
+    "82": {
+      "trait": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+        "Gain 4 Ward."
+      ],
+      "weakness": "Release"
+    },
+    "83": {
+      "trait": "On Shake the Leaves: Add 2 hits of 2 Growth damage.",
+      "actions": [
+        "Deal 6 Growth damage.",
+        "Heal 4 HP.",
+        "Deal 4 Growth damage. Trait — Silver Leaf-Fall: Add 2 hits of 2 Growth damage."
+      ],
+      "weakness": "Decay"
+    },
+    "84": {
+      "trait": "On Offer the Sleep: The player draws 1 fewer card on their next normal draw.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 4 Memory damage. Trait — Drowsy Bargain: The player draws 1 fewer card on their next normal draw."
+      ],
+      "weakness": "Oblivion"
+    },
+    "85": {
+      "trait": "On Lead the Procession: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Release"
+    },
+    "86": {
+      "trait": "On Open the Firemouth: Apply 2 Burn to the player.",
+      "actions": [
+        "Deal 6 Flame damage.",
+        "Deal 5 Flame damage. Trait — Feed the Fire: Apply 2 Burn to the player."
+      ],
+      "weakness": "Frost"
+    },
+    "87": {
+      "trait": "On Cast the Veil: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Decay damage.",
+        "Deal 4 Decay damage. Trait — Soot Veil: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Growth"
+    },
+    "88": {
+      "trait": "On Take the Feast: The base attack has Leech.",
+      "actions": [
+        "Deal 5 Decay damage.",
+        "Deal 5 Decay damage. Trait — Hungry Table: The base attack has Leech."
+      ],
+      "weakness": "Growth"
+    },
+    "89": {
+      "trait": "On Stride Above the Guard: The base hit ignores up to 3 player Ward.",
+      "actions": [
+        "Deal 5 Release damage.",
+        "Deal 5 Release damage. Trait — Step Over: The base hit ignores up to 3 player Ward."
+      ],
+      "weakness": "Binding"
+    },
+    "90": {
+      "trait": "On Rising Ray: After the player's next normal draw, turn their hand to its light faces. On Sinking Ray: After the player's next normal draw, turn their hand to its dark faces.",
+      "actions": [
+        "Deal 4 Radiance damage. Trait — Half-Drowned Day: After the player's next normal draw, turn their hand to its light faces.",
+        "Deal 4 Radiance damage. Trait — Half-Drowned Day: After the player's next normal draw, turn their hand to its dark faces."
+      ],
+      "weakness": "Shadow"
+    },
+    "91": {
+      "trait": "On Sunstruck Snap: Add 2 Radiance damage to the base hit.",
+      "actions": [
+        "Apply 2 Mark to the player.",
+        "Deal 6 Radiance damage. Trait — Sunstruck Glare: Add 2 Radiance damage to the base hit."
+      ],
+      "weakness": "Shadow"
+    },
+    "92": {
+      "trait": "On Close the Hem: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their draw pile, if any."
+      ],
+      "weakness": "Release"
+    },
+    "93": {
+      "trait": "On Offer the Tangle: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Release"
+    },
+    "94": {
+      "trait": "On Shed the Tar: The player draws 1 fewer card on their next normal draw.",
+      "actions": [
+        "Deal 5 Decay damage.",
+        "Deal 4 Decay damage. Trait — Heavy Feathers: The player draws 1 fewer card on their next normal draw."
+      ],
+      "weakness": "Growth"
+    },
+    "95": {
+      "trait": "While Open the Brambles is shown: After each of the player's direct attack cards, if this enemy survives, deal 1 Binding damage to the player. This is trait damage, not a base attack.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Thorned Pages: After each of the player's direct attack cards, if this enemy survives, deal 1 Binding damage to the player. This is trait damage, not a base attack."
+      ],
+      "weakness": "Release"
+    },
+    "96": {
+      "trait": "On Unravel the Hem: Move the top 1 card of the player's draw pile to the player's discard pile.",
+      "actions": [
+        "Deal 5 Decay damage.",
+        "Deal 4 Decay damage. Trait — Fraying Court: Move the top 1 card of the player's draw pile to the player's discard pile."
+      ],
+      "weakness": "Growth"
+    },
+    "97": {
+      "trait": "On Arrange the Court: Turn the cards still in the player's hand to their light faces.",
+      "actions": [
+        "Deal 6 Binding damage.",
+        "Deal 4 Binding damage. Trait — Royal Choreography: Turn the cards still in the player's hand to their light faces."
+      ],
+      "weakness": "Release"
+    },
+    "98": {
+      "trait": "On Collect the Tooth: The player Banishes 1 held card of their choice, if any.",
+      "actions": [
+        "Deal 5 Decay damage.",
+        "Deal 4 Decay damage. Trait — Another Tooth: The player Banishes 1 held card of their choice, if any."
+      ],
+      "weakness": "Growth"
+    },
+    "99": {
+      "trait": "On Rain of Ribs: Add 2 hits of 2 Binding damage.",
+      "actions": [
+        "Deal 6 Binding damage.",
+        "Gain 6 Ward.",
+        "Deal 4 Binding damage. Trait — Open Canopy: Add 2 hits of 2 Binding damage."
+      ],
+      "weakness": "Release"
+    },
+    "100": {
+      "trait": "On Gather the Flock: Apply 3 Mark to the player.",
+      "actions": [
+        "Deal 5 Radiance damage.",
+        "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 3 Mark to the player."
+      ],
+      "weakness": "Shadow"
+    },
+    "101": {
+      "trait": "On Sound the Shell: Add 1 hit of 2 Memory damage.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 3 Memory damage. Trait — Shell Echo: Add 1 hit of 2 Memory damage.",
+        "Gain 5 Ward."
+      ],
+      "weakness": "Oblivion"
+    },
+    "102": {
+      "trait": "On Pass Through: The base hit ignores up to 3 player Ward.",
+      "actions": [
+        "Deal 5 Shadow damage.",
+        "Deal 5 Shadow damage. Trait — Passing Shadow: The base hit ignores up to 3 player Ward."
+      ],
+      "weakness": "Radiance"
+    },
+    "103": {
+      "trait": "On Tighten the Coil: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Binding damage.",
+        "Deal 4 Binding damage. Trait — Velvet Coil: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Release"
+    },
+    "104": {
+      "trait": "On Tunnel Beneath: The base hit ignores up to 4 player Ward.",
+      "actions": [
+        "Deal 5 Release damage.",
+        "Deal 4 Release damage. Trait — Burrow Under: The base hit ignores up to 4 player Ward."
+      ],
+      "weakness": "Binding"
+    },
+    "105": {
+      "trait": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their draw pile."
+      ],
+      "weakness": "Oblivion"
+    },
+    "106": {
+      "trait": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any.",
+      "actions": [
+        "Deal 5 Flame damage.",
+        "Deal 4 Flame damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any."
+      ],
+      "weakness": "Frost"
+    },
+    "107": {
+      "trait": "On Speak the Names: Move the top 2 cards of the player's draw pile to the player's discard pile.",
+      "actions": [
+        "Deal 5 Memory damage.",
+        "Deal 4 Memory damage. Trait — Whispered Names: Move the top 2 cards of the player's draw pile to the player's discard pile."
+      ],
+      "weakness": "Oblivion"
+    },
+    "108": {
+      "trait": "On Expose the Core: Apply 3 Burn to the player.",
+      "actions": [
+        "Deal 6 Flame damage.",
+        "Deal 5 Flame damage. Trait — Open Furnace: Apply 3 Burn to the player."
+      ],
+      "weakness": "Frost"
+    },
+    "109": {
+      "trait": "On Murmur the Lullaby: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Growth damage.",
+        "Heal 4 HP.",
+        "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Decay"
+    },
+    "110": {
+      "trait": "On Silken Lunge: Apply 3 Weaken to the player.",
+      "actions": [
+        "Deal 5 Shadow damage.",
+        "Deal 5 Shadow damage. Trait — Patient Web: Apply 3 Weaken to the player."
+      ],
+      "weakness": "Radiance"
+    }
+  }
+}

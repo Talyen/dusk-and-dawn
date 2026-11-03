@@ -8,8 +8,12 @@
     "Each enemy has one labeled trait, one explicit damage-type weakness and 2–3 independently authored actions. No resistances or separate theme tags. Enemy values do not reference player-card values.",
     "Suppress the enemy’s labeled trait through its next action. Skip a non-attack ability; an attack keeps its base hits. Advance the pattern normally.",
     "Heal for the attack’s final damage after bonuses and Weaken, before Ward. Count Ward absorption and overkill. Healing stops at maximum HP.",
+    "Absorb incoming damage before HP. At the start of its holder’s turn, halve remaining Ward, rounding down. Remove it at 0.",
+    "At player turn end, deal Fire damage equal to Burn, then halve Burn, rounding down. Remove it at 0. Applying Burn keeps the higher value; it does not add.",
+    "At player turn end, deal Decay damage equal to Poison, then halve Poison, rounding down. Remove it at 0. Applying Poison keeps the higher value; it does not add.",
+    "Reveal the top card of your library for the rest of this player turn. If the top changes, reveal the new top.",
     "Show the whole intent before player choices. Hush begins immediately, lasts through the next action, does not undo prior results, and advances the pattern. Check a grouped Burn condition once after the Burn tick.",
-    "Each damage instance has exactly one type. Mark, weakness and Weaken affect the first hit only. A direct card receives at most one +2 weakness bonus. Burn and reactive trait damage do not receive these bonuses.",
+    "Each damage instance has exactly one type. Mark, weakness and Weaken affect the first hit only. A direct card receives at most one +2 weakness bonus. Burn, Poison and reactive trait damage do not receive these bonuses.",
     "Held-card clauses check the actual hand after unkept cards are discarded. No retained snapshots, prior-turn identity comparisons, Ward-versus-HP tests or actual-health-loss triggers are used.",
     "Next-normal-draw and next-mana-refill penalties are visible and expire after one use; multiple copies use the highest value. Queued hand-facing effects happen after that draw.",
     "Reactive traits exist only while their named intent is displayed: Swan reflects once, Librarian pricks after each direct attack card if it survives. These are visible exceptions to action-time traits.",
@@ -59,13 +63,33 @@
     },
     {
       "case": "Burn feeds the mouth",
-      "setup_and_result": "Lantern Eater has 3 Burn at turn end. Burn deals 3 Flame and falls to 2. On Devour the Glow, the remaining Burn satisfies one condition for the whole trait: remove it and heal 3. With Hush, Burn stays at 2 and no feeding heal occurs.",
+      "setup_and_result": "Lantern Eater has 3 Burn at turn end. Burn deals 3 Fire and falls to 1. On Devour the Glow, the remaining Burn satisfies one condition for the whole trait: remove it and heal 3. With Hush, Burn stays at 1 and no feeding heal occurs.",
       "implication": "The Burn condition is checked once for the action, not again after clearing Burn."
+    },
+    {
+      "case": "Ward carryover",
+      "setup_and_result": "End a turn with 7 Ward after all damage. At the next player turn start it becomes 3; if untouched, later starts leave 1 then 0. Enemy Ward follows the same floor rule at enemy action start, after damage-over-time ticks, even when Hush skips the action.",
+      "implication": "Only remaining Ward halves; new Ward adds normally."
+    },
+    {
+      "case": "Poison alongside Burn",
+      "setup_and_result": "A player with 5 Ward, 4 Burn and 3 Poison takes a 4 Fire tick, then a 3 Decay tick. Ward absorbs the first 4 and 1 of the second: lose 2 HP. Burn becomes 2 and Poison becomes 1.",
+      "implication": "Separate typed instances; both counters halve even when Ward absorbs damage."
+    },
+    {
+      "case": "Scry without a choice",
+      "setup_and_result": "Scry enables the library-top reveal. If the library is empty, it does not reshuffle. Drawing or moving cards later may refill it; reveal its current top until End Turn begins.",
+      "implication": "Changing the top changes the reveal; no selection or bottom-card prompt."
+    },
+    {
+      "case": "Self transformation",
+      "setup_and_result": "Cocoon flips its own resolving physical card to Shed Skin, then Keeps that same card in hand on its new face. Finish the original played description; do not start the new face’s effect.",
+      "implication": "Every later play still costs mana; no copy, free replay or extra turn is granted."
     },
     {
       "case": "A player Burn",
       "setup_and_result": "The Kiln applies 2 Burn after the current turn’s Burn step. It first ticks at the end of the next player turn. A Rain played before then removes Burn from both combatants; Bathhouse removes only the player’s Burn.",
-      "implication": "Player Ward can absorb that tick before it expires at the next turn start."
+      "implication": "Player Ward can absorb that tick, then its remainder halves at the next turn start."
     },
     {
       "case": "A visible tax",
@@ -79,7 +103,7 @@
     },
     {
       "case": "Returning a changed form",
-      "setup_and_result": "Pottery Workshop chooses a card in the discard pile, flips that physical card there, then returns it to hand. Its source is resolving outside the hand and cannot be chosen.",
+      "setup_and_result": "Pottery Workshop flips the top card of the discard pile, then returns that physical card to hand, without a selection prompt. Its source is resolving outside the hand and cannot be chosen.",
       "implication": "Explicit zone text is the exception to ordinary hand-only Flip."
     },
     {
@@ -89,7 +113,7 @@
     },
     {
       "case": "A cost without a target",
-      "setup_and_result": "Oblivion requires another card in hand to Banish. If it is the only card, it cannot be played and spends no mana. A pure Scry with both piles empty simply does nothing.",
+      "setup_and_result": "Oblivion requires another card in hand to Banish. If it is the only card, it cannot be played and spends no mana. Scry with an empty library reveals nothing until another effect supplies a top card during that turn.",
       "implication": "Required costs differ from instructions that operate on whatever is available."
     }
   ],
@@ -394,11 +418,11 @@
               "to": "player_banished"
             }
           ],
-          "effect": "Banish the top 1 card of the player's draw pile.",
+          "effect": "Banish the top 1 card of the player's library.",
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
-          "preview": "Banish the top 1 card of the player's draw pile."
+          "preview": "Banish the top 1 card of the player's library."
         },
         {
           "id": "c",
@@ -768,12 +792,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay withers the living roots.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -1313,11 +1337,11 @@
               "to": "player_banished"
             }
           ],
-          "effect": "Banish the top 1 card of the player's draw pile.",
+          "effect": "Banish the top 1 card of the player's library.",
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
-          "preview": "Banish the top 1 card of the player's draw pile."
+          "preview": "Banish the top 1 card of the player's library."
         }
       ],
       "pattern": [
@@ -1366,7 +1390,7 @@
       },
       "trait": {
         "name": "Ashen Dust",
-        "effect": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile.",
+        "effect": "On Scatter Ash: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile.",
         "by_action": {
           "b": [
             {
@@ -1421,7 +1445,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's draw pile to the player's discard pile."
+          "preview": "Deal 4 Decay damage. Trait — Ashen Dust: Apply 2 Weaken to the player. Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
       "pattern": [
@@ -1470,13 +1494,13 @@
       },
       "trait": {
         "name": "Tugged Hands",
-        "effect": "On Puppet Dance: The player flips 1 held card of their choice, if any.",
+        "effect": "On Puppet Dance: Flip 1 random card still in the player's hand, if any.",
         "by_action": {
           "b": [
             {
               "op": "flip_held",
               "amount": 1,
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -1518,7 +1542,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Tugged Hands: The player flips 1 held card of their choice, if any."
+          "preview": "Deal 4 Binding damage. Trait — Tugged Hands: Flip 1 random card still in the player's hand, if any."
         }
       ],
       "pattern": [
@@ -1526,6 +1550,7 @@
         "b"
       ],
       "keywords": [
+        "Flip",
         "Binding",
         "Release"
       ],
@@ -1657,7 +1682,7 @@
       },
       "trait": {
         "name": "Drowned Prophecy",
-        "effect": "On Foretold Drowning: Move the top 1 card of the player's draw pile to the player's discard pile.",
+        "effect": "On Foretold Drowning: Move the top 1 card of the player's library to the player's discard pile.",
         "by_action": {
           "b": [
             {
@@ -1706,7 +1731,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Memory damage. Trait — Drowned Prophecy: Move the top 1 card of the player's draw pile to the player's discard pile."
+          "preview": "Deal 5 Memory damage. Trait — Drowned Prophecy: Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
       "pattern": [
@@ -1744,12 +1769,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay wilts the living bells.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -2034,7 +2059,7 @@
       },
       "trait": {
         "name": "Another Circuit",
-        "effect": "On Round Again: Move the top 1 card of the player's draw pile to the bottom of that pile.",
+        "effect": "On Round Again: Move the top 1 card of the player's library to the bottom of that pile.",
         "by_action": {
           "b": [
             {
@@ -2083,7 +2108,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Memory damage. Trait — Another Circuit: Move the top 1 card of the player's draw pile to the bottom of that pile."
+          "preview": "Deal 4 Memory damage. Trait — Another Circuit: Move the top 1 card of the player's library to the bottom of that pile."
         }
       ],
       "pattern": [
@@ -2121,12 +2146,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay withers the blossoms feeding the axe.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -2336,7 +2361,7 @@
       },
       "trait": {
         "name": "Redrawn Route",
-        "effect": "On Change the Map: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+        "effect": "On Change the Map: Move the top 2 cards of the player's library to the bottom of that pile.",
         "by_action": {
           "b": [
             {
@@ -2385,7 +2410,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Memory damage. Trait — Redrawn Route: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+          "preview": "Deal 4 Memory damage. Trait — Redrawn Route: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
       "pattern": [
@@ -2527,7 +2552,7 @@
       },
       "trait": {
         "name": "Gathering Apron",
-        "effect": "On Gather the Apron: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+        "effect": "On Gather the Apron: The player puts 1 held card of their choice on the top of their library, if any.",
         "by_action": {
           "b": [
             {
@@ -2576,7 +2601,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their draw pile, if any."
+          "preview": "Deal 5 Binding damage. Trait — Gathering Apron: The player puts 1 held card of their choice on the top of their library, if any."
         }
       ],
       "pattern": [
@@ -2621,7 +2646,7 @@
       },
       "trait": {
         "name": "Unfinished Phrase",
-        "effect": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
+        "effect": "On Play the Refrain: The player may put 1 card of their choice from their discard pile on top of their library.",
         "by_action": {
           "b": [
             {
@@ -2669,7 +2694,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their draw pile."
+          "preview": "Deal 4 Memory damage. Trait — Unfinished Phrase: The player may put 1 card of their choice from their discard pile on top of their library."
         }
       ],
       "pattern": [
@@ -2739,15 +2764,15 @@
             {
               "op": "damage",
               "amount": 5,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 5 Flame damage.",
+          "effect": "Deal 5 Fire damage.",
           "trait_active": false,
           "hush_target": false,
-          "hushed_effect": "Deal 5 Flame damage. No suppressible effect in this intent.",
-          "preview": "Deal 5 Flame damage."
+          "hushed_effect": "Deal 5 Fire damage. No suppressible effect in this intent.",
+          "preview": "Deal 5 Fire damage."
         },
         {
           "id": "b",
@@ -2757,15 +2782,15 @@
             {
               "op": "damage",
               "amount": 5,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 5 Flame damage.",
+          "effect": "Deal 5 Fire damage.",
           "trait_active": true,
           "hush_target": true,
-          "hushed_effect": "Deal 5 Flame damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Flame damage. Trait — Pooled Wax: Gain 3 Ward."
+          "hushed_effect": "Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.",
+          "preview": "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."
         }
       ],
       "pattern": [
@@ -2774,7 +2799,7 @@
       ],
       "keywords": [
         "Ward",
-        "Flame",
+        "Fire",
         "Frost"
       ],
       "review_flags": [
@@ -3823,7 +3848,7 @@
       },
       "trait": {
         "name": "Closing Weave",
-        "effect": "On Close the Loom: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer.",
+        "effect": "On Close the Loom: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer.",
         "by_action": {
           "b": [
             {
@@ -3872,7 +3897,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their draw pile, or all held cards if fewer."
+          "preview": "Deal 4 Binding damage. Trait — Closing Weave: The player puts 2 held cards of their choice on the top of their library, or all held cards if fewer."
         }
       ],
       "pattern": [
@@ -4103,12 +4128,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay withers the sheltered growth.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -4523,12 +4548,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay wilts its living tentacles.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -4625,7 +4650,7 @@
       },
       "trait": {
         "name": "Empty Harvest",
-        "effect": "On Reap Tomorrow: Banish the top 1 card of the player's draw pile.",
+        "effect": "On Reap Tomorrow: Banish the top 1 card of the player's library.",
         "by_action": {
           "b": [
             {
@@ -4674,7 +4699,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Decay damage. Trait — Empty Harvest: Banish the top 1 card of the player's draw pile."
+          "preview": "Deal 5 Decay damage. Trait — Empty Harvest: Banish the top 1 card of the player's library."
         }
       ],
       "pattern": [
@@ -4724,7 +4749,7 @@
       },
       "trait": {
         "name": "Sticky Tribute",
-        "effect": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+        "effect": "On Close the Honey Trap: The player puts 1 held card of their choice on the top of their library, if any.",
         "by_action": {
           "b": [
             {
@@ -4773,7 +4798,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their draw pile, if any."
+          "preview": "Deal 4 Binding damage. Trait — Sticky Tribute: The player puts 1 held card of their choice on the top of their library, if any."
         }
       ],
       "pattern": [
@@ -4821,7 +4846,7 @@
       },
       "trait": {
         "name": "Bounding Trail",
-        "effect": "On Leave an Ink Trail: Move the top 1 card of the player's draw pile to the bottom of that pile.",
+        "effect": "On Leave an Ink Trail: Move the top 1 card of the player's library to the bottom of that pile.",
         "by_action": {
           "b": [
             {
@@ -4870,7 +4895,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Shadow damage. Trait — Bounding Trail: Move the top 1 card of the player's draw pile to the bottom of that pile."
+          "preview": "Deal 5 Shadow damage. Trait — Bounding Trail: Move the top 1 card of the player's library to the bottom of that pile."
         }
       ],
       "pattern": [
@@ -5184,7 +5209,8 @@
       "keywords": [
         "Mark",
         "Binding",
-        "Release"
+        "Release",
+        "Fire"
       ],
       "review_flags": [
         "wider-pool-weakness"
@@ -5318,11 +5344,16 @@
       },
       "trait": {
         "name": "Clean Sweep",
-        "effect": "On Sweep the Floor: Remove all enemy Burn.",
+        "effect": "On Sweep the Floor: Remove all enemy Burn. Remove all enemy Poison.",
         "by_action": {
           "b": [
             {
               "op": "remove_burn",
+              "target": "enemy",
+              "stage": "after_attack"
+            },
+            {
+              "op": "remove_poison",
               "target": "enemy",
               "stage": "after_attack"
             }
@@ -5365,7 +5396,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Release damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Release damage. Trait — Clean Sweep: Remove all enemy Burn."
+          "preview": "Deal 4 Release damage. Trait — Clean Sweep: Remove all enemy Burn. Remove all enemy Poison."
         }
       ],
       "pattern": [
@@ -5374,13 +5405,14 @@
       ],
       "keywords": [
         "Burn",
+        "Poison",
         "Binding",
         "Release"
       ],
       "review_flags": [
         "wider-pool-weakness"
       ],
-      "thematic_reason": "The mop clears its owner's lingering Burn after a deliberate sweep."
+      "thematic_reason": "The janitor mops away burning residue and toxic contamination, without removing unrelated statuses."
     },
     {
       "id": "the-marble-nurse",
@@ -6099,7 +6131,7 @@
       },
       "trait": {
         "name": "Stolen Morrow",
-        "effect": "On Escape into Dusk: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+        "effect": "On Escape into Dusk: Move the top 2 cards of the player's library to the bottom of that pile.",
         "by_action": {
           "c": [
             {
@@ -6144,11 +6176,11 @@
               "to": "player_banished"
             }
           ],
-          "effect": "Banish the top 1 card of the player's draw pile.",
+          "effect": "Banish the top 1 card of the player's library.",
           "trait_active": false,
           "hush_target": true,
           "hushed_effect": "Skip this ability. Advance the pattern.",
-          "preview": "Banish the top 1 card of the player's draw pile."
+          "preview": "Banish the top 1 card of the player's library."
         },
         {
           "id": "c",
@@ -6166,7 +6198,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Shadow damage. Trait — Stolen Morrow: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+          "preview": "Deal 4 Shadow damage. Trait — Stolen Morrow: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
       "pattern": [
@@ -6205,12 +6237,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay withers its living moss.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -6308,7 +6340,7 @@
       },
       "trait": {
         "name": "Moth-Eaten Tribute",
-        "effect": "On Loose the Moths: Move the top 2 cards of the player's draw pile to the player's discard pile.",
+        "effect": "On Loose the Moths: Move the top 2 cards of the player's library to the player's discard pile.",
         "by_action": {
           "b": [
             {
@@ -6357,7 +6389,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Decay damage. Trait — Moth-Eaten Tribute: Move the top 2 cards of the player's draw pile to the player's discard pile."
+          "preview": "Deal 4 Decay damage. Trait — Moth-Eaten Tribute: Move the top 2 cards of the player's library to the player's discard pile."
         }
       ],
       "pattern": [
@@ -6395,22 +6427,22 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay consumes the living fungal growth.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
-        "name": "Spore Chord",
-        "effect": "On Pluck the Mould: Apply 3 Weaken to the player.",
+        "name": "Mould Spores",
+        "effect": "On Pluck the Mould: Apply 2 Poison to the player.",
         "by_action": {
           "c": [
             {
-              "op": "weaken",
-              "amount": 3,
+              "op": "poison",
+              "amount": 2,
               "target": "player",
               "stage": "after_attack"
             }
@@ -6439,7 +6471,7 @@
         },
         {
           "id": "b",
-          "name": "Grow the Refrain",
+          "name": "Pluck the Mould",
           "kind": "ability",
           "base": [
             {
@@ -6470,7 +6502,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Growth damage. Trait — Spore Chord: Apply 3 Weaken to the player."
+          "preview": "Deal 4 Growth damage. Trait — Mould Spores: Apply 2 Poison to the player."
         }
       ],
       "pattern": [
@@ -6479,14 +6511,15 @@
         "c"
       ],
       "keywords": [
-        "Weaken",
+        "Poison",
         "Growth",
         "Decay"
       ],
       "review_flags": [
+        "damage-over-time",
         "recovery-stall-check"
       ],
-      "thematic_reason": "The mould visibly regrows and sends a debilitating spore-note after the harpist's touch."
+      "thematic_reason": "The mould-coated harp throws toxic spores from its vibrating strings; Poison follows the visible fungal growth."
     },
     {
       "id": "the-noon-dancer",
@@ -6613,7 +6646,7 @@
       },
       "trait": {
         "name": "Dive for Cover",
-        "effect": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+        "effect": "On Dive with the Prize: The player puts 1 held card of their choice on the bottom of their library, if any.",
         "by_action": {
           "b": [
             {
@@ -6662,7 +6695,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their draw pile, if any."
+          "preview": "Deal 4 Shadow damage. Trait — Dive for Cover: The player puts 1 held card of their choice on the bottom of their library, if any."
         }
       ],
       "pattern": [
@@ -7298,7 +7331,7 @@
       },
       "trait": {
         "name": "Drawing Current",
-        "effect": "On Turn the Current: Move the top 2 cards of the player's draw pile to the bottom of that pile.",
+        "effect": "On Turn the Current: Move the top 2 cards of the player's library to the bottom of that pile.",
         "by_action": {
           "b": [
             {
@@ -7347,7 +7380,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Radiance damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Radiance damage. Trait — Drawing Current: Move the top 2 cards of the player's draw pile to the bottom of that pile."
+          "preview": "Deal 4 Radiance damage. Trait — Drawing Current: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
       "pattern": [
@@ -7574,12 +7607,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay rots the roots feeding the pipes.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -7688,12 +7721,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay withers the anchoring roots.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -7878,24 +7911,23 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay withers its living, plantlike body.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
-        "name": "Saffron Snare",
-        "effect": "On Close the Snare: The player discards 1 held card of their choice, if any.",
+        "name": "Saffron Venom",
+        "effect": "On Venomous Bite: Apply 2 Poison to the player.",
         "by_action": {
           "b": [
             {
-              "op": "move_held",
-              "amount": 1,
-              "to": "player_discard",
-              "chooser": "player",
+              "op": "poison",
+              "amount": 2,
+              "target": "player",
               "stage": "after_attack"
             }
           ]
@@ -7923,7 +7955,7 @@
         },
         {
           "id": "b",
-          "name": "Close the Snare",
+          "name": "Venomous Bite",
           "kind": "attack",
           "base": [
             {
@@ -7937,7 +7969,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Growth damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Growth damage. Trait — Saffron Snare: The player discards 1 held card of their choice, if any."
+          "preview": "Deal 4 Growth damage. Trait — Saffron Venom: Apply 2 Poison to the player."
         }
       ],
       "pattern": [
@@ -7945,13 +7977,14 @@
         "b"
       ],
       "keywords": [
+        "Poison",
         "Growth",
         "Decay"
       ],
       "review_flags": [
-        "held-card-interaction"
+        "damage-over-time"
       ],
-      "thematic_reason": "The web catches one visibly held card, rather than adding a fang solely because Keep was played."
+      "thematic_reason": "The huge spider delivers venom through its bite rather than manipulating an arbitrary held card."
     },
     {
       "id": "the-salt-crown",
@@ -8105,7 +8138,7 @@
             {
               "op": "flip_held",
               "amount": "all",
-              "chooser": "player",
+              "chooser": "random",
               "stage": "after_attack"
             }
           ]
@@ -8195,7 +8228,7 @@
       },
       "trait": {
         "name": "Hands Within",
-        "effect": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their draw pile, if any.",
+        "effect": "On Open the Hands: The player puts 1 held card of their choice on the bottom of their library, if any.",
         "by_action": {
           "b": [
             {
@@ -8244,7 +8277,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their draw pile, if any."
+          "preview": "Deal 4 Binding damage. Trait — Hands Within: The player puts 1 held card of their choice on the bottom of their library, if any."
         },
         {
           "id": "c",
@@ -8301,12 +8334,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay withers the fruiting branches.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -8636,15 +8669,15 @@
             {
               "op": "damage",
               "amount": 6,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 6 Flame damage.",
+          "effect": "Deal 6 Fire damage.",
           "trait_active": false,
           "hush_target": false,
-          "hushed_effect": "Deal 6 Flame damage. No suppressible effect in this intent.",
-          "preview": "Deal 6 Flame damage."
+          "hushed_effect": "Deal 6 Fire damage. No suppressible effect in this intent.",
+          "preview": "Deal 6 Fire damage."
         },
         {
           "id": "b",
@@ -8654,15 +8687,15 @@
             {
               "op": "damage",
               "amount": 5,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 5 Flame damage.",
+          "effect": "Deal 5 Fire damage.",
           "trait_active": true,
           "hush_target": true,
-          "hushed_effect": "Deal 5 Flame damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Flame damage. Trait — Feed the Fire: Apply 2 Burn to the player."
+          "hushed_effect": "Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.",
+          "preview": "Deal 5 Fire damage. Trait — Feed the Fire: Apply 2 Burn to the player."
         }
       ],
       "pattern": [
@@ -8671,10 +8704,11 @@
       ],
       "keywords": [
         "Burn",
-        "Flame",
+        "Fire",
         "Frost"
       ],
       "review_flags": [
+        "damage-over-time",
         "wider-pool-weakness",
         "sparse-weakness-pool"
       ],
@@ -9191,7 +9225,7 @@
       },
       "trait": {
         "name": "Hem the Hand",
-        "effect": "On Close the Hem: The player puts 1 held card of their choice on the top of their draw pile, if any.",
+        "effect": "On Close the Hem: The player puts 1 held card of their choice on the top of their library, if any.",
         "by_action": {
           "b": [
             {
@@ -9240,7 +9274,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Binding damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their draw pile, if any."
+          "preview": "Deal 4 Binding damage. Trait — Hem the Hand: The player puts 1 held card of their choice on the top of their library, if any."
         }
       ],
       "pattern": [
@@ -9574,7 +9608,7 @@
       },
       "trait": {
         "name": "Fraying Court",
-        "effect": "On Unravel the Hem: Move the top 1 card of the player's draw pile to the player's discard pile.",
+        "effect": "On Unravel the Hem: Move the top 1 card of the player's library to the player's discard pile.",
         "by_action": {
           "b": [
             {
@@ -9623,7 +9657,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Decay damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Decay damage. Trait — Fraying Court: Move the top 1 card of the player's draw pile to the player's discard pile."
+          "preview": "Deal 4 Decay damage. Trait — Fraying Court: Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
       "pattern": [
@@ -10466,7 +10500,7 @@
       },
       "trait": {
         "name": "Remembered Courtesy",
-        "effect": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their draw pile.",
+        "effect": "On Invite the Memory: The player may put 1 card of their choice from their discard pile on top of their library.",
         "by_action": {
           "b": [
             {
@@ -10514,7 +10548,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 3 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their draw pile."
+          "preview": "Deal 3 Memory damage. Trait — Remembered Courtesy: The player may put 1 card of their choice from their discard pile on top of their library."
         }
       ],
       "pattern": [
@@ -10562,7 +10596,7 @@
       },
       "trait": {
         "name": "Wax Seal",
-        "effect": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any.",
+        "effect": "On Pour the Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any.",
         "by_action": {
           "b": [
             {
@@ -10591,15 +10625,15 @@
             {
               "op": "damage",
               "amount": 5,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 5 Flame damage.",
+          "effect": "Deal 5 Fire damage.",
           "trait_active": false,
           "hush_target": false,
-          "hushed_effect": "Deal 5 Flame damage. No suppressible effect in this intent.",
-          "preview": "Deal 5 Flame damage."
+          "hushed_effect": "Deal 5 Fire damage. No suppressible effect in this intent.",
+          "preview": "Deal 5 Fire damage."
         },
         {
           "id": "b",
@@ -10609,15 +10643,15 @@
             {
               "op": "damage",
               "amount": 4,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 4 Flame damage.",
+          "effect": "Deal 4 Fire damage.",
           "trait_active": true,
           "hush_target": true,
-          "hushed_effect": "Deal 4 Flame damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Flame damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their draw pile, if any."
+          "hushed_effect": "Deal 4 Fire damage. Suppress the labeled trait. Advance the pattern.",
+          "preview": "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. The player puts 1 held card of their choice on the top of their library, if any."
         }
       ],
       "pattern": [
@@ -10626,11 +10660,12 @@
       ],
       "keywords": [
         "Burn",
-        "Flame",
+        "Fire",
         "Frost"
       ],
       "review_flags": [
         "held-card-interaction",
+        "damage-over-time",
         "wider-pool-weakness",
         "sparse-weakness-pool"
       ],
@@ -10664,7 +10699,7 @@
       },
       "trait": {
         "name": "Whispered Names",
-        "effect": "On Speak the Names: Move the top 2 cards of the player's draw pile to the player's discard pile.",
+        "effect": "On Speak the Names: Move the top 2 cards of the player's library to the player's discard pile.",
         "by_action": {
           "b": [
             {
@@ -10713,7 +10748,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 4 Memory damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 4 Memory damage. Trait — Whispered Names: Move the top 2 cards of the player's draw pile to the player's discard pile."
+          "preview": "Deal 4 Memory damage. Trait — Whispered Names: Move the top 2 cards of the player's library to the player's discard pile."
         }
       ],
       "pattern": [
@@ -10782,15 +10817,15 @@
             {
               "op": "damage",
               "amount": 6,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 6 Flame damage.",
+          "effect": "Deal 6 Fire damage.",
           "trait_active": false,
           "hush_target": false,
-          "hushed_effect": "Deal 6 Flame damage. No suppressible effect in this intent.",
-          "preview": "Deal 6 Flame damage."
+          "hushed_effect": "Deal 6 Fire damage. No suppressible effect in this intent.",
+          "preview": "Deal 6 Fire damage."
         },
         {
           "id": "b",
@@ -10800,15 +10835,15 @@
             {
               "op": "damage",
               "amount": 5,
-              "damage_type": "Flame",
+              "damage_type": "Fire",
               "hits": 1
             }
           ],
-          "effect": "Deal 5 Flame damage.",
+          "effect": "Deal 5 Fire damage.",
           "trait_active": true,
           "hush_target": true,
-          "hushed_effect": "Deal 5 Flame damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Flame damage. Trait — Open Furnace: Apply 3 Burn to the player."
+          "hushed_effect": "Deal 5 Fire damage. Suppress the labeled trait. Advance the pattern.",
+          "preview": "Deal 5 Fire damage. Trait — Open Furnace: Apply 3 Burn to the player."
         }
       ],
       "pattern": [
@@ -10817,10 +10852,11 @@
       ],
       "keywords": [
         "Burn",
-        "Flame",
+        "Fire",
         "Frost"
       ],
       "review_flags": [
+        "damage-over-time",
         "wider-pool-weakness",
         "sparse-weakness-pool"
       ],
@@ -10847,12 +10883,12 @@
         "type": "Decay",
         "direct_card_bonus": 2,
         "reason": "Decay rots the cradle's living plant fibers.",
-        "available_direct_face_count": 23,
+        "available_direct_face_count": 22,
         "example_direct_faces": [
           "Drought",
-          "Plague Brazier",
           "Wither",
-          "Ash"
+          "Ash",
+          "Thorns"
         ]
       },
       "trait": {
@@ -10970,12 +11006,12 @@
         ]
       },
       "trait": {
-        "name": "Patient Web",
-        "effect": "On Silken Lunge: Apply 3 Weaken to the player.",
+        "name": "Widow Venom",
+        "effect": "On Venomous Lunge: Apply 3 Poison to the player.",
         "by_action": {
           "b": [
             {
-              "op": "weaken",
+              "op": "poison",
               "amount": 3,
               "target": "player",
               "stage": "after_attack"
@@ -11005,7 +11041,7 @@
         },
         {
           "id": "b",
-          "name": "Silken Lunge",
+          "name": "Venomous Lunge",
           "kind": "attack",
           "base": [
             {
@@ -11019,7 +11055,7 @@
           "trait_active": true,
           "hush_target": true,
           "hushed_effect": "Deal 5 Shadow damage. Suppress the labeled trait. Advance the pattern.",
-          "preview": "Deal 5 Shadow damage. Trait — Patient Web: Apply 3 Weaken to the player."
+          "preview": "Deal 5 Shadow damage. Trait — Widow Venom: Apply 3 Poison to the player."
         }
       ],
       "pattern": [
@@ -11027,12 +11063,14 @@
         "b"
       ],
       "keywords": [
-        "Weaken",
+        "Poison",
         "Radiance",
         "Shadow"
       ],
-      "review_flags": [],
-      "thematic_reason": "The widow's web restrains the next attack after its physical lunge, without punishing a remembered play count."
+      "review_flags": [
+        "damage-over-time"
+      ],
+      "thematic_reason": "The widow’s spider limbs deliver a venomous strike; the toxin lingers after the base hit."
     }
   ]
 }

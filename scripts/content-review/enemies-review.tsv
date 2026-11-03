@@ -24,7 +24,7 @@
 24|Summer Rattle|b|extra1x3|Brass Mandibles|d3|Rattling Wings|d3|-|-|ab|The brass wings add a rapid series of three small rattling pulses.|Radiance
 25|Gathering Apron|b|stow1|Brass Embrace|d6|Gather the Apron|d5|-|-|ab|The matron tucks one still-held card into the next draw rather than copying an unrelated Ward total.|Binding
 26|Unfinished Phrase|b|recur1|Buried Fingers|d6|Play the Refrain|d4|-|-|ab|The buried melody brings one visible discarded card back to the next draw; this strange courtesy can help the player.|Memory
-27|Pooled Wax|b|ward3|Candle Scald|d5|Pour the Wax|d5|-|-|ab|The poured wax hardens into a fresh covering after the scald.|Flame
+27|Pooled Wax|b|ward3|Candle Scald|d5|Pour the Wax|d5|-|-|ab|The poured wax hardens into a fresh covering after the scald.|Fire
 28|Set the Hook|b|discard1|Star Hook|d5|Reel the Line|d4|-|-|ab|The line pulls away one card the player still holds; no previous health-damage flag is stored.|Binding
 29|Cellar Fumes|a|weaken2|Bitter Goblet|d6|Drink the Vintage|h4|-|-|aba|The vintage restores its drinker while its heavy fumes impair the opponent.|Decay
 30|Dustfall|b|weaken3|Chalk Hand|d6|Shake the Chalk|d5|-|-|ab|The giant sheds a cloud of chalk dust that interferes with aim.|Binding
@@ -50,7 +50,7 @@
 50|Tightening Knot|b|weaken3|Knotted Fist|d6|Tighten the Cords|d5|-|-|ab|The giant's cords constrain the opponent instead of gaining armor when an attack was blocked.|Binding
 51|Broadside Order|b|extra2x2|Lacquered Saber|d5|Fire the Broadside|d4|Signal the Fleet|m2|cab|The fleet's signal fixes a target and two shipboard shots follow the admiral's leading blow.|Binding
 52|Gathered Linen|a|weaken2|Linen Pounce|d6|Fold the Linen|w4|-|-|ba|The linen is both real covering and a cloth that catches the opponent's attacking limbs; no delayed charge is implied.|Binding
-53|Clean Sweep|b|clean|Royal Mop|d5|Sweep the Floor|d4|-|-|ab|The mop clears its owner's lingering Burn after a deliberate sweep.|Release
+53|Clean Sweep|b|clean,cleanpoison|Royal Mop|d5|Sweep the Floor|d4|-|-|ab|The janitor mops away burning residue and toxic contamination, without removing unrelated statuses.|Release
 54|Sedating Presence|b|slow1|Marble Needle|d4|Administer the Dose|d4|-|-|ab|The nurse's uncanny sedation reduces the next normal draw by one; Ward still only stops damage.|Binding
 55|Midday Mask|b|light|Solar Stare|d5|Present the Mask|d4|-|-|ab|The bright mask turns the next entire hand to its light faces, matching the noon-lit scene.|Radiance
 56|Tightrope Rebound|b|bypass2|Rope Kick|d5|Vault the Rope|d4|-|-|ab|The unmasked acrobat clears a small frontal guard with an explicit vault, not a remembered play count.|Release
@@ -61,7 +61,7 @@
 61|Stolen Morrow|c|bottom2|Dawn Snatch|d5|Steal Tomorrow|q1|Escape into Dusk|d4|abc|The thief takes one future card and conceals the next approach while escaping.|Shadow
 62|Moss Drinks|b|heal3|Mossback Club|d6|Let the Moss Drink|d5|-|-|ab|The wet moss renews its own body directly, without copying the player's healing.|Growth
 63|Moth-Eaten Tribute|b|mill2|Tattered Scepter|d5|Loose the Moths|d4|-|-|ab|The moths consume the next two pages of the draw sequence into the spent pile.|Decay
-64|Spore Chord|c|weaken3|Bony Fingers|d5|Grow the Refrain|h4|Pluck the Mould|d4|abc|The mould visibly regrows and sends a debilitating spore-note after the harpist's touch.|Growth
+64|Mould Spores|c|poison2|Bony Fingers|d5|Pluck the Mould|h4|Pluck the Mould|d4|abc|The mould-coated harp throws toxic spores from its vibrating strings; Poison follows the visible fungal growth.|Growth
 65|Turning Step|b|lightnow|Noon Step|d5|Light Pirouette|d4|-|-|ab|The sunlit turn changes only the faces the player still holds; newly drawn cards are not secretly tracked.|Radiance
 66|Dive for Cover|b|bury1|Obsidian Bite|d5|Dive with the Prize|d4|-|-|ab|The otter carries one held card down to the draw pile's bottom instead of checking an unspent Mark.|Shadow
 67|Ripple of Light|b|extra1x3|Opal Mandibles|d5|Ripple the Segments|d3|-|-|ab|The opalescent segments add three small moving flashes to the leading bite.|Radiance
@@ -76,14 +76,14 @@
 76|Root Pedal|b|extra2x1|Rooted Hands|d6|Sound the Organ|d4|Drink Deep|h3|cab|The roots draw nourishment and the organ adds a second low pulse after the fingers strike.|Growth
 77|Anchored Landing|b|weaken3|Anchored Kick|d5|Land in the Roots|d4|-|-|ab|The landing spreads roots that entangle the opponent instead of healing only when a shield blocked a hit.|Growth
 78|Turn the Key|b|bypassall|Sable Key|d5|Unlocking Thrust|d5|-|-|ab|The key passes through a locked guard; Hush stops that opening while the 5-damage thrust remains.|Binding
-79|Saffron Snare|b|discard1|Saffron Fang|d5|Close the Snare|d4|-|-|ab|The web catches one visibly held card, rather than adding a fang solely because Keep was played.|Growth
+79|Saffron Venom|b|poison2|Saffron Fang|d5|Venomous Bite|d4|-|-|ab|The huge spider delivers venom through its bite rather than manipulating an arbitrary held card.|Growth
 80|Crystalline Spires|c|extra2x2|Salt Shard|d5|Crystallize the Crown|w5|Raise the Spires|d4|bac|The dense crystal protects and its separate spires add two distinct strikes.|Binding
 81|Borrowed Gesture|b|flipall|Shadow String|d5|Borrow the Hands|d4|-|-|ab|The puppeteer turns the actual held cards into their opposite gestures.|Shadow
 82|Hands Within|b|bury1|Cabinet Slam|d5|Open the Hands|d4|Shut the Door|w4|cba|The wooden door is real cover; the hands hide one held card at the back of the draw pile.|Binding
 83|Silver Leaf-Fall|c|extra2x2|Silver Bough|d6|Harvest the Fruit|h4|Shake the Leaves|d4|abc|The fruit restores a fixed amount, while two sharp silver leaves follow the branch's impact.|Growth
 84|Drowsy Bargain|b|slow1|Dream Toll|d5|Offer the Sleep|d4|-|-|ab|The bottled sleep reduces attention and the next normal draw by one.|Memory
 85|Follow the Sleepwalkers|b|weaken3|Bridge Tilt|d5|Lead the Procession|d4|-|-|ab|The uncanny procession puts the traveler into a weakening trance without remembering which saved card was played.|Binding
-86|Feed the Fire|b|burn2|Kiln Breath|d6|Open the Firemouth|d5|-|-|ab|Real fire from the kiln leaves a Burn after the first breath.|Flame
+86|Feed the Fire|b|burn2|Kiln Breath|d6|Open the Firemouth|d5|-|-|ab|Real fire from the kiln leaves a Burn after the first breath.|Fire
 87|Soot Veil|b|weaken3|Soot Kiss|d5|Cast the Veil|d4|-|-|ab|The visible soot cloud interferes with the opponent's aim, independent of Scry.|Decay
 88|Hungry Table|b|leech|Banquet Gnash|d5|Take the Feast|d5|-|-|ab|The great mouth feeds through Leech using the full attack amount before Ward, not HP actually lost.|Decay
 89|Step Over|b|bypass3|Stilt Stamp|d5|Stride Above the Guard|d5|-|-|ab|The long stilts step above part of a frontal guard without a threshold test on remaining Ward.|Release
@@ -103,8 +103,8 @@
 103|Velvet Coil|b|weaken3|Coiling Bite|d5|Tighten the Coil|d4|-|-|ab|The eel's long body constricts the next attacking motion rather than checking draw effects.|Binding
 104|Burrow Under|b|bypass4|Velvet Claw|d5|Tunnel Beneath|d4|-|-|ab|The digging claws come from below a frontal guard.|Release
 105|Remembered Courtesy|b|recur1|Velvet Finger|d5|Invite the Memory|d3|-|-|ab|The courtly skeleton invites a discarded memory back to the next draw; a dark figure can offer real help.|Memory
-106|Wax Seal|b|burn1,stow1|Regent's Scald|d5|Pour the Seal|d4|-|-|ab|Hot wax leaves a Burn and seals one held card into the next draw, without testing HP damage.|Flame
+106|Wax Seal|b|burn1,stow1|Regent's Scald|d5|Pour the Seal|d4|-|-|ab|Hot wax leaves a Burn and seals one held card into the next draw, without testing HP damage.|Fire
 107|Whispered Names|b|mill2|Casket Murmur|d5|Speak the Names|d4|-|-|ab|The whispers draw two coming cards into the spent past without tracking the identity of last turn's final card.|Memory
-108|Open Furnace|b|burn3|White Heat|d6|Expose the Core|d5|-|-|ab|The uncovered furnace leaves a strong continuing Burn; it need not ignore every possible shield.|Flame
+108|Open Furnace|b|burn3|White Heat|d6|Expose the Core|d5|-|-|ab|The uncovered furnace leaves a strong continuing Burn; it need not ignore every possible shield.|Fire
 109|Dreaming Cradle|c|weaken3|Wicker Reach|d5|Sleep|h4|Murmur the Lullaby|d4|bac|The sleeper restores itself and its dream dulls the opponent's next attacking motion.|Growth
-110|Patient Web|b|weaken3|Velvet Fang|d5|Silken Lunge|d5|-|-|ab|The widow's web restrains the next attack after its physical lunge, without punishing a remembered play count.|Shadow
+110|Widow Venom|b|poison3|Velvet Fang|d5|Venomous Lunge|d5|-|-|ab|The widow’s spider limbs deliver a venomous strike; the toxin lingers after the base hit.|Shadow
