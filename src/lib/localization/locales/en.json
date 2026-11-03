@@ -2,5 +2,14 @@
   "tagline": "A card game prototype",
   "title": "Dusk & Dawn",
   "description": "A new story is taking shape.",
-  "status": "Prototype foundation"
+  "status": "Prototype foundation",
+  "play": "Play",
+  "options": "Options",
+  "audio": "Audio",
+  "music": "Music",
+  "sound": "Sound effects",
+  "display": "Display",
+  "reducedMotion": "Reduce motion",
+  "back": "Back",
+  "settingsSaveError": "Settings could not be saved. Changes apply for this session."
 }

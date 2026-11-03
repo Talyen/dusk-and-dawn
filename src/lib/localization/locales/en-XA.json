@@ -2,5 +2,14 @@
   "tagline": "[A caaard gaaame prooototype]",
   "title": "Dusk & Dawn",
   "description": "[A neeew stooory is taaaking shaaape.]",
-  "status": "[Prooototype fouuundation]"
+  "status": "[Prooototype fouuundation]",
+  "play": "[Plaaay]",
+  "options": "[Oooptiiions]",
+  "audio": "[Auuudio]",
+  "music": "[Muuusic]",
+  "sound": "[Sooound effeeeects]",
+  "display": "[Diiisplaaay]",
+  "reducedMotion": "[Reduuuce mooootion]",
+  "back": "[Baaack]",
+  "settingsSaveError": "[Seeeettings cooould noooot be saaaved. Chaaanges appply fooor thiiis seeession.]"
 }

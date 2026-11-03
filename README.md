@@ -55,3 +55,19 @@ The seeded generator, integer selection, and shuffle in `src/lib/random.ts` are 
 ## Dependency audit
 
 The current npm audit reports moderate advisories in the development-only Electron packaging dependency tree, rooted in older `minimatch` versions. The production dependency audit reports no advisories. Recheck after electron-builder updates; do not use `npm audit fix --force` to downgrade the packaging toolchain without verifying both desktop targets.
+
+## UI foundation
+
+`src/components/ui/controls.tsx` contains reusable buttons, surfaces, a switch,
+a named progress bar, pressed-button tab navigation, and the screen shell. The semantic palette in `src/style.css`
+and these controls adapt Alchemy's UI foundations to Dusk & Dawn's dusk palette.
+Use native controls and visible focus states; interactive artwork can use
+`SurfaceButton`. Options stores music and sound volumes and reduced-motion
+preference locally. Audio playback should use the shared `audio` manager exported
+from `src/lib/settings/settings.ts` so these volume settings apply. No sound assets
+are configured yet. Settings storage is separate from game saves.
+
+The UI palette, controls, and interaction conventions are adapted from Alchemy's
+`src/styles/theme.css`, `src/components/ui/`, `src/features/alchemy/shared/ui/`,
+and `Docs/UI.md` (Alchemy source is CC BY-NC 4.0); Dusk & Dawn's own license has
+not been specified here.
