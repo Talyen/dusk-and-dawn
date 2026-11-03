@@ -30,6 +30,8 @@ test("collection cards fit above pagination at different window and game sizes",
         );
         return {
           scrollHeight: document.documentElement.scrollHeight,
+          tabsBottom: document.querySelector(".ui-tab-bar")!.getBoundingClientRect().bottom,
+          top: Math.min(...cards.map((card) => card.top)),
           bottom: Math.max(...cards.map((card) => card.bottom)),
           paginationTop: pagination.top,
         };
@@ -39,6 +41,8 @@ test("collection cards fit above pagination at different window and game sizes",
       if (width === 1280 && gameSize === 100) {
         const box = (await cards.first().boundingBox())!;
         expect(box.width).toBeGreaterThan(tab === "Cards" ? 150 : 200);
+        expect(bounds.top - bounds.tabsBottom).toBeGreaterThanOrEqual(23);
+        expect(bounds.paginationTop - bounds.bottom).toBeGreaterThanOrEqual(19);
       }
     }
   }
