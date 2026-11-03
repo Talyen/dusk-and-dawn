@@ -109,7 +109,7 @@ describe("playable run", () => {
     expect(game.getSnapshot().state.enemy.hush).toBe(false);
     expect(game.getSnapshot().state.action).toBe(0);
   });
-  it("Hush skips an enemy ability and Freeze skips an attack without inventing thaw", () => {
+  it("Hush skips an enemy ability and Freeze clears after skipping an attack", () => {
     const setup = structuredClone(createRun(1).getSnapshot());
     setup.state.fight = 1;
     setup.state.action = 0;
@@ -125,6 +125,6 @@ describe("playable run", () => {
     game2.dispatch({ type: "end" });
     expect(game2.getSnapshot().state.player.hp).toBe(30);
     expect(game2.getSnapshot().state.action).toBe(2);
-    expect(game2.getSnapshot().state.enemy.freeze).toBe(true);
+    expect(game2.getSnapshot().state.enemy.freeze).toBe(false);
   });
 });

@@ -407,6 +407,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       return yes();
     }
     s.enemy.hush = false;
+    if (s.enemy.freeze) s.enemy.freeze = false;
     s.action = (s.action + 1) % route[s.fight]!.actions.length;
     halveWard(s.player);
     s.mana = 3;
