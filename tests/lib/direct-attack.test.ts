@@ -76,3 +76,24 @@ it("preserves Ward-ignoring damage when the hit is reflected", () => {
   expect(hits[0]).toMatchObject({ target: "attacker", amount: 5, absorbed: 0 });
   expect([attacker.hp, attacker.ward, defender.ward]).toEqual([15, 10, 9]);
 });
+
+it("finishes a player's multi-hit attack after the enemy falls and counts all Leech damage", () => {
+  const attacker = combatant({ hp: 10 });
+  const defender = combatant({ hp: 1 });
+  const hits = directAttack(
+    attacker,
+    defender,
+    [
+      { amount: 3, type: "Shadow" },
+      { amount: 3, type: "Shadow" },
+    ],
+    {
+      leech: true,
+      scaling: "flat-preview",
+      finishOnDefenderDefeat: true,
+    },
+  );
+  expect(hits).toHaveLength(2);
+  expect(attacker.hp).toBe(16);
+  expect(defender.hp).toBe(0);
+});

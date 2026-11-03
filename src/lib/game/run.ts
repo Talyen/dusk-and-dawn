@@ -422,7 +422,13 @@ function attack(s: RunState, hits: number[], type: DamageType, leech = false, ig
     s.player,
     s.enemy,
     hits.map((amount) => ({ amount, type })),
-    { weakness: getEnemy(s).weakness, leech, scaling: "flat-preview", ignoreWard },
+    {
+      weakness: getEnemy(s).weakness,
+      leech,
+      scaling: "flat-preview",
+      ignoreWard,
+      finishOnDefenderDefeat: true,
+    },
   );
   if (resolved.length) s.latestDirectHit = resolved.at(-1)!.amount;
 }

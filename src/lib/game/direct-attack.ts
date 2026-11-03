@@ -15,7 +15,13 @@ export function directAttack(
   attacker: Combatant,
   defender: Combatant,
   hits: readonly Hit[],
-  options: { weakness?: DamageType; leech: boolean; scaling: ScalingModel; ignoreWard?: boolean },
+  options: {
+    weakness?: DamageType;
+    leech: boolean;
+    scaling: ScalingModel;
+    ignoreWard?: boolean;
+    finishOnDefenderDefeat?: boolean;
+  },
 ): ResolvedHit[] {
   if (hits.length === 0) throw new Error("An attack must have at least one hit");
   const bonus = hits[0]!.type === options.weakness ? 2 : 0;
@@ -31,7 +37,7 @@ export function directAttack(
   const resolved: ResolvedHit[] = [];
   let leechTotal = 0;
   for (let index = 0; index < hits.length; index += 1) {
-    if (attacker.hp === 0 || defender.hp === 0) break;
+    if (attacker.hp === 0 || (defender.hp === 0 && !options.finishOnDefenderDefeat)) break;
     const hit = hits[index]!;
     const amount = values[index]!;
     const reflected = defender.reflect;
