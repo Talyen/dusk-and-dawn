@@ -1726,3 +1726,68 @@ input:focus-visible,
   width: 100%;
   box-sizing: border-box;
 }
+
+.battle-choice-panel {
+  position: absolute;
+  z-index: 20;
+  top: 24%;
+  left: 50%;
+  width: min(38rem, 92vw);
+  max-height: 60vh;
+  overflow: auto;
+  transform: translateX(-50%);
+  padding: 1rem;
+  border: 1px solid #947454;
+  border-radius: 0.5rem;
+  background: #141219f5;
+  text-align: center;
+}
+.battle-choice-panel h2 {
+  margin: 0 0 0.8rem;
+}
+.battle-choice-grid {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+.battle-inspection-card {
+  width: min(8rem, 22%);
+  flex: 0 1 8rem;
+}
+.battle-choice-art {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border: 1px solid #947454;
+  border-radius: 0.35rem;
+}
+.battle-choice-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.battle-inspection-card:hover .battle-choice-art,
+.battle-inspection-card:focus-visible .battle-choice-art,
+.battle-inspection-card[aria-pressed="true"] .battle-choice-art {
+  box-shadow: 0 0 1rem #efd0a68c;
+}
+.battle-inspection-card[aria-pressed="true"] .battle-choice-art {
+  outline: 2px solid #e8c68a;
+}
+.battle-inspection-card > span:last-child:not(.battle-choice-art) {
+  margin-top: 0.2rem;
+}
+@media (max-width: 700px), (max-height: 600px) {
+  .battle-choice-panel {
+    top: 20%;
+    max-height: 65vh;
+  }
+  .battle-inspection-card {
+    width: min(5.5rem, 22%);
+  }
+}
+
+.battle-inspection-card > .battle-choice-art {
+  margin-top: 0;
+}

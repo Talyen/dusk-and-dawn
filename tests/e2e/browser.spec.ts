@@ -544,11 +544,20 @@ test("paid library inspection survives reload and resolves without leaking early
   await page.getByRole("button", { name: "Continue run" }).click();
   const panel = page.getByLabel("Committed inspection");
   await expect(panel).toBeVisible();
+  await expect(panel.getByRole("button", { name: "Confirm choice" })).toHaveCount(0);
   await panel.getByRole("button", { name: /^Flame —/ }).click();
-  await panel.getByRole("button", { name: "Confirm choice" }).click();
   await expect(panel).toHaveCount(0);
   await expect(page.getByRole("button", { name: /Flame light/ })).toBeVisible();
   await expect(page.getByText(/Mana 2\/3/)).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.zones.library.map(
+          (card: { id: string }) => card.id,
+        ),
+      ),
+    )
+    .toEqual(["one", "two", "bottom"]);
 });
 
 test("plays a complete seeded run through the browser", async ({ page }) => {
@@ -725,14 +734,33 @@ for (const name of ["Memory", "Sacrifice"] as const) {
     await page.keyboard.press("Enter");
     const choice = page.getByLabel("Selected card");
     await expect(choice).toBeFocused();
+    await expect(sourceButton).toBeDisabled();
+    await expect(page.getByRole("button", { name: "End turn" })).toBeDisabled();
+    await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+    const preview = choice.getByRole("button", { name: /^Angel —/ });
+    await preview.hover();
+    if (name === "Sacrifice") {
+      for (const img of await choice.locator("img").all())
+        await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
+    }
+    const tip = (await page.getByRole("tooltip").boundingBox())!;
+    const cancel = (await choice.getByRole("button", { name: "Cancel" }).boundingBox())!;
+    expect(
+      tip.y + tip.height <= cancel.y ||
+        cancel.y + cancel.height <= tip.y ||
+        tip.x + tip.width <= cancel.x ||
+        cancel.x + cancel.width <= tip.x,
+    ).toBe(true);
     await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
     await expect(page.getByRole("button", { name: `Play ${name}` })).toHaveCount(0);
-    await page.getByRole("button", { name: "Cancel", exact: true }).click();
+    await page.getByRole("button", { name: "Cancel", exact: true }).focus();
+    await page.keyboard.press("Enter");
     await expect(choice).toHaveCount(0);
+    await expect(sourceButton).toBeFocused();
     await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
     await sourceButton.focus();
     await page.keyboard.press("Enter");
-    await choice.getByRole("button", { name: "Angel", exact: true }).focus();
+    await choice.getByRole("button", { name: /^Angel —/ }).focus();
     await page.keyboard.press("Enter");
     await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
     await expect(choice).toHaveCount(0);
@@ -1391,4 +1419,135 @@ test("expedition selectors remain visible on a phone-sized window", async ({ pag
   await expect(page.getByLabel("Starting orientation")).toBeInViewport({ ratio: 1 });
   await expect(page.getByLabel("Run relic")).toBeInViewport({ ratio: 1 });
   await expect(page.getByRole("button", { name: "Start expedition" })).toBeInViewport({ ratio: 1 });
+});
+
+test("ordered inspection permits revisions and preserves the chosen draw order", async ({ page }) => {
+  const snapshot = structuredClone(createRun(44).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Cartographer & Lost Wanderer" },
+    { id: "bottom", pair: "Sun & Moon" },
+    { id: "one", pair: "Sun & Moon" },
+    { id: "two", pair: "Angel & Vampire" },
+    { id: "three", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(1)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Cartographer light/ }).click();
+  const panel = page.getByLabel("Committed inspection");
+  await expect(panel.locator(".battle-inspection-card img")).toHaveCount(3);
+  const sun = panel.getByRole("button", { name: /^Sun —/ });
+  const flame = panel.getByRole("button", { name: /^Flame —/ });
+  const angel = panel.getByRole("button", { name: /^Angel —/ });
+  const confirm = panel.getByRole("button", { name: "Confirm choice" });
+  await expect(confirm).toBeDisabled();
+  await sun.click();
+  await flame.click();
+  await expect(sun).toHaveAttribute("aria-pressed", "true");
+  await expect(sun).toHaveAccessibleName(/position 1/);
+  await expect(sun).toContainText("1");
+  await expect(flame).toContainText("2");
+  await sun.click();
+  await expect(sun).toHaveAttribute("aria-pressed", "false");
+  await expect(flame).toContainText("1");
+  await sun.click();
+  await angel.click();
+  await expect(confirm).toBeEnabled();
+  await confirm.focus();
+  await page.keyboard.press("Enter");
+  await expect(panel).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "End turn" })).toBeFocused();
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.zones.library.map(
+          (card: { id: string }) => card.id,
+        ),
+      ),
+    )
+    .toEqual(["bottom", "two", "one", "three"]);
+});
+
+test("touch hold inspects a paid library choice without choosing it", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const snapshot = structuredClone(createRun(44).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Walled City & Wilderness" },
+    { id: "one", pair: "Sun & Moon" },
+    { id: "two", pair: "Angel & Vampire" },
+    { id: "three", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "dark", kept: false }];
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(1)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  const cdp = await context.newCDPSession(page);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  await page.getByRole("button", { name: /Wilderness dark/ }).tap();
+  const panel = page.getByLabel("Committed inspection");
+  const flame = panel.getByRole("button", { name: /^Flame —/ });
+  const box = (await flame.boundingBox())!;
+  const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+  await page.waitForTimeout(600);
+  await expect(page.getByRole("tooltip")).toContainText("Flame");
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await expect(panel).toBeVisible();
+  await flame.tap();
+  await expect(panel).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /Flame light/ })).toBeVisible();
+  await context.close();
+});
+
+test("compact target choices keep cards and cancellation accessible", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 480 });
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Sacrifice & Self-Preservation" },
+    { id: "one", pair: "Sun & Moon" },
+    { id: "two", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Sacrifice light/ }).click();
+  const panel = page.getByLabel("Selected card");
+  await expect(panel.getByRole("button", { name: /^Angel —/ })).toBeInViewport({ ratio: 1 });
+  await expect(panel.getByRole("button", { name: /^Sun —/ })).toBeInViewport({ ratio: 1 });
+  await expect(panel.getByRole("button", { name: "Cancel" })).toBeInViewport({ ratio: 1 });
+  for (const img of await panel.locator("img").all())
+    await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
+  await panel.getByRole("button", { name: "Cancel" }).click();
+  await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
 });
