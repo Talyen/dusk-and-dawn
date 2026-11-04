@@ -17,6 +17,7 @@ Open the local URL printed by Vite. `npm run dev:desktop` opens the app in Elect
 
 - [Contributing and verification](CONTRIBUTING.md): focused checks, CI, visual review, and local integration.
 - [Architecture and persistence](docs/ARCHITECTURE.md): ownership, command and random-state boundaries, saves, and recovery.
+- [Implemented run and combat rules](docs/GAME_RULES.md): current turn order, card zones, status interactions, and their code owners.
 - [Content and asset workflows](docs/CONTENT_WORKFLOWS.md): design sources, generated runtime data, artwork, and localization.
 - [UI and interaction](docs/UI.md): shared controls, navigation, inspection, scaling, and review.
 - [Seeded playthroughs](docs/PLAYTHROUGHS.md): existing simulations, replay, and interpreting their evidence.
