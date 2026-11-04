@@ -398,7 +398,13 @@ function BattleCard({
           } else onSelect(event);
         }}
       >
-        <img className="battle-card-art" src={art("card", info.name)} alt="" fetchPriority="high" />
+        <img
+          key={info.name}
+          className="battle-card-art"
+          src={art("card", info.name)}
+          alt=""
+          fetchPriority="high"
+        />
         <span className="battle-card-description">
           <strong>{info.name}</strong> {card.face} · {card.kept ? "Kept · " : ""}1 mana. {info.effect}
         </span>
@@ -558,7 +564,7 @@ function EnemyPortrait({
           }
         }}
       >
-        <img className="battle-enemy-art" src={art("enemy", name)} alt="" fetchPriority="high" />
+        <img key={name} className="battle-enemy-art" src={art("enemy", name)} alt="" fetchPriority="high" />
       </div>
       <progress aria-label={`${name} health`} value={hp} max={maxHp} />
       <Tooltip triggerRef={trigger} id={id} open={open} placement="right" className="battle-tooltip">

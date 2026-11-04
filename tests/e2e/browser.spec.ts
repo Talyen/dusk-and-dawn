@@ -1753,6 +1753,45 @@ test("a flip can start remaining preloads while an old visible image is still pe
   }
 });
 
+test("a slow flipped face shows a neutral back instead of stale artwork", async ({ page }) => {
+  await page.addInitScript(() => {
+    Math.random = () => 0.42;
+  });
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/assets/card-fallen-seraph.webp", async (route) => {
+    await held;
+    await route.continue();
+  });
+  try {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Start expedition" }).click();
+    const originalImage = page
+      .getByRole("button", { name: /^Seraph light/ })
+      .first()
+      .locator("img");
+    await expect(originalImage).toHaveJSProperty("naturalWidth", 512);
+    const old = await originalImage.elementHandle();
+    expect(old).not.toBeNull();
+    await page.getByRole("button", { name: /^Key light/ }).click();
+    const flipped = page.getByRole("button", { name: /^Fallen Seraph dark/ }).first();
+    await expect(flipped.locator("img")).toHaveJSProperty("complete", false);
+    expect(await old!.evaluate((image) => image.isConnected)).toBe(false);
+    await expect(flipped).toHaveCSS("background-image", /radial-gradient/);
+  } finally {
+    release();
+  }
+  await expect(
+    page
+      .getByRole("button", { name: /^Fallen Seraph dark/ })
+      .first()
+      .locator("img"),
+  ).toHaveJSProperty("naturalWidth", 512);
+});
+
 test("touch hold inspects a battle card without playing it; a tap plays it", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 700 },

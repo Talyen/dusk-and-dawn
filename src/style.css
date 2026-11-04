@@ -1007,6 +1007,12 @@ input:focus-visible,
     gap: 0;
   }
 }
+.battle-reward-art img,
+.battle-enemy-art {
+  background:
+    radial-gradient(ellipse at center, #6d4d4b 0%, transparent 48%),
+    repeating-linear-gradient(135deg, #30232a 0 1px, #211a22 1px 12px);
+}
 .battle-card-art {
   display: block;
   width: 100%;
@@ -1267,7 +1273,9 @@ input:focus-visible,
   flex: 0 1 10rem;
   overflow: visible;
   border-color: #947454;
-  background: #17131a;
+  background:
+    radial-gradient(ellipse at center, #6d4d4b 0%, transparent 48%),
+    repeating-linear-gradient(135deg, #30232a 0 1px, #211a22 1px 12px);
   box-shadow: 0 0 1rem #e4a16a22;
   transition:
     filter 160ms ease,
