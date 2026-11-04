@@ -458,7 +458,8 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   const card = page.locator(".battle-card").first();
   await expect(card.locator("img")).toHaveJSProperty("complete", true);
   expect(await card.locator("img").evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
-  await expect(page.getByText(/Current attack:.*Radiance damage before Ward and Reflect/)).toBeVisible();
+  await page.locator(".battle-enemy-trigger").hover();
+  await expect(page.getByRole("tooltip")).toContainText(/Current attack:.*Radiance damage before Ward and Reflect/);
   await card.hover();
   await expect(page.getByRole("tooltip")).toContainText("Other face:");
   await card.click();
@@ -490,7 +491,8 @@ test("a run can be resumed after reloading", async ({ page }) => {
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await expect(page.getByText(/HP 26\/30/)).toBeVisible();
-  await expect(page.getByText(/Next: Open-Wing Dust/)).toBeVisible();
+  await page.locator(".battle-enemy-trigger").hover();
+  await expect(page.getByRole("tooltip")).toContainText("Next: Open-Wing Dust");
 });
 
 test("paid library inspection survives reload and resolves without leaking early", async ({ page }) => {
@@ -563,7 +565,7 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
     const title = (await page.locator("#battle-title").innerText()).trim();
     if (title === "Victory") break;
     if (title === "Run ended") throw new Error(`Seeded browser run ended in defeat after ${step} decisions`);
-    if (title === "Choose a reward") {
+    if (title === "Rewards") {
       const offers = page.locator(".battle-reward");
       if (await offers.count()) {
         await expect(offers.first().locator(".battle-reward-art img")).toHaveCount(2);
@@ -582,16 +584,13 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
       continue;
     }
     encountered.add(title);
-    const player = page.locator(".battle-board .battle-panel").first();
+    const player = page.locator(".battle-player");
     const enemy = page.locator(".battle-enemy");
-    const playerStats = await player.locator("p").first().innerText();
-    const playerStatus = await player.locator("p").nth(1).innerText();
-    const enemyStatus = await enemy.locator("p").nth(1).innerText();
-    const hp = Number(/HP\s*(\d+)/.exec(playerStats)?.[1]);
-    const mana = Number(/Mana\s*(\d+)/.exec(playerStats)?.[1]);
-    const ward = Number(/ward\s+(\d+)/i.exec(playerStatus)?.[1] ?? 0);
-    const burn = Number(/burn\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
-    const curse = Number(/curse\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
+    const hp = Number(await player.getAttribute("data-player-hp"));
+    const mana = Number(await player.getAttribute("data-mana"));
+    const ward = Number(await player.getAttribute("data-ward"));
+    const burn = Number(await enemy.getAttribute("data-enemy-burn"));
+    const curse = Number(await enemy.getAttribute("data-enemy-curse"));
     const priority: Record<string, number> = {
       Sun: 20,
       Vampire: 19,
@@ -767,8 +766,13 @@ test("a card rejected for lack of mana remains in hand", async ({ page }) => {
   await page.getByRole("button", { name: "Continue run" }).click();
   const cards = page.locator(".battle-card");
   const count = await cards.count();
-  await cards.first().click();
-  await expect(page.getByRole("status")).toContainText(/mana/i);
+  await expect(cards.first()).toHaveAttribute("aria-disabled", "true");
+  await cards.first().hover();
+  await expect(page.getByRole("tooltip")).toContainText("1 mana");
+  const box = (await cards.first().boundingBox())!;
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  await cards.first().focus();
+  await page.keyboard.press("Enter");
   await expect(cards).toHaveCount(count);
   await expect(page.getByText("Mana 0/3", { exact: false })).toBeVisible();
 });
@@ -805,19 +809,21 @@ test("battle art remains full-bleed and combat text stays readable at common siz
   await page.getByRole("button", { name: "Start new run" }).click();
   const card = page.locator(".battle-card").first();
   const dimensions = await card.evaluate((element) => {
-    const cardBox = element.getBoundingClientRect();
-    const imageBox = element.querySelector("img")!.getBoundingClientRect();
+    const card = element as HTMLElement;
+    const image = element.querySelector("img")!;
+    const cardBox = card.getBoundingClientRect();
     const actionsBox = document.querySelector(".battle-actions")!.getBoundingClientRect();
     return {
-      cardBox: { width: cardBox.width, height: cardBox.height, bottom: cardBox.bottom },
-      imageBox: { width: imageBox.width, height: imageBox.height },
-      actionsTop: actionsBox.top,
+      cardBox: { width: card.offsetWidth, height: card.offsetHeight },
+      imageBox: { width: image.offsetWidth, height: image.offsetHeight },
+      overlapsActions: cardBox.right > actionsBox.left && cardBox.left < actionsBox.right &&
+        cardBox.bottom > actionsBox.top && cardBox.top < actionsBox.bottom,
     };
   });
   expect(dimensions.imageBox.width).toBeGreaterThan(dimensions.cardBox.width - 3);
   expect(dimensions.imageBox.height).toBeGreaterThan(dimensions.cardBox.height - 3);
   expect(dimensions.cardBox.width / dimensions.cardBox.height).toBeCloseTo(3 / 4, 1);
-  expect(dimensions.cardBox.bottom).toBeLessThan(dimensions.actionsTop);
+  expect(dimensions.overlapsActions).toBe(false);
   const enemyArt = await page.locator(".battle-enemy-art").boundingBox();
   expect(enemyArt!.width / enemyArt!.height).toBeCloseTo(4 / 3, 1);
   await page.setViewportSize({ width: 800, height: 600 });
@@ -842,6 +848,11 @@ test("battle actions stay usable on a small viewport", async ({ page }) => {
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
+  await expect(page.getByLabel(/^Library /)).toBeInViewport({ ratio: 1 });
+  await expect(page.getByLabel(/^Discard /)).toBeInViewport({ ratio: 1 });
+  const hand = (await page.locator(".battle-hand").boundingBox())!;
+  const resource = (await page.locator(".battle-resource--health > p").first().boundingBox())!;
+  expect(hand.y + hand.height).toBeLessThan(resource.y);
   await page.locator(".battle-card").first().click();
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
@@ -920,7 +931,7 @@ test("plays a full branching expedition through the browser", async ({ page }) =
       await page.getByRole("button", { name: branches === 1 ? /^Combat:/ : /^Rest: heal 4/ }).click();
       continue;
     }
-    if (title === "Choose a reward") {
+    if (title === "Rewards") {
       await page.getByRole("button", { name: "Skip reward" }).click();
       continue;
     }
@@ -929,16 +940,13 @@ test("plays a full branching expedition through the browser", async ({ page }) =
       continue;
     }
     encountered.add(title);
-    const player = page.locator(".battle-board .battle-panel").first();
+    const player = page.locator(".battle-player");
     const enemy = page.locator(".battle-enemy");
-    const playerStats = await player.locator("p").first().innerText();
-    const playerStatus = await player.locator("p").nth(1).innerText();
-    const enemyStatus = await enemy.locator("p").nth(1).innerText();
-    const hp = Number(/HP\s*(\d+)/.exec(playerStats)?.[1]);
-    const mana = Number(/Mana\s*(\d+)/.exec(playerStats)?.[1]);
-    const ward = Number(/ward\s+(\d+)/i.exec(playerStatus)?.[1] ?? 0);
-    const burn = Number(/burn\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
-    const curse = Number(/curse\s+(\d+)/i.exec(enemyStatus)?.[1] ?? 0);
+    const hp = Number(await player.getAttribute("data-player-hp"));
+    const mana = Number(await player.getAttribute("data-mana"));
+    const ward = Number(await player.getAttribute("data-ward"));
+    const burn = Number(await enemy.getAttribute("data-enemy-burn"));
+    const curse = Number(await enemy.getAttribute("data-enemy-curse"));
     const priority: Record<string, number> = {
       Sun: 20,
       Vampire: 19,
@@ -985,8 +993,8 @@ test("inspects battle cards on hover and keyboard focus without selecting them",
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("progressbar", { name: "Radiant Moth health" })).toHaveAttribute("value", "18");
-  await page.getByText("Inspect full pattern").click();
-  await expect(page.getByText("Deal 4 Radiance damage.", { exact: false }).first()).toBeVisible();
+  await page.locator(".battle-enemy-trigger").hover();
+  await expect(page.getByRole("tooltip")).toContainText("Deal 4 Radiance damage.");
   const card = page.locator(".battle-card").filter({ hasText: "Angel" }).first();
   await card.hover();
   const tip = page.getByRole("tooltip");
@@ -1056,9 +1064,9 @@ test("enemy pattern inspection preserves repeated actions without console errors
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  await page.getByText("Inspect full pattern").click();
-  await expect(page.locator(".battle-enemy details li")).toHaveCount(3);
-  await expect(page.locator(".battle-enemy details li").filter({ hasText: "Bitter Goblet" })).toHaveCount(2);
+  await page.locator(".battle-enemy-trigger").hover();
+  const pattern = (await page.getByRole("tooltip").innerText()).split("Pattern:")[1]!;
+  expect(pattern.match(/Bitter Goblet/g)).toHaveLength(2);
   expect(errors).toEqual([]);
 });
 
@@ -1088,7 +1096,8 @@ test("Fogbound Weaver previews retained cards and preserves their order during a
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("heading", { name: "The Fogbound Weaver", exact: true })).toBeVisible();
-  await expect(page.getByText(/Held-card hazard pool if you end turn now:/)).toBeVisible();
+  await page.locator(".battle-enemy-trigger").hover();
+  await expect(page.getByRole("tooltip")).toContainText("Held-card hazard pool if you end turn now:");
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.getByText(/HP 26\/30/)).toBeVisible();
   await expect
@@ -1135,4 +1144,42 @@ test("Funnel previews and draws the first card in the visible hand order", async
   await expect(page.locator(".battle-card")).toHaveCount(1);
   await expect(page.locator(".battle-card").first()).toContainText("Moon");
   await expect(page.locator(".battle-card").first()).not.toContainText("Kept");
+});
+
+test("preloads both faces of the deck and reports actual combat damage briefly", async ({ page }) => {
+  const requested = new Set<string>();
+  page.on("request", (request) => requested.add(new URL(request.url()).pathname));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
+  await expect.poll(() => requested.has("/assets/card-moon.webp")).toBe(true);
+  await expect.poll(() => requested.has("/assets/card-vampire.webp")).toBe(true);
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByRole("status")).toContainText("You −4 HP");
+  await expect(page.getByRole("status")).toBeEmpty({ timeout: 5000 });
+});
+
+test("touch hold inspects a battle card without playing it; a tap plays it", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const cdp = await context.newCDPSession(page);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Start new run" }).tap();
+  const card = page.locator(".battle-card").first();
+  const box = (await card.boundingBox())!;
+  const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+  await page.waitForTimeout(600);
+  await expect(page.getByRole("tooltip")).toContainText("1 mana");
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await card.tap();
+  await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
+  await context.close();
 });

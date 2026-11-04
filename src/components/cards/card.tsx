@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Tooltip } from "../ui/tooltip";
+import { useTouchInspection } from "./use-touch-inspection";
 import { useTranslation } from "react-i18next";
 import { resolveKeywords } from "../../lib/keywords/keywords";
 import { KeywordDescription, ShineBorder, ShineText } from "../effects/shine";
@@ -40,6 +41,11 @@ export function Card({
   const focus = useRef(false);
   const [open, setOpen] = useState(false);
   const [shimmer, setShimmer] = useState(0);
+  const touchPinned = useRef(false);
+  const touch = useTouchInspection<HTMLDivElement>(() => {
+    touchPinned.current = true;
+    show();
+  });
 
   const show = () => {
     setOpen(true);
@@ -48,6 +54,7 @@ export function Card({
   const dismiss = () => {
     pointer.current = false;
     focus.current = false;
+    touchPinned.current = false;
     setOpen(false);
   };
   useEffect(() => {
@@ -67,7 +74,7 @@ export function Card({
       }
     };
     const onPointerOut = (event: PointerEvent) => {
-      if (event.relatedTarget === null && !focus.current) dismiss();
+      if (event.relatedTarget === null && !focus.current && !touchPinned.current) dismiss();
     };
     const observer = new MutationObserver(() => {
       if (!trigger.current?.isConnected || trigger.current.closest('[hidden], [inert], [aria-hidden="true"]'))
@@ -102,15 +109,27 @@ export function Card({
         data-discovered={discovered}
         aria-label={title}
         aria-describedby={open ? id : undefined}
+        onPointerDown={touch.onPointerDown}
+        onPointerMove={touch.onPointerMove}
+        onPointerUp={touch.onPointerUp}
+        onPointerCancel={touch.onPointerCancel}
+        onContextMenu={touch.onContextMenu}
+        onClick={() => {
+          if (touch.wasTouch() && !touch.consumeClick()) {
+            touchPinned.current = true;
+            show();
+          }
+        }}
         onPointerEnter={(event) => {
           if (event.pointerType !== "touch") {
             pointer.current = true;
             show();
           }
         }}
-        onPointerLeave={() => {
+        onPointerLeave={(event) => {
+          if (event.pointerType === "touch") return;
           pointer.current = false;
-          if (!focus.current) setOpen(false);
+          if (!focus.current && !touchPinned.current) setOpen(false);
         }}
         onFocus={(event) => {
           if (event.currentTarget.matches(":focus-visible")) {
@@ -120,7 +139,7 @@ export function Card({
         }}
         onBlur={() => {
           focus.current = false;
-          if (!pointer.current) setOpen(false);
+          if (!pointer.current && !touchPinned.current) setOpen(false);
         }}
       >
         <span className="game-card__clip" aria-hidden="true">

@@ -24,6 +24,7 @@ import {
 import type { Snapshot } from "../../lib/game/session";
 import { Button } from "../ui/controls";
 import { Tooltip } from "../ui/tooltip";
+import { useTouchInspection } from "../cards/use-touch-inspection";
 import { KeywordDescription } from "../effects/shine";
 import { keywordDefinitions } from "../../lib/keywords/keywords";
 
@@ -76,12 +77,18 @@ function BattleCard({
   card,
   selected,
   disabled,
+  exhausted,
+  angle,
+  drop,
   preview,
   onSelect,
 }: {
   card: FightCard;
   selected: boolean;
   disabled: boolean;
+  exhausted: boolean;
+  angle: number;
+  drop: number;
   preview: ReactNode;
   onSelect: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
@@ -90,6 +97,11 @@ function BattleCard({
   const pointer = useRef(false);
   const focus = useRef(false);
   const [open, setOpen] = useState(false);
+  const touchPinned = useRef(false);
+  const touch = useTouchInspection<HTMLButtonElement>(() => {
+    touchPinned.current = true;
+    setOpen(true);
+  });
   const info = face(card);
   const other = cards[card.pair]![card.face === "light" ? "dark" : "light"];
   useEffect(() => {
@@ -97,11 +109,22 @@ function BattleCard({
     const dismiss = () => {
       pointer.current = false;
       focus.current = false;
+      touchPinned.current = false;
       setOpen(false);
     };
+    const outside = (event: globalThis.PointerEvent) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) dismiss();
+    };
+    const focusOutside = (event: FocusEvent) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) dismiss();
+    };
+    document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("focusin", focusOutside, true);
     document.addEventListener("wheel", dismiss, { capture: true, passive: true });
     window.addEventListener("blur", dismiss);
     return () => {
+      document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("focusin", focusOutside, true);
       document.removeEventListener("wheel", dismiss, true);
       window.removeEventListener("blur", dismiss);
     };
@@ -112,18 +135,34 @@ function BattleCard({
         ref={trigger}
         type="button"
         className="battle-card"
+        style={
+          {
+            "--card-art": `url("${art("card", info.name)}")`,
+            "--fan-angle": `${angle}deg`,
+            "--fan-drop": `${drop}px`,
+          } as React.CSSProperties
+        }
         data-selected={selected || undefined}
+        data-kept={card.kept || undefined}
+        data-exhausted={exhausted || undefined}
+        aria-disabled={exhausted || undefined}
         aria-describedby={open ? id : undefined}
         disabled={disabled}
+        onPointerDown={touch.onPointerDown}
+        onPointerMove={touch.onPointerMove}
+        onPointerUp={touch.onPointerUp}
+        onPointerCancel={touch.onPointerCancel}
+        onContextMenu={touch.onContextMenu}
         onPointerEnter={(event) => {
           if (event.pointerType !== "touch") {
             pointer.current = true;
             setOpen(true);
           }
         }}
-        onPointerLeave={() => {
+        onPointerLeave={(event) => {
+          if (event.pointerType === "touch") return;
           pointer.current = false;
-          if (!focus.current) setOpen(false);
+          if (!focus.current && !touchPinned.current) setOpen(false);
         }}
         onFocus={(event) => {
           if (event.currentTarget.matches(":focus-visible")) {
@@ -133,30 +172,33 @@ function BattleCard({
         }}
         onBlur={() => {
           focus.current = false;
-          if (!pointer.current) setOpen(false);
+          if (!pointer.current && !touchPinned.current) setOpen(false);
         }}
         onKeyDown={(event) => {
           if (event.key === "Escape" && open) {
             event.stopPropagation();
             pointer.current = false;
             focus.current = false;
+            touchPinned.current = false;
             setOpen(false);
           }
         }}
-        onClick={onSelect}
+        onClick={(event) => {
+          if (touch.consumeClick()) {
+            event.preventDefault();
+            return;
+          }
+          if (!exhausted) onSelect(event);
+        }}
       >
         <img className="battle-card-art" src={art("card", info.name)} alt="" />
-        {card.kept && (
-          <span className="battle-card-kept" aria-hidden="true">
-            Kept
-          </span>
-        )}
         <span className="battle-card-description">
           <strong>{info.name}</strong> {card.face} · {card.kept ? "Kept · " : ""}1 mana. {info.effect}
         </span>
       </button>
       <Tooltip triggerRef={trigger} id={id} open={open} className="battle-tooltip">
         <strong>{info.name}</strong>
+        <p>1 mana{card.kept ? " · Kept" : ""}</p>
         <p>
           <Description text={info.effect} />
         </p>
@@ -171,6 +213,211 @@ function BattleCard({
               <strong>{keyword}</strong> {keywordHelp[keyword]}
             </p>
           ))}
+      </Tooltip>
+    </>
+  );
+}
+
+function EnemyPortrait({
+  name,
+  hp,
+  maxHp,
+  children,
+}: {
+  name: string;
+  hp: number;
+  maxHp: number;
+  children: ReactNode;
+}) {
+  const trigger = useRef<HTMLDivElement>(null);
+  const id = useId();
+  const pointer = useRef(false);
+  const focus = useRef(false);
+  const [open, setOpen] = useState(false);
+  const touchPinned = useRef(false);
+  const touch = useTouchInspection<HTMLDivElement>(() => {
+    touchPinned.current = true;
+    setOpen(true);
+  });
+  useEffect(() => {
+    if (!open) return;
+    const outside = (event: globalThis.PointerEvent) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
+        touchPinned.current = false;
+        setOpen(false);
+      }
+    };
+    const focusOutside = (event: FocusEvent) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
+        pointer.current = false;
+        focus.current = false;
+        touchPinned.current = false;
+        setOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("focusin", focusOutside, true);
+    return () => {
+      document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("focusin", focusOutside, true);
+    };
+  }, [open]);
+  return (
+    <figure className="battle-enemy-figure">
+      <div
+        ref={trigger}
+        className="battle-enemy-trigger"
+        role="img"
+        tabIndex={0}
+        aria-label={`${name}, ${hp} of ${maxHp} HP`}
+        aria-describedby={open ? id : undefined}
+        onPointerDown={touch.onPointerDown}
+        onPointerMove={touch.onPointerMove}
+        onPointerUp={touch.onPointerUp}
+        onPointerCancel={touch.onPointerCancel}
+        onContextMenu={touch.onContextMenu}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType === "touch") return;
+          pointer.current = false;
+          if (!focus.current && !touchPinned.current) setOpen(false);
+        }}
+        onFocus={(event) => {
+          if (event.currentTarget.matches(":focus-visible")) {
+            focus.current = true;
+            setOpen(true);
+          }
+        }}
+        onBlur={() => {
+          focus.current = false;
+          if (!pointer.current && !touchPinned.current) setOpen(false);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && open) {
+            event.stopPropagation();
+            pointer.current = false;
+            focus.current = false;
+            touchPinned.current = false;
+            setOpen(false);
+          }
+        }}
+      >
+        <img className="battle-enemy-art" src={art("enemy", name)} alt="" />
+      </div>
+      <progress aria-label={`${name} health`} value={hp} max={maxHp} />
+      <Tooltip triggerRef={trigger} id={id} open={open} placement="right" className="battle-tooltip">
+        {children}
+      </Tooltip>
+    </figure>
+  );
+}
+
+function RewardCard({ pair, onChoose }: { pair: string; onChoose: () => void }) {
+  const trigger = useRef<HTMLButtonElement>(null);
+  const id = useId();
+  const pointer = useRef(false);
+  const focus = useRef(false);
+  const [open, setOpen] = useState(false);
+  const touchPinned = useRef(false);
+  const touch = useTouchInspection<HTMLButtonElement>(() => {
+    touchPinned.current = true;
+    setOpen(true);
+  });
+  useEffect(() => {
+    if (!open) return;
+    const outside = (event: globalThis.PointerEvent) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
+        touchPinned.current = false;
+        setOpen(false);
+      }
+    };
+    const focusOutside = (event: FocusEvent) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
+        pointer.current = false;
+        focus.current = false;
+        touchPinned.current = false;
+        setOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("focusin", focusOutside, true);
+    return () => {
+      document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("focusin", focusOutside, true);
+    };
+  }, [open]);
+  const light = cards[pair]!.light;
+  const dark = cards[pair]!.dark;
+  return (
+    <>
+      <button
+        ref={trigger}
+        type="button"
+        className="battle-reward"
+        onClick={(event) => {
+          if (touch.consumeClick()) {
+            event.preventDefault();
+            return;
+          }
+          onChoose();
+        }}
+        aria-label={`${pair}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
+        aria-describedby={open ? id : undefined}
+        onPointerDown={touch.onPointerDown}
+        onPointerMove={touch.onPointerMove}
+        onPointerUp={touch.onPointerUp}
+        onPointerCancel={touch.onPointerCancel}
+        onContextMenu={touch.onContextMenu}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType === "touch") return;
+          pointer.current = false;
+          if (!focus.current && !touchPinned.current) setOpen(false);
+        }}
+        onFocus={(event) => {
+          if (event.currentTarget.matches(":focus-visible")) {
+            focus.current = true;
+            setOpen(true);
+          }
+        }}
+        onBlur={() => {
+          focus.current = false;
+          if (!pointer.current && !touchPinned.current) setOpen(false);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && open) {
+            event.stopPropagation();
+            pointer.current = false;
+            focus.current = false;
+            touchPinned.current = false;
+            setOpen(false);
+          }
+        }}
+      >
+        <span className="battle-reward-art" aria-hidden="true">
+          <img src={art("card", light.name)} alt="" />
+          <img src={art("card", dark.name)} alt="" />
+        </span>
+      </button>
+      <Tooltip triggerRef={trigger} id={id} open={open} className="battle-tooltip">
+        <strong>{light.name}</strong>
+        <p>
+          <Description text={light.effect} />
+        </p>
+        <strong>{dark.name}</strong>
+        <p>
+          <Description text={dark.effect} />
+        </p>
       </Tooltip>
     </>
   );
@@ -492,6 +739,12 @@ function BattleSession({
   onComplete: (id: string) => void;
 }) {
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
+  const [feedback, setFeedback] = useState<{ revision: number; text: string } | null>(null);
+  useEffect(() => {
+    if (!feedback) return;
+    const timer = window.setTimeout(() => setFeedback(null), 2200);
+    return () => window.clearTimeout(timer);
+  }, [feedback]);
   const handRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const pendingRef = useRef<HTMLElement>(null);
@@ -536,6 +789,19 @@ function BattleSession({
     void writes.current.catch(() => undefined).then(onExit);
   }
   const s = snapshot.state;
+  const preloadedImages = useRef<HTMLImageElement[]>([]);
+  const preloadPairs = [...new Set(s.deck.map((card) => card.pair))].join("\0");
+  useEffect(() => {
+    preloadedImages.current = preloadPairs
+      .split("\0")
+      .filter(Boolean)
+      .flatMap((pair) => [cards[pair]!.light, cards[pair]!.dark])
+      .map((face) => {
+        const image = new Image();
+        image.src = art("card", face.name);
+        return image;
+      });
+  }, [preloadPairs]);
   const completed = useRef(false);
   useEffect(() => {
     if (
@@ -566,6 +832,29 @@ function BattleSession({
       setError(result.decision.reason);
     } else {
       setError("");
+      if (snapshot.state.phase === "battle" && (command.type === "play" || command.type === "end")) {
+        const before = snapshot.state;
+        const after = result.snapshot.state;
+        const changes: string[] = [];
+        const signed = (value: number) => (value > 0 ? `+${value}` : `−${Math.abs(value)}`);
+        if (after.player.hp !== before.player.hp)
+          changes.push(`You ${signed(after.player.hp - before.player.hp)} HP`);
+        if (after.enemy.hp !== before.enemy.hp)
+          changes.push(`${getEnemy(before).name} ${signed(after.enemy.hp - before.enemy.hp)} HP`);
+        if (after.player.ward > before.player.ward)
+          changes.push(`Ward +${after.player.ward - before.player.ward}`);
+        for (const name of ["burn", "poison", "curse", "bless"] as const) {
+          if (after.enemy[name] > before.enemy[name])
+            changes.push(
+              `${name[0]!.toUpperCase()}${name.slice(1)} +${after.enemy[name] - before.enemy[name]}`,
+            );
+        }
+        const text =
+          after.phase === "reward" || after.phase === "victory"
+            ? `${getEnemy(before).name} defeated`
+            : changes.join(" · ") || after.message;
+        setFeedback({ revision: result.snapshot.revision, text });
+      } else setFeedback(null);
       setSelected(null);
       setTargets([]);
       setSnapshot(result.snapshot);
@@ -674,7 +963,10 @@ function BattleSession({
     ? cards[selectedCard.pair]![selectedCard.face === "light" ? "dark" : "light"]
     : null;
   return (
-    <section className="battle-screen" aria-labelledby="battle-title">
+    <section
+      className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : ""}`}
+      aria-labelledby="battle-title"
+    >
       <div className="battle-head">
         <div>
           <p className="battle-eyebrow">Dusk & Dawn · playable preview</p>
@@ -682,7 +974,7 @@ function BattleSession({
             {s.phase === "battle"
               ? enemy.name
               : s.phase === "reward"
-                ? "Choose a reward"
+                ? "Rewards"
                 : s.phase === "rest"
                   ? "A moment of rest"
                   : s.phase === "route"
@@ -697,102 +989,121 @@ function BattleSession({
       <p className="battle-preview">
         Preview rules: Bless and Curse use the provisional flat model (+1/−1 per stack).
       </p>
-      <p role="status" aria-live="polite">
-        {error || s.message}
+      <p role="status" aria-live="polite" key={feedback?.revision}>
+        {error ||
+          (s.phase === "battle" || s.phase === "reward" ? feedback?.text : feedback?.text || s.message)}
       </p>
       {saveError && <p role="alert">The run could not be saved. Play can continue in this session.</p>}
       {s.phase === "battle" && (
         <>
           <div className="battle-board">
-            <section className="battle-panel">
-              <h2>You</h2>
-              <p>
-                HP {s.player.hp}/{s.player.maxHp} · Mana {s.mana}/3
-              </p>
-              <p>Statuses: {statuses(s.player)}</p>
-              <p>
-                Library {s.zones.library.length} · Discard {s.zones.discard.length} · Banished{" "}
-                {s.zones.banished.length}
-              </p>
-              {s.zones.scry && <p>Scry: {top ? face(top).name : "library empty"}</p>}
-            </section>
-            <section className="battle-panel battle-enemy">
-              <figure className="battle-enemy-figure">
-                <img className="battle-enemy-art" src={art("enemy", enemy.name)} alt="" />
-                <progress aria-label={`${enemy.name} health`} value={s.enemy.hp} max={s.enemy.maxHp} />
-              </figure>
-              <h2>
-                {enemy.name} · HP {s.enemy.hp}/{s.enemy.maxHp}
-              </h2>
-              <p>Weakness: {enemy.weakness} (+2 on first matching hit)</p>
-              <p>Statuses: {statuses(s.enemy)}</p>
-              <p>
-                <strong>Next: {enemy.actions[s.action]!.name}</strong> —{" "}
-                {s.enemy.freeze ? (
-                  "Frozen: this action is skipped."
-                ) : s.enemy.hush && action.ability ? (
-                  "Hushed: this ability is skipped."
-                ) : s.enemy.hush ? (
-                  "Hushed: base attack only; the trait is suppressed."
-                ) : (
-                  <Description text={action.text} />
-                )}
-              </p>
-              {enemyHits && !s.enemy.freeze && (
+            <section
+              className="battle-player"
+              data-player-hp={s.player.hp}
+              data-mana={s.mana}
+              data-ward={s.player.ward}
+              aria-label="Player resources"
+            >
+              <div className="battle-resource battle-resource--health">
                 <p>
-                  Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}
-                  {action.hit}; trait{" "}
-                  {s.enemy.hush
-                    ? "suppressed"
-                    : action.traitBonus
-                      ? `+${action.traitBonus} to first hit`
-                      : action.extra !== undefined
-                        ? `+${action.extra} extra hit`
-                        : action.extraHits?.length
-                          ? `+${action.extraHits.join(" + ")} extra hits`
-                          : "none"}
-                  ; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
+                  HP {s.player.hp}/{s.player.maxHp}
                 </p>
-              )}
-              {!s.enemy.hush &&
-                !s.enemy.freeze &&
-                action.effects?.some((effect) =>
-                  ["move_held", "flip_held", "turn_held"].includes(effect.op),
-                ) && (
+                <span
+                  className="battle-pile battle-pile--draw"
+                  role="img"
+                  aria-label={`Library ${s.zones.library.length}`}
+                >
+                  <span>{s.zones.library.length}</span>
+                </span>
+                {statuses(s.player) !== "None" && (
+                  <p className="battle-resource-status">{statuses(s.player)}</p>
+                )}
+                {s.zones.scry && (
+                  <p className="battle-resource-status">Scry: {top ? face(top).name : "library empty"}</p>
+                )}
+              </div>
+              <div className="battle-resource battle-resource--mana">
+                <p>Mana {s.mana}/3</p>
+                <span
+                  className="battle-pile battle-pile--discard"
+                  role="img"
+                  aria-label={`Discard ${s.zones.discard.length} · Banished ${s.zones.banished.length}`}
+                >
+                  <span>{s.zones.discard.length}</span>
+                </span>
+              </div>
+            </section>
+            <section className="battle-enemy" data-enemy-burn={s.enemy.burn} data-enemy-curse={s.enemy.curse}>
+              <EnemyPortrait name={enemy.name} hp={s.enemy.hp} maxHp={s.enemy.maxHp}>
+                <strong>{enemy.name}</strong>
+                <p>
+                  HP {s.enemy.hp}/{s.enemy.maxHp} · Weakness: {enemy.weakness} (+2 on first matching hit)
+                </p>
+                <p>Statuses: {statuses(s.enemy)}</p>
+                <p>
+                  <strong>Next: {action.name}</strong> —{" "}
+                  {s.enemy.freeze ? (
+                    "Frozen: this action is skipped."
+                  ) : s.enemy.hush && action.ability ? (
+                    "Hushed: this ability is skipped."
+                  ) : s.enemy.hush ? (
+                    "Hushed: base attack only; the trait is suppressed."
+                  ) : (
+                    <Description text={action.text} />
+                  )}
+                </p>
+                {enemyHits && !s.enemy.freeze && (
                   <p>
-                    Held-card hazard pool if you end turn now:{" "}
-                    {s.zones.hand
-                      .filter((card) => card.kept)
-                      .map((card) => face(card).name)
-                      .join(", ") || "none"}
-                    . Unkept cards are discarded before the enemy acts.
+                    Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}
+                    {action.hit}; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
                   </p>
                 )}
-              <p>
-                Trait: {enemy.trait} — {enemy.traitEffect} Pattern:{" "}
-                {enemy.actions.map((a) => a.name).join(" → ")}
+                {!s.enemy.hush &&
+                  !s.enemy.freeze &&
+                  action.effects?.some((effect) =>
+                    ["move_held", "flip_held", "turn_held"].includes(effect.op),
+                  ) && (
+                    <p>
+                      Held-card hazard pool if you end turn now:{" "}
+                      {s.zones.hand
+                        .filter((card) => card.kept)
+                        .map((card) => face(card).name)
+                        .join(", ") || "none"}
+                      . Unkept cards are discarded before the enemy acts.
+                    </p>
+                  )}
+                <p>
+                  Trait: {enemy.trait} — {enemy.traitEffect}
+                </p>
+                <p>Pattern: {enemy.actions.map((a) => `${a.name}: ${a.text}`).join(" → ")}</p>
+              </EnemyPortrait>
+              <h2>
+                {enemy.name} · {s.enemy.hp}/{s.enemy.maxHp}
+              </h2>
+              <p className="battle-intent">
+                {s.enemy.freeze || (s.enemy.hush && action.ability)
+                  ? "Skipped"
+                  : enemyHits
+                    ? `${enemyHits.join(" + ")} ${action.type}`
+                    : action.text}
               </p>
-              <details>
-                <summary>Inspect full pattern</summary>
-                <ol>
-                  {enemy.actions.map((a, index) => (
-                    <li key={`${a.name}-${index}`}>
-                      <strong>{a.name}:</strong> <Description text={a.text} />
-                    </li>
-                  ))}
-                </ol>
-              </details>
+              {statuses(s.enemy) !== "None" && <p className="battle-enemy-status">{statuses(s.enemy)}</p>}
             </section>
           </div>
-          <section aria-labelledby="hand-title">
-            <h2 id="hand-title">Your hand</h2>
+          <section className="battle-hand-stage" aria-labelledby="hand-title">
+            <h2 id="hand-title" className="visually-hidden">
+              Your hand
+            </h2>
             <div className="battle-hand" ref={handRef}>
-              {s.zones.hand.map((card) => (
+              {s.zones.hand.map((card, index) => (
                 <BattleCard
                   key={card.id}
                   card={card}
                   selected={selected === card.id}
                   disabled={!!s.pending}
+                  exhausted={s.mana === 0}
+                  angle={(index - (s.zones.hand.length - 1) / 2) * 2.5}
+                  drop={Math.abs(index - (s.zones.hand.length - 1) / 2) * 3}
                   preview={cardPreview(s, card)}
                   onSelect={(event) => {
                     const name = face(card).name;
@@ -1019,9 +1330,7 @@ function BattleSession({
                 <a href="#selected-card-details">Choose target</a>
                 <Button onClick={() => setSelected(null)}>Cancel</Button>
               </>
-            ) : (
-              <span className="battle-actions__selection">Click a card to play</span>
-            )}
+            ) : null}
             <Button disabled={!!s.pending} onClick={() => dispatch({ type: "end" })}>
               End turn
             </Button>
@@ -1034,19 +1343,7 @@ function BattleSession({
       {s.phase === "reward" && (
         <div className="battle-rewards">
           {s.offers.map((pair) => (
-            <button key={pair} className="battle-reward" onClick={() => dispatch({ type: "reward", pair })}>
-              <span className="battle-reward-art" aria-hidden="true">
-                <img src={art("card", cards[pair]!.light.name)} alt="" />
-                <img src={art("card", cards[pair]!.dark.name)} alt="" />
-              </span>
-              <strong>{pair}</strong>
-              <span>
-                {cards[pair]!.light.name}: {cards[pair]!.light.effect}
-              </span>
-              <span>
-                {cards[pair]!.dark.name}: {cards[pair]!.dark.effect}
-              </span>
-            </button>
+            <RewardCard key={pair} pair={pair} onChoose={() => dispatch({ type: "reward", pair })} />
           ))}
           <Button onClick={() => dispatch({ type: "reward", pair: null })}>Skip reward</Button>
         </div>
