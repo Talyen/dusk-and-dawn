@@ -2731,6 +2731,45 @@ for (const condition of ["active", "hush", "freeze"] as const) {
   });
 }
 
+for (const scenario of [
+  { id: "the-marble-nurse", name: "The Marble Nurse", hp: 24, cue: "next draw −1", resource: "draw" },
+  { id: "the-pearl-taxman", name: "The Pearl Taxman", hp: 26, cue: "next mana −1", resource: "mana" },
+] as const) {
+  for (const condition of ["active", "hush", "freeze"] as const) {
+    test(`${scenario.name} previews the next-turn penalty with ${condition}`, async ({ page }) => {
+      const snapshot = structuredClone(createRun(42).getSnapshot());
+      snapshot.state.encounters![0] = scenario.id;
+      snapshot.state.enemy.hp = scenario.hp;
+      snapshot.state.enemy.maxHp = scenario.hp;
+      snapshot.state.action = 1;
+      snapshot.state.player.ward = 20;
+      if (condition === "hush") snapshot.state.enemy.hush = true;
+      if (condition === "freeze") snapshot.state.enemy.freeze = true;
+      await page.addInitScript(
+        (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+        encodeRun(snapshot),
+      );
+      await page.setViewportSize({ width: 320, height: 480 });
+      await page.goto("/");
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      const intent =
+        condition === "freeze" ? "Skipped" : `4 Binding${condition === "active" ? ` · ${scenario.cue}` : ""}`;
+      await expectIntentClear(
+        page.getByRole("button", { name: `${scenario.name} intent: ${intent}`, exact: true }),
+      );
+      await page.getByRole("button", { name: "End turn" }).click();
+      await expect(page.locator(".battle-player")).toHaveAttribute(
+        "data-mana",
+        scenario.resource === "mana" && condition === "active" ? "2" : "3",
+      );
+      await expect(page.locator(".battle-card")).toHaveCount(
+        scenario.resource === "draw" && condition === "active" ? 4 : 5,
+      );
+    });
+  }
+}
+
 test("touch inspects the enemy portrait and intent without advancing combat", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },

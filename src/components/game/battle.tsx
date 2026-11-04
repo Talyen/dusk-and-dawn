@@ -1725,6 +1725,15 @@ function BattleSession({
       ? `${reaction.amount} ${reaction.damage_type ?? "damage"} after your attacks`
       : undefined;
   const activeActionEffects = traitWillActivate && !s.enemy.freeze ? (action.effects ?? []) : [];
+  const nextTurnPenalties = activeActionEffects
+    .filter(
+      (effect) =>
+        effect.stage === "after_attack" &&
+        (effect.op === "reduce_next_draw" || effect.op === "reduce_next_mana") &&
+        typeof effect.amount === "number" &&
+        effect.amount > 0,
+    )
+    .map((effect) => `next ${effect.op === "reduce_next_draw" ? "draw" : "mana"} −${effect.amount}`);
   const copiesLastHit = activeActionEffects.some((effect) => effect.op === "copy_latest_hit");
   const nextHandFace = activeActionEffects.find(
     (effect) => effect.op === "turn_after_draw" && effect.stage === "after_attack",
@@ -1737,6 +1746,7 @@ function BattleSession({
             `${enemyHits.join(" + ")} ${action.type}`,
             ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
             ...statusEffects,
+            ...nextTurnPenalties,
             ...(copiesLastHit ? ["copies your last hit"] : []),
             ...(nextHandFace ? [`next hand ${nextHandFace}`] : []),
           ].join(" · ")
