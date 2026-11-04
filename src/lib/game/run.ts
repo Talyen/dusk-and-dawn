@@ -1,3 +1,4 @@
+import { expeditionEventIds, type ExpeditionEventId } from "./expedition-events";
 import { heroes, type HeroId } from "./heroes";
 import { simpleEnemies } from "./simple-enemies.generated";
 import { simpleCards } from "./simple-cards.generated";
@@ -369,7 +370,10 @@ export interface RunState {
         tier: number;
         orientation: "light" | "dark";
         relic: "none" | "many-eyes" | "spare-thread" | "cracked-vessel";
-        route?: { enemy: string; pair: Pair; active: boolean } | undefined;
+        route?:
+          | { enemy: string; pair: Pair; active: boolean; event?: ExpeditionEventId | undefined }
+          | undefined;
+        lastEvent?: ExpeditionEventId | undefined;
         restRemovals?: number | undefined;
       }
     | undefined;
@@ -678,11 +682,12 @@ function offerRoute(s: RunState, rng: Rng) {
     continueRoute(s, rng);
     return;
   }
-  experiment.route = {
-    enemy: candidates[rngInt(rng, candidates.length)]!.id,
-    pair: pairs[rngInt(rng, pairs.length)]!,
-    active: false,
-  };
+  const enemy = candidates[rngInt(rng, candidates.length)]!.id;
+  const pair = pairs[rngInt(rng, pairs.length)]!;
+  const events = expeditionEventIds.filter((id) => id !== experiment.lastEvent);
+  const event = events[rngInt(rng, events.length)]!;
+  experiment.lastEvent = event;
+  experiment.route = { enemy, pair, event, active: false };
   s.phase = "route";
   s.message = "Choose a path. The routes rejoin before the next encounter.";
 }
@@ -716,17 +721,21 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     const path = s.experiment?.route;
     if (s.phase !== "route" || !path || path.active || !["combat", "rest", "event"].includes(command.choice))
       return no("No path is available.");
-    if (command.choice === "event" && s.player.hp <= 4) return no("The event requires more than 4 HP.");
+    const event = path.event ?? "blood";
+    if (command.choice === "event" && event === "blood" && s.player.hp <= 4)
+      return no("The Blood Bargain requires more than 4 HP.");
     if (command.choice === "combat") {
       path.active = true;
       beginFight(s, rng);
     } else {
       if (command.choice === "rest") s.player.hp = Math.min(s.player.maxHp, s.player.hp + 4);
       else {
-        s.player.hp -= 4;
+        if (event === "blood") s.player.hp -= 4;
         s.deck.push({ id: `card-${s.nextId++}`, pair: path.pair });
       }
       continueRoute(s, rng);
+      if (command.choice === "event" && event === "thorns") applyDamageOverTime(s.player, "poison", 4);
+      if (command.choice === "event" && event === "lantern") s.mana = 2;
     }
     return yes();
   }

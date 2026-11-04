@@ -11,7 +11,10 @@ function routeGame(relic: ExperimentOptions["relic"] = "none") {
   snapshot.state.offers = [];
   const game = restoreSession(snapshot, runHandler);
   expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
-  return game;
+  const legacy = structuredClone(game.getSnapshot());
+  delete legacy.state.experiment!.route!.event;
+  delete legacy.state.experiment!.lastEvent;
+  return restoreSession(legacy, runHandler);
 }
 
 describe("experimental expeditions", () => {
@@ -42,6 +45,72 @@ describe("experimental expeditions", () => {
     expect(game.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
     expect(game.getSnapshot().state.player.hp).toBe(8);
     expect(game.getSnapshot().state.fight).toBe(1);
+  });
+  it("offers varied events without repeating the previous route's event", () => {
+    const firstEvents = new Set<string>();
+    for (let seed = 0; seed < 60; seed++) {
+      const initial = structuredClone(createRun(seed, options).getSnapshot());
+      initial.state.phase = "reward";
+      initial.state.offers = [];
+      let game = restoreSession(initial, runHandler);
+      expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+      const first = game.getSnapshot().state.experiment!.route!.event!;
+      firstEvents.add(first);
+      expect(game.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
+      const later = structuredClone(game.getSnapshot());
+      later.state.fight = 2;
+      later.state.phase = "reward";
+      later.state.offers = [];
+      game = restoreSession(later, runHandler);
+      expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+      expect(game.getSnapshot().state.experiment!.route!.event).not.toBe(first);
+    }
+    expect(firstEvents).toEqual(new Set(["blood", "thorns", "lantern"]));
+  });
+  for (const event of ["blood", "thorns", "lantern"] as const) {
+    it(`previews, saves, and resolves the ${event} event once`, async () => {
+      const initial = structuredClone(routeGame().getSnapshot());
+      initial.state.experiment!.route!.event = event;
+      initial.state.experiment!.lastEvent = event;
+      const pair = initial.state.experiment!.route!.pair;
+      const encoded = encodeRun(initial);
+      const loaded = await readRunWithRecovery({
+        readCandidates: async () => [encoded],
+        write: async () => {},
+      });
+      expect(loaded?.snapshot).toEqual(initial);
+      let game = restoreSession(loaded!.snapshot, runHandler);
+      expect(game.dispatch({ type: "route", choice: "event" }).decision.accepted).toBe(true);
+      const after = game.getSnapshot();
+      expect(after.state.fight).toBe(1);
+      expect(after.state.experiment!.route).toBeUndefined();
+      expect(after.state.deck.filter((card) => card.pair === pair)).toHaveLength(1);
+      expect(after.state.player.hp).toBe(event === "blood" ? 26 : 30);
+      expect(after.state.player.poison).toBe(event === "thorns" ? 4 : 0);
+      expect(after.state.mana).toBe(event === "lantern" ? 2 : 3);
+      const saved = encodeRun(after);
+      const resumed = await readRunWithRecovery({
+        readCandidates: async () => [saved],
+        write: async () => {},
+      });
+      expect(resumed?.snapshot).toEqual(after);
+      game = restoreSession(resumed!.snapshot, runHandler);
+      expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+      expect(game.getSnapshot().state.player.poison).toBe(event === "thorns" ? 2 : 0);
+      expect(game.getSnapshot().state.mana).toBe(3);
+    });
+  }
+  it("allows risky non-blood events at low health but rejects the blood bargain", () => {
+    for (const event of ["blood", "thorns", "lantern"] as const) {
+      const initial = structuredClone(routeGame().getSnapshot());
+      initial.state.player.hp = 4;
+      initial.state.experiment!.route!.event = event;
+      const game = restoreSession(initial, runHandler);
+      const result = game.dispatch({ type: "route", choice: "event" });
+      expect(result.decision.accepted).toBe(event !== "blood");
+      if (event === "blood") expect(result.snapshot).toEqual(initial);
+      else expect(result.snapshot.state.player.hp).toBe(4);
+    }
   });
   it("expands future encounter pools across tiers", () => {
     const pools = [1, 2, 3].map((tier) => {

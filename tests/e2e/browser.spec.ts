@@ -905,8 +905,11 @@ test("expedition event survives reload and unlocks the dark start for a future r
   snapshot.state.offers = [];
   const game = restoreSession(snapshot, runHandler);
   game.dispatch({ type: "reward", pair: null });
-  const route = game.getSnapshot().state.experiment!.route!;
-  const saved = encodeRun(game.getSnapshot());
+  const legacy = structuredClone(game.getSnapshot());
+  delete legacy.state.experiment!.route!.event;
+  delete legacy.state.experiment!.lastEvent;
+  const route = legacy.state.experiment!.route!;
+  const saved = encodeRun(legacy);
   await page.addInitScript((data) => {
     if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
   }, saved);
@@ -974,6 +977,101 @@ test("expedition event survives reload and unlocks the dark start for a future r
   await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByText(/HP 24\/30/)).toBeVisible();
   await expect(page.locator(".battle-card").first()).toContainText("dark");
+});
+
+for (const event of [
+  { id: "blood", label: "lose 4 HP", cost: "Lose 4 HP.", mana: "3", hp: "26" },
+  {
+    id: "thorns",
+    label: "start next fight with 4 Poison",
+    cost: "Start the next fight with 4 Poison.",
+    mana: "3",
+    hp: "30",
+  },
+  {
+    id: "lantern",
+    label: "start next fight with 2 mana",
+    cost: "Start the next fight with 2 mana.",
+    mana: "2",
+    hp: "30",
+  },
+] as const) {
+  test(`expedition ${event.id} event previews its cost and survives reload`, async ({ page }) => {
+    const snapshot = structuredClone(
+      createRun(31, {
+        id: `browser-${event.id}`,
+        tier: 1,
+        orientation: "light",
+        relic: "none",
+      }).getSnapshot(),
+    );
+    snapshot.state.phase = "reward";
+    snapshot.state.offers = [];
+    const game = restoreSession(snapshot, runHandler);
+    game.dispatch({ type: "reward", pair: null });
+    const route = structuredClone(game.getSnapshot());
+    route.state.experiment!.route!.event = event.id;
+    route.state.experiment!.lastEvent = event.id;
+    const pair = route.state.experiment!.route!.pair;
+    await page.addInitScript((data) => {
+      if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    }, encodeRun(route));
+    await page.setViewportSize({ width: 390, height: 700 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const choice = page.getByRole("button", { name: `Event: ${event.label}, add ${pair}` });
+    await choice.hover();
+    await expect(page.getByRole("tooltip")).toContainText(event.cost);
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: `Event: ${event.label}, add ${pair}` }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", event.hp);
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", event.mana);
+    if (event.id === "thorns")
+      await expect(page.getByRole("button", { name: "Player status: poison 4" })).toBeVisible();
+    await expect
+      .poll(async () =>
+        page.evaluate(
+          () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.fight,
+        ),
+      )
+      .toBe(1);
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", event.mana);
+    if (event.id === "thorns")
+      await expect(page.getByRole("button", { name: "Player status: poison 4" })).toBeVisible();
+    await page.getByRole("button", { name: /^Discard / }).click();
+    await page.getByRole("button", { name: /^Deck / }).click();
+    await expect(page.getByRole("dialog").getByLabel(new RegExp(pair.split(" & ")[0]!))).toBeVisible();
+  });
+}
+
+test("an unaffordable Blood Bargain remains inspectable by keyboard", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(31, { id: "low-health-event", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  const game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = structuredClone(game.getSnapshot());
+  route.state.player.hp = 4;
+  route.state.experiment!.route!.event = "blood";
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), encodeRun(route));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const choice = page.getByRole("button", { name: /^Event: lose 4 HP/ });
+  await expect(choice).toHaveAttribute("aria-disabled", "true");
+  await page.keyboard.press("Tab");
+  await choice.focus();
+  await expect(page.getByRole("tooltip", { name: /^Blood Bargain/ })).toContainText("Lose 4 HP.");
+  await choice.press("Enter");
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
 });
 
 test("an expedition recap does not claim a progress unlock when storage is unavailable", async ({ page }) => {

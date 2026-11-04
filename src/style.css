@@ -1571,7 +1571,7 @@ input:focus-visible,
 .battle-route-choice:focus-visible .battle-route-art {
   box-shadow: 0 0 1.2rem #efd0a65c;
 }
-.battle-route-choice:disabled {
+.battle-route-choice[aria-disabled="true"] {
   opacity: 0.45;
   cursor: default;
 }

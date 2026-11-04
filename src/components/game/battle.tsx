@@ -1,3 +1,4 @@
+import { expeditionEvent } from "../../lib/game/expedition-events";
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
 import { heroes, heroIds, heroPassive, type HeroId } from "../../lib/game/heroes";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
@@ -662,9 +663,9 @@ function RouteChoice({
         aria-label={label}
         aria-pressed={pressed}
         aria-describedby={open ? id : undefined}
-        disabled={disabled}
+        aria-disabled={disabled || undefined}
         onClick={(event) => {
-          if (touch.consumeClick()) event.preventDefault();
+          if (touch.consumeClick() || disabled) event.preventDefault();
           else {
             onChoose(event);
             if (inspectOnSelect && touch.wasTouch()) {
@@ -1888,6 +1889,7 @@ function BattleSession({
         (() => {
           const path = s.experiment.route;
           const enemy = simpleEnemies.find((entry) => entry.id === path.enemy)!;
+          const event = expeditionEvent(path.event);
           return (
             <section className="battle-route" aria-label="Route choices">
               <RouteChoice
@@ -1923,9 +1925,9 @@ function BattleSession({
                 <p>Heal 4 HP.</p>
               </RouteChoice>
               <RouteChoice
-                label={`Event: lose 4 HP, add ${path.pair}`}
-                caption="Event · −4 HP"
-                disabled={s.player.hp <= 4}
+                label={`Event: ${event.label}, add ${path.pair}`}
+                caption={event.caption}
+                disabled={(path.event ?? "blood") === "blood" && s.player.hp <= 4}
                 onChoose={() => dispatch({ type: "route", choice: "event" })}
                 art={
                   <span className="battle-route-art battle-route-art--pair">
@@ -1934,6 +1936,15 @@ function BattleSession({
                   </span>
                 }
               >
+                <strong>{event.name}</strong>
+                <p>
+                  <Description text={event.cost} />
+                </p>
+                {path.event === "thorns" && (
+                  <p>
+                    <strong>Poison</strong> deals its amount at end turn, then halves.
+                  </p>
+                )}
                 <strong>{cards[path.pair]!.light.name}</strong>
                 <p>{cards[path.pair]!.light.effect}</p>
                 <strong>{cards[path.pair]!.dark.name}</strong>

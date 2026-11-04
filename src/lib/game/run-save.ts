@@ -1,3 +1,4 @@
+import { expeditionEventIds } from "./expedition-events";
 import { z } from "zod";
 import { heroIds } from "./heroes";
 import { cards, getEnemy, route, runHandler, validEncounter, type RunState } from "./run";
@@ -37,11 +38,13 @@ const runSchema = z
         orientation: z.enum(["light", "dark"]),
         relic: z.enum(["none", "many-eyes", "spare-thread", "cracked-vessel"]),
         restRemovals: z.literal(1).optional(),
+        lastEvent: z.enum(expeditionEventIds).optional(),
         route: z
           .object({
             enemy: z.string().refine((id) => validEncounter(id) && !id.startsWith("fixture:")),
             pair: cardPair,
             active: z.boolean(),
+            event: z.enum(expeditionEventIds).optional(),
           })
           .strict()
           .optional(),
