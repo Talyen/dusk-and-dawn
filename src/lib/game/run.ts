@@ -506,6 +506,24 @@ function beginFight(s: RunState, rng: Rng) {
   s.phase = "battle";
   s.message = `Fight ${s.fight + 1}: ${getEnemy(s).name}`;
 }
+// Prefer distinct mechanics on one reward screen, while leaving every pair
+// eligible later and falling back to alternate art when the pool is small.
+function rewardSignature(pair: Pair): string {
+  const card = cards[pair]!;
+  return JSON.stringify([card.light.effect, card.dark.effect]);
+}
+function distinctRewardChoices(pairs: Pair[], chosen: Pair[] = []): Pair[] {
+  const seen = new Set(chosen.map(rewardSignature));
+  const unique: Pair[] = [];
+  const equivalent: Pair[] = [];
+  for (const pair of pairs) {
+    const signature = rewardSignature(pair);
+    (seen.has(signature) ? equivalent : unique).push(pair);
+    seen.add(signature);
+  }
+  return [...unique, ...equivalent];
+}
+
 function victory(s: RunState, rng: Rng) {
   if (s.fight === route.length - 1 && !s.experiment?.route?.active) {
     s.phase = "victory";
@@ -518,10 +536,15 @@ function victory(s: RunState, rng: Rng) {
     rng,
   );
   const recent = new Set(s.lastOffers ?? []);
+  const count = s.experiment?.relic === "many-eyes" ? 4 : 3;
+  const fresh = distinctRewardChoices(shuffled.filter((pair) => !recent.has(pair))).slice(0, count);
   s.offers = [
-    ...shuffled.filter((pair) => !recent.has(pair)),
-    ...shuffled.filter((pair) => recent.has(pair)),
-  ].slice(0, s.experiment?.relic === "many-eyes" ? 4 : 3);
+    ...fresh,
+    ...distinctRewardChoices(
+      shuffled.filter((pair) => recent.has(pair)),
+      fresh,
+    ),
+  ].slice(0, count);
   s.phase = "reward";
   s.message = "Choose a card pair or skip.";
 }

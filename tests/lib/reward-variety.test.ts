@@ -58,6 +58,89 @@ describe("reward variety", () => {
     },
   );
 
+  it("does not offer two pairs with identical effects when other choices are available", () => {
+    const game = win(
+      createRun(40, { id: "distinct", tier: 1, orientation: "light", relic: "none" }, "thorn-witch"),
+    );
+    const offers = game.getSnapshot().state.offers;
+    const effects = offers.map((pair) => [cards[pair]!.light.effect, cards[pair]!.dark.effect]);
+    expect(new Set(effects.map((effect) => JSON.stringify(effect))).size).toBe(offers.length);
+  });
+
+  it.each([
+    { pair: "Feather & Chain", face: "light", hand: 3, scry: false, curse: 0, kept: false },
+    { pair: "Open Gate & Sealed Gate", face: "light", hand: 3, scry: false, curse: 0, kept: false },
+    { pair: "Feather & Chain", face: "dark", hand: 1, scry: false, curse: 2, kept: false },
+    { pair: "Open Gate & Sealed Gate", face: "dark", hand: 1, scry: false, curse: 2, kept: false },
+    { pair: "Lantern & Shroud", face: "light", hand: 2, scry: true, curse: 0, kept: false },
+    { pair: "Sunlit Gallery & Shadow Gallery", face: "light", hand: 2, scry: true, curse: 0, kept: false },
+    { pair: "Lantern & Shroud", face: "dark", hand: 1, scry: false, curse: 0, kept: true },
+    { pair: "Sunlit Gallery & Shadow Gallery", face: "dark", hand: 1, scry: false, curse: 0, kept: true },
+  ] as const)("resolves the matching $pair $face effect", ({ pair, face, hand, scry, curse, kept }) => {
+    const state = structuredClone(createRun(12).getSnapshot());
+    state.state.deck = [pair, "Sun & Moon", "Angel & Vampire", "Bloom & Wither"].map((item, i) => ({
+      id: `card-${i}`,
+      pair: item,
+    }));
+    const [source, held, first, second] = state.state.deck.map((card) => ({
+      ...card,
+      face: "light" as "light" | "dark",
+      kept: false,
+    }));
+    source!.face = face;
+    state.state.zones.hand = [source!, held!];
+    state.state.zones.library = [first!, second!];
+    state.state.zones.discard = [];
+    state.state.zones.banished = [];
+    state.state.zones.scry = false;
+    const game = restoreSession(state, runHandler);
+    expect(game.dispatch({ type: "play", id: source!.id }).decision.accepted).toBe(true);
+    const after = game.getSnapshot().state;
+    expect(after.zones.hand).toHaveLength(hand);
+    expect(after.zones.hand.find((card) => card.id === held!.id)?.kept).toBe(kept);
+    expect(after.zones.scry).toBe(scry);
+    expect(after.enemy.curse).toBe(curse);
+  });
+
+  it("prefers distinct older offers when only one fresh pair remains", () => {
+    const snapshot = structuredClone(createRun(19).getSnapshot());
+    const choices = [
+      "Dream & Nightmare",
+      "Compass & Labyrinth",
+      "Open Gate & Sealed Gate",
+      "Sunlit Gallery & Shadow Gallery",
+    ];
+    snapshot.state.deck = Object.keys(cards)
+      .filter((pair) => !choices.includes(pair))
+      .map((pair, index) => ({ id: `card-${index}`, pair }));
+    const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+    snapshot.state.zones.hand = [fight.find((card) => card.pair === "Sun & Moon")!];
+    snapshot.state.zones.library = fight.filter((card) => card.pair !== "Sun & Moon");
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    snapshot.state.lastOffers = choices.slice(1);
+    const game = win(restoreSession(snapshot, runHandler));
+    const offers = game.getSnapshot().state.offers;
+    expect(offers).toContain("Dream & Nightmare");
+    expect(offers).not.toContain("Compass & Labyrinth");
+    expect(offers).toHaveLength(3);
+  });
+
+  it("retains equivalent artwork choices when the remaining pool is small", () => {
+    const snapshot = structuredClone(createRun(19).getSnapshot());
+    const choices = ["Dream & Nightmare", "Compass & Labyrinth"];
+    snapshot.state.deck = Object.keys(cards)
+      .filter((pair) => !choices.includes(pair))
+      .map((pair, index) => ({ id: `card-${index}`, pair }));
+    const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+    snapshot.state.zones.hand = [fight.find((card) => card.pair === "Sun & Moon")!];
+    snapshot.state.zones.library = fight.filter((card) => card.pair !== "Sun & Moon");
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    const game = win(restoreSession(snapshot, runHandler));
+    expect(new Set(game.getSnapshot().state.offers)).toEqual(new Set(choices));
+  });
+
   it("offers a fresh event pair immediately after the reward choices", () => {
     let game = createRun(
       0,
