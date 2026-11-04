@@ -140,3 +140,16 @@ At `de74e20`, four card-face WebPs and three enemy WebPs were individually inspe
 | The Sunken Sun | A large sun sinks beneath dark waves. Alternating light and dark orientations after the next draw express the rising and sinking cycle; Hush and Freeze can prevent the change. |
 
 Controlled checks in `tests/lib/expedition-art-review.test.ts` compare both Prism faces against the Sphinx's two hits, Gravity/Levitation play order and the Carousel's movement with and without Hush. The existing Sunken Sun checks cover forced orientation after drawing and the Hush/Freeze intent. These tests exercise selected states, not every interaction. No effect, damage type or Bless/Curse rule was changed; existing saves are unchanged.
+
+## Ninth pass: early rewards and the Velvet Mole
+
+At `64abd93`, six early-reward card faces and the Velvet Mole's WebP were individually viewed against their live effects. All three pairs appeared together as rewards after the Blue Jackal in the preceding manual Seraph expedition; that run skipped the reward, so it is not a natural-play evaluation of these cards.
+
+| Entry | Artwork and assessment |
+| --- | --- |
+| Parchment Scribe & Ink Drinker | A scribe holds a long scroll; the reverse drinks dark liquid from a skull. Retrieving the oldest discard to plan a draw and consuming the newest discard for healing suit recording and consumption, though the exact pile positions are abstract. |
+| Chessboard & Scattered Chess Pieces | Two sides face each other over an ordered board; on the reverse pieces tumble away. Scry and Curse suggest planning and restraint; shuffling the hand and drawing four reflects disruption. |
+| Confession & Secrecy | A kneeling figure confesses to a luminous figure; on the reverse a woman gestures for silence. Paying a random held card for one-use healing suggests release. Secrecy only Keeps itself: it fits holding a secret but offers little immediate value. Hush would echo existing silence cards and keeping the other hand would repeat existing shelter effects, so no replacement was established in this pass. |
+| The Velvet Mole | A large mole pushes through dark earth. Its second attack bypasses Ward by tunneling underneath; Hush suppresses the trait. The Release damage name remains part of the separate open damage-type question. |
+
+A controlled browser fight played Scribe then Chessboard against the Mole: the oldest discard was revealed by Scry as the next draw, Curse reduced the tunnel to 3 damage through Ward, and both the reveal and subsequent draw survived a reload. `tests/lib/early-reward-art-review.test.ts` compares Scribe with Ink Drinker, checks that an empty discard cannot pay for healing, and compares the tunnel with and without Hush. Existing catalogue tests cover Confession's payment and Chessboard's empty-library boundary. These are selected scenarios, not a natural-run balance study; Scattered Chess Pieces and Secrecy were visually inspected but not played in this pass. No card or enemy effect changed.

@@ -6123,3 +6123,46 @@ for (const viewport of [
     await expect(page.locator(".battle-enemy-trigger")).toBeVisible();
   });
 }
+
+test("the Scribe and Chessboard plan the next draw against the Mole's tunnel", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-velvet-mole";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 24;
+  snapshot.state.action = 1;
+  snapshot.state.player.hp = 20;
+  snapshot.state.player.ward = 5;
+  snapshot.state.deck = [
+    { id: "scribe", pair: "Parchment Scribe & Ink Drinker" },
+    { id: "chess", pair: "Chessboard & Scattered Chess Pieces" },
+    { id: "next", pair: "Key & Lock" },
+    { id: "oldest", pair: "Sun & Moon" },
+    { id: "newest", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck
+    .slice(0, 2)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [{ ...snapshot.state.deck[2]!, face: "light", kept: false }];
+  snapshot.state.zones.discard = snapshot.state.deck
+    .slice(3)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Parchment Scribe light/ }).click();
+  await page.getByRole("button", { name: /^Chessboard light/ }).click();
+  await expect(page.getByRole("img", { name: /Library 2\. Scry\. Sun light/ })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /The Velvet Mole intent: 3 Release · 3 through Ward/ }),
+  ).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("img", { name: /Library 2\. Scry\. Sun light/ })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "17");
+  await expect(page.getByRole("button", { name: /^Sun light/ })).toBeVisible();
+});
