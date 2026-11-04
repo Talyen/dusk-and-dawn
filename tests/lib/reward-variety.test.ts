@@ -67,6 +67,49 @@ describe("reward variety", () => {
     expect(new Set(effects.map((effect) => JSON.stringify(effect))).size).toBe(offers.length);
   });
 
+  it("prefers distinct effects on both faces without excluding either shared-face pair", () => {
+    const choices = [
+      "Tuned Violin & Broken Violin",
+      "Perfumer & Scent Thief",
+      "Wax Seal & Torn Letter",
+      "Wooden Spool & Loose Thread",
+    ];
+    const seen = new Set<string>();
+    for (let seed = 0; seed < 100; seed++) {
+      const snapshot = structuredClone(createRun(seed).getSnapshot());
+      snapshot.state.deck = Object.keys(cards)
+        .filter((pair) => !choices.includes(pair))
+        .map((pair, index) => ({ id: `card-${index}`, pair }));
+      const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+      snapshot.state.zones.hand = [fight.find((card) => card.pair === "Sun & Moon")!];
+      snapshot.state.zones.library = fight.filter((card) => card.pair !== "Sun & Moon");
+      snapshot.state.zones.discard = [];
+      snapshot.state.zones.banished = [];
+      const offers = win(restoreSession(snapshot, runHandler)).getSnapshot().state.offers;
+      expect(offers).toHaveLength(3);
+      for (const side of ["light", "dark"] as const)
+        expect(new Set(offers.map((pair) => cards[pair]![side].effect)).size).toBe(3);
+      for (const pair of offers) seen.add(pair);
+    }
+    expect(seen).toEqual(new Set(choices));
+  });
+
+  it("retains both shared-face pairs when their different opposite faces are needed", () => {
+    const snapshot = structuredClone(createRun(19).getSnapshot());
+    const choices = ["Tuned Violin & Broken Violin", "Perfumer & Scent Thief", "Wax Seal & Torn Letter"];
+    snapshot.state.deck = Object.keys(cards)
+      .filter((pair) => !choices.includes(pair))
+      .map((pair, index) => ({ id: `card-${index}`, pair }));
+    const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+    snapshot.state.zones.hand = [fight.find((card) => card.pair === "Sun & Moon")!];
+    snapshot.state.zones.library = fight.filter((card) => card.pair !== "Sun & Moon");
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    const game = win(restoreSession(snapshot, runHandler));
+    expect(new Set(game.getSnapshot().state.offers)).toEqual(new Set(choices));
+    expect(cards[choices[0]!]!.dark.effect).not.toBe(cards[choices[1]!]!.dark.effect);
+  });
+
   it.each([
     { pair: "Feather & Chain", face: "light", hand: 3, scry: false, curse: 0, kept: false },
     { pair: "Open Gate & Sealed Gate", face: "light", hand: 3, scry: false, curse: 0, kept: false },

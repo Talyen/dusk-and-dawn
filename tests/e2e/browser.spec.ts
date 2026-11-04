@@ -4756,3 +4756,55 @@ for (const scenario of ["ability", "attack", "held", "frozen", "empty"] as const
     await expectIntentClear(feedback);
   });
 }
+
+test("sampled rewards show distinct face effects and the chosen pair survives reload", async ({ page }) => {
+  function win(game: ReturnType<typeof createRun>) {
+    const snapshot = structuredClone(game.getSnapshot());
+    snapshot.state.enemy.hp = 1;
+    const zones = snapshot.state.zones;
+    const card = [...zones.hand, ...zones.library, ...zones.discard].find(
+      (item) => item.pair === "Seraph & Fallen Seraph",
+    )!;
+    zones.hand = zones.hand.filter((item) => item.id !== card.id);
+    zones.library = zones.library.filter((item) => item.id !== card.id);
+    zones.discard = zones.discard.filter((item) => item.id !== card.id);
+    card.face = "light";
+    card.kept = false;
+    zones.hand.push(card);
+    snapshot.state.mana = 3;
+    const resumed = restoreSession(snapshot, runHandler);
+    expect(resumed.dispatch({ type: "play", id: card.id }).decision.accepted).toBe(true);
+    return resumed;
+  }
+  let game = win(
+    createRun(8, { id: "reward-browser", tier: 1, orientation: "light", relic: "none" }, "oathless-seraph"),
+  );
+  expect(game.dispatch({ type: "reward", pair: game.getSnapshot().state.offers[0]! }).decision.accepted).toBe(
+    true,
+  );
+  expect(game.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
+  game = win(game);
+  expect(game.getSnapshot().state.offers).toEqual([
+    "Banquet Hall & Empty Banquet Hall",
+    "Mountain Monastery & Sunken Shrine",
+    "Sanctuary & Prison",
+  ]);
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(game.getSnapshot()));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const sanctuary = page.getByRole("button", { name: /^Sanctuary & Prison/ });
+  await sanctuary.hover();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "Cleanse all harmful statuses from yourself. Heal 3 HP.",
+  );
+  await expect(page.getByRole("tooltip")).toContainText("Curse 3.");
+  await sanctuary.click();
+  await expect(page.getByRole("heading", { name: "A moment of rest" })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: /^Remove Sanctuary & Prison/ })).toBeVisible();
+});

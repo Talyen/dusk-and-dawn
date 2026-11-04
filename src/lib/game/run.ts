@@ -598,22 +598,32 @@ function beginFight(s: RunState, rng: Rng) {
   s.phase = "battle";
   s.message = `Fight ${s.fight + 1}: ${getEnemy(s).name}`;
 }
-// Prefer distinct mechanics on one reward screen, while leaving every pair
-// eligible later and falling back to alternate art when the pool is small.
+// Prefer variety on each face, but keep shared and identical effects as fallbacks.
+// Each fresh shuffled group retains its first candidate.
 function rewardSignature(pair: Pair): string {
   const card = cards[pair]!;
   return JSON.stringify([card.light.effect, card.dark.effect]);
 }
 function distinctRewardChoices(pairs: Pair[], chosen: Pair[] = []): Pair[] {
-  const seen = new Set(chosen.map(rewardSignature));
-  const unique: Pair[] = [];
+  const seenPairs = new Set(chosen.map(rewardSignature));
+  const seenLight = new Set(chosen.map((pair) => cards[pair]!.light.effect));
+  const seenDark = new Set(chosen.map((pair) => cards[pair]!.dark.effect));
+  const distinct: Pair[] = [];
+  const partial: Pair[] = [];
   const equivalent: Pair[] = [];
   for (const pair of pairs) {
     const signature = rewardSignature(pair);
-    (seen.has(signature) ? equivalent : unique).push(pair);
-    seen.add(signature);
+    const { light, dark } = cards[pair]!;
+    if (seenPairs.has(signature)) equivalent.push(pair);
+    else if (seenLight.has(light.effect) || seenDark.has(dark.effect)) partial.push(pair);
+    else {
+      distinct.push(pair);
+      seenLight.add(light.effect);
+      seenDark.add(dark.effect);
+    }
+    seenPairs.add(signature);
   }
-  return [...unique, ...equivalent];
+  return [...distinct, ...partial, ...equivalent];
 }
 
 function victory(s: RunState, rng: Rng) {
