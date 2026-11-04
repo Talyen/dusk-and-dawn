@@ -221,15 +221,14 @@ it("draw-before-random-discard may discard a newly drawn card", () => {
   expect(checked).toBe(3);
 });
 
-it("required random hand-discard payments reject before spending and consume the selected card", () => {
+it("required random hand-discard payments reject before spending and resolve the printed payoff", () => {
   let checked = 0;
   for (const face of catalogue) {
-    if (
-      !/^Discard a random card\. (?:Draw \d+ cards?|Heal \d+ HP|Deal \d+ (?:Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage)\./.test(
+    const match =
+      /^Discard a random card\. (?:Draw (\d+) cards?|Heal (\d+) HP|Deal (\d+) (Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage)\.( Banish this card\.)?$/.exec(
         face.effect,
-      )
-    )
-      continue;
+      );
+    if (!match) continue;
     checked++;
     const blocked = fixture(face, [], [c("top")], []);
     const before = blocked.getSnapshot();
@@ -237,20 +236,46 @@ it("required random hand-discard payments reject before spending and consume the
     expect(blocked.getSnapshot()).toEqual(before);
     const payment = c("payment", "dark", true);
     const library = Array.from({ length: 4 }, (_, index) => c(`library-${index}`));
-    const game = fixture(face, [payment], library, []);
+    const setup = structuredClone(fixture(face, [payment], library, []).getSnapshot());
+    setup.state.player.hp = 20;
+    setup.state.enemy.hp = 100;
+    setup.state.enemy.maxHp = 100;
+    setup.state.enemy.ward = 3;
+    const game = restoreSession(setup, runHandler);
     expect(game.dispatch({ type: "play", id: "source" }).decision.accepted, face.name).toBe(true);
     const state = game.getSnapshot().state;
-    expect(state.zones.discard[0]).toEqual({ ...payment, kept: false });
-    expect(state.zones.hand.some((card) => card.id === "payment")).toBe(false);
-    expect(state.mana).toBe(2);
-    const draw = /Draw (\d+) cards?\./.exec(face.effect);
-    if (draw)
-      expect(state.zones.hand.map((card) => card.id)).toEqual(
-        library
-          .slice(-Number(draw[1]))
-          .reverse()
-          .map((card) => card.id),
-      );
+    expect(state.zones.discard[0], face.name).toEqual({ ...payment, kept: false });
+    expect(
+      state.zones.hand.some((card) => card.id === "payment"),
+      face.name,
+    ).toBe(false);
+    expect(state.mana, face.name).toBe(2);
+    const count = Number(match[1] ?? 0);
+    expect(
+      state.zones.hand.map((card) => card.id),
+      face.name,
+    ).toEqual(
+      count
+        ? library
+            .slice(-count)
+            .reverse()
+            .map((card) => card.id)
+        : [],
+    );
+    expect(state.zones.library, face.name).toEqual(library.slice(0, library.length - count));
+    expect(state.player.hp, face.name).toBe(Math.min(30, 20 + Number(match[2] ?? 0)));
+    const amount = match[3] ? Number(match[3]) + (match[4] === "Shadow" ? 2 : 0) : 0;
+    const absorbed = Math.min(3, amount);
+    expect(state.enemy.hp, face.name).toBe(100 - amount + absorbed);
+    expect(state.enemy.ward, face.name).toBe(3 - absorbed);
+    expect(
+      state.zones.discard.map((card) => card.id),
+      face.name,
+    ).toEqual(match[5] ? ["payment"] : ["payment", "source"]);
+    expect(
+      state.zones.banished.map((card) => card.id),
+      face.name,
+    ).toEqual(match[5] ? ["source"] : []);
   }
   expect(checked).toBe(6);
 });

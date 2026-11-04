@@ -1,0 +1,3293 @@
+{
+  "schema_version": 1,
+  "scope": "At least one outcome scenario per named face; not exhaustive interaction, random distribution, balance, or thematic verification.",
+  "families": {
+    "numeric": {
+      "test_file": "tests/lib/card-numeric-outcomes.test.ts",
+      "test_name": "matches printed numeric card outcomes under Ward, weakness, statuses, and mana caps",
+      "count": 193,
+      "sentence_patterns": [
+        "Deal \\d+ (?:Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage(?: (?:twice|three times)|, ignoring Ward)?\\.",
+        "Leech\\.",
+        "Banish this card\\.",
+        "Heal \\d+ HP\\.",
+        "Gain \\d+ (?:Ward|mana)\\.",
+        "(?:Bless|Curse) \\d+\\.",
+        "Apply \\d+ (?:Burn|Poison)\\."
+      ]
+    },
+    "draw": {
+      "test_file": "tests/lib/card-flow-families.test.ts",
+      "test_name": "draw and Scry faces obey printed counts, ordering, hand cap, mana and source disposition",
+      "count": 61,
+      "effect_pattern": "^(?:Scry\\. )?(?:Gain \\d+ mana\\. )?Draw \\d+ cards?\\.(?: Banish this card\\.)?$"
+    },
+    "scry": {
+      "test_file": "tests/lib/card-flow-families.test.ts",
+      "test_name": "pure Scry follows an empty library without revealing or reshuffling the discard pile",
+      "count": 4,
+      "effect_pattern": "^Scry\\.$"
+    },
+    "return-discard": {
+      "test_file": "tests/lib/card-flow-families.test.ts",
+      "test_name": "fixed discard returns use the printed end and preserve faces, including an empty pile",
+      "count": 25,
+      "effect_pattern": "^Return the (?:top|bottom) card of your discard pile to your hand\\.$"
+    },
+    "banish-discard": {
+      "test_file": "tests/lib/card-flow-families.test.ts",
+      "test_name": "pure fixed discard Banish uses the named end and handles an empty pile",
+      "count": 17,
+      "effect_pattern": "^Banish the (?:top|bottom) card of your discard pile\\.$"
+    },
+    "self-keep": {
+      "test_file": "tests/lib/card-flow-families.test.ts",
+      "test_name": "self-Keep and self-Flip resolve the original source on its resulting face",
+      "count": 29,
+      "effect_pattern": "^(?:Flip this card\\. )?Keep this card\\.$"
+    },
+    "whole-hand": {
+      "test_file": "tests/lib/card-flow-families.test.ts",
+      "test_name": "whole-hand Flip, Keep, and facing effects change the other held cards only",
+      "count": 30,
+      "effect_pattern": "^(?:Flip your hand\\.|Keep your hand\\.|Turn your hand to its (?:light|dark) faces\\.)$"
+    },
+    "random-hand": {
+      "test_file": "tests/lib/card-flow-families.test.ts",
+      "test_name": "random Flip and Keep act without replacement and use all available cards",
+      "count": 18,
+      "effect_pattern": "^(?:Flip|Keep) (?:a random card|\\d+ random cards) in your hand\\.$"
+    },
+    "self-tuck": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "self-tucking faces move the source before drawing, including an otherwise empty library",
+      "count": 4,
+      "effect_pattern": "^Put this card on the bottom of your library\\. Draw \\d+ cards?\\.$"
+    },
+    "discard-to-library": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "fixed discard-to-library operations preserve the printed pile end and block order",
+      "count": 12,
+      "effect_pattern": "^(?:Put the (?:top|bottom) card of your discard pile on top of your library\\.(?: Scry\\.)?|Put the top 2 cards of your discard pile on top of your library in their current order\\.|Put the bottom 2 cards of your discard pile on the bottom of your library\\.)$"
+    },
+    "return-top-two": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "top-two discard returns move only what fits, with the top card first",
+      "count": 2,
+      "effect_pattern": "^Return the top 2 cards of your discard pile to your hand\\.(?: Banish this card\\.)?$"
+    },
+    "restore-discard-face": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "discard-face restoration returns the same physical top card on the specified face",
+      "count": 5,
+      "effect_pattern": "^(?:Flip the top card of your discard pile\\.|Turn the top card of your discard pile to its light face\\.) Return it to your hand\\.$"
+    },
+    "reverse-scry": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "reverse-and-Scry faces reverse only the available top block without a midway reshuffle",
+      "count": 3,
+      "effect_pattern": "^Reverse the top \\d+ cards of your library\\. Scry\\.$"
+    },
+    "draw-hand-effect": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "draw-before-Flip, facing, and Keep effects include the newly drawn card",
+      "count": 6,
+      "effect_pattern": "^Draw 1 card\\. (?:Flip your hand\\.(?: Banish this card\\.)?|Turn your hand to its (?:light|dark) faces\\. Banish this card\\.|Keep your hand\\.)$"
+    },
+    "draw-random-discard": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "draw-before-random-discard may discard a newly drawn card",
+      "count": 3,
+      "effect_pattern": "^Draw \\d+ cards?\\. Discard a random card\\.$"
+    },
+    "random-discard-payment": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "required random hand-discard payments reject before spending and resolve the printed payoff",
+      "count": 6,
+      "effect_pattern": "^Discard a random card\\. (?:Draw \\d+ cards?|Heal \\d+ HP|Deal \\d+ (?:Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage)\\.(?: Banish this card\\.)?$"
+    },
+    "hp-payment": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "HP payments cannot be lethal and occur before the stated payoff",
+      "count": 5,
+      "effect_pattern": "^Lose \\d+ HP\\. .*$"
+    },
+    "discard-payment": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "discard-pile payments must exist before a printed damage or healing payoff",
+      "count": 6,
+      "effect_pattern": "^Banish the (?:top|bottom) card of your discard pile\\. (?:Heal \\d+ HP|Deal \\d+ \\w+ damage(?:, ignoring Ward)?)\\.(?: Banish this card\\.)?$"
+    },
+    "hush": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "pure Hush faces require a suppressible intent and spend their source only on a valid play",
+      "count": 6,
+      "effect_pattern": "^Hush\\. Banish this card\\.$"
+    },
+    "reflect": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "Reflect faces redirect the next hit once and banish the source",
+      "count": 8,
+      "effect_pattern": "^Reflect the first hit of the enemy's next attack\\. Banish this card\\.$"
+    },
+    "water-clock": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "Water Clock's draw can fill the vacated slot before self-Keep",
+      "count": 1,
+      "effect_pattern": "^Draw 1 card\\. Keep this card\\.$"
+    },
+    "exchange": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "random exchanges use the printed discard end and leave an empty side unchanged",
+      "count": 2,
+      "effect_pattern": "^Exchange a random card in your hand with the (?:top|bottom) card of your discard pile\\.$"
+    },
+    "remove-status": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "single-status removal faces preserve other statuses and resolve healing or draw afterward",
+      "count": 8,
+      "effect_pattern": "^Remove all your (?:Burn|Poison|Curse)\\.(?: (?:Draw \\d+ cards?|Heal \\d+ HP)\\.)?(?: Banish this card\\.)?$"
+    },
+    "shuffle-hand": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "shuffle-hand faces clear Keep, draw the stated number, and exclude the resolving source",
+      "count": 6,
+      "effect_pattern": "^Shuffle your hand into your library\\. Draw \\d+ cards?\\.(?: Banish this card\\.)?$"
+    },
+    "cleanse-purge": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "Cleanse and Purge remove the specified count of whole status kinds, not stacks",
+      "count": 5,
+      "effect_pattern": "^(?:Cleanse (?:one random harmful status from yourself|all harmful statuses from yourself)\\. Heal 3 HP\\. Banish this card\\.|Purge one random beneficial status from the enemy\\.|Purge all beneficial statuses from the enemy\\. Banish this card\\.)$"
+    },
+    "heal-draw": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "healing-then-draw faces cap HP before drawing and banish their source",
+      "count": 2,
+      "effect_pattern": "^Heal \\d+ HP\\. Draw \\d+ cards?\\. Banish this card\\.$"
+    }
+  },
+  "faces": [
+    {
+      "pair": "Angel & Vampire",
+      "side": "light",
+      "face": "Angel",
+      "family": "numeric"
+    },
+    {
+      "pair": "Angel & Vampire",
+      "side": "dark",
+      "face": "Vampire",
+      "family": "numeric"
+    },
+    {
+      "pair": "Seraph & Fallen Seraph",
+      "side": "light",
+      "face": "Seraph",
+      "family": "numeric"
+    },
+    {
+      "pair": "Seraph & Fallen Seraph",
+      "side": "dark",
+      "face": "Fallen Seraph",
+      "family": "hp-payment"
+    },
+    {
+      "pair": "Cherub & Imp",
+      "side": "light",
+      "face": "Cherub",
+      "family": "numeric"
+    },
+    {
+      "pair": "Cherub & Imp",
+      "side": "dark",
+      "face": "Imp",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Imp attacks before flipping its only other held card",
+        "effect": "Deal 4 Shadow damage. Flip a random card in your hand."
+      }
+    },
+    {
+      "pair": "Winged Guardian & Revenant",
+      "side": "light",
+      "face": "Winged Guardian",
+      "family": "numeric"
+    },
+    {
+      "pair": "Winged Guardian & Revenant",
+      "side": "dark",
+      "face": "Revenant",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/simple-cards.test.ts",
+        "test_name": "Revenant attacks then remains in hand and still costs mana on replay",
+        "effect": "Deal 3 Shadow damage. Keep this card."
+      }
+    },
+    {
+      "pair": "Pilgrim & Exile",
+      "side": "light",
+      "face": "Pilgrim",
+      "family": "draw"
+    },
+    {
+      "pair": "Pilgrim & Exile",
+      "side": "dark",
+      "face": "Exile",
+      "family": "random-discard-payment"
+    },
+    {
+      "pair": "Oracle & Deceiver",
+      "side": "light",
+      "face": "Oracle",
+      "family": "draw"
+    },
+    {
+      "pair": "Oracle & Deceiver",
+      "side": "dark",
+      "face": "Deceiver",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Abbess & Vampire Countess",
+      "side": "light",
+      "face": "Abbess",
+      "family": "cleanse-purge"
+    },
+    {
+      "pair": "Abbess & Vampire Countess",
+      "side": "dark",
+      "face": "Vampire Countess",
+      "family": "numeric"
+    },
+    {
+      "pair": "Gardener & Gravedigger",
+      "side": "light",
+      "face": "Gardener",
+      "family": "numeric"
+    },
+    {
+      "pair": "Gardener & Gravedigger",
+      "side": "dark",
+      "face": "Gravedigger",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Confession & Secrecy",
+      "side": "light",
+      "face": "Confession",
+      "family": "random-discard-payment"
+    },
+    {
+      "pair": "Confession & Secrecy",
+      "side": "dark",
+      "face": "Secrecy",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Absolution & Condemnation",
+      "side": "light",
+      "face": "Absolution",
+      "family": "numeric"
+    },
+    {
+      "pair": "Absolution & Condemnation",
+      "side": "dark",
+      "face": "Condemnation",
+      "family": "numeric"
+    },
+    {
+      "pair": "Temptation & Resolve",
+      "side": "dark",
+      "face": "Temptation",
+      "family": "hp-payment"
+    },
+    {
+      "pair": "Temptation & Resolve",
+      "side": "light",
+      "face": "Resolve",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sacrifice & Self-Preservation",
+      "side": "light",
+      "face": "Sacrifice",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/inspection.test.ts",
+        "test_name": "Sacrifice requires and consumes a chosen other card before its attack",
+        "effect": "Banish another card of your choice from your hand. Deal 8 Radiance damage."
+      }
+    },
+    {
+      "pair": "Sacrifice & Self-Preservation",
+      "side": "dark",
+      "face": "Self-Preservation",
+      "family": "numeric"
+    },
+    {
+      "pair": "Dove & Raven",
+      "side": "light",
+      "face": "Dove",
+      "family": "numeric"
+    },
+    {
+      "pair": "Dove & Raven",
+      "side": "dark",
+      "face": "Raven",
+      "family": "return-discard"
+    },
+    {
+      "pair": "White Stag & Black Stag",
+      "side": "light",
+      "face": "White Stag",
+      "family": "draw"
+    },
+    {
+      "pair": "White Stag & Black Stag",
+      "side": "dark",
+      "face": "Black Stag",
+      "family": "numeric"
+    },
+    {
+      "pair": "White Swan & Black Swan",
+      "side": "light",
+      "face": "White Swan",
+      "family": "reflect"
+    },
+    {
+      "pair": "White Swan & Black Swan",
+      "side": "dark",
+      "face": "Black Swan",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Lamb & Wolf",
+      "side": "light",
+      "face": "Lamb",
+      "family": "numeric"
+    },
+    {
+      "pair": "Lamb & Wolf",
+      "side": "dark",
+      "face": "Wolf",
+      "family": "numeric"
+    },
+    {
+      "pair": "Butterfly & Moth",
+      "side": "light",
+      "face": "Butterfly",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Butterfly & Moth",
+      "side": "dark",
+      "face": "Moth",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Lark & Owl",
+      "side": "light",
+      "face": "Lark",
+      "family": "draw"
+    },
+    {
+      "pair": "Lark & Owl",
+      "side": "dark",
+      "face": "Owl",
+      "family": "draw"
+    },
+    {
+      "pair": "Sun & Moon",
+      "side": "light",
+      "face": "Sun",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sun & Moon",
+      "side": "dark",
+      "face": "Moon",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Sunrise & Eclipse",
+      "side": "light",
+      "face": "Sunrise",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Sunrise & Eclipse",
+      "side": "dark",
+      "face": "Eclipse",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Flame & Frost",
+      "side": "light",
+      "face": "Flame",
+      "family": "numeric"
+    },
+    {
+      "pair": "Flame & Frost",
+      "side": "dark",
+      "face": "Frost",
+      "family": "numeric"
+    },
+    {
+      "pair": "Rain & Drought",
+      "side": "light",
+      "face": "Rain",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Rain clears both Burns, heals, and preserves unrelated statuses",
+        "effect": "Remove all Burn from both combatants. Heal 3 HP. Banish this card."
+      }
+    },
+    {
+      "pair": "Rain & Drought",
+      "side": "dark",
+      "face": "Drought",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bell Ringer & Silenced Bell Ringer",
+      "side": "light",
+      "face": "Bell Ringer",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bell Ringer & Silenced Bell Ringer",
+      "side": "dark",
+      "face": "Silenced Bell Ringer",
+      "family": "hush"
+    },
+    {
+      "pair": "Sacred Chalice & Blood Goblet",
+      "side": "light",
+      "face": "Sacred Chalice",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sacred Chalice & Blood Goblet",
+      "side": "dark",
+      "face": "Blood Goblet",
+      "family": "hp-payment"
+    },
+    {
+      "pair": "Censer & Plague Brazier",
+      "side": "light",
+      "face": "Censer",
+      "family": "numeric"
+    },
+    {
+      "pair": "Censer & Plague Brazier",
+      "side": "dark",
+      "face": "Plague Brazier",
+      "family": "numeric"
+    },
+    {
+      "pair": "Reliquary & Empty Reliquary",
+      "side": "light",
+      "face": "Reliquary",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Reliquary & Empty Reliquary",
+      "side": "dark",
+      "face": "Empty Reliquary",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Bloom & Wither",
+      "side": "light",
+      "face": "Bloom",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bloom & Wither",
+      "side": "dark",
+      "face": "Wither",
+      "family": "numeric"
+    },
+    {
+      "pair": "Seed & Ash",
+      "side": "light",
+      "face": "Seed",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Seed & Ash",
+      "side": "dark",
+      "face": "Ash",
+      "family": "numeric"
+    },
+    {
+      "pair": "Ivy & Thorns",
+      "side": "light",
+      "face": "Ivy",
+      "family": "numeric"
+    },
+    {
+      "pair": "Ivy & Thorns",
+      "side": "dark",
+      "face": "Thorns",
+      "family": "numeric"
+    },
+    {
+      "pair": "Key & Lock",
+      "side": "light",
+      "face": "Key",
+      "family": "draw-hand-effect"
+    },
+    {
+      "pair": "Key & Lock",
+      "side": "dark",
+      "face": "Lock",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Mirror & Shattered Mirror",
+      "side": "light",
+      "face": "Mirror",
+      "family": "reflect"
+    },
+    {
+      "pair": "Mirror & Shattered Mirror",
+      "side": "dark",
+      "face": "Shattered Mirror",
+      "family": "numeric"
+    },
+    {
+      "pair": "Candle & Extinguished Candle",
+      "side": "light",
+      "face": "Candle",
+      "family": "numeric"
+    },
+    {
+      "pair": "Candle & Extinguished Candle",
+      "side": "dark",
+      "face": "Extinguished Candle",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Extinguished Candle and Lantern Snuffer turn other held cards dark while preserving Keep",
+        "effect": "Turn your hand to its dark faces. Banish this card."
+      }
+    },
+    {
+      "pair": "Open Book & Sealed Book",
+      "side": "light",
+      "face": "Open Book",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Open Book & Sealed Book",
+      "side": "dark",
+      "face": "Sealed Book",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Hourglass & Broken Hourglass",
+      "side": "light",
+      "face": "Hourglass",
+      "family": "numeric"
+    },
+    {
+      "pair": "Hourglass & Broken Hourglass",
+      "side": "dark",
+      "face": "Broken Hourglass",
+      "family": "shuffle-hand"
+    },
+    {
+      "pair": "Feather & Chain",
+      "side": "light",
+      "face": "Feather",
+      "family": "draw"
+    },
+    {
+      "pair": "Feather & Chain",
+      "side": "dark",
+      "face": "Chain",
+      "family": "numeric"
+    },
+    {
+      "pair": "Cathedral & Ruined Cathedral",
+      "side": "light",
+      "face": "Cathedral",
+      "family": "numeric"
+    },
+    {
+      "pair": "Cathedral & Ruined Cathedral",
+      "side": "dark",
+      "face": "Ruined Cathedral",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Sunlit Chapel & Moonlit Crypt",
+      "side": "light",
+      "face": "Sunlit Chapel",
+      "family": "cleanse-purge"
+    },
+    {
+      "pair": "Sunlit Chapel & Moonlit Crypt",
+      "side": "dark",
+      "face": "Moonlit Crypt",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Cloister Garden & Overgrown Ruins",
+      "side": "light",
+      "face": "Cloister Garden",
+      "family": "numeric"
+    },
+    {
+      "pair": "Cloister Garden & Overgrown Ruins",
+      "side": "dark",
+      "face": "Overgrown Ruins",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Bell Tower & Fallen Bell",
+      "side": "light",
+      "face": "Bell Tower",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bell Tower & Fallen Bell",
+      "side": "dark",
+      "face": "Fallen Bell",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bridge & Chasm",
+      "side": "light",
+      "face": "Bridge",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Bridge & Chasm",
+      "side": "dark",
+      "face": "Chasm",
+      "family": "numeric"
+    },
+    {
+      "pair": "Open Gate & Sealed Gate",
+      "side": "light",
+      "face": "Open Gate",
+      "family": "draw"
+    },
+    {
+      "pair": "Open Gate & Sealed Gate",
+      "side": "dark",
+      "face": "Sealed Gate",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sanctuary & Prison",
+      "side": "light",
+      "face": "Sanctuary",
+      "family": "cleanse-purge"
+    },
+    {
+      "pair": "Sanctuary & Prison",
+      "side": "dark",
+      "face": "Prison",
+      "family": "numeric"
+    },
+    {
+      "pair": "Mountain Monastery & Sunken Shrine",
+      "side": "light",
+      "face": "Mountain Monastery",
+      "family": "numeric"
+    },
+    {
+      "pair": "Mountain Monastery & Sunken Shrine",
+      "side": "dark",
+      "face": "Sunken Shrine",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Benediction & Curse",
+      "side": "light",
+      "face": "Benediction",
+      "family": "numeric"
+    },
+    {
+      "pair": "Benediction & Curse",
+      "side": "dark",
+      "face": "Curse",
+      "family": "numeric"
+    },
+    {
+      "pair": "Ascension & Descent",
+      "side": "light",
+      "face": "Ascension",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Ascension & Descent",
+      "side": "dark",
+      "face": "Descent",
+      "family": "self-tuck"
+    },
+    {
+      "pair": "Memory & Oblivion",
+      "side": "light",
+      "face": "Memory",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/run.test.ts",
+        "test_name": "requires a real Memory choice when discard contains cards and banishes Memory",
+        "effect": "Return a card of your choice from your discard pile to your hand. Banish this card."
+      }
+    },
+    {
+      "pair": "Memory & Oblivion",
+      "side": "dark",
+      "face": "Oblivion",
+      "family": "numeric"
+    },
+    {
+      "pair": "Dream & Nightmare",
+      "side": "light",
+      "face": "Dream",
+      "family": "draw"
+    },
+    {
+      "pair": "Dream & Nightmare",
+      "side": "dark",
+      "face": "Nightmare",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bound Soul & Unbound Spirit",
+      "side": "dark",
+      "face": "Bound Soul",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bound Soul & Unbound Spirit",
+      "side": "light",
+      "face": "Unbound Spirit",
+      "family": "draw"
+    },
+    {
+      "pair": "Sovereign & Jester",
+      "side": "light",
+      "face": "Sovereign",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sovereign & Jester",
+      "side": "dark",
+      "face": "Jester",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Puppeteer & Marionette",
+      "side": "light",
+      "face": "Puppeteer",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Puppeteer & Marionette",
+      "side": "dark",
+      "face": "Marionette",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/simple-cards.test.ts",
+        "test_name": "keeps exactly the card flipped by Marionette",
+        "effect": "Flip a random card in your hand. Keep it."
+      }
+    },
+    {
+      "pair": "Weaver & Unraveler",
+      "side": "light",
+      "face": "Weaver",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Weaver & Unraveler",
+      "side": "dark",
+      "face": "Unraveler",
+      "family": "discard-payment"
+    },
+    {
+      "pair": "Midwife & Undertaker",
+      "side": "light",
+      "face": "Midwife",
+      "family": "heal-draw"
+    },
+    {
+      "pair": "Midwife & Undertaker",
+      "side": "dark",
+      "face": "Undertaker",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Sentinel & Sleepwalker",
+      "side": "light",
+      "face": "Sentinel",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sentinel & Sleepwalker",
+      "side": "dark",
+      "face": "Sleepwalker",
+      "family": "shuffle-hand"
+    },
+    {
+      "pair": "Cartographer & Lost Wanderer",
+      "side": "light",
+      "face": "Cartographer",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/inspection.test.ts",
+        "test_name": "commits Cartographer before revealing and resumes an ordered choice after saving",
+        "effect": "Look at the top 3 cards of your library. Put them back in any order."
+      }
+    },
+    {
+      "pair": "Cartographer & Lost Wanderer",
+      "side": "dark",
+      "face": "Lost Wanderer",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Lost Wanderer shuffles only the library before drawing, leaving retained cards untouched",
+        "effect": "Shuffle your library. Draw 2 cards."
+      }
+    },
+    {
+      "pair": "Executioner & Resurrector",
+      "side": "light",
+      "face": "Executioner",
+      "family": "numeric"
+    },
+    {
+      "pair": "Executioner & Resurrector",
+      "side": "dark",
+      "face": "Resurrector",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Honeybee & Locust",
+      "side": "light",
+      "face": "Honeybee",
+      "family": "numeric"
+    },
+    {
+      "pair": "Honeybee & Locust",
+      "side": "dark",
+      "face": "Locust",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/catalogue-outcomes.test.ts",
+        "test_name": "Locust prepares an empty library, pays the top card, then deals damage",
+        "effect": "Banish the top card of your library. Deal 8 Decay damage."
+      }
+    },
+    {
+      "pair": "Peacock & Vulture",
+      "side": "light",
+      "face": "Peacock",
+      "family": "numeric"
+    },
+    {
+      "pair": "Peacock & Vulture",
+      "side": "dark",
+      "face": "Vulture",
+      "family": "discard-payment"
+    },
+    {
+      "pair": "Goldfish & Anglerfish",
+      "side": "light",
+      "face": "Goldfish",
+      "family": "draw"
+    },
+    {
+      "pair": "Goldfish & Anglerfish",
+      "side": "dark",
+      "face": "Anglerfish",
+      "family": "numeric"
+    },
+    {
+      "pair": "Caged Songbird & Wild Songbird",
+      "side": "light",
+      "face": "Caged Songbird",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Caged Songbird & Wild Songbird",
+      "side": "dark",
+      "face": "Wild Songbird",
+      "family": "draw"
+    },
+    {
+      "pair": "Tortoise & Hare",
+      "side": "light",
+      "face": "Tortoise",
+      "family": "numeric"
+    },
+    {
+      "pair": "Tortoise & Hare",
+      "side": "dark",
+      "face": "Hare",
+      "family": "draw"
+    },
+    {
+      "pair": "Lighthouse & Shipwreck",
+      "side": "light",
+      "face": "Lighthouse",
+      "family": "draw"
+    },
+    {
+      "pair": "Lighthouse & Shipwreck",
+      "side": "dark",
+      "face": "Shipwreck",
+      "family": "numeric"
+    },
+    {
+      "pair": "Glasshouse & Root Cellar",
+      "side": "light",
+      "face": "Glasshouse",
+      "family": "numeric"
+    },
+    {
+      "pair": "Glasshouse & Root Cellar",
+      "side": "dark",
+      "face": "Root Cellar",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Walled City & Wilderness",
+      "side": "light",
+      "face": "Walled City",
+      "family": "numeric"
+    },
+    {
+      "pair": "Walled City & Wilderness",
+      "side": "dark",
+      "face": "Wilderness",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/inspection.test.ts",
+        "test_name": "resolves %s while preserving inspected order",
+        "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order."
+      }
+    },
+    {
+      "pair": "Orchard & Bone Orchard",
+      "side": "light",
+      "face": "Orchard",
+      "family": "numeric"
+    },
+    {
+      "pair": "Orchard & Bone Orchard",
+      "side": "dark",
+      "face": "Bone Orchard",
+      "family": "discard-payment"
+    },
+    {
+      "pair": "Dawn Market & Night Market",
+      "side": "light",
+      "face": "Dawn Market",
+      "family": "random-discard-payment"
+    },
+    {
+      "pair": "Dawn Market & Night Market",
+      "side": "dark",
+      "face": "Night Market",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/catalogue-outcomes.test.ts",
+        "test_name": "Night Market pays with the other held card before drawing and rejects missing payment",
+        "effect": "Banish a random other card from your hand. Draw 3 cards."
+      }
+    },
+    {
+      "pair": "Banquet Hall & Empty Banquet Hall",
+      "side": "light",
+      "face": "Banquet Hall",
+      "family": "numeric"
+    },
+    {
+      "pair": "Banquet Hall & Empty Banquet Hall",
+      "side": "dark",
+      "face": "Empty Banquet Hall",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Observatory & Underground Cavern",
+      "side": "light",
+      "face": "Observatory",
+      "family": "draw"
+    },
+    {
+      "pair": "Observatory & Underground Cavern",
+      "side": "dark",
+      "face": "Underground Cavern",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Salt Flat & Deep Marsh",
+      "side": "light",
+      "face": "Salt Flat",
+      "family": "numeric"
+    },
+    {
+      "pair": "Salt Flat & Deep Marsh",
+      "side": "dark",
+      "face": "Deep Marsh",
+      "family": "numeric"
+    },
+    {
+      "pair": "Frozen Lake & Boiling Lake",
+      "side": "light",
+      "face": "Frozen Lake",
+      "family": "numeric"
+    },
+    {
+      "pair": "Frozen Lake & Boiling Lake",
+      "side": "dark",
+      "face": "Boiling Lake",
+      "family": "numeric"
+    },
+    {
+      "pair": "Floating Library & Sunken Library",
+      "side": "light",
+      "face": "Floating Library",
+      "family": "draw"
+    },
+    {
+      "pair": "Floating Library & Sunken Library",
+      "side": "dark",
+      "face": "Sunken Library",
+      "family": "return-discard"
+    },
+    {
+      "pair": "White Desert & Black Forest",
+      "side": "light",
+      "face": "White Desert",
+      "family": "numeric"
+    },
+    {
+      "pair": "White Desert & Black Forest",
+      "side": "dark",
+      "face": "Black Forest",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Clockwork City & Wandering Village",
+      "side": "light",
+      "face": "Clockwork City",
+      "family": "draw-hand-effect"
+    },
+    {
+      "pair": "Clockwork City & Wandering Village",
+      "side": "dark",
+      "face": "Wandering Village",
+      "family": "shuffle-hand"
+    },
+    {
+      "pair": "Sewing Needle & Scissors",
+      "side": "light",
+      "face": "Sewing Needle",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Sewing Needle & Scissors",
+      "side": "dark",
+      "face": "Scissors",
+      "family": "discard-payment"
+    },
+    {
+      "pair": "Compass & Labyrinth",
+      "side": "light",
+      "face": "Compass",
+      "family": "draw"
+    },
+    {
+      "pair": "Compass & Labyrinth",
+      "side": "dark",
+      "face": "Labyrinth",
+      "family": "numeric"
+    },
+    {
+      "pair": "Lantern & Shroud",
+      "side": "light",
+      "face": "Lantern",
+      "family": "draw"
+    },
+    {
+      "pair": "Lantern & Shroud",
+      "side": "dark",
+      "face": "Shroud",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Prism & Black Glass",
+      "side": "light",
+      "face": "Prism",
+      "family": "numeric"
+    },
+    {
+      "pair": "Prism & Black Glass",
+      "side": "dark",
+      "face": "Black Glass",
+      "family": "reflect"
+    },
+    {
+      "pair": "Tuned Violin & Broken Violin",
+      "side": "light",
+      "face": "Tuned Violin",
+      "family": "numeric"
+    },
+    {
+      "pair": "Tuned Violin & Broken Violin",
+      "side": "dark",
+      "face": "Broken Violin",
+      "family": "numeric"
+    },
+    {
+      "pair": "Balance Scales & Loaded Dice",
+      "side": "light",
+      "face": "Balance Scales",
+      "family": "numeric"
+    },
+    {
+      "pair": "Balance Scales & Loaded Dice",
+      "side": "dark",
+      "face": "Loaded Dice",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/inspection.test.ts",
+        "test_name": "resolves %s while preserving inspected order",
+        "effect": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order."
+      }
+    },
+    {
+      "pair": "Chessboard & Scattered Chess Pieces",
+      "side": "light",
+      "face": "Chessboard",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Chessboard Scries without reshuffling and adds Curse",
+        "effect": "Scry. Curse 1."
+      }
+    },
+    {
+      "pair": "Chessboard & Scattered Chess Pieces",
+      "side": "dark",
+      "face": "Scattered Chess Pieces",
+      "family": "shuffle-hand"
+    },
+    {
+      "pair": "Wax Seal & Torn Letter",
+      "side": "light",
+      "face": "Wax Seal",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Wax Seal & Torn Letter",
+      "side": "dark",
+      "face": "Torn Letter",
+      "family": "numeric"
+    },
+    {
+      "pair": "Anchor & Kite",
+      "side": "light",
+      "face": "Anchor",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Anchor & Kite",
+      "side": "dark",
+      "face": "Kite",
+      "family": "draw"
+    },
+    {
+      "pair": "Metronome & Wind Chime",
+      "side": "light",
+      "face": "Metronome",
+      "family": "reverse-scry"
+    },
+    {
+      "pair": "Metronome & Wind Chime",
+      "side": "dark",
+      "face": "Wind Chime",
+      "family": "numeric"
+    },
+    {
+      "pair": "Lens & Blindfold",
+      "side": "light",
+      "face": "Lens",
+      "family": "draw"
+    },
+    {
+      "pair": "Lens & Blindfold",
+      "side": "dark",
+      "face": "Blindfold",
+      "family": "numeric"
+    },
+    {
+      "pair": "Comb & Tangled Hair",
+      "side": "light",
+      "face": "Comb",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Comb & Tangled Hair",
+      "side": "dark",
+      "face": "Tangled Hair",
+      "family": "numeric"
+    },
+    {
+      "pair": "Porcelain Doll & Rag Doll",
+      "side": "light",
+      "face": "Porcelain Doll",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Porcelain Doll & Rag Doll",
+      "side": "dark",
+      "face": "Rag Doll",
+      "family": "return-top-two"
+    },
+    {
+      "pair": "Symmetry & Asymmetry",
+      "side": "light",
+      "face": "Symmetry",
+      "family": "numeric"
+    },
+    {
+      "pair": "Symmetry & Asymmetry",
+      "side": "dark",
+      "face": "Asymmetry",
+      "family": "draw-random-discard"
+    },
+    {
+      "pair": "Unity & Fragmentation",
+      "side": "light",
+      "face": "Unity",
+      "family": "draw-hand-effect"
+    },
+    {
+      "pair": "Unity & Fragmentation",
+      "side": "dark",
+      "face": "Fragmentation",
+      "family": "numeric"
+    },
+    {
+      "pair": "Convergence & Divergence",
+      "side": "light",
+      "face": "Convergence",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Convergence & Divergence",
+      "side": "dark",
+      "face": "Divergence",
+      "family": "self-tuck"
+    },
+    {
+      "pair": "Compression & Expansion",
+      "side": "light",
+      "face": "Compression",
+      "family": "numeric"
+    },
+    {
+      "pair": "Compression & Expansion",
+      "side": "dark",
+      "face": "Expansion",
+      "family": "draw"
+    },
+    {
+      "pair": "Attraction & Repulsion",
+      "side": "light",
+      "face": "Attraction",
+      "family": "draw"
+    },
+    {
+      "pair": "Attraction & Repulsion",
+      "side": "dark",
+      "face": "Repulsion",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/catalogue-outcomes.test.ts",
+        "test_name": "%s queues the hand at library bottom in order before drawing",
+        "effect": "Put your hand on the bottom of your library. Draw 3 cards."
+      }
+    },
+    {
+      "pair": "Gravity & Levitation",
+      "side": "light",
+      "face": "Gravity",
+      "family": "numeric"
+    },
+    {
+      "pair": "Gravity & Levitation",
+      "side": "dark",
+      "face": "Levitation",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Stillness & Frenzy",
+      "side": "light",
+      "face": "Stillness",
+      "family": "numeric"
+    },
+    {
+      "pair": "Stillness & Frenzy",
+      "side": "dark",
+      "face": "Frenzy",
+      "family": "random-discard-payment"
+    },
+    {
+      "pair": "Silence & Clamor",
+      "side": "light",
+      "face": "Silence",
+      "family": "hush"
+    },
+    {
+      "pair": "Silence & Clamor",
+      "side": "dark",
+      "face": "Clamor",
+      "family": "numeric"
+    },
+    {
+      "pair": "Awakening & Slumber",
+      "side": "light",
+      "face": "Awakening",
+      "family": "draw-hand-effect"
+    },
+    {
+      "pair": "Awakening & Slumber",
+      "side": "dark",
+      "face": "Slumber",
+      "family": "numeric"
+    },
+    {
+      "pair": "Multiplicity & Solitude",
+      "side": "light",
+      "face": "Multiplicity",
+      "family": "draw"
+    },
+    {
+      "pair": "Multiplicity & Solitude",
+      "side": "dark",
+      "face": "Solitude",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Solitude banishes all other held cards, clearing Keep, and still works with no others",
+        "effect": "Banish all other cards in your hand."
+      }
+    },
+    {
+      "pair": "Plenty & Famine",
+      "side": "light",
+      "face": "Plenty",
+      "family": "heal-draw"
+    },
+    {
+      "pair": "Plenty & Famine",
+      "side": "dark",
+      "face": "Famine",
+      "family": "hp-payment"
+    },
+    {
+      "pair": "High Tide & Low Tide",
+      "side": "light",
+      "face": "High Tide",
+      "family": "return-top-two"
+    },
+    {
+      "pair": "High Tide & Low Tide",
+      "side": "dark",
+      "face": "Low Tide",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Low Tide moves the top to the bottom, then reveals the new top",
+        "effect": "Put the top card of your library on the bottom. Scry."
+      }
+    },
+    {
+      "pair": "Exposure & Concealment",
+      "side": "light",
+      "face": "Exposure",
+      "family": "cleanse-purge"
+    },
+    {
+      "pair": "Exposure & Concealment",
+      "side": "dark",
+      "face": "Concealment",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Herald & Smuggler",
+      "side": "light",
+      "face": "Herald",
+      "family": "numeric"
+    },
+    {
+      "pair": "Herald & Smuggler",
+      "side": "dark",
+      "face": "Smuggler",
+      "family": "self-tuck"
+    },
+    {
+      "pair": "Standard Bearer & Flag Burner",
+      "side": "light",
+      "face": "Standard Bearer",
+      "family": "draw"
+    },
+    {
+      "pair": "Standard Bearer & Flag Burner",
+      "side": "dark",
+      "face": "Flag Burner",
+      "family": "numeric"
+    },
+    {
+      "pair": "Animal Tamer & Shapeshifter",
+      "side": "light",
+      "face": "Animal Tamer",
+      "family": "numeric"
+    },
+    {
+      "pair": "Animal Tamer & Shapeshifter",
+      "side": "dark",
+      "face": "Shapeshifter",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Mask Maker & Face Thief",
+      "side": "light",
+      "face": "Mask Maker",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Mask Maker & Face Thief",
+      "side": "dark",
+      "face": "Face Thief",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Fencer & Brawler",
+      "side": "light",
+      "face": "Fencer",
+      "family": "numeric"
+    },
+    {
+      "pair": "Fencer & Brawler",
+      "side": "dark",
+      "face": "Brawler",
+      "family": "hp-payment"
+    },
+    {
+      "pair": "Charioteer & Ferryman",
+      "side": "light",
+      "face": "Charioteer",
+      "family": "numeric"
+    },
+    {
+      "pair": "Charioteer & Ferryman",
+      "side": "dark",
+      "face": "Ferryman",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Auctioneer & Scavenger",
+      "side": "light",
+      "face": "Auctioneer",
+      "family": "random-discard-payment"
+    },
+    {
+      "pair": "Auctioneer & Scavenger",
+      "side": "dark",
+      "face": "Scavenger",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Ballerina & Contortionist",
+      "side": "light",
+      "face": "Ballerina",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Ballerina & Contortionist",
+      "side": "dark",
+      "face": "Contortionist",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Royal Hound & Stray Hound",
+      "side": "light",
+      "face": "Royal Hound",
+      "family": "numeric"
+    },
+    {
+      "pair": "Royal Hound & Stray Hound",
+      "side": "dark",
+      "face": "Stray Hound",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Archivist & Bookworm",
+      "side": "light",
+      "face": "Archivist",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Archivist & Bookworm",
+      "side": "dark",
+      "face": "Bookworm",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Surveyor & Trespasser",
+      "side": "light",
+      "face": "Surveyor",
+      "family": "draw"
+    },
+    {
+      "pair": "Surveyor & Trespasser",
+      "side": "dark",
+      "face": "Trespasser",
+      "family": "cleanse-purge"
+    },
+    {
+      "pair": "Chimney Sweep & Smoke Spirit",
+      "side": "light",
+      "face": "Chimney Sweep",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Chimney Sweep removes Burn even when no discard target exists",
+        "effect": "Remove all your Burn. Banish the top card of your discard pile."
+      }
+    },
+    {
+      "pair": "Chimney Sweep & Smoke Spirit",
+      "side": "dark",
+      "face": "Smoke Spirit",
+      "family": "numeric"
+    },
+    {
+      "pair": "Coral Reef & Kelp Forest",
+      "side": "light",
+      "face": "Coral Reef",
+      "family": "numeric"
+    },
+    {
+      "pair": "Coral Reef & Kelp Forest",
+      "side": "dark",
+      "face": "Kelp Forest",
+      "family": "numeric"
+    },
+    {
+      "pair": "Oyster & Cuttlefish",
+      "side": "light",
+      "face": "Oyster",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Oyster & Cuttlefish",
+      "side": "dark",
+      "face": "Cuttlefish",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Firefly & Cave Cricket",
+      "side": "light",
+      "face": "Firefly",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Firefly & Cave Cricket",
+      "side": "dark",
+      "face": "Cave Cricket",
+      "family": "draw"
+    },
+    {
+      "pair": "Stalactite & Geyser",
+      "side": "light",
+      "face": "Stalactite",
+      "family": "numeric"
+    },
+    {
+      "pair": "Stalactite & Geyser",
+      "side": "dark",
+      "face": "Geyser",
+      "family": "numeric"
+    },
+    {
+      "pair": "Dandelion & Mandrake",
+      "side": "light",
+      "face": "Dandelion",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/catalogue-outcomes.test.ts",
+        "test_name": "%s queues the hand at library bottom in order before drawing",
+        "effect": "Put your hand on the bottom of your library. Draw 3 cards."
+      }
+    },
+    {
+      "pair": "Dandelion & Mandrake",
+      "side": "dark",
+      "face": "Mandrake",
+      "family": "numeric"
+    },
+    {
+      "pair": "Snowdrop & Nightshade",
+      "side": "light",
+      "face": "Snowdrop",
+      "family": "numeric"
+    },
+    {
+      "pair": "Snowdrop & Nightshade",
+      "side": "dark",
+      "face": "Nightshade",
+      "family": "numeric"
+    },
+    {
+      "pair": "Cocoon & Shed Skin",
+      "side": "light",
+      "face": "Cocoon",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Cocoon & Shed Skin",
+      "side": "dark",
+      "face": "Shed Skin",
+      "family": "draw"
+    },
+    {
+      "pair": "Lotus & Corpse Flower",
+      "side": "light",
+      "face": "Lotus",
+      "family": "numeric"
+    },
+    {
+      "pair": "Lotus & Corpse Flower",
+      "side": "dark",
+      "face": "Corpse Flower",
+      "family": "discard-payment"
+    },
+    {
+      "pair": "Kingfisher & Bat",
+      "side": "light",
+      "face": "Kingfisher",
+      "family": "numeric"
+    },
+    {
+      "pair": "Kingfisher & Bat",
+      "side": "dark",
+      "face": "Bat",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sunflower & Moonflower",
+      "side": "light",
+      "face": "Sunflower",
+      "family": "draw"
+    },
+    {
+      "pair": "Sunflower & Moonflower",
+      "side": "dark",
+      "face": "Moonflower",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Starfish & Sea Urchin",
+      "side": "light",
+      "face": "Starfish",
+      "family": "numeric"
+    },
+    {
+      "pair": "Starfish & Sea Urchin",
+      "side": "dark",
+      "face": "Sea Urchin",
+      "family": "numeric"
+    },
+    {
+      "pair": "Silkworm & Silverfish",
+      "side": "light",
+      "face": "Silkworm",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Silkworm & Silverfish",
+      "side": "dark",
+      "face": "Silverfish",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Sceptre & Begging Bowl",
+      "side": "light",
+      "face": "Sceptre",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sceptre & Begging Bowl",
+      "side": "dark",
+      "face": "Begging Bowl",
+      "family": "draw"
+    },
+    {
+      "pair": "Quill & Eraser",
+      "side": "light",
+      "face": "Quill",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Quill & Eraser",
+      "side": "dark",
+      "face": "Eraser",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Fishing Net & Harpoon",
+      "side": "light",
+      "face": "Fishing Net",
+      "family": "numeric"
+    },
+    {
+      "pair": "Fishing Net & Harpoon",
+      "side": "dark",
+      "face": "Harpoon",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sieve & Funnel",
+      "side": "light",
+      "face": "Sieve",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/inspection.test.ts",
+        "test_name": "resolves %s while preserving inspected order",
+        "effect": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order."
+      }
+    },
+    {
+      "pair": "Sieve & Funnel",
+      "side": "dark",
+      "face": "Funnel",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/catalogue-outcomes.test.ts",
+        "test_name": "Funnel queues the whole hand in hand order, then draws the first queued card",
+        "effect": "Put your hand on top of your library. Draw 1 card."
+      }
+    },
+    {
+      "pair": "Scabbard & Drawn Blade",
+      "side": "light",
+      "face": "Scabbard",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Scabbard & Drawn Blade",
+      "side": "dark",
+      "face": "Drawn Blade",
+      "family": "numeric"
+    },
+    {
+      "pair": "Tuning Fork & Rattle",
+      "side": "light",
+      "face": "Tuning Fork",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Tuning Fork & Rattle",
+      "side": "dark",
+      "face": "Rattle",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sundial & Water Clock",
+      "side": "light",
+      "face": "Sundial",
+      "family": "draw"
+    },
+    {
+      "pair": "Sundial & Water Clock",
+      "side": "dark",
+      "face": "Water Clock",
+      "family": "water-clock"
+    },
+    {
+      "pair": "Rope Ladder & Trapdoor",
+      "side": "light",
+      "face": "Rope Ladder",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Rope Ladder & Trapdoor",
+      "side": "dark",
+      "face": "Trapdoor",
+      "family": "numeric"
+    },
+    {
+      "pair": "Floodgate & Broken Dam",
+      "side": "light",
+      "face": "Floodgate",
+      "family": "numeric"
+    },
+    {
+      "pair": "Floodgate & Broken Dam",
+      "side": "dark",
+      "face": "Broken Dam",
+      "family": "numeric"
+    },
+    {
+      "pair": "Wax Fruit & Rotting Fruit",
+      "side": "light",
+      "face": "Wax Fruit",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Wax Fruit & Rotting Fruit",
+      "side": "dark",
+      "face": "Rotting Fruit",
+      "family": "numeric"
+    },
+    {
+      "pair": "Measuring Rod & Twisted Ribbon",
+      "side": "light",
+      "face": "Measuring Rod",
+      "family": "scry"
+    },
+    {
+      "pair": "Measuring Rod & Twisted Ribbon",
+      "side": "dark",
+      "face": "Twisted Ribbon",
+      "family": "numeric"
+    },
+    {
+      "pair": "Glass Slipper & Iron Boot",
+      "side": "light",
+      "face": "Glass Slipper",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Glass Slipper & Iron Boot",
+      "side": "dark",
+      "face": "Iron Boot",
+      "family": "numeric"
+    },
+    {
+      "pair": "Wedding Veil & Funeral Veil",
+      "side": "light",
+      "face": "Wedding Veil",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Wedding Veil & Funeral Veil",
+      "side": "dark",
+      "face": "Funeral Veil",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Amphitheatre & Backstage",
+      "side": "light",
+      "face": "Amphitheatre",
+      "family": "draw"
+    },
+    {
+      "pair": "Amphitheatre & Backstage",
+      "side": "dark",
+      "face": "Backstage",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Grand Staircase & Spiral Well",
+      "side": "light",
+      "face": "Grand Staircase",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Grand Staircase & Spiral Well",
+      "side": "dark",
+      "face": "Spiral Well",
+      "family": "self-tuck"
+    },
+    {
+      "pair": "Aqueduct & Sewer",
+      "side": "light",
+      "face": "Aqueduct",
+      "family": "numeric"
+    },
+    {
+      "pair": "Aqueduct & Sewer",
+      "side": "dark",
+      "face": "Sewer",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Marble Quarry & Peat Bog",
+      "side": "light",
+      "face": "Marble Quarry",
+      "family": "numeric"
+    },
+    {
+      "pair": "Marble Quarry & Peat Bog",
+      "side": "dark",
+      "face": "Peat Bog",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bathhouse & Icehouse",
+      "side": "light",
+      "face": "Bathhouse",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Bathhouse & Icehouse",
+      "side": "dark",
+      "face": "Icehouse",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Counting House & Thieves Den",
+      "side": "light",
+      "face": "Counting House",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/catalogue-outcomes.test.ts",
+        "test_name": "Counting House moves the only other kept card to library bottom before drawing",
+        "effect": "Put a random card from your hand on the bottom of your library. Draw 2 cards."
+      }
+    },
+    {
+      "pair": "Counting House & Thieves Den",
+      "side": "dark",
+      "face": "Thieves Den",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Dovecote & Spider Nursery",
+      "side": "light",
+      "face": "Dovecote",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Dovecote & Spider Nursery",
+      "side": "dark",
+      "face": "Spider Nursery",
+      "family": "numeric"
+    },
+    {
+      "pair": "Tidal Causeway & Drifting Island",
+      "side": "light",
+      "face": "Tidal Causeway",
+      "family": "exchange"
+    },
+    {
+      "pair": "Tidal Causeway & Drifting Island",
+      "side": "dark",
+      "face": "Drifting Island",
+      "family": "shuffle-hand"
+    },
+    {
+      "pair": "Crystal Ballroom & Cinder Ballroom",
+      "side": "light",
+      "face": "Crystal Ballroom",
+      "family": "reflect"
+    },
+    {
+      "pair": "Crystal Ballroom & Cinder Ballroom",
+      "side": "dark",
+      "face": "Cinder Ballroom",
+      "family": "numeric"
+    },
+    {
+      "pair": "Pottery Workshop & Shard Heap",
+      "side": "light",
+      "face": "Pottery Workshop",
+      "family": "restore-discard-face"
+    },
+    {
+      "pair": "Pottery Workshop & Shard Heap",
+      "side": "dark",
+      "face": "Shard Heap",
+      "family": "numeric"
+    },
+    {
+      "pair": "Circus Ring & Abandoned Fairground",
+      "side": "light",
+      "face": "Circus Ring",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Circus Ring & Abandoned Fairground",
+      "side": "dark",
+      "face": "Abandoned Fairground",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Beehive Palace & Termite Palace",
+      "side": "light",
+      "face": "Beehive Palace",
+      "family": "numeric"
+    },
+    {
+      "pair": "Beehive Palace & Termite Palace",
+      "side": "dark",
+      "face": "Termite Palace",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "%s removes only available enemy Ward",
+        "effect": "Remove 6 enemy Ward."
+      }
+    },
+    {
+      "pair": "Paved Road & Deer Trail",
+      "side": "light",
+      "face": "Paved Road",
+      "family": "draw"
+    },
+    {
+      "pair": "Paved Road & Deer Trail",
+      "side": "dark",
+      "face": "Deer Trail",
+      "family": "draw"
+    },
+    {
+      "pair": "Bell Founder & Bell Breaker",
+      "side": "light",
+      "face": "Bell Founder",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bell Founder & Bell Breaker",
+      "side": "dark",
+      "face": "Bell Breaker",
+      "family": "hush"
+    },
+    {
+      "pair": "Crown Jeweler & Crown Snatcher",
+      "side": "light",
+      "face": "Crown Jeweler",
+      "family": "restore-discard-face"
+    },
+    {
+      "pair": "Crown Jeweler & Crown Snatcher",
+      "side": "dark",
+      "face": "Crown Snatcher",
+      "family": "hush"
+    },
+    {
+      "pair": "Prism Keeper & Shade Keeper",
+      "side": "light",
+      "face": "Prism Keeper",
+      "family": "numeric"
+    },
+    {
+      "pair": "Prism Keeper & Shade Keeper",
+      "side": "dark",
+      "face": "Shade Keeper",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Dream Binder & Dream Unbinder",
+      "side": "light",
+      "face": "Dream Binder",
+      "family": "numeric"
+    },
+    {
+      "pair": "Dream Binder & Dream Unbinder",
+      "side": "dark",
+      "face": "Dream Unbinder",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Clockmaker & Clock Thief",
+      "side": "light",
+      "face": "Clockmaker",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Clockmaker & Clock Thief",
+      "side": "dark",
+      "face": "Clock Thief",
+      "family": "draw"
+    },
+    {
+      "pair": "Court Physician & Plague Doctor",
+      "side": "light",
+      "face": "Court Physician",
+      "family": "numeric"
+    },
+    {
+      "pair": "Court Physician & Plague Doctor",
+      "side": "dark",
+      "face": "Plague Doctor",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Parchment Scribe & Ink Drinker",
+      "side": "light",
+      "face": "Parchment Scribe",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Parchment Scribe & Ink Drinker",
+      "side": "dark",
+      "face": "Ink Drinker",
+      "family": "discard-payment"
+    },
+    {
+      "pair": "Portrait Painter & Portrait Eraser",
+      "side": "light",
+      "face": "Portrait Painter",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Portrait Painter & Portrait Eraser",
+      "side": "dark",
+      "face": "Portrait Eraser",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Glassblower & Glass Crusher",
+      "side": "light",
+      "face": "Glassblower",
+      "family": "restore-discard-face"
+    },
+    {
+      "pair": "Glassblower & Glass Crusher",
+      "side": "dark",
+      "face": "Glass Crusher",
+      "family": "numeric"
+    },
+    {
+      "pair": "Perfumer & Scent Thief",
+      "side": "light",
+      "face": "Perfumer",
+      "family": "numeric"
+    },
+    {
+      "pair": "Perfumer & Scent Thief",
+      "side": "dark",
+      "face": "Scent Thief",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Stone Mason & Stone Eater",
+      "side": "light",
+      "face": "Stone Mason",
+      "family": "numeric"
+    },
+    {
+      "pair": "Stone Mason & Stone Eater",
+      "side": "dark",
+      "face": "Stone Eater",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "%s removes only available enemy Ward",
+        "effect": "Remove 4 enemy Ward. Heal 3 HP. Banish this card."
+      }
+    },
+    {
+      "pair": "Bird Keeper & Bird Liberator",
+      "side": "light",
+      "face": "Bird Keeper",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Bird Keeper & Bird Liberator",
+      "side": "dark",
+      "face": "Bird Liberator",
+      "family": "draw"
+    },
+    {
+      "pair": "Cage Builder & Cage Breaker",
+      "side": "light",
+      "face": "Cage Builder",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Cage Builder & Cage Breaker",
+      "side": "dark",
+      "face": "Cage Breaker",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Fortune Teller & Fortune Gambler",
+      "side": "light",
+      "face": "Fortune Teller",
+      "family": "draw"
+    },
+    {
+      "pair": "Fortune Teller & Fortune Gambler",
+      "side": "dark",
+      "face": "Fortune Gambler",
+      "family": "draw-random-discard"
+    },
+    {
+      "pair": "Lantern Lighter & Lantern Snuffer",
+      "side": "light",
+      "face": "Lantern Lighter",
+      "family": "numeric"
+    },
+    {
+      "pair": "Lantern Lighter & Lantern Snuffer",
+      "side": "dark",
+      "face": "Lantern Snuffer",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Extinguished Candle and Lantern Snuffer turn other held cards dark while preserving Keep",
+        "effect": "Remove all Burn from both combatants. Turn your hand to its dark faces."
+      }
+    },
+    {
+      "pair": "Thread Spinner & Thread Cutter",
+      "side": "light",
+      "face": "Thread Spinner",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Thread Spinner & Thread Cutter",
+      "side": "dark",
+      "face": "Thread Cutter",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Storyteller & Story Swallower",
+      "side": "light",
+      "face": "Storyteller",
+      "family": "draw"
+    },
+    {
+      "pair": "Storyteller & Story Swallower",
+      "side": "dark",
+      "face": "Story Swallower",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Coin Minter & Coin Melter",
+      "side": "light",
+      "face": "Coin Minter",
+      "family": "draw"
+    },
+    {
+      "pair": "Coin Minter & Coin Melter",
+      "side": "dark",
+      "face": "Coin Melter",
+      "family": "numeric"
+    },
+    {
+      "pair": "Path Maker & Path Eraser",
+      "side": "light",
+      "face": "Path Maker",
+      "family": "draw"
+    },
+    {
+      "pair": "Path Maker & Path Eraser",
+      "side": "dark",
+      "face": "Path Eraser",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Path Eraser prepares an empty library and has no required payment when both piles are empty",
+        "effect": "Banish the top card of your library."
+      }
+    },
+    {
+      "pair": "Weather Watcher & Storm Chaser",
+      "side": "light",
+      "face": "Weather Watcher",
+      "family": "draw"
+    },
+    {
+      "pair": "Weather Watcher & Storm Chaser",
+      "side": "dark",
+      "face": "Storm Chaser",
+      "family": "draw"
+    },
+    {
+      "pair": "Oath Keeper & Oath Breaker",
+      "side": "light",
+      "face": "Oath Keeper",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Oath Keeper & Oath Breaker",
+      "side": "dark",
+      "face": "Oath Breaker",
+      "family": "draw"
+    },
+    {
+      "pair": "Door Warden & Door Wanderer",
+      "side": "light",
+      "face": "Door Warden",
+      "family": "numeric"
+    },
+    {
+      "pair": "Door Warden & Door Wanderer",
+      "side": "dark",
+      "face": "Door Wanderer",
+      "family": "draw"
+    },
+    {
+      "pair": "Doll Mender & Doll Thief",
+      "side": "light",
+      "face": "Doll Mender",
+      "family": "restore-discard-face"
+    },
+    {
+      "pair": "Doll Mender & Doll Thief",
+      "side": "dark",
+      "face": "Doll Thief",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Music Conductor & Improviser",
+      "side": "light",
+      "face": "Music Conductor",
+      "family": "reverse-scry"
+    },
+    {
+      "pair": "Music Conductor & Improviser",
+      "side": "dark",
+      "face": "Improviser",
+      "family": "draw-random-discard"
+    },
+    {
+      "pair": "Tide Keeper & Tide Wanderer",
+      "side": "light",
+      "face": "Tide Keeper",
+      "family": "numeric"
+    },
+    {
+      "pair": "Tide Keeper & Tide Wanderer",
+      "side": "dark",
+      "face": "Tide Wanderer",
+      "family": "exchange"
+    },
+    {
+      "pair": "Flying Beetle & Burrowing Beetle",
+      "side": "light",
+      "face": "Flying Beetle",
+      "family": "numeric"
+    },
+    {
+      "pair": "Flying Beetle & Burrowing Beetle",
+      "side": "dark",
+      "face": "Burrowing Beetle",
+      "family": "numeric"
+    },
+    {
+      "pair": "White Fox & Black Fox",
+      "side": "light",
+      "face": "White Fox",
+      "family": "draw"
+    },
+    {
+      "pair": "White Fox & Black Fox",
+      "side": "dark",
+      "face": "Black Fox",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Glass Snail & Stone Slug",
+      "side": "light",
+      "face": "Glass Snail",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Glass Snail & Stone Slug",
+      "side": "dark",
+      "face": "Stone Slug",
+      "family": "numeric"
+    },
+    {
+      "pair": "Dawn Crane & Night Heron",
+      "side": "light",
+      "face": "Dawn Crane",
+      "family": "draw"
+    },
+    {
+      "pair": "Dawn Crane & Night Heron",
+      "side": "dark",
+      "face": "Night Heron",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sunfish & Deep Sea Dragonfish",
+      "side": "light",
+      "face": "Sunfish",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sunfish & Deep Sea Dragonfish",
+      "side": "dark",
+      "face": "Deep Sea Dragonfish",
+      "family": "numeric"
+    },
+    {
+      "pair": "Day Moth & Night Moth",
+      "side": "light",
+      "face": "Day Moth",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Day and Night Moth turn only a card currently on the eligible face",
+        "effect": "Turn a random dark card in your hand to its light face."
+      }
+    },
+    {
+      "pair": "Day Moth & Night Moth",
+      "side": "dark",
+      "face": "Night Moth",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/card-special-outcomes.test.ts",
+        "test_name": "Day and Night Moth turn only a card currently on the eligible face",
+        "effect": "Turn a random light card in your hand to its dark face."
+      }
+    },
+    {
+      "pair": "Alabaster Spider & Obsidian Spider",
+      "side": "light",
+      "face": "Alabaster Spider",
+      "family": "numeric"
+    },
+    {
+      "pair": "Alabaster Spider & Obsidian Spider",
+      "side": "dark",
+      "face": "Obsidian Spider",
+      "family": "numeric"
+    },
+    {
+      "pair": "Pearl Crab & Hermit Crab",
+      "side": "light",
+      "face": "Pearl Crab",
+      "family": "numeric"
+    },
+    {
+      "pair": "Pearl Crab & Hermit Crab",
+      "side": "dark",
+      "face": "Hermit Crab",
+      "family": "numeric"
+    },
+    {
+      "pair": "Honey Ant & Army Ant",
+      "side": "light",
+      "face": "Honey Ant",
+      "family": "numeric"
+    },
+    {
+      "pair": "Honey Ant & Army Ant",
+      "side": "dark",
+      "face": "Army Ant",
+      "family": "numeric"
+    },
+    {
+      "pair": "Albino Serpent & Black Adder",
+      "side": "light",
+      "face": "Albino Serpent",
+      "family": "numeric"
+    },
+    {
+      "pair": "Albino Serpent & Black Adder",
+      "side": "dark",
+      "face": "Black Adder",
+      "family": "numeric"
+    },
+    {
+      "pair": "Hard Coral & Soft Coral",
+      "side": "light",
+      "face": "Hard Coral",
+      "family": "numeric"
+    },
+    {
+      "pair": "Hard Coral & Soft Coral",
+      "side": "dark",
+      "face": "Soft Coral",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Hummingbird & Hawk Moth",
+      "side": "light",
+      "face": "Hummingbird",
+      "family": "draw"
+    },
+    {
+      "pair": "Hummingbird & Hawk Moth",
+      "side": "dark",
+      "face": "Hawk Moth",
+      "family": "numeric"
+    },
+    {
+      "pair": "Whole Egg & Cracked Egg",
+      "side": "light",
+      "face": "Whole Egg",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Whole Egg & Cracked Egg",
+      "side": "dark",
+      "face": "Cracked Egg",
+      "family": "draw"
+    },
+    {
+      "pair": "Butterfly Wing & Beetle Shell",
+      "side": "light",
+      "face": "Butterfly Wing",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Butterfly Wing & Beetle Shell",
+      "side": "dark",
+      "face": "Beetle Shell",
+      "family": "numeric"
+    },
+    {
+      "pair": "Amber Frog & Indigo Toad",
+      "side": "light",
+      "face": "Amber Frog",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Amber Frog & Indigo Toad",
+      "side": "dark",
+      "face": "Indigo Toad",
+      "family": "numeric"
+    },
+    {
+      "pair": "Red Panda & Clouded Leopard",
+      "side": "light",
+      "face": "Red Panda",
+      "family": "numeric"
+    },
+    {
+      "pair": "Red Panda & Clouded Leopard",
+      "side": "dark",
+      "face": "Clouded Leopard",
+      "family": "numeric"
+    },
+    {
+      "pair": "Living Jellyfish & Jellyfish Fossil",
+      "side": "light",
+      "face": "Living Jellyfish",
+      "family": "numeric"
+    },
+    {
+      "pair": "Living Jellyfish & Jellyfish Fossil",
+      "side": "dark",
+      "face": "Jellyfish Fossil",
+      "family": "self-keep"
+    },
+    {
+      "pair": "White Poppy & Black Tulip",
+      "side": "light",
+      "face": "White Poppy",
+      "family": "numeric"
+    },
+    {
+      "pair": "White Poppy & Black Tulip",
+      "side": "dark",
+      "face": "Black Tulip",
+      "family": "numeric"
+    },
+    {
+      "pair": "Silver Birch & Hollow Oak",
+      "side": "light",
+      "face": "Silver Birch",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Silver Birch & Hollow Oak",
+      "side": "dark",
+      "face": "Hollow Oak",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Fern Fiddlehead & Fallen Leaf",
+      "side": "light",
+      "face": "Fern Fiddlehead",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Fern Fiddlehead & Fallen Leaf",
+      "side": "dark",
+      "face": "Fallen Leaf",
+      "family": "numeric"
+    },
+    {
+      "pair": "Flower Bud & Seed Pod",
+      "side": "light",
+      "face": "Flower Bud",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Flower Bud & Seed Pod",
+      "side": "dark",
+      "face": "Seed Pod",
+      "family": "draw"
+    },
+    {
+      "pair": "Cultivated Mushroom & Wild Mushroom",
+      "side": "light",
+      "face": "Cultivated Mushroom",
+      "family": "numeric"
+    },
+    {
+      "pair": "Cultivated Mushroom & Wild Mushroom",
+      "side": "dark",
+      "face": "Wild Mushroom",
+      "family": "shuffle-hand"
+    },
+    {
+      "pair": "Cactus Flower & Desert Thorn",
+      "side": "light",
+      "face": "Cactus Flower",
+      "family": "numeric"
+    },
+    {
+      "pair": "Cactus Flower & Desert Thorn",
+      "side": "dark",
+      "face": "Desert Thorn",
+      "family": "numeric"
+    },
+    {
+      "pair": "Ice Crystal & Salt Crystal",
+      "side": "light",
+      "face": "Ice Crystal",
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/run.test.ts",
+        "test_name": "plays Ice Crystal, skips the enemy action, and clears Freeze",
+        "effect": "Freeze. Banish this card."
+      }
+    },
+    {
+      "pair": "Ice Crystal & Salt Crystal",
+      "side": "dark",
+      "face": "Salt Crystal",
+      "family": "self-keep"
+    },
+    {
+      "pair": "River Pearl & Volcanic Obsidian",
+      "side": "light",
+      "face": "River Pearl",
+      "family": "self-keep"
+    },
+    {
+      "pair": "River Pearl & Volcanic Obsidian",
+      "side": "dark",
+      "face": "Volcanic Obsidian",
+      "family": "numeric"
+    },
+    {
+      "pair": "Golden Mask & Cracked Mask",
+      "side": "light",
+      "face": "Golden Mask",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Golden Mask & Cracked Mask",
+      "side": "dark",
+      "face": "Cracked Mask",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Silver Crown & Rusty Crown",
+      "side": "light",
+      "face": "Silver Crown",
+      "family": "numeric"
+    },
+    {
+      "pair": "Silver Crown & Rusty Crown",
+      "side": "dark",
+      "face": "Rusty Crown",
+      "family": "numeric"
+    },
+    {
+      "pair": "Crystal Goblet & Clay Cup",
+      "side": "light",
+      "face": "Crystal Goblet",
+      "family": "numeric"
+    },
+    {
+      "pair": "Crystal Goblet & Clay Cup",
+      "side": "dark",
+      "face": "Clay Cup",
+      "family": "numeric"
+    },
+    {
+      "pair": "Silk Glove & Iron Gauntlet",
+      "side": "light",
+      "face": "Silk Glove",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Silk Glove & Iron Gauntlet",
+      "side": "dark",
+      "face": "Iron Gauntlet",
+      "family": "numeric"
+    },
+    {
+      "pair": "Woven Basket & Unwoven Reeds",
+      "side": "light",
+      "face": "Woven Basket",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Woven Basket & Unwoven Reeds",
+      "side": "dark",
+      "face": "Unwoven Reeds",
+      "family": "numeric"
+    },
+    {
+      "pair": "Music Box & Silent Music Box",
+      "side": "light",
+      "face": "Music Box",
+      "family": "numeric"
+    },
+    {
+      "pair": "Music Box & Silent Music Box",
+      "side": "dark",
+      "face": "Silent Music Box",
+      "family": "hush"
+    },
+    {
+      "pair": "Closed Parasol & Open Parasol",
+      "side": "light",
+      "face": "Closed Parasol",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Closed Parasol & Open Parasol",
+      "side": "dark",
+      "face": "Open Parasol",
+      "family": "numeric"
+    },
+    {
+      "pair": "White Fan & Black Fan",
+      "side": "light",
+      "face": "White Fan",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "White Fan & Black Fan",
+      "side": "dark",
+      "face": "Black Fan",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Wooden Spool & Loose Thread",
+      "side": "light",
+      "face": "Wooden Spool",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Wooden Spool & Loose Thread",
+      "side": "dark",
+      "face": "Loose Thread",
+      "family": "numeric"
+    },
+    {
+      "pair": "Gilded Cage & Broken Cage",
+      "side": "light",
+      "face": "Gilded Cage",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Gilded Cage & Broken Cage",
+      "side": "dark",
+      "face": "Broken Cage",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Bronze Mirror & Tarnished Mirror",
+      "side": "light",
+      "face": "Bronze Mirror",
+      "family": "reflect"
+    },
+    {
+      "pair": "Bronze Mirror & Tarnished Mirror",
+      "side": "dark",
+      "face": "Tarnished Mirror",
+      "family": "restore-discard-face"
+    },
+    {
+      "pair": "Glass Marble & Clay Marble",
+      "side": "light",
+      "face": "Glass Marble",
+      "family": "reflect"
+    },
+    {
+      "pair": "Glass Marble & Clay Marble",
+      "side": "dark",
+      "face": "Clay Marble",
+      "family": "numeric"
+    },
+    {
+      "pair": "Silver Locket & Empty Locket",
+      "side": "light",
+      "face": "Silver Locket",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Silver Locket & Empty Locket",
+      "side": "dark",
+      "face": "Empty Locket",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Wax Key & Melted Key",
+      "side": "light",
+      "face": "Wax Key",
+      "family": "draw-hand-effect"
+    },
+    {
+      "pair": "Wax Key & Melted Key",
+      "side": "dark",
+      "face": "Melted Key",
+      "family": "numeric"
+    },
+    {
+      "pair": "Golden Shears & Blunt Shears",
+      "side": "light",
+      "face": "Golden Shears",
+      "family": "numeric"
+    },
+    {
+      "pair": "Golden Shears & Blunt Shears",
+      "side": "dark",
+      "face": "Blunt Shears",
+      "family": "numeric"
+    },
+    {
+      "pair": "Copper Coin & Hollow Coin",
+      "side": "light",
+      "face": "Copper Coin",
+      "family": "draw"
+    },
+    {
+      "pair": "Copper Coin & Hollow Coin",
+      "side": "dark",
+      "face": "Hollow Coin",
+      "family": "draw"
+    },
+    {
+      "pair": "Feather Quill & Ink Blot",
+      "side": "light",
+      "face": "Feather Quill",
+      "family": "discard-to-library"
+    },
+    {
+      "pair": "Feather Quill & Ink Blot",
+      "side": "dark",
+      "face": "Ink Blot",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Paintbrush & Paint Scraper",
+      "side": "light",
+      "face": "Paintbrush",
+      "family": "random-hand"
+    },
+    {
+      "pair": "Paintbrush & Paint Scraper",
+      "side": "dark",
+      "face": "Paint Scraper",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Lit Match & Spent Match",
+      "side": "light",
+      "face": "Lit Match",
+      "family": "numeric"
+    },
+    {
+      "pair": "Lit Match & Spent Match",
+      "side": "dark",
+      "face": "Spent Match",
+      "family": "numeric"
+    },
+    {
+      "pair": "Paper Boat & Stone Boat",
+      "side": "light",
+      "face": "Paper Boat",
+      "family": "draw"
+    },
+    {
+      "pair": "Paper Boat & Stone Boat",
+      "side": "dark",
+      "face": "Stone Boat",
+      "family": "numeric"
+    },
+    {
+      "pair": "Iron Needlecase & Empty Needlecase",
+      "side": "light",
+      "face": "Iron Needlecase",
+      "family": "self-keep"
+    },
+    {
+      "pair": "Iron Needlecase & Empty Needlecase",
+      "side": "dark",
+      "face": "Empty Needlecase",
+      "family": "numeric"
+    },
+    {
+      "pair": "White Ribbon & Black Ribbon",
+      "side": "light",
+      "face": "White Ribbon",
+      "family": "random-hand"
+    },
+    {
+      "pair": "White Ribbon & Black Ribbon",
+      "side": "dark",
+      "face": "Black Ribbon",
+      "family": "numeric"
+    },
+    {
+      "pair": "Hour Bell & Silent Bell",
+      "side": "light",
+      "face": "Hour Bell",
+      "family": "draw"
+    },
+    {
+      "pair": "Hour Bell & Silent Bell",
+      "side": "dark",
+      "face": "Silent Bell",
+      "family": "hush"
+    },
+    {
+      "pair": "Intact Sapphire & Cracked Sapphire",
+      "side": "light",
+      "face": "Intact Sapphire",
+      "family": "reflect"
+    },
+    {
+      "pair": "Intact Sapphire & Cracked Sapphire",
+      "side": "dark",
+      "face": "Cracked Sapphire",
+      "family": "numeric"
+    },
+    {
+      "pair": "Ivory Chess King & Obsidian Chess Queen",
+      "side": "light",
+      "face": "Ivory Chess King",
+      "family": "draw"
+    },
+    {
+      "pair": "Ivory Chess King & Obsidian Chess Queen",
+      "side": "dark",
+      "face": "Obsidian Chess Queen",
+      "family": "numeric"
+    },
+    {
+      "pair": "Sunlit Gallery & Shadow Gallery",
+      "side": "light",
+      "face": "Sunlit Gallery",
+      "family": "draw"
+    },
+    {
+      "pair": "Sunlit Gallery & Shadow Gallery",
+      "side": "dark",
+      "face": "Shadow Gallery",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Winter Conservatory & Summer Conservatory",
+      "side": "light",
+      "face": "Winter Conservatory",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Winter Conservatory & Summer Conservatory",
+      "side": "dark",
+      "face": "Summer Conservatory",
+      "family": "numeric"
+    },
+    {
+      "pair": "High Balcony & Hidden Basement",
+      "side": "light",
+      "face": "High Balcony",
+      "family": "draw"
+    },
+    {
+      "pair": "High Balcony & Hidden Basement",
+      "side": "dark",
+      "face": "Hidden Basement",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Open Pavilion & Walled Pavilion",
+      "side": "light",
+      "face": "Open Pavilion",
+      "family": "draw"
+    },
+    {
+      "pair": "Open Pavilion & Walled Pavilion",
+      "side": "dark",
+      "face": "Walled Pavilion",
+      "family": "numeric"
+    },
+    {
+      "pair": "Crystal Grotto & Basalt Cave",
+      "side": "light",
+      "face": "Crystal Grotto",
+      "family": "reflect"
+    },
+    {
+      "pair": "Crystal Grotto & Basalt Cave",
+      "side": "dark",
+      "face": "Basalt Cave",
+      "family": "numeric"
+    },
+    {
+      "pair": "Hedge Garden & Wild Thicket",
+      "side": "light",
+      "face": "Hedge Garden",
+      "family": "reverse-scry"
+    },
+    {
+      "pair": "Hedge Garden & Wild Thicket",
+      "side": "dark",
+      "face": "Wild Thicket",
+      "family": "numeric"
+    },
+    {
+      "pair": "Marble Fountain & Dry Fountain",
+      "side": "light",
+      "face": "Marble Fountain",
+      "family": "numeric"
+    },
+    {
+      "pair": "Marble Fountain & Dry Fountain",
+      "side": "dark",
+      "face": "Dry Fountain",
+      "family": "numeric"
+    },
+    {
+      "pair": "Golden Atrium & Black Atrium",
+      "side": "light",
+      "face": "Golden Atrium",
+      "family": "draw-hand-effect"
+    },
+    {
+      "pair": "Golden Atrium & Black Atrium",
+      "side": "dark",
+      "face": "Black Atrium",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Moonlit Pier & Sunlit Pier",
+      "side": "dark",
+      "face": "Moonlit Pier",
+      "family": "scry"
+    },
+    {
+      "pair": "Moonlit Pier & Sunlit Pier",
+      "side": "light",
+      "face": "Sunlit Pier",
+      "family": "draw"
+    },
+    {
+      "pair": "Hilltop Windmill & Underground Mill",
+      "side": "light",
+      "face": "Hilltop Windmill",
+      "family": "draw"
+    },
+    {
+      "pair": "Hilltop Windmill & Underground Mill",
+      "side": "dark",
+      "face": "Underground Mill",
+      "family": "random-discard-payment"
+    },
+    {
+      "pair": "Watchtower & Collapsed Watchtower",
+      "side": "light",
+      "face": "Watchtower",
+      "family": "draw"
+    },
+    {
+      "pair": "Watchtower & Collapsed Watchtower",
+      "side": "dark",
+      "face": "Collapsed Watchtower",
+      "family": "numeric"
+    },
+    {
+      "pair": "Open Courtyard & Roofed Courtyard",
+      "side": "light",
+      "face": "Open Courtyard",
+      "family": "draw"
+    },
+    {
+      "pair": "Open Courtyard & Roofed Courtyard",
+      "side": "dark",
+      "face": "Roofed Courtyard",
+      "family": "numeric"
+    },
+    {
+      "pair": "Grand Library & Forgotten Archive",
+      "side": "light",
+      "face": "Grand Library",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Grand Library & Forgotten Archive",
+      "side": "dark",
+      "face": "Forgotten Archive",
+      "family": "banish-discard"
+    },
+    {
+      "pair": "Frozen Waterfall & Flowing Waterfall",
+      "side": "light",
+      "face": "Frozen Waterfall",
+      "family": "numeric"
+    },
+    {
+      "pair": "Frozen Waterfall & Flowing Waterfall",
+      "side": "dark",
+      "face": "Flowing Waterfall",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Coral Palace & Ship Graveyard",
+      "side": "light",
+      "face": "Coral Palace",
+      "family": "numeric"
+    },
+    {
+      "pair": "Coral Palace & Ship Graveyard",
+      "side": "dark",
+      "face": "Ship Graveyard",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Ivory Bridge & Obsidian Bridge",
+      "side": "light",
+      "face": "Ivory Bridge",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Ivory Bridge & Obsidian Bridge",
+      "side": "dark",
+      "face": "Obsidian Bridge",
+      "family": "numeric"
+    },
+    {
+      "pair": "Glass Stairway & Stone Stairway",
+      "side": "light",
+      "face": "Glass Stairway",
+      "family": "draw"
+    },
+    {
+      "pair": "Glass Stairway & Stone Stairway",
+      "side": "dark",
+      "face": "Stone Stairway",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Candlelit Theatre & Darkened Theatre",
+      "side": "light",
+      "face": "Candlelit Theatre",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Candlelit Theatre & Darkened Theatre",
+      "side": "dark",
+      "face": "Darkened Theatre",
+      "family": "whole-hand"
+    },
+    {
+      "pair": "Tiled Bath & Broken Bath",
+      "side": "light",
+      "face": "Tiled Bath",
+      "family": "remove-status"
+    },
+    {
+      "pair": "Tiled Bath & Broken Bath",
+      "side": "dark",
+      "face": "Broken Bath",
+      "family": "numeric"
+    },
+    {
+      "pair": "Clock Tower & Timeless Tower",
+      "side": "light",
+      "face": "Clock Tower",
+      "family": "draw"
+    },
+    {
+      "pair": "Clock Tower & Timeless Tower",
+      "side": "dark",
+      "face": "Timeless Tower",
+      "family": "return-discard"
+    },
+    {
+      "pair": "Silk Tent & Wicker Shelter",
+      "side": "light",
+      "face": "Silk Tent",
+      "family": "numeric"
+    },
+    {
+      "pair": "Silk Tent & Wicker Shelter",
+      "side": "dark",
+      "face": "Wicker Shelter",
+      "family": "numeric"
+    },
+    {
+      "pair": "Stone Circle & Scattered Stones",
+      "side": "light",
+      "face": "Stone Circle",
+      "family": "numeric"
+    },
+    {
+      "pair": "Stone Circle & Scattered Stones",
+      "side": "dark",
+      "face": "Scattered Stones",
+      "family": "numeric"
+    },
+    {
+      "pair": "Shallow Shore & Abyssal Trench",
+      "side": "light",
+      "face": "Shallow Shore",
+      "family": "scry"
+    },
+    {
+      "pair": "Shallow Shore & Abyssal Trench",
+      "side": "dark",
+      "face": "Abyssal Trench",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bright Clearing & Dense Canopy",
+      "side": "light",
+      "face": "Bright Clearing",
+      "family": "numeric"
+    },
+    {
+      "pair": "Bright Clearing & Dense Canopy",
+      "side": "dark",
+      "face": "Dense Canopy",
+      "family": "numeric"
+    },
+    {
+      "pair": "Open Window & Shuttered Window",
+      "side": "light",
+      "face": "Open Window",
+      "family": "scry"
+    },
+    {
+      "pair": "Open Window & Shuttered Window",
+      "side": "dark",
+      "face": "Shuttered Window",
+      "family": "whole-hand"
+    }
+  ]
+}
