@@ -1200,6 +1200,7 @@ export function Battle({
   onExit: () => void;
   onDiscover: (ids: readonly string[]) => void;
 }) {
+  const { t } = useTranslation();
   const [backend] = useState(saveBackend);
   const [loaded, setLoaded] = useState(false);
   const [configuring, setConfiguring] = useState(false);
@@ -1224,6 +1225,17 @@ export function Battle({
   } | null>(null);
   const [sessionKey, setSessionKey] = useState(0);
   const [loadError, setLoadError] = useState("");
+  const startExpedition = () => {
+    setGame({
+      session: createRun(
+        Math.floor(Math.random() * 0x100000000),
+        { id: crypto.randomUUID(), tier, orientation, relic },
+        hero,
+      ),
+      isNew: true,
+      recovered: false,
+    });
+  };
   useEffect(() => {
     let active = true;
     void readRunWithRecovery(backend)
@@ -1290,17 +1302,7 @@ export function Battle({
               Continue run
             </Button>
           )}
-          <Button
-            onClick={() =>
-              setGame({
-                session: createRun(Math.floor(Math.random() * 0x100000000), undefined, hero),
-                isNew: true,
-                recovered: false,
-              })
-            }
-          >
-            Start new run
-          </Button>
+          {!configuring && <Button onClick={startExpedition}>{t("startExpedition")}</Button>}
           <Button onClick={() => setConfiguring(!configuring)}>
             {configuring ? "Hide expedition options" : "Configure expedition"}
           </Button>
@@ -1339,26 +1341,20 @@ export function Battle({
                   </select>
                 </label>
               </div>
-              <Button
-                onClick={() =>
-                  setGame({
-                    session: createRun(
-                      Math.floor(Math.random() * 0x100000000),
-                      {
-                        id: crypto.randomUUID(),
-                        tier,
-                        orientation,
-                        relic,
-                      },
-                      hero,
-                    ),
-                    isNew: true,
-                    recovered: false,
-                  })
-                }
-              >
-                Start expedition
-              </Button>
+              <div className="battle-setup__actions">
+                <Button onClick={startExpedition}>{t("startExpedition")}</Button>
+                <Button
+                  onClick={() =>
+                    setGame({
+                      session: createRun(Math.floor(Math.random() * 0x100000000), undefined, hero),
+                      isNew: true,
+                      recovered: false,
+                    })
+                  }
+                >
+                  {t("startClassicRun")}
+                </Button>
+              </div>
             </div>
           </section>
         )}

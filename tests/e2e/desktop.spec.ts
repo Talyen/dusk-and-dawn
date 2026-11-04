@@ -215,7 +215,7 @@ test("desktop resumes a saved combat after relaunch", async () => {
     try {
       const page = await app.firstWindow();
       await page.getByRole("button", { name: "Play", exact: true }).click();
-      await page.getByRole("button", { name: "Start new run" }).click();
+      await page.getByRole("button", { name: "Start expedition" }).click();
       await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
       await page.getByRole("button", { name: "End turn" }).click();
       await expect
@@ -292,7 +292,7 @@ test("desktop resumes an Oracle run with its passive and kit", async () => {
       const page = await app.firstWindow();
       await page.getByRole("button", { name: "Play", exact: true }).click();
       await page.getByRole("button", { name: /^The Veiled Oracle/ }).click();
-      await page.getByRole("button", { name: "Start new run" }).click();
+      await page.getByRole("button", { name: "Start expedition" }).click();
       await expect(page.getByRole("img", { name: /^Library 5\. Scry\./ })).toBeVisible();
       await expect
         .poll(async () =>

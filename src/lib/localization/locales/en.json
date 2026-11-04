@@ -3,6 +3,8 @@
   "title": "Dusk & Dawn",
   "description": "A new story is taking shape.",
   "status": "Prototype foundation",
+  "startExpedition": "Start expedition",
+  "startClassicRun": "Start classic run",
   "playAgain": "Play again",
   "play": "Play",
   "options": "Options",

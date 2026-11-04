@@ -1714,7 +1714,7 @@ input:focus-visible,
   margin: 0.4rem 0 0.8rem;
   color: #d7c7b4;
 }
-.battle-expedition__controls > .ui-button {
+.battle-expedition__controls > .battle-setup__actions {
   margin-top: 0.9rem;
 }
 .battle-screen--rest {

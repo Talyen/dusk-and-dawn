@@ -452,7 +452,7 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
   const card = page.locator(".battle-card").first();
@@ -476,7 +476,7 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
 test("a run can be resumed after reloading", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.getByText(/HP 26\/30/)).toBeVisible();
@@ -570,7 +570,8 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Configure expedition" }).click();
+  await page.getByRole("button", { name: "Start classic run" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   const encountered = new Set<string>();
   for (let step = 0; step < 300; step++) {
@@ -641,7 +642,7 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
 test("encountered enemies remain discovered in the real collection", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   await expect
     .poll(async () =>
@@ -778,7 +779,7 @@ for (const name of ["Memory", "Sacrifice"] as const) {
 test("keyboard activation directly plays an ordinary card and keeps focus in the hand", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   const card = page.locator(".battle-card").first();
   await page.locator(".battle-enemy-trigger").hover();
   await page.keyboard.press("Tab");
@@ -842,7 +843,7 @@ test("battle art remains full-bleed and combat text stays readable at common siz
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   const card = page.locator(".battle-card").first();
   const dimensions = await card.evaluate((element) => {
     const card = element as HTMLElement;
@@ -885,7 +886,7 @@ test("battle actions stay usable on a small viewport", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 480 });
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
   await expect(page.getByLabel(/^Library /)).toBeInViewport({ ratio: 1 });
   await expect(page.getByLabel(/^Discard /)).toBeInViewport({ ratio: 1 });
@@ -1117,9 +1118,19 @@ test("plays a full branching expedition through the browser", async ({ page }) =
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Configure expedition" }).click();
-  await page.getByLabel("Run relic").selectOption("many-eyes");
   await page.getByRole("button", { name: "Start expedition" }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const saved = localStorage.getItem("dusk-and-dawn.save.v1");
+        return saved && JSON.parse(saved).state.run.experiment;
+      }),
+    )
+    .toMatchObject({ tier: 1, orientation: "light", relic: "none" });
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
   const encountered = new Set<string>();
   let branches = 0;
@@ -1202,7 +1213,7 @@ test("inspects battle cards on hover and keyboard focus without selecting them",
   }, seed);
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByRole("progressbar", { name: "Radiant Moth health" })).toHaveAttribute("value", "18");
   await page.locator(".battle-enemy-trigger").hover();
   await expect(page.getByRole("tooltip")).toContainText("Deal 4 Radiance damage.");
@@ -1522,7 +1533,7 @@ test("preloads both faces of the deck and reports actual combat damage briefly",
   page.on("request", (request) => requested.add(new URL(request.url()).pathname));
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   await expect.poll(() => requested.has("/assets/card-fallen-seraph.webp")).toBe(true);
   await expect.poll(() => requested.has("/assets/card-vampire.webp")).toBe(true);
   await page.getByRole("button", { name: "End turn" }).click();
@@ -1540,7 +1551,7 @@ test("touch hold inspects a battle card without playing it; a tap plays it", asy
   const cdp = await context.newCDPSession(page);
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).tap();
-  await page.getByRole("button", { name: "Start new run" }).tap();
+  await page.getByRole("button", { name: "Start expedition" }).tap();
   const card = page.locator(".battle-card").first();
   const box = (await card.boundingBox())!;
   const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
@@ -2930,7 +2941,7 @@ test("the Oracle reveals the next library card every turn and survives resume", 
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: /^The Veiled Oracle/ }).click();
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
   await expect(page.getByRole("img", { name: /^Library 5\. Scry\./ })).toBeVisible();
   await page.getByRole("button", { name: "End turn" }).click();
@@ -2996,7 +3007,7 @@ test("touching an antihero selects it and reveals its passive before starting", 
   await expect(oracle).toHaveAttribute("aria-pressed", "true");
   await expect(witch).toHaveAttribute("aria-pressed", "false");
   await expect(page.getByRole("tooltip")).toContainText("Scry at the start of each turn");
-  await page.getByRole("button", { name: "Start new run" }).tap();
+  await page.getByRole("button", { name: "Start expedition" }).tap();
   await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
   await context.close();
 });
