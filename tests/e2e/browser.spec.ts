@@ -3106,3 +3106,82 @@ test("resuming an exchange does not reveal a route enemy that is not on screen",
   );
   expect(discovered).not.toContain(`enemy:${path.enemy}`);
 });
+
+for (const condition of ["active", "hush", "freeze", "curse", "zero"] as const) {
+  test(`ward-bypassing intent reflects ${condition} and matches combat`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "sunbleached-harlequin";
+    snapshot.state.enemy.hp = 24;
+    snapshot.state.enemy.maxHp = 24;
+    snapshot.state.action = 1;
+    snapshot.state.player.ward = 10;
+    if (condition === "hush") snapshot.state.enemy.hush = true;
+    if (condition === "freeze") snapshot.state.enemy.freeze = true;
+    if (condition === "curse") snapshot.state.enemy.curse = 4;
+    if (condition === "zero") snapshot.state.enemy.curse = 5;
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 320, height: 480 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const text =
+      condition === "active"
+        ? "5 Release · 3 through Ward"
+        : condition === "hush"
+          ? "5 Release"
+          : condition === "freeze"
+            ? "Skipped"
+            : condition === "zero"
+              ? "0 Release"
+              : "1 Release · 1 through Ward";
+    const intent = page.getByRole("button", { name: `Sunbleached Harlequin intent: ${text}`, exact: true });
+    await expect(intent).toBeVisible();
+    const overlaps = await intent.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      return [...document.querySelectorAll(".battle-card, .battle-actions button")].some((other) => {
+        const box = other.getBoundingClientRect();
+        return (
+          bounds.left < box.right &&
+          bounds.right > box.left &&
+          bounds.top < box.bottom &&
+          bounds.bottom > box.top
+        );
+      });
+    });
+    expect(overlaps).toBe(false);
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-player-hp",
+      condition === "active" ? "27" : condition === "curse" ? "29" : "30",
+    );
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-ward",
+      condition === "active" ? "4" : condition === "hush" ? "2" : "5",
+    );
+  });
+}
+
+test("an all-Ward bypass reports the full hit and ignores the shield", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-sable-locksmith";
+  snapshot.state.enemy.hp = 24;
+  snapshot.state.enemy.maxHp = 24;
+  snapshot.state.action = 1;
+  snapshot.state.player.ward = 10;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(
+    page.getByRole("button", { name: "The Sable Locksmith intent: 5 Binding · 5 through Ward" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-ward", "5");
+});

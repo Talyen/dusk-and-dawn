@@ -1596,21 +1596,32 @@ function BattleSession({
   const top = scryTop(s.zones);
   const enemy = getEnemy(s);
   const action = enemy.actions[s.action]!;
+  const traitWillActivate =
+    !s.enemy.hush &&
+    (!action.condition ||
+      (action.condition === "enemy_has_Burn_after_tick" && Math.floor(s.enemy.burn / 2) > 0));
   const enemyHits =
     action.hit === undefined
       ? null
       : attackValues(
-          enemyAttackHits(action, s.enemy.hush, s.latestDirectHit),
+          enemyAttackHits(action, !traitWillActivate, s.latestDirectHit),
           s.enemy.bless,
           s.enemy.curse,
           0,
           "flat-preview",
         );
+  const bypass = traitWillActivate
+    ? action.effects?.find((effect) => effect.op === "ignore_ward")?.amount
+    : undefined;
+  const bypassAmount =
+    enemyHits && bypass !== undefined
+      ? Math.min(enemyHits[0]!, bypass === "all" ? enemyHits[0]! : bypass)
+      : 0;
   const intentText =
     s.enemy.freeze || (s.enemy.hush && action.ability)
       ? "Skipped"
       : enemyHits
-        ? `${enemyHits.join(" + ")} ${action.type}`
+        ? `${enemyHits.join(" + ")} ${action.type}${bypassAmount ? ` · ${bypassAmount} through Ward` : ""}`
         : action.text;
   const actionDetails = (
     <>
