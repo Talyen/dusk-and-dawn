@@ -1608,3 +1608,121 @@ input:focus-visible,
     margin-top: calc(0.15 * var(--tooltip-unit));
   }
 }
+
+.battle-expedition {
+  display: grid;
+  grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  width: min(40rem, 92vw);
+  margin: 1.5rem auto;
+  text-align: left;
+}
+.battle-setup:has(.battle-expedition) {
+  width: min(42rem, 94vw);
+}
+.battle-expedition__art {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.battle-expedition__art img {
+  width: calc((100% - 0.4rem) / 2);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid #947454;
+  border-radius: 0.35rem;
+  opacity: 0.48;
+  transition:
+    opacity 160ms ease,
+    box-shadow 160ms ease;
+}
+.battle-expedition__art[data-orientation="light"] img:first-child,
+.battle-expedition__art[data-orientation="dark"] img:last-child {
+  opacity: 1;
+  box-shadow: 0 0 1.2rem #efd0a65c;
+}
+.battle-expedition__controls h2 {
+  margin: 0;
+  font:
+    1.35rem Georgia,
+    serif;
+}
+.battle-expedition__controls > p {
+  margin: 0.4rem 0 0.8rem;
+  color: #d7c7b4;
+}
+.battle-expedition__controls > .ui-button {
+  margin-top: 0.9rem;
+}
+.battle-screen--rest {
+  text-align: center;
+}
+.battle-screen--rest .battle-head {
+  justify-content: center;
+  position: relative;
+}
+.battle-screen--rest .battle-head > .ui-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.battle-screen--rest > .battle-preview,
+.battle-screen--rest > [role="status"]:not(.battle-status-error) {
+  display: none;
+}
+.battle-rest {
+  width: min(62rem, 100%);
+  margin: 1rem auto;
+}
+.battle-rest__heal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.battle-rest__heal p {
+  color: #d7c7b4;
+}
+.battle-rest h2 {
+  margin: 1.2rem 0 0.8rem;
+}
+.battle-rest__deck {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+.battle-rest-card {
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .battle-expedition {
+    grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+  .battle-screen--rest .battle-head > .ui-button {
+    position: static;
+  }
+  .battle-screen--rest .battle-head {
+    flex-wrap: wrap;
+  }
+  .battle-rest__deck {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .battle-expedition__art img {
+    transition: none;
+  }
+}
+
+.battle-expedition__controls,
+.battle-expedition__controls label,
+.battle-expedition__controls select {
+  min-width: 0;
+}
+.battle-expedition__controls select {
+  width: 100%;
+  box-sizing: border-box;
+}

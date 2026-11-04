@@ -1253,3 +1253,142 @@ for (const handSize of [1, 2, 3, 5, 8]) {
     }
   });
 }
+
+test("rest previews both faces and heals without changing the deck", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.phase = "rest";
+  snapshot.state.fight = 1;
+  snapshot.state.player.hp = 19;
+  const initialDeck = snapshot.state.deck.length;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const card = page.getByRole("button", { name: /^Remove Angel & Vampire/ }).first();
+  await expect(card.locator("img")).toHaveCount(2);
+  await card.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
+  await expect(page.getByRole("tooltip")).toContainText("Leech");
+  await expect(page.getByText("HP 19/30")).toBeVisible();
+  await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+  await page.getByRole("button", { name: "Heal 6 HP" }).click();
+  await expect(page.getByText(/HP 25\/30/)).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck.length),
+    )
+    .toBe(initialDeck);
+});
+
+test("Spare Thread removal restores keyboard focus and survives a reload", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(22, { id: "rest-test", tier: 1, orientation: "light", relic: "spare-thread" }).getSnapshot(),
+  );
+  snapshot.state.phase = "rest";
+  snapshot.state.fight = 1;
+  const firstId = snapshot.state.deck[0]!.id;
+  const initialDeck = snapshot.state.deck.length;
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const first = page.locator(".battle-rest-card").first();
+  await first.focus();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("heading", { name: "Remove another pair" })).toBeVisible();
+  await expect(page.locator(".battle-rest-card:focus")).toHaveCount(1);
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck.length),
+    )
+    .toBe(initialDeck - 1);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Remove another pair" })).toBeVisible();
+  const restored = await page.evaluate(
+    () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck as { id: string }[],
+  );
+  expect(restored.some((card) => card.id === firstId)).toBe(false);
+  await page.locator(".battle-rest-card").first().focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#battle-title")).toBeFocused();
+  await expect(page.getByRole("heading", { name: "A moment of rest" })).toHaveCount(0);
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck.length),
+    )
+    .toBe(initialDeck - 2);
+});
+
+test("expedition orientation artwork follows the selected unlocked face", async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem("dusk-and-dawn.expeditions.v1", JSON.stringify({ completed: ["past-run"] })),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Configure expedition" }).click();
+  const artwork = page.locator(".battle-expedition__art");
+  await expect(artwork).toHaveAttribute("data-orientation", "light");
+  await expect(artwork.locator("img")).toHaveCount(2);
+  await page.getByLabel("Starting orientation").selectOption("dark");
+  await expect(artwork).toHaveAttribute("data-orientation", "dark");
+  await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+  await page.getByLabel("Run relic").selectOption("cracked-vessel");
+  await page.getByRole("button", { name: "Start expedition" }).click();
+  await expect(page.getByText(/HP 24\/30/)).toBeVisible();
+  await expect(page.locator(".battle-card").first()).toContainText("dark");
+});
+
+test("touch can inspect a rest pair without removing it, then tap to remove", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.phase = "rest";
+  snapshot.state.fight = 1;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  const cdp = await context.newCDPSession(page);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  const card = page.locator(".battle-rest-card").first();
+  const box = (await card.boundingBox())!;
+  const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+  await page.waitForTimeout(600);
+  await expect(page.getByRole("tooltip")).toContainText("Angel");
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await expect(page.getByRole("heading", { name: "A moment of rest" })).toBeVisible();
+  await expect(page.locator(".battle-rest-card")).toHaveCount(snapshot.state.deck.length);
+  await card.tap();
+  await expect(page.getByRole("heading", { name: "A moment of rest" })).toHaveCount(0);
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck.length),
+    )
+    .toBe(snapshot.state.deck.length - 1);
+  await context.close();
+});
+
+test("expedition selectors remain visible on a phone-sized window", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 700 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Configure expedition" }).click();
+  await expect(page.getByLabel("Starting orientation")).toBeInViewport({ ratio: 1 });
+  await expect(page.getByLabel("Run relic")).toBeInViewport({ ratio: 1 });
+  await expect(page.getByRole("button", { name: "Start expedition" })).toBeInViewport({ ratio: 1 });
+});

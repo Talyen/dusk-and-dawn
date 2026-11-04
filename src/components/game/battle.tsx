@@ -317,7 +317,15 @@ function EnemyPortrait({
   );
 }
 
-function RewardCard({ pair, onChoose }: { pair: string; onChoose: () => void }) {
+function RewardCard({
+  pair,
+  onChoose,
+  removing = false,
+}: {
+  pair: string;
+  onChoose: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  removing?: boolean;
+}) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
   const pointer = useRef(false);
@@ -358,15 +366,15 @@ function RewardCard({ pair, onChoose }: { pair: string; onChoose: () => void }) 
       <button
         ref={trigger}
         type="button"
-        className="battle-reward"
+        className={`battle-reward${removing ? " battle-rest-card" : ""}`}
         onClick={(event) => {
           if (touch.consumeClick()) {
             event.preventDefault();
             return;
           }
-          onChoose();
+          onChoose(event);
         }}
-        aria-label={`${pair}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
+        aria-label={`${removing ? "Remove " : ""}${pair}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
         onPointerMove={touch.onPointerMove}
@@ -755,57 +763,54 @@ export function Battle({
           </Button>
         </div>
         {configuring && (
-          <section className="battle-panel" aria-label="Expedition options">
-            <h2>Experimental expedition</h2>
-            <p>
-              Two optional branching detours. Complete expeditions to expand future card and enemy pools; the
-              current deck never changes from an unlock.
-            </p>
-            <p>
-              Pool tier {tier}/3 · {progress.completed.length} qualifying expedition
-              {progress.completed.length === 1 ? "" : "s"} completed.
-            </p>
-            <div className="battle-setup__fields">
-              <label>
-                Starting orientation{" "}
-                <select
-                  value={orientation}
-                  onChange={(event) => setOrientation(event.target.value as "light" | "dark")}
-                >
-                  <option value="light">Lamplighter · light each fight</option>
-                  <option value="dark" disabled={tier < 2}>
-                    Nocturne · dark each fight{tier < 2 ? " (unlock after one expedition)" : ""}
-                  </option>
-                </select>
-              </label>
-              <label>
-                {" "}
-                Run relic{" "}
-                <select value={relic} onChange={(event) => setRelic(event.target.value as typeof relic)}>
-                  <option value="none">None</option>
-                  <option value="many-eyes">Many Eyes · four reward offers</option>
-                  <option value="spare-thread">Spare Thread · a second midpoint removal</option>
-                  <option value="cracked-vessel">Cracked Vessel · start at 24 HP with an extra pair</option>
-                </select>
-              </label>
+          <section className="battle-expedition" aria-label="Expedition options">
+            <div className="battle-expedition__art" data-orientation={orientation} aria-hidden="true">
+              <img src={art("card", "Sun")} alt="" />
+              <img src={art("card", "Moon")} alt="" />
             </div>
-            <p>Provisional values; reaching the second fight qualifies for progression.</p>
-            <Button
-              onClick={() =>
-                setGame({
-                  session: createRun(Math.floor(Math.random() * 0x100000000), {
-                    id: crypto.randomUUID(),
-                    tier,
-                    orientation,
-                    relic,
-                  }),
-                  isNew: true,
-                  recovered: false,
-                })
-              }
-            >
-              Start expedition
-            </Button>
+            <div className="battle-expedition__controls">
+              <h2>Expedition</h2>
+              <p>Pool tier {tier}/3</p>
+              <div className="battle-setup__fields">
+                <label>
+                  Starting orientation
+                  <select
+                    value={orientation}
+                    onChange={(event) => setOrientation(event.target.value as "light" | "dark")}
+                  >
+                    <option value="light">Lamplighter · light each fight</option>
+                    <option value="dark" disabled={tier < 2}>
+                      Nocturne · dark each fight{tier < 2 ? " (unlock after one expedition)" : ""}
+                    </option>
+                  </select>
+                </label>
+                <label>
+                  Run relic
+                  <select value={relic} onChange={(event) => setRelic(event.target.value as typeof relic)}>
+                    <option value="none">None</option>
+                    <option value="many-eyes">Many Eyes · four reward offers</option>
+                    <option value="spare-thread">Spare Thread · a second midpoint removal</option>
+                    <option value="cracked-vessel">Cracked Vessel · start at 24 HP with an extra pair</option>
+                  </select>
+                </label>
+              </div>
+              <Button
+                onClick={() =>
+                  setGame({
+                    session: createRun(Math.floor(Math.random() * 0x100000000), {
+                      id: crypto.randomUUID(),
+                      tier,
+                      orientation,
+                      relic,
+                    }),
+                    isNew: true,
+                    recovered: false,
+                  })
+                }
+              >
+                Start expedition
+              </Button>
+            </div>
           </section>
         )}
         <Button onClick={onExit}>Main menu</Button>
@@ -859,6 +864,15 @@ function BattleSession({
   const pendingRef = useRef<HTMLElement>(null);
   const actionRef = useRef<HTMLDivElement>(null);
   const focusAfterPlay = useRef<number | null>(null);
+  const restDeckRef = useRef<HTMLDivElement>(null);
+  const focusAfterRest = useRef<number | null>(null);
+  useEffect(() => {
+    const index = focusAfterRest.current;
+    if (index === null) return;
+    focusAfterRest.current = null;
+    const buttons = restDeckRef.current?.querySelectorAll<HTMLButtonElement>("button");
+    (buttons?.[Math.min(index, buttons.length - 1)] ?? titleRef.current)?.focus();
+  }, [snapshot]);
   useEffect(() => {
     const index = focusAfterPlay.current;
     if (index === null) return;
@@ -938,6 +952,7 @@ function BattleSession({
     const result = game.dispatch(command);
     if (!result.decision.accepted) {
       focusAfterPlay.current = null;
+      focusAfterRest.current = null;
       setError(result.decision.reason);
     } else {
       setError("");
@@ -1081,7 +1096,7 @@ function BattleSession({
     : null;
   return (
     <section
-      className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : s.phase === "route" ? " battle-screen--route" : s.phase === "victory" || s.phase === "defeat" ? " battle-screen--ending" : ""}`}
+      className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : s.phase === "route" ? " battle-screen--route" : s.phase === "rest" ? " battle-screen--rest" : s.phase === "victory" || s.phase === "defeat" ? " battle-screen--ending" : ""}`}
       aria-labelledby="battle-title"
     >
       <div className="battle-head">
@@ -1108,7 +1123,12 @@ function BattleSession({
       <p className="battle-preview">
         Preview rules: Bless and Curse use the provisional flat model (+1/−1 per stack).
       </p>
-      <p role="status" aria-live="polite" key={feedback?.revision}>
+      <p
+        role="status"
+        aria-live="polite"
+        key={feedback?.revision}
+        className={error ? "battle-status-error" : undefined}
+      >
         {error ||
           (s.phase === "battle" || s.phase === "reward" ? feedback?.text : feedback?.text || s.message)}
       </p>
@@ -1527,16 +1547,27 @@ function BattleSession({
           );
         })()}
       {s.phase === "rest" && (
-        <section className="battle-panel">
-          <Button onClick={() => dispatch({ type: "rest" })}>
-            {s.experiment?.restRemovals ? "Continue without another removal" : "Heal 6 HP"}
-          </Button>
-          <h2>{s.experiment?.restRemovals ? "Remove one more card" : "Or remove one card"}</h2>
-          <div className="battle-targets">
-            {s.deck.map((card) => (
-              <button key={card.id} onClick={() => dispatch({ type: "rest", remove: card.id })}>
-                {card.pair}
-              </button>
+        <section className="battle-rest" aria-label="Rest choices">
+          <div className="battle-rest__heal">
+            <p>
+              HP {s.player.hp}/{s.player.maxHp}
+            </p>
+            <Button onClick={() => dispatch({ type: "rest" })}>
+              {s.experiment?.restRemovals ? "Continue without another removal" : "Heal 6 HP"}
+            </Button>
+          </div>
+          <h2>{s.experiment?.restRemovals ? "Remove another pair" : "Remove a pair"}</h2>
+          <div className="battle-rest__deck" ref={restDeckRef}>
+            {s.deck.map((card, index) => (
+              <RewardCard
+                key={card.id}
+                pair={card.pair}
+                removing
+                onChoose={(event) => {
+                  if (event.detail === 0) focusAfterRest.current = index;
+                  dispatch({ type: "rest", remove: card.id });
+                }}
+              />
             ))}
           </div>
         </section>
