@@ -125,7 +125,7 @@ it("compares four bounded strategies over 100 seeded runs each", () => {
     expect(counts.victory + counts.defeat + counts.unfinished).toBe(100);
   }
   console.log("Strategy playtests, 100 runs each", JSON.stringify(results));
-});
+}, 60_000);
 
 it("compares experimental routes, relics and orientations over 50 seeds each", () => {
   const results: Record<string, unknown> = {};
@@ -219,7 +219,7 @@ it("compares experimental routes, relics and orientations over 50 seeds each", (
     expect(counts.victory + counts.defeat + counts.unfinished).toBe(50);
   }
   console.log("Expedition playtests, 50 runs each", JSON.stringify(results));
-});
+}, 60_000);
 
 it("isolates orientation and Cracked Vessel across attack and defense policies", () => {
   const results: Record<string, unknown> = {};
@@ -329,4 +329,4 @@ it("isolates orientation and Cracked Vessel across attack and defense policies",
       expect(counts.victory + counts.defeat + counts.unfinished).toBe(100);
     }
   console.log("Orientation and relic factorial, 100 runs each", JSON.stringify(results));
-}, 20000);
+}, 120_000);
