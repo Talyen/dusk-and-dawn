@@ -12,6 +12,7 @@ import {
   face,
   getEnemy,
   route,
+  seraphGrantsWard,
   vampireDamage,
   type Command,
   type RunState,
@@ -1053,11 +1054,10 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
     return `${face(other).name} → ${next.name}`;
   });
   const lines: string[] = [];
-  if (s.hero === "oathless-seraph" && card.face === "light")
-    lines.push("On play: gain 1 Ward before this effect.");
+  if (seraphGrantsWard(s, card)) lines.push("On play: gain 1 Ward before this effect.");
   if (s.hero === "thorn-witch" && card.face === "dark")
     lines.push(
-      s.heroRuleset === 2
+      s.heroRuleset !== undefined
         ? "On play: apply 1 Curse before this effect."
         : "On play: apply 2 Poison before this effect.",
     );

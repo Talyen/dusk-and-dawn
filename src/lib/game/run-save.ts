@@ -31,7 +31,7 @@ const runSchema = z
   .object({
     phase: z.enum(["battle", "reward", "rest", "route", "victory", "defeat"]),
     hero: z.enum(heroIds).optional(),
-    heroRuleset: z.literal(2).optional(),
+    heroRuleset: z.union([z.literal(2), z.literal(3)]).optional(),
     experiment: z
       .object({
         id: z.string().min(1).max(128),

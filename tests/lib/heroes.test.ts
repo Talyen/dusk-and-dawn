@@ -27,7 +27,7 @@ describe("antihero starting kits and passives", () => {
     for (const hero of heroIds) {
       const state = createRun(19, undefined, hero).getSnapshot().state;
       expect(state.hero).toBe(hero);
-      expect(state.heroRuleset).toBe(2);
+      expect(state.heroRuleset).toBe(3);
       expect(state.deck).toHaveLength(10);
       expect(new Set(state.deck.map((card) => card.id)).size).toBe(10);
       for (const pair of heroes[hero].pairs)
@@ -36,18 +36,50 @@ describe("antihero starting kits and passives", () => {
     expect(createRun(19).getSnapshot().state.hero).toBeUndefined();
   });
 
-  it("grants Seraph Ward before each light effect, and not on dark or rejected plays", () => {
-    const initial = setup("oathless-seraph", ["Sun & Moon", "Angel & Vampire"], ["light", "dark"]);
-    initial.state.enemy.reflect = true;
+  it("grants the new Seraph Ward for light support but not direct attacks or dark plays", () => {
+    const initial = setup(
+      "oathless-seraph",
+      ["Sun & Moon", "Cactus Flower & Desert Thorn", "Angel & Vampire", "Key & Lock"],
+      ["light", "light", "light", "dark"],
+    );
+    initial.state.enemy.hp = 100;
+    initial.state.enemy.maxHp = 100;
     const game = restoreSession(initial, runHandler);
     expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
-    expect(game.getSnapshot().state.player.hp).toBe(25); // 1 Ward absorbs the first point of the reflected 6.
     expect(game.getSnapshot().state.player.ward).toBe(0);
     expect(game.dispatch({ type: "play", id: "test-1" }).decision.accepted).toBe(true);
     expect(game.getSnapshot().state.player.ward).toBe(0);
+    expect(game.dispatch({ type: "play", id: "test-2" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.ward).toBe(6); // Angel's 5 plus the passive.
     const before = game.getSnapshot();
-    expect(game.dispatch({ type: "play", id: "missing" }).decision.accepted).toBe(false);
+    expect(game.dispatch({ type: "play", id: "test-3" }).decision.accepted).toBe(false);
     expect(game.getSnapshot()).toEqual(before);
+    const dark = restoreSession(setup("oathless-seraph", ["Key & Lock"], ["dark"]), runHandler);
+    expect(dark.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(dark.getSnapshot().state.player.ward).toBe(0);
+  });
+
+  it("does not grant the new Seraph passive before a reflected direct attack", () => {
+    const initial = setup("oathless-seraph", ["Sun & Moon"], ["light"]);
+    initial.state.enemy.reflect = true;
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.hp).toBe(24);
+    expect(game.getSnapshot().state.player.ward).toBe(0);
+  });
+
+  it("preserves the old Seraph passive on saved runs, including reflected attacks", async () => {
+    const initial = setup("oathless-seraph", ["Sun & Moon"], ["light"]);
+    initial.state.heroRuleset = 2;
+    initial.state.enemy.reflect = true;
+    const resumed = resumeRun(await saved(initial));
+    expect(heroPassive("oathless-seraph", resumed.getSnapshot().state.heroRuleset)).toBe(
+      "Before each light card resolves, gain 1 Ward.",
+    );
+    expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.player.hp).toBe(25);
+    expect(resumed.getSnapshot().state.player.ward).toBe(0);
+    expect((await saved(resumed.getSnapshot())).state.heroRuleset).toBe(2);
   });
 
   it("grants Seraph Ward only once when an inspection is committed, including across save and resume", async () => {

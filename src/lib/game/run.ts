@@ -1,6 +1,6 @@
 import type { RelicId } from "./relics";
 import { expeditionEventIds, type ExpeditionEventId } from "./expedition-events";
-import { heroes, type HeroId } from "./heroes";
+import { heroes, type HeroId, type HeroRuleset } from "./heroes";
 import { simpleEnemies } from "./simple-enemies.generated";
 import { simpleCards } from "./simple-cards.generated";
 import { rngInt, shuffle, type Rng } from "../random";
@@ -370,7 +370,7 @@ export interface PendingChoice {
 export interface RunState {
   phase: "battle" | "reward" | "rest" | "route" | "victory" | "defeat";
   hero?: HeroId | undefined;
-  heroRuleset?: 2 | undefined;
+  heroRuleset?: HeroRuleset | undefined;
   experiment?:
     | {
         id: string;
@@ -434,6 +434,30 @@ export function face(card: FightCard): FaceInfo {
   const pair = cards[card.pair];
   if (!pair) throw new Error(`Unknown card pair: ${card.pair}`);
   return pair[card.face];
+}
+const directAttackSpecialFaces = new Set([
+  "Vampire",
+  "Sun",
+  "Wither",
+  "Thorns",
+  "Shattered Mirror",
+  "Ash",
+  "Oblivion",
+  "Sacrifice",
+]);
+export function cardDealsDirectDamage(card: FightCard): boolean {
+  const info = face(card);
+  return (
+    directAttackSpecialFaces.has(info.name) ||
+    !!info.ops?.some((op) => op.op === "attack" || op.op === "attack-ignore-ward")
+  );
+}
+export function seraphGrantsWard(s: Pick<RunState, "hero" | "heroRuleset">, card: FightCard): boolean {
+  return (
+    s.hero === "oathless-seraph" &&
+    card.face === "light" &&
+    (s.heroRuleset !== 3 || !cardDealsDirectDamage(card))
+  );
 }
 const selfBanishingSpecialFaces = new Set([
   "Bloom",
@@ -906,10 +930,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   if (!source || s.mana < 1) return no("Card unavailable or insufficient mana.");
   const playedFace = face(source);
   const name = playedFace.name;
-  const isDirectAttack =
-    ["Vampire", "Sun", "Wither", "Thorns", "Shattered Mirror", "Ash", "Oblivion", "Sacrifice"].includes(
-      name,
-    ) || !!playedFace.ops?.some((op) => op.op === "attack" || op.op === "attack-ignore-ward");
+  const isDirectAttack = cardDealsDirectDamage(source);
   const restriction = cardRestriction(s, source);
   if (restriction) return no(restriction);
   const requestedIds = command.targets ?? [];
@@ -933,9 +954,9 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   s.zones.hand.splice(index, 1);
   source.kept = false;
   s.mana--;
-  if (s.hero === "oathless-seraph" && source.face === "light") s.player.ward++;
+  if (seraphGrantsWard(s, source)) s.player.ward++;
   if (s.hero === "thorn-witch" && source.face === "dark") {
-    if (s.heroRuleset === 2) s.enemy.curse++;
+    if (s.heroRuleset !== undefined) s.enemy.curse++;
     else applyDamageOverTime(s.enemy, "poison", 2);
   }
   let banishSource = false;
@@ -1357,7 +1378,7 @@ export function createRun(seed: number, experiment?: ExperimentOptions, hero?: H
   ]);
   const initial: RunState = {
     phase: "battle",
-    ...(hero ? { hero, heroRuleset: 2 as const } : {}),
+    ...(hero ? { hero, heroRuleset: 3 as const } : {}),
     fight: 0,
     deck,
     nextId: 10,

@@ -2496,7 +2496,7 @@ test("the run deck is inspectable before rewards and remains unchanged until a c
   await expect(deck.locator(".battle-deck-pair button").last()).toBeFocused();
   await pair.focus();
   await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
-  await expect(page.getByRole("tooltip")).toContainText("Deal 4 Shadow damage");
+  await expect(page.getByRole("tooltip")).toContainText("Deal 3 Shadow damage");
   await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
   await page.keyboard.press("Escape");
   await expect(deck).toBeVisible();
@@ -2573,7 +2573,7 @@ test("touch can inspect the deck on an expedition route without choosing it", as
   const pair = deck.getByRole("button", { name: /^Angel & Vampire, 2 copies/ });
   await pair.tap();
   await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
-  await expect(page.getByRole("tooltip")).toContainText("Deal 4 Shadow damage");
+  await expect(page.getByRole("tooltip")).toContainText("Deal 3 Shadow damage");
   expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
   await deck.getByRole("button", { name: "Close" }).tap();
   await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
@@ -2671,24 +2671,39 @@ test("the Oracle reveals the next library card every turn and survives resume", 
   await expect(page.getByRole("img", { name: "Library 0. Scry: empty" })).toBeVisible();
 });
 
-test("the Seraph gains Ward on a light play and exposes the passive contextually", async ({ page }) => {
+test("the Seraph previews Ward on light support but not direct attacks", async ({ page }) => {
+  const snapshot = structuredClone(createRun(17, undefined, "oathless-seraph").getSnapshot());
+  snapshot.state.deck = [
+    { id: "attack", pair: "Sun & Moon" },
+    { id: "support", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await expect(page.getByRole("button", { name: /^The Oathless Seraph/ })).toHaveAttribute(
-    "aria-pressed",
-    "true",
-  );
-  await page.getByRole("button", { name: "Start new run" }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
   const health = page.getByRole("button", { name: "The Oathless Seraph, HP 30/30" });
   await health.hover();
-  await expect(page.getByRole("tooltip")).toContainText("Before each light card resolves, gain 1 Ward");
-  const first = page.locator(".battle-card").first();
-  await first.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Before each light card without a direct attack");
+  const sun = page.getByRole("button", { name: /^Sun light/ });
+  await sun.hover();
+  await expect(page.getByRole("tooltip")).not.toContainText("gain 1 Ward before this effect");
+  await sun.click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-ward", "0");
+  const angel = page.getByRole("button", { name: /^Angel light/ });
+  await angel.hover();
   await expect(page.getByRole("tooltip")).toContainText("gain 1 Ward before this effect");
-  await first.click();
-  await expect
-    .poll(async () => Number(await page.locator(".battle-player").getAttribute("data-ward")))
-    .toBeGreaterThanOrEqual(1);
+  await angel.click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-ward", "6");
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-ward", "6");
 });
 
 test("touching an antihero selects it and reveals its passive before starting", async ({ browser }) => {
