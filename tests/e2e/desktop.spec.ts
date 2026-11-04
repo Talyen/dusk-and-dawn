@@ -385,3 +385,81 @@ test("desktop resumes a Sunken Sanctuary choice and its opening mana", async () 
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("desktop replay waits for the finished save and survives relaunch", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-replay-"));
+  const initial = createRun(
+    25,
+    { id: "desktop-before-replay", tier: 2, orientation: "dark", relic: "ashen-seal" },
+    "veiled-oracle",
+  ).getSnapshot();
+  const launch = () =>
+    electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+  try {
+    await mkdir(join(directory, "saves"), { recursive: true });
+    await writeFile(join(directory, "saves", "save.json"), encodeRun(initial));
+    const app = await launch();
+    let newId = "";
+    try {
+      const page = await app.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      await page.getByRole("button", { name: "Concede" }).click();
+      await page.getByRole("button", { name: "Play again" }).click();
+      await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
+      await expect(page.locator(".battle-card").first()).toContainText("dark");
+      await expect
+        .poll(async () =>
+          page.evaluate(async () => {
+            const bridge = (window as unknown as { duskDesktop: { readSaveCandidates(): Promise<string[]> } })
+              .duskDesktop;
+            const [raw] = await bridge.readSaveCandidates();
+            const run = raw ? JSON.parse(raw).state.run : null;
+            return (
+              run?.phase === "battle" && !!run.experiment?.id && run.experiment.id !== "desktop-before-replay"
+            );
+          }),
+        )
+        .toBe(true);
+      const run = await page.evaluate(async () => {
+        const bridge = (window as unknown as { duskDesktop: { readSaveCandidates(): Promise<string[]> } })
+          .duskDesktop;
+        const [raw] = await bridge.readSaveCandidates();
+        return JSON.parse(raw!).state.run;
+      });
+      expect(run).toMatchObject({
+        phase: "battle",
+        hero: "veiled-oracle",
+        fight: 0,
+        experiment: { orientation: "dark", relic: "ashen-seal" },
+      });
+      newId = run.experiment.id;
+      expect(newId).toBeTruthy();
+      expect(newId).not.toBe("desktop-before-replay");
+    } finally {
+      await app.close();
+    }
+    const reopened = await launch();
+    try {
+      const page = await reopened.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
+      await expect(page.locator(".battle-card").first()).toContainText("dark");
+      const id = await page.evaluate(async () => {
+        const bridge = (window as unknown as { duskDesktop: { readSaveCandidates(): Promise<string[]> } })
+          .duskDesktop;
+        const [raw] = await bridge.readSaveCandidates();
+        return JSON.parse(raw!).state.run.experiment.id;
+      });
+      expect(id).toBe(newId);
+    } finally {
+      await reopened.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

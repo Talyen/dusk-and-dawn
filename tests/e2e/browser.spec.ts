@@ -1265,6 +1265,164 @@ test("a conceded detour reloads as a defeat instead of recovering the previous b
   await expect(page.getByText("Journey 1/5 · Deck 10")).toBeVisible();
 });
 
+test("victory recap replays the same expedition setup and saves the new run", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(
+      17,
+      { id: "finished-expedition", tier: 2, orientation: "dark", relic: "ashen-seal" },
+      "thorn-witch",
+    ).getSnapshot(),
+  );
+  snapshot.state.phase = "victory";
+  snapshot.state.fight = 4;
+  snapshot.state.encounters![4] = "fixture:4";
+  snapshot.state.action = 0;
+  snapshot.state.player.hp = 13;
+  snapshot.state.message = "Hollow King falls.";
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    if (!localStorage.getItem("dusk-and-dawn.expeditions.v1"))
+      localStorage.setItem(
+        "dusk-and-dawn.expeditions.v1",
+        JSON.stringify({ completed: ["previous-expedition"] }),
+      );
+  }, encodeRun(snapshot));
+  await page.setViewportSize({ width: 320, height: 480 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
+  await expect(page.locator(".battle-ending p").first()).toContainText("Journey 5/5 · Deck 10 · HP 13/30");
+  const health = page.getByRole("button", { name: "The Thorn Witch, HP 13/30" });
+  await health.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Ashen Seal");
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.expeditions.v1") || "{}")),
+    )
+    .toEqual({
+      completed: ["previous-expedition", "finished-expedition"],
+    });
+  for (const name of ["Play again", "View deck", "Return to main menu"]) {
+    const button = page.getByRole("button", { name, exact: true });
+    await expect(button).toBeInViewport({ ratio: 1 });
+    expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  }
+  const image = page.locator(".battle-ending img");
+  const centerOffset = await image.evaluate((element) => {
+    const box = element.getBoundingClientRect();
+    return Math.abs((box.left + box.right) / 2 - innerWidth / 2);
+  });
+  expect(centerOffset).toBeLessThan(1);
+  const replay = page.getByRole("button", { name: "Play again" });
+  await replay.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "The Thorn Witch, HP 30/30" })).toBeVisible();
+  await expect(page.locator(".battle-card")).toHaveCount(5);
+  await expect(page.locator(".battle-card").first()).toContainText("dark");
+  const savedRun = async () =>
+    page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run);
+  await expect.poll(async () => (await savedRun())?.phase).toBe("battle");
+  const restarted = await savedRun();
+  expect(restarted.hero).toBe("thorn-witch");
+  expect(restarted.fight).toBe(0);
+  expect(restarted.experiment).toMatchObject({ tier: 3, orientation: "dark", relic: "ashen-seal" });
+  expect(restarted.experiment.id).not.toBe("finished-expedition");
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  expect((await savedRun()).experiment.id).toBe(restarted.experiment.id);
+  expect(
+    JSON.parse((await page.evaluate(() => localStorage.getItem("dusk-and-dawn.expeditions.v1")))!).completed,
+  ).toEqual(["previous-expedition", "finished-expedition"]);
+});
+
+test("expanded replay label remains usable on a compact ending", async ({ page }) => {
+  const snapshot = structuredClone(createRun(21).getSnapshot());
+  snapshot.state.phase = "defeat";
+  snapshot.state.player.hp = 0;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.setViewportSize({ width: 320, height: 480 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.evaluate(async () => {
+    const modulePath = "/src/lib/localization/index.ts";
+    const { localization } = await import(/* @vite-ignore */ modulePath);
+    await localization.changeLanguage("en-XA");
+  });
+  const replay = page.getByRole("button", { name: "[Plaaay agaaain]", exact: true });
+  await expect(replay).toBeInViewport({ ratio: 1 });
+  expect((await replay.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  await replay.click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+});
+
+for (const scenario of [
+  { name: "first fight", fight: 0, detour: false, hp: 0, completed: 0 },
+  { name: "first detour", fight: 0, detour: true, hp: 0, completed: 1 },
+  { name: "second detour", fight: 2, detour: true, hp: 12, completed: 3 },
+  { name: "boss", fight: 4, detour: false, hp: 0, completed: 4 },
+] as const) {
+  test(`ending recap counts completed scheduled fights after ${scenario.name}`, async ({ page }) => {
+    const snapshot = structuredClone(
+      createRun(11, {
+        id: `ending-${scenario.name}`,
+        tier: 1,
+        orientation: "light",
+        relic: "none",
+      }).getSnapshot(),
+    );
+    snapshot.state.phase = "defeat";
+    snapshot.state.fight = scenario.fight;
+    snapshot.state.action = 0;
+    snapshot.state.player.hp = scenario.hp;
+    snapshot.state.message = scenario.hp ? "Run conceded." : "You fell.";
+    if (scenario.detour)
+      snapshot.state.experiment!.route = { active: true, enemy: "the-cobweb-admiral", pair: "Sun & Moon" };
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.locator(".battle-ending p").first()).toContainText(
+      `Journey ${scenario.completed}/5 · Deck 10 · HP ${scenario.hp}/30`,
+    );
+  });
+}
+
+test("replaying a legacy run keeps its original run mode", async ({ page }) => {
+  const snapshot = structuredClone(createRun(21).getSnapshot());
+  snapshot.state.phase = "defeat";
+  snapshot.state.player.hp = 0;
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Play again" }).click();
+  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.phase,
+      ),
+    )
+    .toBe("battle");
+  const run = await page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run);
+  expect(run.hero).toBeUndefined();
+  expect(run.experiment).toBeUndefined();
+  expect(run.deck).toHaveLength(10);
+});
+
 test("enemy pattern inspection preserves repeated actions without console errors", async ({ page }) => {
   const snapshot = structuredClone(createRun(14).getSnapshot());
   snapshot.state.encounters![0] = "the-cellar-duchess";

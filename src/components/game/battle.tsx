@@ -3,6 +3,7 @@ import { expeditionEvent } from "../../lib/game/expedition-events";
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
 import { heroes, heroIds, heroPassive, type HeroId } from "../../lib/game/heroes";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import {
   cards,
   cardCanBanishItself,
@@ -1219,7 +1220,9 @@ export function Battle({
     session: ReturnType<typeof createRun>;
     isNew: boolean;
     recovered: boolean;
+    focusOnStart?: boolean;
   } | null>(null);
+  const [sessionKey, setSessionKey] = useState(0);
   const [loadError, setLoadError] = useState("");
   useEffect(() => {
     let active = true;
@@ -1364,11 +1367,30 @@ export function Battle({
     );
   return (
     <BattleSession
+      key={sessionKey}
       game={game.session}
       isNew={game.isNew}
+      focusOnStart={game.focusOnStart ?? false}
       recovered={game.recovered}
       backend={backend}
       onExit={onExit}
+      onReplay={(previous) => {
+        const experiment = previous.experiment
+          ? {
+              id: crypto.randomUUID(),
+              tier: unlockTier(progress),
+              orientation: previous.experiment.orientation,
+              relic: previous.experiment.relic,
+            }
+          : undefined;
+        setGame({
+          session: createRun(Math.floor(Math.random() * 0x100000000), experiment, previous.hero),
+          isNew: true,
+          recovered: false,
+          focusOnStart: true,
+        });
+        setSessionKey((key) => key + 1);
+      }}
       onDiscover={onDiscover}
       progress={progress}
       progressError={progressError}
@@ -1388,9 +1410,11 @@ export function Battle({
 function BattleSession({
   game,
   isNew,
+  focusOnStart,
   recovered,
   backend,
   onExit,
+  onReplay,
   onDiscover,
   progress,
   progressError,
@@ -1398,14 +1422,17 @@ function BattleSession({
 }: {
   game: ReturnType<typeof createRun>;
   isNew: boolean;
+  focusOnStart: boolean;
   recovered: boolean;
   backend: SaveBackend;
   onExit: () => void;
+  onReplay: (state: RunState) => void;
   onDiscover: (ids: readonly string[]) => void;
   progress: Progression;
   progressError: boolean;
   onComplete: (id: string) => void;
 }) {
+  const { t } = useTranslation();
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
   const [feedback, setFeedback] = useState<{ revision: number; text: string } | null>(null);
   useEffect(() => {
@@ -1415,6 +1442,9 @@ function BattleSession({
   }, [feedback]);
   const handRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (focusOnStart) titleRef.current?.focus();
+  }, [focusOnStart]);
   const pendingRef = useRef<HTMLElement>(null);
   const actionRef = useRef<HTMLDivElement>(null);
   const focusAfterPlay = useRef<number | null>(null);
@@ -1462,6 +1492,8 @@ function BattleSession({
   const [error, setError] = useState("");
   const [saveError, setSaveError] = useState(false);
   const writes = useRef<Promise<void>>(Promise.resolve());
+  const leaving = useRef(false);
+  const [transitioning, setTransitioning] = useState(false);
   const preserveBackup = useRef(recovered);
   function persist(next: Snapshot<RunState>) {
     const encoded = encodeRun(next);
@@ -1476,8 +1508,17 @@ function BattleSession({
   useEffect(() => {
     if (isNew) persist(game.getSnapshot());
   }, [game, isNew]);
+  function leaveBattle(action: () => void) {
+    if (leaving.current) return;
+    leaving.current = true;
+    setTransitioning(true);
+    void writes.current.catch(() => undefined).then(action);
+  }
   function exitBattle() {
-    void writes.current.catch(() => undefined).then(onExit);
+    leaveBattle(onExit);
+  }
+  function replayBattle() {
+    leaveBattle(() => onReplay(snapshot.state));
   }
   const s = snapshot.state;
   useLayoutEffect(() => {
@@ -2171,17 +2212,25 @@ function BattleSession({
         <section className="battle-ending">
           <img src={art("enemy", enemy.name)} alt="" />
           <p>
-            Journey {s.fight + 1}/{route.length} · Deck {s.deck.length}
+            Journey {s.fight + (s.phase === "victory" || s.experiment?.route?.active ? 1 : 0)}/{route.length}
+            {" · "}Deck {s.deck.length}
+            {" · "}
+            <HeroHealth state={s} />
           </p>
           {s.experiment && progress.completed.includes(s.experiment.id) && (
             <p role="status">Expedition pool · tier {unlockTier(progress)}/3 · Nocturne unlocked</p>
           )}
           {progressError && <p role="alert">Expedition progress could not be saved.</p>}
           <div className="battle-ending__actions">
-            <Button variant="outline" onClick={() => setPileOpen(true)}>
+            <Button disabled={transitioning} onClick={replayBattle}>
+              {t("playAgain")}
+            </Button>
+            <Button variant="outline" disabled={transitioning} onClick={() => setPileOpen(true)}>
               View deck
             </Button>
-            <Button onClick={exitBattle}>Return to main menu</Button>
+            <Button variant="outline" disabled={transitioning} onClick={exitBattle}>
+              Return to main menu
+            </Button>
           </div>
         </section>
       )}
