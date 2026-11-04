@@ -1791,3 +1791,116 @@ input:focus-visible,
 .battle-inspection-card > .battle-choice-art {
   margin-top: 0;
 }
+
+button.battle-pile {
+  cursor: pointer;
+  color: inherit;
+}
+button.battle-pile:hover,
+button.battle-pile:focus-visible {
+  border-color: #e8c68a;
+  box-shadow:
+    0 3px #4d3d38,
+    0 6px #211c21,
+    0 9px #4d3d38,
+    0 0 1.6rem #e8c68a66;
+}
+button.battle-pile:disabled {
+  cursor: default;
+}
+.battle-pile-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: #08070bd9;
+  padding: 1rem;
+}
+.battle-pile-dialog {
+  width: min(44rem, 100%);
+  max-height: min(42rem, 92dvh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.25rem;
+  border: 1px solid #947454;
+  border-radius: 0.6rem;
+  background: #141219;
+  text-align: center;
+}
+.battle-pile-dialog__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.battle-pile-dialog__head h2 {
+  margin: 0;
+}
+.battle-pile-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem;
+}
+.battle-pile-tabs .ui-button[aria-pressed="true"] {
+  border-color: #e8c68a;
+  background: #524337;
+}
+.battle-pile-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.2rem;
+}
+.battle-pile-item {
+  width: min(8.5rem, 20vw);
+  flex: 0 0 min(8.5rem, 20vw);
+}
+.battle-pile-position {
+  display: block;
+  margin-top: 0.3rem;
+  color: #d7c7b4;
+  font-size: 0.8rem;
+}
+.battle-pile-card {
+  min-width: 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid #947454;
+  border-radius: 0.35rem;
+}
+.battle-pile-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.battle-pile-card:hover,
+.battle-pile-card:focus-visible {
+  outline: 2px solid #e8c68a;
+  box-shadow: 0 0 1rem #efd0a65c;
+}
+.battle-pile-empty {
+  color: #d7c7b4;
+}
+@media (max-width: 700px) {
+  .battle-pile-dialog {
+    padding: 0.75rem;
+  }
+  .battle-pile-grid {
+    gap: 0.45rem;
+  }
+}
+
+.battle-pile-item {
+  width: clamp(4.75rem, 23vw, 8.5rem);
+  flex-basis: clamp(4.75rem, 23vw, 8.5rem);
+}
+.battle-pile-item:only-child {
+  width: min(10rem, 50vw);
+  flex-basis: min(10rem, 50vw);
+}

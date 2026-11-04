@@ -359,6 +359,20 @@ function RewardCard({
       document.removeEventListener("focusin", focusOutside, true);
     };
   }, [open]);
+  useEffect(() => {
+    if (!open) return;
+    const closeForAnother = (event: Event) => {
+      if (event instanceof CustomEvent && event.detail !== trigger.current) {
+        pointer.current = false;
+        focus.current = false;
+        touchPinned.current = false;
+        setOpen(false);
+      }
+    };
+    document.addEventListener("dusk-reward-inspection", closeForAnother);
+    document.dispatchEvent(new CustomEvent("dusk-reward-inspection", { detail: trigger.current }));
+    return () => document.removeEventListener("dusk-reward-inspection", closeForAnother);
+  }, [open]);
   const light = cards[pair]!.light;
   const dark = cards[pair]!.dark;
   return (
@@ -544,6 +558,228 @@ function RouteChoice({
         {children}
       </Tooltip>
     </>
+  );
+}
+
+function PileCard({ card, position }: { card: FightCard; position?: string }) {
+  const trigger = useRef<HTMLDivElement>(null);
+  const id = useId();
+  const pointer = useRef(false);
+  const focus = useRef(false);
+  const pinned = useRef(false);
+  const [open, setOpen] = useState(false);
+  const info = face(card);
+  const other = cards[card.pair]![card.face === "light" ? "dark" : "light"];
+  const touch = useTouchInspection<HTMLDivElement>(() => {
+    pinned.current = true;
+    setOpen(true);
+  });
+  useEffect(() => {
+    if (!open) return;
+    const outside = (event: Event) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
+        pointer.current = false;
+        focus.current = false;
+        pinned.current = false;
+        setOpen(false);
+      }
+    };
+    const dismiss = () => {
+      pointer.current = false;
+      focus.current = false;
+      pinned.current = false;
+      setOpen(false);
+    };
+    document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("focusin", outside, true);
+    document.addEventListener("scroll", dismiss, true);
+    window.addEventListener("blur", dismiss);
+    return () => {
+      document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("focusin", outside, true);
+      document.removeEventListener("scroll", dismiss, true);
+      window.removeEventListener("blur", dismiss);
+    };
+  }, [open]);
+  return (
+    <div className="battle-pile-item">
+      <div
+        ref={trigger}
+        role="img"
+        tabIndex={0}
+        className="battle-pile-card"
+        aria-label={`${position ? `${position}. ` : ""}${info.name} ${card.face}. ${info.effect}`}
+        aria-describedby={open ? id : undefined}
+        onPointerDown={touch.onPointerDown}
+        onPointerMove={touch.onPointerMove}
+        onPointerUp={touch.onPointerUp}
+        onPointerCancel={touch.onPointerCancel}
+        onContextMenu={touch.onContextMenu}
+        onClick={() => {
+          if (touch.wasTouch()) {
+            touch.consumeClick();
+            pinned.current = true;
+            setOpen(true);
+          }
+        }}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = false;
+            if (!focus.current && !pinned.current) setOpen(false);
+          }
+        }}
+        onFocus={(event) => {
+          if (event.currentTarget.matches(":focus-visible")) {
+            focus.current = true;
+            setOpen(true);
+          }
+        }}
+        onBlur={() => {
+          focus.current = false;
+          if (!pointer.current && !pinned.current) setOpen(false);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && open) {
+            event.stopPropagation();
+            pointer.current = false;
+            focus.current = false;
+            pinned.current = false;
+            setOpen(false);
+          }
+        }}
+      >
+        <img src={art("card", info.name)} alt="" />
+      </div>
+      {position && (
+        <span className="battle-pile-position" aria-hidden="true">
+          {position}
+        </span>
+      )}
+      <Tooltip triggerRef={trigger} id={id} open={open} overlayNarrow className="battle-tooltip">
+        <strong>{info.name}</strong>
+        <p>
+          <Description text={info.effect} />
+        </p>
+        <p>
+          Other face: <strong>{other.name}</strong> — <Description text={other.effect} />
+        </p>
+        {info.keywords
+          .filter((keyword) => keywordHelp[keyword])
+          .map((keyword) => (
+            <p key={keyword}>
+              <strong>{keyword}</strong> {keywordHelp[keyword]}
+            </p>
+          ))}
+      </Tooltip>
+    </div>
+  );
+}
+
+function PileBrowser({
+  discard,
+  banished,
+  onClose,
+}: {
+  discard: FightCard[];
+  banished: FightCard[];
+  onClose: () => void;
+}) {
+  const [view, setView] = useState<"discard" | "banished">("discard");
+  const dialogRef = useRef<HTMLElement>(null);
+  const titleId = useId();
+  useEffect(() => {
+    const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    dialogRef.current?.focus();
+    return () => previous?.focus();
+  }, []);
+  const visible = view === "discard" ? [...discard].reverse() : banished;
+  return (
+    <div
+      className="battle-pile-scrim"
+      onPointerDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <section
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        className="battle-pile-dialog"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            event.stopPropagation();
+            onClose();
+          }
+          if (event.key !== "Tab") return;
+          const items = [
+            ...(dialogRef.current?.querySelectorAll<HTMLElement>(
+              'button:not(:disabled), [role="img"][tabindex="0"]',
+            ) ?? []),
+          ];
+          if (!items.length) return;
+          const first = items[0]!;
+          const last = items[items.length - 1]!;
+          if (
+            event.shiftKey &&
+            (document.activeElement === first || document.activeElement === dialogRef.current)
+          ) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }}
+      >
+        <div className="battle-pile-dialog__head">
+          <h2 id={titleId}>{view === "discard" ? "Discard" : "Banished"}</h2>
+          <Button variant="outline" onClick={onClose}>
+            Close
+          </Button>
+        </div>
+        <div className="battle-pile-tabs" role="group" aria-label="Card piles">
+          <Button variant="outline" aria-pressed={view === "discard"} onClick={() => setView("discard")}>
+            Discard {discard.length}
+          </Button>
+          <Button variant="outline" aria-pressed={view === "banished"} onClick={() => setView("banished")}>
+            Banished {banished.length}
+          </Button>
+        </div>
+        {visible.length ? (
+          <div className="battle-pile-grid">
+            {visible.map((card, index) => (
+              <PileCard
+                key={card.id}
+                card={card}
+                {...(view === "discard"
+                  ? {
+                      position:
+                        visible.length === 1
+                          ? "Top · Bottom"
+                          : index === 0
+                            ? "Top"
+                            : index === visible.length - 1
+                              ? "Bottom"
+                              : "",
+                    }
+                  : {})}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="battle-pile-empty">Empty</p>
+        )}
+      </section>
+    </div>
   );
 }
 
@@ -904,6 +1140,7 @@ function BattleSession({
     }
   }, [selected]);
   const [targets, setTargets] = useState<string[]>([]);
+  const [pileOpen, setPileOpen] = useState(false);
   const [error, setError] = useState("");
   const [saveError, setSaveError] = useState(false);
   const writes = useRef<Promise<void>>(Promise.resolve());
@@ -1108,13 +1345,15 @@ function BattleSession({
               </div>
               <div className="battle-resource battle-resource--mana">
                 <p>Mana {s.mana}/3</p>
-                <span
+                <button
+                  type="button"
                   className="battle-pile battle-pile--discard"
-                  role="img"
                   aria-label={`Discard ${s.zones.discard.length} · Banished ${s.zones.banished.length}`}
+                  disabled={!!s.pending || !!selected}
+                  onClick={() => setPileOpen(true)}
                 >
                   <span>{s.zones.discard.length}</span>
-                </span>
+                </button>
               </div>
             </section>
             <section className="battle-enemy" data-enemy-burn={s.enemy.burn} data-enemy-curse={s.enemy.curse}>
@@ -1320,6 +1559,13 @@ function BattleSession({
                 Cancel
               </Button>
             </section>
+          )}
+          {pileOpen && (
+            <PileBrowser
+              discard={s.zones.discard}
+              banished={s.zones.banished}
+              onClose={() => setPileOpen(false)}
+            />
           )}
           <div className="battle-actions" ref={actionRef} role="group" aria-label="Battle actions">
             <Button disabled={!!s.pending || !!selected} onClick={() => dispatch({ type: "end" })}>

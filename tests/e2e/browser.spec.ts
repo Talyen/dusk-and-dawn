@@ -523,6 +523,7 @@ test("paid library inspection survives reload and resolves without leaking early
   await page.getByRole("button", { name: /Wilderness dark/ }).focus();
   await page.keyboard.press("Enter");
   await expect(page.getByLabel("Committed inspection")).toBeFocused();
+  await expect(page.getByRole("button", { name: /^Discard / })).toBeDisabled();
   await expect(page.getByRole("button", { name: "End turn" })).toBeDisabled();
   await expect
     .poll(async () =>
@@ -735,6 +736,7 @@ for (const name of ["Memory", "Sacrifice"] as const) {
     const choice = page.getByLabel("Selected card");
     await expect(choice).toBeFocused();
     await expect(sourceButton).toBeDisabled();
+    await expect(page.getByRole("button", { name: /^Discard / })).toBeDisabled();
     await expect(page.getByRole("button", { name: "End turn" })).toBeDisabled();
     await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
     const preview = choice.getByRole("button", { name: /^Angel —/ });
@@ -1326,8 +1328,17 @@ test("Spare Thread removal restores keyboard focus and survives a reload", async
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   const first = page.locator(".battle-rest-card").first();
+  await page.mouse.move(5, 5);
+  await page.keyboard.press("Tab");
   await first.focus();
   await expect(page.getByRole("tooltip")).toBeVisible();
+  const second = page.locator(".battle-rest-card").nth(2);
+  await second.hover();
+  await expect(page.getByRole("tooltip")).toHaveCount(1);
+  await page.mouse.move(5, 5);
+  await page.keyboard.press("Tab");
+  await first.focus();
+  await expect(page.getByRole("tooltip")).toHaveCount(1);
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Remove another pair" })).toBeVisible();
   await expect(page.locator(".battle-rest-card:focus")).toHaveCount(1);
@@ -1550,4 +1561,124 @@ test("compact target choices keep cards and cancellation accessible", async ({ p
     await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
   await panel.getByRole("button", { name: "Cancel" }).click();
   await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
+});
+
+function pileFixture() {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "held", pair: "Sun & Moon" },
+    { id: "hidden", pair: "Censer & Plague Brazier" },
+    { id: "bottom", pair: "Angel & Vampire" },
+    { id: "top", pair: "Flame & Frost" },
+    { id: "banished", pair: "Key & Lock" },
+  ];
+  const [held, hidden, bottom, top, banished] = snapshot.state.deck;
+  snapshot.state.zones.hand = [{ ...held!, face: "light", kept: false }];
+  snapshot.state.zones.library = [{ ...hidden!, face: "dark", kept: false }];
+  snapshot.state.zones.discard = [
+    { ...bottom!, face: "dark", kept: false },
+    { ...top!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.banished = [{ ...banished!, face: "dark", kept: false }];
+  return snapshot;
+}
+
+test("pile inspection shows visible cards in order without exposing the library or changing the run", async ({
+  page,
+}) => {
+  const snapshot = pileFixture();
+  const saved = encodeRun(snapshot);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const pile = page.getByRole("button", { name: "Discard 2 · Banished 1" });
+  await pile.focus();
+  await page.keyboard.press("Enter");
+  const dialog = page.getByRole("dialog", { name: "Discard" });
+  await expect(dialog).toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  await expect(dialog.locator(".battle-pile-card").last()).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeFocused();
+  const cards = dialog.locator(".battle-pile-card");
+  await expect(cards).toHaveCount(2);
+  await expect(cards.nth(0)).toHaveAccessibleName(/Top\. Flame light/);
+  await expect(cards.nth(1)).toHaveAccessibleName(/Bottom\. Vampire dark/);
+  await expect(dialog.getByRole("img", { name: /Plague Brazier|Censer/ })).toHaveCount(0);
+  await cards.nth(1).focus();
+  await expect(page.getByRole("tooltip")).toContainText("Vampire");
+  await expect(page.getByRole("tooltip")).toContainText("Other face: Angel");
+  await expect(page.getByRole("tooltip")).toContainText("Heal for the attack's final damage");
+  await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(pile).toBeFocused();
+  await pile.click();
+  await page.getByRole("button", { name: "Banished 1", exact: true }).click();
+  const banished = page.getByRole("dialog", { name: "Banished" });
+  await expect(banished.getByRole("img", { name: /Lock dark/ })).toBeVisible();
+  await expect(banished.getByRole("img", { name: /Flame|Vampire|Plague Brazier/ })).toHaveCount(0);
+  await page.mouse.click(2, 2);
+  await expect(banished).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
+});
+
+test("touch can inspect pile cards and switch piles without playing them", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(pileFixture()),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  await page.getByRole("button", { name: "Discard 2 · Banished 1" }).tap();
+  const dialog = page.getByRole("dialog", { name: "Discard" });
+  await dialog.getByRole("img", { name: /Flame light/ }).tap();
+  await expect(page.getByRole("tooltip")).toContainText("Apply 3 Burn");
+  await page.getByRole("button", { name: "Banished 1", exact: true }).tap();
+  await expect(
+    page.getByRole("dialog", { name: "Banished" }).getByRole("img", { name: /Lock dark/ }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Close", exact: true }).tap();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
+  await context.close();
+});
+
+test("large piles scroll without losing their controls on a small viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 480 });
+  const snapshot = pileFixture();
+  const extras = Array.from({ length: 20 }, (_, index) => ({ id: `extra-${index}`, pair: "Sun & Moon" }));
+  snapshot.state.deck.push(...extras);
+  snapshot.state.zones.discard.push(
+    ...extras.map((card) => ({ ...card, face: "light" as const, kept: false })),
+  );
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Discard 22 · Banished 1" }).click();
+  const dialog = page.getByRole("dialog", { name: "Discard" });
+  const cards = dialog.locator(".battle-pile-card");
+  await expect(cards).toHaveCount(22);
+  await cards.last().scrollIntoViewIfNeeded();
+  await expect(cards.last()).toBeInViewport({ ratio: 1 });
+  await expect(cards.last()).toHaveAccessibleName(/Bottom\. Vampire dark/);
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeInViewport({ ratio: 1 });
+  await expect(dialog.getByRole("button", { name: "Banished 1" })).toBeInViewport({ ratio: 1 });
+  await dialog.getByRole("button", { name: "Close" }).click();
+  await expect(dialog).toHaveCount(0);
 });
