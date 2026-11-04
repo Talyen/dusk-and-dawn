@@ -385,21 +385,24 @@ it("Reflect faces redirect the next hit once and banish the source", () => {
   }
 });
 
-it("Water Clock's draw can fill the vacated slot before self-Keep", () => {
-  const face = catalogue.find((entry) => entry.name === "Water Clock")!;
-  const held = Array.from({ length: 7 }, (_, index) => c(`held-${index}`));
-  const full = fixture(face, held, [c("drawn", "dark")], []);
-  expect(full.dispatch({ type: "play", id: "source" }).decision.accepted).toBe(true);
-  expect(full.getSnapshot().state.zones.hand).toEqual([...held, c("drawn", "dark")]);
-  expect(full.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["source"]);
-  const empty = fixture(face, held, [], []);
-  expect(empty.dispatch({ type: "play", id: "source" }).decision.accepted).toBe(true);
-  expect(empty.getSnapshot().state.zones.hand.at(-1)).toEqual({
-    id: "source",
-    pair: face.pair,
-    face: face.side,
-    kept: true,
-  });
+it("draw before self-Keep can fill the vacated slot", () => {
+  const faces = catalogue.filter((entry) => entry.effect === "Draw 1 card. Keep this card.");
+  expect(faces).toHaveLength(2);
+  for (const face of faces) {
+    const held = Array.from({ length: 7 }, (_, index) => c(`held-${index}`));
+    const full = fixture(face, held, [c("drawn", "dark")], []);
+    expect(full.dispatch({ type: "play", id: "source" }).decision.accepted).toBe(true);
+    expect(full.getSnapshot().state.zones.hand).toEqual([...held, c("drawn", "dark")]);
+    expect(full.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["source"]);
+    const empty = fixture(face, held, [], []);
+    expect(empty.dispatch({ type: "play", id: "source" }).decision.accepted).toBe(true);
+    expect(empty.getSnapshot().state.zones.hand.at(-1)).toEqual({
+      id: "source",
+      pair: face.pair,
+      face: face.side,
+      kept: true,
+    });
+  }
 });
 
 it("random exchanges use the printed discard end and leave an empty side unchanged", () => {

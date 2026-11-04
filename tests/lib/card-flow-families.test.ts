@@ -124,7 +124,7 @@ it("self-Keep and self-Flip resolve the original source on its resulting face", 
   const faces = catalogue.filter((face) =>
     ["Keep this card.", "Flip this card. Keep this card."].includes(face.effect),
   );
-  expect(faces).toHaveLength(24);
+  expect(faces).toHaveLength(23);
   for (const face of faces) {
     const held = Array.from({ length: 7 }, (_, index) => c(`held-${index}`, index % 2 ? "dark" : "light"));
     const game = fixture(face, held, [], []);

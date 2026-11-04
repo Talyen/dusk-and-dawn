@@ -846,30 +846,38 @@ test("a card rejected for lack of mana remains in hand", async ({ page }) => {
   await expect(page.getByText("Mana 0/3", { exact: false })).toBeVisible();
 });
 
-test("previews when Water Clock cannot Keep itself after filling the hand", async ({ page }) => {
-  const snapshot = structuredClone(createRun(22).getSnapshot());
-  snapshot.state.deck[0]!.pair = "Sundial & Water Clock";
-  const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
-  snapshot.state.zones.hand = [{ ...fight[0]!, face: "dark" }, ...fight.slice(1, 8)];
-  snapshot.state.zones.library = fight.slice(8);
-  snapshot.state.zones.discard = [];
-  snapshot.state.zones.banished = [];
-  await page.addInitScript(
-    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
-    encodeRun(snapshot),
-  );
-  await page.goto("/");
-  await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Continue run" }).click();
-  const waterClock = page.getByRole("button", { name: /Water Clock dark/ });
-  await waterClock.hover();
-  await expect(page.getByRole("tooltip")).toContainText(
-    "Drawing will fill your hand, so this card cannot return to it with Keep.",
-  );
-  await waterClock.click();
-  await expect(page.getByRole("button", { name: /Water Clock dark/ })).toHaveCount(0);
-  await expect(page.locator(".battle-card")).toHaveCount(8);
-});
+for (const scenario of [
+  { pair: "Sundial & Water Clock", face: "dark", name: "Water Clock" },
+  { pair: "Caged Songbird & Wild Songbird", face: "light", name: "Caged Songbird" },
+] as const) {
+  test(`previews when ${scenario.name} cannot Keep itself after filling the hand`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(22).getSnapshot());
+    snapshot.state.deck[0]!.pair = scenario.pair;
+    const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+    snapshot.state.zones.hand = [{ ...fight[0]!, face: scenario.face }, ...fight.slice(1, 8)];
+    snapshot.state.zones.library = fight.slice(8);
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const card = page.getByRole("button", { name: new RegExp(`^${scenario.name} ${scenario.face}`) });
+    await card.hover();
+    await expect(page.getByRole("tooltip")).toContainText(
+      "Drawing will fill your hand, so this card cannot return to it with Keep.",
+    );
+    await card.click();
+    await expect(
+      page.getByRole("button", { name: new RegExp(`^${scenario.name} ${scenario.face}`) }),
+    ).toHaveCount(0);
+    await expect(page.locator(".battle-card")).toHaveCount(8);
+    await expect(page.getByRole("status")).toContainText("Drew 1");
+  });
+}
 
 test("battle art remains full-bleed and combat text stays readable at common sizes", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
@@ -5866,3 +5874,44 @@ for (const action of [0, 1] as const) {
     await expect(page.getByRole("button", { name: /^Bloom light/ })).toHaveCount(action === 0 ? 1 : 0);
   });
 }
+
+test("caged songbird draws for mana, stays for the next turn and survives reload", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42, undefined, "oathless-seraph").getSnapshot());
+  snapshot.state.encounters![0] = "the-paper-nautilus";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 28;
+  snapshot.state.action = 0;
+  snapshot.state.deck = [
+    { id: "bird", pair: "Caged Songbird & Wild Songbird" },
+    { id: "held", pair: "Sun & Moon" },
+    ...Array.from({ length: 6 }, (_, index) => ({ id: `fresh-${index}`, pair: "Bloom & Wither" })),
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck
+    .slice(0, 2)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(2)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const bird = page.getByRole("button", { name: /^Caged Songbird light/ });
+  for (let i = 0; i < 3; i++) {
+    await bird.click();
+    await expect(page.getByRole("status")).toContainText("Drew 1");
+  }
+  await expect(bird).toHaveAttribute("aria-disabled", "true");
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "28");
+  await expect(page.getByRole("button", { name: /^Caged Songbird light/ })).toBeVisible();
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(0);
+});

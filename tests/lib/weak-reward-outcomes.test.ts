@@ -291,3 +291,46 @@ it("Tuned Violin keeps its Bless at the hand cap or with nothing to draw", () =>
     expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["card-0"]);
   }
 });
+
+it("the caged bird trades a larger immediate choice for a card kept into the next turn", () => {
+  const pair = "Caged Songbird & Wild Songbird";
+  for (const face of ["light", "dark"] as const) {
+    const setup = structuredClone(createRun(31, undefined, "oathless-seraph").getSnapshot());
+    setup.state.encounters![0] = "radiant-moth";
+    setup.state.enemy.hp = setup.state.enemy.maxHp = 18;
+    setup.state.action = 0;
+    setup.state.zones.hand = [
+      { id: "bird", pair, face, kept: false },
+      { id: "angel", pair: "Angel & Vampire", face: "light", kept: false },
+    ];
+    setup.state.zones.library = [
+      ...Array.from({ length: 8 }, (_, index) => ({
+        id: `fresh-${index}`,
+        pair: "Sun & Moon",
+        face: "light" as const,
+        kept: false,
+      })),
+      { id: "wither", pair: "Bloom & Wither", face: "dark", kept: false },
+      { id: "sun", pair: "Sun & Moon", face: "light", kept: false },
+    ];
+    setup.state.zones.discard = [];
+    setup.state.zones.banished = [];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "bird" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual(
+      face === "light" ? ["angel", "sun", "bird"] : ["angel", "sun", "wither"],
+    );
+    expect(game.dispatch({ type: "play", id: face === "light" ? "sun" : "wither" }).decision.accepted).toBe(
+      true,
+    );
+    expect(game.dispatch({ type: "play", id: "angel" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.enemy.hp).toBe(face === "light" ? 12 : 11);
+    expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    const result = game.getSnapshot().state;
+    expect(result.player.hp).toBe(30);
+    expect(result.zones.hand.some((card) => card.id === "bird")).toBe(face === "light");
+    expect(result.zones.hand.find((card) => card.id === "bird")?.kept).toBe(
+      face === "light" ? false : undefined,
+    );
+  }
+});

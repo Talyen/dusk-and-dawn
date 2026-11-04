@@ -52,6 +52,7 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Broken Violin": "Hush. Banish this card.",
   Lamb: "Bless 2.",
   "Sealed Gate": "Keep your hand.",
+  "Caged Songbird": "Draw 1 card. Keep this card.",
   "Fern Fiddlehead": "Draw 2 cards.",
   "Fallen Leaf": "Draw 1 card. Banish this card.",
   "Flower Bud": "Keep your hand.",
@@ -108,6 +109,15 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
       keywords: ["Flip"],
       ops: [{ op: "draw", amount: 1 }, { op: "flip-hand" }],
     },
+  },
+  "Caged Songbird & Wild Songbird": {
+    light: {
+      name: "Caged Songbird",
+      effect: playtestEffectOverrides["Caged Songbird"]!,
+      keywords: ["Keep"],
+      ops: [{ op: "draw", amount: 1 }, { op: "keep-self" }],
+    },
+    dark: simpleCards["Caged Songbird & Wild Songbird"].dark,
   },
   "Lamb & Wolf": {
     light: {

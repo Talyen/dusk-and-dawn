@@ -43,7 +43,7 @@
     "self-keep": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "self-Keep and self-Flip resolve the original source on its resulting face",
-      "count": 24,
+      "count": 23,
       "effect_pattern": "^(?:Flip this card\\. )?Keep this card\\.$"
     },
     "whole-hand": {
@@ -130,12 +130,6 @@
       "count": 8,
       "effect_pattern": "^Reflect the first hit of the enemy's next attack\\. Banish this card\\.$"
     },
-    "water-clock": {
-      "test_file": "tests/lib/card-sequencing-families.test.ts",
-      "test_name": "Water Clock's draw can fill the vacated slot before self-Keep",
-      "count": 1,
-      "effect_pattern": "^Draw 1 card\\. Keep this card\\.$"
-    },
     "exchange": {
       "test_file": "tests/lib/card-sequencing-families.test.ts",
       "test_name": "random exchanges use the printed discard end and leave an empty side unchanged",
@@ -165,6 +159,12 @@
       "test_name": "healing-then-draw faces cap HP before drawing and banish their source",
       "count": 2,
       "effect_pattern": "^Heal \\d+ HP\\. Draw \\d+ cards?\\. Banish this card\\.$"
+    },
+    "draw-self-keep": {
+      "test_file": "tests/lib/card-sequencing-families.test.ts",
+      "test_name": "draw before self-Keep can fill the vacated slot",
+      "count": 2,
+      "effect_pattern": "^Draw 1 card\\. Keep this card\\.$"
     }
   },
   "faces": [
@@ -918,7 +918,7 @@
       "pair": "Caged Songbird & Wild Songbird",
       "side": "light",
       "face": "Caged Songbird",
-      "family": "self-keep"
+      "family": "draw-self-keep"
     },
     {
       "pair": "Caged Songbird & Wild Songbird",
@@ -1824,7 +1824,7 @@
       "pair": "Sundial & Water Clock",
       "side": "dark",
       "face": "Water Clock",
-      "family": "water-clock"
+      "family": "draw-self-keep"
     },
     {
       "pair": "Rope Ladder & Trapdoor",

@@ -1186,7 +1186,7 @@ function cardFlowChanges(before: RunState, after: RunState, sourceId: string): s
   // Restrict draw counts to effects that draw directly into the hand and do not
   // subsequently discard or exchange cards; a net hand diff is otherwise ambiguous.
   const simpleDraw =
-    /^(?:Scry\. )?Draw \d+ cards?\.(?: Flip your hand\.| Turn your hand to its (?:light|dark) faces\.)?(?: Banish this card\.)?$/.test(
+    /^(?:Scry\. )?Draw \d+ cards?\.(?: Flip your hand\.| Turn your hand to its (?:light|dark) faces\.| Keep this card\.)?(?: Banish this card\.)?$/.test(
       info.effect,
     );
   if (simpleDraw) {
@@ -1391,7 +1391,10 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
       );
   }
   if (
-    info.name === "Water Clock" &&
+    ops.length === 2 &&
+    ops[0]?.op === "draw" &&
+    ops[0].amount === 1 &&
+    ops[1]?.op === "keep-self" &&
     s.zones.hand.length === 8 &&
     (s.zones.library.length > 0 || s.zones.discard.length > 0)
   )
