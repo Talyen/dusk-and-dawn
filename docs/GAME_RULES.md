@@ -26,7 +26,7 @@ Wax Seal gives 7 Ward and Banishes itself; Torn Letter draws two and Banishes it
 
 ## Cards and turn order
 
-Playing a card costs 1 mana. The active face and any required target are checked before payment; the card leaves the hand while its effect resolves. A flip changes the card's face but does not change the effect already being resolved. Kept cards remain in hand at end of turn; other cards are discarded left to right. Banish removes a card from the fight, not the run deck. The hand limit is 8; excess draws remain in the library. The discard pile is shuffled into an empty library only when a draw needs it. Scry exposes the current library top without causing a reshuffle and ends when the turn is ended.
+Playing a card costs 1 mana. The active face and any required target are checked before payment; the card leaves the hand while its effect resolves. A flip changes the card's face but does not change the effect already being resolved. Kept cards remain in hand at end of turn; other cards are discarded left to right. Banish removes a card from the fight, not the run deck. The hand limit is 8; excess draws remain in the library. When a draw needs an empty library, or an effect explicitly looks at or moves its top card, the discard pile is shuffled into the library first. A multi-card inspection or move uses the available cards without reshuffling midway. Scry exposes the current library top without causing a reshuffle and ends when the turn is ended.
 
 Some inspection effects commit the play and payment before presenting a choice. While that choice is pending, other commands, including concede, are rejected; the choice is part of the saved run. See `tests/lib/card-zones.test.ts`, `inspection.test.ts` and `run-save.test.ts`.
 

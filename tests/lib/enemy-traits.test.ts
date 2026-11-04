@@ -328,3 +328,105 @@ it("the Librarian does not retaliate after a lethal attack, even when Frozen", (
   expect(game.getSnapshot().state.player.hp).toBe(30);
   expect(game.getSnapshot().state.phase).toBe("reward");
 });
+
+it("the Ashen Gardener prepares an empty library before moving its top card, but Hush leaves the piles untouched", () => {
+  const setup = encounter("the-ashen-gardener", 1);
+  setup.state.zones.hand = Array.from({ length: 8 }, (_, index) => ({
+    id: `held-${index}`,
+    pair: "Sun & Moon",
+    face: "light" as const,
+    kept: true,
+  }));
+  setup.state.zones.library = [];
+  setup.state.zones.discard = [
+    { id: "old-one", pair: "Angel & Vampire", face: "light", kept: false },
+    { id: "old-two", pair: "Sun & Moon", face: "dark", kept: false },
+  ];
+  const game = restoreSession(setup, runHandler);
+  game.dispatch({ type: "end" });
+  const state = game.getSnapshot().state;
+  expect(state.player).toMatchObject({ hp: 26, curse: 1 });
+  expect(state.zones.library).toHaveLength(1);
+  expect(state.zones.discard).toHaveLength(1);
+  expect([...state.zones.library, ...state.zones.discard].map((card) => card.id).sort()).toEqual([
+    "old-one",
+    "old-two",
+  ]);
+  expect(state.zones.hand).toHaveLength(8);
+
+  const muted = structuredClone(setup);
+  muted.state.enemy.hush = true;
+  const hushed = restoreSession(muted, runHandler);
+  hushed.dispatch({ type: "end" });
+  expect(hushed.getSnapshot().state.player).toMatchObject({ hp: 26, curse: 0 });
+  expect(hushed.getSnapshot().state.zones.library).toEqual([]);
+  expect(hushed.getSnapshot().state.zones.discard).toEqual(setup.state.zones.discard);
+  expect(hushed.getSnapshot().random).toEqual(setup.random);
+});
+
+it("the Bone Cartographer moves only the available top block without refilling midway", () => {
+  const setup = encounter("the-bone-cartographer", 1);
+  setup.state.player.nextDrawPenalty = 5;
+  setup.state.zones.library = [{ id: "only", pair: "Sun & Moon", face: "dark", kept: false }];
+  setup.state.zones.discard = [{ id: "discard", pair: "Angel & Vampire", face: "light", kept: false }];
+  const game = restoreSession(setup, runHandler);
+  game.dispatch({ type: "end" });
+  const state = game.getSnapshot().state;
+  expect(state.player.hp).toBe(26);
+  expect(state.zones.library.map((card) => card.id)).toEqual(["only"]);
+  expect(state.zones.library[0]!.face).toBe("dark");
+  expect(state.zones.discard.map((card) => card.id)).toEqual(["discard"]);
+});
+
+it("a lethal reflected Widow attack prevents its Poison rider and ends the encounter", () => {
+  const setup = encounter("velvet-widow", 1);
+  setup.state.enemy.hp = 5;
+  setup.state.player.reflect = true;
+  const game = restoreSession(setup, runHandler);
+  game.dispatch({ type: "end" });
+  const state = game.getSnapshot().state;
+  expect(state.phase).toBe("reward");
+  expect(state.player).toMatchObject({ hp: 30, poison: 0, reflect: false });
+  expect(state.enemy.hp).toBe(0);
+});
+
+it("the Widow applies Poison even when Curse reduces the hit to zero; Hush and Freeze stop the rider", () => {
+  const setup = encounter("velvet-widow", 1);
+  setup.state.enemy.curse = 5;
+  const normal = restoreSession(setup, runHandler);
+  normal.dispatch({ type: "end" });
+  expect(normal.getSnapshot().state.player).toMatchObject({ hp: 30, poison: 3 });
+  expect(normal.getSnapshot().state.enemy.curse).toBe(0);
+
+  const muted = structuredClone(setup);
+  muted.state.enemy.hush = true;
+  const hushed = restoreSession(muted, runHandler);
+  hushed.dispatch({ type: "end" });
+  expect(hushed.getSnapshot().state.player).toMatchObject({ hp: 30, poison: 0 });
+  expect(hushed.getSnapshot().state.enemy.curse).toBe(0);
+
+  const frozen = structuredClone(setup);
+  frozen.state.enemy.freeze = true;
+  const skipped = restoreSession(frozen, runHandler);
+  skipped.dispatch({ type: "end" });
+  expect(skipped.getSnapshot().state.player).toMatchObject({ hp: 30, poison: 0 });
+  expect(skipped.getSnapshot().state.enemy.curse).toBe(5);
+});
+
+it("the Glass Judge spends Reflect on its first scaled hit and applies the second through Ward", () => {
+  const setup = encounter("glass-judge", 2);
+  setup.state.enemy.curse = 1;
+  setup.state.player.reflect = true;
+  setup.state.player.ward = 6;
+  const normal = restoreSession(setup, runHandler);
+  normal.dispatch({ type: "end" });
+  expect(normal.getSnapshot().state.enemy).toMatchObject({ hp: 16, curse: 0 });
+  expect(normal.getSnapshot().state.player).toMatchObject({ hp: 30, ward: 2, reflect: false });
+
+  const muted = structuredClone(setup);
+  muted.state.enemy.hush = true;
+  const hushed = restoreSession(muted, runHandler);
+  hushed.dispatch({ type: "end" });
+  expect(hushed.getSnapshot().state.enemy).toMatchObject({ hp: 16, curse: 0 });
+  expect(hushed.getSnapshot().state.player).toMatchObject({ hp: 30, ward: 3, reflect: false });
+});
