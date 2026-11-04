@@ -10,6 +10,7 @@ export function getUiScale(width: number, height: number, gameSizePercent: numbe
 export function useUiScale(gameSizePercent: number) {
   useLayoutEffect(() => {
     const update = () => {
+      document.documentElement.style.setProperty("--game-size-factor", String(gameSizePercent / 100));
       document.documentElement.style.setProperty(
         "--ui-scale",
         String(getUiScale(window.innerWidth, window.innerHeight, gameSizePercent)),

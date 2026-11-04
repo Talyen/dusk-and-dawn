@@ -60,6 +60,11 @@ input:focus-visible,
   text-align: center;
   padding: calc(4 * var(--ui-unit)) calc(1.5 * var(--ui-unit));
 }
+@media (max-width: 700px) {
+  .intro {
+    --ui-unit: max(calc(1rem * var(--ui-scale)), calc(0.8rem * var(--game-size-factor, 1)));
+  }
+}
 .intro h1 {
   margin: calc(1 * var(--ui-unit)) 0;
   font:

@@ -540,6 +540,7 @@ function RewardCard({
   inspecting = false,
   count,
   exchangeFor,
+  hoverReady,
 }: {
   pair: string;
   onChoose: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -547,6 +548,7 @@ function RewardCard({
   inspecting?: boolean;
   count?: number;
   exchangeFor?: string;
+  hoverReady?: { current: boolean };
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -617,12 +619,23 @@ function RewardCard({
         aria-label={`${exchangeFor ? `Exchange ${pair} for ${exchangeFor}` : `${removing ? "Remove " : ""}${pair}`}${inspecting && count !== undefined ? `, ${count} ${count === 1 ? "copy" : "copies"}` : ""}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
-        onPointerMove={touch.onPointerMove}
+        onPointerMove={(event) => {
+          touch.onPointerMove(event);
+          if (
+            hoverReady?.current &&
+            event.pointerType !== "touch" &&
+            (event.movementX !== 0 || event.movementY !== 0) &&
+            !pointer.current
+          ) {
+            pointer.current = true;
+            inspect();
+          }
+        }}
         onPointerUp={touch.onPointerUp}
         onPointerCancel={touch.onPointerCancel}
         onContextMenu={touch.onContextMenu}
         onPointerEnter={(event) => {
-          if (event.pointerType !== "touch") {
+          if (event.pointerType !== "touch" && (!hoverReady || hoverReady.current)) {
             pointer.current = true;
             inspect();
           }
@@ -682,6 +695,7 @@ function RouteChoice({
   pressed,
   inspectOnSelect = false,
   placement = "bottom",
+  hoverReady,
 }: {
   label: string;
   caption: string;
@@ -693,6 +707,7 @@ function RouteChoice({
   pressed?: boolean | undefined;
   inspectOnSelect?: boolean;
   placement?: "top" | "bottom";
+  hoverReady?: { current: boolean };
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -742,12 +757,23 @@ function RouteChoice({
           }
         }}
         onPointerDown={touch.onPointerDown}
-        onPointerMove={touch.onPointerMove}
+        onPointerMove={(event) => {
+          touch.onPointerMove(event);
+          if (
+            hoverReady?.current &&
+            event.pointerType !== "touch" &&
+            (event.movementX !== 0 || event.movementY !== 0) &&
+            !pointer.current
+          ) {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
         onPointerUp={touch.onPointerUp}
         onPointerCancel={touch.onPointerCancel}
         onContextMenu={touch.onContextMenu}
         onPointerEnter={(event) => {
-          if (event.pointerType !== "touch") {
+          if (event.pointerType !== "touch" && (!hoverReady || hoverReady.current)) {
             pointer.current = true;
             setOpen(true);
           }
@@ -800,10 +826,12 @@ function PileCard({
   card,
   position,
   libraryCount,
+  hoverReady,
 }: {
   card: FightCard;
   position?: string;
   libraryCount?: number;
+  hoverReady?: { current: boolean };
 }) {
   const trigger = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -854,7 +882,18 @@ function PileCard({
         aria-label={`${libraryCount !== undefined ? `Library ${libraryCount}. Scry. ` : ""}${position ? `${position}. ` : ""}${info.name} ${card.face}. ${info.effect}`}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
-        onPointerMove={touch.onPointerMove}
+        onPointerMove={(event) => {
+          touch.onPointerMove(event);
+          if (
+            hoverReady?.current &&
+            event.pointerType !== "touch" &&
+            (event.movementX !== 0 || event.movementY !== 0) &&
+            !pointer.current
+          ) {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
         onPointerUp={touch.onPointerUp}
         onPointerCancel={touch.onPointerCancel}
         onContextMenu={touch.onContextMenu}
@@ -866,7 +905,7 @@ function PileCard({
           }
         }}
         onPointerEnter={(event) => {
-          if (event.pointerType !== "touch") {
+          if (event.pointerType !== "touch" && (!hoverReady || hoverReady.current)) {
             pointer.current = true;
             setOpen(true);
           }
@@ -936,14 +975,14 @@ function PileCard({
   );
 }
 
-function DeckContents({ deck }: { deck: RunState["deck"] }) {
+function DeckContents({ deck, hoverReady }: { deck: RunState["deck"]; hoverReady: { current: boolean } }) {
   const counts = new Map<string, number>();
   for (const card of deck) counts.set(card.pair, (counts.get(card.pair) ?? 0) + 1);
   return (
     <div className="battle-pile-grid battle-deck-grid">
       {[...counts].map(([pair, count]) => (
         <div className="battle-deck-pair" key={pair}>
-          <RewardCard pair={pair} inspecting count={count} onChoose={() => {}} />
+          <RewardCard pair={pair} inspecting count={count} hoverReady={hoverReady} onChoose={() => {}} />
           <span aria-hidden="true">×{count}</span>
         </div>
       ))}
@@ -966,6 +1005,7 @@ function PileBrowser({
 }) {
   const [view, setView] = useState<"discard" | "banished" | "deck">(betweenFights ? "deck" : "discard");
   const dialogRef = useRef<HTMLElement>(null);
+  const hoverReady = useRef(false);
   const titleId = useId();
   useEffect(() => {
     const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -987,6 +1027,16 @@ function PileBrowser({
         aria-labelledby={titleId}
         tabIndex={-1}
         className="battle-pile-dialog"
+        onScrollCapture={() => {
+          hoverReady.current = false;
+        }}
+        onWheelCapture={() => {
+          hoverReady.current = false;
+        }}
+        onPointerMoveCapture={(event) => {
+          if (event.pointerType !== "touch" && (event.movementX !== 0 || event.movementY !== 0))
+            hoverReady.current = true;
+        }}
         onKeyDown={(event) => {
           if (event.key === "Escape") {
             event.preventDefault();
@@ -1024,25 +1074,47 @@ function PileBrowser({
         </div>
         {!betweenFights && (
           <div className="battle-pile-tabs" role="group" aria-label="Card piles">
-            <Button variant="outline" aria-pressed={view === "discard"} onClick={() => setView("discard")}>
+            <Button
+              variant="outline"
+              aria-pressed={view === "discard"}
+              onClick={() => {
+                hoverReady.current = false;
+                setView("discard");
+              }}
+            >
               Discard {discard.length}
             </Button>
-            <Button variant="outline" aria-pressed={view === "banished"} onClick={() => setView("banished")}>
+            <Button
+              variant="outline"
+              aria-pressed={view === "banished"}
+              onClick={() => {
+                hoverReady.current = false;
+                setView("banished");
+              }}
+            >
               Banished {banished.length}
             </Button>
-            <Button variant="outline" aria-pressed={view === "deck"} onClick={() => setView("deck")}>
+            <Button
+              variant="outline"
+              aria-pressed={view === "deck"}
+              onClick={() => {
+                hoverReady.current = false;
+                setView("deck");
+              }}
+            >
               Deck {deck.length}
             </Button>
           </div>
         )}
         {view === "deck" ? (
-          <DeckContents deck={deck} />
+          <DeckContents deck={deck} hoverReady={hoverReady} />
         ) : visible.length ? (
           <div className="battle-pile-grid">
             {visible.map((card, index) => (
               <PileCard
                 key={card.id}
                 card={card}
+                hoverReady={hoverReady}
                 {...(view === "discard"
                   ? {
                       position:
@@ -1580,6 +1652,10 @@ function BattleSession({
     leaveBattle(() => onReplay(snapshot.state));
   }
   const s = snapshot.state;
+  const phaseHoverReady = useRef(false);
+  useLayoutEffect(() => {
+    phaseHoverReady.current = false;
+  }, [s.phase, s.experiment?.route?.selecting, s.experiment?.restRemovals]);
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [s.phase, s.experiment?.route?.selecting]);
@@ -1838,6 +1914,16 @@ function BattleSession({
     <section
       className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : s.phase === "route" ? " battle-screen--route" : s.phase === "rest" ? " battle-screen--rest" : s.phase === "victory" || s.phase === "defeat" ? " battle-screen--ending" : ""}`}
       aria-labelledby="battle-title"
+      onPointerMoveCapture={(event) => {
+        if (event.pointerType !== "touch" && (event.movementX !== 0 || event.movementY !== 0))
+          phaseHoverReady.current = true;
+      }}
+      onWheelCapture={() => {
+        phaseHoverReady.current = false;
+      }}
+      onScrollCapture={() => {
+        phaseHoverReady.current = false;
+      }}
     >
       <div className="battle-head">
         <div>
@@ -2107,7 +2193,12 @@ function BattleSession({
       {s.phase === "reward" && (
         <div className="battle-rewards" style={{ "--offers": s.offers.length } as React.CSSProperties}>
           {s.offers.map((pair) => (
-            <RewardCard key={pair} pair={pair} onChoose={() => dispatch({ type: "reward", pair })} />
+            <RewardCard
+              key={pair}
+              pair={pair}
+              hoverReady={phaseHoverReady}
+              onChoose={() => dispatch({ type: "reward", pair })}
+            />
           ))}
           <div className="battle-reward-actions">
             <Button variant="outline" onClick={() => setPileOpen(true)}>
@@ -2135,7 +2226,7 @@ function BattleSession({
               <section className="battle-exchange" aria-label="Mirror Exchange">
                 <div className="battle-exchange__offer">
                   <h2>Receive</h2>
-                  <RewardCard pair={path.pair} inspecting onChoose={() => {}} />
+                  <RewardCard pair={path.pair} inspecting hoverReady={phaseHoverReady} onChoose={() => {}} />
                   <Button
                     variant="outline"
                     onClick={(event) => {
@@ -2153,6 +2244,7 @@ function BattleSession({
                       key={card.id}
                       pair={card.pair}
                       removing
+                      hoverReady={phaseHoverReady}
                       exchangeFor={path.pair}
                       onChoose={(event) => {
                         if (event.detail === 0) focusAfterPlay.current = 0;
@@ -2166,6 +2258,7 @@ function BattleSession({
           return (
             <section className="battle-route" aria-label="Route choices">
               <RouteChoice
+                hoverReady={phaseHoverReady}
                 label={`Combat: ${enemy.name} · ${enemy.hp} HP · weakness ${enemy.weakness} · extra reward`}
                 caption="Combat · Extra reward"
                 onChoose={() => dispatch({ type: "route", choice: "combat" })}
@@ -2185,6 +2278,7 @@ function BattleSession({
                 <p>Pattern: {enemyPattern(enemy)}</p>
               </RouteChoice>
               <RouteChoice
+                hoverReady={phaseHoverReady}
                 label={`Rest: heal ${restHeal} HP`}
                 caption={`Rest · +${restHeal} HP`}
                 onChoose={() => dispatch({ type: "route", choice: "rest" })}
@@ -2198,6 +2292,7 @@ function BattleSession({
                 <p>Heal {restHeal} HP.</p>
               </RouteChoice>
               <RouteChoice
+                hoverReady={phaseHoverReady}
                 label={
                   path.event === "exchange"
                     ? `Event: ${event.label} ${path.pair}`
@@ -2280,6 +2375,7 @@ function BattleSession({
                 key={card.id}
                 pair={card.pair}
                 removing
+                hoverReady={phaseHoverReady}
                 onChoose={(event) => {
                   if (event.detail === 0) focusAfterRest.current = index;
                   dispatch({ type: "rest", remove: card.id });
@@ -2295,7 +2391,10 @@ function BattleSession({
           banished={s.zones.banished}
           deck={s.deck}
           betweenFights={s.phase !== "battle"}
-          onClose={() => setPileOpen(false)}
+          onClose={() => {
+            phaseHoverReady.current = false;
+            setPileOpen(false);
+          }}
         />
       )}
       {(s.phase === "victory" || s.phase === "defeat") && (

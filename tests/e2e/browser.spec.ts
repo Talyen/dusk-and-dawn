@@ -3123,7 +3123,10 @@ test("a large deck scrolls in a small window without losing controls or stale in
   await expect(page.getByRole("tooltip")).toBeVisible();
   await grid.hover();
   await page.mouse.wheel(0, 3000);
-  await expect(page.getByRole("tooltip", { name: /Angel.*Vampire/ })).toHaveCount(0);
+  await page.evaluate(
+    () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+  );
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
   await expect(deck.locator(".battle-deck-pair button").last()).toBeInViewport({ ratio: 1 });
   await expect(deck.getByRole("button", { name: "Close" })).toBeInViewport({ ratio: 1 });
   await deck.getByRole("button", { name: "Close" }).click();
@@ -4418,3 +4421,107 @@ for (const ruleset of [3, 4] as const) {
     ).toBeVisible();
   });
 }
+
+test("opening the deck does not inspect artwork under a stationary pointer", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22, undefined, "oathless-seraph").getSnapshot());
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = ["Sanctuary & Prison"];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const deckButton = page.getByRole("button", { name: "Deck 10" });
+  const point = (await deckButton.boundingBox())!;
+  await deckButton.click();
+  const deck = page.getByRole("dialog", { name: "Deck · 10" });
+  await expect(deck).toBeVisible();
+  await page.evaluate(
+    () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+  );
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await page.mouse.move(point.x + point.width / 2 + 3, point.y + point.height / 2);
+  await expect(page.getByRole("tooltip")).toContainText("Key");
+  await page.keyboard.press("Tab");
+  await deck.getByRole("button", { name: /^Angel & Vampire/ }).focus();
+  await expect(page.getByRole("tooltip")).toContainText("Vampire");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await page.keyboard.press("Escape");
+  await expect(deck).toHaveCount(0);
+});
+
+test("choosing a reward does not open an unrelated route tooltip under the pointer", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(
+      31,
+      { id: "route-hover", tier: 1, orientation: "light", relic: "none" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = ["High Tide & Low Tide", "Thread Spinner & Thread Cutter", "Midwife & Undertaker"];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const reward = page.getByRole("button", { name: /^High Tide & Low Tide/ });
+  const point = (await reward.boundingBox())!;
+  await reward.click();
+  const combat = page.getByRole("button", { name: /^Combat:/ });
+  await expect(combat).toBeVisible();
+  await page.evaluate(
+    () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+  );
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await page.mouse.move(point.x + point.width / 2 + 3, point.y + point.height / 2);
+  await expect(page.getByRole("tooltip")).toContainText("Extra reward");
+  await page.keyboard.press("Tab");
+  await page.getByRole("button", { name: /^Rest:/ }).focus();
+  await expect(page.getByRole("tooltip")).toContainText("Heal");
+});
+
+test("the main menu remains readable and tappable in compact portrait windows", async ({ page }) => {
+  for (const size of [
+    { width: 390, height: 844 },
+    { width: 320, height: 480 },
+  ]) {
+    await page.setViewportSize(size);
+    await page.goto("/");
+    const title = page.getByRole("heading", { name: "Dusk & Dawn" });
+    expect(
+      Number.parseFloat(await title.evaluate((el) => getComputedStyle(el).fontSize)),
+    ).toBeGreaterThanOrEqual(36);
+    for (const name of ["Play", "Collection", "Options"]) {
+      const button = page.getByRole("button", { name, exact: true });
+      await expect(button).toBeInViewport({ ratio: 1 });
+      expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    }
+  }
+});
+
+test("compact menu sizing still follows the player's game-size setting", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const heights: number[] = [];
+  for (const gameSizePercent of [80, 120]) {
+    await page.goto("/");
+    await page.evaluate(
+      (size) =>
+        localStorage.setItem(
+          "dusk-and-dawn.settings.v1",
+          JSON.stringify({ gameSizePercent: size, reducedMotion: true }),
+        ),
+      gameSizePercent,
+    );
+    await page.reload();
+    heights.push((await page.getByRole("button", { name: "Play", exact: true }).boundingBox())!.height);
+  }
+  expect(heights[1]! / heights[0]!).toBeCloseTo(1.5, 1);
+});
