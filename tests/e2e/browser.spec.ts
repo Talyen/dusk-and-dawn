@@ -3069,6 +3069,206 @@ test("touching an antihero selects it and reveals its passive before starting", 
   await context.close();
 });
 
+test("turning the hand previews only changed faces and counts duplicate cards", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "sunrise", pair: "Sunrise & Eclipse" },
+    { id: "first", pair: "Angel & Vampire" },
+    { id: "moon", pair: "Sun & Moon" },
+    { id: "second", pair: "Angel & Vampire" },
+    { id: "sun", pair: "Sun & Moon" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card, index) => ({
+    ...card,
+    face: index === 0 || index === 4 ? "light" : "dark",
+    kept: false,
+  }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const sunrise = page.getByRole("button", { name: /Sunrise light/ });
+  await sunrise.hover();
+  const tip = page.getByRole("tooltip");
+  await expect(tip).toContainText("Light face preview: Vampire → Angel ×2; Moon → Sun.");
+  await expect(tip).not.toContainText("Sun → Moon");
+  await page.mouse.move(5, 5);
+  await page.keyboard.press("Tab");
+  await sunrise.focus();
+  await page.setViewportSize({ width: 320, height: 480 });
+  await expect(tip).toBeInViewport({ ratio: 1 });
+  await expect(tip).toContainText("Vampire → Angel ×2");
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await sunrise.click();
+  await expect(page.getByRole("button", { name: /Angel light/ })).toHaveCount(2);
+  await expect(page.getByRole("button", { name: /Sun light/ })).toHaveCount(2);
+  await expect(page.getByText(/Mana 2\/3/)).toBeVisible();
+});
+
+test("the original Extinguished Candle previews dark faces", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "candle", pair: "Candle & Extinguished Candle" },
+    { id: "angel", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "dark", kept: false },
+    { ...snapshot.state.deck[1]!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const candle = page.getByRole("button", { name: /Extinguished Candle dark/ });
+  await candle.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Dark face preview: Angel → Vampire.");
+  await candle.click();
+  await expect(page.getByRole("button", { name: /Vampire dark/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Extinguished Candle dark/ })).toHaveCount(0);
+});
+
+test("a turn effect reports when no other faces would change", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "sunrise", pair: "Sunrise & Eclipse" },
+    { id: "angel", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Sunrise light/ }).hover();
+  await expect(page.getByRole("tooltip")).toContainText("Light face preview: no other cards change.");
+});
+
+for (const scenario of [
+  { label: "uses Scry without exposing deeper cards", reveal: true, topFace: "dark" },
+  { label: "keeps the draw hidden", reveal: false, topFace: "dark" },
+  { label: "recognizes an already light draw", reveal: true, topFace: "light" },
+] as const) {
+  test(`draw-and-turn preview ${scenario.label}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(22).getSnapshot());
+    snapshot.state.deck = [
+      { id: "atrium", pair: "Golden Atrium & Black Atrium" },
+      { id: "moon", pair: "Sun & Moon" },
+      { id: "hidden", pair: "Flame & Frost" },
+      { id: "top", pair: "Angel & Vampire" },
+    ];
+    snapshot.state.zones.hand = [
+      { ...snapshot.state.deck[0]!, face: "light", kept: false },
+      { ...snapshot.state.deck[1]!, face: "dark", kept: false },
+    ];
+    snapshot.state.zones.library = [
+      { ...snapshot.state.deck[2]!, face: "light", kept: false },
+      { ...snapshot.state.deck[3]!, face: scenario.topFace, kept: false },
+    ];
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    snapshot.state.zones.scry = scenario.reveal;
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const atrium = page.getByRole("button", { name: /Golden Atrium light/ });
+    await atrium.hover();
+    const tip = page.getByRole("tooltip");
+    await expect(tip).toContainText("Light face preview: Moon → Sun.");
+    if (scenario.reveal && scenario.topFace === "dark")
+      await expect(tip).toContainText("Draw and turn: Vampire → Angel.");
+    else if (scenario.reveal) await expect(tip).toContainText("Draw and turn: Angel remains light.");
+    else {
+      await expect(tip).toContainText("its identity is not revealed yet");
+      await expect(tip).not.toContainText("Vampire");
+    }
+    await expect(tip).not.toContainText("Flame");
+    await atrium.click();
+    await expect(page.getByRole("button", { name: /Angel light/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Sun light/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Golden Atrium light/ })).toHaveCount(0);
+  });
+}
+
+test("draw-and-turn preview reports an empty draw without exposing a card", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "atrium", pair: "Golden Atrium & Black Atrium" },
+    { id: "moon", pair: "Sun & Moon" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "light", kept: false },
+    { ...snapshot.state.deck[1]!, face: "dark", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  snapshot.state.zones.scry = true;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const atrium = page.getByRole("button", { name: /Golden Atrium light/ });
+  await atrium.hover();
+  await expect(page.getByRole("tooltip")).toContainText("No card will be drawn.");
+  await atrium.click();
+  await expect(page.getByRole("button", { name: /Sun light/ })).toBeVisible();
+  await expect(page.locator(".battle-card")).toHaveCount(1);
+});
+
+test("random Flip preview counts repeated eligible faces", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "marionette", pair: "Puppeteer & Marionette" },
+    { id: "first", pair: "Sun & Moon" },
+    { id: "second", pair: "Sun & Moon" },
+    { id: "angel", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card, index) => ({
+    ...card,
+    face: index === 0 ? "dark" : "light",
+    kept: false,
+  }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const marionette = page.getByRole("button", { name: /Marionette dark/ });
+  await marionette.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Sun → Moon ×2; Angel → Vampire");
+  await marionette.click();
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+});
+
 test("Scry-aware flip previews show the revealed draw without exposing deeper cards", async ({ page }) => {
   const snapshot = structuredClone(createRun(22, undefined, "veiled-oracle").getSnapshot());
   snapshot.state.deck = [

@@ -1052,6 +1052,12 @@ const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = 
   Oblivion: { hits: [7], type: "Oblivion" },
 };
 
+function summarizeChanges(changes: string[]): string {
+  const counts = new Map<string, number>();
+  for (const change of changes) counts.set(change, (counts.get(change) ?? 0) + 1);
+  return [...counts].map(([change, count]) => `${change}${count > 1 ? ` ×${count}` : ""}`).join("; ");
+}
+
 function cardPreview(s: RunState, card: FightCard): ReactNode {
   const info = face(card);
   const ops = info.ops ?? [];
@@ -1060,6 +1066,7 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
     const next = cards[other.pair]![other.face === "light" ? "dark" : "light"];
     return `${face(other).name} → ${next.name}`;
   });
+  const flipSummary = summarizeChanges(flipped);
   const lines: string[] = [];
   if (seraphGrantsWard(s, card)) lines.push("On play: gain 1 Ward before this effect.");
   if (s.hero === "thorn-witch" && card.face === "dark")
@@ -1092,7 +1099,7 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
     if (generic?.op === "attack-ignore-ward") lines.push("This attack ignores Ward, including if reflected.");
   }
   if (info.name === "Moon" || info.name === "Key" || ops.some((op) => op.op === "flip-hand")) {
-    lines.push(`Flip preview: ${flipped.join("; ") || "no other cards in hand"}.`);
+    lines.push(`Flip preview: ${flipSummary || "no other cards in hand"}.`);
     if (info.name === "Key" || ops.some((op) => op.op === "draw")) {
       const revealed = scryTop(s.zones);
       if (revealed) {
@@ -1105,9 +1112,37 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
       }
     }
   }
+  const turnHand = ops.find((op) => op.op === "turn-hand");
+  const turnFace = info.name === "Extinguished Candle" ? "dark" : turnHand?.face;
+  if (turnFace) {
+    const changed = summarizeChanges(
+      hand
+        .filter((other) => other.face !== turnFace)
+        .map((other) => `${face(other).name} → ${cards[other.pair]![turnFace].name}`),
+    );
+    lines.push(
+      `${turnFace === "light" ? "Light" : "Dark"} face preview: ${changed || "no other cards change"}.`,
+    );
+    const turnIndex = ops.findIndex((op) => op.op === "turn-hand");
+    if (ops.slice(0, turnIndex).some((op) => op.op === "draw")) {
+      const revealed = scryTop(s.zones);
+      if (revealed) {
+        const target = cards[revealed.pair]![turnFace].name;
+        lines.push(
+          revealed.face === turnFace
+            ? `Draw and turn: ${target} remains ${turnFace}.`
+            : `Draw and turn: ${face(revealed).name} → ${target}.`,
+        );
+      } else if (!s.zones.library.length && !s.zones.discard.length) {
+        lines.push("No card will be drawn.");
+      } else {
+        lines.push(`Any card drawn first will also turn ${turnFace}; its identity is not revealed yet.`);
+      }
+    }
+  }
   if (ops.some((op) => op.op === "flip-random"))
     lines.push(
-      `Random Flip eligible cards: ${flipped.join("; ") || "none"}. The random selection happens after play.`,
+      `Random Flip eligible cards: ${flipSummary || "none"}. The random selection happens after play.`,
     );
   const handMove = info.name === "Funnel" ? "top" : ops.find((op) => op.op === "hand-library")?.position;
   if (handMove)
