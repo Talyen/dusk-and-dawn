@@ -56,6 +56,8 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Fern Fiddlehead": "Draw 2 cards.",
   "Fallen Leaf": "Draw 1 card. Banish this card.",
   "Flower Bud": "Keep your hand.",
+  Anchor: "Keep your hand.",
+  Secrecy: "Hush. Banish this card.",
 };
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   ...simpleCards,
@@ -185,6 +187,24 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
       ops: [{ op: "keep-hand" }],
     },
     dark: simpleCards["Flower Bud & Seed Pod"].dark,
+  },
+  "Anchor & Kite": {
+    light: {
+      name: "Anchor",
+      effect: playtestEffectOverrides.Anchor!,
+      keywords: ["Keep"],
+      ops: [{ op: "keep-hand" }],
+    },
+    dark: simpleCards["Anchor & Kite"].dark,
+  },
+  "Confession & Secrecy": {
+    light: simpleCards["Confession & Secrecy"].light,
+    dark: {
+      name: "Secrecy",
+      effect: playtestEffectOverrides.Secrecy!,
+      keywords: ["Hush", "Banish"],
+      ops: [{ op: "hush" }, { op: "banish" }],
+    },
   },
   "Angel & Vampire": {
     light: { name: "Angel", effect: "Gain 5 Ward.", keywords: ["Ward"] },

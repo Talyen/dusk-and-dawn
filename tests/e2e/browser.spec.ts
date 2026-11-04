@@ -6166,3 +6166,49 @@ test("the Scribe and Chessboard plan the next draw against the Mole's tunnel", a
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "17");
   await expect(page.getByRole("button", { name: /^Sun light/ })).toBeVisible();
 });
+
+test("Anchor preserves a hand and Secrecy silences the Mole across reload", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42, undefined, "oathless-seraph").getSnapshot());
+  snapshot.state.encounters![0] = "the-velvet-mole";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 24;
+  snapshot.state.action = 1;
+  snapshot.state.player.hp = 20;
+  snapshot.state.player.ward = 5;
+  snapshot.state.deck = [
+    { id: "anchor", pair: "Anchor & Kite" },
+    { id: "secret", pair: "Confession & Secrecy" },
+    { id: "sun", pair: "Sun & Moon" },
+    { id: "angel", pair: "Angel & Vampire" },
+    ...Array.from({ length: 6 }, (_, index) => ({ id: `fresh-${index}`, pair: "Bloom & Wither" })),
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.slice(0, 4).map((card, index) => ({
+    ...card,
+    face: index === 1 ? "dark" : "light",
+    kept: false,
+  }));
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(4)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Anchor light.*Keep your hand/ }).click();
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(3);
+  await page.getByRole("button", { name: /^Secrecy dark.*Hush/ }).click();
+  await expect(page.getByRole("button", { name: "Discard 1 · Banished 1" })).toBeVisible();
+  await page.getByRole("button", { name: /^Sun light/ }).click();
+  await expect(page.getByRole("img", { name: "The Velvet Mole, 18 of 24 HP" })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+  await expect(page.getByRole("button", { name: /The Velvet Mole intent: 4 Release$/ })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "20");
+  await expect(page.getByRole("button", { name: /^Angel light/ })).toBeVisible();
+});

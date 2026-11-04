@@ -43,13 +43,13 @@
     "self-keep": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "self-Keep and self-Flip resolve the original source on its resulting face",
-      "count": 23,
+      "count": 21,
       "effect_pattern": "^(?:Flip this card\\. )?Keep this card\\.$"
     },
     "whole-hand": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "whole-hand Flip, Keep, and facing effects change the other held cards only",
-      "count": 34,
+      "count": 35,
       "effect_pattern": "^(?:Flip your hand\\.|Keep your hand\\.|Turn your hand to its (?:light|dark) faces\\.)$"
     },
     "random-hand": {
@@ -121,7 +121,7 @@
     "hush": {
       "test_file": "tests/lib/card-sequencing-families.test.ts",
       "test_name": "pure Hush faces require a suppressible intent and spend their source only on a valid play",
-      "count": 7,
+      "count": 8,
       "effect_pattern": "^Hush\\. Banish this card\\.$"
     },
     "reflect": {
@@ -284,7 +284,7 @@
       "pair": "Confession & Secrecy",
       "side": "dark",
       "face": "Secrecy",
-      "family": "self-keep"
+      "family": "hush"
     },
     {
       "pair": "Absolution & Condemnation",
@@ -1207,7 +1207,7 @@
       "pair": "Anchor & Kite",
       "side": "light",
       "face": "Anchor",
-      "family": "self-keep"
+      "family": "whole-hand"
     },
     {
       "pair": "Anchor & Kite",

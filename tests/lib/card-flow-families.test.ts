@@ -124,7 +124,7 @@ it("self-Keep and self-Flip resolve the original source on its resulting face", 
   const faces = catalogue.filter((face) =>
     ["Keep this card.", "Flip this card. Keep this card."].includes(face.effect),
   );
-  expect(faces).toHaveLength(23);
+  expect(faces).toHaveLength(21);
   for (const face of faces) {
     const held = Array.from({ length: 7 }, (_, index) => c(`held-${index}`, index % 2 ? "dark" : "light"));
     const game = fixture(face, held, [], []);
@@ -166,7 +166,7 @@ it("whole-hand Flip, Keep, and facing effects change the other held cards only",
     expect(game.getSnapshot().state.zones.hand, face.name).toEqual(expected);
     expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["source"]);
   }
-  expect(checked).toBe(34);
+  expect(checked).toBe(35);
 });
 
 it("random Flip and Keep act without replacement and use all available cards", () => {
