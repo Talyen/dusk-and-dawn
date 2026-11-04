@@ -8,6 +8,8 @@ A run starts at 30 HP with two copies of each of five starter pairs; the Cracked
 
 Victory before the last scheduled fight offers up to three unowned card pairs or a skip. After the second scheduled fight, the player may heal 6 HP or remove a deck card. The optional expedition can add a route after the first and third fights: combat for a reward, rest for 4 HP, or an event costing 4 HP for a card pair. The event requires more than 4 HP; routes rejoin before the next scheduled fight. Relics can alter these choices. See `tests/lib/expedition.test.ts` and `tests/lib/run.test.ts`.
 
+The run deck can be inspected at reward and route choices, and from the combat pile browser. It groups physical cards by pair and shows both faces and copy counts. It does not show the order or current facing of cards in the hidden library, and inspection does not change the run or consume randomness.
+
 ## Cards and turn order
 
 Playing a card costs 1 mana. The active face and any required target are checked before payment; the card leaves the hand while its effect resolves. A flip changes the card's face but does not change the effect already being resolved. Kept cards remain in hand at end of turn; other cards are discarded left to right. Banish removes a card from the fight, not the run deck. The hand limit is 8; excess draws remain in the library. The discard pile is shuffled into an empty library only when a draw needs it. Scry exposes the current library top without causing a reshuffle and ends when the turn is ended.

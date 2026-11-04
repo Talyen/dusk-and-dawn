@@ -976,8 +976,10 @@ input:focus-visible,
   gap: 0.5rem;
   max-width: 19rem;
 }
-.battle-rewards > .ui-button {
-  align-self: flex-start;
+.battle-reward-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
 }
 .battle-reward-art {
   display: flex;
@@ -1457,7 +1459,7 @@ input:focus-visible,
 .battle-reward:focus-visible .battle-reward-art img {
   box-shadow: 0 0 1.2rem #efd0a65c;
 }
-.battle-rewards > .ui-button {
+.battle-reward-actions > .ui-button {
   align-self: center;
   color: #e8d7c3;
   background: #16141c;
@@ -1581,7 +1583,8 @@ input:focus-visible,
 .battle-reward {
   width: 100%;
 }
-.battle-rewards > .ui-button {
+.battle-reward-actions,
+.battle-route-deck {
   grid-column: 1 / -1;
   justify-self: center;
 }
@@ -1961,4 +1964,18 @@ button.battle-pile:disabled {
   .battle-status-tooltip {
     max-width: min(14rem, calc(100vw - 6rem)) !important;
   }
+}
+
+.battle-deck-grid {
+  margin-top: 1rem;
+}
+.battle-deck-pair {
+  flex: 0 0 clamp(8rem, 25vw, 12rem);
+  width: clamp(8rem, 25vw, 12rem);
+  color: #d7c7b4;
+  font-size: 0.8rem;
+}
+.battle-deck-pair > span {
+  display: block;
+  margin-top: 0.3rem;
 }

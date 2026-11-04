@@ -471,10 +471,14 @@ function RewardCard({
   pair,
   onChoose,
   removing = false,
+  inspecting = false,
+  count = 1,
 }: {
   pair: string;
   onChoose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   removing?: boolean;
+  inspecting?: boolean;
+  count?: number;
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -488,25 +492,24 @@ function RewardCard({
   });
   useEffect(() => {
     if (!open) return;
-    const outside = (event: globalThis.PointerEvent) => {
-      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
-        touchPinned.current = false;
-        setOpen(false);
-      }
+    const dismiss = () => {
+      pointer.current = false;
+      focus.current = false;
+      touchPinned.current = false;
+      setOpen(false);
     };
-    const focusOutside = (event: FocusEvent) => {
-      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
-        pointer.current = false;
-        focus.current = false;
-        touchPinned.current = false;
-        setOpen(false);
-      }
+    const outside = (event: Event) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) dismiss();
     };
     document.addEventListener("pointerdown", outside, true);
-    document.addEventListener("focusin", focusOutside, true);
+    document.addEventListener("focusin", outside, true);
+    document.addEventListener("scroll", dismiss, true);
+    window.addEventListener("blur", dismiss);
     return () => {
       document.removeEventListener("pointerdown", outside, true);
-      document.removeEventListener("focusin", focusOutside, true);
+      document.removeEventListener("focusin", outside, true);
+      document.removeEventListener("scroll", dismiss, true);
+      window.removeEventListener("blur", dismiss);
     };
   }, [open]);
   useEffect(() => {
@@ -536,9 +539,12 @@ function RewardCard({
             event.preventDefault();
             return;
           }
-          onChoose(event);
+          if (inspecting) {
+            touchPinned.current = true;
+            setOpen(true);
+          } else onChoose(event);
         }}
-        aria-label={`${removing ? "Remove " : ""}${pair}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
+        aria-label={`${removing ? "Remove " : ""}${pair}${inspecting ? `, ${count} ${count === 1 ? "copy" : "copies"}` : ""}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
         onPointerMove={touch.onPointerMove}
@@ -851,16 +857,35 @@ function PileCard({
   );
 }
 
+function DeckContents({ deck }: { deck: RunState["deck"] }) {
+  const counts = new Map<string, number>();
+  for (const card of deck) counts.set(card.pair, (counts.get(card.pair) ?? 0) + 1);
+  return (
+    <div className="battle-pile-grid battle-deck-grid">
+      {[...counts].map(([pair, count]) => (
+        <div className="battle-deck-pair" key={pair}>
+          <RewardCard pair={pair} inspecting count={count} onChoose={() => {}} />
+          <span aria-hidden="true">×{count}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function PileBrowser({
   discard,
   banished,
+  deck,
+  betweenFights,
   onClose,
 }: {
   discard: FightCard[];
   banished: FightCard[];
+  deck: RunState["deck"];
+  betweenFights: boolean;
   onClose: () => void;
 }) {
-  const [view, setView] = useState<"discard" | "banished">("discard");
+  const [view, setView] = useState<"discard" | "banished" | "deck">(betweenFights ? "deck" : "discard");
   const dialogRef = useRef<HTMLElement>(null);
   const titleId = useId();
   useEffect(() => {
@@ -911,20 +936,29 @@ function PileBrowser({
         }}
       >
         <div className="battle-pile-dialog__head">
-          <h2 id={titleId}>{view === "discard" ? "Discard" : "Banished"}</h2>
+          <h2 id={titleId}>
+            {view === "discard" ? "Discard" : view === "banished" ? "Banished" : `Deck · ${deck.length}`}
+          </h2>
           <Button variant="outline" onClick={onClose}>
             Close
           </Button>
         </div>
-        <div className="battle-pile-tabs" role="group" aria-label="Card piles">
-          <Button variant="outline" aria-pressed={view === "discard"} onClick={() => setView("discard")}>
-            Discard {discard.length}
-          </Button>
-          <Button variant="outline" aria-pressed={view === "banished"} onClick={() => setView("banished")}>
-            Banished {banished.length}
-          </Button>
-        </div>
-        {visible.length ? (
+        {!betweenFights && (
+          <div className="battle-pile-tabs" role="group" aria-label="Card piles">
+            <Button variant="outline" aria-pressed={view === "discard"} onClick={() => setView("discard")}>
+              Discard {discard.length}
+            </Button>
+            <Button variant="outline" aria-pressed={view === "banished"} onClick={() => setView("banished")}>
+              Banished {banished.length}
+            </Button>
+            <Button variant="outline" aria-pressed={view === "deck"} onClick={() => setView("deck")}>
+              Deck {deck.length}
+            </Button>
+          </div>
+        )}
+        {view === "deck" ? (
+          <DeckContents deck={deck} />
+        ) : visible.length ? (
           <div className="battle-pile-grid">
             {visible.map((card, index) => (
               <PileCard
@@ -1746,13 +1780,6 @@ function BattleSession({
               </Button>
             </section>
           )}
-          {pileOpen && (
-            <PileBrowser
-              discard={s.zones.discard}
-              banished={s.zones.banished}
-              onClose={() => setPileOpen(false)}
-            />
-          )}
           <div className="battle-actions" ref={actionRef} role="group" aria-label="Battle actions">
             <Button disabled={!!s.pending || !!selected} onClick={() => dispatch({ type: "end" })}>
               End turn
@@ -1768,7 +1795,12 @@ function BattleSession({
           {s.offers.map((pair) => (
             <RewardCard key={pair} pair={pair} onChoose={() => dispatch({ type: "reward", pair })} />
           ))}
-          <Button onClick={() => dispatch({ type: "reward", pair: null })}>Skip reward</Button>
+          <div className="battle-reward-actions">
+            <Button variant="outline" onClick={() => setPileOpen(true)}>
+              Deck {s.deck.length}
+            </Button>
+            <Button onClick={() => dispatch({ type: "reward", pair: null })}>Skip reward</Button>
+          </div>
         </div>
       )}
       {s.phase === "route" &&
@@ -1827,6 +1859,9 @@ function BattleSession({
                 <strong>{cards[path.pair]!.dark.name}</strong>
                 <p>{cards[path.pair]!.dark.effect}</p>
               </RouteChoice>
+              <Button className="battle-route-deck" variant="outline" onClick={() => setPileOpen(true)}>
+                Deck {s.deck.length}
+              </Button>
             </section>
           );
         })()}
@@ -1855,6 +1890,15 @@ function BattleSession({
             ))}
           </div>
         </section>
+      )}
+      {pileOpen && (
+        <PileBrowser
+          discard={s.zones.discard}
+          banished={s.zones.banished}
+          deck={s.deck}
+          betweenFights={s.phase !== "battle"}
+          onClose={() => setPileOpen(false)}
+        />
       )}
       {(s.phase === "victory" || s.phase === "defeat") && (
         <section className="battle-ending">

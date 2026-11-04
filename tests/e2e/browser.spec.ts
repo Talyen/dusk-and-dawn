@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { createRun, runHandler } from "../../src/lib/game/run";
+import { cards, createRun, runHandler } from "../../src/lib/game/run";
 import { restoreSession } from "../../src/lib/game/session";
 import { stateRng } from "../../src/lib/game/random-state";
 import { encodeRun } from "../../src/lib/game/run-save";
@@ -2169,4 +2169,141 @@ test("multi-effect combat feedback stays clear of the hand and actions at common
     });
     expect(overlaps, `feedback overlaps controls at ${viewport.width}×${viewport.height}`).toEqual([]);
   }
+});
+
+test("the run deck is inspectable before rewards and remains unchanged until a choice", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = ["Sanctuary & Prison"];
+  const saved = encodeRun(snapshot);
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const opener = page.getByRole("button", { name: "Deck 10", exact: true });
+  await opener.focus();
+  await page.keyboard.press("Enter");
+  const deck = page.getByRole("dialog", { name: "Deck · 10" });
+  await expect(deck).toBeFocused();
+  await expect(deck.locator(".battle-deck-pair")).toHaveCount(5);
+  const pair = deck.getByRole("button", { name: /^Angel & Vampire, 2 copies/ });
+  await page.keyboard.press("Shift+Tab");
+  await expect(deck.locator(".battle-deck-pair button").last()).toBeFocused();
+  await pair.focus();
+  await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
+  await expect(page.getByRole("tooltip")).toContainText("Deal 4 Shadow damage");
+  await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+  await page.keyboard.press("Escape");
+  await expect(deck).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(deck).toHaveCount(0);
+  await expect(opener).toBeFocused();
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await page.getByRole("button", { name: /^Sanctuary & Prison/ }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck.length),
+    )
+    .toBe(11);
+  await page.getByRole("button", { name: /Discard .* Banished/ }).click();
+  await page.getByRole("button", { name: "Deck 11", exact: true }).click();
+  await expect(
+    page
+      .getByRole("dialog", { name: "Deck · 11" })
+      .getByRole("button", { name: /^Sanctuary & Prison, 1 copy/ }),
+  ).toBeVisible();
+});
+
+test("deck inspection does not reveal library order or current hidden faces", async ({ browser }) => {
+  const original = structuredClone(createRun(22).getSnapshot());
+  const changed = structuredClone(original);
+  changed.state.zones.library.reverse();
+  changed.state.zones.library.forEach((card) => {
+    card.face = card.face === "light" ? "dark" : "light";
+  });
+  const observed: string[][] = [];
+  for (const snapshot of [original, changed]) {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    const saved = encodeRun(snapshot);
+    await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: /Discard .* Banished/ }).click();
+    await page.getByRole("button", { name: "Deck 10", exact: true }).click();
+    const deck = page.getByRole("dialog", { name: "Deck · 10" });
+    observed.push(
+      await deck
+        .locator(".battle-deck-pair button")
+        .evaluateAll((buttons) => buttons.map((button) => button.getAttribute("aria-label")!)),
+    );
+    expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+    await context.close();
+  }
+  expect(observed[0]).toEqual(observed[1]);
+});
+
+test("touch can inspect the deck on an expedition route without choosing it", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const snapshot = structuredClone(
+    createRun(31, { id: "deck-route", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const saved = encodeRun(game.getSnapshot());
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  await page.getByRole("button", { name: "Deck 10", exact: true }).tap();
+  const deck = page.getByRole("dialog", { name: "Deck · 10" });
+  const pair = deck.getByRole("button", { name: /^Angel & Vampire, 2 copies/ });
+  await pair.tap();
+  await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
+  await expect(page.getByRole("tooltip")).toContainText("Deal 4 Shadow damage");
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await deck.getByRole("button", { name: "Close" }).tap();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+  await page.getByRole("button", { name: /^Rest: heal 4/ }).tap();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toHaveCount(0);
+  await context.close();
+});
+
+test("a large deck scrolls in a small window without losing controls or stale inspection", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 480 });
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = [];
+  snapshot.state.deck = Object.keys(cards)
+    .slice(0, 24)
+    .map((pair, index) => ({ id: `deck-${index}`, pair }));
+  const saved = encodeRun(snapshot);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Deck 24", exact: true }).click();
+  const deck = page.getByRole("dialog", { name: "Deck · 24" });
+  const grid = deck.locator(".battle-deck-grid");
+  await deck.locator(".battle-deck-pair button").first().click();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await grid.hover();
+  await page.mouse.wheel(0, 3000);
+  await expect(page.getByRole("tooltip", { name: /Angel.*Vampire/ })).toHaveCount(0);
+  await expect(deck.locator(".battle-deck-pair button").last()).toBeInViewport({ ratio: 1 });
+  await expect(deck.getByRole("button", { name: "Close" })).toBeInViewport({ ratio: 1 });
+  await deck.getByRole("button", { name: "Close" }).click();
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
 });
