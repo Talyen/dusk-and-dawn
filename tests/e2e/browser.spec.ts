@@ -6212,3 +6212,41 @@ test("Anchor preserves a hand and Secrecy silences the Mole across reload", asyn
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "20");
   await expect(page.getByRole("button", { name: /^Angel light/ })).toBeVisible();
 });
+
+test("Scabbard draws the blade for the next turn and persists it on reload", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "radiant-moth";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 18;
+  snapshot.state.action = 0;
+  snapshot.state.mana = 1;
+  snapshot.state.deck = [
+    { id: "blade", pair: "Scabbard & Drawn Blade" },
+    ...Array.from({ length: 5 }, (_, index) => ({ id: `fresh-${index}`, pair: "Sun & Moon" })),
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(1)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Scabbard light.*Flip this card/ }).click();
+  await expect(page.getByRole("button", { name: /^Drawn Blade dark/ })).toHaveAttribute(
+    "aria-disabled",
+    "true",
+  );
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+  await page.getByRole("button", { name: "End turn" }).click();
+  await page.getByRole("button", { name: /^Drawn Blade dark/ }).click();
+  await expect(page.getByRole("img", { name: "Radiant Moth, 12 of 18 HP" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Drawn Blade dark/ })).toHaveCount(0);
+});

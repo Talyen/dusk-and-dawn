@@ -58,6 +58,7 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Flower Bud": "Keep your hand.",
   Anchor: "Keep your hand.",
   Secrecy: "Hush. Banish this card.",
+  Scabbard: "Flip this card. Keep this card.",
 };
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   ...simpleCards,
@@ -187,6 +188,15 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
       ops: [{ op: "keep-hand" }],
     },
     dark: simpleCards["Flower Bud & Seed Pod"].dark,
+  },
+  "Scabbard & Drawn Blade": {
+    light: {
+      name: "Scabbard",
+      effect: playtestEffectOverrides.Scabbard!,
+      keywords: ["Flip", "Keep"],
+      ops: [{ op: "flip-self" }, { op: "keep-self" }],
+    },
+    dark: simpleCards["Scabbard & Drawn Blade"].dark,
   },
   "Anchor & Kite": {
     light: {
