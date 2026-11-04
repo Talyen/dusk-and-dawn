@@ -4083,3 +4083,35 @@ test("deck focus overrides a stationary pointer inspecting another pair", async 
   await page.keyboard.press("Escape");
   await expect(page.getByRole("tooltip")).toHaveCount(0);
 });
+
+test("route inspection leaves the deck action visible on desktop", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(31, { id: "route-tooltip", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  const game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(game.getSnapshot()),
+  );
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const rest = page.getByRole("button", { name: /^Rest: heal/ });
+  const deck = page.getByRole("button", { name: /^Deck / });
+  await rest.hover();
+  const tip = page.getByRole("tooltip");
+  await expect(tip).toContainText("Heal 0 HP");
+  await expect
+    .poll(async () => {
+      const [a, b] = await Promise.all([tip.boundingBox(), deck.boundingBox()]);
+      if (!a || !b) return true;
+      return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+    })
+    .toBe(false);
+  await deck.click();
+  await expect(page.getByRole("dialog", { name: /^Deck/ })).toBeVisible();
+});

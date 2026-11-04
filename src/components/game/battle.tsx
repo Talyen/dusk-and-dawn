@@ -765,6 +765,7 @@ function RouteChoice({
         open={open}
         placement={placement}
         overlayNarrow
+        avoidRegions=".battle-route-deck"
         className="battle-tooltip"
       >
         {children}
