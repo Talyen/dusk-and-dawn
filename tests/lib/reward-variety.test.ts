@@ -69,7 +69,7 @@ describe("reward variety", () => {
 
   it("prefers distinct effects on both faces without excluding either shared-face pair", () => {
     const choices = [
-      "Lamb & Wolf",
+      "Red Panda & Clouded Leopard",
       "Perfumer & Scent Thief",
       "Wax Seal & Torn Letter",
       "Wooden Spool & Loose Thread",
@@ -96,7 +96,7 @@ describe("reward variety", () => {
 
   it("retains both shared-face pairs when their different opposite faces are needed", () => {
     const snapshot = structuredClone(createRun(19).getSnapshot());
-    const choices = ["Lamb & Wolf", "Perfumer & Scent Thief", "Wax Seal & Torn Letter"];
+    const choices = ["Red Panda & Clouded Leopard", "Perfumer & Scent Thief", "Wax Seal & Torn Letter"];
     snapshot.state.deck = Object.keys(cards)
       .filter((pair) => !choices.includes(pair))
       .map((pair, index) => ({ id: `card-${index}`, pair }));
@@ -114,7 +114,7 @@ describe("reward variety", () => {
     { pair: "Feather & Chain", face: "light", hand: 3, scry: false, curse: 0, kept: false },
     { pair: "Open Gate & Sealed Gate", face: "light", hand: 3, scry: false, curse: 0, kept: false },
     { pair: "Feather & Chain", face: "dark", hand: 1, scry: false, curse: 2, kept: false },
-    { pair: "Open Gate & Sealed Gate", face: "dark", hand: 1, scry: false, curse: 2, kept: false },
+    { pair: "Open Gate & Sealed Gate", face: "dark", hand: 1, scry: false, curse: 0, kept: true },
     { pair: "Lantern & Shroud", face: "light", hand: 2, scry: true, curse: 0, kept: false },
     { pair: "Sunlit Gallery & Shadow Gallery", face: "light", hand: 2, scry: true, curse: 0, kept: false },
     { pair: "Lantern & Shroud", face: "dark", hand: 1, scry: false, curse: 0, kept: true },

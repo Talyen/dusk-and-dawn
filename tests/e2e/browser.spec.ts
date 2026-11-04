@@ -5815,3 +5815,54 @@ test("the revised violin draws an empowered attack and silences the Stag's trait
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "26");
   await expect(page.getByRole("button", { name: /^Player status:.*curse/ })).toHaveCount(0);
 });
+
+for (const action of [0, 1] as const) {
+  test(`Lamb and Sealed Gate against the Fisher's ${action === 0 ? "base attack" : "hook"}`, async ({
+    page,
+  }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-celestial-fisher";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 28;
+    snapshot.state.action = action;
+    snapshot.state.deck = [
+      { id: "lamb", pair: "Lamb & Wolf" },
+      { id: "sun", pair: "Sun & Moon" },
+      { id: "gate", pair: "Open Gate & Sealed Gate" },
+      { id: "bloom", pair: "Bloom & Wither" },
+      ...Array.from({ length: 6 }, (_, index) => ({ id: `fresh-${index}`, pair: "Sun & Moon" })),
+    ];
+    snapshot.state.zones.hand = [
+      { ...snapshot.state.deck[0]!, face: "light", kept: false },
+      { ...snapshot.state.deck[1]!, face: "light", kept: false },
+      { ...snapshot.state.deck[2]!, face: "dark", kept: false },
+      { ...snapshot.state.deck[3]!, face: "light", kept: false },
+    ];
+    snapshot.state.zones.library = snapshot.state.deck
+      .slice(4)
+      .map((card) => ({ ...card, face: "light", kept: false }));
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript((data) => {
+      if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    }, encodeRun(snapshot));
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: /^Lamb light/ }).click();
+    await expect(page.getByRole("button", { name: /^Player status:.*bless 2/ })).toBeVisible();
+    await page.getByRole("button", { name: /^Sun light/ }).click();
+    await expect(page.getByRole("img", { name: "The Celestial Fisher, 20 of 28 HP" })).toBeVisible();
+    await page.getByRole("button", { name: /^Sealed Gate dark/ }).click();
+    await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.locator(".battle-card[data-kept]")).toHaveCount(1);
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-player-hp",
+      action === 0 ? "25" : "26",
+    );
+    await expect(page.getByRole("button", { name: /^Bloom light/ })).toHaveCount(action === 0 ? 1 : 0);
+  });
+}

@@ -50,6 +50,8 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Collapsed Watchtower": "Deal 6 Decay damage. Banish this card.",
   "Tuned Violin": "Bless 1. Draw 1 card.",
   "Broken Violin": "Hush. Banish this card.",
+  Lamb: "Bless 2.",
+  "Sealed Gate": "Keep your hand.",
   "Fern Fiddlehead": "Draw 2 cards.",
   "Fallen Leaf": "Draw 1 card. Banish this card.",
   "Flower Bud": "Keep your hand.",
@@ -105,6 +107,24 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
       effect: playtestEffectOverrides["Deer Trail"]!,
       keywords: ["Flip"],
       ops: [{ op: "draw", amount: 1 }, { op: "flip-hand" }],
+    },
+  },
+  "Lamb & Wolf": {
+    light: {
+      name: "Lamb",
+      effect: playtestEffectOverrides.Lamb!,
+      keywords: ["Bless"],
+      ops: [{ op: "bless", amount: 2 }],
+    },
+    dark: simpleCards["Lamb & Wolf"].dark,
+  },
+  "Open Gate & Sealed Gate": {
+    light: simpleCards["Open Gate & Sealed Gate"].light,
+    dark: {
+      name: "Sealed Gate",
+      effect: playtestEffectOverrides["Sealed Gate"]!,
+      keywords: ["Keep"],
+      ops: [{ op: "keep-hand" }],
     },
   },
   "Tuned Violin & Broken Violin": {

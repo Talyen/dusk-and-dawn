@@ -103,3 +103,90 @@ it("the Jackrabbit places the top library card at the bottom without changing it
     expect(state.zones.library.find((card) => card.id === "top")?.face).toBe("dark");
   }
 });
+
+it("Lamb boosts a Radiance hit while Censer protects against the Jackrabbit", () => {
+  for (const support of ["lamb", "censer"] as const) {
+    const setup = structuredClone(createRun(19).getSnapshot());
+    setup.state.encounters![0] = "the-ink-jackrabbit";
+    setup.state.enemy.hp = setup.state.enemy.maxHp = 22;
+    setup.state.action = 0;
+    setup.state.zones.hand = [
+      {
+        id: "support",
+        pair: support === "lamb" ? "Lamb & Wolf" : "Censer & Plague Brazier",
+        face: "light",
+        kept: false,
+      },
+      { id: "sun", pair: "Sun & Moon", face: "light", kept: false },
+    ];
+    setup.state.zones.library = [];
+    setup.state.zones.discard = [];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "support" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.bless).toBe(support === "lamb" ? 2 : 0);
+    expect(game.getSnapshot().state.enemy.curse).toBe(support === "censer" ? 2 : 0);
+    expect(game.dispatch({ type: "play", id: "sun" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.enemy.hp).toBe(support === "lamb" ? 12 : 14);
+    expect(game.getSnapshot().state.player.bless).toBe(0);
+    expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.hp).toBe(support === "lamb" ? 26 : 28);
+  }
+});
+
+it("Sealed Gate keeps the other hand, but the Fisher can still hook a kept card", () => {
+  for (const action of [0, 1]) {
+    const setup = structuredClone(createRun(19).getSnapshot());
+    setup.state.encounters![0] = "the-celestial-fisher";
+    setup.state.enemy.hp = setup.state.enemy.maxHp = 28;
+    setup.state.action = action;
+    setup.state.zones.hand = [
+      { id: "gate", pair: "Open Gate & Sealed Gate", face: "dark", kept: false },
+      { id: "held", pair: "Sun & Moon", face: "light", kept: false },
+    ];
+    setup.state.zones.library = Array.from({ length: 7 }, (_, index) => ({
+      id: `fresh-${index}`,
+      pair: "Bloom & Wither",
+      face: "light" as const,
+      kept: false,
+    }));
+    setup.state.zones.discard = [];
+    const game = restoreSession(setup, runHandler);
+    expect(game.dispatch({ type: "play", id: "gate" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand).toMatchObject([{ id: "held", kept: true }]);
+    expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["gate"]);
+    expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    const state = game.getSnapshot().state;
+    expect(state.player.hp).toBe(action === 0 ? 25 : 26);
+    expect(state.zones.hand.some((card) => card.id === "held")).toBe(action === 0);
+    expect(state.zones.discard.some((card) => card.id === "held")).toBe(action === 1);
+    expect(state.zones.hand.every((card) => !card.kept)).toBe(true);
+  }
+});
+
+it("opening before sealing preserves the newly drawn cards, while reversing the order does not", () => {
+  for (const order of [
+    ["open", "sealed"],
+    ["sealed", "open"],
+  ] as const) {
+    const setup = structuredClone(createRun(19).getSnapshot());
+    setup.state.zones.hand = [
+      { id: "open", pair: "Open Gate & Sealed Gate", face: "light", kept: false },
+      { id: "sealed", pair: "Open Gate & Sealed Gate", face: "dark", kept: false },
+      { id: "held", pair: "Sun & Moon", face: "light", kept: false },
+    ];
+    setup.state.zones.library = [
+      { id: "bottom", pair: "Bloom & Wither", face: "light", kept: false },
+      { id: "top", pair: "Angel & Vampire", face: "dark", kept: false },
+    ];
+    setup.state.zones.discard = [];
+    const game = restoreSession(setup, runHandler);
+    for (const id of order) expect(game.dispatch({ type: "play", id }).decision.accepted).toBe(true);
+    const hand = game.getSnapshot().state.zones.hand;
+    expect(hand.map((card) => card.id)).toEqual(["held", "top", "bottom"]);
+    expect(hand.map((card) => card.kept)).toEqual(
+      order[0] === "open" ? [true, true, true] : [true, false, false],
+    );
+    expect(hand.find((card) => card.id === "top")?.face).toBe("dark");
+    expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(order);
+  }
+});

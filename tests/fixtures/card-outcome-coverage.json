@@ -5,7 +5,7 @@
     "numeric": {
       "test_file": "tests/lib/card-numeric-outcomes.test.ts",
       "test_name": "matches printed numeric card outcomes under Ward, weakness, statuses, and mana caps",
-      "count": 189,
+      "count": 188,
       "sentence_patterns": [
         "Deal \\d+ (?:Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage(?: (?:twice|three times)|, ignoring Ward)?\\.",
         "Leech\\.",
@@ -49,7 +49,7 @@
     "whole-hand": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "whole-hand Flip, Keep, and facing effects change the other held cards only",
-      "count": 33,
+      "count": 34,
       "effect_pattern": "^(?:Flip your hand\\.|Keep your hand\\.|Turn your hand to its (?:light|dark) faces\\.)$"
     },
     "random-hand": {
@@ -683,7 +683,7 @@
       "pair": "Open Gate & Sealed Gate",
       "side": "dark",
       "face": "Sealed Gate",
-      "family": "numeric"
+      "family": "whole-hand"
     },
     {
       "pair": "Sanctuary & Prison",

@@ -166,7 +166,7 @@ it("whole-hand Flip, Keep, and facing effects change the other held cards only",
     expect(game.getSnapshot().state.zones.hand, face.name).toEqual(expected);
     expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["source"]);
   }
-  expect(checked).toBe(33);
+  expect(checked).toBe(34);
 });
 
 it("random Flip and Keep act without replacement and use all available cards", () => {
