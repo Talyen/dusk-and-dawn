@@ -833,6 +833,10 @@ input:focus-visible,
 .battle-tooltip {
   --tooltip-unit: max(0.875rem, calc(var(--ui-unit) * var(--tooltip-size)));
 }
+.battle-card-tooltip p strong {
+  display: inline;
+  font-size: inherit;
+}
 .battle-setup h1 {
   font:
     1.9rem Georgia,

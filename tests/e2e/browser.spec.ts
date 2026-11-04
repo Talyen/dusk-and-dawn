@@ -1242,6 +1242,63 @@ test("inspects battle cards on hover and keyboard focus without selecting them",
   expect(accessibility.violations).toEqual([]);
 });
 
+test("hand inspection keeps the enemy and actions clear when desktop space permits", async ({ page }) => {
+  const seed = Array.from({ length: 100 }, (_, index) => index).find(
+    (value) =>
+      createRun(
+        value,
+        { id: "placement", tier: 1, orientation: "light", relic: "none" },
+        "oathless-seraph",
+      ).getSnapshot().state.zones.hand[2]?.pair === "Key & Lock",
+  )!;
+  await page.addInitScript((value) => {
+    Math.random = () => value / 0x100000000;
+  }, seed);
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
+  const card = page.locator(".battle-card").nth(2);
+  const tip = page.getByRole("tooltip");
+  const clearBoard = async () => {
+    const boxes = await Promise.all(
+      [
+        tip,
+        page.locator(".battle-enemy"),
+        page.locator(".battle-hand-stage"),
+        page.locator(".battle-actions"),
+      ].map((item) => item.boundingBox()),
+    );
+    const [panel, ...protectedAreas] = boxes;
+    if (!panel || protectedAreas.some((area) => !area)) return null;
+    return protectedAreas.map(
+      (area) =>
+        panel.x < area!.x + area!.width &&
+        panel.x + panel.width > area!.x &&
+        panel.y < area!.y + area!.height &&
+        panel.y + panel.height > area!.y,
+    );
+  };
+  await card.hover();
+  await expect(tip).toContainText("Flip preview:");
+  await expect(tip).toHaveAttribute("data-visible", "true");
+  await expect.poll(clearBoard).toEqual([false, false, false]);
+  await page.mouse.move(5, 5);
+  await page.keyboard.press("Tab");
+  await card.focus();
+  await expect(tip).toBeVisible();
+  await expect.poll(clearBoard).toEqual([false, false, false]);
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await expect.poll(clearBoard).toEqual([false, false, false]);
+  await page.setViewportSize({ width: 320, height: 480 });
+  await expect(tip).toBeInViewport({ ratio: 1 });
+  await expect(tip).toContainText("Flip preview:");
+  await page.keyboard.press("Escape");
+  await expect(tip).toBeHidden();
+  await page.keyboard.press("Enter");
+  await expect(page.getByText(/Mana 2\/3/)).toBeVisible();
+});
+
 test("a conceded detour reloads as a defeat instead of recovering the previous battle", async ({ page }) => {
   const setup = structuredClone(
     createRun(71, { id: "detour-save", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),

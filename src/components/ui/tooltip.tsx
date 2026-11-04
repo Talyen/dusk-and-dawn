@@ -11,6 +11,7 @@ export function Tooltip({
   overlayNarrow = false,
   verticalOnly = false,
   avoidSelector,
+  avoidRegions,
   className,
   children,
 }: {
@@ -21,6 +22,7 @@ export function Tooltip({
   overlayNarrow?: boolean;
   verticalOnly?: boolean;
   avoidSelector?: string;
+  avoidRegions?: string;
   className?: string;
   children: ReactNode;
 }) {
@@ -103,6 +105,36 @@ export function Tooltip({
             if (above >= 8) y = above;
           }
         }
+        if (avoidRegions) {
+          const regions = Array.from(document.querySelectorAll(avoidRegions), (element) =>
+            element.getBoundingClientRect(),
+          );
+          const tip = panel.getBoundingClientRect();
+          const overlaps = (left: number, top: number, region: DOMRect) =>
+            left < region.right &&
+            left + tip.width > region.left &&
+            top < region.bottom &&
+            top + tip.height > region.top;
+          if (regions.some((region) => overlaps(x, y, region))) {
+            // Keep inspection near the hand when possible, but move it beside the
+            // first protected region if a clear, fully visible position exists.
+            const primary = regions[0];
+            if (primary) {
+              const positions = [
+                y,
+                8,
+                ...regions.flatMap((region) => [region.top - tip.height - 8, region.bottom + 8]),
+              ];
+              const candidates = [primary.left - tip.width - 8, primary.right + 8]
+                .filter((left) => left >= 8 && left + tip.width <= window.innerWidth - 8)
+                .flatMap((left) => positions.map((top) => ({ left, top })))
+                .filter(({ top }) => top >= 8 && top + tip.height <= window.innerHeight - 8)
+                .filter(({ left, top }) => !regions.some((region) => overlaps(left, top, region)))
+                .sort((a, b) => Math.hypot(a.left - x, a.top - y) - Math.hypot(b.left - x, b.top - y));
+              if (candidates[0]) ({ left: x, top: y } = candidates[0]);
+            }
+          }
+        }
         Object.assign(panel.style, { left: `${x}px`, top: `${y}px` });
         setSide(placement.split("-")[0] ?? "top");
         setPlaced(true);
@@ -113,7 +145,7 @@ export function Tooltip({
       live = false;
       stop();
     };
-  }, [present, triggerRef, placement, overlayNarrow, verticalOnly, avoidSelector]);
+  }, [present, triggerRef, placement, overlayNarrow, verticalOnly, avoidSelector, avoidRegions]);
 
   if (!present) return null;
   return createPortal(

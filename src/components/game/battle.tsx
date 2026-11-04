@@ -374,7 +374,13 @@ function BattleCard({
           <strong>{info.name}</strong> {card.face} · {card.kept ? "Kept · " : ""}1 mana. {info.effect}
         </span>
       </button>
-      <Tooltip triggerRef={trigger} id={id} open={open} className="battle-tooltip">
+      <Tooltip
+        triggerRef={trigger}
+        id={id}
+        open={open}
+        avoidRegions=".battle-enemy, .battle-hand-stage, .battle-actions"
+        className="battle-tooltip battle-card-tooltip"
+      >
         <strong>{info.name}</strong>
         <p>1 mana{card.kept ? " · Kept" : ""}</p>
         <p>

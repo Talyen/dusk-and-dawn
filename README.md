@@ -1,6 +1,6 @@
 # Dusk & Dawn
 
-A browser and desktop card game prototype. The playable run contains five scheduled encounters, reviewed two-sided cards and enemies, local saves, and an optional branching expedition. Balance and several design decisions remain provisional; see the [playtest notes](docs/Expedition%20Playtest%20v0.1.md).
+A browser and desktop card game prototype. The playable run contains five scheduled encounters, reviewed two-sided cards and enemies, local saves, and a branching expedition, with the original linear run available in expedition settings. Balance and several design decisions remain provisional; see the [playtest notes](docs/Expedition%20Playtest%20v0.1.md).
 
 ## Get started
 
