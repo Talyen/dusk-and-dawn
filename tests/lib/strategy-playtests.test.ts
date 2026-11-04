@@ -165,10 +165,17 @@ it("compares experimental routes, relics and orientations over 50 seeds each", (
             .sort((a, b) => b.value - a.value);
           command = { type: "reward", pair: ranked[0]?.value ? ranked[0].pair : null };
         } else if (state.phase === "rest") command = { type: "rest" };
+        else if (state.phase === "route" && state.experiment?.route?.selecting)
+          command = { type: "exchange", id: state.deck[0]!.id };
         else if (state.phase === "route")
           command = {
             type: "route",
-            choice: variant.path === "event" && state.player.hp <= 4 ? "rest" : variant.path,
+            choice:
+              variant.path === "event" &&
+              state.player.hp <= 4 &&
+              (state.experiment?.route?.event ?? "blood") === "blood"
+                ? "rest"
+                : variant.path,
           };
         else if (state.pending) {
           const choices = state.pending.cards.slice();
@@ -265,6 +272,8 @@ it("isolates orientation and Cracked Vessel across attack and defense policies",
               .sort((a, b) => b.value - a.value);
             command = { type: "reward", pair: ranked[0]?.value ? ranked[0].pair : null };
           } else if (state.phase === "rest") command = { type: "rest" };
+          else if (state.phase === "route" && state.experiment?.route?.selecting)
+            command = { type: "exchange", id: state.deck[0]!.id };
           else if (state.phase === "route")
             command = {
               type: "route",

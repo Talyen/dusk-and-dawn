@@ -65,7 +65,7 @@ describe("experimental expeditions", () => {
       expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
       expect(game.getSnapshot().state.experiment!.route!.event).not.toBe(first);
     }
-    expect(firstEvents).toEqual(new Set(["blood", "thorns", "lantern"]));
+    expect(firstEvents).toEqual(new Set(["blood", "thorns", "lantern", "exchange"]));
   });
   for (const event of ["blood", "thorns", "lantern"] as const) {
     it(`previews, saves, and resolves the ${event} event once`, async () => {
@@ -100,6 +100,67 @@ describe("experimental expeditions", () => {
       expect(game.getSnapshot().state.mana).toBe(3);
     });
   }
+  it("saves and cancels an exchange without changing the deck or randomness, then swaps exactly one card", async () => {
+    const initial = structuredClone(routeGame().getSnapshot());
+    initial.state.experiment!.route!.event = "exchange";
+    initial.state.experiment!.lastEvent = "exchange";
+    initial.state.player.hp = 4;
+    const incoming = initial.state.experiment!.route!.pair;
+    const outgoing = initial.state.deck[0]!;
+    let game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "route", choice: "event" }).decision.accepted).toBe(true);
+    const pending = game.getSnapshot();
+    expect(pending.state.experiment!.route!.selecting).toBe(true);
+    expect(pending.state.deck).toEqual(initial.state.deck);
+    expect(pending.random).toEqual(initial.random);
+    const encoded = encodeRun(pending);
+    const loaded = await readRunWithRecovery({
+      readCandidates: async () => [encoded],
+      write: async () => {},
+    });
+    expect(loaded?.snapshot).toEqual(pending);
+    game = restoreSession(loaded!.snapshot, runHandler);
+    expect(game.dispatch({ type: "exchange", id: "missing" }).snapshot).toEqual(pending);
+    expect(game.dispatch({ type: "route", choice: "combat" }).snapshot).toEqual(pending);
+    expect(game.dispatch({ type: "exchange", id: null }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state).toEqual(initial.state);
+    expect(game.getSnapshot().random).toEqual(initial.random);
+    expect(game.dispatch({ type: "route", choice: "event" }).decision.accepted).toBe(true);
+    expect(game.dispatch({ type: "exchange", id: outgoing.id }).decision.accepted).toBe(true);
+    const result = game.getSnapshot();
+    expect(result.state.phase).toBe("battle");
+    expect(result.state.fight).toBe(1);
+    expect(result.state.player.hp).toBe(4);
+    expect(result.state.deck).toHaveLength(initial.state.deck.length);
+    expect(result.state.deck.some((card) => card.id === outgoing.id)).toBe(false);
+    expect(result.state.deck.filter((card) => card.pair === incoming)).toHaveLength(1);
+    expect(result.state.deck.slice(1)).toEqual(initial.state.deck.slice(1));
+    expect([...result.state.zones.hand, ...result.state.zones.library].map((card) => card.id).sort()).toEqual(
+      result.state.deck.map((card) => card.id).sort(),
+    );
+    const resumed = await readRunWithRecovery({
+      readCandidates: async () => [encodeRun(result)],
+      write: async () => {},
+    });
+    expect(resumed?.snapshot).toEqual(result);
+  });
+  it("rejects malformed exchange saves and never offers an exchange for an empty deck", async () => {
+    const initial = structuredClone(routeGame().getSnapshot());
+    initial.state.experiment!.route!.event = "blood";
+    initial.state.experiment!.route!.selecting = true;
+    await expect(
+      readRunWithRecovery({ readCandidates: async () => [encodeRun(initial)], write: async () => {} }),
+    ).rejects.toThrow();
+    for (let seed = 0; seed < 20; seed++) {
+      const empty = structuredClone(createRun(seed, options).getSnapshot());
+      empty.state.phase = "reward";
+      empty.state.offers = [];
+      empty.state.deck = [];
+      const game = restoreSession(empty, runHandler);
+      expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+      expect(game.getSnapshot().state.experiment!.route?.event).not.toBe("exchange");
+    }
+  });
   it("allows risky non-blood events at low health but rejects the blood bargain", () => {
     for (const event of ["blood", "thorns", "lantern"] as const) {
       const initial = structuredClone(routeGame().getSnapshot());

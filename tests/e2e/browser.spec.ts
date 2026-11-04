@@ -2901,3 +2901,125 @@ for (const fight of [0, 1]) {
     await expect.poll(async () => page.evaluate(() => window.scrollY)).toBe(0);
   });
 }
+
+test("Mirror Exchange previews, cancels, resumes and swaps one chosen card", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "exchange-ui", tier: 1, orientation: "light", relic: "hollow-chalice" },
+      "thorn-witch",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  initial.state.player.hp = 17;
+  const game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = structuredClone(game.getSnapshot());
+  route.state.experiment!.route!.event = "exchange";
+  route.state.experiment!.lastEvent = "exchange";
+  const incoming = route.state.experiment!.route!.pair;
+  const outgoing = route.state.deck[0]!;
+  const saved = encodeRun(route);
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, saved);
+  await page.setViewportSize({ width: 390, height: 700 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const event = page.getByRole("button", { name: `Event: exchange a card for ${incoming}` });
+  await event.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Exchange a card in your deck for this pair.");
+  await page.keyboard.press("Tab");
+  await event.focus();
+  await event.press("Enter");
+  await expect(page.getByRole("heading", { name: "Mirror Exchange", exact: true })).toBeFocused();
+  await expect(page.getByRole("heading", { name: "Receive" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Give" })).toBeVisible();
+  await expect(page.getByRole("button", { name: `The Thorn Witch, HP 17/30` })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () =>
+          JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.experiment?.route
+            ?.selecting,
+      ),
+    )
+    .toBe(true);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Mirror Exchange", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Back to paths" }).click();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Deck 10" })).toBeVisible();
+  await page.getByRole("button", { name: `Event: exchange a card for ${incoming}` }).click();
+  const give = page.getByRole("button", { name: `Exchange ${outgoing.pair} for ${incoming}` }).first();
+  await give.click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "17");
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.fight,
+      ),
+    )
+    .toBe(1);
+  const state = await page.evaluate(
+    () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state.run,
+  );
+  expect(state.deck).toHaveLength(route.state.deck.length);
+  expect(state.deck.some((card: { id: string }) => card.id === outgoing.id)).toBe(false);
+  expect(state.deck.filter((card: { pair: string }) => card.pair === incoming)).toHaveLength(1);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "17");
+});
+
+test("touch inspects an exchange card without trading until tapped", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const snapshot = structuredClone(
+    createRun(31, { id: "exchange-touch", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = structuredClone(game.getSnapshot());
+  route.state.experiment!.route!.event = "exchange";
+  route.state.experiment!.route!.selecting = true;
+  const incoming = route.state.experiment!.route!.pair;
+  const outgoing = route.state.deck[0]!;
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), encodeRun(route));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  const card = page.getByRole("button", { name: `Exchange ${outgoing.pair} for ${incoming}` }).first();
+  await card.scrollIntoViewIfNeeded();
+  const box = (await card.boundingBox())!;
+  const cdp = await context.newCDPSession(page);
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchStart",
+    touchPoints: [{ x: box.x + box.width / 2, y: box.y + box.height / 2 }],
+  });
+  await page.waitForTimeout(600);
+  await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await expect(page.getByRole("heading", { name: "Mirror Exchange", exact: true })).toBeVisible();
+  await card.tap();
+  await expect(page.locator(".battle-player")).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.fight,
+      ),
+    )
+    .toBe(1);
+  await context.close();
+});

@@ -1,4 +1,4 @@
-export const expeditionEventIds = ["blood", "thorns", "lantern"] as const;
+export const expeditionEventIds = ["blood", "thorns", "lantern", "exchange"] as const;
 export type ExpeditionEventId = (typeof expeditionEventIds)[number];
 
 /** An absent event is a route saved before event variety was introduced. */
@@ -21,6 +21,12 @@ export function expeditionEvent(id: ExpeditionEventId = "blood") {
       caption: "Fading Lantern · −1 mana",
       cost: "Start the next fight with 2 mana.",
       label: "start next fight with 2 mana",
+    },
+    exchange: {
+      name: "Mirror Exchange",
+      caption: "Mirror Exchange · Trade a card",
+      cost: "Exchange a card in your deck for this pair.",
+      label: "exchange a card for",
     },
   }[id];
 }

@@ -46,6 +46,7 @@ const runSchema = z
             pair: cardPair,
             active: z.boolean(),
             event: z.enum(expeditionEventIds).optional(),
+            selecting: z.literal(true).optional(),
           })
           .strict()
           .optional(),
@@ -96,6 +97,11 @@ const runSchema = z
       (run.experiment?.route && run.fight !== 0 && run.fight !== 2)
     )
       ctx.addIssue({ code: "custom", message: "Invalid route state" });
+    if (
+      run.experiment?.route?.selecting &&
+      (run.experiment.route.active || run.experiment.route.event !== "exchange" || run.deck.length === 0)
+    )
+      ctx.addIssue({ code: "custom", message: "Invalid exchange state" });
     if (run.action >= getEnemy(run).actions.length)
       ctx.addIssue({ code: "custom", message: "Invalid enemy action" });
     const deck = new Map(run.deck.map((card) => [card.id, card.pair]));

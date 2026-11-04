@@ -507,13 +507,15 @@ function RewardCard({
   onChoose,
   removing = false,
   inspecting = false,
-  count = 1,
+  count,
+  exchangeFor,
 }: {
   pair: string;
   onChoose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   removing?: boolean;
   inspecting?: boolean;
   count?: number;
+  exchangeFor?: string;
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -579,7 +581,7 @@ function RewardCard({
             setOpen(true);
           } else onChoose(event);
         }}
-        aria-label={`${removing ? "Remove " : ""}${pair}${inspecting ? `, ${count} ${count === 1 ? "copy" : "copies"}` : ""}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
+        aria-label={`${exchangeFor ? `Exchange ${pair} for ${exchangeFor}` : `${removing ? "Remove " : ""}${pair}`}${inspecting && count !== undefined ? `, ${count} ${count === 1 ? "copy" : "copies"}` : ""}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
         onPointerMove={touch.onPointerMove}
@@ -1417,6 +1419,13 @@ function BattleSession({
   const focusAfterPlay = useRef<number | null>(null);
   const restDeckRef = useRef<HTMLDivElement>(null);
   const focusAfterRest = useRef<number | null>(null);
+  const focusAfterExchange = useRef(false);
+  useEffect(() => {
+    if (focusAfterExchange.current) {
+      focusAfterExchange.current = false;
+      titleRef.current?.focus();
+    }
+  }, [snapshot]);
   useEffect(() => {
     const index = focusAfterRest.current;
     if (index === null) return;
@@ -1472,7 +1481,7 @@ function BattleSession({
   const s = snapshot.state;
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [s.phase]);
+  }, [s.phase, s.experiment?.route?.selecting]);
   const preloadedImages = useRef<HTMLImageElement[]>([]);
   const preloadPairs = [...new Set(s.deck.map((card) => card.pair))].join("\0");
   useEffect(() => {
@@ -1649,7 +1658,9 @@ function BattleSession({
                 : s.phase === "rest"
                   ? "A moment of rest"
                   : s.phase === "route"
-                    ? "Choose a path"
+                    ? s.experiment?.route?.selecting
+                      ? "Mirror Exchange"
+                      : "Choose a path"
                     : s.phase === "victory"
                       ? "Victory"
                       : "Run ended"}
@@ -1926,6 +1937,39 @@ function BattleSession({
           const enemy = simpleEnemies.find((entry) => entry.id === path.enemy)!;
           const event = expeditionEvent(path.event);
           const restHeal = Math.min(4, s.player.maxHp - s.player.hp);
+          if (path.selecting)
+            return (
+              <section className="battle-exchange" aria-label="Mirror Exchange">
+                <div className="battle-exchange__offer">
+                  <h2>Receive</h2>
+                  <RewardCard pair={path.pair} inspecting onChoose={() => {}} />
+                  <Button
+                    variant="outline"
+                    onClick={(event) => {
+                      if (event.detail === 0) focusAfterExchange.current = true;
+                      dispatch({ type: "exchange", id: null });
+                    }}
+                  >
+                    Back to paths
+                  </Button>
+                </div>
+                <h2>Give</h2>
+                <div className="battle-rest__deck">
+                  {s.deck.map((card) => (
+                    <RewardCard
+                      key={card.id}
+                      pair={card.pair}
+                      removing
+                      exchangeFor={path.pair}
+                      onChoose={(event) => {
+                        if (event.detail === 0) focusAfterPlay.current = 0;
+                        dispatch({ type: "exchange", id: card.id });
+                      }}
+                    />
+                  ))}
+                </div>
+              </section>
+            );
           return (
             <section className="battle-route" aria-label="Route choices">
               <RouteChoice
@@ -1961,10 +2005,20 @@ function BattleSession({
                 <p>Heal {restHeal} HP.</p>
               </RouteChoice>
               <RouteChoice
-                label={`Event: ${event.label}, add ${path.pair}`}
+                label={
+                  path.event === "exchange"
+                    ? `Event: ${event.label} ${path.pair}`
+                    : `Event: ${event.label}, add ${path.pair}`
+                }
                 caption={event.caption}
-                disabled={(path.event ?? "blood") === "blood" && s.player.hp <= 4}
-                onChoose={() => dispatch({ type: "route", choice: "event" })}
+                disabled={
+                  ((path.event ?? "blood") === "blood" && s.player.hp <= 4) ||
+                  (path.event === "exchange" && !s.deck.length)
+                }
+                onChoose={(click) => {
+                  if (click.detail === 0 && path.event === "exchange") focusAfterExchange.current = true;
+                  dispatch({ type: "route", choice: "event" });
+                }}
                 art={
                   <span className="battle-route-art battle-route-art--pair">
                     <img src={art("card", cards[path.pair]!.light.name)} alt="" />

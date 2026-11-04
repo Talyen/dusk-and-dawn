@@ -4,7 +4,7 @@
 
 Collection uses paginated grids of player and enemy cards. Hover or keyboard focus reveals details; clicking a Collection card does not select it. Arrow keys move among visible controls, Tab follows normal focus order, and Back/Escape follow navigation history. Undiscovered entries are masked. Battle has its own selection and inspection flows; preserve keyboard access, focus recovery and the difference between inspecting and committing a play.
 
-Reward and route screens show current HP with the same contextual antihero and relic inspection as combat. Rest choices preview actual healing after the maximum-HP cap. When the run changes phase, the view returns to the top so compact screens start at the new decision rather than a prior scroll position.
+Reward and route screens show current HP with the same contextual antihero and relic inspection as combat. Rest choices preview actual healing after the maximum-HP cap. The Mirror Exchange shows the offered pair alongside the current deck, with a way back before committing a trade. When the run changes phase, the view returns to the top so compact screens start at the new decision rather than a prior scroll position.
 
 `src/components/ui/tooltip.tsx` positions inspection in root space and handles viewport edges and dismissal. The display scale in `src/lib/display/scale.ts` uses the 1280 × 720 fit and large-window growth curve, with a separately saved Game Size. Tooltip Size is independent. Fullscreen is per session and uses the browser or Electron window API. Settings, including reduced motion and background effects, are stored locally; audio should use the shared manager in `src/lib/settings/settings.ts`. No audio assets are registered yet.
 

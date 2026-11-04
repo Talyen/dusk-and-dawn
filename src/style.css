@@ -1711,6 +1711,24 @@ input:focus-visible,
 .battle-screen--rest > [role="status"]:not(.battle-status-error) {
   display: none;
 }
+.battle-exchange {
+  width: min(62rem, 100%);
+  margin: 1rem auto;
+}
+.battle-exchange h2 {
+  margin: 0.8rem 0;
+}
+.battle-exchange__offer {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+}
+.battle-exchange__offer .battle-reward {
+  width: min(13rem, 55vw);
+}
+.battle-exchange__offer h2 {
+  margin: 0;
+}
 .battle-rest {
   width: min(62rem, 100%);
   margin: 1rem auto;

@@ -372,7 +372,13 @@ export interface RunState {
         orientation: "light" | "dark";
         relic: RelicId;
         route?:
-          | { enemy: string; pair: Pair; active: boolean; event?: ExpeditionEventId | undefined }
+          | {
+              enemy: string;
+              pair: Pair;
+              active: boolean;
+              event?: ExpeditionEventId | undefined;
+              selecting?: true | undefined;
+            }
           | undefined;
         lastEvent?: ExpeditionEventId | undefined;
         restRemovals?: number | undefined;
@@ -399,6 +405,7 @@ export type Command =
   | { type: "reward"; pair: Pair | null }
   | { type: "rest"; remove?: string }
   | { type: "route"; choice: "combat" | "rest" | "event" }
+  | { type: "exchange"; id: string | null }
   | { type: "concede" };
 const combatant = (hp: number): Combatant => ({
   hp,
@@ -701,7 +708,9 @@ function offerRoute(s: RunState, rng: Rng) {
   }
   const enemy = candidates[rngInt(rng, candidates.length)]!.id;
   const pair = pairs[rngInt(rng, pairs.length)]!;
-  const events = expeditionEventIds.filter((id) => id !== experiment.lastEvent);
+  const events = expeditionEventIds.filter(
+    (id) => id !== experiment.lastEvent && (id !== "exchange" || s.deck.length > 0),
+  );
   const event = events[rngInt(rng, events.length)]!;
   experiment.lastEvent = event;
   experiment.route = { enemy, pair, event, active: false };
@@ -736,13 +745,38 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     else continueRoute(s, rng);
     return yes();
   }
+  if (command.type === "exchange") {
+    const path = s.experiment?.route;
+    if (s.phase !== "route" || !path || path.active || path.event !== "exchange" || !path.selecting)
+      return no("No exchange is available.");
+    if (command.id === null) {
+      delete path.selecting;
+      return yes();
+    }
+    const index = s.deck.findIndex((card) => card.id === command.id);
+    if (index < 0) return no("Choose a card in the deck.");
+    s.deck[index] = { id: `card-${s.nextId++}`, pair: path.pair };
+    continueRoute(s, rng);
+    return yes();
+  }
   if (command.type === "route") {
     const path = s.experiment?.route;
-    if (s.phase !== "route" || !path || path.active || !["combat", "rest", "event"].includes(command.choice))
+    if (
+      s.phase !== "route" ||
+      !path ||
+      path.active ||
+      path.selecting ||
+      !["combat", "rest", "event"].includes(command.choice)
+    )
       return no("No path is available.");
     const event = path.event ?? "blood";
     if (command.choice === "event" && event === "blood" && s.player.hp <= 4)
       return no("The Blood Bargain requires more than 4 HP.");
+    if (command.choice === "event" && event === "exchange") {
+      if (!s.deck.length) return no("The exchange requires a card in the deck.");
+      path.selecting = true;
+      return yes();
+    }
     if (command.choice === "combat") {
       path.active = true;
       beginFight(s, rng);
