@@ -1385,20 +1385,20 @@ function BattleSession({
         if (after.player.hp !== before.player.hp)
           changes.push(`You ${signed(after.player.hp - before.player.hp)} HP`);
         if (after.enemy.hp !== before.enemy.hp)
-          changes.push(`${getEnemy(before).name} ${signed(after.enemy.hp - before.enemy.hp)} HP`);
+          changes.push(`Enemy ${signed(after.enemy.hp - before.enemy.hp)} HP`);
         if (after.player.ward !== before.player.ward)
           changes.push(`Ward ${signed(after.player.ward - before.player.ward)}`);
         if (after.enemy.ward !== before.enemy.ward)
-          changes.push(`${getEnemy(before).name} Ward ${signed(after.enemy.ward - before.enemy.ward)}`);
+          changes.push(`Enemy Ward ${signed(after.enemy.ward - before.enemy.ward)}`);
         for (const name of ["burn", "poison", "curse", "bless"] as const) {
-          if (after.player[name] > before.player[name])
-            changes.push(
-              `You ${name[0]!.toUpperCase()}${name.slice(1)} +${after.player[name] - before.player[name]}`,
-            );
-          if (after.enemy[name] > before.enemy[name])
-            changes.push(
-              `${name[0]!.toUpperCase()}${name.slice(1)} +${after.enemy[name] - before.enemy[name]}`,
-            );
+          const label = `${name[0]!.toUpperCase()}${name.slice(1)}`;
+          const playerChange = after.player[name] - before.player[name];
+          const enemyChange = after.enemy[name] - before.enemy[name];
+          const showReduction = name === "curse" || name === "bless";
+          if (playerChange > 0 || (showReduction && playerChange < 0))
+            changes.push(`You ${label} ${signed(playerChange)}`);
+          if (enemyChange > 0 || (showReduction && enemyChange < 0))
+            changes.push(`Enemy ${label} ${signed(enemyChange)}`);
         }
         const text =
           after.phase === "reward" || after.phase === "victory"

@@ -1387,9 +1387,19 @@ input:focus-visible,
 }
 .battle-screen--active > [role="status"] {
   top: 55%;
+  width: max-content;
+  max-width: min(90%, 40rem);
   color: #f1d2a8;
   text-shadow: 0 0 0.8rem #d7a16a;
   pointer-events: none;
+}
+@media (max-width: 700px), (max-height: 600px) {
+  .battle-screen--active > [role="status"] {
+    top: 49%;
+    max-width: 48%;
+    font-size: 0.67rem;
+    line-height: 1.1;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .battle-hand .battle-card {

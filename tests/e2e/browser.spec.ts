@@ -2086,3 +2086,87 @@ test("touching an unavailable card explains the cost without playing it", async 
   await expect(page.getByText(/Mana 0\/3/)).toBeVisible();
   await context.close();
 });
+
+test("combat feedback shows Curse being spent so attack order stays understandable", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.player.hp = 13;
+  snapshot.state.player.curse = 3;
+  snapshot.state.enemy.curse = 2;
+  snapshot.state.deck = [
+    { id: "vampire", pair: "Angel & Vampire" },
+    { id: "wither", pair: "Bloom & Wither" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "dark", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const vampire = page.getByRole("button", { name: /Vampire dark/ });
+  const wither = page.getByRole("button", { name: /Wither dark/ });
+  await vampire.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Current attack: 1 Shadow damage");
+  await vampire.click();
+  await expect(page.getByRole("status")).toContainText("You Curse −3");
+  await expect(page.getByText(/HP 14\/30/)).toBeVisible();
+  await wither.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Current attack: 9 Decay damage");
+  await wither.click();
+  await expect(page.getByRole("heading", { name: "Mourning Tree · 26/36" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByText(/HP 9\/30/)).toBeVisible();
+  await expect(page.getByRole("status")).toContainText("Enemy Curse −2");
+  await expect(page.getByRole("status")).toContainText("You Curse +1");
+});
+
+test("multi-effect combat feedback stays clear of the hand and actions at common window sizes", async ({
+  page,
+}) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.player.hp = 20;
+  snapshot.state.enemy.curse = 2;
+  snapshot.state.enemy.burn = 3;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  for (const viewport of [
+    { width: 320, height: 480 },
+    { width: 390, height: 844 },
+    { width: 1280, height: 720 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: "End turn" }).click();
+    const feedback = page.getByRole("status");
+    await expect(feedback).toContainText("Enemy Curse −2");
+    const overlaps = await page.evaluate(() => {
+      const status = document
+        .querySelector('.battle-screen--active > [role="status"]')!
+        .getBoundingClientRect();
+      return [...document.querySelectorAll(".battle-card, .battle-actions button")].flatMap((element) => {
+        const box = element.getBoundingClientRect();
+        return status.left < box.right &&
+          status.right > box.left &&
+          status.top < box.bottom &&
+          status.bottom > box.top
+          ? [
+              {
+                status: status.toJSON(),
+                box: box.toJSON(),
+                label: element.getAttribute("aria-label") || element.textContent,
+              },
+            ]
+          : [];
+      });
+    });
+    expect(overlaps, `feedback overlaps controls at ${viewport.width}×${viewport.height}`).toEqual([]);
+  }
+});
