@@ -460,7 +460,7 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   expect(await card.locator("img").evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   await expect(page.getByText(/Current attack:.*Radiance damage before Ward and Reflect/)).toBeVisible();
   await card.click();
-  await expect(page.getByText(/Other face:/)).toBeVisible();
+  await expect(page.getByLabel("Selected card").getByText(/Other face:/)).toBeVisible();
   await expect(page.getByRole("button", { name: /^Play / })).toBeInViewport();
   await page.getByRole("button", { name: /^Play / }).click();
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
@@ -564,6 +564,16 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
     if (title === "Victory") break;
     if (title === "Run ended") throw new Error(`Seeded browser run ended in defeat after ${step} decisions`);
     if (title === "Choose a reward") {
+      const offers = page.locator(".battle-reward");
+      if (await offers.count()) {
+        await expect(offers.first().locator(".battle-reward-art img")).toHaveCount(2);
+        for (const image of await offers.first().locator(".battle-reward-art img").all()) {
+          await expect(image).toHaveJSProperty("complete", true);
+          expect(await image.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(
+            0,
+          );
+        }
+      }
       await page.getByRole("button", { name: "Skip reward" }).click();
       continue;
     }
@@ -707,6 +717,44 @@ test("previews when Water Clock cannot Keep itself after filling the hand", asyn
   await page.getByRole("button", { name: "Play Water Clock" }).click();
   await expect(page.getByRole("button", { name: /Water Clock dark/ })).toHaveCount(0);
   await expect(page.locator(".battle-card")).toHaveCount(8);
+});
+
+test("battle art remains full-bleed and combat text stays readable at common sizes", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
+  const card = page.locator(".battle-card").first();
+  const dimensions = await card.evaluate((element) => {
+    const cardBox = element.getBoundingClientRect();
+    const imageBox = element.querySelector("img")!.getBoundingClientRect();
+    const actionsBox = document.querySelector(".battle-actions")!.getBoundingClientRect();
+    return {
+      cardBox: { width: cardBox.width, height: cardBox.height, bottom: cardBox.bottom },
+      imageBox: { width: imageBox.width, height: imageBox.height },
+      actionsTop: actionsBox.top,
+    };
+  });
+  expect(dimensions.imageBox.width).toBeGreaterThan(dimensions.cardBox.width - 3);
+  expect(dimensions.imageBox.height).toBeGreaterThan(dimensions.cardBox.height - 3);
+  expect(dimensions.cardBox.width / dimensions.cardBox.height).toBeCloseTo(3 / 4, 1);
+  expect(dimensions.cardBox.bottom).toBeLessThan(dimensions.actionsTop);
+  const enemyArt = await page.locator(".battle-enemy-art").boundingBox();
+  expect(enemyArt!.width / enemyArt!.height).toBeCloseTo(4 / 3, 1);
+  await page.setViewportSize({ width: 800, height: 600 });
+  const fontSize = await page
+    .locator(".battle-enemy")
+    .evaluate((element) => parseFloat(getComputedStyle(element).fontSize));
+  expect(fontSize).toBeGreaterThanOrEqual(14);
+  await card.scrollIntoViewIfNeeded();
+  await card.hover();
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  expect(
+    await tooltip.evaluate((element) => parseFloat(getComputedStyle(element).fontSize)),
+  ).toBeGreaterThanOrEqual(14);
+  await card.click();
+  await expect(page.getByRole("button", { name: /^Play / })).toBeInViewport();
 });
 
 test("battle actions stay usable on a small viewport", async ({ page }) => {
@@ -869,6 +917,8 @@ test("inspects battle cards on hover and keyboard focus without selecting them",
   const tip = page.getByRole("tooltip");
   await expect(tip).toBeVisible();
   await expect(tip).toContainText("Absorbs damage");
+  await expect(tip).toContainText("Other face:");
+  await expect(tip).toContainText("Vampire");
   await expect(card).toHaveAttribute("aria-pressed", "false");
   await expect(page.getByRole("button", { name: /^Play Angel/ })).toHaveCount(0);
   await page.mouse.move(5, 5);

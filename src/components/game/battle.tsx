@@ -89,6 +89,7 @@ function BattleCard({
   const focus = useRef(false);
   const [open, setOpen] = useState(false);
   const info = face(card);
+  const other = cards[card.pair]![card.face === "light" ? "dark" : "light"];
   useEffect(() => {
     if (!open) return;
     const dismiss = () => {
@@ -143,18 +144,22 @@ function BattleCard({
         onClick={onSelect}
       >
         <img className="battle-card-art" src={art("card", info.name)} alt="" />
-        <strong>{info.name}</strong>
-        <span>
-          {card.face} · {card.kept ? "Kept · " : ""}1 mana
-        </span>
-        <span>
-          <Description text={info.effect} />
+        {card.kept && (
+          <span className="battle-card-kept" aria-hidden="true">
+            Kept
+          </span>
+        )}
+        <span className="battle-card-description">
+          <strong>{info.name}</strong> {card.face} · {card.kept ? "Kept · " : ""}1 mana. {info.effect}
         </span>
       </button>
-      <Tooltip triggerRef={trigger} id={id} open={open}>
+      <Tooltip triggerRef={trigger} id={id} open={open} className="battle-tooltip">
         <strong>{info.name}</strong>
         <p>
           <Description text={info.effect} />
+        </p>
+        <p>
+          Other face: <strong>{other.name}</strong> — <Description text={other.effect} />
         </p>
         {info.keywords
           .filter((keyword) => keywordHelp[keyword])
@@ -876,6 +881,10 @@ function BattleSession({
         <div className="battle-rewards">
           {s.offers.map((pair) => (
             <button key={pair} className="battle-reward" onClick={() => dispatch({ type: "reward", pair })}>
+              <span className="battle-reward-art" aria-hidden="true">
+                <img src={art("card", cards[pair]!.light.name)} alt="" />
+                <img src={art("card", cards[pair]!.dark.name)} alt="" />
+              </span>
               <strong>{pair}</strong>
               <span>
                 {cards[pair]!.light.name}: {cards[pair]!.light.effect}

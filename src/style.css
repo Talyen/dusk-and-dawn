@@ -827,6 +827,10 @@ input:focus-visible,
   margin: 0 auto;
   padding: 0.6rem 0 9rem;
   color: #eee9df;
+  font-size: max(0.875rem, var(--ui-unit));
+}
+.battle-tooltip {
+  --tooltip-unit: max(0.875rem, calc(var(--ui-unit) * var(--tooltip-size)));
 }
 .battle-setup h1 {
   font:
@@ -920,13 +924,34 @@ input:focus-visible,
   cursor: pointer;
 }
 .battle-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  position: relative;
   width: min(7rem, 45vw);
-  min-height: 9rem;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  overflow: hidden;
 }
-.battle-card span,
+.battle-card-description {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.battle-card-kept {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  background: #16131de8;
+  color: #fff4de;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
 .battle-reward span {
   font-size: 0.85rem;
 }
@@ -950,21 +975,31 @@ input:focus-visible,
   gap: 0.5rem;
   max-width: 19rem;
 }
+.battle-rewards > .ui-button {
+  align-self: flex-start;
+}
+.battle-reward-art {
+  display: flex;
+  gap: 0.35rem;
+}
+.battle-reward-art img {
+  display: block;
+  width: 5.5rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 0.3rem;
+}
 @media (max-width: 700px) {
   .battle-board {
     grid-template-columns: 1fr;
     gap: 0;
   }
 }
-.battle-card {
-  padding: 0.4rem;
-}
 .battle-card-art {
   display: block;
   width: 100%;
-  aspect-ratio: 3/4;
+  height: 100%;
   object-fit: cover;
-  border-radius: 0.25rem;
 }
 .battle-enemy-figure {
   float: right;

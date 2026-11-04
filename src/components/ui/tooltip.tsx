@@ -8,12 +8,14 @@ export function Tooltip({
   id,
   open,
   placement = "top",
+  className,
   children,
 }: {
   triggerRef: RefObject<HTMLElement | null>;
   id: string;
   open: boolean;
   placement?: "top" | "left" | "right";
+  className?: string;
   children: ReactNode;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -83,7 +85,7 @@ export function Tooltip({
       ref={panelRef}
       id={id}
       role="tooltip"
-      className="card-tooltip"
+      className={`card-tooltip${className ? ` ${className}` : ""}`}
       data-side={side}
       data-visible={open && placed ? "true" : undefined}
       aria-hidden={!open || undefined}
