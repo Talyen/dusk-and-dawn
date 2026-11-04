@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Locator } from "@playwright/test";
-import { cards, createRun, runHandler } from "../../src/lib/game/run";
+import { cards, createRun, getEnemy, runHandler } from "../../src/lib/game/run";
 import { restoreSession } from "../../src/lib/game/session";
 import { stateRng } from "../../src/lib/game/random-state";
 import { encodeRun } from "../../src/lib/game/run-save";
@@ -444,6 +444,38 @@ test("game menu dismisses on backdrop and centers after a resize", async ({ page
   await expect(menu).toHaveClass(/game-menu--centered/);
   await page.keyboard.press("Escape");
   await expect(menu).toBeHidden();
+});
+
+test("an unlocked expedition starts and resumes a varied opening encounter", async ({ page }) => {
+  const config = { id: "selection", tier: 2, orientation: "light", relic: "none" } as const;
+  const seed = Array.from({ length: 100 }, (_, i) => i).find(
+    (value) => createRun(value, config, "oathless-seraph").getSnapshot().state.encounters![0] !== "fixture:0",
+  )!;
+  const state = createRun(seed, config, "oathless-seraph").getSnapshot().state;
+  const enemyName = getEnemy(state).name;
+  await page.addInitScript((value) => {
+    Math.random = () => value / 0x100000000;
+    localStorage.setItem("dusk-and-dawn.expeditions.v1", JSON.stringify({ completed: ["prior-expedition"] }));
+  }, seed);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start expedition" }).click();
+  await expect(page.getByRole("heading", { name: enemyName, exact: true })).toBeVisible();
+  await expect(page.getByRole("progressbar", { name: `${enemyName} health` })).toHaveAttribute(
+    "value",
+    String(state.enemy.hp),
+  );
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.encounters[0]),
+    )
+    .toBe(state.encounters![0]);
+  await page.getByRole("button", { name: "End turn" }).click();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: enemyName, exact: true })).toBeVisible();
+  await expect(page.getByText("A retained copy of the run was recovered.")).toHaveCount(0);
 });
 
 test("a player can inspect and play a card, then end the turn", async ({ page }) => {
@@ -1385,7 +1417,12 @@ test("victory recap replays the same expedition setup and saves the new run", as
   const replay = page.getByRole("button", { name: "Play again" });
   await replay.focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeFocused();
+  const opening = page.locator("#battle-title");
+  await expect(opening).toBeFocused();
+  const openingName = await opening.innerText();
+  expect(["Radiant Moth", "The Ink Jackrabbit", "The Blue Jackal", "The Brass Cicada"]).toContain(
+    openingName,
+  );
   await expect(page.getByRole("button", { name: "The Thorn Witch, HP 30/30" })).toBeVisible();
   await expect(page.locator(".battle-card")).toHaveCount(5);
   await expect(page.locator(".battle-card").first()).toContainText("dark");
@@ -1400,7 +1437,7 @@ test("victory recap replays the same expedition setup and saves the new run", as
   await page.reload();
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  await expect(page.getByRole("heading", { name: "Radiant Moth", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: openingName, exact: true })).toBeVisible();
   expect((await savedRun()).experiment.id).toBe(restarted.experiment.id);
   expect(
     JSON.parse((await page.evaluate(() => localStorage.getItem("dusk-and-dawn.expeditions.v1")))!).completed,
@@ -2825,6 +2862,7 @@ test("the run deck is inspectable before rewards and remains unchanged until a c
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   const opener = page.getByRole("button", { name: "Deck 10", exact: true });
+  await page.mouse.move(5, 5);
   await opener.focus();
   await page.keyboard.press("Enter");
   const deck = page.getByRole("dialog", { name: "Deck · 10" });
@@ -2833,7 +2871,9 @@ test("the run deck is inspectable before rewards and remains unchanged until a c
   const pair = deck.getByRole("button", { name: /^Angel & Vampire, 2 copies/ });
   await page.keyboard.press("Shift+Tab");
   await expect(deck.locator(".battle-deck-pair button").last()).toBeFocused();
-  await pair.focus();
+  for (let i = 0; i < 4; i++) await page.keyboard.press("Shift+Tab");
+  await expect(pair).toBeFocused();
+  await expect(page.getByRole("tooltip")).toHaveCount(1);
   await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
   await expect(page.getByRole("tooltip")).toContainText("Deal 3 Shadow damage");
   await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);

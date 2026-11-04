@@ -196,6 +196,68 @@ describe("experimental expeditions", () => {
       else expect(result.snapshot.state.player.hp).toBe(4);
     }
   });
+  it("keeps the first expedition and classic opening while varying later expeditions without repeats", () => {
+    const tier2 = new Set<string>();
+    const tier3 = new Set<string>();
+    for (let seed = 0; seed < 180; seed++) {
+      expect(createRun(seed).getSnapshot().state.encounters![0]).toBe("fixture:0");
+      expect(createRun(seed, options).getSnapshot().state.encounters![0]).toBe("fixture:0");
+      for (const [tier, observed] of [
+        [2, tier2],
+        [3, tier3],
+      ] as const) {
+        const first = createRun(seed, { ...options, tier }).getSnapshot();
+        const repeated = createRun(seed, { ...options, tier }).getSnapshot();
+        expect(first).toEqual(repeated);
+        const encounters = first.state.encounters!;
+        expect(new Set(encounters).size).toBe(encounters.length);
+        expect(first.state.enemy.hp).toBe(getEnemy(first.state).hp);
+        observed.add(encounters[0]!);
+      }
+    }
+    expect(tier2).toEqual(new Set(["fixture:0", "the-ink-jackrabbit", "the-blue-jackal"]));
+    expect(tier3).toEqual(
+      new Set(["fixture:0", "the-ink-jackrabbit", "the-blue-jackal", "the-brass-cicada"]),
+    );
+  });
+  it.each([
+    { id: "the-ink-jackrabbit", hp: 22, damage: 4 },
+    { id: "the-blue-jackal", hp: 24, damage: 5 },
+    { id: "the-brass-cicada", hp: 24, damage: 3 },
+  ])("resolves the first turn of the $id opening", ({ id, hp, damage }) => {
+    const seed = Array.from({ length: 180 }, (_, i) => i).find(
+      (value) => createRun(value, { ...options, tier: 3 }).getSnapshot().state.encounters![0] === id,
+    )!;
+    expect(seed).toBeDefined();
+    const game = createRun(seed, { ...options, tier: 3 });
+    expect(game.getSnapshot().state.enemy.hp).toBe(hp);
+    expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.hp).toBe(30 - damage);
+    expect(game.getSnapshot().state.action).toBe(1);
+  });
+  it("resumes both varied and older Moth openings without changing the current run", async () => {
+    const variedSeed = Array.from({ length: 100 }, (_, i) => i).find(
+      (seed) => createRun(seed, { ...options, tier: 2 }).getSnapshot().state.encounters![0] !== "fixture:0",
+    )!;
+    const older = structuredClone(createRun(7, options).getSnapshot());
+    older.state.experiment!.tier = 3;
+    for (const snapshot of [older, createRun(variedSeed, { ...options, tier: 2 }).getSnapshot()]) {
+      const saved = encodeRun(snapshot);
+      const restored = await readRunWithRecovery({
+        readCandidates: async () => [saved],
+        write: async () => {},
+      });
+      expect(restored?.snapshot).toEqual(snapshot);
+      const game = restoreSession(restored!.snapshot, runHandler);
+      expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+      const again = await readRunWithRecovery({
+        readCandidates: async () => [encodeRun(game.getSnapshot())],
+        write: async () => {},
+      });
+      expect(again?.snapshot).toEqual(game.getSnapshot());
+      expect(again!.snapshot.state.encounters![0]).toBe(snapshot.state.encounters![0]);
+    }
+  });
   it("expands future encounter pools across tiers", () => {
     const pools = [1, 2, 3].map((tier) => {
       const ids = new Set<string>();

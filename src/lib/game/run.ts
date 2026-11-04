@@ -337,7 +337,7 @@ function rewardPool(tier: number, hero?: HeroId) {
   const kit = new Set<string>(heroes[hero].pairs);
   return [...pool, ...starter.filter((pair) => !kit.has(pair))];
 }
-function chooseEncounters(rng: Rng, tier = 3): string[] {
+function chooseEncounters(rng: Rng, tier = 3, variedOpening = false): string[] {
   const regular = unlocked(
     simpleEnemies.filter((enemy) => enemy.hp <= 30 && enemy.name !== "Radiant Moth"),
     tier,
@@ -350,12 +350,22 @@ function chooseEncounters(rng: Rng, tier = 3): string[] {
     simpleEnemies.filter((enemy) => enemy.hp >= 42),
     tier,
   );
-  const regulars = shuffle(regular, rng)
+  const regulars: string[] = shuffle(regular, rng)
     .slice(0, 2)
     .map((enemy) => enemy.id);
   const elite = shuffle(elites, rng)[0]!.id;
   const boss = shuffle(bosses, rng)[0]!.id;
-  return ["fixture:0", ...regulars, elite, boss];
+  // The first expedition keeps the familiar opener; later runs add a small,
+  // low-pressure set without repeating an enemy already scheduled for this run.
+  const openings: Array<(typeof simpleEnemies)[number]["id"] | "fixture:0"> = [
+    "fixture:0",
+    "the-ink-jackrabbit",
+    "the-blue-jackal",
+  ];
+  if (tier >= 3) openings.push("the-brass-cicada");
+  const eligible = openings.filter((id) => !regulars.includes(id));
+  const opening = variedOpening && tier >= 2 ? eligible[rngInt(rng, eligible.length)]! : "fixture:0";
+  return [opening, ...regulars, elite, boss];
 }
 interface DeckCard {
   id: string;
@@ -1395,7 +1405,7 @@ export function createRun(seed: number, experiment?: ExperimentOptions, hero?: H
   };
   // Initialization consumes the same serializable RNG stream as later commands.
   const boot: Handler<RunState, { type: "boot" }, string> = (s, _c, rng) => {
-    s.encounters = chooseEncounters(rng, s.experiment?.tier ?? 3);
+    s.encounters = chooseEncounters(rng, s.experiment?.tier ?? 3, !!s.experiment);
     if (s.experiment?.relic === "cracked-vessel") {
       const pool = rewardPool(s.experiment.tier, s.hero).filter(
         (pair) => !s.deck.some((card) => card.pair === pair),
