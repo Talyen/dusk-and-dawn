@@ -5,7 +5,7 @@
     "numeric": {
       "test_file": "tests/lib/card-numeric-outcomes.test.ts",
       "test_name": "matches printed numeric card outcomes under Ward, weakness, statuses, and mana caps",
-      "count": 191,
+      "count": 189,
       "sentence_patterns": [
         "Deal \\d+ (?:Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage(?: (?:twice|three times)|, ignoring Ward)?\\.",
         "Leech\\.",
@@ -121,7 +121,7 @@
     "hush": {
       "test_file": "tests/lib/card-sequencing-families.test.ts",
       "test_name": "pure Hush faces require a suppressible intent and spend their source only on a valid play",
-      "count": 6,
+      "count": 7,
       "effect_pattern": "^Hush\\. Banish this card\\.$"
     },
     "reflect": {
@@ -1144,13 +1144,18 @@
       "pair": "Tuned Violin & Broken Violin",
       "side": "light",
       "face": "Tuned Violin",
-      "family": "numeric"
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/weak-reward-outcomes.test.ts",
+        "test_name": "Tuned Violin draws and empowers an attack while Broken Violin silences a trait",
+        "effect": "Bless 1. Draw 1 card."
+      }
     },
     {
       "pair": "Tuned Violin & Broken Violin",
       "side": "dark",
       "face": "Broken Violin",
-      "family": "numeric"
+      "family": "hush"
     },
     {
       "pair": "Balance Scales & Loaded Dice",

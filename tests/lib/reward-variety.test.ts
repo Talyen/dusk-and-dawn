@@ -69,7 +69,7 @@ describe("reward variety", () => {
 
   it("prefers distinct effects on both faces without excluding either shared-face pair", () => {
     const choices = [
-      "Tuned Violin & Broken Violin",
+      "Lamb & Wolf",
       "Perfumer & Scent Thief",
       "Wax Seal & Torn Letter",
       "Wooden Spool & Loose Thread",
@@ -96,7 +96,7 @@ describe("reward variety", () => {
 
   it("retains both shared-face pairs when their different opposite faces are needed", () => {
     const snapshot = structuredClone(createRun(19).getSnapshot());
-    const choices = ["Tuned Violin & Broken Violin", "Perfumer & Scent Thief", "Wax Seal & Torn Letter"];
+    const choices = ["Lamb & Wolf", "Perfumer & Scent Thief", "Wax Seal & Torn Letter"];
     snapshot.state.deck = Object.keys(cards)
       .filter((pair) => !choices.includes(pair))
       .map((pair, index) => ({ id: `card-${index}`, pair }));

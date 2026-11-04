@@ -351,7 +351,7 @@ it("discard-pile payments must exist before a printed damage or healing payoff",
 
 it("pure Hush faces require a suppressible intent and spend their source only on a valid play", () => {
   const faces = catalogue.filter((face) => face.effect === "Hush. Banish this card.");
-  expect(faces).toHaveLength(6);
+  expect(faces).toHaveLength(7);
   for (const face of faces) {
     const game = fixture(face, [], [], []);
     const before = game.getSnapshot();

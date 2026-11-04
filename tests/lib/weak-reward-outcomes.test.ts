@@ -232,3 +232,62 @@ it("the watchtower scouts while its collapsing face strikes and is spent", async
   expect(againstWeaver.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
   expect(againstWeaver.getSnapshot().state.enemy).toMatchObject({ hp: 24, ward: 0 });
 });
+
+it("Tuned Violin draws and empowers an attack while Broken Violin silences a trait", async () => {
+  const pair = "Tuned Violin & Broken Violin";
+  expect(cards[pair]!.light.effect).toBe("Bless 1. Draw 1 card.");
+  expect(cards[pair]!.dark.effect).toBe("Hush. Banish this card.");
+  const initial = structuredClone(fixture(pair, "light").getSnapshot());
+  initial.state.zones.hand = [initial.state.zones.hand[0]!];
+  initial.state.zones.library = [{ id: "sun", pair: "Sun & Moon", face: "light", kept: false }];
+  initial.state.zones.discard = [];
+  const tune = restoreSession(initial, runHandler);
+  expect(tune.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+  expect(tune.getSnapshot().state.player.bless).toBe(1);
+  expect(tune.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual(["sun"]);
+  expect(tune.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["card-0"]);
+  expect(tune.dispatch({ type: "play", id: "sun" }).decision.accepted).toBe(true);
+  expect(tune.getSnapshot().state.enemy.hp).toBe(11); // Radiant Moth: 18 - (6 + 1 Bless).
+  expect(tune.getSnapshot().state.player.bless).toBe(0);
+
+  const old = structuredClone(fixture(pair, "dark").getSnapshot());
+  old.state.encounters![0] = "the-coin-eyed-stag";
+  old.state.enemy.hp = old.state.enemy.maxHp = 28;
+  old.state.action = 1;
+  const loaded = await readRun({ readCandidates: async () => [encodeRun(old)], write: async () => {} });
+  expect(loaded).toEqual(old);
+  const broken = restoreSession(loaded!, runHandler);
+  expect(broken.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+  expect(broken.getSnapshot().state.enemy.hush).toBe(true);
+  expect(broken.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["card-0"]);
+  expect(broken.dispatch({ type: "end" }).decision.accepted).toBe(true);
+  expect(broken.getSnapshot().state.player).toMatchObject({ hp: 26, curse: 0 });
+});
+
+it("Tuned Violin keeps its Bless at the hand cap or with nothing to draw", () => {
+  const pair = "Tuned Violin & Broken Violin";
+  for (const hasLibraryCard of [false, true]) {
+    const snapshot = structuredClone(fixture(pair, "light").getSnapshot());
+    snapshot.state.zones.hand = [
+      snapshot.state.zones.hand[0]!,
+      ...Array.from({ length: 7 }, (_, index) => ({
+        id: `held-${index}`,
+        pair: "Sun & Moon",
+        face: "light" as const,
+        kept: false,
+      })),
+    ];
+    snapshot.state.zones.library = hasLibraryCard
+      ? [{ id: "drawn", pair: "Angel & Vampire", face: "dark", kept: false }]
+      : [];
+    snapshot.state.zones.discard = [];
+    const game = restoreSession(snapshot, runHandler);
+    expect(game.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.bless).toBe(1);
+    expect(game.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual([
+      ...Array.from({ length: 7 }, (_, index) => `held-${index}`),
+      ...(hasLibraryCard ? ["drawn"] : []),
+    ]);
+    expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["card-0"]);
+  }
+});
