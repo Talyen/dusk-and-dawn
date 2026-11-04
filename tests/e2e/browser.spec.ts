@@ -1682,3 +1682,194 @@ test("large piles scroll without losing their controls on a small viewport", asy
   await dialog.getByRole("button", { name: "Close" }).click();
   await expect(dialog).toHaveCount(0);
 });
+
+test("Scry reveals only the current library top and follows later draws", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Measuring Rod & Twisted Ribbon" },
+    { id: "draw", pair: "Key & Lock" },
+    { id: "bottom", pair: "Sun & Moon" },
+    { id: "middle", pair: "Angel & Vampire" },
+    { id: "top", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck
+    .slice(0, 2)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [
+    { ...snapshot.state.deck[2]!, face: "light", kept: false },
+    { ...snapshot.state.deck[3]!, face: "dark", kept: false },
+    { ...snapshot.state.deck[4]!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("img", { name: "Library 3", exact: true })).toBeVisible();
+  await expect(page.locator(".battle-pile-item--scry")).toHaveCount(0);
+  await expect(page.locator('img[src$="card-flame.webp"], img[src$="card-vampire.webp"]')).toHaveCount(0);
+  await page.getByRole("button", { name: /Measuring Rod light/ }).click();
+  const revealed = page.getByRole("img", { name: /Library 3\. Scry\. Flame light/ });
+  await expect(revealed).toBeVisible();
+  await expect(revealed.locator("img")).toHaveAttribute("src", /card-flame\.webp$/);
+  await expect(page.locator('img[src$="card-vampire.webp"]')).toHaveCount(0);
+  await revealed.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Apply 3 Burn");
+  await expect(page.getByRole("tooltip")).toContainText("Other face: Frost");
+  await expect
+    .poll(async () => {
+      const tooltip = (await page.getByRole("tooltip").boundingBox())!;
+      const hand = (await page.locator(".battle-hand").boundingBox())!;
+      return (
+        tooltip.x + tooltip.width <= hand.x ||
+        hand.x + hand.width <= tooltip.x ||
+        tooltip.y + tooltip.height <= hand.y ||
+        hand.y + hand.height <= tooltip.y
+      );
+    })
+    .toBe(true);
+  await expect
+    .poll(() => revealed.locator("img").evaluate((element: HTMLImageElement) => element.naturalWidth))
+    .toBeGreaterThan(0);
+  await page.getByRole("button", { name: /Key light/ }).click();
+  await expect(page.getByRole("img", { name: /Library 2\. Scry\. Vampire dark/ })).toBeVisible();
+  await expect(page.getByRole("img", { name: /Library 2\. Scry\. Flame/ })).toHaveCount(0);
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-pile-item--scry")).toHaveCount(0);
+});
+
+test("Scry on an empty library does not reveal or reshuffle the discard", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Measuring Rod & Twisted Ribbon" },
+    { id: "discard", pair: "Sun & Moon" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [{ ...snapshot.state.deck[1]!, face: "dark", kept: false }];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Measuring Rod light/ }).click();
+  await expect(page.getByRole("img", { name: "Library 0. Scry: empty" })).toBeVisible();
+  await expect(page.locator(".battle-pile-item--scry")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Discard 2 · Banished 0" })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.zones.library.length,
+      ),
+    )
+    .toBe(0);
+});
+
+test("touch inspects a Scry reveal without spending mana or playing the card", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Measuring Rod & Twisted Ribbon" },
+    { id: "top", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = [{ ...snapshot.state.deck[1]!, face: "light", kept: false }];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  await page.getByRole("button", { name: /Measuring Rod light/ }).tap();
+  const revealed = page.getByRole("img", { name: /Library 1\. Scry\. Flame light/ });
+  await expect(revealed).toBeInViewport({ ratio: 1 });
+  await revealed.tap();
+  await expect(page.getByRole("tooltip")).toContainText("Apply 3 Burn");
+  await expect(page.getByText(/Mana 2\/3/)).toBeVisible();
+  await expect(revealed).toBeVisible();
+  await context.close();
+});
+
+test("Scry follows a card moved onto an empty library", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Convergence & Divergence" },
+    { id: "one", pair: "Sun & Moon" },
+    { id: "two", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [
+    { ...snapshot.state.deck[1]!, face: "light", kept: false },
+    { ...snapshot.state.deck[2]!, face: "dark", kept: false },
+  ];
+  snapshot.state.zones.banished = [];
+  snapshot.state.zones.scry = true;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("img", { name: "Library 0. Scry: empty" })).toBeVisible();
+  await page.getByRole("button", { name: /Convergence light/ }).click();
+  const revealed = page.getByRole("img", { name: /Library 2\. Scry\. Vampire dark/ });
+  await expect(revealed).toBeVisible();
+  await expect(revealed.locator("img")).toHaveAttribute("src", /card-vampire\.webp$/);
+});
+
+test("a Scry reveal remains clear of the hand in a compact viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 480 });
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.zones.scry = true;
+  const top = snapshot.state.zones.library.at(-1)!;
+  top.pair = "Bloom & Wither";
+  top.face = "dark";
+  snapshot.state.deck.find((card) => card.id === top.id)!.pair = top.pair;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const revealed = page.locator(".battle-pile-item--scry");
+  await expect(revealed).toBeInViewport({ ratio: 1 });
+  const image = (await revealed.boundingBox())!;
+  const hand = (await page.locator(".battle-hand").boundingBox())!;
+  expect(
+    image.x + image.width <= hand.x ||
+      hand.x + hand.width <= image.x ||
+      image.y + image.height <= hand.y ||
+      hand.y + hand.height <= image.y,
+  ).toBe(true);
+  await revealed.locator('[role="img"]').hover();
+  await expect(page.getByRole("tooltip")).toContainText("Wither");
+  await expect
+    .poll(async () => {
+      const tip = (await page.getByRole("tooltip").boundingBox())!;
+      const handBox = (await page.locator(".battle-hand-stage").boundingBox())!;
+      const controls = (await page.locator(".battle-actions").boundingBox())!;
+      const separate = (a: typeof tip, b: typeof tip) =>
+        a.x + a.width <= b.x || b.x + b.width <= a.x || a.y + a.height <= b.y || b.y + b.height <= a.y;
+      return separate(tip, handBox) && separate(tip, controls);
+    })
+    .toBe(true);
+  await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+});

@@ -561,7 +561,15 @@ function RouteChoice({
   );
 }
 
-function PileCard({ card, position }: { card: FightCard; position?: string }) {
+function PileCard({
+  card,
+  position,
+  libraryCount,
+}: {
+  card: FightCard;
+  position?: string;
+  libraryCount?: number;
+}) {
   const trigger = useRef<HTMLDivElement>(null);
   const id = useId();
   const pointer = useRef(false);
@@ -602,13 +610,13 @@ function PileCard({ card, position }: { card: FightCard; position?: string }) {
     };
   }, [open]);
   return (
-    <div className="battle-pile-item">
+    <div className={`battle-pile-item${libraryCount !== undefined ? " battle-pile-item--scry" : ""}`}>
       <div
         ref={trigger}
         role="img"
         tabIndex={0}
         className="battle-pile-card"
-        aria-label={`${position ? `${position}. ` : ""}${info.name} ${card.face}. ${info.effect}`}
+        aria-label={`${libraryCount !== undefined ? `Library ${libraryCount}. Scry. ` : ""}${position ? `${position}. ` : ""}${info.name} ${card.face}. ${info.effect}`}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
         onPointerMove={touch.onPointerMove}
@@ -656,12 +664,24 @@ function PileCard({ card, position }: { card: FightCard; position?: string }) {
       >
         <img src={art("card", info.name)} alt="" />
       </div>
-      {position && (
+      {libraryCount !== undefined ? (
+        <span className="battle-scry-count" aria-hidden="true">
+          {libraryCount}
+        </span>
+      ) : position ? (
         <span className="battle-pile-position" aria-hidden="true">
           {position}
         </span>
-      )}
-      <Tooltip triggerRef={trigger} id={id} open={open} overlayNarrow className="battle-tooltip">
+      ) : null}
+      <Tooltip
+        triggerRef={trigger}
+        id={id}
+        open={open}
+        overlayNarrow
+        verticalOnly={libraryCount !== undefined}
+        {...(libraryCount !== undefined ? { avoidSelector: ".battle-hand-stage" } : {})}
+        className={`battle-tooltip${libraryCount !== undefined ? " battle-scry-tooltip" : ""}`}
+      >
         <strong>{info.name}</strong>
         <p>
           <Description text={info.effect} />
@@ -1329,18 +1349,19 @@ function BattleSession({
                 <p>
                   HP {s.player.hp}/{s.player.maxHp}
                 </p>
-                <span
-                  className="battle-pile battle-pile--draw"
-                  role="img"
-                  aria-label={`Library ${s.zones.library.length}`}
-                >
-                  <span>{s.zones.library.length}</span>
-                </span>
+                {top ? (
+                  <PileCard card={top} libraryCount={s.zones.library.length} />
+                ) : (
+                  <span
+                    className="battle-pile battle-pile--draw"
+                    role="img"
+                    aria-label={`Library ${s.zones.library.length}${s.zones.scry ? ". Scry: empty" : ""}`}
+                  >
+                    <span>{s.zones.library.length}</span>
+                  </span>
+                )}
                 {statuses(s.player) !== "None" && (
                   <p className="battle-resource-status">{statuses(s.player)}</p>
-                )}
-                {s.zones.scry && (
-                  <p className="battle-resource-status">Scry: {top ? face(top).name : "library empty"}</p>
                 )}
               </div>
               <div className="battle-resource battle-resource--mana">

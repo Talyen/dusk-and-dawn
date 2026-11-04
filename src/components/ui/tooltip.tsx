@@ -9,6 +9,8 @@ export function Tooltip({
   open,
   placement = "top",
   overlayNarrow = false,
+  verticalOnly = false,
+  avoidSelector,
   className,
   children,
 }: {
@@ -17,6 +19,8 @@ export function Tooltip({
   open: boolean;
   placement?: "top" | "bottom" | "left" | "right";
   overlayNarrow?: boolean;
+  verticalOnly?: boolean;
+  avoidSelector?: string;
   className?: string;
   children: ReactNode;
 }) {
@@ -52,8 +56,10 @@ export function Tooltip({
         middleware: [
           offset(8),
           flip({
-            fallbackPlacements:
-              placement === "bottom"
+            crossAxis: !verticalOnly,
+            fallbackPlacements: verticalOnly
+              ? ["bottom"]
+              : placement === "bottom"
                 ? ["top"]
                 : placement === "left"
                   ? ["right", "top", "bottom"]
@@ -83,6 +89,20 @@ export function Tooltip({
             Math.min(window.innerHeight - tip.height - 8, anchor.top + (anchor.height - tip.height) / 2),
           );
         }
+        if (avoidSelector) {
+          const avoid = document.querySelector(avoidSelector)?.getBoundingClientRect();
+          const tip = panel.getBoundingClientRect();
+          if (
+            avoid &&
+            x < avoid.right &&
+            x + tip.width > avoid.left &&
+            y < avoid.bottom &&
+            y + tip.height > avoid.top
+          ) {
+            const above = avoid.top - tip.height - 8;
+            if (above >= 8) y = above;
+          }
+        }
         Object.assign(panel.style, { left: `${x}px`, top: `${y}px` });
         setSide(placement.split("-")[0] ?? "top");
         setPlaced(true);
@@ -93,7 +113,7 @@ export function Tooltip({
       live = false;
       stop();
     };
-  }, [present, triggerRef, placement, overlayNarrow]);
+  }, [present, triggerRef, placement, overlayNarrow, verticalOnly, avoidSelector]);
 
   if (!present) return null;
   return createPortal(

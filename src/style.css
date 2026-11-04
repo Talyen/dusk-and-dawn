@@ -1904,3 +1904,34 @@ button.battle-pile:disabled {
   width: min(10rem, 50vw);
   flex-basis: min(10rem, 50vw);
 }
+
+.battle-pile-item--scry {
+  position: relative;
+  width: clamp(4rem, 8vw, 6.2rem);
+  flex: none;
+}
+.battle-pile-item--scry .battle-pile-card {
+  box-shadow:
+    0 3px #4d3d38,
+    0 6px #211c21,
+    0 9px #4d3d38,
+    0 0 1.6rem #e8c68a55;
+}
+.battle-scry-count {
+  position: absolute;
+  left: calc(100% + 0.35rem);
+  bottom: 0;
+  color: #e5d4bc;
+  font-size: 0.8rem;
+}
+@media (max-width: 700px), (max-height: 600px) {
+  .battle-pile-item--scry {
+    width: clamp(2.6rem, 10vw, 4.5rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .battle-scry-tooltip {
+    max-width: min(14rem, calc(100vw - 6rem)) !important;
+  }
+}
