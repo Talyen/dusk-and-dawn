@@ -401,7 +401,7 @@ describe("experimental expeditions", () => {
     const dark = createRun(21, { ...options, orientation: "dark", relic: "cracked-vessel" }).getSnapshot()
       .state;
     expect(dark.player.hp).toBe(24);
-    expect(dark.player.maxHp).toBe(30);
+    expect(dark.player.maxHp).toBe(24);
     expect(dark.deck).toHaveLength(11);
     expect([...dark.zones.hand, ...dark.zones.library].every((card) => card.face === "dark")).toBe(true);
     const snapshot = structuredClone(createRun(22, { ...options, relic: "spare-thread" }).getSnapshot());

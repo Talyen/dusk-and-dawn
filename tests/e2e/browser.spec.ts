@@ -1008,7 +1008,7 @@ test("expedition event survives reload and unlocks the dark start for a future r
   await page.getByLabel("Starting orientation").selectOption("dark");
   await page.getByLabel("Run relic").selectOption("cracked-vessel");
   await page.getByRole("button", { name: "Start expedition" }).click();
-  await expect(page.getByText(/HP 24\/30/)).toBeVisible();
+  await expect(page.getByText(/HP 24\/24/)).toBeVisible();
   await expect(page.locator(".battle-card").first()).toContainText("dark");
 });
 
@@ -1855,7 +1855,7 @@ test("expedition orientation artwork follows the selected unlocked face", async 
   await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
   await page.getByLabel("Run relic").selectOption("cracked-vessel");
   await page.getByRole("button", { name: "Start expedition" }).click();
-  await expect(page.getByText(/HP 24\/30/)).toBeVisible();
+  await expect(page.getByText(/HP 24\/24/)).toBeVisible();
   await expect(page.locator(".battle-card").first()).toContainText("dark");
 });
 
@@ -3156,7 +3156,7 @@ test("antihero selection shows the supplied artwork and starts a dark Witch expe
   await page.getByLabel("Run relic").selectOption("cracked-vessel");
   await expect(page.getByRole("button", { name: "Start expedition" })).toBeInViewport({ ratio: 1 });
   await page.getByRole("button", { name: "Start expedition" }).click();
-  await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/30" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/24" })).toBeVisible();
   await expect(page.locator(".battle-card").first()).toContainText("dark");
   await page.locator(".battle-card").first().hover();
   await expect(page.getByRole("tooltip")).toContainText("apply 1 Curse before this effect");
@@ -3170,8 +3170,30 @@ test("antihero selection shows the supplied artwork and starts a dark Witch expe
   await page.reload();
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/30" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/24" })).toBeVisible();
   await expect(page.getByRole("button", { name: /Enemy status:.*curse 1/ })).toBeVisible();
+});
+
+test("a legacy Cracked Vessel save keeps its original cap and matching relic description", async ({
+  page,
+}) => {
+  const old = structuredClone(
+    createRun(
+      42,
+      { id: "old-vessel", tier: 1, orientation: "light", relic: "cracked-vessel" },
+      "thorn-witch",
+    ).getSnapshot(),
+  );
+  old.state.player.maxHp = 30;
+  old.state.player.hp = 24;
+  await page.addInitScript((save) => localStorage.setItem("dusk-and-dawn.save.v1", save), encodeRun(old));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const health = page.getByRole("button", { name: "The Thorn Witch, HP 24/30" });
+  await health.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Started at 24 HP with an extra pair.");
+  await expect(page.getByRole("tooltip")).not.toContainText("Maximum 24 HP");
 });
 
 test("the Oracle reveals the next library card every turn and survives resume", async ({ page }) => {

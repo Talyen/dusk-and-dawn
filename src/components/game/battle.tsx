@@ -210,7 +210,13 @@ function HeroHealth({ state }: { state: RunState }) {
         <>
           <strong>{relics[relic].name}</strong>
           <p>
-            <Description text={relics[relic].effect} />
+            <Description
+              text={
+                relic === "cracked-vessel" && state.player.maxHp === 30
+                  ? "Started at 24 HP with an extra pair."
+                  : relics[relic].effect
+              }
+            />
           </p>
         </>
       )}

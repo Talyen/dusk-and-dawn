@@ -12,7 +12,7 @@ export const relics: Record<RelicId, { name: string; effect: string }> = {
   none: { name: "None", effect: "" },
   "many-eyes": { name: "Many Eyes", effect: "Up to four reward offers." },
   "spare-thread": { name: "Spare Thread", effect: "A second midpoint removal." },
-  "cracked-vessel": { name: "Cracked Vessel", effect: "Start at 24 HP with an extra pair." },
+  "cracked-vessel": { name: "Cracked Vessel", effect: "Maximum 24 HP. Start with an extra pair." },
   "ashen-seal": {
     name: "Ashen Seal",
     effect: "When a played card Banishes itself, gain 2 Ward after it resolves.",

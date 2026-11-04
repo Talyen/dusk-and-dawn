@@ -28,6 +28,38 @@ async function reload(snapshot: ReturnType<ReturnType<typeof createRun>["getSnap
 }
 
 describe("run-only relics", () => {
+  it("keeps the new Cracked Vessel health cap through healing, fights and saves", async () => {
+    const initial = setup("cracked-vessel", "thorn-witch", ["Bloom & Wither"], ["light"]);
+    expect(initial.state.player).toMatchObject({ hp: 24, maxHp: 24 });
+    initial.state.player.hp = 23;
+    let game = await reload(initial);
+    expect(game.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player).toMatchObject({ hp: 24, maxHp: 24 });
+    const reward = structuredClone(game.getSnapshot());
+    reward.state.phase = "reward";
+    reward.state.offers = [];
+    reward.state.player.hp = 22;
+    game = await reload(reward);
+    game.dispatch({ type: "reward", pair: null });
+    game.dispatch({ type: "route", choice: "rest" });
+    expect(game.getSnapshot().state.player).toMatchObject({ hp: 24, maxHp: 24 });
+    expect((await reload(game.getSnapshot())).getSnapshot()).toEqual(game.getSnapshot());
+  });
+
+  it("preserves the original 30 HP cap for a saved Cracked Vessel run", async () => {
+    const old = setup("cracked-vessel", "thorn-witch", ["Bloom & Wither"], ["light"]);
+    old.state.player.hp = 24;
+    old.state.player.maxHp = 30;
+    old.state.phase = "reward";
+    old.state.offers = [];
+    let game = await reload(old);
+    game.dispatch({ type: "reward", pair: null });
+    game.dispatch({ type: "route", choice: "rest" });
+    expect(game.getSnapshot().state.player).toMatchObject({ hp: 28, maxHp: 30 });
+    game = await reload(game.getSnapshot());
+    expect(game.getSnapshot().state.player.maxHp).toBe(30);
+  });
+
   it.each([
     ["oathless-seraph", "light", 3, 0],
     ["thorn-witch", "dark", 2, 1],

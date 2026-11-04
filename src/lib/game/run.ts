@@ -488,8 +488,8 @@ export function cardCanBanishItself(card: FightCard): boolean {
   return selfBanishingSpecialFaces.has(info.name) || !!info.ops?.some((op) => op.op === "banish");
 }
 function beginFight(s: RunState, rng: Rng) {
-  const hp = s.player.hp;
-  s.player = combatant(30);
+  const { hp, maxHp } = s.player;
+  s.player = combatant(maxHp);
   s.player.hp = hp;
   s.enemy = combatant(getEnemy(s).hp);
   s.action = 0;
@@ -1425,6 +1425,7 @@ export function createRun(seed: number, experiment?: ExperimentOptions, hero?: H
       );
       s.deck.push({ id: `card-${s.nextId++}`, pair: pool[rngInt(rng, pool.length)]! });
       s.player.hp = 24;
+      s.player.maxHp = 24;
     }
     beginFight(s, rng);
     return yes();
