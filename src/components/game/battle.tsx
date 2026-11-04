@@ -1192,6 +1192,44 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
     lines.push(`Current attack: ${values.join(" + ")} ${hit.type} damage before Ward and Reflect.`);
     if (generic?.op === "attack-ignore-ward") lines.push("This attack ignores Ward, including if reflected.");
   }
+  const restriction = cardRestriction(s, card);
+  if ((info.name === "Silence" || ops.some((op) => op.op === "hush")) && !restriction) {
+    const action = getEnemy(s).actions[s.action]!;
+    const enemyAfter = { ...s.enemy, curse: s.enemy.curse + Number(witchGrantsCurse(s, card)) };
+    if (s.hero === "thorn-witch" && card.face === "dark" && s.heroRuleset === undefined)
+      enemyAfter.poison = Math.max(enemyAfter.poison, 2);
+    const playerAfter = {
+      ...s.player,
+      ward:
+        s.player.ward +
+        Number(seraphGrantsWard(s, card)) +
+        (s.experiment?.relic === "ashen-seal" && cardCanBanishItself(card) ? 2 : 0),
+    };
+    const lethal = lethalDamageOverTime(playerAfter, enemyAfter);
+    if (lethal) {
+      const source = `${lethal.source[0]!.toUpperCase()}${lethal.source.slice(1)}`;
+      lines.push(
+        lethal.target === "enemy"
+          ? `If Hushed: enemy falls to ${source} before acting.`
+          : `If Hushed: you fall to ${source} before the enemy acts.`,
+      );
+    } else if (s.enemy.freeze) lines.push("If still Frozen, the action is skipped.");
+    else if (action.ability) lines.push(`If Hushed: ${action.name} is skipped.`);
+    else if (action.hit !== undefined && action.type) {
+      const values = attackValues(
+        enemyAttackHits(action, true, s.latestDirectHit),
+        enemyAfter.bless,
+        enemyAfter.curse,
+        0,
+        "flat-preview",
+      );
+      lines.push(`If Hushed: ${values.join(" + ")} ${action.type} damage before Ward and Reflect.`);
+    }
+    if (action.effects?.some((effect) => effect.op === "reflect_once") && s.enemy.reflect)
+      lines.push("Enemy Reflect ends immediately.");
+    if (action.effects?.some((effect) => effect.op === "reaction_damage"))
+      lines.push("Reactive damage is suppressed immediately.");
+  }
   if (info.name === "Moon" || info.name === "Key" || ops.some((op) => op.op === "flip-hand")) {
     lines.push(`Flip preview: ${flipSummary || "no other cards in hand"}.`);
     if (info.name === "Key" || ops.some((op) => op.op === "draw")) {
@@ -1306,7 +1344,6 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
     lines.push(`Automatic target: ${face(targets[0]!).name}.`);
   if (info.name === "Memory" && !targets.length) lines.push("No cards in the discard pile.");
   if (s.mana === 0) lines.push("Not enough mana.");
-  const restriction = cardRestriction(s, card);
   if (restriction) lines.push(restriction);
   return lines.map((line, index) => <p key={index}>{line}</p>);
 }

@@ -4808,3 +4808,296 @@ test("sampled rewards show distinct face effects and the chosen pair survives re
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("button", { name: /^Remove Sanctuary & Prison/ })).toBeVisible();
 });
+
+for (const scenario of [
+  {
+    id: "mourning-tree",
+    name: "Mourning Tree",
+    action: 1,
+    hp: 36,
+    preview: "If Hushed: 5 Growth damage before Ward and Reflect.",
+    intent: "5 Growth",
+    finalHp: 25,
+  },
+  {
+    id: "glass-judge",
+    name: "Glass Judge",
+    action: 2,
+    hp: 24,
+    preview: "If Hushed: 3 Radiance damage before Ward and Reflect.",
+    intent: "3 Radiance",
+    finalHp: 27,
+  },
+  {
+    id: "hollow-king",
+    name: "Hollow King",
+    action: 1,
+    hp: 48,
+    preview: "If Hushed: Empty Decree is skipped.",
+    intent: "Skipped",
+    finalHp: 30,
+  },
+  {
+    id: "sunbleached-harlequin",
+    name: "Sunbleached Harlequin",
+    action: 1,
+    hp: 24,
+    preview: "If Hushed: 3 Release damage before Ward and Reflect.",
+    intent: "3 Release",
+    finalHp: 27,
+  },
+  {
+    id: "the-mirror-eyed-swan",
+    name: "The Mirror-Eyed Swan",
+    action: 1,
+    hp: 26,
+    preview: "If still Frozen, the action is skipped.",
+    intent: "Skipped",
+    finalHp: 30,
+  },
+  {
+    id: "the-thorned-librarian",
+    name: "The Thorned Librarian",
+    action: 1,
+    hp: 26,
+    preview: "If Hushed: 2 Binding damage before Ward and Reflect.",
+    intent: "2 Binding",
+    finalHp: 28,
+  },
+] as const) {
+  test(`Hush inspection forecasts ${scenario.name} without committing`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = scenario.id;
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = scenario.hp;
+    snapshot.state.enemy.curse = 2;
+    snapshot.state.action = scenario.action;
+    if (scenario.id === "the-mirror-eyed-swan") {
+      snapshot.state.enemy.reflect = true;
+      snapshot.state.enemy.freeze = true;
+    }
+    snapshot.state.deck = [
+      { id: "hush", pair: "Silence & Clamor" },
+      { id: "sun", pair: "Sun & Moon" },
+    ];
+    snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    const saved = encodeRun(snapshot);
+    await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const hush = page.getByRole("button", { name: /^Silence light/ });
+    await hush.hover();
+    await expect(page.getByRole("tooltip")).toContainText(scenario.preview);
+    if (scenario.id === "the-mirror-eyed-swan")
+      await expect(page.getByRole("tooltip")).toContainText("Enemy Reflect ends immediately.");
+    if (scenario.id === "the-thorned-librarian")
+      await expect(page.getByRole("tooltip")).toContainText("Reactive damage is suppressed immediately.");
+    expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+    await hush.click();
+    await expect(
+      page.getByRole("button", { name: `${scenario.name} intent: ${scenario.intent}` }),
+    ).toBeVisible();
+    if (scenario.id === "the-mirror-eyed-swan")
+      await expect(page.getByRole("button", { name: /Enemy status:.*Reflect/ })).toHaveCount(0);
+    await page.getByRole("button", { name: "End turn", exact: true }).click();
+    await expect(page.getByText(`HP ${scenario.finalHp}/30`, { exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Player status:.*curse/ })).toHaveCount(0);
+  });
+}
+
+test("Hush inspection updates with Curse and remains accessible without mana", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.deck = [
+    { id: "hush", pair: "Silence & Clamor" },
+    { id: "frost", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card, index) => ({
+    ...card,
+    face: index === 0 ? "light" : "dark",
+    kept: false,
+  }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  snapshot.state.mana = 1;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const hush = page.getByRole("button", { name: /^Silence light/ });
+  await page.keyboard.press("Tab");
+  await hush.focus();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "If Hushed: 7 Growth damage before Ward and Reflect.",
+  );
+  await page.getByRole("button", { name: /^Frost dark/ }).click();
+  await page.keyboard.press("Tab");
+  await hush.focus();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "If Hushed: 5 Growth damage before Ward and Reflect.",
+  );
+  await expect(page.getByRole("tooltip")).toContainText("Not enough mana.");
+  await expect(page.getByRole("button", { name: /^Silence light/ })).toHaveCount(1);
+});
+
+test("an unavailable Hush shows its restriction without a hypothetical action", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.enemy.hush = true;
+  const card = snapshot.state.zones.hand[0]!;
+  snapshot.state.deck.find((item) => item.id === card.id)!.pair = "Silence & Clamor";
+  card.pair = "Silence & Clamor";
+  card.face = "light";
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.keyboard.press("Tab");
+  await page.getByRole("button", { name: /^Silence light/ }).focus();
+  await expect(page.getByRole("tooltip")).toContainText("Hush requires an unsuppressed ability or trait");
+  await expect(page.getByRole("tooltip")).not.toContainText("If Hushed:");
+});
+
+test("Hush forecast includes a saved Witch's Curse passive", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.hero = "thorn-witch";
+  snapshot.state.heroRuleset = 3;
+  snapshot.state.enemy.curse = 2;
+  snapshot.state.deck = [{ id: "bell", pair: "Bell Founder & Bell Breaker" }];
+  snapshot.state.zones.hand = [
+    { id: "bell", pair: "Bell Founder & Bell Breaker", face: "dark", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const card = page.getByRole("button", { name: /^Bell Breaker dark/ });
+  await card.hover();
+  await expect(page.getByRole("tooltip")).toContainText("On play: apply 1 Curse before this effect.");
+  await expect(page.getByRole("tooltip")).toContainText(
+    "If Hushed: 4 Growth damage before Ward and Reflect.",
+  );
+  await card.click();
+  await expect(page.getByRole("button", { name: "Mourning Tree intent: 4 Growth" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.getByText("HP 26/30")).toBeVisible();
+});
+
+test("Hush forecast includes a legacy Witch's lethal Poison", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.hero = "thorn-witch";
+  delete snapshot.state.heroRuleset;
+  snapshot.state.enemy.hp = 2;
+  snapshot.state.deck = [{ id: "bell", pair: "Bell Founder & Bell Breaker" }];
+  snapshot.state.zones.hand = [
+    { id: "bell", pair: "Bell Founder & Bell Breaker", face: "dark", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const card = page.getByRole("button", { name: /^Bell Breaker dark/ });
+  await card.hover();
+  await expect(page.getByRole("tooltip")).toContainText("On play: apply 2 Poison before this effect.");
+  await expect(page.getByRole("tooltip")).toContainText("If Hushed: enemy falls to Poison before acting.");
+  await card.click();
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Rewards" })).toBeVisible();
+  await expect(page.getByText("HP 30/30")).toBeVisible();
+});
+
+test("Hush forecast accounts for the Seraph and Ashen Seal preventing a lethal tick", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(
+      42,
+      { id: "hush-seal", tier: 1, orientation: "light", relic: "ashen-seal" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  snapshot.state.encounters![0] = "mourning-tree";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 36;
+  snapshot.state.action = 1;
+  snapshot.state.player.hp = 2;
+  snapshot.state.player.burn = 4;
+  snapshot.state.deck = [{ id: "hush", pair: "Silence & Clamor" }];
+  snapshot.state.zones.hand = [{ id: "hush", pair: "Silence & Clamor", face: "light", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const card = page.getByRole("button", { name: /^Silence light/ });
+  await card.hover();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "If Hushed: 7 Growth damage before Ward and Reflect.",
+  );
+  await expect(page.getByRole("tooltip")).not.toContainText("you fall to Burn");
+  await card.click();
+  await expect(page.getByRole("button", { name: /Player status: ward 3.*burn 4/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Mourning Tree intent: 7 Growth" })).toBeVisible();
+});
+
+test("touch inspection previews Hush without playing it", async ({ browser }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.enemy.curse = 2;
+  snapshot.state.deck = [
+    { id: "hush", pair: "Silence & Clamor" },
+    { id: "sun", pair: "Sun & Moon" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  const card = page.getByRole("button", { name: /^Silence light/ });
+  const box = (await card.boundingBox())!;
+  const cdp = await context.newCDPSession(page);
+  const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+  await page.waitForTimeout(600);
+  await expect(page.getByRole("tooltip")).toContainText(
+    "If Hushed: 5 Growth damage before Ward and Reflect.",
+  );
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
+  await card.tap();
+  await expect(page.getByRole("button", { name: "Mourning Tree intent: 5 Growth" })).toBeVisible();
+  await context.close();
+});
