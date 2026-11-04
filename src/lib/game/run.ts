@@ -411,6 +411,7 @@ export interface RunState {
   mana: number;
   action: number;
   offers: Pair[];
+  lastOffers?: Pair[] | undefined;
   message: string;
   pending?: PendingChoice | undefined;
   latestDirectHit?: number | undefined;
@@ -512,10 +513,15 @@ function victory(s: RunState, rng: Rng) {
     return;
   }
   const owned = new Set(s.deck.map((c) => c.pair));
-  s.offers = shuffle(
+  const shuffled = shuffle(
     rewardPool(s.experiment?.tier ?? 3, s.hero).filter((p) => !owned.has(p)),
     rng,
-  ).slice(0, s.experiment?.relic === "many-eyes" ? 4 : 3);
+  );
+  const recent = new Set(s.lastOffers ?? []);
+  s.offers = [
+    ...shuffled.filter((pair) => !recent.has(pair)),
+    ...shuffled.filter((pair) => recent.has(pair)),
+  ].slice(0, s.experiment?.relic === "many-eyes" ? 4 : 3);
   s.phase = "reward";
   s.message = "Choose a card pair or skip.";
 }
@@ -751,7 +757,9 @@ function offerRoute(s: RunState, rng: Rng) {
     return;
   }
   const enemy = candidates[rngInt(rng, candidates.length)]!.id;
-  const pair = pairs[rngInt(rng, pairs.length)]!;
+  const freshPairs = pairs.filter((pair) => !s.lastOffers?.includes(pair));
+  const eventPairs = freshPairs.length ? freshPairs : pairs;
+  const pair = eventPairs[rngInt(rng, eventPairs.length)]!;
   const events = expeditionEventIds.filter(
     (id) => id !== experiment.lastEvent && (id !== "exchange" || s.deck.length > 0),
   );
@@ -780,6 +788,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     if (command.pair) s.deck.push({ id: `card-${s.nextId++}`, pair: command.pair });
     else if (s.offers.length && s.experiment?.relic === "hollow-chalice")
       s.player.hp = Math.min(s.player.maxHp, s.player.hp + 3);
+    if (s.offers.length) s.lastOffers = [...s.offers];
     s.offers = [];
     if (s.experiment?.route?.active) continueRoute(s, rng);
     else if (s.fight === 1) {

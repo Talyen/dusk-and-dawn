@@ -76,6 +76,7 @@ const runSchema = z
     action: integer,
     latestDirectHit: integer.optional(),
     offers: z.array(cardPair),
+    lastOffers: z.array(cardPair).max(4).optional(),
     message: z.string(),
     pending: z
       .object({
