@@ -5189,3 +5189,40 @@ test("replay retains known unlock tier after a transient progression read failur
     )
     .toMatchObject({ tier: 2, orientation: "dark" });
 });
+
+test("Mirror and Shattered Mirror resolve against the Swan through save and resume", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-mirror-eyed-swan";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+  snapshot.state.enemy.reflect = true;
+  snapshot.state.action = 1;
+  snapshot.state.deck = [
+    { id: "mirror", pair: "Mirror & Shattered Mirror" },
+    { id: "shards", pair: "Mirror & Shattered Mirror" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "light", kept: false },
+    { ...snapshot.state.deck[1]!, face: "dark", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Mirror light/ }).click();
+  await page.getByRole("button", { name: /^Shattered Mirror dark/ }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "28");
+  await expect(page.getByRole("img", { name: "The Mirror-Eyed Swan, 24 of 26 HP" })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "28");
+  await expect(page.getByRole("img", { name: "The Mirror-Eyed Swan, 24 of 26 HP" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "28");
+  await expect(page.getByRole("img", { name: "The Mirror-Eyed Swan, 20 of 26 HP" })).toBeVisible();
+});
