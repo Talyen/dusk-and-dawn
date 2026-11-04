@@ -423,6 +423,115 @@ function RewardCard({ pair, onChoose }: { pair: string; onChoose: () => void }) 
   );
 }
 
+function RouteChoice({
+  label,
+  caption,
+  disabled,
+  onChoose,
+  art: artwork,
+  children,
+}: {
+  label: string;
+  caption: string;
+  disabled?: boolean;
+  onChoose: () => void;
+  art: ReactNode;
+  children: ReactNode;
+}) {
+  const trigger = useRef<HTMLButtonElement>(null);
+  const id = useId();
+  const pointer = useRef(false);
+  const focus = useRef(false);
+  const pinned = useRef(false);
+  const [open, setOpen] = useState(false);
+  const touch = useTouchInspection<HTMLButtonElement>(() => {
+    pinned.current = true;
+    setOpen(true);
+  });
+  useEffect(() => {
+    if (!open) return;
+    const dismissOutside = (event: Event) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
+        pointer.current = false;
+        focus.current = false;
+        pinned.current = false;
+        setOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", dismissOutside, true);
+    document.addEventListener("focusin", dismissOutside, true);
+    return () => {
+      document.removeEventListener("pointerdown", dismissOutside, true);
+      document.removeEventListener("focusin", dismissOutside, true);
+    };
+  }, [open]);
+  return (
+    <>
+      <button
+        ref={trigger}
+        type="button"
+        className="battle-route-choice"
+        aria-label={label}
+        aria-describedby={open ? id : undefined}
+        disabled={disabled}
+        onClick={(event) => {
+          if (touch.consumeClick()) event.preventDefault();
+          else onChoose();
+        }}
+        onPointerDown={touch.onPointerDown}
+        onPointerMove={touch.onPointerMove}
+        onPointerUp={touch.onPointerUp}
+        onPointerCancel={touch.onPointerCancel}
+        onContextMenu={touch.onContextMenu}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = false;
+            if (!focus.current && !pinned.current) setOpen(false);
+          }
+        }}
+        onFocus={(event) => {
+          if (event.currentTarget.matches(":focus-visible")) {
+            focus.current = true;
+            setOpen(true);
+          }
+        }}
+        onBlur={() => {
+          focus.current = false;
+          if (!pointer.current && !pinned.current) setOpen(false);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && open) {
+            event.stopPropagation();
+            pointer.current = false;
+            focus.current = false;
+            pinned.current = false;
+            setOpen(false);
+          }
+        }}
+      >
+        {artwork}
+        <span>{caption}</span>
+      </button>
+      <Tooltip
+        triggerRef={trigger}
+        id={id}
+        open={open}
+        placement="bottom"
+        overlayNarrow
+        className="battle-tooltip"
+      >
+        {children}
+      </Tooltip>
+    </>
+  );
+}
+
 const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
   Sacrifice: { hits: [8], type: "Radiance" },
   Vampire: { hits: [4], type: "Shadow" },
@@ -841,8 +950,10 @@ function BattleSession({
           changes.push(`You ${signed(after.player.hp - before.player.hp)} HP`);
         if (after.enemy.hp !== before.enemy.hp)
           changes.push(`${getEnemy(before).name} ${signed(after.enemy.hp - before.enemy.hp)} HP`);
-        if (after.player.ward > before.player.ward)
-          changes.push(`Ward +${after.player.ward - before.player.ward}`);
+        if (after.player.ward !== before.player.ward)
+          changes.push(`Ward ${signed(after.player.ward - before.player.ward)}`);
+        if (after.enemy.ward !== before.enemy.ward)
+          changes.push(`${getEnemy(before).name} Ward ${signed(after.enemy.ward - before.enemy.ward)}`);
         for (const name of ["burn", "poison", "curse", "bless"] as const) {
           if (after.enemy[name] > before.enemy[name])
             changes.push(
@@ -852,7 +963,13 @@ function BattleSession({
         const text =
           after.phase === "reward" || after.phase === "victory"
             ? `${getEnemy(before).name} defeated`
-            : changes.join(" · ") || after.message;
+            : changes.join(" · ") ||
+              (command.type === "end"
+                ? before.enemy.freeze ||
+                  (before.enemy.hush && getEnemy(before).actions[before.action]!.ability)
+                  ? `${getEnemy(before).actions[before.action]!.name} skipped`
+                  : `${getEnemy(before).actions[before.action]!.name}: ${before.enemy.hush ? getEnemy(before).actions[before.action]!.text.split(" Trait — ")[0] : getEnemy(before).actions[before.action]!.text}`
+                : after.message);
         setFeedback({ revision: result.snapshot.revision, text });
       } else setFeedback(null);
       setSelected(null);
@@ -964,7 +1081,7 @@ function BattleSession({
     : null;
   return (
     <section
-      className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : ""}`}
+      className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : s.phase === "route" ? " battle-screen--route" : s.phase === "victory" || s.phase === "defeat" ? " battle-screen--ending" : ""}`}
       aria-labelledby="battle-title"
     >
       <div className="battle-head">
@@ -984,7 +1101,9 @@ function BattleSession({
                       : "Run ended"}
           </h1>
         </div>
-        {s.phase !== "battle" && <Button onClick={exitBattle}>Main menu</Button>}
+        {s.phase !== "battle" && s.phase !== "victory" && s.phase !== "defeat" && (
+          <Button onClick={exitBattle}>Main menu</Button>
+        )}
       </div>
       <p className="battle-preview">
         Preview rules: Bless and Curse use the provisional flat model (+1/−1 per stack).
@@ -1341,7 +1460,7 @@ function BattleSession({
         </>
       )}
       {s.phase === "reward" && (
-        <div className="battle-rewards">
+        <div className="battle-rewards" style={{ "--offers": s.offers.length } as React.CSSProperties}>
           {s.offers.map((pair) => (
             <RewardCard key={pair} pair={pair} onChoose={() => dispatch({ type: "reward", pair })} />
           ))}
@@ -1354,28 +1473,56 @@ function BattleSession({
           const path = s.experiment.route;
           const enemy = simpleEnemies.find((entry) => entry.id === path.enemy)!;
           return (
-            <section className="battle-panel" aria-label="Route choices">
-              <p>All paths lead to the next scheduled fight. The detour grants an extra card reward.</p>
-              <div className="battle-targets">
-                <button onClick={() => dispatch({ type: "route", choice: "combat" })}>
-                  Combat: {enemy.name} · {enemy.hp} HP · weakness {enemy.weakness} · extra reward
-                </button>
-                <button onClick={() => dispatch({ type: "route", choice: "rest" })}>Rest: heal 4 HP</button>
-                <button
-                  disabled={s.player.hp <= 4}
-                  onClick={() => dispatch({ type: "route", choice: "event" })}
-                >
-                  Event: lose 4 HP, add {path.pair}
-                </button>
-              </div>
-              <p>
-                Combat preview: {enemy.trait}: {enemy.traitEffect} Pattern:{" "}
-                {enemy.actions.map((action) => `${action.name}: ${action.text}`).join(" → ")}
-              </p>
-              <p>
-                Event pair: {cards[path.pair]!.light.name}: {cards[path.pair]!.light.effect} /{" "}
-                {cards[path.pair]!.dark.name}: {cards[path.pair]!.dark.effect}
-              </p>
+            <section className="battle-route" aria-label="Route choices">
+              <RouteChoice
+                label={`Combat: ${enemy.name} · ${enemy.hp} HP · weakness ${enemy.weakness} · extra reward`}
+                caption="Combat · Extra reward"
+                onChoose={() => dispatch({ type: "route", choice: "combat" })}
+                art={
+                  <span className="battle-route-art">
+                    <img src={art("enemy", enemy.name)} alt="" />
+                  </span>
+                }
+              >
+                <strong>{enemy.name}</strong>
+                <p>
+                  HP {enemy.hp} · Weakness: {enemy.weakness} · Extra reward
+                </p>
+                <p>
+                  {enemy.trait}: {enemy.traitEffect}
+                </p>
+                <p>Pattern: {enemy.actions.map((action) => `${action.name}: ${action.text}`).join(" → ")}</p>
+              </RouteChoice>
+              <RouteChoice
+                label="Rest: heal 4 HP"
+                caption="Rest · +4 HP"
+                onChoose={() => dispatch({ type: "route", choice: "rest" })}
+                art={
+                  <span className="battle-route-art">
+                    <img src={art("card", "Cloister Garden")} alt="" />
+                  </span>
+                }
+              >
+                <strong>Rest</strong>
+                <p>Heal 4 HP.</p>
+              </RouteChoice>
+              <RouteChoice
+                label={`Event: lose 4 HP, add ${path.pair}`}
+                caption="Event · −4 HP"
+                disabled={s.player.hp <= 4}
+                onChoose={() => dispatch({ type: "route", choice: "event" })}
+                art={
+                  <span className="battle-route-art battle-route-art--pair">
+                    <img src={art("card", cards[path.pair]!.light.name)} alt="" />
+                    <img src={art("card", cards[path.pair]!.dark.name)} alt="" />
+                  </span>
+                }
+              >
+                <strong>{cards[path.pair]!.light.name}</strong>
+                <p>{cards[path.pair]!.light.effect}</p>
+                <strong>{cards[path.pair]!.dark.name}</strong>
+                <p>{cards[path.pair]!.dark.effect}</p>
+              </RouteChoice>
             </section>
           );
         })()}
@@ -1395,9 +1542,10 @@ function BattleSession({
         </section>
       )}
       {(s.phase === "victory" || s.phase === "defeat") && (
-        <section className="battle-panel">
+        <section className="battle-ending">
+          <img src={art("enemy", enemy.name)} alt="" />
           <p>
-            Scheduled fights reached: {s.fight + 1} of {route.length}. Cards in deck: {s.deck.length}.
+            Encounters {s.fight + 1}/{route.length} · Deck {s.deck.length}
           </p>
           <Button onClick={exitBattle}>Return to main menu</Button>
         </section>

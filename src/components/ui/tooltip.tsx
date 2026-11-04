@@ -8,13 +8,15 @@ export function Tooltip({
   id,
   open,
   placement = "top",
+  overlayNarrow = false,
   className,
   children,
 }: {
   triggerRef: RefObject<HTMLElement | null>;
   id: string;
   open: boolean;
-  placement?: "top" | "left" | "right";
+  placement?: "top" | "bottom" | "left" | "right";
+  overlayNarrow?: boolean;
   className?: string;
   children: ReactNode;
 }) {
@@ -51,11 +53,13 @@ export function Tooltip({
           offset(8),
           flip({
             fallbackPlacements:
-              placement === "left"
-                ? ["right", "top", "bottom"]
-                : placement === "right"
-                  ? ["left", "top", "bottom"]
-                  : ["bottom", "left", "right"],
+              placement === "bottom"
+                ? ["top"]
+                : placement === "left"
+                  ? ["right", "top", "bottom"]
+                  : placement === "right"
+                    ? ["left", "top", "bottom"]
+                    : ["bottom", "left", "right"],
           }),
           shift({ padding: 8, crossAxis: true }),
           size({
@@ -67,6 +71,18 @@ export function Tooltip({
         ],
       }).then(({ x, y, placement }) => {
         if (!live || current !== sequence) return;
+        if (overlayNarrow && window.matchMedia("(max-width: 700px)").matches) {
+          const anchor = trigger.getBoundingClientRect();
+          const tip = panel.getBoundingClientRect();
+          x = Math.max(
+            8,
+            Math.min(window.innerWidth - tip.width - 8, anchor.left + (anchor.width - tip.width) / 2),
+          );
+          y = Math.max(
+            8,
+            Math.min(window.innerHeight - tip.height - 8, anchor.top + (anchor.height - tip.height) / 2),
+          );
+        }
         Object.assign(panel.style, { left: `${x}px`, top: `${y}px` });
         setSide(placement.split("-")[0] ?? "top");
         setPlaced(true);
@@ -77,7 +93,7 @@ export function Tooltip({
       live = false;
       stop();
     };
-  }, [present, triggerRef, placement]);
+  }, [present, triggerRef, placement, overlayNarrow]);
 
   if (!present) return null;
   return createPortal(

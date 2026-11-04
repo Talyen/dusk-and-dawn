@@ -459,7 +459,9 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   await expect(card.locator("img")).toHaveJSProperty("complete", true);
   expect(await card.locator("img").evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   await page.locator(".battle-enemy-trigger").hover();
-  await expect(page.getByRole("tooltip")).toContainText(/Current attack:.*Radiance damage before Ward and Reflect/);
+  await expect(page.getByRole("tooltip")).toContainText(
+    /Current attack:.*Radiance damage before Ward and Reflect/,
+  );
   await card.hover();
   await expect(page.getByRole("tooltip")).toContainText("Other face:");
   await card.click();
@@ -816,8 +818,11 @@ test("battle art remains full-bleed and combat text stays readable at common siz
     return {
       cardBox: { width: card.offsetWidth, height: card.offsetHeight },
       imageBox: { width: image.offsetWidth, height: image.offsetHeight },
-      overlapsActions: cardBox.right > actionsBox.left && cardBox.left < actionsBox.right &&
-        cardBox.bottom > actionsBox.top && cardBox.top < actionsBox.bottom,
+      overlapsActions:
+        cardBox.right > actionsBox.left &&
+        cardBox.left < actionsBox.right &&
+        cardBox.bottom > actionsBox.top &&
+        cardBox.top < actionsBox.bottom,
     };
   });
   expect(dimensions.imageBox.width).toBeGreaterThan(dimensions.cardBox.width - 3);
@@ -875,8 +880,19 @@ test("expedition event survives reload and unlocks the dark start for a future r
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
-  await expect(page.getByText(`Event pair:`, { exact: false })).toContainText(route.pair.split(" & ")[0]!);
-  await page.getByRole("button", { name: /^Event: lose 4 HP/ }).click();
+  const event = page.getByRole("button", { name: /^Event: lose 4 HP/ });
+  await expect(page.locator(".battle-route-choice img")).toHaveCount(4);
+  await page.setViewportSize({ width: 390, height: 700 });
+  await page.getByRole("button", { name: /^Combat:/ }).hover();
+  const tip = (await page.getByRole("tooltip").boundingBox())!;
+  const nextArt = (await page
+    .getByRole("button", { name: /^Rest:/ })
+    .locator("img")
+    .boundingBox())!;
+  expect(tip.y + tip.height).toBeLessThanOrEqual(nextArt.y);
+  await event.hover();
+  await expect(page.getByRole("tooltip")).toContainText(route.pair.split(" & ")[0]!);
+  await event.click();
   await expect(page.getByText(/HP 26\/30/)).toBeVisible();
   await expect
     .poll(async () =>
@@ -932,6 +948,13 @@ test("plays a full branching expedition through the browser", async ({ page }) =
       continue;
     }
     if (title === "Rewards") {
+      const offers = page.locator(".battle-reward");
+      if ((await offers.count()) === 4) {
+        const boxes = await Promise.all((await offers.all()).map((offer) => offer.boundingBox()));
+        expect(
+          Math.max(...boxes.map((box) => box!.y)) - Math.min(...boxes.map((box) => box!.y)),
+        ).toBeLessThan(2);
+      }
       await page.getByRole("button", { name: "Skip reward" }).click();
       continue;
     }
@@ -1183,3 +1206,50 @@ test("touch hold inspects a battle card without playing it; a tap plays it", asy
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
   await context.close();
 });
+
+test("reports the enemy action when damage and healing cancel out", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "mourning-tree";
+  snapshot.state.enemy.maxHp = 36;
+  snapshot.state.enemy.hp = 30;
+  snapshot.state.enemy.burn = 3;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-enemy h2")).toContainText("30/36");
+  await expect(page.getByRole("status")).toContainText("Draw from the Earth: Heal 3 HP.");
+});
+
+for (const handSize of [1, 2, 3, 5, 8]) {
+  test(`compact battle controls avoid a ${handSize}-card hand`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    const deck = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+    snapshot.state.zones.hand = deck.slice(0, handSize);
+    snapshot.state.zones.library = deck.slice(handSize);
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const controls = (await page.locator(".battle-actions").boundingBox())!;
+    for (const card of await page.locator(".battle-card").all()) {
+      const box = (await card.boundingBox())!;
+      const intersects =
+        box.x < controls.x + controls.width &&
+        box.x + box.width > controls.x &&
+        box.y < controls.y + controls.height &&
+        box.y + box.height > controls.y;
+      expect(intersects).toBe(false);
+    }
+  });
+}
