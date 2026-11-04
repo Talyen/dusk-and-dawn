@@ -14,6 +14,7 @@ import {
   getEnemy,
   route,
   seraphGrantsWard,
+  witchGrantsCurse,
   vampireDamage,
   type Command,
   type RunState,
@@ -1093,12 +1094,9 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
   const flipSummary = summarizeChanges(flipped);
   const lines: string[] = [];
   if (seraphGrantsWard(s, card)) lines.push("On play: gain 1 Ward before this effect.");
-  if (s.hero === "thorn-witch" && card.face === "dark")
-    lines.push(
-      s.heroRuleset !== undefined
-        ? "On play: apply 1 Curse before this effect."
-        : "On play: apply 2 Poison before this effect.",
-    );
+  if (witchGrantsCurse(s, card)) lines.push("On play: apply 1 Curse before this effect.");
+  else if (s.hero === "thorn-witch" && card.face === "dark" && s.heroRuleset === undefined)
+    lines.push("On play: apply 2 Poison before this effect.");
   if (s.experiment?.relic === "ashen-seal" && cardCanBanishItself(card))
     lines.push("Ashen Seal: gain 2 Ward after this card Banishes itself.");
   const generic = ops.find((op) => op.op === "attack" || op.op === "attack-ignore-ward");
@@ -2187,8 +2185,8 @@ function BattleSession({
                 <p>Pattern: {enemyPattern(enemy)}</p>
               </RouteChoice>
               <RouteChoice
-                label={`Rest: heal ${restHeal} HP, start next fight with 3 Ward`}
-                caption={`Rest · +${restHeal} HP · 3 Ward`}
+                label={`Rest: heal ${restHeal} HP`}
+                caption={`Rest · +${restHeal} HP`}
                 onChoose={() => dispatch({ type: "route", choice: "rest" })}
                 art={
                   <span className="battle-route-art">
@@ -2197,7 +2195,7 @@ function BattleSession({
                 }
               >
                 <strong>Rest</strong>
-                <p>Heal {restHeal} HP. Start the next fight with 3 Ward.</p>
+                <p>Heal {restHeal} HP.</p>
               </RouteChoice>
               <RouteChoice
                 label={

@@ -32,7 +32,7 @@ describe("antihero starting kits and passives", () => {
     for (const hero of heroIds) {
       const state = createRun(19, undefined, hero).getSnapshot().state;
       expect(state.hero).toBe(hero);
-      expect(state.heroRuleset).toBe(3);
+      expect(state.heroRuleset).toBe(4);
       expect(state.deck).toHaveLength(10);
       expect(new Set(state.deck.map((card) => card.id)).size).toBe(10);
       expect(state.deck.filter((card) => card.pair === "Angel & Vampire")).toHaveLength(1);
@@ -78,14 +78,14 @@ describe("antihero starting kits and passives", () => {
     expect(game.getSnapshot().state.player.bless).toBe(0);
   });
 
-  it("lets the Witch apply Poison and passive Curse before the enemy turn", () => {
+  it("lets the Witch apply Poison without gaining Curse from support", () => {
     const initial = setup("thorn-witch", ["Censer & Plague Brazier"], ["dark"]);
     const game = restoreSession(initial, runHandler);
     expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
-    expect(game.getSnapshot().state.enemy).toMatchObject({ poison: 3, curse: 1 });
+    expect(game.getSnapshot().state.enemy).toMatchObject({ poison: 3, curse: 0 });
     expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
     expect(game.getSnapshot().state.enemy).toMatchObject({ hp: 15, poison: 1, curse: 0 });
-    expect(game.getSnapshot().state.player.hp).toBe(27);
+    expect(game.getSnapshot().state.player.hp).toBe(26);
   });
 
   it("gives the Oracle a one-use Burn option and a deliberate dark hand", () => {
@@ -160,6 +160,17 @@ describe("antihero starting kits and passives", () => {
     expect(game.getSnapshot().state.player.ward).toBe(0);
   });
 
+  it("preserves the ruleset 3 Seraph's support-only Ward in a saved run", async () => {
+    const initial = setup("oathless-seraph", ["Sun & Moon", "Angel & Vampire"], ["light", "light"]);
+    initial.state.heroRuleset = 3;
+    const game = resumeRun(await saved(initial));
+    expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.ward).toBe(0);
+    expect(game.dispatch({ type: "play", id: "test-1" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player.ward).toBe(6);
+    expect((await saved(game.getSnapshot())).state.heroRuleset).toBe(3);
+  });
+
   it("preserves the old Seraph passive on saved runs, including reflected attacks", async () => {
     const initial = setup("oathless-seraph", ["Sun & Moon"], ["light"]);
     initial.state.heroRuleset = 2;
@@ -192,24 +203,57 @@ describe("antihero starting kits and passives", () => {
     expect(resumed.getSnapshot().state.hero).toBe("oathless-seraph");
   });
 
-  it("applies Witch Curse on every dark play, including repeated plays in one turn", async () => {
-    const initial = setup("thorn-witch", ["Key & Lock", "Sun & Moon"], ["dark", "light"]);
+  it("gives the Witch Curse only for dark attacks, not mana refunds or other dark support", async () => {
+    const initial = setup(
+      "thorn-witch",
+      [
+        "Coin Minter & Coin Melter",
+        "Clockmaker & Clock Thief",
+        "Bloom & Wither",
+        "Ivy & Thorns",
+        "Key & Lock",
+      ],
+      ["dark", "dark", "dark", "dark", "dark"],
+    );
+    initial.state.enemy.hp = 100;
+    initial.state.enemy.maxHp = 100;
     const game = restoreSession(initial, runHandler);
     expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
-    expect(game.getSnapshot().state.enemy.curse).toBe(1);
-    const resumed = resumeRun(await saved(game.getSnapshot()));
-    expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
-    expect(resumed.getSnapshot().state.enemy.curse).toBe(2);
-    expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
-    expect(resumed.getSnapshot().state.enemy.curse).toBe(3);
-    expect(resumed.getSnapshot().state.enemy.poison).toBe(0);
-    const before = resumed.getSnapshot();
-    expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(false);
-    expect(resumed.getSnapshot()).toEqual(before);
-    expect(resumed.dispatch({ type: "end" }).decision.accepted).toBe(true);
-    expect(resumed.getSnapshot().state.player.hp).toBe(29); // Moth's 4 damage is reduced by three Curse.
-    expect(resumed.getSnapshot().state.enemy.curse).toBe(0);
+    expect(game.dispatch({ type: "play", id: "test-1" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.mana).toBe(3);
+    expect(game.getSnapshot().state.enemy).toMatchObject({ curse: 0, burn: 1 });
+    expect(game.dispatch({ type: "play", id: "test-2" }).decision.accepted).toBe(true);
+    expect(game.dispatch({ type: "play", id: "test-3" }).decision.accepted).toBe(true);
+    expect(game.dispatch({ type: "play", id: "test-4" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.enemy.curse).toBe(2);
+    const loaded = resumeRun(await saved(game.getSnapshot()));
+    expect(loaded.getSnapshot().state.heroRuleset).toBe(4);
+    expect(loaded.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(loaded.getSnapshot().state.player.hp).toBe(28);
   });
+
+  it.each([2, 3] as const)(
+    "preserves Witch Curse on every dark play in older ruleset %i saves",
+    async (ruleset) => {
+      const initial = setup("thorn-witch", ["Key & Lock", "Sun & Moon"], ["dark", "light"]);
+      initial.state.heroRuleset = ruleset;
+      const game = restoreSession(initial, runHandler);
+      expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+      expect(game.getSnapshot().state.enemy.curse).toBe(1);
+      const resumed = resumeRun(await saved(game.getSnapshot()));
+      expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+      expect(resumed.getSnapshot().state.enemy.curse).toBe(2);
+      expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+      expect(resumed.getSnapshot().state.enemy.curse).toBe(3);
+      expect(resumed.getSnapshot().state.enemy.poison).toBe(0);
+      const before = resumed.getSnapshot();
+      expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(false);
+      expect(resumed.getSnapshot()).toEqual(before);
+      expect(resumed.dispatch({ type: "end" }).decision.accepted).toBe(true);
+      expect(resumed.getSnapshot().state.player.hp).toBe(29); // Moth's 4 damage is reduced by three Curse.
+      expect(resumed.getSnapshot().state.enemy.curse).toBe(0);
+    },
+  );
 
   it("preserves the original Poison passive for Witch saves created before ruleset 2", async () => {
     const initial = setup("thorn-witch", ["Key & Lock"], ["dark"]);

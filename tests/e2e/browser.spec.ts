@@ -3157,10 +3157,10 @@ test("antihero selection shows the supplied artwork and starts a dark Witch expe
   await expect(page.getByRole("button", { name: "Start expedition" })).toBeInViewport({ ratio: 1 });
   await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/24" })).toBeVisible();
-  await expect(page.locator(".battle-card").first()).toContainText("dark");
-  await page.locator(".battle-card").first().hover();
+  const attack = page.getByRole("button", { name: /^Vampire dark/ });
+  await attack.hover();
   await expect(page.getByRole("tooltip")).toContainText("apply 1 Curse before this effect");
-  await page.locator(".battle-card").first().click();
+  await attack.click();
   await expect(page.getByRole("button", { name: /Enemy status:.*curse 1/ })).toBeVisible();
   await expect
     .poll(() =>
@@ -3259,7 +3259,7 @@ test("touching an antihero selects it and reveals its passive before starting", 
   const witch = page.getByRole("button", { name: /^The Thorn Witch/ });
   await witch.tap();
   await expect(witch).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("tooltip")).toContainText("Before each dark card resolves, apply 1 Curse");
+  await expect(page.getByRole("tooltip")).toContainText("Before each dark attack card, apply 1 Curse");
   expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBeNull();
   const oracle = page.getByRole("button", { name: /^The Veiled Oracle/ });
   await oracle.tap();
@@ -3705,22 +3705,17 @@ for (const hp of [25, 28, 30]) {
     await page.keyboard.press("Tab");
     await health.focus();
     const tip = page.getByRole("tooltip").filter({ hasText: "Hollow Chalice" });
-    await expect(tip).toContainText("Before each dark card resolves");
+    await expect(tip).toContainText("Before each dark attack card");
     const amount = Math.min(4, 30 - hp);
-    const rest = page.getByRole("button", { name: `Rest: heal ${amount} HP, start next fight with 3 Ward` });
+    const rest = page.getByRole("button", { name: `Rest: heal ${amount} HP` });
     await expect(rest).toContainText(`Rest · +${amount} HP`);
     expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
     await page.reload();
     await page.getByRole("button", { name: "Play", exact: true }).click();
     await page.getByRole("button", { name: "Continue run" }).click();
     await expect(page.getByRole("button", { name: `The Thorn Witch, HP ${hp}/30` })).toBeVisible();
-    await page.getByRole("button", { name: `Rest: heal ${amount} HP, start next fight with 3 Ward` }).click();
+    await page.getByRole("button", { name: `Rest: heal ${amount} HP` }).click();
     await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", String(hp + amount));
-    await expect(page.getByRole("button", { name: "Player status: ward 3" })).toBeVisible();
-    await page.reload();
-    await page.getByRole("button", { name: "Play", exact: true }).click();
-    await page.getByRole("button", { name: "Continue run" }).click();
-    await expect(page.getByRole("button", { name: "Player status: ward 3" })).toBeVisible();
   });
 }
 
@@ -4122,9 +4117,7 @@ test("Sunken Sanctuary previews healing versus mana without revealing or adding 
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("button", { name: "The Oathless Seraph, HP 20/30" })).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Rest: heal 4 HP, start next fight with 3 Ward" }),
-  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Rest: heal 4 HP" })).toBeVisible();
   const shrine = page.getByRole("button", { name: "Event: heal 7 HP, start next fight with 2 mana" });
   await expect(shrine).toContainText("Sunken Sanctuary · +7 HP · −1 mana");
   await shrine.hover();
@@ -4387,5 +4380,41 @@ for (const side of ["light", "dark"] as const) {
     if (side === "light")
       await expect(page.getByRole("button", { name: /^Iron Needlecase light · Kept/ })).toBeVisible();
     else await expect(page.getByRole("button", { name: /Banished 1/ })).toBeVisible();
+  });
+}
+
+for (const ruleset of [3, 4] as const) {
+  test(`Witch ruleset ${ruleset} previews and resolves its saved passive`, async ({ page }) => {
+    const initial = structuredClone(createRun(31, undefined, "thorn-witch").getSnapshot());
+    initial.state.heroRuleset = ruleset;
+    for (const [index, pair] of ["Coin Minter & Coin Melter", "Bloom & Wither"].entries()) {
+      const card = initial.state.deck[index]!;
+      card.pair = pair;
+      const zone = [...initial.state.zones.hand, ...initial.state.zones.library].find(
+        (item) => item.id === card.id,
+      )!;
+      initial.state.zones.hand = initial.state.zones.hand.filter((item) => item.id !== card.id);
+      initial.state.zones.library = initial.state.zones.library.filter((item) => item.id !== card.id);
+      initial.state.zones.hand.push({ ...zone, pair, face: "dark", kept: false });
+    }
+    await page.addInitScript((data) => {
+      if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    }, encodeRun(initial));
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const support = page.getByRole("button", { name: /^Coin Melter dark/ });
+    await support.hover();
+    if (ruleset === 3) await expect(page.getByRole("tooltip")).toContainText("On play: apply 1 Curse");
+    else await expect(page.getByRole("tooltip")).not.toContainText("On play: apply 1 Curse");
+    await support.click();
+    await expect(page.getByText("Mana 3/3")).toBeVisible();
+    const attack = page.getByRole("button", { name: /^Wither dark/ });
+    await attack.hover();
+    await expect(page.getByRole("tooltip")).toContainText("On play: apply 1 Curse");
+    await attack.click();
+    await expect(
+      page.getByRole("button", { name: new RegExp(`Enemy status:.*curse ${ruleset === 3 ? 2 : 1}`) }),
+    ).toBeVisible();
   });
 }

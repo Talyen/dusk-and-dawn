@@ -9,7 +9,7 @@ export const heroes = {
   },
   "thorn-witch": {
     name: "The Thorn Witch",
-    passive: "Before each dark card resolves, apply 1 Curse.",
+    passive: "Before each dark attack card, apply 1 Curse.",
     art: "hero-thorn-witch.webp",
     signature: "Censer & Plague Brazier",
     pairs: ["Angel & Vampire", "Sun & Moon", "Ivy & Thorns", "Bloom & Wither", "Key & Lock"],
@@ -44,10 +44,13 @@ export function heroDeckDescription(hero: HeroId): string {
 }
 
 /** Existing class saves retain their original passives. */
-export type HeroRuleset = 2 | 3;
+export type HeroRuleset = 2 | 3 | 4;
 export function heroPassive(hero: HeroId, ruleset?: HeroRuleset): string {
   if (hero === "thorn-witch" && ruleset === undefined)
     return "Before each dark card resolves, apply 2 Poison.";
-  if (hero === "oathless-seraph" && ruleset !== 3) return "Before each light card resolves, gain 1 Ward.";
+  if (hero === "thorn-witch" && (ruleset === 2 || ruleset === 3))
+    return "Before each dark card resolves, apply 1 Curse.";
+  if (hero === "oathless-seraph" && (ruleset === undefined || ruleset === 2))
+    return "Before each light card resolves, gain 1 Ward.";
   return heroes[hero].passive;
 }

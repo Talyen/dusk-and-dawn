@@ -516,7 +516,15 @@ export function seraphGrantsWard(s: Pick<RunState, "hero" | "heroRuleset">, card
   return (
     s.hero === "oathless-seraph" &&
     card.face === "light" &&
-    (s.heroRuleset !== 3 || !cardDealsDirectDamage(card))
+    (s.heroRuleset === undefined || s.heroRuleset === 2 || !cardDealsDirectDamage(card))
+  );
+}
+export function witchGrantsCurse(s: Pick<RunState, "hero" | "heroRuleset">, card: FightCard): boolean {
+  return (
+    s.hero === "thorn-witch" &&
+    card.face === "dark" &&
+    s.heroRuleset !== undefined &&
+    (s.heroRuleset !== 4 || cardDealsDirectDamage(card))
   );
 }
 const selfBanishingSpecialFaces = new Set([
@@ -912,7 +920,6 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
         s.deck.push({ id: `card-${s.nextId++}`, pair: path.pair });
       }
       continueRoute(s, rng);
-      if (command.choice === "rest") s.player.ward = 3;
       if (command.choice === "event" && event === "thorns") applyDamageOverTime(s.player, "poison", 4);
       if (command.choice === "event" && (event === "lantern" || event === "sanctuary")) s.mana = 2;
     }
@@ -1050,10 +1057,9 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   source.kept = false;
   s.mana--;
   if (seraphGrantsWard(s, source)) s.player.ward++;
-  if (s.hero === "thorn-witch" && source.face === "dark") {
-    if (s.heroRuleset !== undefined) s.enemy.curse++;
-    else applyDamageOverTime(s.enemy, "poison", 2);
-  }
+  if (witchGrantsCurse(s, source)) s.enemy.curse++;
+  else if (s.hero === "thorn-witch" && source.face === "dark" && s.heroRuleset === undefined)
+    applyDamageOverTime(s.enemy, "poison", 2);
   let banishSource = false;
   let sourceMoved = false;
   let referenced: FightCard | null = null;
@@ -1471,7 +1477,7 @@ export function createRun(seed: number, experiment?: ExperimentOptions, hero?: H
   const deck = startingPairs.map((pair, i) => ({ id: `card-${i}`, pair }));
   const initial: RunState = {
     phase: "battle",
-    ...(hero ? { hero, heroRuleset: 3 as const } : {}),
+    ...(hero ? { hero, heroRuleset: 4 as const } : {}),
     fight: 0,
     deck,
     nextId: 10,
