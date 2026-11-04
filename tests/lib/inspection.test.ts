@@ -66,3 +66,62 @@ it("Sacrifice requires and consumes a chosen other card before its attack", () =
   expect(ready.getSnapshot().state.enemy.hp).toBe(10);
   expect(ready.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["three"]);
 });
+
+it.each([
+  ["Cartographer & Lost Wanderer", "light"],
+  ["Walled City & Wilderness", "dark"],
+  ["Sieve & Funnel", "light"],
+] as const)("automatically resolves %s with one available library card", (pair, side) => {
+  const initial = structuredClone(fixture(pair, side).getSnapshot());
+  initial.state.zones.library = [{ id: "only", pair: "Sun & Moon", face: "dark", kept: false }];
+  initial.state.zones.discard = [{ id: "discard", pair: "Angel & Vampire", face: "light", kept: false }];
+  const game = restoreSession(initial, runHandler);
+  expect(game.dispatch({ type: "play", id: "source" }).decision.accepted).toBe(true);
+  const state = game.getSnapshot().state;
+  expect(state.pending).toBeUndefined();
+  expect(state.mana).toBe(2);
+  if (pair.startsWith("Cartographer")) {
+    expect(state.zones.library.map((card) => card.id)).toEqual(["only"]);
+    expect(state.zones.hand).toEqual([]);
+  } else {
+    expect(state.zones.hand.map((card) => card.id)).toEqual(["only"]);
+    expect(state.zones.library).toEqual([]);
+  }
+  expect(state.zones.discard.map((card) => card.id)).toEqual(["discard", "source"]);
+});
+
+it("Loaded Dice requests only what fits and preserves the remainder's library order", () => {
+  const setup = structuredClone(fixture("Balance Scales & Loaded Dice", "dark").getSnapshot());
+  setup.state.zones.hand.push(
+    ...Array.from({ length: 7 }, (_, index) => ({
+      id: `held-${index}`,
+      pair: "Sun & Moon",
+      face: "light" as const,
+      kept: false,
+    })),
+  );
+  const game = restoreSession(setup, runHandler);
+  expect(game.dispatch({ type: "play", id: "source" }).decision.accepted).toBe(true);
+  expect(game.getSnapshot().state.pending).toMatchObject({ kind: "select-bottom", required: 1 });
+  expect(game.getSnapshot().state.pending?.cards.map((card) => card.id)).toEqual(["three", "two", "one"]);
+  expect(game.dispatch({ type: "choose", ids: ["two"] }).decision.accepted).toBe(true);
+  expect(game.getSnapshot().state.zones.hand).toHaveLength(8);
+  expect(game.getSnapshot().state.zones.hand.at(-1)?.id).toBe("two");
+  expect(game.getSnapshot().state.zones.library.map((card) => card.id)).toEqual(["one", "three", "bottom"]);
+});
+
+it("Cartographer does not reshuffle discard midway through an incomplete inspection", () => {
+  const setup = structuredClone(fixture("Cartographer & Lost Wanderer", "light").getSnapshot());
+  setup.state.zones.library = [
+    { id: "bottom", pair: "Sun & Moon", face: "light", kept: false },
+    { id: "top", pair: "Angel & Vampire", face: "dark", kept: false },
+  ];
+  setup.state.zones.discard = [{ id: "discard", pair: "Flame & Frost", face: "light", kept: false }];
+  const game = restoreSession(setup, runHandler);
+  game.dispatch({ type: "play", id: "source" });
+  expect(game.getSnapshot().state.pending?.cards.map((card) => card.id)).toEqual(["top", "bottom"]);
+  expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["discard"]);
+  expect(game.dispatch({ type: "choose", ids: ["bottom", "top"] }).decision.accepted).toBe(true);
+  expect(game.getSnapshot().state.zones.library.map((card) => card.id)).toEqual(["top", "bottom"]);
+  expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["discard", "source"]);
+});

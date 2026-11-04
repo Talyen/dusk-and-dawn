@@ -300,3 +300,31 @@ it("turning held cards occurs before draw, whereas the Sunken Sun turns after dr
     ["drawn", "dark"],
   ]);
 });
+
+it("the Swan's displayed reflection remains active while Frozen and expires on the skipped action", () => {
+  const snapshot = encounter("the-mirror-eyed-swan", 1);
+  snapshot.state.enemy.freeze = true;
+  snapshot.state.enemy.reflect = true;
+  snapshot.state.zones.hand = [{ id: "sun", pair: "Sun & Moon", face: "light", kept: false }];
+  const game = restoreSession(snapshot, runHandler);
+  expect(game.dispatch({ type: "play", id: "sun" }).decision.accepted).toBe(true);
+  expect(game.getSnapshot().state.player.hp).toBe(24);
+  expect(game.getSnapshot().state.enemy.hp).toBe(20);
+  expect(game.getSnapshot().state.enemy.freeze).toBe(true);
+  game.dispatch({ type: "end" });
+  expect(game.getSnapshot().state.player.hp).toBe(24);
+  expect(game.getSnapshot().state.enemy.freeze).toBe(false);
+  expect(game.getSnapshot().state.enemy.reflect).toBe(false);
+  expect(game.getSnapshot().state.action).toBe(0);
+});
+
+it("the Librarian does not retaliate after a lethal attack, even when Frozen", () => {
+  const snapshot = encounter("the-thorned-librarian", 1);
+  snapshot.state.enemy.freeze = true;
+  snapshot.state.enemy.hp = 1;
+  snapshot.state.zones.hand = [{ id: "sun", pair: "Sun & Moon", face: "light", kept: false }];
+  const game = restoreSession(snapshot, runHandler);
+  expect(game.dispatch({ type: "play", id: "sun" }).decision.accepted).toBe(true);
+  expect(game.getSnapshot().state.player.hp).toBe(30);
+  expect(game.getSnapshot().state.phase).toBe("reward");
+});
