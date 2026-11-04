@@ -1,28 +1,757 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dusk &amp; Dawn — Bless Curse and Control Review</title><style>
-:root{color-scheme:dark;--bg:#111218;--panel:#1b1e27;--ink:#eee9df;--muted:#bbb4c3;--line:#42404d;--accent:#e9c58b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:44px 28px 68px}header{max-width:960px;margin-bottom:26px}h1{font:normal clamp(34px,5vw,58px)/1.12 Georgia,serif;margin:12px 0 20px}h2{font:normal 29px/1.2 Georgia,serif;margin:0 0 18px}h3{font-size:18px;margin:18px 0 8px}p{margin:0 0 14px}a{color:var(--accent);text-underline-offset:3px}.eyebrow,.number{color:var(--accent);font-size:12px;letter-spacing:.08em;text-transform:uppercase}.muted,footer{color:var(--muted)}.notice{border-left:3px solid var(--accent);padding:15px 20px;background:#292432}.panel,.pair,.enemy,.audit{padding:24px;border:1px solid var(--line);border-radius:8px;background:var(--panel);margin-bottom:20px}.faces{display:grid;grid-template-columns:1fr 1fr;gap:25px}.side{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}.effect{font-size:18px;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}.enemy{padding:0;overflow:hidden;margin:0}.art{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#090a0e}.entry{padding:22px}.entry h2{font-size:27px}.actions{padding-left:20px}.actions li{margin:12px 0}.tools{display:flex;gap:16px;flex-wrap:wrap;align-items:end;margin:28px 0}.tools label{display:flex;flex-direction:column;gap:5px;font-size:13px}input,select,button{font:inherit;background:#22232d;color:var(--ink);border:1px solid #777081;padding:10px;border-radius:4px}input{width:min(380px,75vw)}button{cursor:pointer}:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.count{color:var(--muted);padding:10px 0}details{margin:18px 0}summary{cursor:pointer;font-weight:650;color:var(--accent)}details p{margin-top:12px}dl{margin:0}dt{font-weight:650;margin:14px 0 5px}dd{margin:0 0 12px}.rule{border-top:1px solid var(--line);padding-top:12px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}li{margin:7px 0}.small{font-size:14px}.section{margin:48px 0 24px}.toc{display:flex;flex-wrap:wrap;gap:10px 18px;border-bottom:1px solid var(--line);padding-bottom:20px}.portrait-grid{display:flex;gap:18px;flex-wrap:wrap}.portrait-grid img{max-width:200px;height:auto;max-height:240px;object-fit:contain}.audit .changed{color:#f2c084}.audit .before{color:var(--muted)}footer{margin-top:40px;font-size:13px}[hidden]{display:none!important}@media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){main{padding:26px 18px}.grid,.faces{grid-template-columns:1fr}.panel,.pair,.audit{padding:18px}.entry{padding:20px}.tools{display:block}.tools label{margin-bottom:12px}}@media print{body{background:white;color:#111;font:10pt/1.4 Arial,sans-serif}main{padding:0}.tools,.toc{display:none}.panel,.pair,.enemy,.audit{background:white;border-color:#bbb;break-inside:avoid}.grid{display:block}.enemy{display:grid;grid-template-columns:27% 1fr;margin-bottom:18px}.art{margin-top:20px}.entry{padding:14px}h2{font-size:18pt}.notice{background:#eee}a,.muted,.side,footer,summary{color:#333}.effect span,dd span,li span{color:#222!important}}
-.kw-radiance{color:#F7D670;font-weight:650}
-.kw-shadow{color:#C7AEF1;font-weight:650}
-.kw-growth{color:#9DDA97;font-weight:650}
-.kw-decay{color:#C7CD78;font-weight:650}
-.kw-binding{color:#80D1BE;font-weight:650}
-.kw-release{color:#7DDDEC;font-weight:650}
-.kw-fire{color:#FFAD66;font-weight:650}
-.kw-frost{color:#A8E5FA;font-weight:650}
-.kw-memory{color:#B8C7FF;font-weight:650}
-.kw-oblivion{color:#C5C5CD;font-weight:650}
-.kw-ward{color:#8BCBFF;font-weight:650}
-.kw-burn{color:#FF966B;font-weight:650}
-.kw-poison{color:#B2D67C;font-weight:650}
-.kw-flip{color:#D8ABFF;font-weight:650}
-.kw-banish{color:#F3A5B6;font-weight:650}
-.kw-scry{color:#86D8D0;font-weight:650}
-.kw-bless{color:#F5D58C;font-weight:650}
-.kw-curse{color:#D4A2E4;font-weight:650}
-.kw-freeze{color:#90CDEC;font-weight:650}
-.kw-cleanse{color:#A4E5CF;font-weight:650}
-.kw-purge{color:#F4B3A1;font-weight:650}
-.kw-hush{color:#B5BCD1;font-weight:650}
-.kw-keep{color:#B6E1A8;font-weight:650}
-.kw-reflect{color:#9DDDFF;font-weight:650}
-.kw-leech{color:#EF9EAC;font-weight:650}</style></head><body><main><header><p class="eyebrow">Dusk & Dawn · approved directions, open numbers</p><h1>Bless, Curse and control</h1><p class="notice">Bless/Curse scaling is undecided. Flat values are explicitly provisional previews. Freeze thaw from attacks or Fire is undecided. Mark and Weaken are retired from current rules and effects.</p></header><section id="directions" class="section"><h2>Directions and recommendations</h2><ul><li>Approved: <span class="kw-bless">Bless</span> and <span class="kw-curse">Curse</span> are stacking buff/debuff counters affecting every hit of the next direct attack. Mark and Weaken are removed from current effects and rules. Applications add, non-attacks preserve counters, and the next attack spends all of both even if damage is zero.</li><li>Recommendation: flat +1/−1 per stack, with minimum final damage 0 and no extra counter or damage cap. Current mana, cards and one-attack consumption bound individual uses; that is not proof of balance. Stack counts were conservatively retuned to mostly 1–2, with 3 on a few <span class="kw-banish">Banish</span> sources. These are provisional counts, not a conversion formula to preserve old balance.</li><li>The numerical decision is OPEN. Current catalogue previews explicitly use the flat candidate as a working proposal. No percentage rate, rounding mode or percentage cap is approved.</li><li>Comparison candidate only: each stack adds or subtracts 25 percentage points. Combine <span class="kw-bless">Bless</span> minus <span class="kw-curse">Curse</span>, clamp the multiplier between 0× and 2×, then round each final hit to nearest integer with half ties upward. Do not compound multipliers. This permits meaningful comparison without selecting it as the rule.</li><li>Low hit sizes make percentage steps uneven. Nearest rounding leaves 2-damage hits unchanged under <span class="kw-curse">Curse</span> 1; the Millipede gets the same 6 total under <span class="kw-curse">Curse</span> 1 and <span class="kw-curse">Curse</span> 2. Rounding down instead can erase 1-damage hits with one stack while making small <span class="kw-bless">Bless</span> bonuses invisible. Rounding up reverses that bias. Fractional carry or attack-total redistribution could fix some thresholds but adds hidden arithmetic and order rules.</li><li>Flat scaling deliberately rewards or counters many-hit attacks. <span class="kw-bless">Bless</span> 1 adds 3 total to Prism but 1 to a single hit; <span class="kw-curse">Curse</span> 1 removes 5 total from the Millipede when it has five positive hits. Test these interactions with <span class="kw-leech">Leech</span>, reflection, <span class="kw-banish">Banish</span> thinning and repeated draw/recovery.</li><li><span class="kw-curse">Curse</span> can reduce direct hits to 0, but separate <span class="kw-burn">Burn</span>, <span class="kw-poison">Poison</span>, card movement, healing and trait clauses still happen. <span class="kw-freeze">Freeze</span> controls the entire action; <span class="kw-hush">Hush</span> suppresses the labeled trait and skips non-attack abilities. Those remain distinct even when <span class="kw-curse">Curse</span> prevents all direct damage.</li><li><span class="kw-freeze">Freeze</span> control is approved. Its thaw rule is OPEN: whether direct attacks and/or <span class="kw-fire">Fire</span> end it is not defined. Preview only the conditional case “if still Frozen at action start, skip the whole action, advance and clear”. Do not treat earlier breakable-freeze proposals, or a no-thaw alternative, as a settled rule.</li><li><span class="kw-cleanse">Cleanse</span> and <span class="kw-purge">Purge</span> explicitly remove one random eligible kind or all eligible kinds. Random is uniform by active kind, not stack amount; clear the whole chosen counter. No target menu. Typed narrow cures and partial <span class="kw-ward">Ward</span> removal remain separate when those better fit the subject.</li><li>The main player decisions are which cards to play and in what order. Enemy held-card moves now choose random recipients; helpful recovery uses the top discarded card. The dedicated card-flow pass reviews all 122 former flags. The remaining deliberate exceptions below are documented in that pass; risky random <span class="kw-banish">Banish</span> was not used as a blanket replacement.</li></ul></section><section id="counts" class="section"><h2>All-content coverage</h2><ul><li>card faces checked: 496</li><li>enemies checked: 110</li><li>changed card descriptions since previous commit: 197</li><li>enemy entries with effect text changes: 44</li><li>conditional <span class="kw-freeze">Freeze</span> previews: 243</li><li><span class="kw-bless">Bless</span> faces: 8</li><li><span class="kw-curse">Curse</span> faces: 60</li><li><span class="kw-freeze">Freeze</span> faces: 1</li><li><span class="kw-cleanse">Cleanse</span> faces: 3</li><li><span class="kw-purge">Purge</span> faces: 2</li><li>remaining card faces with selection flags: 6</li><li>remaining enemy selection prompts: 0</li></ul></section><section class="section"><h2>Flat versus percentage · one stack</h2><p>No weakness or other modifiers. Percentage columns use the comparison-only 25% rate, nearest rounding with half ties up, and 0–2× bounds.</p><div class="table-wrap"><table><thead><tr><th>Printed hit</th><th>Flat Bless</th><th>25% Bless</th><th>Flat Curse</th><th>25% Curse</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>1</td><td>0</td><td>1</td></tr><tr><td>2</td><td>3</td><td>3</td><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td><td>4</td><td>2</td><td>2</td></tr><tr><td>4</td><td>5</td><td>5</td><td>3</td><td>3</td></tr><tr><td>5</td><td>6</td><td>6</td><td>4</td><td>4</td></tr><tr><td>6</td><td>7</td><td>8</td><td>5</td><td>5</td></tr><tr><td>7</td><td>8</td><td>9</td><td>6</td><td>5</td></tr><tr><td>8</td><td>9</td><td>10</td><td>7</td><td>6</td></tr><tr><td>9</td><td>10</td><td>11</td><td>8</td><td>7</td></tr><tr><td>10</td><td>11</td><td>13</td><td>9</td><td>8</td></tr><tr><td>11</td><td>12</td><td>14</td><td>10</td><td>8</td></tr></tbody></table></div></section><section class="section"><h2>Actual attack patterns</h2><div class="table-wrap"><table><thead><tr><th>Example</th><th>Base</th><th>Flat Bless 1</th><th>25% Bless 1</th><th>Flat Curse 1</th><th>25% Curse 1</th><th>25% Curse 2</th></tr></thead><tbody><tr><td>Prism</td><td>[2, 2, 2]</td><td>[3, 3, 3]</td><td>[3, 3, 3]</td><td>[1, 1, 1]</td><td>[2, 2, 2]</td><td>[1, 1, 1]</td></tr><tr><td>Porcelain Choir · Chorus</td><td>[2, 2, 2]</td><td>[3, 3, 3]</td><td>[3, 3, 3]</td><td>[1, 1, 1]</td><td>[2, 2, 2]</td><td>[1, 1, 1]</td></tr><tr><td>Golden Millipede · March</td><td>[3, 1, 1, 1, 1]</td><td>[4, 2, 2, 2, 2]</td><td>[4, 1, 1, 1, 1]</td><td>[2, 0, 0, 0, 0]</td><td>[2, 1, 1, 1, 1]</td><td>[2, 1, 1, 1, 1]</td></tr><tr><td>Large printed card hit</td><td>[11]</td><td>[12]</td><td>[14]</td><td>[10]</td><td>[8]</td><td>[6]</td></tr></tbody></table></div></section><section id="prompts" class="section"><h2>Deliberate selection exceptions after the card-flow review</h2><p>These require card selection, inspection decisions or ordering. These are the documented deliberate exceptions retained after the individual card-flow review.</p><div class="table-wrap"><table><thead><tr><th>Face</th><th>Current effect</th><th>Selection flags</th></tr></thead><tbody><tr><th>Sacrifice</th><td><span class="kw-banish">Banish</span> another card of your choice from your hand. Deal 8 <span class="kw-radiance">Radiance</span> damage.</td><td>choose-held-card</td></tr><tr><th>Memory</th><td>Return a card of your choice from your discard pile to your hand. <span class="kw-banish">Banish</span> this card.</td><td>explicit-card-choice</td></tr><tr><th>Cartographer</th><td>Look at the top 3 cards of your library. Put them back in any order.</td><td>inspection-selection-or-order</td></tr><tr><th>Wilderness</th><td>Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order.</td><td>inspection-selection-or-order</td></tr><tr><th>Loaded Dice</th><td>Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order.</td><td>inspection-selection-or-order</td></tr><tr><th>Sieve</th><td>Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order.</td><td>inspection-selection-or-order</td></tr></tbody></table></div></section><footer><a href="Dusk%20%26%20Dawn%20%E2%80%94%20Game%20Design%20v0.2.html">Current design</a> · <a href="Effect%20Rules%20v0.1.json">Structured rules</a> · no full balance or fun claim.</footer></main></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dusk &amp; Dawn — Bless Curse and Control Review</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #111218;
+        --panel: #1b1e27;
+        --ink: #eee9df;
+        --muted: #bbb4c3;
+        --line: #42404d;
+        --accent: #e9c58b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.6 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 1280px;
+        margin: auto;
+        padding: 44px 28px 68px;
+      }
+      header {
+        max-width: 960px;
+        margin-bottom: 26px;
+      }
+      h1 {
+        font:
+          normal clamp(34px, 5vw, 58px)/1.12 Georgia,
+          serif;
+        margin: 12px 0 20px;
+      }
+      h2 {
+        font:
+          normal 29px/1.2 Georgia,
+          serif;
+        margin: 0 0 18px;
+      }
+      h3 {
+        font-size: 18px;
+        margin: 18px 0 8px;
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+      }
+      .eyebrow,
+      .number {
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .muted,
+      footer {
+        color: var(--muted);
+      }
+      .notice {
+        border-left: 3px solid var(--accent);
+        padding: 15px 20px;
+        background: #292432;
+      }
+      .panel,
+      .pair,
+      .enemy,
+      .audit {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        margin-bottom: 20px;
+      }
+      .faces {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+      .side {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+      .effect {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        align-items: start;
+      }
+      .enemy {
+        padding: 0;
+        overflow: hidden;
+        margin: 0;
+      }
+      .art {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+        object-fit: contain;
+        background: #090a0e;
+      }
+      .entry {
+        padding: 22px;
+      }
+      .entry h2 {
+        font-size: 27px;
+      }
+      .actions {
+        padding-left: 20px;
+      }
+      .actions li {
+        margin: 12px 0;
+      }
+      .tools {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: end;
+        margin: 28px 0;
+      }
+      .tools label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 13px;
+      }
+      input,
+      select,
+      button {
+        font: inherit;
+        background: #22232d;
+        color: var(--ink);
+        border: 1px solid #777081;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      input {
+        width: min(380px, 75vw);
+      }
+      button {
+        cursor: pointer;
+      }
+      :focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .count {
+        color: var(--muted);
+        padding: 10px 0;
+      }
+      details {
+        margin: 18px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 650;
+        color: var(--accent);
+      }
+      details p {
+        margin-top: 12px;
+      }
+      dl {
+        margin: 0;
+      }
+      dt {
+        font-weight: 650;
+        margin: 14px 0 5px;
+      }
+      dd {
+        margin: 0 0 12px;
+      }
+      .rule {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+      .table-wrap {
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      li {
+        margin: 7px 0;
+      }
+      .small {
+        font-size: 14px;
+      }
+      .section {
+        margin: 48px 0 24px;
+      }
+      .toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 20px;
+      }
+      .portrait-grid {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .portrait-grid img {
+        max-width: 200px;
+        height: auto;
+        max-height: 240px;
+        object-fit: contain;
+      }
+      .audit .changed {
+        color: #f2c084;
+      }
+      .audit .before {
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 40px;
+        font-size: 13px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 1050px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 620px) {
+        main {
+          padding: 26px 18px;
+        }
+        .grid,
+        .faces {
+          grid-template-columns: 1fr;
+        }
+        .panel,
+        .pair,
+        .audit {
+          padding: 18px;
+        }
+        .entry {
+          padding: 20px;
+        }
+        .tools {
+          display: block;
+        }
+        .tools label {
+          margin-bottom: 12px;
+        }
+      }
+      @media print {
+        body {
+          background: white;
+          color: #111;
+          font:
+            10pt/1.4 Arial,
+            sans-serif;
+        }
+        main {
+          padding: 0;
+        }
+        .tools,
+        .toc {
+          display: none;
+        }
+        .panel,
+        .pair,
+        .enemy,
+        .audit {
+          background: white;
+          border-color: #bbb;
+          break-inside: avoid;
+        }
+        .grid {
+          display: block;
+        }
+        .enemy {
+          display: grid;
+          grid-template-columns: 27% 1fr;
+          margin-bottom: 18px;
+        }
+        .art {
+          margin-top: 20px;
+        }
+        .entry {
+          padding: 14px;
+        }
+        h2 {
+          font-size: 18pt;
+        }
+        .notice {
+          background: #eee;
+        }
+        a,
+        .muted,
+        .side,
+        footer,
+        summary {
+          color: #333;
+        }
+        .effect span,
+        dd span,
+        li span {
+          color: #222 !important;
+        }
+      }
+      .kw-radiance {
+        color: #f7d670;
+        font-weight: 650;
+      }
+      .kw-shadow {
+        color: #c7aef1;
+        font-weight: 650;
+      }
+      .kw-growth {
+        color: #9dda97;
+        font-weight: 650;
+      }
+      .kw-decay {
+        color: #c7cd78;
+        font-weight: 650;
+      }
+      .kw-binding {
+        color: #80d1be;
+        font-weight: 650;
+      }
+      .kw-release {
+        color: #7dddec;
+        font-weight: 650;
+      }
+      .kw-fire {
+        color: #ffad66;
+        font-weight: 650;
+      }
+      .kw-frost {
+        color: #a8e5fa;
+        font-weight: 650;
+      }
+      .kw-memory {
+        color: #b8c7ff;
+        font-weight: 650;
+      }
+      .kw-oblivion {
+        color: #c5c5cd;
+        font-weight: 650;
+      }
+      .kw-ward {
+        color: #8bcbff;
+        font-weight: 650;
+      }
+      .kw-burn {
+        color: #ff966b;
+        font-weight: 650;
+      }
+      .kw-poison {
+        color: #b2d67c;
+        font-weight: 650;
+      }
+      .kw-flip {
+        color: #d8abff;
+        font-weight: 650;
+      }
+      .kw-banish {
+        color: #f3a5b6;
+        font-weight: 650;
+      }
+      .kw-scry {
+        color: #86d8d0;
+        font-weight: 650;
+      }
+      .kw-bless {
+        color: #f5d58c;
+        font-weight: 650;
+      }
+      .kw-curse {
+        color: #d4a2e4;
+        font-weight: 650;
+      }
+      .kw-freeze {
+        color: #90cdec;
+        font-weight: 650;
+      }
+      .kw-cleanse {
+        color: #a4e5cf;
+        font-weight: 650;
+      }
+      .kw-purge {
+        color: #f4b3a1;
+        font-weight: 650;
+      }
+      .kw-hush {
+        color: #b5bcd1;
+        font-weight: 650;
+      }
+      .kw-keep {
+        color: #b6e1a8;
+        font-weight: 650;
+      }
+      .kw-reflect {
+        color: #9dddff;
+        font-weight: 650;
+      }
+      .kw-leech {
+        color: #ef9eac;
+        font-weight: 650;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Dusk & Dawn · approved directions, open numbers</p>
+        <h1>Bless, Curse and control</h1>
+        <p class="notice">
+          Bless/Curse scaling is undecided. Flat values are explicitly provisional previews. Freeze thaw from
+          attacks or Fire is undecided. Mark and Weaken are retired from current rules and effects.
+        </p>
+      </header>
+      <section id="directions" class="section">
+        <h2>Directions and recommendations</h2>
+        <ul>
+          <li>
+            Approved: <span class="kw-bless">Bless</span> and <span class="kw-curse">Curse</span> are stacking
+            buff/debuff counters affecting every hit of the next direct attack. Mark and Weaken are removed
+            from current effects and rules. Applications add, non-attacks preserve counters, and the next
+            attack spends all of both even if damage is zero.
+          </li>
+          <li>
+            Recommendation: flat +1/−1 per stack, with minimum final damage 0 and no extra counter or damage
+            cap. Current mana, cards and one-attack consumption bound individual uses; that is not proof of
+            balance. Stack counts were conservatively retuned to mostly 1–2, with 3 on a few
+            <span class="kw-banish">Banish</span> sources. These are provisional counts, not a conversion
+            formula to preserve old balance.
+          </li>
+          <li>
+            The numerical decision is OPEN. Current catalogue previews explicitly use the flat candidate as a
+            working proposal. No percentage rate, rounding mode or percentage cap is approved.
+          </li>
+          <li>
+            Comparison candidate only: each stack adds or subtracts 25 percentage points. Combine
+            <span class="kw-bless">Bless</span> minus <span class="kw-curse">Curse</span>, clamp the
+            multiplier between 0× and 2×, then round each final hit to nearest integer with half ties upward.
+            Do not compound multipliers. This permits meaningful comparison without selecting it as the rule.
+          </li>
+          <li>
+            Low hit sizes make percentage steps uneven. Nearest rounding leaves 2-damage hits unchanged under
+            <span class="kw-curse">Curse</span> 1; the Millipede gets the same 6 total under
+            <span class="kw-curse">Curse</span> 1 and <span class="kw-curse">Curse</span> 2. Rounding down
+            instead can erase 1-damage hits with one stack while making small
+            <span class="kw-bless">Bless</span> bonuses invisible. Rounding up reverses that bias. Fractional
+            carry or attack-total redistribution could fix some thresholds but adds hidden arithmetic and
+            order rules.
+          </li>
+          <li>
+            Flat scaling deliberately rewards or counters many-hit attacks.
+            <span class="kw-bless">Bless</span> 1 adds 3 total to Prism but 1 to a single hit;
+            <span class="kw-curse">Curse</span> 1 removes 5 total from the Millipede when it has five positive
+            hits. Test these interactions with <span class="kw-leech">Leech</span>, reflection,
+            <span class="kw-banish">Banish</span> thinning and repeated draw/recovery.
+          </li>
+          <li>
+            <span class="kw-curse">Curse</span> can reduce direct hits to 0, but separate
+            <span class="kw-burn">Burn</span>, <span class="kw-poison">Poison</span>, card movement, healing
+            and trait clauses still happen. <span class="kw-freeze">Freeze</span> controls the entire action;
+            <span class="kw-hush">Hush</span> suppresses the labeled trait and skips non-attack abilities.
+            Those remain distinct even when <span class="kw-curse">Curse</span> prevents all direct damage.
+          </li>
+          <li>
+            <span class="kw-freeze">Freeze</span> control is approved. Its thaw rule is OPEN: whether direct
+            attacks and/or <span class="kw-fire">Fire</span> end it is not defined. Preview only the
+            conditional case “if still Frozen at action start, skip the whole action, advance and clear”. Do
+            not treat earlier breakable-freeze proposals, or a no-thaw alternative, as a settled rule.
+          </li>
+          <li>
+            <span class="kw-cleanse">Cleanse</span> and <span class="kw-purge">Purge</span> explicitly remove
+            one random eligible kind or all eligible kinds. Random is uniform by active kind, not stack
+            amount; clear the whole chosen counter. No target menu. Typed narrow cures and partial
+            <span class="kw-ward">Ward</span> removal remain separate when those better fit the subject.
+          </li>
+          <li>
+            The main player decisions are which cards to play and in what order. Enemy held-card moves now
+            choose random recipients; helpful recovery uses the top discarded card. The dedicated card-flow
+            pass reviews all 122 former flags. The remaining deliberate exceptions below are documented in
+            that pass; risky random <span class="kw-banish">Banish</span> was not used as a blanket
+            replacement.
+          </li>
+        </ul>
+      </section>
+      <section id="counts" class="section">
+        <h2>All-content coverage</h2>
+        <ul>
+          <li>card faces checked: 496</li>
+          <li>enemies checked: 110</li>
+          <li>changed card descriptions since previous commit: 197</li>
+          <li>enemy entries with effect text changes: 44</li>
+          <li>conditional <span class="kw-freeze">Freeze</span> previews: 243</li>
+          <li><span class="kw-bless">Bless</span> faces: 8</li>
+          <li><span class="kw-curse">Curse</span> faces: 60</li>
+          <li><span class="kw-freeze">Freeze</span> faces: 1</li>
+          <li><span class="kw-cleanse">Cleanse</span> faces: 3</li>
+          <li><span class="kw-purge">Purge</span> faces: 2</li>
+          <li>remaining card faces with selection flags: 6</li>
+          <li>remaining enemy selection prompts: 0</li>
+        </ul>
+      </section>
+      <section class="section">
+        <h2>Flat versus percentage · one stack</h2>
+        <p>
+          No weakness or other modifiers. Percentage columns use the comparison-only 25% rate, nearest
+          rounding with half ties up, and 0–2× bounds.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Printed hit</th>
+                <th>Flat Bless</th>
+                <th>25% Bless</th>
+                <th>Flat Curse</th>
+                <th>25% Curse</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>3</td>
+                <td>3</td>
+                <td>1</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>4</td>
+                <td>4</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>5</td>
+                <td>3</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>6</td>
+                <td>6</td>
+                <td>4</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>5</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>6</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>7</td>
+                <td>6</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>8</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>11</td>
+                <td>13</td>
+                <td>9</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>14</td>
+                <td>10</td>
+                <td>8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="section">
+        <h2>Actual attack patterns</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Example</th>
+                <th>Base</th>
+                <th>Flat Bless 1</th>
+                <th>25% Bless 1</th>
+                <th>Flat Curse 1</th>
+                <th>25% Curse 1</th>
+                <th>25% Curse 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Prism</td>
+                <td>[2, 2, 2]</td>
+                <td>[3, 3, 3]</td>
+                <td>[3, 3, 3]</td>
+                <td>[1, 1, 1]</td>
+                <td>[2, 2, 2]</td>
+                <td>[1, 1, 1]</td>
+              </tr>
+              <tr>
+                <td>Porcelain Choir · Chorus</td>
+                <td>[2, 2, 2]</td>
+                <td>[3, 3, 3]</td>
+                <td>[3, 3, 3]</td>
+                <td>[1, 1, 1]</td>
+                <td>[2, 2, 2]</td>
+                <td>[1, 1, 1]</td>
+              </tr>
+              <tr>
+                <td>Golden Millipede · March</td>
+                <td>[3, 1, 1, 1, 1]</td>
+                <td>[4, 2, 2, 2, 2]</td>
+                <td>[4, 1, 1, 1, 1]</td>
+                <td>[2, 0, 0, 0, 0]</td>
+                <td>[2, 1, 1, 1, 1]</td>
+                <td>[2, 1, 1, 1, 1]</td>
+              </tr>
+              <tr>
+                <td>Large printed card hit</td>
+                <td>[11]</td>
+                <td>[12]</td>
+                <td>[14]</td>
+                <td>[10]</td>
+                <td>[8]</td>
+                <td>[6]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section id="prompts" class="section">
+        <h2>Deliberate selection exceptions after the card-flow review</h2>
+        <p>
+          These require card selection, inspection decisions or ordering. These are the documented deliberate
+          exceptions retained after the individual card-flow review.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Face</th>
+                <th>Current effect</th>
+                <th>Selection flags</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Sacrifice</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card of your choice from your hand. Deal 8
+                  <span class="kw-radiance">Radiance</span> damage.
+                </td>
+                <td>choose-held-card</td>
+              </tr>
+              <tr>
+                <th>Memory</th>
+                <td>
+                  Return a card of your choice from your discard pile to your hand.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+                <td>explicit-card-choice</td>
+              </tr>
+              <tr>
+                <th>Cartographer</th>
+                <td>Look at the top 3 cards of your library. Put them back in any order.</td>
+                <td>inspection-selection-or-order</td>
+              </tr>
+              <tr>
+                <th>Wilderness</th>
+                <td>
+                  Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in
+                  library order.
+                </td>
+                <td>inspection-selection-or-order</td>
+              </tr>
+              <tr>
+                <th>Loaded Dice</th>
+                <td>
+                  Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in
+                  library order.
+                </td>
+                <td>inspection-selection-or-order</td>
+              </tr>
+              <tr>
+                <th>Sieve</th>
+                <td>
+                  Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library
+                  order.
+                </td>
+                <td>inspection-selection-or-order</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer>
+        <a href="Dusk%20%26%20Dawn%20%E2%80%94%20Game%20Design%20v0.2.html">Current design</a> ·
+        <a href="Effect%20Rules%20v0.1.json">Structured rules</a> · no full balance or fun claim.
+      </footer>
+    </main>
+  </body>
+</html>

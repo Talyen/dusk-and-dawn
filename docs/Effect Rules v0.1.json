@@ -12,12 +12,7 @@
       "gain": "add"
     },
     "damage_over_time": {
-      "order": [
-        "player Burn",
-        "player Poison",
-        "enemy Burn",
-        "enemy Poison"
-      ],
+      "order": ["player Burn", "player Poison", "enemy Burn", "enemy Poison"],
       "timing": "player turn end, after unkept cards are discarded",
       "damage_types": {
         "Burn": "Fire",
@@ -68,10 +63,7 @@
       "percentage_candidate": {
         "per_stack_percent": 25,
         "stacking": "add percentage points; net Bless minus Curse before clamping",
-        "multiplier_bounds": [
-          0,
-          2
-        ],
+        "multiplier_bounds": [0, 2],
         "rounding": "nearest integer; half ties upward",
         "formula": "round_half_up((base hit + first-hit weakness) * clamp(1 + 0.25*(Bless-Curse), 0, 2))",
         "status": "comparison only, not approved"
@@ -113,11 +105,7 @@
     "Purge": {
       "target": "enemy",
       "quantity": "one random eligible status or all, explicitly printed",
-      "eligible": [
-        "Ward",
-        "Reflect",
-        "Bless"
-      ],
+      "eligible": ["Ward", "Reflect", "Bless"],
       "one": "whole named effect, all stacks",
       "random": "uniform across active eligible kinds",
       "selection_prompts": 0,
@@ -290,10 +278,7 @@
     "Leech": "#EF9EAC"
   },
   "no_separate_theme_tags": true,
-  "provisional_damage_names": [
-    "Binding",
-    "Release"
-  ],
+  "provisional_damage_names": ["Binding", "Release"],
   "weakness_bonus": 2,
   "weakness_frequency": "once per direct attack card, first hit",
   "damage_order": [

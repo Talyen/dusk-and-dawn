@@ -554,10 +554,7 @@
     },
     "7": {
       "trait": "On Root Lash: Apply 2 Weaken to the player.",
-      "actions": [
-        "Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player.",
-        "Heal 3 HP."
-      ],
+      "actions": ["Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player.", "Heal 3 HP."],
       "weakness": "Decay"
     },
     "8": {
@@ -651,10 +648,7 @@
     },
     "19": {
       "trait": "On Blackwater Charge: Apply 2 Weaken to the player.",
-      "actions": [
-        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player.",
-        "Heal 4 HP."
-      ],
+      "actions": ["Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player.", "Heal 4 HP."],
       "weakness": "Radiance"
     },
     "20": {
@@ -716,10 +710,7 @@
     },
     "27": {
       "trait": "On Pour the Wax: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Flame damage.",
-        "Deal 5 Flame damage. Trait — Pooled Wax: Gain 3 Ward."
-      ],
+      "actions": ["Deal 5 Flame damage.", "Deal 5 Flame damage. Trait — Pooled Wax: Gain 3 Ward."],
       "weakness": "Frost"
     },
     "28": {
@@ -732,10 +723,7 @@
     },
     "29": {
       "trait": "On Bitter Goblet: Apply 2 Weaken to the player.",
-      "actions": [
-        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player.",
-        "Heal 4 HP."
-      ],
+      "actions": ["Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player.", "Heal 4 HP."],
       "weakness": "Growth"
     },
     "30": {
@@ -815,10 +803,7 @@
     },
     "39": {
       "trait": "On Fold the Shelter: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."
-      ],
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."],
       "weakness": "Release"
     },
     "40": {
@@ -1004,10 +989,7 @@
     },
     "62": {
       "trait": "On Let the Moss Drink: Heal 3 HP.",
-      "actions": [
-        "Deal 6 Growth damage.",
-        "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."
-      ],
+      "actions": ["Deal 6 Growth damage.", "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."],
       "weakness": "Decay"
     },
     "63": {
@@ -1070,10 +1052,7 @@
     },
     "70": {
       "trait": "On Fold the Spiral: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."
-      ],
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."],
       "weakness": "Release"
     },
     "71": {

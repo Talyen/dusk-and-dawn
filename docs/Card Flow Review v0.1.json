@@ -79,9 +79,7 @@
       "reason": "A willing sacrifice depends on choosing the offering. This deliberate irreversible payment is the central ritual, not an incidental discard.",
       "selection_exception": true,
       "exception_kind": "choose-offering",
-      "current_selection_flags": [
-        "choose-held-card"
-      ],
+      "current_selection_flags": ["choose-held-card"],
       "sheet": "card-artwork-review/cards-02.jpg"
     },
     {
@@ -263,9 +261,7 @@
       "reason": "Memory recalls one particular past experience. Keep this deliberate retrieval exception; Banish limits repeated unrestricted tutoring.",
       "selection_exception": true,
       "exception_kind": "recall-specific-card",
-      "current_selection_flags": [
-        "explicit-card-choice"
-      ],
+      "current_selection_flags": ["explicit-card-choice"],
       "sheet": "card-artwork-review/cards-06.jpg"
     },
     {
@@ -349,9 +345,7 @@
       "reason": "Planning the exact coming route is the cartographer’s whole effect. Retain this single deliberate ordering exception.",
       "selection_exception": true,
       "exception_kind": "plan-route-order",
-      "current_selection_flags": [
-        "inspection-selection-or-order"
-      ],
+      "current_selection_flags": ["inspection-selection-or-order"],
       "sheet": "card-artwork-review/cards-07.jpg"
     },
     {
@@ -421,9 +415,7 @@
       "reason": "Choosing a route is the wilderness expedition’s central decision. Retain that one selection, but remove the separate ordering prompt.",
       "selection_exception": true,
       "exception_kind": "choose-route",
-      "current_selection_flags": [
-        "inspection-selection-or-order"
-      ],
+      "current_selection_flags": ["inspection-selection-or-order"],
       "sheet": "card-artwork-review/cards-08.jpg"
     },
     {
@@ -577,9 +569,7 @@
       "reason": "Loaded dice deliberately let the player pick the favorable outcomes. Retain that selection, with automatic existing order for every moved group.",
       "selection_exception": true,
       "exception_kind": "choose-loaded-results",
-      "current_selection_flags": [
-        "inspection-selection-or-order"
-      ],
+      "current_selection_flags": ["inspection-selection-or-order"],
       "sheet": "card-artwork-review/cards-10.jpg"
     },
     {
@@ -1041,9 +1031,7 @@
       "reason": "Selecting what passes through the sieve is its entire filtering action. Keep that one choice; avoid inventing an arbitrary light/dark filter or an extra discard-order choice.",
       "selection_exception": true,
       "exception_kind": "filter-one-card",
-      "current_selection_flags": [
-        "inspection-selection-or-order"
-      ],
+      "current_selection_flags": ["inspection-selection-or-order"],
       "sheet": "card-artwork-review/cards-16.jpg"
     },
     {
@@ -1738,49 +1726,37 @@
       "number": 23,
       "face": "Sacrifice",
       "effect": "Banish another card of your choice from your hand. Deal 8 Radiance damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "flags": ["choose-held-card"]
     },
     {
       "number": 91,
       "face": "Memory",
       "effect": "Return a card of your choice from your discard pile to your hand. Banish this card.",
-      "flags": [
-        "explicit-card-choice"
-      ]
+      "flags": ["explicit-card-choice"]
     },
     {
       "number": 107,
       "face": "Cartographer",
       "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     },
     {
       "number": 126,
       "face": "Wilderness",
       "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     },
     {
       "number": 156,
       "face": "Loaded Dice",
       "effect": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     },
     {
       "number": 251,
       "face": "Sieve",
       "effect": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     }
   ],
   "implementation_operations": {

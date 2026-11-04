@@ -112,10 +112,7 @@
       "artwork": {
         "source_filename": "Crowned Sun.png",
         "sha256": "27b7d7cbb22ae80ea07415c329bc6f80d773183e486f6cdeb171d3987662674c",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "A crowned sun fills the sky above reaching figures."
@@ -125,12 +122,7 @@
         "direct_card_bonus": 2,
         "reason": "Shade breaks the sun's direct glare.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "High Noon",
@@ -205,16 +197,8 @@
           "preview": "Gain 4 Ward."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Ward", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The sun's rays intensify at noon; the veiling corona is an actual luminous screen."
     },
@@ -227,10 +211,7 @@
       "artwork": {
         "source_filename": "Glass Judge.png",
         "sha256": "fc70ba55ab12ed92cd61180285e154dce61c1901808189877c7fcc6c6c4ae2c1",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "A transparent judge holds a pair of scales."
@@ -240,12 +221,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow clouds the glass and blunts its glare.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Split Verdict",
@@ -321,16 +297,8 @@
           "preview": "Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Curse", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The judge’s scales pronounce an afflicting verdict on the accused; the divided glass still supplies a second ray."
     },
@@ -343,10 +311,7 @@
       "artwork": {
         "source_filename": "Hollow King.png",
         "sha256": "f142c9707acff450aeb1c6aba8f14d73bd1b4dfe878a6868b9e94dc6d1f4fe98",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "A huge crowned, hollow figure looms over a ruined throne."
@@ -356,12 +321,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance illuminates the empty spaces beneath the crown.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Empty Grasp",
@@ -437,20 +397,9 @@
           "preview": "Deal 7 Shadow damage. Trait — Empty Grasp: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b",
-        "c"
-      ],
-      "keywords": [
-        "Banish",
-        "Curse",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "temporary-card-loss"
-      ],
+      "pattern": ["a", "b", "c"],
+      "keywords": ["Banish", "Curse", "Radiance", "Shadow"],
+      "review_flags": ["temporary-card-loss"],
       "thematic_reason": "The empty king takes a future offering, while its long hollow hands sap the grasped figure's strength."
     },
     {
@@ -462,10 +411,7 @@
       "artwork": {
         "source_filename": "Ink Leviathan.png",
         "sha256": "7ef55b940a9eb28bd382b2f122629b7de124476b80d83e9c7868b2fa918fdf36",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "An inky sea creature rises with a vast mouth and sweeping tendrils."
@@ -475,12 +421,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance exposes the ink-dark body.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Black Tide",
@@ -537,15 +478,8 @@
           "preview": "Deal 5 Shadow damage. Trait — Black Tide: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The visible ink cloud obscures aim; it does not need to identify which part of a shield was damaged."
     },
@@ -558,10 +492,7 @@
       "artwork": {
         "source_filename": "Ivory Colossus.png",
         "sha256": "2a01a6144160192c4b2168f24bf0534436467df5851aded22e26ec2cd58cb912",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "An ivory giant is built from monumental arches."
@@ -571,12 +502,7 @@
         "direct_card_bonus": 2,
         "reason": "Release prises apart the supporting structure.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Falling Arch",
@@ -652,19 +578,9 @@
           "preview": "Deal 6 Binding damage. Trait — Falling Arch: Add 1 hit of 2 Binding damage."
         }
       ],
-      "pattern": [
-        "b",
-        "a",
-        "c"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["b", "a", "c"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The architectural body rebuilds a genuine buttress, then drops an additional piece after its hand strike."
     },
     {
@@ -676,10 +592,7 @@
       "artwork": {
         "source_filename": "Lantern Eater.png",
         "sha256": "8f859356c0eadd24a5de1bb155f95c5e9bd0bd995b360fd0b26c230ef87b3b66",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "A huge mouth reaches toward a lantern offered by a traveler."
@@ -689,12 +602,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance exposes the creature beyond the lantern's small glow.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Swallow the Lantern",
@@ -758,18 +666,9 @@
           "preview": "Deal 4 Shadow damage. Trait — Swallow the Lantern: If the enemy has Burn after the tick, remove all its Burn and heal 3 HP."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Burn",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Burn", "Radiance", "Shadow"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The mouth eats the visible fire it carries; only an existing Burn supplies this feeding."
     },
     {
@@ -781,10 +680,7 @@
       "artwork": {
         "source_filename": "Mourning Tree.png",
         "sha256": "e8b5a658a577d78577f4fef5e85638ec07bac027dce7555b9cba57fdec68b079",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "A weeping tree sheds drops into a pool beneath tangled roots."
@@ -794,12 +690,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay withers the living roots.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Root Snare",
@@ -855,18 +746,9 @@
           "preview": "Heal 3 HP."
         }
       ],
-      "pattern": [
-        "b",
-        "a"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["b", "a"],
+      "keywords": ["Curse", "Growth", "Decay"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The living roots nourish the tree and physically entangle the attacker's movement."
     },
     {
@@ -878,10 +760,7 @@
       "artwork": {
         "source_filename": "Porcelain Choir.png",
         "sha256": "7cd63ddffe03071e2425dfd7aee407234a7679869ae35b66873046b47bc20ce3",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "Several porcelain singers lift their faces together."
@@ -891,12 +770,7 @@
         "direct_card_bonus": 2,
         "reason": "Release breaks the fragile arrangement of the chorus.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Joining Voices",
@@ -954,17 +828,9 @@
           "preview": "Deal 2 Binding damage. Trait — Joining Voices: Add 2 hits of 2 Binding damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The hands make the base strike; two resonant voices add separate hits that Hush can still."
     },
     {
@@ -976,10 +842,7 @@
       "artwork": {
         "source_filename": "Radiant Moth.png",
         "sha256": "a67828d7ef33f68d25917f7c5190d9641201b0308b6a3bf300bef292ff02f7d1",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "A luminous moth spreads broad wings before an eclipse."
@@ -989,12 +852,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow dims the light on its wings.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Open Wings",
@@ -1051,14 +909,8 @@
           "preview": "Deal 4 Radiance damage. Trait — Open Wings: Add 1 Radiance damage to the base hit."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The larger spread of illuminated wings intensifies the same dust attack."
     },
@@ -1071,10 +923,7 @@
       "artwork": {
         "source_filename": "Seven-Eyed Heron.png",
         "sha256": "77a1f2cf4f60217551015603f8e9de0a0c6d36c5e7b286b662328db53d934c0b",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "Eyes run down a heron's long neck beneath a solar disk."
@@ -1084,12 +933,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow hides a target from its many eyes.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Seven Watches",
@@ -1146,15 +990,8 @@
           "preview": "Deal 3 Radiance damage. Trait — Seven Watches: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The many-eyed glare dazes the observed player, afflicting the next whole attack."
     },
@@ -1167,10 +1004,7 @@
       "artwork": {
         "source_filename": "Sunbleached Harlequin.png",
         "sha256": "0b4339016a089a8d9c3089d8034c9c879fff2b91ac931c12c78cf8b366ecf3bf",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "A sunlit jester balances beneath curling architecture."
@@ -1180,12 +1014,7 @@
         "direct_card_bonus": 2,
         "reason": "Binding arrests the jester's tumbling motion.",
         "available_direct_face_count": 11,
-        "example_direct_faces": [
-          "Fallen Bell",
-          "Gravity",
-          "Royal Hound",
-          "Stalactite"
-        ]
+        "example_direct_faces": ["Fallen Bell", "Gravity", "Royal Hound", "Stalactite"]
       },
       "trait": {
         "name": "Over the Guard",
@@ -1241,18 +1070,9 @@
           "preview": "Deal 5 Release damage. Trait — Over the Guard: The base hit ignores up to 3 player Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The acrobat vaults part of a frontal guard while retaining a normal bodily kick."
     },
     {
@@ -1264,10 +1084,7 @@
       "artwork": {
         "source_filename": "The Amber Bailiff.png",
         "sha256": "96defa1bcd8a969c480d724b7d7edc8c40915638a3f135985900c8a7c66cb4a1",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-01.jpg",
         "observed": "An amber ruler holds a glowing amber orb."
@@ -1277,12 +1094,7 @@
         "direct_card_bonus": 2,
         "reason": "Release frees what amber encloses.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Amber Custody",
@@ -1358,21 +1170,9 @@
           "preview": "Banish the top 1 card of the player's library."
         }
       ],
-      "pattern": [
-        "a",
-        "b",
-        "c"
-      ],
-      "keywords": [
-        "Banish",
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "temporary-card-loss",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b", "c"],
+      "keywords": ["Banish", "Curse", "Binding", "Release"],
+      "review_flags": ["temporary-card-loss", "wider-pool-weakness"],
       "thematic_reason": "Amber restrains a grasped limb and preserves one surrendered future card in a visible seal."
     },
     {
@@ -1384,10 +1184,7 @@
       "artwork": {
         "source_filename": "The Ashen Gardener.png",
         "sha256": "8fa924dfa247e3711e8f005bede0490d3d9cd212bac3380ac31d2e3e7fbfa256",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "An ashen gardener scatters gray matter over skeletal plants."
@@ -1397,10 +1194,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth brings life back into the spent garden.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Ashen Dust",
@@ -1464,19 +1258,9 @@
           "preview": "Deal 4 Decay damage. Trait — Ashen Dust: Apply 1 Curse to the player. Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Growth", "Decay"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The scattered ash obscures aim and buries one approaching card in the spent pile."
     },
     {
@@ -1488,10 +1272,7 @@
       "artwork": {
         "source_filename": "The Ashen Puppeteer.png",
         "sha256": "9100d8029b7027bc6cd2455a60a437825d5fabedf2508f8159993339a1fee32b",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A towering puppeteer holds red strings over small figures."
@@ -1501,12 +1282,7 @@
         "direct_card_bonus": 2,
         "reason": "Release cuts the controlling strings.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Tugged Hands",
@@ -1563,19 +1339,9 @@
           "preview": "Deal 4 Binding damage. Trait — Tugged Hands: Flip 1 random card still in the player's hand, if any."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Flip",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Flip", "Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The puppeteer's strings turn one of the cards the player actually still holds."
     },
     {
@@ -1587,10 +1353,7 @@
       "artwork": {
         "source_filename": "The Astral Custodian.png",
         "sha256": "dd818f271dd3d63240d45a90cf41510e5e67d6b5e33e8b0303a21418557fa1d0",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "An astral keeper reaches across floating spheres and bridges."
@@ -1600,12 +1363,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow hides the small paths from its watch.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Sweeping Orbit",
@@ -1663,14 +1421,8 @@
           "preview": "Deal 4 Radiance damage. Trait — Sweeping Orbit: Add 1 hit of 3 Radiance damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "A floating sphere follows the custodian's reaching hand as a second, larger sweep."
     },
@@ -1683,10 +1435,7 @@
       "artwork": {
         "source_filename": "The Bathtub Oracle.png",
         "sha256": "036042c9c26427c8ef386fd9ee860c8429609d274e183e6a63213501ed07b427",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A reclining oracle gestures from a moonlit bathtub."
@@ -1696,9 +1445,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion erases the future it has divined.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Drowned Prophecy",
@@ -1756,18 +1503,9 @@
           "preview": "Deal 5 Memory damage. Trait — Drowned Prophecy: Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The oracle reveals a coming card and sends it below into the discard pile; it does not remember a hidden physical identity."
     },
     {
@@ -1779,10 +1517,7 @@
       "artwork": {
         "source_filename": "The Bellflower Magistrate.png",
         "sha256": "b10b37ef40787ac020d96aa72803b179d71d913c81fa0d7fb3fed77f859a2366",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "Bell-shaped flowers cover a magistrate's robe and outstretched hand."
@@ -1792,12 +1527,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay wilts the living bells.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Closing Bell",
@@ -1854,15 +1584,8 @@
           "preview": "Deal 4 Growth damage. Trait — Closing Bell: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Growth", "Decay"],
       "review_flags": [],
       "thematic_reason": "The hanging bellflowers ring out a calming, restraining cadence after the stem strike."
     },
@@ -1875,10 +1598,7 @@
       "artwork": {
         "source_filename": "The Black Jellyfish.png",
         "sha256": "a42595eb41db2705d1bbe5d64fe6121111800983c422d70f08a22f5d23f50849",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A black jellyfish trails long tendrils through the sky."
@@ -1888,12 +1608,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance outlines the otherwise obscure tendrils.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Trailing Tendrils",
@@ -1951,14 +1666,8 @@
           "preview": "Deal 4 Shadow damage. Trait — Trailing Tendrils: Add 2 hits of 1 Shadow damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "Two dangling stingers follow the jellyfish's first pulse regardless of whether Ward absorbed it."
     },
@@ -1971,10 +1680,7 @@
       "artwork": {
         "source_filename": "The Blackwater Bison.png",
         "sha256": "b46b897aebb215a3c5d08fc17991479d940835f4157b33f0ffb26689facb7731",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A dark bison lowers its head beside rippling water."
@@ -1984,12 +1690,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance reveals the beast in black water.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Mud Spray",
@@ -2045,18 +1746,9 @@
           "preview": "Heal 4 HP."
         }
       ],
-      "pattern": [
-        "b",
-        "a"
-      ],
-      "keywords": [
-        "Curse",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["b", "a"],
+      "keywords": ["Curse", "Radiance", "Shadow"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "Wallowing restores the great beast; its charge throws obscuring mud rather than manufacturing armor."
     },
     {
@@ -2068,10 +1760,7 @@
       "artwork": {
         "source_filename": "The Bleak Carousel.png",
         "sha256": "0df77e73c2ae71ccbb907c534e243ac543b5195af356a0917b2be85ac6547372",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "Pale carousel horses circle under a ragged canopy."
@@ -2081,9 +1770,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion interrupts the carousel's repeated circuit.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Another Circuit",
@@ -2141,18 +1828,9 @@
           "preview": "Deal 4 Memory damage. Trait — Another Circuit: Move the top 1 card of the player's library to the bottom of that pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The carousel carries the approaching card around to the far end of the draw pile."
     },
     {
@@ -2164,10 +1842,7 @@
       "artwork": {
         "source_filename": "The Blooming Executioner.png",
         "sha256": "03b7c803c96e9b7555d2ddfce8398917e50bc72b4fb416502f7f09eaf1e5983c",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A flowering executioner holds an enormous axe."
@@ -2177,12 +1852,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay withers the blossoms feeding the axe.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Flowering Blade",
@@ -2258,18 +1928,9 @@
           "preview": "Deal 6 Growth damage. Trait — Flowering Blade: Add 1 hit of 2 Growth damage."
         }
       ],
-      "pattern": [
-        "b",
-        "a",
-        "c"
-      ],
-      "keywords": [
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["b", "a", "c"],
+      "keywords": ["Growth", "Decay"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The living flowers renew themselves and add a separate petal cut to the executioner's physical axe."
     },
     {
@@ -2281,10 +1942,7 @@
       "artwork": {
         "source_filename": "The Blue Jackal.png",
         "sha256": "9b5477f4c6800458ff4fca503dd48c05b4fab31e6d730d924c6c04f0b465d957",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A lean blue jackal stands alert in moonlit ruins."
@@ -2294,12 +1952,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance exposes the moonlit hunter.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Marked Quarry",
@@ -2356,15 +2009,8 @@
           "preview": "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Bless",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Bless", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The moonlit howl gathers strength for the jackal’s next attack."
     },
@@ -2377,10 +2023,7 @@
       "artwork": {
         "source_filename": "The Bone Cartographer.png",
         "sha256": "9de0a63f5a569b144dbe606867405ce2449fdf4cd2c077cc07c61f4ae2da3a4d",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A skeletal cartographer measures a map with long dividers."
@@ -2390,9 +2033,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion erases the route it has measured.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Redrawn Route",
@@ -2450,18 +2091,9 @@
           "preview": "Deal 4 Memory damage. Trait — Redrawn Route: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The cartographer reroutes the next two cards to the far end of the known path instead of comparing old play counts."
     },
     {
@@ -2473,10 +2105,7 @@
       "artwork": {
         "source_filename": "The Brass Cicada.png",
         "sha256": "0aec053ae70c4ece97d9f0e23a8bbee40f419a80d5558bb993c5575caabe91d4",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-02.jpg",
         "observed": "A huge brass cicada spreads perforated wings in a golden sky."
@@ -2486,12 +2115,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow muffles its sun-bright resonance.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Summer Rattle",
@@ -2549,14 +2173,8 @@
           "preview": "Deal 3 Radiance damage. Trait — Summer Rattle: Add 3 hits of 1 Radiance damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The brass wings add a rapid series of three small rattling pulses."
     },
@@ -2569,10 +2187,7 @@
       "artwork": {
         "source_filename": "The Brass Matron.png",
         "sha256": "f281a9a0db1558533185f98c7687704a031c7b0a4c4d6ca504308ce4354b0ea6",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A brass matron's rigid robes shelter small reaching figures."
@@ -2582,12 +2197,7 @@
         "direct_card_bonus": 2,
         "reason": "Release loosens the rigid enclosure.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Gathering Apron",
@@ -2645,18 +2255,9 @@
           "preview": "Deal 5 Binding damage. Trait — Gathering Apron: Move a random card still in the player's hand to the top of the player's library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The matron tucks one still-held card into the next draw rather than copying an unrelated Ward total."
     },
     {
@@ -2668,10 +2269,7 @@
       "artwork": {
         "source_filename": "The Buried Violinist.png",
         "sha256": "850ef0283653ed718c31cefb8d3dd52cf0a277c03472a82b13bd78d8a3009499",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A buried violinist plays among roots and exposed bones."
@@ -2681,9 +2279,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion ends the tune that persists underground.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Unfinished Phrase",
@@ -2740,19 +2336,9 @@
           "preview": "Deal 4 Memory damage. Trait — Unfinished Phrase: Move the top 1 card of the player's discard pile to the top of their library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "helpful-trait",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["helpful-trait", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The buried melody brings one visible discarded card back to the next draw; this strange courtesy can help the player."
     },
     {
@@ -2764,10 +2350,7 @@
       "artwork": {
         "source_filename": "The Candlewax Duchess.png",
         "sha256": "680d980562dd2fcd9c88694ff93c99eb915e11e25910ca551f5bf07519267e25",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "Candles burn along a duchess's melting wax body."
@@ -2777,10 +2360,7 @@
         "direct_card_bonus": 2,
         "reason": "Frost cools the candles and stiffens the dripping wax.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Frozen Lake",
-          "Frozen Waterfall"
-        ]
+        "example_direct_faces": ["Frozen Lake", "Frozen Waterfall"]
       },
       "trait": {
         "name": "Pooled Wax",
@@ -2837,19 +2417,9 @@
           "preview": "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Fire",
-        "Frost"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Fire", "Frost"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The poured wax hardens into a fresh covering after the scald."
     },
     {
@@ -2861,10 +2431,7 @@
       "artwork": {
         "source_filename": "The Celestial Fisher.png",
         "sha256": "5a46c50539b71fa189458cb5b7c2d8aea3415f8fde4fb1c7e357fbbb5d976c46",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A celestial fisher holds a line attached to a huge fish."
@@ -2874,12 +2441,7 @@
         "direct_card_bonus": 2,
         "reason": "Release slips the hook and slackens the line.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Set the Hook",
@@ -2937,18 +2499,9 @@
           "preview": "Deal 4 Binding damage. Trait — Set the Hook: Move a random card still in the player's hand to the player's discard pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The line pulls away one card the player still holds; no previous health-damage flag is stored."
     },
     {
@@ -2960,10 +2513,7 @@
       "artwork": {
         "source_filename": "The Cellar Duchess.png",
         "sha256": "19b4260f33e2aae59f9fbc4788fcb326c3ba85b66a21f6332a25f106c2c4e16a",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A duchess sits among barrels holding a red drink."
@@ -2973,10 +2523,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth renews the stale, enclosed cellar.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Cellar Fumes",
@@ -3032,21 +2579,9 @@
           "preview": "Heal 4 HP."
         }
       ],
-      "pattern": [
-        "a",
-        "b",
-        "a"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b", "a"],
+      "keywords": ["Curse", "Growth", "Decay"],
+      "review_flags": ["recovery-stall-check", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The vintage restores its drinker while its heavy fumes impair the opponent."
     },
     {
@@ -3058,10 +2593,7 @@
       "artwork": {
         "source_filename": "The Chalk Giant.png",
         "sha256": "ae6aca5c57feffce455572aacc04e929e50eb4b9b9ae0cf8ae38f7eae07fd521",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A vast chalk-white giant reaches over pale cliffs."
@@ -3071,12 +2603,7 @@
         "direct_card_bonus": 2,
         "reason": "Release crumbles the chalk structure.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Dustfall",
@@ -3133,18 +2660,9 @@
           "preview": "Deal 5 Binding damage. Trait — Dustfall: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The giant sheds a cloud of chalk dust that interferes with aim."
     },
     {
@@ -3156,10 +2674,7 @@
       "artwork": {
         "source_filename": "The Clockwork Peacock.png",
         "sha256": "2321faa34dd2720ae6b48a75271c6f75548c95cb3624ded9a6081e8740e61570",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "Gears fill a clockwork peacock's tail."
@@ -3169,12 +2684,7 @@
         "direct_card_bonus": 2,
         "reason": "Release unmeshes the tail's mechanisms.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Geared Fan",
@@ -3250,19 +2760,9 @@
           "preview": "Deal 4 Binding damage. Trait — Geared Fan: Add 1 hit of 2 Binding damage."
         }
       ],
-      "pattern": [
-        "b",
-        "c",
-        "a"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["b", "c", "a"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "Aligning the fan of gears interlocks it into a physical screen, before the peacock sweeps its segmented tail."
     },
     {
@@ -3274,10 +2774,7 @@
       "artwork": {
         "source_filename": "The Cobweb Admiral.png",
         "sha256": "2978124f5ffbbd9c394fa60031e3dedea0cc258f8cc8587a210e2af3a32ebc5d",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A web-covered admiral stands before a ship caught in cobwebs."
@@ -3287,12 +2784,7 @@
         "direct_card_bonus": 2,
         "reason": "Release parts the rigging and webbing.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Webbed Rigging",
@@ -3349,18 +2841,9 @@
           "preview": "Deal 4 Binding damage. Trait — Webbed Rigging: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The visible cobweb ropes entangle the opponent's next attacking motion."
     },
     {
@@ -3372,10 +2855,7 @@
       "artwork": {
         "source_filename": "The Coin-Eyed Stag.png",
         "sha256": "e179fa70003faf0b853908e19d1af635adc993fcd248403372d7bdc65ab1ccda",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "Gold coins cover a stag's eyes beneath branching antlers."
@@ -3385,12 +2865,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow conceals a target from the shining coin eyes.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Coin-Eyed Gaze",
@@ -3447,15 +2922,8 @@
           "preview": "Deal 4 Radiance damage. Trait — Coin-Eyed Gaze: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The coin-eyed gaze holds its viewer in a weakening fascination."
     },
@@ -3468,10 +2936,7 @@
       "artwork": {
         "source_filename": "The Cracked Moon.png",
         "sha256": "b982615442c3dc706ffcca5c3735b0b725dbe1477f0f1851efc10d085e30757d",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A moon is split by large cracks above a dark landscape."
@@ -3481,9 +2946,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion removes the moon's familiar returning shape.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Falling Fragments",
@@ -3559,19 +3022,9 @@
           "preview": "After the player's next normal draw, turn their hand to its dark faces."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The cracked moon drops several fragments and its eclipse-like passage turns the following hand dark."
     },
     {
@@ -3583,10 +3036,7 @@
       "artwork": {
         "source_filename": "The Crystal Beetle.png",
         "sha256": "e1cf6f0d5ada94093009e9d73f7f553a9a36bf061d798ddb390443e1794c90bf",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A jewel-like beetle stands between watching stone faces."
@@ -3596,12 +3046,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow dulls the beetle's prismatic glare.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Prism Flash",
@@ -3677,16 +3122,8 @@
           "preview": "Gain 4 Ward."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Ward", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The beetle has a real shell, and its many facets add two separate rays to the horn's strike."
     },
@@ -3699,10 +3136,7 @@
       "artwork": {
         "source_filename": "The Drowned Pianist.png",
         "sha256": "d81245f8b98e6ce65e75b67c0f12540f7a6e345bc17253b20a2a207b514e6697",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-03.jpg",
         "observed": "A drowned figure plays a piano beneath tentacles and water."
@@ -3712,9 +3146,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion ends the submerged melody.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Submerged Arpeggio",
@@ -3772,18 +3204,9 @@
           "preview": "Deal 4 Memory damage. Trait — Submerged Arpeggio: Add 2 hits of 1 Memory damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The physical hands remain dangerous while the haunting piano adds two audible notes."
     },
     {
@@ -3795,10 +3218,7 @@
       "artwork": {
         "source_filename": "The Dusk Fisher.png",
         "sha256": "1a13f9d425709d37d77332b2b04bb57ef2c4c3ab0cb6f4a35e0efeaff87e39bb",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A lone fisher casts into a dark sea beneath the setting sun."
@@ -3808,12 +3228,7 @@
         "direct_card_bonus": 2,
         "reason": "Release frees the line caught beneath the water.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Reel In",
@@ -3870,18 +3285,9 @@
           "preview": "Deal 4 Binding damage. Trait — Reel In: Remove up to 4 player Ward before the base hit."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The hook pulls a barrier aside immediately before the same line strikes."
     },
     {
@@ -3893,10 +3299,7 @@
       "artwork": {
         "source_filename": "The Fogbound Weaver.png",
         "sha256": "15236830a33fd24d7f679dd54e489692fe3d35e5b50652bcf0a8c1538d9db575",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A weaver holds crossing threads over a tightrope figure in fog."
@@ -3906,12 +3309,7 @@
         "direct_card_bonus": 2,
         "reason": "Release loosens the supporting threads.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Closing Weave",
@@ -3969,18 +3367,9 @@
           "preview": "Deal 4 Binding damage. Trait — Closing Weave: Move 2 random cards still in the player's hand to the top of the player's library, or all held cards if fewer."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The crossing threads sew up to two actually held cards into the next draw's order."
     },
     {
@@ -3992,10 +3381,7 @@
       "artwork": {
         "source_filename": "The Folded Stranger.png",
         "sha256": "053aa48ba19808371437961c9ee0a0c575812a6329d99ef0a1198538a00d2d04",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A sharply folded humanoid stands beside reflecting water."
@@ -4005,12 +3391,7 @@
         "direct_card_bonus": 2,
         "reason": "Release unfolds its creased paper body.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Refold",
@@ -4067,18 +3448,9 @@
           "preview": "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The folded body adds new protective layers to itself rather than reacting to the player's Flip count."
     },
     {
@@ -4090,10 +3462,7 @@
       "artwork": {
         "source_filename": "The Gilded Pelican.png",
         "sha256": "e3c872c6be95363032fffa86e4ec4b57453f7a967871d814967282c30cca80b4",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A golden pelican stretches a broad beak and wide wings."
@@ -4103,12 +3472,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow dims the pelican's brilliant silhouette.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Filled Pouch",
@@ -4166,19 +3530,9 @@
           "preview": "Deal 5 Radiance damage. Trait — Filled Pouch: Banish a random card still in the player's hand."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Banish",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "temporary-card-loss"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Banish", "Radiance", "Shadow"],
+      "review_flags": ["held-card-interaction", "temporary-card-loss"],
       "thematic_reason": "The huge pouch swallows one still-held card for this fight; playing it before the scoop keeps it out of reach."
     },
     {
@@ -4190,10 +3544,7 @@
       "artwork": {
         "source_filename": "The Glasshouse Matriarch.png",
         "sha256": "d0beb7ed9a73730bcab659570980700b360c5cb2a714cb40287727df154b5271",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A matriarch encloses red plants in a glasshouse body."
@@ -4203,12 +3554,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay withers the sheltered growth.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Green Fingers",
@@ -4282,21 +3628,9 @@
           "preview": "Gain 3 Ward."
         }
       ],
-      "pattern": [
-        "b",
-        "a",
-        "c",
-        "a"
-      ],
-      "keywords": [
-        "Ward",
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["b", "a", "c", "a"],
+      "keywords": ["Ward", "Curse", "Growth", "Decay"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The plants renew themselves and entangle a visitor, while the enclosing glass supplies actual cover."
     },
     {
@@ -4308,10 +3642,7 @@
       "artwork": {
         "source_filename": "The Golden Menagerie.png",
         "sha256": "edd14f6350b1132d1ebada08a61506382adbbf9a1412950fd1efa18ae1e0620f",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "Several gilded animals crowd around one central sun-face."
@@ -4321,12 +3652,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow breaks the shared golden display.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Menagerie Procession",
@@ -4384,14 +3710,8 @@
           "preview": "Deal 3 Radiance damage. Trait — Menagerie Procession: Add 3 hits of 2 Radiance damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "Several different gilded animals follow the first hoof strike in one procession."
     },
@@ -4404,10 +3724,7 @@
       "artwork": {
         "source_filename": "The Golden Millipede.png",
         "sha256": "14cdf7868d0836e3a05451cd20b45748599c519469a1410a2e541f9b605c8466",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A golden millipede curls many short legs around a bridge."
@@ -4417,12 +3734,7 @@
         "direct_card_bonus": 2,
         "reason": "Release breaks its coordinated grip.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Many Feet",
@@ -4480,17 +3792,9 @@
           "preview": "Deal 3 Binding damage. Trait — Many Feet: Add 4 hits of 1 Binding damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The long row of legs creates four small follow-up footfalls without checking whether the first hit reached HP."
     },
     {
@@ -4502,10 +3806,7 @@
       "artwork": {
         "source_filename": "The Gravel Baron.png",
         "sha256": "040436b2be8a28a8a6d805de24e43a29a7c30150b2cc7917c297370af9ab36a8",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A ragged baron lets gravel fall from one hand."
@@ -4515,12 +3816,7 @@
         "direct_card_bonus": 2,
         "reason": "Release scatters the pile before it compacts.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Loose Scree",
@@ -4596,19 +3892,9 @@
           "preview": "Gain 4 Ward."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The falling gravel breaks into separate impacts, while the piled stones form a real barrier."
     },
     {
@@ -4620,10 +3906,7 @@
       "artwork": {
         "source_filename": "The Hollow Anemone.png",
         "sha256": "4e77ce00cb97bcd1e362da5c226e7af4873734d76946d5af6b40c6c69560124b",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A hollow anemone spreads pale tentacles around a dark mouth."
@@ -4633,12 +3916,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay wilts its living tentacles.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Closing Mouth",
@@ -4695,15 +3973,8 @@
           "preview": "Deal 4 Growth damage. Trait — Closing Mouth: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Growth", "Decay"],
       "review_flags": [],
       "thematic_reason": "The soft living tentacles restrain movement rather than testing the player's kept-card history."
     },
@@ -4716,10 +3987,7 @@
       "artwork": {
         "source_filename": "The Hollow Harvester.png",
         "sha256": "72269587e94d2764c94a95544263d17fd29cb538e730aca48a44bcc85e105b7f",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "A hollow, antlered harvester dangles emptied pods above a field."
@@ -4729,10 +3997,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth fills the emptied, blighted harvest.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Empty Harvest",
@@ -4790,20 +4055,9 @@
           "preview": "Deal 5 Decay damage. Trait — Empty Harvest: Banish the top 1 card of the player's library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Banish",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "temporary-card-loss",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Banish", "Growth", "Decay"],
+      "review_flags": ["temporary-card-loss", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The harvester removes one future growth from the draw pile as a temporary harvest."
     },
     {
@@ -4815,10 +4069,7 @@
       "artwork": {
         "source_filename": "The Honey Tyrant.png",
         "sha256": "9b21ea4b209824340456d80c7093ec9431beca83ab9ac9ede275c0f41eafdef4",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "Honeycombs and dripping honey cover a winged ruler."
@@ -4828,12 +4079,7 @@
         "direct_card_bonus": 2,
         "reason": "Release frees a target from sticky honey.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Sticky Tribute",
@@ -4891,18 +4137,9 @@
           "preview": "Deal 4 Binding damage. Trait — Sticky Tribute: Move a random card still in the player's hand to the top of the player's library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The sticky honey seals one actually held card into the next draw instead of demanding an unrelated Flip."
     },
     {
@@ -4914,10 +4151,7 @@
       "artwork": {
         "source_filename": "The Ink Jackrabbit.png",
         "sha256": "a0fb2f278dff9ccc1424928457ebe81a9367c1484b95d2071b37b1f39feeacfe",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-04.jpg",
         "observed": "An ink-dark jackrabbit leaps above bridges beneath a moon."
@@ -4927,12 +4161,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance reveals the bounding ink silhouette.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Bounding Trail",
@@ -4990,14 +4219,8 @@
           "preview": "Deal 5 Shadow damage. Trait — Bounding Trail: Move the top 1 card of the player's library to the bottom of that pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The leaping ink body blots the immediate route and sends the approaching card around to the draw pile's bottom."
     },
@@ -5010,10 +4233,7 @@
       "artwork": {
         "source_filename": "The Ivory Dentist.png",
         "sha256": "422450ec21fd1540083b94bb20e90890da32bf3e13137afa086e3bf60b240115",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A gigantic dentist holds a mirror and a tooth-pulling tool over a chair."
@@ -5023,12 +4243,7 @@
         "direct_card_bonus": 2,
         "reason": "Binding holds the tooth firm against extraction.",
         "available_direct_face_count": 11,
-        "example_direct_faces": [
-          "Fallen Bell",
-          "Gravity",
-          "Royal Hound",
-          "Stalactite"
-        ]
+        "example_direct_faces": ["Fallen Bell", "Gravity", "Royal Hound", "Stalactite"]
       },
       "trait": {
         "name": "Extraction",
@@ -5085,18 +4300,9 @@
           "preview": "Deal 4 Release damage. Trait — Extraction: Remove up to 5 player Ward before the base hit."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The pliers remove the guard immediately before the bodily pull; Hush stops extraction without erasing the 4-damage attack."
     },
     {
@@ -5108,10 +4314,7 @@
       "artwork": {
         "source_filename": "The Knotted Giant.png",
         "sha256": "ccc8066ec34ae16b2a14d72006f1da35f32ccf6fe10b0dd0f51ed53181791457",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "Thick red knots wrap a huge pale body."
@@ -5121,12 +4324,7 @@
         "direct_card_bonus": 2,
         "reason": "Release loosens the knots holding the giant together.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Tightening Knot",
@@ -5183,18 +4381,9 @@
           "preview": "Deal 5 Binding damage. Trait — Tightening Knot: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The giant's cords constrain the opponent instead of gaining armor when an attack was blocked."
     },
     {
@@ -5206,10 +4395,7 @@
       "artwork": {
         "source_filename": "The Lacquered Admiral.png",
         "sha256": "e3ec1e3169cb3093fbf14654127304bccdb02e4dfd4a626ab5eefb64a649cf71",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A lacquered admiral stands before ships and dark tentacles."
@@ -5219,12 +4405,7 @@
         "direct_card_bonus": 2,
         "reason": "Release disrupts the rigid command and rigging.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Broadside Order",
@@ -5300,20 +4481,9 @@
           "preview": "Gain 1 Bless."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Bless",
-        "Binding",
-        "Release",
-        "Fire"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Bless", "Binding", "Release", "Fire"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The admiral’s signal coordinates and strengthens the next whole broadside. Bless is a combat boon, not a moral alignment."
     },
     {
@@ -5325,10 +4495,7 @@
       "artwork": {
         "source_filename": "The Linen Lioness.png",
         "sha256": "0de1405cd850e7583315732bd725f868f782741c06bc32fa12ff5a14020b1f21",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A lioness is formed from trailing woven linen."
@@ -5338,12 +4505,7 @@
         "direct_card_bonus": 2,
         "reason": "Release unravels the cloth body.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Gathered Linen",
@@ -5399,19 +4561,9 @@
           "preview": "Gain 4 Ward."
         }
       ],
-      "pattern": [
-        "b",
-        "a"
-      ],
-      "keywords": [
-        "Ward",
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["b", "a"],
+      "keywords": ["Ward", "Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The linen is both real covering and a cloth that catches the opponent's attacking limbs; no delayed charge is implied."
     },
     {
@@ -5423,10 +4575,7 @@
       "artwork": {
         "source_filename": "The Majestic Janitor.png",
         "sha256": "fb76c35f5ffc9cf8b9b0a826e3013f0b67f12bbda909957c45daea4f30b0e6ed",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A crowned janitor carries a mop amid flowing golden surfaces."
@@ -5436,12 +4585,7 @@
         "direct_card_bonus": 2,
         "reason": "Binding arrests the sweeping motion.",
         "available_direct_face_count": 11,
-        "example_direct_faces": [
-          "Fallen Bell",
-          "Gravity",
-          "Royal Hound",
-          "Stalactite"
-        ]
+        "example_direct_faces": ["Fallen Bell", "Gravity", "Royal Hound", "Stalactite"]
       },
       "trait": {
         "name": "Clean Sweep",
@@ -5502,19 +4646,9 @@
           "preview": "Deal 4 Release damage. Trait — Clean Sweep: Remove all enemy Burn. Remove all enemy Poison."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Burn",
-        "Poison",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Burn", "Poison", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The janitor mops away burning residue and toxic contamination, without removing unrelated statuses."
     },
     {
@@ -5526,10 +4660,7 @@
       "artwork": {
         "source_filename": "The Marble Nurse.png",
         "sha256": "5ec5b8d1e92f87ac578561c119c196eb746cf92374c7107386b2e0ef7d48bc15",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A marble nurse holds a syringe above reaching patients."
@@ -5539,12 +4670,7 @@
         "direct_card_bonus": 2,
         "reason": "Release escapes the restraining treatment.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Sedating Presence",
@@ -5601,18 +4727,9 @@
           "preview": "Deal 4 Binding damage. Trait — Sedating Presence: The player draws 1 fewer card on their next normal draw."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "visible-next-turn-effect",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["visible-next-turn-effect", "wider-pool-weakness"],
       "thematic_reason": "The nurse's uncanny sedation reduces the next normal draw by one; Ward still only stops damage."
     },
     {
@@ -5624,10 +4741,7 @@
       "artwork": {
         "source_filename": "The Masked Midday.png",
         "sha256": "3788709417ae05e1713dd1a1cc0af14dd468b798d80927750f3d9c142be01b13",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A theatrical mask sits within the sun's curling rays."
@@ -5637,12 +4751,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow veils the mask's midday glare.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Midday Mask",
@@ -5699,17 +4808,9 @@
           "preview": "Deal 4 Radiance damage. Trait — Midday Mask: After the player's next normal draw, turn their hand to its light faces."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "visible-next-turn-effect"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
+      "review_flags": ["visible-next-turn-effect"],
       "thematic_reason": "The bright mask turns the next entire hand to its light faces, matching the noon-lit scene."
     },
     {
@@ -5721,10 +4822,7 @@
       "artwork": {
         "source_filename": "The Maskless Acrobat.png",
         "sha256": "b2694578644576dfab7c2ce585d6fdacbdeb08c6f79b8eb8409e82adb09ab7b0",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A bare-faced acrobat balances on a thin rope."
@@ -5734,12 +4832,7 @@
         "direct_card_bonus": 2,
         "reason": "Binding stills the swinging rope.",
         "available_direct_face_count": 11,
-        "example_direct_faces": [
-          "Fallen Bell",
-          "Gravity",
-          "Royal Hound",
-          "Stalactite"
-        ]
+        "example_direct_faces": ["Fallen Bell", "Gravity", "Royal Hound", "Stalactite"]
       },
       "trait": {
         "name": "Tightrope Rebound",
@@ -5795,18 +4888,9 @@
           "preview": "Deal 4 Release damage. Trait — Tightrope Rebound: The base hit ignores up to 2 player Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The unmasked acrobat clears a small frontal guard with an explicit vault, not a remembered play count."
     },
     {
@@ -5818,10 +4902,7 @@
       "artwork": {
         "source_filename": "The Midnight Oyster.png",
         "sha256": "f1dc6923bb91f717be99242f5629e66b9ce59340896dd14871b9ae16d72e54e5",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "An open oyster holds a bright pearl in moonlit water."
@@ -5831,12 +4912,7 @@
         "direct_card_bonus": 2,
         "reason": "Release prises the shell apart.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Pearl Glint",
@@ -5911,20 +4987,9 @@
           "preview": "Deal 4 Binding damage. Trait — Pearl Glint: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "b",
-        "a",
-        "c"
-      ],
-      "keywords": [
-        "Ward",
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["b", "a", "c"],
+      "keywords": ["Ward", "Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The bright pearl enthralls approaching prey after the shell’s snap."
     },
     {
@@ -5936,10 +5001,7 @@
       "artwork": {
         "source_filename": "The Midnight Tailor.png",
         "sha256": "06df56f16caa69baf26cbb6eca85009f5b915547ada0f3d1e4037896dcf82a7f",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A nocturnal tailor stitches long cloth beside a sewing machine."
@@ -5949,12 +5011,7 @@
         "direct_card_bonus": 2,
         "reason": "Release cuts the thread and opens the seam.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Closing Stitch",
@@ -6012,18 +5069,9 @@
           "preview": "Deal 4 Binding damage. Trait — Closing Stitch: Move a random card still in the player's hand to the player's discard pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The stitch catches and removes one card still held after discard."
     },
     {
@@ -6035,10 +5083,7 @@
       "artwork": {
         "source_filename": "The Mirror-Eyed Swan.png",
         "sha256": "d3657999792b9635036e6c4603701b6d62fddfe469c52b855c448c8d5dfea57c",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "A white swan looks into bright, patterned reflections."
@@ -6048,12 +5093,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow disrupts the shining mirrored image.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Mirrored Wing",
@@ -6108,18 +5148,9 @@
           "preview": "Deal 4 Radiance damage. Trait — Mirrored Wing: Reflect the first hit of the next direct card attack against this enemy. This ends when the hit is reflected or this intent ends."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Reflect",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "reactive-trait"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Reflect", "Radiance", "Shadow"],
+      "review_flags": ["reactive-trait"],
       "thematic_reason": "While the mirror wing is shown it reflects the next attack's first hit; the beak remains the physical base attack."
     },
     {
@@ -6131,10 +5162,7 @@
       "artwork": {
         "source_filename": "The Mirrored Sphinx.png",
         "sha256": "173bbf5cd355f34d9e7f11766809126ac087c08d1fd59a2a9e8de52c008b01c9",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-05.jpg",
         "observed": "Two matching sphinxes face one another above a stair."
@@ -6144,9 +5172,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion erases the answer the mirrored guardians share.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Twin Questions",
@@ -6204,18 +5230,9 @@
           "preview": "Deal 3 Memory damage. Trait — Twin Questions: Add 1 hit of 3 Memory damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The second mirrored sphinx supplies a second claw strike instead of remembering a previous opening card."
     },
     {
@@ -6227,10 +5244,7 @@
       "artwork": {
         "source_filename": "The Morrow Thief.png",
         "sha256": "444c95e254da2760b67ba48807e11f73e548d23442322781c64f9b3db15970f9",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A running thief carries a stolen piece of sunrise."
@@ -6240,12 +5254,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance reveals the thief and the stolen dawn.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Stolen Morrow",
@@ -6322,19 +5331,9 @@
           "preview": "Deal 4 Shadow damage. Trait — Stolen Morrow: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b",
-        "c"
-      ],
-      "keywords": [
-        "Banish",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "temporary-card-loss"
-      ],
+      "pattern": ["a", "b", "c"],
+      "keywords": ["Banish", "Radiance", "Shadow"],
+      "review_flags": ["temporary-card-loss"],
       "thematic_reason": "The thief takes one future card and conceals the next approach while escaping."
     },
     {
@@ -6346,10 +5345,7 @@
       "artwork": {
         "source_filename": "The Mossback Ogre.png",
         "sha256": "210342bc9cce69892d8eddbe15dcf33dcd0baf109941b86711ed3715a0c10a4e",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A hunched ogre is covered in hanging moss beside a pool."
@@ -6359,12 +5355,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay withers its living moss.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Moss Drinks",
@@ -6421,17 +5412,9 @@
           "preview": "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Growth", "Decay"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The wet moss renews its own body directly, without copying the player's healing."
     },
     {
@@ -6443,10 +5426,7 @@
       "artwork": {
         "source_filename": "The Moth-Eaten Regent.png",
         "sha256": "66fc5fb3e6ebb97a33227b78de6d9538131e28d1abbf7c0de4718e382157ddca",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A monarch's robe and crown are riddled with moth holes."
@@ -6456,10 +5436,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth renews what the moths have eaten.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Moth-Eaten Tribute",
@@ -6517,18 +5494,9 @@
           "preview": "Deal 4 Decay damage. Trait — Moth-Eaten Tribute: Move the top 2 cards of the player's library to the player's discard pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Growth", "Decay"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The moths consume the next two pages of the draw sequence into the spent pile."
     },
     {
@@ -6540,10 +5508,7 @@
       "artwork": {
         "source_filename": "The Mould Harpist.png",
         "sha256": "9c31839dab7981e253fc2580710c75f6ce24705cc37bc3adc9e13f595b3d9399",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "Mould coats a skeletal harpist and the harp's long strings."
@@ -6553,12 +5518,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay consumes the living fungal growth.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Mould Spores",
@@ -6633,20 +5593,9 @@
           "preview": "Deal 4 Growth damage. Trait — Mould Spores: Apply 2 Poison to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b",
-        "c"
-      ],
-      "keywords": [
-        "Poison",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "damage-over-time",
-        "recovery-stall-check"
-      ],
+      "pattern": ["a", "b", "c"],
+      "keywords": ["Poison", "Growth", "Decay"],
+      "review_flags": ["damage-over-time", "recovery-stall-check"],
       "thematic_reason": "The mould-coated harp throws toxic spores from its vibrating strings; Poison follows the visible fungal growth."
     },
     {
@@ -6658,10 +5607,7 @@
       "artwork": {
         "source_filename": "The Noon Dancer.png",
         "sha256": "9b7fb3046d1c19639e3cbc6521cff658bca13f7f7bd4d99875cb916f751eb9b9",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A dancer rises before the sun with broad flowing fabric."
@@ -6671,12 +5617,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow dims the sunlit dance.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Turning Step",
@@ -6732,17 +5673,9 @@
           "preview": "Deal 4 Radiance damage. Trait — Turning Step: Turn the cards still in the player's hand to their light faces."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "held-card-interaction"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
+      "review_flags": ["held-card-interaction"],
       "thematic_reason": "The sunlit turn changes only the faces the player still holds; newly drawn cards are not secretly tracked."
     },
     {
@@ -6754,10 +5687,7 @@
       "artwork": {
         "source_filename": "The Obsidian Otter.png",
         "sha256": "c9613aacd0f632a638d88a559f33703b178e78cf9d4c1e9ee3834699bbefa23a",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A sleek black otter perches above a pool."
@@ -6767,12 +5697,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance reveals the animal beneath the dark water.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Dive for Cover",
@@ -6830,17 +5755,9 @@
           "preview": "Deal 4 Shadow damage. Trait — Dive for Cover: Move a random card still in the player's hand to the bottom of the player's library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "held-card-interaction"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
+      "review_flags": ["held-card-interaction"],
       "thematic_reason": "The otter carries one held card down to the draw pile's bottom instead of checking an unspent Bless."
     },
     {
@@ -6852,10 +5769,7 @@
       "artwork": {
         "source_filename": "The Opal Centipede.png",
         "sha256": "fd205dd011bc85bec9e18ddee0edc9ee227c443e0bc7d43c68a2cd1069927b54",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "An opalescent centipede arches through illuminated bridges."
@@ -6865,12 +5779,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow dulls its many reflective segments.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Ripple of Light",
@@ -6928,14 +5837,8 @@
           "preview": "Deal 3 Radiance damage. Trait — Ripple of Light: Add 3 hits of 1 Radiance damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The opalescent segments add three small moving flashes to the leading bite."
     },
@@ -6948,10 +5851,7 @@
       "artwork": {
         "source_filename": "The Painted Elephant.png",
         "sha256": "212268ca70894cec14ea4aa74fbfa2d90c7c18e4a1a1980bae9e4d20f8f45793",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A brightly painted elephant stands with raised trunk and long tusks."
@@ -6961,9 +5861,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion erases the pattern the elephant remembers.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Painted Touch",
@@ -7020,19 +5918,9 @@
           "preview": "Deal 5 Memory damage. Trait — Painted Touch: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The stamped painted pattern becomes a bodily affliction that hampers the next whole attack."
     },
     {
@@ -7044,10 +5932,7 @@
       "artwork": {
         "source_filename": "The Painted Raven.png",
         "sha256": "996dcfbe70e99d71621232ac470935a6e0da063a93b1434e8ce9e4f0515d42eb",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A multicolored raven stands beside a traveler holding a palette."
@@ -7057,9 +5942,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion wipes away the raven's collected colors.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Stolen Pigment",
@@ -7135,20 +6018,9 @@
           "preview": "Heal 3 HP."
         }
       ],
-      "pattern": [
-        "a",
-        "b",
-        "c"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "recovery-stall-check",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b", "c"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["recovery-stall-check", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The painted raven copies the most recent attack's displayed strength this turn; preening restores its painted body."
     },
     {
@@ -7160,10 +6032,7 @@
       "artwork": {
         "source_filename": "The Paper Nautilus.png",
         "sha256": "56ce8f2262adf388cfd10cae0fb07dbd70a6e988469c74d708c5ff4e7f3cedbe",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A pale nautilus has a visibly folded, spiral shell."
@@ -7173,12 +6042,7 @@
         "direct_card_bonus": 2,
         "reason": "Release unfolds the paper spiral.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Nested Folds",
@@ -7235,18 +6099,9 @@
           "preview": "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The paper shell gains protective layers through its own folding rather than counting the player's remaining cards."
     },
     {
@@ -7258,10 +6113,7 @@
       "artwork": {
         "source_filename": "The Pearl Taxman.png",
         "sha256": "30b4504b9866eb0be1db92a44fdc5708f3d18d03bb584d7ec227971eec9515c8",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A pearl-clad taxman offers one bead from a long string."
@@ -7271,12 +6123,7 @@
         "direct_card_bonus": 2,
         "reason": "Release breaks the string that binds the collection.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Pearl Levy",
@@ -7333,18 +6180,9 @@
           "preview": "Deal 4 Binding damage. Trait — Pearl Levy: The player starts their next turn with 1 less mana."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "visible-next-turn-effect",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["visible-next-turn-effect", "wider-pool-weakness"],
       "thematic_reason": "The taxman takes one unit from the player's next mana refill, a real upcoming resource rather than already expiring Ward."
     },
     {
@@ -7356,10 +6194,7 @@
       "artwork": {
         "source_filename": "The Porcelain Hound.png",
         "sha256": "d3fcaab91649147d36e3a02658b0aa5f83da76a7d14053819307227128bf9ab7",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-06.jpg",
         "observed": "A white porcelain hound carries a blue floral pattern."
@@ -7369,12 +6204,7 @@
         "direct_card_bonus": 2,
         "reason": "Release breaks the porcelain joints.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Porcelain Splinters",
@@ -7432,17 +6262,9 @@
           "preview": "Deal 4 Binding damage. Trait — Porcelain Splinters: Add 1 hit of 2 Binding damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "One sharp porcelain fragment follows the physical bite; no HP-damage trigger is required."
     },
     {
@@ -7454,10 +6276,7 @@
       "artwork": {
         "source_filename": "The Radiant Undertow.png",
         "sha256": "fdb7b59581851fcc7585350e651f5e6c7afdbecb6439e54dd3e8e7448d1fab4e",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A bright face looms above a spiraling, sunlit wave."
@@ -7467,12 +6286,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow dims the pull of the bright center.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Drawing Current",
@@ -7530,14 +6344,8 @@
           "preview": "Deal 4 Radiance damage. Trait — Drawing Current: Move the top 2 cards of the player's library to the bottom of that pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The visible undertow carries the next two draw-pile cards away to the bottom."
     },
@@ -7550,10 +6358,7 @@
       "artwork": {
         "source_filename": "The Ragged Conductor.png",
         "sha256": "69f4b58e6fa67005488c4b909fd83463e9f72d499a422c4908ae46753f79bd50",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A ragged conductor directs an orchestra of skeletal musicians."
@@ -7563,12 +6368,7 @@
         "direct_card_bonus": 2,
         "reason": "Release breaks the ensemble's coordination.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Following the Baton",
@@ -7626,17 +6426,9 @@
           "preview": "Deal 3 Binding damage. Trait — Following the Baton: Add 2 hits of 2 Binding damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "Two musicians answer the conductor's leading motion without counting the player's card plays."
     },
     {
@@ -7648,10 +6440,7 @@
       "artwork": {
         "source_filename": "The Ribbon General.png",
         "sha256": "1becfeb2b8171300e89c696446fc6bf89a06fc85e2bb4697b0f1257a56c1730f",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A general is wrapped in broad flying red ribbons."
@@ -7661,12 +6450,7 @@
         "direct_card_bonus": 2,
         "reason": "Release parts the commander's ribbons.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Ribbon Formation",
@@ -7723,18 +6507,9 @@
           "preview": "Deal 4 Binding damage. Trait — Ribbon Formation: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The flying ribbons restrain the next attacking motion rather than converting absorbed damage into armor."
     },
     {
@@ -7746,10 +6521,7 @@
       "artwork": {
         "source_filename": "The Rootbound Organist.png",
         "sha256": "699d081370d9112be000b5e00703a6bcf4902f95fa5d93f2ff48d17f08aa6f1a",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "Roots grow from an organist into an immense pipe organ."
@@ -7759,12 +6531,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay rots the roots feeding the pipes.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Root Pedal",
@@ -7840,18 +6607,9 @@
           "preview": "Heal 3 HP."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Growth", "Decay"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The roots draw nourishment and the organ adds a second low pulse after the fingers strike."
     },
     {
@@ -7863,10 +6621,7 @@
       "artwork": {
         "source_filename": "The Rooted Acrobat.png",
         "sha256": "fe37ac3e1f53ef1b8c6967a850c6557d2c3abcef1a86f0fd6e4b7c019e162668",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "An acrobat reaches upward while thick roots anchor the legs."
@@ -7876,12 +6631,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay withers the anchoring roots.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Anchored Landing",
@@ -7938,15 +6688,8 @@
           "preview": "Deal 4 Growth damage. Trait — Anchored Landing: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Growth", "Decay"],
       "review_flags": [],
       "thematic_reason": "The landing spreads roots that entangle the opponent instead of healing only when a shield blocked a hit."
     },
@@ -7959,10 +6702,7 @@
       "artwork": {
         "source_filename": "The Sable Locksmith.png",
         "sha256": "a99cdc91e486fca21298808cd92f22972bcac1bd4ed3a9073ccbe80630240630",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A locksmith carries keys before a giant keyhole tower."
@@ -7972,12 +6712,7 @@
         "direct_card_bonus": 2,
         "reason": "Release opens what the locks hold shut.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Turn the Key",
@@ -8033,19 +6768,9 @@
           "preview": "Deal 5 Binding damage. Trait — Turn the Key: The base hit ignores all player Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "full-Ward-bypass",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["full-Ward-bypass", "wider-pool-weakness"],
       "thematic_reason": "The key passes through a locked guard; Hush stops that opening while the 5-damage thrust remains."
     },
     {
@@ -8057,10 +6782,7 @@
       "artwork": {
         "source_filename": "The Saffron Spider.png",
         "sha256": "ceb6ed0dcdb5ce1be6a00f9903e291749b2a8fd50c110f157c65a42f6481226a",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A huge orange spider towers over a saffron-colored landscape."
@@ -8070,12 +6792,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay withers its living, plantlike body.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Saffron Venom",
@@ -8132,18 +6849,9 @@
           "preview": "Deal 4 Growth damage. Trait — Saffron Venom: Apply 2 Poison to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Poison",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "damage-over-time"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Poison", "Growth", "Decay"],
+      "review_flags": ["damage-over-time"],
       "thematic_reason": "The huge spider delivers venom through its bite rather than manipulating an arbitrary held card."
     },
     {
@@ -8155,10 +6863,7 @@
       "artwork": {
         "source_filename": "The Salt Crown.png",
         "sha256": "b113e01e0888f4625bfc83de33ef1ef2278ef8e60c868131d8cb33d48253504f",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A crystalline salt crown rises above white terraces."
@@ -8168,12 +6873,7 @@
         "direct_card_bonus": 2,
         "reason": "Release disperses the crystals holding the crown together.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Crystalline Spires",
@@ -8249,19 +6949,9 @@
           "preview": "Deal 4 Binding damage. Trait — Crystalline Spires: Add 2 hits of 2 Binding damage."
         }
       ],
-      "pattern": [
-        "b",
-        "a",
-        "c"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["b", "a", "c"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The dense crystal protects and its separate spires add two distinct strikes."
     },
     {
@@ -8273,10 +6963,7 @@
       "artwork": {
         "source_filename": "The Shadow Puppeteer.png",
         "sha256": "88cbcf5704d2b719d2cce17d79e0beb108a553650895387e5ebf2dd55292893e",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "An inky puppeteer holds strings over dancing silhouettes."
@@ -8286,12 +6973,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance reveals the controlling hands and strings.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Borrowed Gesture",
@@ -8348,18 +7030,9 @@
           "preview": "Deal 4 Shadow damage. Trait — Borrowed Gesture: Flip all cards still in the player's hand."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Flip",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "held-card-interaction"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Flip", "Radiance", "Shadow"],
+      "review_flags": ["held-card-interaction"],
       "thematic_reason": "The puppeteer turns the actual held cards into their opposite gestures."
     },
     {
@@ -8371,10 +7044,7 @@
       "artwork": {
         "source_filename": "The Shivering Cabinet.png",
         "sha256": "cf5d8a2014d279dd15d034c42eb88d562c4daa55f4625cb24cb3e0118bf9cdbc",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A tall cabinet's partly open door reveals reaching hands."
@@ -8384,12 +7054,7 @@
         "direct_card_bonus": 2,
         "reason": "Release opens the cabinet's confinement.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Hands Within",
@@ -8465,20 +7130,9 @@
           "preview": "Gain 4 Ward."
         }
       ],
-      "pattern": [
-        "c",
-        "b",
-        "a"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["c", "b", "a"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The wooden door is real cover; the hands hide one held card at the back of the draw pile."
     },
     {
@@ -8490,10 +7144,7 @@
       "artwork": {
         "source_filename": "The Silver Orchard.png",
         "sha256": "148d8159f41861d7ae857dbd687920fd6c7640f745bb96b93321214d4d11c2b2",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "Silver trees carry shining leaves in a pale orchard."
@@ -8503,12 +7154,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay withers the fruiting branches.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Silver Leaf-Fall",
@@ -8584,18 +7230,9 @@
           "preview": "Deal 4 Growth damage. Trait — Silver Leaf-Fall: Add 2 hits of 2 Growth damage."
         }
       ],
-      "pattern": [
-        "a",
-        "b",
-        "c"
-      ],
-      "keywords": [
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["a", "b", "c"],
+      "keywords": ["Growth", "Decay"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The fruit restores a fixed amount, while two sharp silver leaves follow the branch's impact."
     },
     {
@@ -8607,10 +7244,7 @@
       "artwork": {
         "source_filename": "The Sleep Merchant.png",
         "sha256": "7cb3bc60ce2595ac525272c3c2222d0e3790f041f8f7b2153d3515a8978aa10e",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-07.jpg",
         "observed": "A merchant offers glowing vessels containing sleeping shapes."
@@ -8620,9 +7254,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion breaks the stored dream.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Drowsy Bargain",
@@ -8679,19 +7311,9 @@
           "preview": "Deal 4 Memory damage. Trait — Drowsy Bargain: The player draws 1 fewer card on their next normal draw."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "visible-next-turn-effect",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["visible-next-turn-effect", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The bottled sleep reduces attention and the next normal draw by one."
     },
     {
@@ -8703,10 +7325,7 @@
       "artwork": {
         "source_filename": "The Sleepwalking Bridge.png",
         "sha256": "0d036ce727bac91a9a876907f1d105abb9e508fe2c5163f387d78f3b23e1bd15",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "Sleepwalkers cross a bridge shaped by a looming pale figure."
@@ -8716,12 +7335,7 @@
         "direct_card_bonus": 2,
         "reason": "Release breaks the compulsory procession.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Follow the Sleepwalkers",
@@ -8778,18 +7392,9 @@
           "preview": "Deal 4 Binding damage. Trait — Follow the Sleepwalkers: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The uncanny procession puts the traveler into a weakening trance without remembering which saved card was played."
     },
     {
@@ -8801,10 +7406,7 @@
       "artwork": {
         "source_filename": "The Smiling Kiln.png",
         "sha256": "e42257b721681dc8fbd09329ace83354693a0b6361e6742548d962a67a697ed5",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A smiling kiln glows with fire beneath a smoking chimney."
@@ -8814,10 +7416,7 @@
         "direct_card_bonus": 2,
         "reason": "Frost cools the kiln's furnace.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Frozen Lake",
-          "Frozen Waterfall"
-        ]
+        "example_direct_faces": ["Frozen Lake", "Frozen Waterfall"]
       },
       "trait": {
         "name": "Feed the Fire",
@@ -8874,20 +7473,9 @@
           "preview": "Deal 5 Fire damage. Trait — Feed the Fire: Apply 2 Burn to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Burn",
-        "Fire",
-        "Frost"
-      ],
-      "review_flags": [
-        "damage-over-time",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Burn", "Fire", "Frost"],
+      "review_flags": ["damage-over-time", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "Real fire from the kiln leaves a Burn after the first breath."
     },
     {
@@ -8899,10 +7487,7 @@
       "artwork": {
         "source_filename": "The Soot Bride.png",
         "sha256": "265e3287efbd70c476607e3e0218cdffc15d52199bcae9ae3f07169de433596c",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A soot-dark veil trails from a pale bride under a black plume."
@@ -8912,10 +7497,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth restores what the soot has blighted.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Soot Veil",
@@ -8972,19 +7554,9 @@
           "preview": "Deal 4 Decay damage. Trait — Soot Veil: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Growth", "Decay"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The visible soot cloud interferes with the opponent's aim, independent of Scry."
     },
     {
@@ -8996,10 +7568,7 @@
       "artwork": {
         "source_filename": "The Starved Banquet.png",
         "sha256": "b511dc0788848d43fc71aa04fff05788e0e5d192cf98d8ced82a1126b2eda721",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "An enormous crowned diner presides over an empty banquet table."
@@ -9009,10 +7578,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth replenishes the starved table.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Hungry Table",
@@ -9067,20 +7633,9 @@
           "preview": "Deal 5 Decay damage. Trait — Hungry Table: The base attack has Leech."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Leech",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Leech", "Growth", "Decay"],
+      "review_flags": ["recovery-stall-check", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The great mouth feeds through Leech using the full attack amount before Ward, not HP actually lost."
     },
     {
@@ -9092,10 +7647,7 @@
       "artwork": {
         "source_filename": "The Stilt Walker.png",
         "sha256": "918a4f396e608f023727907c8da611d742baf34bf7f9dbfb801f57710ce2a13d",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A very tall figure walks on narrow stilts."
@@ -9105,12 +7657,7 @@
         "direct_card_bonus": 2,
         "reason": "Binding fixes the stilts in place.",
         "available_direct_face_count": 11,
-        "example_direct_faces": [
-          "Fallen Bell",
-          "Gravity",
-          "Royal Hound",
-          "Stalactite"
-        ]
+        "example_direct_faces": ["Fallen Bell", "Gravity", "Royal Hound", "Stalactite"]
       },
       "trait": {
         "name": "Step Over",
@@ -9166,18 +7713,9 @@
           "preview": "Deal 5 Release damage. Trait — Step Over: The base hit ignores up to 3 player Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The long stilts step above part of a frontal guard without a threshold test on remaining Ward."
     },
     {
@@ -9189,10 +7727,7 @@
       "artwork": {
         "source_filename": "The Sunken Sun.png",
         "sha256": "c7190dc70ee879c6807aa9e66a7e97c0ef7b82359da156a7af109be682c8a0a8",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A sun's face lies half submerged in a glowing sea."
@@ -9202,12 +7737,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow dims the reflected sunlight.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Half-Drowned Day",
@@ -9272,17 +7802,9 @@
           "preview": "Deal 4 Radiance damage. Trait — Half-Drowned Day: After the player's next normal draw, turn their hand to its dark faces."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "visible-next-turn-effect"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Radiance", "Shadow"],
+      "review_flags": ["visible-next-turn-effect"],
       "thematic_reason": "The half-submerged sun alternates the next hand's day and night faces; both physical rays remain Radiance attacks."
     },
     {
@@ -9294,10 +7816,7 @@
       "artwork": {
         "source_filename": "The Sunstruck Crocodile.png",
         "sha256": "413e8070d5fc4f711510b2b640406da153e1f9bd6010a7171fd6b2d60e844bee",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A pale crocodile basks with open jaws beneath the sun."
@@ -9307,12 +7826,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow deprives its sunlit charge of a clear target.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Sunstruck Glare",
@@ -9368,15 +7882,8 @@
           "preview": "Deal 6 Radiance damage. Trait — Sunstruck Glare: Add 2 Radiance damage to the base hit."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Bless",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Bless", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The sun warms the waiting crocodile into strength for its next snap."
     },
@@ -9389,10 +7896,7 @@
       "artwork": {
         "source_filename": "The Tall Seamstress.png",
         "sha256": "cedea198ddee2818e2473801be29fa94ad11223f1791acad941d5385f7161bbb",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A towering seamstress stitches a long red span between arches."
@@ -9402,12 +7906,7 @@
         "direct_card_bonus": 2,
         "reason": "Release cuts the long seam.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Hem the Hand",
@@ -9465,18 +7964,9 @@
           "preview": "Deal 4 Binding damage. Trait — Hem the Hand: Move a random card still in the player's hand to the top of the player's library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The seamstress sews one held card into the top of the next draw rather than erasing it."
     },
     {
@@ -9488,10 +7978,7 @@
       "artwork": {
         "source_filename": "The Tangle Guest.png",
         "sha256": "c1e2b35f3c8bd24d612eb060c73e8179ed22b99ddc5d6926a2b56f021b691d22",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A pale guest is woven from looping strands and openings."
@@ -9501,12 +7988,7 @@
         "direct_card_bonus": 2,
         "reason": "Release untangles the guest's woven body.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Tangled Welcome",
@@ -9563,18 +8045,9 @@
           "preview": "Deal 4 Binding damage. Trait — Tangled Welcome: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The looping body restrains an attacking motion without watching for repeated pairs."
     },
     {
@@ -9586,10 +8059,7 @@
       "artwork": {
         "source_filename": "The Tar Albatross.png",
         "sha256": "cc7b62bb05abb2bd36483fb53c338abad14c8ac8e5384329386e6156cd0e6e7f",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "Black tar drips from a spread-winged albatross."
@@ -9599,10 +8069,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth reclaims the tar-stained living surface.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Heavy Feathers",
@@ -9659,19 +8126,9 @@
           "preview": "Deal 4 Decay damage. Trait — Heavy Feathers: The player draws 1 fewer card on their next normal draw."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "visible-next-turn-effect",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Growth", "Decay"],
+      "review_flags": ["visible-next-turn-effect", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The heavy sticky residue hinders the next draw instead of inspecting old retained-card snapshots."
     },
     {
@@ -9683,10 +8140,7 @@
       "artwork": {
         "source_filename": "The Thorned Librarian.png",
         "sha256": "3a3c232d7447b2bad3f1b331e2d6fc44e4426178dcd6fb106b9e6a4917633d21",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A thorn-crowned librarian holds an open book among shelves."
@@ -9696,12 +8150,7 @@
         "direct_card_bonus": 2,
         "reason": "Release pulls the book free of its constraining thorns.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Thorned Pages",
@@ -9759,18 +8208,9 @@
           "preview": "Deal 4 Binding damage. Trait — Thorned Pages: After each of the player's direct attack cards, if this enemy survives, deal 1 Binding damage to the player. This is trait damage, not a base attack."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "reactive-trait",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["reactive-trait", "wider-pool-weakness"],
       "thematic_reason": "While brambles are shown, each direct attack card provokes one thorn prick regardless of whether the hit met Ward."
     },
     {
@@ -9782,10 +8222,7 @@
       "artwork": {
         "source_filename": "The Threadbare Duke.png",
         "sha256": "e2676ce39e4a4f3716f517cfe99bcb2b3b2c90981a2feed1313d78abfdba2a5e",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-08.jpg",
         "observed": "A ragged duke's garments hang in long, fraying strips."
@@ -9795,10 +8232,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth renews the wasted cloth and body.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Fraying Court",
@@ -9856,18 +8290,9 @@
           "preview": "Deal 4 Decay damage. Trait — Fraying Court: Move the top 1 card of the player's library to the player's discard pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Growth", "Decay"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The ragged hem takes the next page out of the coming draw sequence and leaves it among spent scraps."
     },
     {
@@ -9879,10 +8304,7 @@
       "artwork": {
         "source_filename": "The Threaded Monarch.png",
         "sha256": "d96781caf9e31220d2d5c704c0236c72ba681e975aa4063829c04a4dcee47241",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A radiant monarch controls figures with taut golden threads."
@@ -9892,12 +8314,7 @@
         "direct_card_bonus": 2,
         "reason": "Release cuts the monarch's commanding threads.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Royal Choreography",
@@ -9953,18 +8370,9 @@
           "preview": "Deal 4 Binding damage. Trait — Royal Choreography: Turn the cards still in the player's hand to their light faces."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "held-card-interaction",
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Binding", "Release"],
+      "review_flags": ["held-card-interaction", "wider-pool-weakness"],
       "thematic_reason": "The monarch's golden strings impose one bright presentation on the cards actually still held, not a remembered three-card sequence."
     },
     {
@@ -9976,10 +8384,7 @@
       "artwork": {
         "source_filename": "The Tooth Collector.png",
         "sha256": "78ac5ea9439619beb989e751f1724ba8e8630e04b779b15cb284b24cc6ad154a",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A dark collector carries a bag filled with teeth."
@@ -9989,10 +8394,7 @@
         "direct_card_bonus": 2,
         "reason": "Growth restores what has been extracted and lost.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Honeybee",
-          "Cactus Flower"
-        ]
+        "example_direct_faces": ["Honeybee", "Cactus Flower"]
       },
       "trait": {
         "name": "Another Tooth",
@@ -10050,15 +8452,8 @@
           "preview": "Deal 4 Decay damage. Trait — Another Tooth: Banish a random card still in the player's hand."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Banish",
-        "Growth",
-        "Decay"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Banish", "Growth", "Decay"],
       "review_flags": [
         "held-card-interaction",
         "temporary-card-loss",
@@ -10076,10 +8471,7 @@
       "artwork": {
         "source_filename": "The Umbrella Beast.png",
         "sha256": "90bce99e4a0b09de0d8dad8f1619b3c933d6f7753bc2c7d7d3ea1f802e6c270d",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "Umbrellas hang from a towering long-limbed beast."
@@ -10089,12 +8481,7 @@
         "direct_card_bonus": 2,
         "reason": "Release collapses the umbrellas' supporting frames.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Open Canopy",
@@ -10170,19 +8557,9 @@
           "preview": "Deal 4 Binding damage. Trait — Open Canopy: Add 2 hits of 2 Binding damage."
         }
       ],
-      "pattern": [
-        "b",
-        "a",
-        "c"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["b", "a", "c"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The canopies provide actual shelter and the many pointed ribs add separate strikes."
     },
     {
@@ -10194,10 +8571,7 @@
       "artwork": {
         "source_filename": "The Unblinking Shepherd.png",
         "sha256": "d51658f2bb98eab70b9815f55faed22db7d7464b30f117e8bafa0edbdce0f576",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A single bright eye watches sheep moving along a narrow path."
@@ -10207,12 +8581,7 @@
         "direct_card_bonus": 2,
         "reason": "Shadow conceals a stray from its unblinking eye.",
         "available_direct_face_count": 15,
-        "example_direct_faces": [
-          "Vampire",
-          "Fallen Seraph",
-          "Imp",
-          "Revenant"
-        ]
+        "example_direct_faces": ["Vampire", "Fallen Seraph", "Imp", "Revenant"]
       },
       "trait": {
         "name": "Unblinking Gaze",
@@ -10269,15 +8638,8 @@
           "preview": "Deal 4 Radiance damage. Trait — Unblinking Gaze: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The eye and crook draw the player into the flock, constraining their next whole attack."
     },
@@ -10290,10 +8652,7 @@
       "artwork": {
         "source_filename": "The Unquiet Whelk.png",
         "sha256": "3337814c20f55680c70f28d67f28f208b8a1792e1b0a9ec39ad9c1d80f4bab2d",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "An open spiral whelk shell releases curling shapes over water."
@@ -10303,9 +8662,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion ends the sea-echo held in the shell.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Shell Echo",
@@ -10381,20 +8738,9 @@
           "preview": "Gain 5 Ward."
         }
       ],
-      "pattern": [
-        "c",
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["c", "a", "b"],
+      "keywords": ["Ward", "Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The hard shell shelters its owner and adds an audible echo after the leading ridge strike."
     },
     {
@@ -10406,10 +8752,7 @@
       "artwork": {
         "source_filename": "The Unseen Horse.png",
         "sha256": "a8921f829b4de77996bae15f6504195d8997f4ddd892a118c3bb968dc1fabf6c",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A horse's silhouette appears as a gap in the sweeping landscape."
@@ -10419,12 +8762,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance outlines the otherwise unseen animal.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Passing Shadow",
@@ -10480,15 +8818,8 @@
           "preview": "Deal 5 Shadow damage. Trait — Passing Shadow: The base hit ignores up to 3 player Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Radiance",
-        "Shadow"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Radiance", "Shadow"],
       "review_flags": [],
       "thematic_reason": "The negative-space horse phases part of the way through a guard; no Scry history is checked."
     },
@@ -10501,10 +8832,7 @@
       "artwork": {
         "source_filename": "The Velvet Eel.png",
         "sha256": "2a2bcc8d1cc57d7aa8ec6dccce5873f6e6a707dffb9c98930112b012ff447a25",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A long velvet eel curves around arches above water."
@@ -10514,12 +8842,7 @@
         "direct_card_bonus": 2,
         "reason": "Release slips the eel's encircling coils.",
         "available_direct_face_count": 9,
-        "example_direct_faces": [
-          "Shattered Mirror",
-          "Frenzy",
-          "Geyser",
-          "Harpoon"
-        ]
+        "example_direct_faces": ["Shattered Mirror", "Frenzy", "Geyser", "Harpoon"]
       },
       "trait": {
         "name": "Velvet Coil",
@@ -10576,18 +8899,9 @@
           "preview": "Deal 4 Binding damage. Trait — Velvet Coil: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Curse",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Curse", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The eel's long body constricts the next attacking motion rather than checking draw effects."
     },
     {
@@ -10599,10 +8913,7 @@
       "artwork": {
         "source_filename": "The Velvet Mole.png",
         "sha256": "c13d5f846b5bbe0bfe5394f0ab517950a72dc36830040efdf5ab0b1d0512ffca",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A velvet mole pushes great claws out of dark soil."
@@ -10612,12 +8923,7 @@
         "direct_card_bonus": 2,
         "reason": "Binding pins the digging claws and closes the tunnel.",
         "available_direct_face_count": 11,
-        "example_direct_faces": [
-          "Fallen Bell",
-          "Gravity",
-          "Royal Hound",
-          "Stalactite"
-        ]
+        "example_direct_faces": ["Fallen Bell", "Gravity", "Royal Hound", "Stalactite"]
       },
       "trait": {
         "name": "Burrow Under",
@@ -10673,18 +8979,9 @@
           "preview": "Deal 4 Release damage. Trait — Burrow Under: The base hit ignores up to 4 player Ward."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Ward",
-        "Binding",
-        "Release"
-      ],
-      "review_flags": [
-        "wider-pool-weakness"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Ward", "Binding", "Release"],
+      "review_flags": ["wider-pool-weakness"],
       "thematic_reason": "The digging claws come from below a frontal guard."
     },
     {
@@ -10696,10 +8993,7 @@
       "artwork": {
         "source_filename": "The Velvet Skeleton.png",
         "sha256": "40df11628ec100e9871dafb511f0055f191cd061b994350a567e243a68786ca2",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A velvet-robed skeleton raises a bare hand beneath the moon."
@@ -10709,9 +9003,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion releases the remembered courtly gesture.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Remembered Courtesy",
@@ -10768,19 +9060,9 @@
           "preview": "Deal 3 Memory damage. Trait — Remembered Courtesy: Move the top 1 card of the player's discard pile to the top of their library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "helpful-trait",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["helpful-trait", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The courtly skeleton invites a discarded memory back to the next draw; a dark figure can offer real help."
     },
     {
@@ -10792,10 +9074,7 @@
       "artwork": {
         "source_filename": "The Wax Regent.png",
         "sha256": "d1119171e5d774a6ebf6524a9f8fbd0579d2d7cfaf586793b47bdea95a2b16bd",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A candle-covered ruler melts into broad wax drapes."
@@ -10805,10 +9084,7 @@
         "direct_card_bonus": 2,
         "reason": "Frost cools the ruler's burning wax.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Frozen Lake",
-          "Frozen Waterfall"
-        ]
+        "example_direct_faces": ["Frozen Lake", "Frozen Waterfall"]
       },
       "trait": {
         "name": "Wax Seal",
@@ -10872,15 +9148,8 @@
           "preview": "Deal 4 Fire damage. Trait — Wax Seal: Apply 1 Burn to the player. Move a random card still in the player's hand to the top of the player's library."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Burn",
-        "Fire",
-        "Frost"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Burn", "Fire", "Frost"],
       "review_flags": [
         "held-card-interaction",
         "damage-over-time",
@@ -10898,10 +9167,7 @@
       "artwork": {
         "source_filename": "The Whispering Casket.png",
         "sha256": "f17a396086a5c72c20a3836375d75de63da7e544d85d5468912e3c7a43fab5f4",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "Smoke-like spirits curl from an open casket."
@@ -10911,9 +9177,7 @@
         "direct_card_bonus": 2,
         "reason": "Oblivion lays the lingering whispers to rest.",
         "available_direct_face_count": 1,
-        "example_direct_faces": [
-          "Oblivion"
-        ]
+        "example_direct_faces": ["Oblivion"]
       },
       "trait": {
         "name": "Whispered Names",
@@ -10971,18 +9235,9 @@
           "preview": "Deal 4 Memory damage. Trait — Whispered Names: Move the top 2 cards of the player's library to the player's discard pile."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Memory",
-        "Oblivion"
-      ],
-      "review_flags": [
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Memory", "Oblivion"],
+      "review_flags": ["wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The whispers draw two coming cards into the spent past without tracking the identity of last turn's final card."
     },
     {
@@ -10994,10 +9249,7 @@
       "artwork": {
         "source_filename": "The White Furnace.png",
         "sha256": "23f3ee85b9b0075a9e394b9a475d807ccf9041009b87a42fa4ab7823f8d102bf",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-09.jpg",
         "observed": "A giant pale figure holds an intense furnace-like light in its chest."
@@ -11007,10 +9259,7 @@
         "direct_card_bonus": 2,
         "reason": "Frost cools the exposed furnace core.",
         "available_direct_face_count": 2,
-        "example_direct_faces": [
-          "Frozen Lake",
-          "Frozen Waterfall"
-        ]
+        "example_direct_faces": ["Frozen Lake", "Frozen Waterfall"]
       },
       "trait": {
         "name": "Open Furnace",
@@ -11067,20 +9316,9 @@
           "preview": "Deal 5 Fire damage. Trait — Open Furnace: Apply 3 Burn to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Burn",
-        "Fire",
-        "Frost"
-      ],
-      "review_flags": [
-        "damage-over-time",
-        "wider-pool-weakness",
-        "sparse-weakness-pool"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Burn", "Fire", "Frost"],
+      "review_flags": ["damage-over-time", "wider-pool-weakness", "sparse-weakness-pool"],
       "thematic_reason": "The uncovered furnace leaves a strong continuing Burn; it need not ignore every possible shield."
     },
     {
@@ -11092,10 +9330,7 @@
       "artwork": {
         "source_filename": "The Wicker Sleeper.png",
         "sha256": "480d3c5cf437010545c2fe6c22aaff39c06de0cdbcea3f57853f204e17af6af6",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-10.jpg",
         "observed": "A sleeping figure lies inside a woven wicker cradle."
@@ -11105,12 +9340,7 @@
         "direct_card_bonus": 2,
         "reason": "Decay rots the cradle's living plant fibers.",
         "available_direct_face_count": 22,
-        "example_direct_faces": [
-          "Drought",
-          "Wither",
-          "Ash",
-          "Thorns"
-        ]
+        "example_direct_faces": ["Drought", "Wither", "Ash", "Thorns"]
       },
       "trait": {
         "name": "Dreaming Cradle",
@@ -11185,19 +9415,9 @@
           "preview": "Deal 4 Growth damage. Trait — Dreaming Cradle: Apply 1 Curse to the player."
         }
       ],
-      "pattern": [
-        "b",
-        "a",
-        "c"
-      ],
-      "keywords": [
-        "Curse",
-        "Growth",
-        "Decay"
-      ],
-      "review_flags": [
-        "recovery-stall-check"
-      ],
+      "pattern": ["b", "a", "c"],
+      "keywords": ["Curse", "Growth", "Decay"],
+      "review_flags": ["recovery-stall-check"],
       "thematic_reason": "The sleeper restores itself and its dream dulls the opponent's next attacking motion."
     },
     {
@@ -11209,10 +9429,7 @@
       "artwork": {
         "source_filename": "Velvet Widow.png",
         "sha256": "8f2a67e88183d308d43de789f94015fb4cda73537ab877bdc6f57687f6105621",
-        "dimensions": [
-          1448,
-          1086
-        ],
+        "dimensions": [1448, 1086],
         "inspection": "contact-sheet",
         "contact_sheet": "contact-10.jpg",
         "observed": "A velvet-clad woman has long spider legs beneath her dress."
@@ -11222,12 +9439,7 @@
         "direct_card_bonus": 2,
         "reason": "Radiance exposes the hunter beneath the moonlit velvet.",
         "available_direct_face_count": 13,
-        "example_direct_faces": [
-          "Seraph",
-          "Sacrifice",
-          "Sun",
-          "Executioner"
-        ]
+        "example_direct_faces": ["Seraph", "Sacrifice", "Sun", "Executioner"]
       },
       "trait": {
         "name": "Widow Venom",
@@ -11284,18 +9496,9 @@
           "preview": "Deal 5 Shadow damage. Trait — Widow Venom: Apply 3 Poison to the player."
         }
       ],
-      "pattern": [
-        "a",
-        "b"
-      ],
-      "keywords": [
-        "Poison",
-        "Radiance",
-        "Shadow"
-      ],
-      "review_flags": [
-        "damage-over-time"
-      ],
+      "pattern": ["a", "b"],
+      "keywords": ["Poison", "Radiance", "Shadow"],
+      "review_flags": ["damage-over-time"],
       "thematic_reason": "The widow’s spider limbs deliver a venomous strike; the toxin lingers after the base hit."
     }
   ]

@@ -1,28 +1,2389 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dusk &amp; Dawn — Status and Targeting Revision</title><style>
-:root{color-scheme:dark;--bg:#111218;--panel:#1b1e27;--ink:#eee9df;--muted:#bbb4c3;--line:#42404d;--accent:#e9c58b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:44px 28px 68px}header{max-width:960px;margin-bottom:26px}h1{font:normal clamp(34px,5vw,58px)/1.12 Georgia,serif;margin:12px 0 20px}h2{font:normal 29px/1.2 Georgia,serif;margin:0 0 18px}h3{font-size:18px;margin:18px 0 8px}p{margin:0 0 14px}a{color:var(--accent);text-underline-offset:3px}.eyebrow,.number{color:var(--accent);font-size:12px;letter-spacing:.08em;text-transform:uppercase}.muted,footer{color:var(--muted)}.notice{border-left:3px solid var(--accent);padding:15px 20px;background:#292432}.panel,.pair,.enemy,.audit{padding:24px;border:1px solid var(--line);border-radius:8px;background:var(--panel);margin-bottom:20px}.faces{display:grid;grid-template-columns:1fr 1fr;gap:25px}.side{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}.effect{font-size:18px;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}.enemy{padding:0;overflow:hidden;margin:0}.art{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#090a0e}.entry{padding:22px}.entry h2{font-size:27px}.actions{padding-left:20px}.actions li{margin:12px 0}.tools{display:flex;gap:16px;flex-wrap:wrap;align-items:end;margin:28px 0}.tools label{display:flex;flex-direction:column;gap:5px;font-size:13px}input,select,button{font:inherit;background:#22232d;color:var(--ink);border:1px solid #777081;padding:10px;border-radius:4px}input{width:min(380px,75vw)}button{cursor:pointer}:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.count{color:var(--muted);padding:10px 0}details{margin:18px 0}summary{cursor:pointer;font-weight:650;color:var(--accent)}details p{margin-top:12px}dl{margin:0}dt{font-weight:650;margin:14px 0 5px}dd{margin:0 0 12px}.rule{border-top:1px solid var(--line);padding-top:12px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}li{margin:7px 0}.small{font-size:14px}.section{margin:48px 0 24px}.toc{display:flex;flex-wrap:wrap;gap:10px 18px;border-bottom:1px solid var(--line);padding-bottom:20px}.portrait-grid{display:flex;gap:18px;flex-wrap:wrap}.portrait-grid img{max-width:200px;height:auto;max-height:240px;object-fit:contain}.audit .changed{color:#f2c084}.audit .before{color:var(--muted)}footer{margin-top:40px;font-size:13px}[hidden]{display:none!important}@media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){main{padding:26px 18px}.grid,.faces{grid-template-columns:1fr}.panel,.pair,.audit{padding:18px}.entry{padding:20px}.tools{display:block}.tools label{margin-bottom:12px}}@media print{body{background:white;color:#111;font:10pt/1.4 Arial,sans-serif}main{padding:0}.tools,.toc{display:none}.panel,.pair,.enemy,.audit{background:white;border-color:#bbb;break-inside:avoid}.grid{display:block}.enemy{display:grid;grid-template-columns:27% 1fr;margin-bottom:18px}.art{margin-top:20px}.entry{padding:14px}h2{font-size:18pt}.notice{background:#eee}a,.muted,.side,footer,summary{color:#333}.effect span,dd span,li span{color:#222!important}}
-.kw-radiance{color:#F7D670;font-weight:650}
-.kw-shadow{color:#C7AEF1;font-weight:650}
-.kw-growth{color:#9DDA97;font-weight:650}
-.kw-decay{color:#C7CD78;font-weight:650}
-.kw-binding{color:#80D1BE;font-weight:650}
-.kw-release{color:#7DDDEC;font-weight:650}
-.kw-fire{color:#FFAD66;font-weight:650}
-.kw-frost{color:#A8E5FA;font-weight:650}
-.kw-memory{color:#B8C7FF;font-weight:650}
-.kw-oblivion{color:#C5C5CD;font-weight:650}
-.kw-ward{color:#8BCBFF;font-weight:650}
-.kw-burn{color:#FF966B;font-weight:650}
-.kw-poison{color:#B2D67C;font-weight:650}
-.kw-flip{color:#D8ABFF;font-weight:650}
-.kw-banish{color:#F3A5B6;font-weight:650}
-.kw-scry{color:#86D8D0;font-weight:650}
-.kw-bless{color:#F5D58C;font-weight:650}
-.kw-curse{color:#D4A2E4;font-weight:650}
-.kw-freeze{color:#90CDEC;font-weight:650}
-.kw-cleanse{color:#A4E5CF;font-weight:650}
-.kw-purge{color:#F4B3A1;font-weight:650}
-.kw-hush{color:#B5BCD1;font-weight:650}
-.kw-keep{color:#B6E1A8;font-weight:650}
-.kw-reflect{color:#9DDDFF;font-weight:650}
-.kw-leech{color:#EF9EAC;font-weight:650}</style></head><body><main><header><p class="eyebrow">Dusk & Dawn · continued status revision</p><h1>Halving statuses. Fewer target prompts.</h1><p>Current directions are applied across the rules, 496 card faces and 110 enemies. Timing, rounding and values are provisional. Bless, Curse, Freeze, Cleanse and Purge now have approved directions. Numerical scaling and Freeze thaw remain open; see the linked current comparison.</p></header><p><a href="Bless%20Curse%20and%20Control%20Review%20v0.1.html">Current scaling comparison, control decisions and prompt audit</a></p><section id="current" class="section"><h2>Applied rule contract</h2><ul><li>Absorb incoming damage before HP. At the start of its holder’s turn, halve remaining <span class="kw-ward">Ward</span>, rounding down. Remove it at 0.</li><li>At player turn end, deal <span class="kw-fire">Fire</span> damage equal to <span class="kw-burn">Burn</span>, then halve <span class="kw-burn">Burn</span>, rounding down. Remove it at 0. Applying <span class="kw-burn">Burn</span> keeps the higher value; it does not add.</li><li>At player turn end, deal <span class="kw-decay">Decay</span> damage equal to <span class="kw-poison">Poison</span>, then halve <span class="kw-poison">Poison</span>, rounding down. Remove it at 0. Applying <span class="kw-poison">Poison</span> keeps the higher value; it does not add.</li><li>Reveal the top card of your library for the rest of this player turn. If the top changes, reveal the new top.</li><li>Give the stated cards a <span class="kw-keep">Keep</span> marker. They survive this turn’s discard on their current faces. “<span class="kw-keep">Keep</span> this card” returns the resolving source to your hand, marked, when its effect finishes.</li><li>Turn the stated cards to their other faces. Whole-hand, self, top-of-pile and random targets are explicit and require no selection prompt.</li></ul><p>Provisional timing: player <span class="kw-ward">Ward</span> halves before refill and draw. Clear <span class="kw-scry">Scry</span> when End Turn begins; discard unkept cards; tick player <span class="kw-burn">Burn</span>, player <span class="kw-poison">Poison</span>, enemy <span class="kw-burn">Burn</span>, then enemy <span class="kw-poison">Poison</span>. Halve each damaging status immediately after its hit and remove 0. If the enemy survives, halve its remaining <span class="kw-ward">Ward</span> before its action, even if Hushed. Stop immediately on defeat. <span class="kw-poison">Poison</span> and <span class="kw-burn">Burn</span> apply by maximum value, separately. Rounding down prevents immortal 1-point counters.</p></section><section id="counts" class="section"><h2>Complete review coverage</h2><ul><li>card faces checked: 496</li><li>enemies checked: 110</li><li>changed card descriptions since previous commit: 287</li><li>enemy entries with text or type changes: 62</li><li>self <span class="kw-keep">Keep</span> faces: 31</li><li>whole hand <span class="kw-keep">Keep</span> faces: 13</li><li>random <span class="kw-keep">Keep</span> faces: 8</li><li>self <span class="kw-flip">Flip</span> faces: 7</li><li>whole hand <span class="kw-flip">Flip</span> faces: 14</li><li>random <span class="kw-flip">Flip</span> faces: 12</li><li>top discard <span class="kw-flip">Flip</span> faces: 3</li><li><span class="kw-poison">Poison</span> applying faces: 6</li><li><span class="kw-poison">Poison</span> applying enemies: 3</li><li>selection prompts for <span class="kw-keep">Keep</span> or <span class="kw-flip">Flip</span>: 0</li></ul></section><section id="impact" class="section"><h2>Balance and gameplay implications</h2><ul><li><span class="kw-ward">Ward</span> banking makes spare defense useful across turns and can make quiet enemy turns more defensive. Repeated gains may support stalls: 10 <span class="kw-ward">Ward</span> every turn with no damage approaches 19 from zero after gain. Values remain unchanged pending playtests; test healing plus <span class="kw-ward">Ward</span> and shield-stripping counters.</li><li><span class="kw-burn">Burn</span> loses damage faster: <span class="kw-burn">Burn</span> 3 changes from 3+2+1=6 to 3+1=4; <span class="kw-burn">Burn</span> 4 becomes 4+2+1=7. <span class="kw-poison">Poison</span> uses the same curve with <span class="kw-decay">Decay</span> damage. Existing <span class="kw-burn">Burn</span> amounts are preserved; the six new <span class="kw-poison">Poison</span> faces use provisional values. Both counters coexist, can be absorbed by <span class="kw-ward">Ward</span>, and use max application rather than additive stacking. They deliberately share their math; their current differences are their independent counters, damage labels and specific cures or feeding interactions.</li><li>Damage-over-time instances are not direct attacks. Neither <span class="kw-burn">Burn</span> nor <span class="kw-poison">Poison</span> is modified by weakness, <span class="kw-bless">Bless</span>, <span class="kw-curse">Curse</span>, <span class="kw-reflect">Reflect</span> or <span class="kw-leech">Leech</span>. <span class="kw-fire">Fire</span> replaces the damage label only; the card named Flame and all artwork filenames retain their identities.</li><li><span class="kw-scry">Scry</span> trades top-card filtering for turn-long information. <span class="kw-scry">Scry</span> followed by Draw reveals the next top too, supporting informed draw, ordering and facing decisions without a prompt. A pure <span class="kw-scry">Scry</span> face may be weak at 1 mana; test it before adding unrelated rider effects.</li><li>Self-<span class="kw-keep">Keep</span> preserves a particular known physical card, including its opposite face for later <span class="kw-flip">Flip</span>. Whole-hand <span class="kw-keep">Keep</span> can preserve too much and restrict fresh draws: seven kept cards allow only one new card under the cap. It never grants a free replay; every play still costs 1 mana.</li><li>Self-<span class="kw-flip">Flip</span> plus self-<span class="kw-keep">Keep</span> gives Cocoon, Flower Bud and other transformation subjects a direct change of form. The original played description finishes even after its source flips. Random targets reduce prompts but reduce precision; sample only after payment, without replacement, and preview the pool rather than a secret result.</li><li>Pottery Workshop, Glassblower and Tarnished Mirror now transform the visible top discarded card. End-turn discard order follows hand order rather than asking for an ordering choice; bespoke effects that explicitly say “in any order” retain that deliberate choice.</li><li>The Mould Harpist spreads spores; Saffron Spider and Velvet Widow deliver venom. The Janitor removes both damaging residues. <span class="kw-poison">Poison</span> 2 totals 3 before prevention; <span class="kw-poison">Poison</span> 3 totals 4. These are thematic proposals with different pressure, not tested encounter balance. The Plague Doctor explicitly treats <span class="kw-poison">Poison</span>; most other recovery remains unchanged.</li><li><span class="kw-bless">Bless</span> and <span class="kw-curse">Curse</span> are now stacking whole-attack modifiers; Mark and Weaken are retired. <span class="kw-cleanse">Cleanse</span> and <span class="kw-purge">Purge</span> print one random kind or all. Scaling and <span class="kw-freeze">Freeze</span> thaw remain unresolved; see the current comparison and prompt audit.</li></ul></section><section id="bless" class="section"><h2>Bless · current direction and open details</h2><h3>Status</h3><p>approved stacking buff; numerical scaling open</p><h3>Current direction</h3><p>Affects every hit of the owner’s next direct attack; applications add and all stacks are spent on that attack. The catalogue shows a labeled provisional flat model.</p><h3>Open decision</h3><p>Flat +1 per stack versus percentage scaling; no final unit is chosen.</p></section><section id="curse" class="section"><h2>Curse · current direction and open details</h2><h3>Status</h3><p>approved stacking debuff; numerical scaling open</p><h3>Current direction</h3><p>Affects every hit of the holder’s next direct attack; applications add and all stacks are spent. It replaces Weaken; Mark is also removed.</p><h3>Open decision</h3><p>Flat −1 per stack versus percentage scaling; compare actual attack values before deciding.</p></section><section id="freeze" class="section"><h2>Freeze · current direction and open details</h2><h3>Status</h3><p>approved enemy action control; thaw open</p><h3>Current direction</h3><p>If still active, skip the next whole enemy action, advance the pattern and clear <span class="kw-freeze">Freeze</span>. It does not stack or queue turns.</p><h3>Open decision</h3><p>Whether direct attacks or <span class="kw-fire">Fire</span> thaw it is unresolved. Current conditional previews do not choose either rule.</p></section><section id="purge" class="section"><h2>Purge · current direction and open details</h2><h3>Status</h3><p>approved direction and quantities</p><h3>Current direction</h3><p>Remove one random beneficial status or all from the enemy, as printed. One clears a whole kind, regardless of stack count.</p><h3>Scope</h3><p><span class="kw-ward">Ward</span>, <span class="kw-reflect">Reflect</span> and <span class="kw-bless">Bless</span>; not printed traits, action patterns or later grants.</p></section><section id="cleanse" class="section"><h2>Cleanse · current direction and open details</h2><h3>Status</h3><p>approved direction and quantities</p><h3>Current direction</h3><p>Remove one random harmful status or all from self, as printed. One clears a whole kind; random is uniform by eligible kind.</p><h3>Scope</h3><p><span class="kw-burn">Burn</span>, <span class="kw-poison">Poison</span>, <span class="kw-curse">Curse</span>, <span class="kw-hush">Hush</span>, <span class="kw-freeze">Freeze</span> and visible draw/mana penalties. It does not heal HP or recover cards.</p></section><section id="classification" class="section"><h2>Current removal scope</h2><ul><li>beneficial combat statuses: <span class="kw-ward">Ward</span>, <span class="kw-reflect">Reflect</span>, <span class="kw-bless">Bless</span></li><li>harmful combat statuses: <span class="kw-burn">Burn</span>, <span class="kw-poison">Poison</span>, <span class="kw-curse">Curse</span>, <span class="kw-hush">Hush</span>, <span class="kw-freeze">Freeze</span>, next-normal-draw penalty, next-mana-refill penalty</li><li>other state: <span class="kw-keep">Keep</span> markers belong to individual cards, <span class="kw-scry">Scry</span> is player-turn information, face orientation and queued facing changes are not automatically harmful, HP, library/discard/<span class="kw-banish">Banish</span> zones, printed traits and action patterns are not removed</li><li>principle: One random kind or all is printed explicitly. Random is not weighted by counter size. This is mechanical removal scope, not a thematic tag system.</li></ul></section><section id="examples" class="section"><h2>Changed descriptions</h2><div class="table-wrap"><table><thead><tr><th>Face</th><th>Before</th><th>Current proposal</th></tr></thead><tbody><tr><th>Imp</th><td>Deal 4 <span class="kw-shadow">Shadow</span> damage. <span class="kw-flip">Flip</span> a card in your hand.</td><td>Deal 4 <span class="kw-shadow">Shadow</span> damage. <span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Revenant</th><td>Deal 5 <span class="kw-shadow">Shadow</span> damage. You may return a card from your discard pile to your hand.</td><td>Deal 3 <span class="kw-shadow">Shadow</span> damage. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Exile</th><td>Discard a card. Draw 2 cards.</td><td>Discard a random card. Draw 2 cards.</td></tr><tr><th>Deceiver</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Abbess</th><td>Heal 5 HP. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-cleanse">Cleanse</span> one random harmful status from yourself. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Gravedigger</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Confession</th><td>Discard a card. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td><td>Discard a random card. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Secrecy</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Condemnation</th><td>Mark 4. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Sacrifice</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 8 <span class="kw-radiance">Radiance</span> damage.</td><td><span class="kw-banish">Banish</span> another card of your choice from your hand. Deal 8 <span class="kw-radiance">Radiance</span> damage.</td></tr><tr><th>Dove</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Raven</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Black Swan</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Lamb</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Butterfly</th><td><span class="kw-flip">Flip</span> up to 2 cards in your hand.</td><td><span class="kw-flip">Flip</span> 2 random cards in your hand.</td></tr><tr><th>Moth</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Frost</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Bell Ringer</th><td>Mark 3.</td><td><span class="kw-bless">Bless</span> 2.</td></tr><tr><th>Censer</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Plague Brazier</th><td>Weaken 3. Deal 3 <span class="kw-decay">Decay</span> damage.</td><td>Apply 3 <span class="kw-poison">Poison</span>.</td></tr><tr><th>Reliquary</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Empty Reliquary</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td></tr><tr><th>Seed</th><td>Put up to 2 cards from your discard pile on the bottom of your draw pile.</td><td>Put the bottom 2 cards of your discard pile on the bottom of your library.</td></tr><tr><th>Ash</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 7 <span class="kw-decay">Decay</span> damage.</td><td>Deal 7 <span class="kw-decay">Decay</span> damage. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Ivy</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Lock</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Open Book</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Sealed Book</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Hourglass</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Broken Hourglass</th><td>Shuffle your hand into your draw pile. Draw 5 cards. <span class="kw-banish">Banish</span> this card.</td><td>Shuffle your hand into your library. Draw 5 cards. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Chain</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Ruined Cathedral</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Sunlit Chapel</th><td>Heal 5 HP. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-cleanse">Cleanse</span> one random harmful status from yourself. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Moonlit Crypt</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Overgrown Ruins</th><td>Put a card from your discard pile on top of your draw pile.</td><td>Put the top card of your discard pile on top of your library.</td></tr><tr><th>Bell Tower</th><td>Mark 3.</td><td><span class="kw-bless">Bless</span> 2.</td></tr><tr><th>Bridge</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Sealed Gate</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Sanctuary</th><td>Heal 5 HP. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-cleanse">Cleanse</span> all harmful statuses from yourself. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Prison</th><td>Weaken 6. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Sunken Shrine</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Benediction</th><td>Heal 4 HP. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-bless">Bless</span> 3. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Curse</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Ascension</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Descent</th><td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td><td>Put this card on the bottom of your library. Draw 1 card.</td></tr><tr><th>Memory</th><td>Return a card from your discard pile to your hand.</td><td>Return a card of your choice from your discard pile to your hand. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Oblivion</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 7 <span class="kw-oblivion">Oblivion</span> damage.</td><td>Deal 7 <span class="kw-oblivion">Oblivion</span> damage. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Nightmare</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Bound Soul</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Sovereign</th><td>Weaken 5.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Puppeteer</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Marionette</th><td>Put another card from your hand on top of your draw pile.</td><td><span class="kw-flip">Flip</span> a random card in your hand. <span class="kw-keep">Keep</span> it.</td></tr><tr><th>Weaver</th><td>Put a card from your discard pile on top of your draw pile.</td><td>Put the top 2 cards of your discard pile on top of your library in their current order.</td></tr><tr><th>Unraveler</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 8 <span class="kw-decay">Decay</span> damage.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile. Deal 6 <span class="kw-decay">Decay</span> damage.</td></tr><tr><th>Undertaker</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Sleepwalker</th><td>Shuffle your hand into your draw pile. Draw 3 cards.</td><td>Shuffle your hand into your library. Draw 3 cards.</td></tr><tr><th>Cartographer</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Look at the top 3 cards of your library. Put them back in any order.</td></tr><tr><th>Lost Wanderer</th><td>Shuffle your draw pile. Draw 2 cards.</td><td>Shuffle your library. Draw 2 cards.</td></tr><tr><th>Resurrector</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Locust</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 11 <span class="kw-decay">Decay</span> damage.</td><td><span class="kw-banish">Banish</span> the top card of your library. Deal 8 <span class="kw-decay">Decay</span> damage.</td></tr><tr><th>Peacock</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Vulture</th><td><span class="kw-banish">Banish</span> a card from your discard pile. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Anglerfish</th><td>Deal 3 <span class="kw-shadow">Shadow</span> damage. Mark 2.</td><td>Deal 3 <span class="kw-shadow">Shadow</span> damage. <span class="kw-curse">Curse</span> 1.</td></tr><tr><th>Caged Songbird</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Shipwreck</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 10 <span class="kw-decay">Decay</span> damage.</td><td>Deal 7 <span class="kw-decay">Decay</span> damage. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Root Cellar</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Wilderness</th><td>Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.</td><td>Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order.</td></tr><tr><th>Bone Orchard</th><td><span class="kw-banish">Banish</span> a card from your discard pile. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Dawn Market</th><td>Discard a card. Draw 2 cards.</td><td>Discard a random card. Draw 2 cards.</td></tr><tr><th>Night Market</th><td><span class="kw-banish">Banish</span> another card from your hand. Draw 3 cards.</td><td><span class="kw-banish">Banish</span> a random other card from your hand. Draw 3 cards.</td></tr><tr><th>Empty Banquet Hall</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Underground Cavern</th><td>Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Deep Marsh</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Frozen Lake</th><td>Weaken 3. Deal 2 <span class="kw-frost">Frost</span> damage.</td><td><span class="kw-curse">Curse</span> 1. Deal 2 <span class="kw-frost">Frost</span> damage.</td></tr><tr><th>Boiling Lake</th><td>Deal 5 Flame damage. Apply 2 <span class="kw-burn">Burn</span>.</td><td>Deal 5 <span class="kw-fire">Fire</span> damage. Apply 2 <span class="kw-burn">Burn</span>.</td></tr><tr><th>Sunken Library</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>White Desert</th><td>Weaken 3. Deal 3 <span class="kw-radiance">Radiance</span> damage.</td><td><span class="kw-curse">Curse</span> 1. Deal 3 <span class="kw-radiance">Radiance</span> damage.</td></tr><tr><th>Black Forest</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Clockwork City</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Draw 1 card. <span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Wandering Village</th><td>Shuffle your hand into your draw pile. Draw 4 cards.</td><td>Shuffle your hand into your library. Draw 4 cards.</td></tr><tr><th>Sewing Needle</th><td>Put a card from your discard pile on top of your draw pile.</td><td>Put the top card of your discard pile on top of your library.</td></tr><tr><th>Scissors</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 7 <span class="kw-decay">Decay</span> damage, ignoring <span class="kw-ward">Ward</span>.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile. Deal 5 <span class="kw-decay">Decay</span> damage, ignoring <span class="kw-ward">Ward</span>.</td></tr><tr><th>Compass</th><td>Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.</td><td><span class="kw-scry">Scry</span>. Draw 1 card.</td></tr><tr><th>Labyrinth</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Shroud</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Tuned Violin</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Broken Violin</th><td>Weaken 5. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Balance Scales</th><td>Mark 2. Weaken 2.</td><td><span class="kw-bless">Bless</span> 1. <span class="kw-curse">Curse</span> 1.</td></tr><tr><th>Loaded Dice</th><td>Look at the top 3 cards of your draw pile. Put 2 in your hand and the rest on the bottom in any order.</td><td>Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order.</td></tr><tr><th>Chessboard</th><td><span class="kw-scry">Scry</span>. Weaken 2.</td><td><span class="kw-scry">Scry</span>. <span class="kw-curse">Curse</span> 1.</td></tr><tr><th>Scattered Chess Pieces</th><td>Shuffle your hand into your draw pile. Draw 4 cards.</td><td>Shuffle your hand into your library. Draw 4 cards.</td></tr><tr><th>Wax Seal</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Torn Letter</th><td><span class="kw-banish">Banish</span> another card from your hand.</td><td><span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Anchor</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Metronome</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Reverse the top 2 cards of your library. <span class="kw-scry">Scry</span>.</td></tr><tr><th>Wind Chime</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Lens</th><td>Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.</td><td><span class="kw-scry">Scry</span>. Draw 1 card.</td></tr><tr><th>Blindfold</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Comb</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Turn your hand to its light faces.</td></tr><tr><th>Tangled Hair</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Porcelain Doll</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Rag Doll</th><td>Return a card from your discard pile to your hand.</td><td>Return the top 2 cards of your discard pile to your hand. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Symmetry</th><td>Mark 2. Weaken 2.</td><td><span class="kw-bless">Bless</span> 1. <span class="kw-curse">Curse</span> 1.</td></tr><tr><th>Asymmetry</th><td>Draw 2 cards. Discard a card.</td><td>Draw 2 cards. Discard a random card.</td></tr><tr><th>Unity</th><td>Return a card from your discard pile to your hand.</td><td>Draw 1 card. <span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Fragmentation</th><td><span class="kw-banish">Banish</span> another card from your hand. Deal 4 <span class="kw-decay">Decay</span> damage twice.</td><td>Deal 3 <span class="kw-decay">Decay</span> damage twice. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Convergence</th><td>Put up to 2 cards from your discard pile on top of your draw pile in any order.</td><td>Put the top 2 cards of your discard pile on top of your library in their current order.</td></tr><tr><th>Divergence</th><td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td><td>Put this card on the bottom of your library. Draw 1 card.</td></tr><tr><th>Compression</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Attraction</th><td>Return a card from your discard pile to your hand.</td><td>Draw 2 cards.</td></tr><tr><th>Repulsion</th><td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td><td>Put your hand on the bottom of your library. Draw 3 cards.</td></tr><tr><th>Levitation</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Stillness</th><td>Weaken 6. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Frenzy</th><td>Discard a card. Deal 10 <span class="kw-release">Release</span> damage.</td><td>Discard a random card. Deal 10 <span class="kw-release">Release</span> damage.</td></tr><tr><th>Clamor</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>High Tide</th><td>Return up to 2 cards from your discard pile to your hand.</td><td>Return the top 2 cards of your discard pile to your hand.</td></tr><tr><th>Low Tide</th><td>Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.</td><td>Put the top card of your library on the bottom. <span class="kw-scry">Scry</span>.</td></tr><tr><th>Exposure</th><td>Remove 3 enemy <span class="kw-ward">Ward</span>. Mark 3.</td><td><span class="kw-purge">Purge</span> all beneficial statuses from the enemy. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Concealment</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Herald</th><td>Mark 3.</td><td><span class="kw-bless">Bless</span> 2.</td></tr><tr><th>Smuggler</th><td>Put another card from your hand on the bottom of your draw pile. Draw 2 cards.</td><td>Put this card on the bottom of your library. Draw 2 cards.</td></tr><tr><th>Flag Burner</th><td><span class="kw-banish">Banish</span> another card from your hand. Apply 3 <span class="kw-burn">Burn</span>.</td><td>Apply 3 <span class="kw-burn">Burn</span>. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Animal Tamer</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Shapeshifter</th><td><span class="kw-flip">Flip</span> your hand.</td><td><span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Mask Maker</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Face Thief</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Fencer</th><td>Deal 3 <span class="kw-radiance">Radiance</span> damage. Mark 2.</td><td>Deal 2 <span class="kw-radiance">Radiance</span> damage twice.</td></tr><tr><th>Ferryman</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Auctioneer</th><td>Discard a card. Draw 2 cards.</td><td>Discard a random card. Draw 2 cards.</td></tr><tr><th>Scavenger</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Contortionist</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Royal Hound</th><td>Mark 3.</td><td>Deal 2 <span class="kw-binding">Binding</span> damage twice.</td></tr><tr><th>Stray Hound</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Archivist</th><td>Put a card from your discard pile on top of your draw pile. <span class="kw-scry">Scry</span>.</td><td>Put the bottom card of your discard pile on top of your library. <span class="kw-scry">Scry</span>.</td></tr><tr><th>Bookworm</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td></tr><tr><th>Surveyor</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td><span class="kw-scry">Scry</span>. Draw 1 card.</td></tr><tr><th>Trespasser</th><td>Remove 5 enemy <span class="kw-ward">Ward</span>.</td><td><span class="kw-purge">Purge</span> one random beneficial status from the enemy.</td></tr><tr><th>Chimney Sweep</th><td>Remove all your <span class="kw-burn">Burn</span>. <span class="kw-banish">Banish</span> a card from your discard pile.</td><td>Remove all your <span class="kw-burn">Burn</span>. <span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Smoke Spirit</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Kelp Forest</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Oyster</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Cuttlefish</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Firefly</th><td>Mark 3.</td><td>Turn your hand to its light faces.</td></tr><tr><th>Dandelion</th><td>Put up to 2 other cards from your hand on the bottom of your draw pile. Draw that many cards.</td><td>Put your hand on the bottom of your library. Draw 3 cards.</td></tr><tr><th>Mandrake</th><td>Weaken 6. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Cocoon</th><td><span class="kw-flip">Flip</span> a card in your hand. <span class="kw-keep">Keep</span> it.</td><td><span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Shed Skin</th><td><span class="kw-banish">Banish</span> another card from your hand. Draw 1 card.</td><td>Draw 1 card. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Corpse Flower</th><td><span class="kw-banish">Banish</span> a card from your discard pile. Deal 6 <span class="kw-decay">Decay</span> damage.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile. Deal 6 <span class="kw-decay">Decay</span> damage.</td></tr><tr><th>Moonflower</th><td>Turn a card in your hand to its dark face.</td><td>Turn your hand to its dark faces.</td></tr><tr><th>Silkworm</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Silverfish</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td></tr><tr><th>Sceptre</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Quill</th><td>Put a card from your discard pile on top of your draw pile.</td><td>Put the top card of your discard pile on top of your library.</td></tr><tr><th>Eraser</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Fishing Net</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Sieve</th><td>Look at the top 4 cards of your draw pile. Put 1 in your hand and discard the rest.</td><td>Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order.</td></tr><tr><th>Funnel</th><td>Put another card from your hand on top of your draw pile.</td><td>Put your hand on top of your library. Draw 1 card.</td></tr><tr><th>Scabbard</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Tuning Fork</th><td>Remove all your Weaken.</td><td>Remove all your <span class="kw-curse">Curse</span>.</td></tr><tr><th>Rattle</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Water Clock</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Draw 1 card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Rope Ladder</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Floodgate</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Wax Fruit</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Rotting Fruit</th><td>Deal 6 <span class="kw-decay">Decay</span> damage.</td><td>Apply 3 <span class="kw-poison">Poison</span>.</td></tr><tr><th>Measuring Rod</th><td>Mark 3.</td><td><span class="kw-scry">Scry</span>.</td></tr><tr><th>Twisted Ribbon</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Glass Slipper</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Wedding Veil</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Funeral Veil</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Backstage</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Grand Staircase</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Spiral Well</th><td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td><td>Put this card on the bottom of your library. Draw 1 card.</td></tr><tr><th>Sewer</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td></tr><tr><th>Peat Bog</th><td>Weaken 3. Deal 2 <span class="kw-decay">Decay</span> damage.</td><td><span class="kw-curse">Curse</span> 1. Deal 2 <span class="kw-decay">Decay</span> damage.</td></tr><tr><th>Icehouse</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Counting House</th><td><span class="kw-banish">Banish</span> another card from your hand. Draw 2 cards.</td><td>Put a random card from your hand on the bottom of your library. Draw 2 cards.</td></tr><tr><th>Thieves Den</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Dovecote</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td></tr><tr><th>Spider Nursery</th><td>Weaken 4.</td><td>Apply 2 <span class="kw-poison">Poison</span>.</td></tr><tr><th>Tidal Causeway</th><td>Exchange a card in your hand with one in your discard pile.</td><td>Exchange a random card in your hand with the top card of your discard pile.</td></tr><tr><th>Drifting Island</th><td>Shuffle your hand into your draw pile. Draw 4 cards.</td><td>Shuffle your hand into your library. Draw 4 cards.</td></tr><tr><th>Pottery Workshop</th><td><span class="kw-flip">Flip</span> a card in your discard pile. Return it to your hand.</td><td><span class="kw-flip">Flip</span> the top card of your discard pile. Return it to your hand.</td></tr><tr><th>Abandoned Fairground</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Paved Road</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td><span class="kw-scry">Scry</span>. Draw 1 card.</td></tr><tr><th>Bell Founder</th><td>Mark 3.</td><td><span class="kw-bless">Bless</span> 2.</td></tr><tr><th>Crown Jeweler</th><td>Return a card from your discard pile to your hand.</td><td>Turn the top card of your discard pile to its light face. Return it to your hand.</td></tr><tr><th>Shade Keeper</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td></tr><tr><th>Dream Binder</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Dream Unbinder</th><td>Remove all your Weaken.</td><td>Remove all your <span class="kw-curse">Curse</span>.</td></tr><tr><th>Clockmaker</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Put the top card of your discard pile on top of your library. <span class="kw-scry">Scry</span>.</td></tr><tr><th>Plague Doctor</th><td>Remove all your Weaken. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td><td>Remove all your <span class="kw-poison">Poison</span>. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Parchment Scribe</th><td>Put a card from your discard pile on top of your draw pile.</td><td>Put the bottom card of your discard pile on top of your library.</td></tr><tr><th>Ink Drinker</th><td><span class="kw-banish">Banish</span> a card from your discard pile. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Portrait Painter</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Portrait Eraser</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Glassblower</th><td><span class="kw-flip">Flip</span> a card in your discard pile. Return it to your hand.</td><td><span class="kw-flip">Flip</span> the top card of your discard pile. Return it to your hand.</td></tr><tr><th>Perfumer</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Scent Thief</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Bird Keeper</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> a random card in your hand.</td></tr><tr><th>Cage Builder</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> a random card in your hand.</td></tr><tr><th>Cage Breaker</th><td>Remove all your Weaken. Draw 2 cards. <span class="kw-banish">Banish</span> this card.</td><td>Remove all your <span class="kw-curse">Curse</span>. Draw 2 cards. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Thread Spinner</th><td>Put a card from your discard pile on top of your draw pile.</td><td>Put the top card of your discard pile on top of your library.</td></tr><tr><th>Thread Cutter</th><td><span class="kw-banish">Banish</span> another card from your hand.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Story Swallower</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Path Eraser</th><td><span class="kw-banish">Banish</span> another card from your hand.</td><td><span class="kw-banish">Banish</span> the top card of your library.</td></tr><tr><th>Oath Keeper</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Oath Breaker</th><td><span class="kw-banish">Banish</span> another card from your hand. Draw 1 card.</td><td>Draw 1 card. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Doll Mender</th><td>Return a card from your discard pile to your hand.</td><td>Turn the top card of your discard pile to its light face. Return it to your hand.</td></tr><tr><th>Doll Thief</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Music Conductor</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Reverse the top 3 cards of your library. <span class="kw-scry">Scry</span>.</td></tr><tr><th>Improviser</th><td>Draw 2 cards. Discard a card.</td><td>Draw 2 cards. Discard a random card.</td></tr><tr><th>Tide Keeper</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Tide Wanderer</th><td>Exchange a card in your hand with one in your discard pile.</td><td>Exchange a random card in your hand with the bottom card of your discard pile.</td></tr><tr><th>Black Fox</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Glass Snail</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Day Moth</th><td>Turn a card in your hand to its light face.</td><td>Turn a random dark card in your hand to its light face.</td></tr><tr><th>Night Moth</th><td>Turn a card in your hand to its dark face.</td><td>Turn a random light card in your hand to its dark face.</td></tr><tr><th>Alabaster Spider</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Obsidian Spider</th><td>Mark 3.</td><td>Deal 2 <span class="kw-decay">Decay</span> damage. Apply 2 <span class="kw-poison">Poison</span>.</td></tr><tr><th>Black Adder</th><td>Deal 5 <span class="kw-decay">Decay</span> damage, ignoring <span class="kw-ward">Ward</span>.</td><td>Deal 3 <span class="kw-decay">Decay</span> damage. Apply 2 <span class="kw-poison">Poison</span>.</td></tr><tr><th>Soft Coral</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Hawk Moth</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Whole Egg</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Cracked Egg</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td>Draw 2 cards. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Butterfly Wing</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Amber Frog</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Indigo Toad</th><td>Weaken 3.</td><td>Apply 3 <span class="kw-poison">Poison</span>.</td></tr><tr><th>Red Panda</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Living Jellyfish</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Jellyfish Fossil</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Silver Birch</th><td>Put up to 2 cards from your discard pile on the bottom of your draw pile.</td><td>Put the bottom 2 cards of your discard pile on the bottom of your library.</td></tr><tr><th>Hollow Oak</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td></tr><tr><th>Fern Fiddlehead</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Fallen Leaf</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Flower Bud</th><td><span class="kw-flip">Flip</span> a card in your hand. <span class="kw-keep">Keep</span> it.</td><td><span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Wild Mushroom</th><td>Shuffle your hand into your draw pile. Draw 4 cards.</td><td>Shuffle your hand into your library. Draw 4 cards.</td></tr><tr><th>Ice Crystal</th><td>Weaken 2. Deal 3 <span class="kw-frost">Frost</span> damage.</td><td><span class="kw-freeze">Freeze</span>. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Salt Crystal</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>River Pearl</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Golden Mask</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Cracked Mask</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Silver Crown</th><td>Mark 3.</td><td><span class="kw-bless">Bless</span> 2.</td></tr><tr><th>Rusty Crown</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Silk Glove</th><td>Return a card from your discard pile to your hand.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Woven Basket</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td></tr><tr><th>Unwoven Reeds</th><td><span class="kw-banish">Banish</span> another card from your hand.</td><td><span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Music Box</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Closed Parasol</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.</td></tr><tr><th>White Fan</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Black Fan</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> your hand.</td></tr><tr><th>Wooden Spool</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Loose Thread</th><td><span class="kw-banish">Banish</span> another card from your hand.</td><td><span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Gilded Cage</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> a random card in your hand.</td></tr><tr><th>Broken Cage</th><td>Remove all your Weaken. Draw 1 card.</td><td>Remove all your <span class="kw-curse">Curse</span>. Draw 1 card.</td></tr><tr><th>Tarnished Mirror</th><td><span class="kw-flip">Flip</span> a card in your discard pile. Return it to your hand.</td><td><span class="kw-flip">Flip</span> the top card of your discard pile. Return it to your hand.</td></tr><tr><th>Silver Locket</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Empty Locket</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td></tr><tr><th>Melted Key</th><td><span class="kw-banish">Banish</span> a card from your discard pile. <span class="kw-banish">Banish</span> this card.</td><td><span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Feather Quill</th><td>Put a card from your discard pile on top of your draw pile.</td><td>Put the top card of your discard pile on top of your library.</td></tr><tr><th>Ink Blot</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Paintbrush</th><td><span class="kw-flip">Flip</span> a card in your hand.</td><td><span class="kw-flip">Flip</span> a random card in your hand.</td></tr><tr><th>Paint Scraper</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the top card of your discard pile.</td></tr><tr><th>Spent Match</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Iron Needlecase</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> this card.</td></tr><tr><th>Empty Needlecase</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> this card.</td></tr><tr><th>White Ribbon</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td></tr><tr><th>Black Ribbon</th><td>Weaken 4.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Shadow Gallery</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Winter Conservatory</th><td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Hidden Basement</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Hedge Garden</th><td>Look at the top 3 cards of your draw pile. Put them back in any order.</td><td>Reverse the top 3 cards of your library. <span class="kw-scry">Scry</span>.</td></tr><tr><th>Wild Thicket</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Dry Fountain</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Golden Atrium</th><td>Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in any order.</td><td>Draw 1 card. Turn your hand to its light faces. <span class="kw-banish">Banish</span> this card.</td></tr><tr><th>Black Atrium</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr><tr><th>Underground Mill</th><td>Discard a card. Draw 2 cards.</td><td>Discard a random card. Draw 2 cards.</td></tr><tr><th>Collapsed Watchtower</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Grand Library</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Forgotten Archive</th><td><span class="kw-banish">Banish</span> a card from your discard pile.</td><td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td></tr><tr><th>Frozen Waterfall</th><td>Weaken 2. Deal 3 <span class="kw-frost">Frost</span> damage.</td><td><span class="kw-curse">Curse</span> 1. Deal 3 <span class="kw-frost">Frost</span> damage.</td></tr><tr><th>Ship Graveyard</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Ivory Bridge</th><td>Exchange a card in your hand with one in your discard pile.</td><td>Return the top card of your discard pile to your hand.</td></tr><tr><th>Obsidian Bridge</th><td>Weaken 3.</td><td><span class="kw-curse">Curse</span> 2.</td></tr><tr><th>Stone Stairway</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Timeless Tower</th><td>Return a card from your discard pile to your hand.</td><td>Return the bottom card of your discard pile to your hand.</td></tr><tr><th>Shuttered Window</th><td><span class="kw-keep">Keep</span> a card in your hand.</td><td><span class="kw-keep">Keep</span> your hand.</td></tr></tbody></table></div></section><footer>The companion JSON records all 606 checks and every current action preview. Read the <a href="Dusk%20%26%20Dawn%20%E2%80%94%20Game%20Design%20v0.2.html">design</a> and the <a href="Full%20Content%20Review%20v0.1.html">individual artwork rationales</a>. Focused reference-model checks are not a running game or proof of balance.</footer></main></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dusk &amp; Dawn — Status and Targeting Revision</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #111218;
+        --panel: #1b1e27;
+        --ink: #eee9df;
+        --muted: #bbb4c3;
+        --line: #42404d;
+        --accent: #e9c58b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.6 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 1280px;
+        margin: auto;
+        padding: 44px 28px 68px;
+      }
+      header {
+        max-width: 960px;
+        margin-bottom: 26px;
+      }
+      h1 {
+        font:
+          normal clamp(34px, 5vw, 58px)/1.12 Georgia,
+          serif;
+        margin: 12px 0 20px;
+      }
+      h2 {
+        font:
+          normal 29px/1.2 Georgia,
+          serif;
+        margin: 0 0 18px;
+      }
+      h3 {
+        font-size: 18px;
+        margin: 18px 0 8px;
+      }
+      p {
+        margin: 0 0 14px;
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+      }
+      .eyebrow,
+      .number {
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .muted,
+      footer {
+        color: var(--muted);
+      }
+      .notice {
+        border-left: 3px solid var(--accent);
+        padding: 15px 20px;
+        background: #292432;
+      }
+      .panel,
+      .pair,
+      .enemy,
+      .audit {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        margin-bottom: 20px;
+      }
+      .faces {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+      .side {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+      .effect {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        align-items: start;
+      }
+      .enemy {
+        padding: 0;
+        overflow: hidden;
+        margin: 0;
+      }
+      .art {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+        object-fit: contain;
+        background: #090a0e;
+      }
+      .entry {
+        padding: 22px;
+      }
+      .entry h2 {
+        font-size: 27px;
+      }
+      .actions {
+        padding-left: 20px;
+      }
+      .actions li {
+        margin: 12px 0;
+      }
+      .tools {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: end;
+        margin: 28px 0;
+      }
+      .tools label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 13px;
+      }
+      input,
+      select,
+      button {
+        font: inherit;
+        background: #22232d;
+        color: var(--ink);
+        border: 1px solid #777081;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      input {
+        width: min(380px, 75vw);
+      }
+      button {
+        cursor: pointer;
+      }
+      :focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .count {
+        color: var(--muted);
+        padding: 10px 0;
+      }
+      details {
+        margin: 18px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 650;
+        color: var(--accent);
+      }
+      details p {
+        margin-top: 12px;
+      }
+      dl {
+        margin: 0;
+      }
+      dt {
+        font-weight: 650;
+        margin: 14px 0 5px;
+      }
+      dd {
+        margin: 0 0 12px;
+      }
+      .rule {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+      .table-wrap {
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      li {
+        margin: 7px 0;
+      }
+      .small {
+        font-size: 14px;
+      }
+      .section {
+        margin: 48px 0 24px;
+      }
+      .toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 20px;
+      }
+      .portrait-grid {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .portrait-grid img {
+        max-width: 200px;
+        height: auto;
+        max-height: 240px;
+        object-fit: contain;
+      }
+      .audit .changed {
+        color: #f2c084;
+      }
+      .audit .before {
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 40px;
+        font-size: 13px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 1050px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 620px) {
+        main {
+          padding: 26px 18px;
+        }
+        .grid,
+        .faces {
+          grid-template-columns: 1fr;
+        }
+        .panel,
+        .pair,
+        .audit {
+          padding: 18px;
+        }
+        .entry {
+          padding: 20px;
+        }
+        .tools {
+          display: block;
+        }
+        .tools label {
+          margin-bottom: 12px;
+        }
+      }
+      @media print {
+        body {
+          background: white;
+          color: #111;
+          font:
+            10pt/1.4 Arial,
+            sans-serif;
+        }
+        main {
+          padding: 0;
+        }
+        .tools,
+        .toc {
+          display: none;
+        }
+        .panel,
+        .pair,
+        .enemy,
+        .audit {
+          background: white;
+          border-color: #bbb;
+          break-inside: avoid;
+        }
+        .grid {
+          display: block;
+        }
+        .enemy {
+          display: grid;
+          grid-template-columns: 27% 1fr;
+          margin-bottom: 18px;
+        }
+        .art {
+          margin-top: 20px;
+        }
+        .entry {
+          padding: 14px;
+        }
+        h2 {
+          font-size: 18pt;
+        }
+        .notice {
+          background: #eee;
+        }
+        a,
+        .muted,
+        .side,
+        footer,
+        summary {
+          color: #333;
+        }
+        .effect span,
+        dd span,
+        li span {
+          color: #222 !important;
+        }
+      }
+      .kw-radiance {
+        color: #f7d670;
+        font-weight: 650;
+      }
+      .kw-shadow {
+        color: #c7aef1;
+        font-weight: 650;
+      }
+      .kw-growth {
+        color: #9dda97;
+        font-weight: 650;
+      }
+      .kw-decay {
+        color: #c7cd78;
+        font-weight: 650;
+      }
+      .kw-binding {
+        color: #80d1be;
+        font-weight: 650;
+      }
+      .kw-release {
+        color: #7dddec;
+        font-weight: 650;
+      }
+      .kw-fire {
+        color: #ffad66;
+        font-weight: 650;
+      }
+      .kw-frost {
+        color: #a8e5fa;
+        font-weight: 650;
+      }
+      .kw-memory {
+        color: #b8c7ff;
+        font-weight: 650;
+      }
+      .kw-oblivion {
+        color: #c5c5cd;
+        font-weight: 650;
+      }
+      .kw-ward {
+        color: #8bcbff;
+        font-weight: 650;
+      }
+      .kw-burn {
+        color: #ff966b;
+        font-weight: 650;
+      }
+      .kw-poison {
+        color: #b2d67c;
+        font-weight: 650;
+      }
+      .kw-flip {
+        color: #d8abff;
+        font-weight: 650;
+      }
+      .kw-banish {
+        color: #f3a5b6;
+        font-weight: 650;
+      }
+      .kw-scry {
+        color: #86d8d0;
+        font-weight: 650;
+      }
+      .kw-bless {
+        color: #f5d58c;
+        font-weight: 650;
+      }
+      .kw-curse {
+        color: #d4a2e4;
+        font-weight: 650;
+      }
+      .kw-freeze {
+        color: #90cdec;
+        font-weight: 650;
+      }
+      .kw-cleanse {
+        color: #a4e5cf;
+        font-weight: 650;
+      }
+      .kw-purge {
+        color: #f4b3a1;
+        font-weight: 650;
+      }
+      .kw-hush {
+        color: #b5bcd1;
+        font-weight: 650;
+      }
+      .kw-keep {
+        color: #b6e1a8;
+        font-weight: 650;
+      }
+      .kw-reflect {
+        color: #9dddff;
+        font-weight: 650;
+      }
+      .kw-leech {
+        color: #ef9eac;
+        font-weight: 650;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Dusk & Dawn · continued status revision</p>
+        <h1>Halving statuses. Fewer target prompts.</h1>
+        <p>
+          Current directions are applied across the rules, 496 card faces and 110 enemies. Timing, rounding
+          and values are provisional. Bless, Curse, Freeze, Cleanse and Purge now have approved directions.
+          Numerical scaling and Freeze thaw remain open; see the linked current comparison.
+        </p>
+      </header>
+      <p>
+        <a href="Bless%20Curse%20and%20Control%20Review%20v0.1.html"
+          >Current scaling comparison, control decisions and prompt audit</a
+        >
+      </p>
+      <section id="current" class="section">
+        <h2>Applied rule contract</h2>
+        <ul>
+          <li>
+            Absorb incoming damage before HP. At the start of its holder’s turn, halve remaining
+            <span class="kw-ward">Ward</span>, rounding down. Remove it at 0.
+          </li>
+          <li>
+            At player turn end, deal <span class="kw-fire">Fire</span> damage equal to
+            <span class="kw-burn">Burn</span>, then halve <span class="kw-burn">Burn</span>, rounding down.
+            Remove it at 0. Applying <span class="kw-burn">Burn</span> keeps the higher value; it does not
+            add.
+          </li>
+          <li>
+            At player turn end, deal <span class="kw-decay">Decay</span> damage equal to
+            <span class="kw-poison">Poison</span>, then halve <span class="kw-poison">Poison</span>, rounding
+            down. Remove it at 0. Applying <span class="kw-poison">Poison</span> keeps the higher value; it
+            does not add.
+          </li>
+          <li>
+            Reveal the top card of your library for the rest of this player turn. If the top changes, reveal
+            the new top.
+          </li>
+          <li>
+            Give the stated cards a <span class="kw-keep">Keep</span> marker. They survive this turn’s discard
+            on their current faces. “<span class="kw-keep">Keep</span> this card” returns the resolving source
+            to your hand, marked, when its effect finishes.
+          </li>
+          <li>
+            Turn the stated cards to their other faces. Whole-hand, self, top-of-pile and random targets are
+            explicit and require no selection prompt.
+          </li>
+        </ul>
+        <p>
+          Provisional timing: player <span class="kw-ward">Ward</span> halves before refill and draw. Clear
+          <span class="kw-scry">Scry</span> when End Turn begins; discard unkept cards; tick player
+          <span class="kw-burn">Burn</span>, player <span class="kw-poison">Poison</span>, enemy
+          <span class="kw-burn">Burn</span>, then enemy <span class="kw-poison">Poison</span>. Halve each
+          damaging status immediately after its hit and remove 0. If the enemy survives, halve its remaining
+          <span class="kw-ward">Ward</span> before its action, even if Hushed. Stop immediately on defeat.
+          <span class="kw-poison">Poison</span> and <span class="kw-burn">Burn</span> apply by maximum value,
+          separately. Rounding down prevents immortal 1-point counters.
+        </p>
+      </section>
+      <section id="counts" class="section">
+        <h2>Complete review coverage</h2>
+        <ul>
+          <li>card faces checked: 496</li>
+          <li>enemies checked: 110</li>
+          <li>changed card descriptions since previous commit: 287</li>
+          <li>enemy entries with text or type changes: 62</li>
+          <li>self <span class="kw-keep">Keep</span> faces: 31</li>
+          <li>whole hand <span class="kw-keep">Keep</span> faces: 13</li>
+          <li>random <span class="kw-keep">Keep</span> faces: 8</li>
+          <li>self <span class="kw-flip">Flip</span> faces: 7</li>
+          <li>whole hand <span class="kw-flip">Flip</span> faces: 14</li>
+          <li>random <span class="kw-flip">Flip</span> faces: 12</li>
+          <li>top discard <span class="kw-flip">Flip</span> faces: 3</li>
+          <li><span class="kw-poison">Poison</span> applying faces: 6</li>
+          <li><span class="kw-poison">Poison</span> applying enemies: 3</li>
+          <li>
+            selection prompts for <span class="kw-keep">Keep</span> or <span class="kw-flip">Flip</span>: 0
+          </li>
+        </ul>
+      </section>
+      <section id="impact" class="section">
+        <h2>Balance and gameplay implications</h2>
+        <ul>
+          <li>
+            <span class="kw-ward">Ward</span> banking makes spare defense useful across turns and can make
+            quiet enemy turns more defensive. Repeated gains may support stalls: 10
+            <span class="kw-ward">Ward</span> every turn with no damage approaches 19 from zero after gain.
+            Values remain unchanged pending playtests; test healing plus <span class="kw-ward">Ward</span> and
+            shield-stripping counters.
+          </li>
+          <li>
+            <span class="kw-burn">Burn</span> loses damage faster: <span class="kw-burn">Burn</span> 3 changes
+            from 3+2+1=6 to 3+1=4; <span class="kw-burn">Burn</span> 4 becomes 4+2+1=7.
+            <span class="kw-poison">Poison</span> uses the same curve with
+            <span class="kw-decay">Decay</span> damage. Existing <span class="kw-burn">Burn</span> amounts are
+            preserved; the six new <span class="kw-poison">Poison</span> faces use provisional values. Both
+            counters coexist, can be absorbed by <span class="kw-ward">Ward</span>, and use max application
+            rather than additive stacking. They deliberately share their math; their current differences are
+            their independent counters, damage labels and specific cures or feeding interactions.
+          </li>
+          <li>
+            Damage-over-time instances are not direct attacks. Neither <span class="kw-burn">Burn</span> nor
+            <span class="kw-poison">Poison</span> is modified by weakness,
+            <span class="kw-bless">Bless</span>, <span class="kw-curse">Curse</span>,
+            <span class="kw-reflect">Reflect</span> or <span class="kw-leech">Leech</span>.
+            <span class="kw-fire">Fire</span> replaces the damage label only; the card named Flame and all
+            artwork filenames retain their identities.
+          </li>
+          <li>
+            <span class="kw-scry">Scry</span> trades top-card filtering for turn-long information.
+            <span class="kw-scry">Scry</span> followed by Draw reveals the next top too, supporting informed
+            draw, ordering and facing decisions without a prompt. A pure
+            <span class="kw-scry">Scry</span> face may be weak at 1 mana; test it before adding unrelated
+            rider effects.
+          </li>
+          <li>
+            Self-<span class="kw-keep">Keep</span> preserves a particular known physical card, including its
+            opposite face for later <span class="kw-flip">Flip</span>. Whole-hand
+            <span class="kw-keep">Keep</span> can preserve too much and restrict fresh draws: seven kept cards
+            allow only one new card under the cap. It never grants a free replay; every play still costs 1
+            mana.
+          </li>
+          <li>
+            Self-<span class="kw-flip">Flip</span> plus self-<span class="kw-keep">Keep</span> gives Cocoon,
+            Flower Bud and other transformation subjects a direct change of form. The original played
+            description finishes even after its source flips. Random targets reduce prompts but reduce
+            precision; sample only after payment, without replacement, and preview the pool rather than a
+            secret result.
+          </li>
+          <li>
+            Pottery Workshop, Glassblower and Tarnished Mirror now transform the visible top discarded card.
+            End-turn discard order follows hand order rather than asking for an ordering choice; bespoke
+            effects that explicitly say “in any order” retain that deliberate choice.
+          </li>
+          <li>
+            The Mould Harpist spreads spores; Saffron Spider and Velvet Widow deliver venom. The Janitor
+            removes both damaging residues. <span class="kw-poison">Poison</span> 2 totals 3 before
+            prevention; <span class="kw-poison">Poison</span> 3 totals 4. These are thematic proposals with
+            different pressure, not tested encounter balance. The Plague Doctor explicitly treats
+            <span class="kw-poison">Poison</span>; most other recovery remains unchanged.
+          </li>
+          <li>
+            <span class="kw-bless">Bless</span> and <span class="kw-curse">Curse</span> are now stacking
+            whole-attack modifiers; Mark and Weaken are retired. <span class="kw-cleanse">Cleanse</span> and
+            <span class="kw-purge">Purge</span> print one random kind or all. Scaling and
+            <span class="kw-freeze">Freeze</span> thaw remain unresolved; see the current comparison and
+            prompt audit.
+          </li>
+        </ul>
+      </section>
+      <section id="bless" class="section">
+        <h2>Bless · current direction and open details</h2>
+        <h3>Status</h3>
+        <p>approved stacking buff; numerical scaling open</p>
+        <h3>Current direction</h3>
+        <p>
+          Affects every hit of the owner’s next direct attack; applications add and all stacks are spent on
+          that attack. The catalogue shows a labeled provisional flat model.
+        </p>
+        <h3>Open decision</h3>
+        <p>Flat +1 per stack versus percentage scaling; no final unit is chosen.</p>
+      </section>
+      <section id="curse" class="section">
+        <h2>Curse · current direction and open details</h2>
+        <h3>Status</h3>
+        <p>approved stacking debuff; numerical scaling open</p>
+        <h3>Current direction</h3>
+        <p>
+          Affects every hit of the holder’s next direct attack; applications add and all stacks are spent. It
+          replaces Weaken; Mark is also removed.
+        </p>
+        <h3>Open decision</h3>
+        <p>Flat −1 per stack versus percentage scaling; compare actual attack values before deciding.</p>
+      </section>
+      <section id="freeze" class="section">
+        <h2>Freeze · current direction and open details</h2>
+        <h3>Status</h3>
+        <p>approved enemy action control; thaw open</p>
+        <h3>Current direction</h3>
+        <p>
+          If still active, skip the next whole enemy action, advance the pattern and clear
+          <span class="kw-freeze">Freeze</span>. It does not stack or queue turns.
+        </p>
+        <h3>Open decision</h3>
+        <p>
+          Whether direct attacks or <span class="kw-fire">Fire</span> thaw it is unresolved. Current
+          conditional previews do not choose either rule.
+        </p>
+      </section>
+      <section id="purge" class="section">
+        <h2>Purge · current direction and open details</h2>
+        <h3>Status</h3>
+        <p>approved direction and quantities</p>
+        <h3>Current direction</h3>
+        <p>
+          Remove one random beneficial status or all from the enemy, as printed. One clears a whole kind,
+          regardless of stack count.
+        </p>
+        <h3>Scope</h3>
+        <p>
+          <span class="kw-ward">Ward</span>, <span class="kw-reflect">Reflect</span> and
+          <span class="kw-bless">Bless</span>; not printed traits, action patterns or later grants.
+        </p>
+      </section>
+      <section id="cleanse" class="section">
+        <h2>Cleanse · current direction and open details</h2>
+        <h3>Status</h3>
+        <p>approved direction and quantities</p>
+        <h3>Current direction</h3>
+        <p>
+          Remove one random harmful status or all from self, as printed. One clears a whole kind; random is
+          uniform by eligible kind.
+        </p>
+        <h3>Scope</h3>
+        <p>
+          <span class="kw-burn">Burn</span>, <span class="kw-poison">Poison</span>,
+          <span class="kw-curse">Curse</span>, <span class="kw-hush">Hush</span>,
+          <span class="kw-freeze">Freeze</span> and visible draw/mana penalties. It does not heal HP or
+          recover cards.
+        </p>
+      </section>
+      <section id="classification" class="section">
+        <h2>Current removal scope</h2>
+        <ul>
+          <li>
+            beneficial combat statuses: <span class="kw-ward">Ward</span>,
+            <span class="kw-reflect">Reflect</span>, <span class="kw-bless">Bless</span>
+          </li>
+          <li>
+            harmful combat statuses: <span class="kw-burn">Burn</span>, <span class="kw-poison">Poison</span>,
+            <span class="kw-curse">Curse</span>, <span class="kw-hush">Hush</span>,
+            <span class="kw-freeze">Freeze</span>, next-normal-draw penalty, next-mana-refill penalty
+          </li>
+          <li>
+            other state: <span class="kw-keep">Keep</span> markers belong to individual cards,
+            <span class="kw-scry">Scry</span> is player-turn information, face orientation and queued facing
+            changes are not automatically harmful, HP, library/discard/<span class="kw-banish">Banish</span>
+            zones, printed traits and action patterns are not removed
+          </li>
+          <li>
+            principle: One random kind or all is printed explicitly. Random is not weighted by counter size.
+            This is mechanical removal scope, not a thematic tag system.
+          </li>
+        </ul>
+      </section>
+      <section id="examples" class="section">
+        <h2>Changed descriptions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Face</th>
+                <th>Before</th>
+                <th>Current proposal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Imp</th>
+                <td>
+                  Deal 4 <span class="kw-shadow">Shadow</span> damage. <span class="kw-flip">Flip</span> a
+                  card in your hand.
+                </td>
+                <td>
+                  Deal 4 <span class="kw-shadow">Shadow</span> damage. <span class="kw-flip">Flip</span> a
+                  random card in your hand.
+                </td>
+              </tr>
+              <tr>
+                <th>Revenant</th>
+                <td>
+                  Deal 5 <span class="kw-shadow">Shadow</span> damage. You may return a card from your discard
+                  pile to your hand.
+                </td>
+                <td>
+                  Deal 3 <span class="kw-shadow">Shadow</span> damage. <span class="kw-keep">Keep</span> this
+                  card.
+                </td>
+              </tr>
+              <tr>
+                <th>Exile</th>
+                <td>Discard a card. Draw 2 cards.</td>
+                <td>Discard a random card. Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Deceiver</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Abbess</th>
+                <td>Heal 5 HP. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-cleanse">Cleanse</span> one random harmful status from yourself. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Gravedigger</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Confession</th>
+                <td>Discard a card. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td>
+                <td>Discard a random card. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Secrecy</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Condemnation</th>
+                <td>Mark 4. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Sacrifice</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 8
+                  <span class="kw-radiance">Radiance</span> damage.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> another card of your choice from your hand. Deal 8
+                  <span class="kw-radiance">Radiance</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Dove</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Raven</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Black Swan</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Lamb</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Butterfly</th>
+                <td><span class="kw-flip">Flip</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-flip">Flip</span> 2 random cards in your hand.</td>
+              </tr>
+              <tr>
+                <th>Moth</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Frost</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Bell Ringer</th>
+                <td>Mark 3.</td>
+                <td><span class="kw-bless">Bless</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Censer</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Plague Brazier</th>
+                <td>Weaken 3. Deal 3 <span class="kw-decay">Decay</span> damage.</td>
+                <td>Apply 3 <span class="kw-poison">Poison</span>.</td>
+              </tr>
+              <tr>
+                <th>Reliquary</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Empty Reliquary</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Seed</th>
+                <td>Put up to 2 cards from your discard pile on the bottom of your draw pile.</td>
+                <td>Put the bottom 2 cards of your discard pile on the bottom of your library.</td>
+              </tr>
+              <tr>
+                <th>Ash</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 7
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+                <td>
+                  Deal 7 <span class="kw-decay">Decay</span> damage.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Ivy</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Lock</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Open Book</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Sealed Book</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Hourglass</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Broken Hourglass</th>
+                <td>
+                  Shuffle your hand into your draw pile. Draw 5 cards.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+                <td>
+                  Shuffle your hand into your library. Draw 5 cards.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Chain</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Ruined Cathedral</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Sunlit Chapel</th>
+                <td>Heal 5 HP. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-cleanse">Cleanse</span> one random harmful status from yourself. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Moonlit Crypt</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Overgrown Ruins</th>
+                <td>Put a card from your discard pile on top of your draw pile.</td>
+                <td>Put the top card of your discard pile on top of your library.</td>
+              </tr>
+              <tr>
+                <th>Bell Tower</th>
+                <td>Mark 3.</td>
+                <td><span class="kw-bless">Bless</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Bridge</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Sealed Gate</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Sanctuary</th>
+                <td>Heal 5 HP. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-cleanse">Cleanse</span> all harmful statuses from yourself. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Prison</th>
+                <td>Weaken 6. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Sunken Shrine</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Benediction</th>
+                <td>Heal 4 HP. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-bless">Bless</span> 3. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Curse</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Ascension</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Descent</th>
+                <td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td>
+                <td>Put this card on the bottom of your library. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Memory</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>
+                  Return a card of your choice from your discard pile to your hand.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Oblivion</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 7
+                  <span class="kw-oblivion">Oblivion</span> damage.
+                </td>
+                <td>
+                  Deal 7 <span class="kw-oblivion">Oblivion</span> damage.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Nightmare</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Bound Soul</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Sovereign</th>
+                <td>Weaken 5.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Puppeteer</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Marionette</th>
+                <td>Put another card from your hand on top of your draw pile.</td>
+                <td>
+                  <span class="kw-flip">Flip</span> a random card in your hand.
+                  <span class="kw-keep">Keep</span> it.
+                </td>
+              </tr>
+              <tr>
+                <th>Weaver</th>
+                <td>Put a card from your discard pile on top of your draw pile.</td>
+                <td>
+                  Put the top 2 cards of your discard pile on top of your library in their current order.
+                </td>
+              </tr>
+              <tr>
+                <th>Unraveler</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 8
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> the top card of your discard pile. Deal 6
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Undertaker</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Sleepwalker</th>
+                <td>Shuffle your hand into your draw pile. Draw 3 cards.</td>
+                <td>Shuffle your hand into your library. Draw 3 cards.</td>
+              </tr>
+              <tr>
+                <th>Cartographer</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>Look at the top 3 cards of your library. Put them back in any order.</td>
+              </tr>
+              <tr>
+                <th>Lost Wanderer</th>
+                <td>Shuffle your draw pile. Draw 2 cards.</td>
+                <td>Shuffle your library. Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Resurrector</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Locust</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 11
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> the top card of your library. Deal 8
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Peacock</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Vulture</th>
+                <td>
+                  <span class="kw-banish">Banish</span> a card from your discard pile. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> the top card of your discard pile. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Anglerfish</th>
+                <td>Deal 3 <span class="kw-shadow">Shadow</span> damage. Mark 2.</td>
+                <td>
+                  Deal 3 <span class="kw-shadow">Shadow</span> damage. <span class="kw-curse">Curse</span> 1.
+                </td>
+              </tr>
+              <tr>
+                <th>Caged Songbird</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Shipwreck</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 10
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+                <td>
+                  Deal 7 <span class="kw-decay">Decay</span> damage.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Root Cellar</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Wilderness</th>
+                <td>
+                  Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in
+                  any order.
+                </td>
+                <td>
+                  Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in
+                  library order.
+                </td>
+              </tr>
+              <tr>
+                <th>Bone Orchard</th>
+                <td>
+                  <span class="kw-banish">Banish</span> a card from your discard pile. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> the bottom card of your discard pile. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Dawn Market</th>
+                <td>Discard a card. Draw 2 cards.</td>
+                <td>Discard a random card. Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Night Market</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand. Draw 3 cards.</td>
+                <td>
+                  <span class="kw-banish">Banish</span> a random other card from your hand. Draw 3 cards.
+                </td>
+              </tr>
+              <tr>
+                <th>Empty Banquet Hall</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Underground Cavern</th>
+                <td>
+                  Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in
+                  any order.
+                </td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Deep Marsh</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Frozen Lake</th>
+                <td>Weaken 3. Deal 2 <span class="kw-frost">Frost</span> damage.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 1. Deal 2 <span class="kw-frost">Frost</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Boiling Lake</th>
+                <td>Deal 5 Flame damage. Apply 2 <span class="kw-burn">Burn</span>.</td>
+                <td>
+                  Deal 5 <span class="kw-fire">Fire</span> damage. Apply 2 <span class="kw-burn">Burn</span>.
+                </td>
+              </tr>
+              <tr>
+                <th>Sunken Library</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>White Desert</th>
+                <td>Weaken 3. Deal 3 <span class="kw-radiance">Radiance</span> damage.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 1. Deal 3
+                  <span class="kw-radiance">Radiance</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Black Forest</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Clockwork City</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>Draw 1 card. <span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Wandering Village</th>
+                <td>Shuffle your hand into your draw pile. Draw 4 cards.</td>
+                <td>Shuffle your hand into your library. Draw 4 cards.</td>
+              </tr>
+              <tr>
+                <th>Sewing Needle</th>
+                <td>Put a card from your discard pile on top of your draw pile.</td>
+                <td>Put the top card of your discard pile on top of your library.</td>
+              </tr>
+              <tr>
+                <th>Scissors</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 7
+                  <span class="kw-decay">Decay</span> damage, ignoring <span class="kw-ward">Ward</span>.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> the top card of your discard pile. Deal 5
+                  <span class="kw-decay">Decay</span> damage, ignoring <span class="kw-ward">Ward</span>.
+                </td>
+              </tr>
+              <tr>
+                <th>Compass</th>
+                <td>
+                  Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in
+                  any order.
+                </td>
+                <td><span class="kw-scry">Scry</span>. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Labyrinth</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Shroud</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Tuned Violin</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Broken Violin</th>
+                <td>Weaken 5. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Balance Scales</th>
+                <td>Mark 2. Weaken 2.</td>
+                <td><span class="kw-bless">Bless</span> 1. <span class="kw-curse">Curse</span> 1.</td>
+              </tr>
+              <tr>
+                <th>Loaded Dice</th>
+                <td>
+                  Look at the top 3 cards of your draw pile. Put 2 in your hand and the rest on the bottom in
+                  any order.
+                </td>
+                <td>
+                  Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in
+                  library order.
+                </td>
+              </tr>
+              <tr>
+                <th>Chessboard</th>
+                <td><span class="kw-scry">Scry</span>. Weaken 2.</td>
+                <td><span class="kw-scry">Scry</span>. <span class="kw-curse">Curse</span> 1.</td>
+              </tr>
+              <tr>
+                <th>Scattered Chess Pieces</th>
+                <td>Shuffle your hand into your draw pile. Draw 4 cards.</td>
+                <td>Shuffle your hand into your library. Draw 4 cards.</td>
+              </tr>
+              <tr>
+                <th>Wax Seal</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Torn Letter</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand.</td>
+                <td><span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Anchor</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Metronome</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>Reverse the top 2 cards of your library. <span class="kw-scry">Scry</span>.</td>
+              </tr>
+              <tr>
+                <th>Wind Chime</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Lens</th>
+                <td>
+                  Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in
+                  any order.
+                </td>
+                <td><span class="kw-scry">Scry</span>. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Blindfold</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Comb</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>Turn your hand to its light faces.</td>
+              </tr>
+              <tr>
+                <th>Tangled Hair</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Porcelain Doll</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Rag Doll</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>
+                  Return the top 2 cards of your discard pile to your hand.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Symmetry</th>
+                <td>Mark 2. Weaken 2.</td>
+                <td><span class="kw-bless">Bless</span> 1. <span class="kw-curse">Curse</span> 1.</td>
+              </tr>
+              <tr>
+                <th>Asymmetry</th>
+                <td>Draw 2 cards. Discard a card.</td>
+                <td>Draw 2 cards. Discard a random card.</td>
+              </tr>
+              <tr>
+                <th>Unity</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Draw 1 card. <span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Fragmentation</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Deal 4
+                  <span class="kw-decay">Decay</span> damage twice.
+                </td>
+                <td>
+                  Deal 3 <span class="kw-decay">Decay</span> damage twice.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Convergence</th>
+                <td>Put up to 2 cards from your discard pile on top of your draw pile in any order.</td>
+                <td>
+                  Put the top 2 cards of your discard pile on top of your library in their current order.
+                </td>
+              </tr>
+              <tr>
+                <th>Divergence</th>
+                <td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td>
+                <td>Put this card on the bottom of your library. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Compression</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Attraction</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Repulsion</th>
+                <td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td>
+                <td>Put your hand on the bottom of your library. Draw 3 cards.</td>
+              </tr>
+              <tr>
+                <th>Levitation</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Stillness</th>
+                <td>Weaken 6. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Frenzy</th>
+                <td>Discard a card. Deal 10 <span class="kw-release">Release</span> damage.</td>
+                <td>Discard a random card. Deal 10 <span class="kw-release">Release</span> damage.</td>
+              </tr>
+              <tr>
+                <th>Clamor</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>High Tide</th>
+                <td>Return up to 2 cards from your discard pile to your hand.</td>
+                <td>Return the top 2 cards of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Low Tide</th>
+                <td>
+                  Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in
+                  any order.
+                </td>
+                <td>Put the top card of your library on the bottom. <span class="kw-scry">Scry</span>.</td>
+              </tr>
+              <tr>
+                <th>Exposure</th>
+                <td>Remove 3 enemy <span class="kw-ward">Ward</span>. Mark 3.</td>
+                <td>
+                  <span class="kw-purge">Purge</span> all beneficial statuses from the enemy.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Concealment</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Herald</th>
+                <td>Mark 3.</td>
+                <td><span class="kw-bless">Bless</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Smuggler</th>
+                <td>Put another card from your hand on the bottom of your draw pile. Draw 2 cards.</td>
+                <td>Put this card on the bottom of your library. Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Flag Burner</th>
+                <td>
+                  <span class="kw-banish">Banish</span> another card from your hand. Apply 3
+                  <span class="kw-burn">Burn</span>.
+                </td>
+                <td>
+                  Apply 3 <span class="kw-burn">Burn</span>. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Animal Tamer</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Shapeshifter</th>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+                <td>
+                  <span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Mask Maker</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Face Thief</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Fencer</th>
+                <td>Deal 3 <span class="kw-radiance">Radiance</span> damage. Mark 2.</td>
+                <td>Deal 2 <span class="kw-radiance">Radiance</span> damage twice.</td>
+              </tr>
+              <tr>
+                <th>Ferryman</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Auctioneer</th>
+                <td>Discard a card. Draw 2 cards.</td>
+                <td>Discard a random card. Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Scavenger</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Contortionist</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td>
+                  <span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Royal Hound</th>
+                <td>Mark 3.</td>
+                <td>Deal 2 <span class="kw-binding">Binding</span> damage twice.</td>
+              </tr>
+              <tr>
+                <th>Stray Hound</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Archivist</th>
+                <td>
+                  Put a card from your discard pile on top of your draw pile.
+                  <span class="kw-scry">Scry</span>.
+                </td>
+                <td>
+                  Put the bottom card of your discard pile on top of your library.
+                  <span class="kw-scry">Scry</span>.
+                </td>
+              </tr>
+              <tr>
+                <th>Bookworm</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Surveyor</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td><span class="kw-scry">Scry</span>. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Trespasser</th>
+                <td>Remove 5 enemy <span class="kw-ward">Ward</span>.</td>
+                <td><span class="kw-purge">Purge</span> one random beneficial status from the enemy.</td>
+              </tr>
+              <tr>
+                <th>Chimney Sweep</th>
+                <td>
+                  Remove all your <span class="kw-burn">Burn</span>. <span class="kw-banish">Banish</span> a
+                  card from your discard pile.
+                </td>
+                <td>
+                  Remove all your <span class="kw-burn">Burn</span>. <span class="kw-banish">Banish</span> the
+                  top card of your discard pile.
+                </td>
+              </tr>
+              <tr>
+                <th>Smoke Spirit</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Kelp Forest</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Oyster</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Cuttlefish</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Firefly</th>
+                <td>Mark 3.</td>
+                <td>Turn your hand to its light faces.</td>
+              </tr>
+              <tr>
+                <th>Dandelion</th>
+                <td>
+                  Put up to 2 other cards from your hand on the bottom of your draw pile. Draw that many
+                  cards.
+                </td>
+                <td>Put your hand on the bottom of your library. Draw 3 cards.</td>
+              </tr>
+              <tr>
+                <th>Mandrake</th>
+                <td>Weaken 6. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 3. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Cocoon</th>
+                <td>
+                  <span class="kw-flip">Flip</span> a card in your hand. <span class="kw-keep">Keep</span> it.
+                </td>
+                <td>
+                  <span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Shed Skin</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand. Draw 1 card.</td>
+                <td>Draw 1 card. <span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Corpse Flower</th>
+                <td>
+                  <span class="kw-banish">Banish</span> a card from your discard pile. Deal 6
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> the bottom card of your discard pile. Deal 6
+                  <span class="kw-decay">Decay</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Moonflower</th>
+                <td>Turn a card in your hand to its dark face.</td>
+                <td>Turn your hand to its dark faces.</td>
+              </tr>
+              <tr>
+                <th>Silkworm</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Silverfish</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Sceptre</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Quill</th>
+                <td>Put a card from your discard pile on top of your draw pile.</td>
+                <td>Put the top card of your discard pile on top of your library.</td>
+              </tr>
+              <tr>
+                <th>Eraser</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Fishing Net</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Sieve</th>
+                <td>Look at the top 4 cards of your draw pile. Put 1 in your hand and discard the rest.</td>
+                <td>
+                  Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library
+                  order.
+                </td>
+              </tr>
+              <tr>
+                <th>Funnel</th>
+                <td>Put another card from your hand on top of your draw pile.</td>
+                <td>Put your hand on top of your library. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Scabbard</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Tuning Fork</th>
+                <td>Remove all your Weaken.</td>
+                <td>Remove all your <span class="kw-curse">Curse</span>.</td>
+              </tr>
+              <tr>
+                <th>Rattle</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Water Clock</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>Draw 1 card. <span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Rope Ladder</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Floodgate</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Wax Fruit</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Rotting Fruit</th>
+                <td>Deal 6 <span class="kw-decay">Decay</span> damage.</td>
+                <td>Apply 3 <span class="kw-poison">Poison</span>.</td>
+              </tr>
+              <tr>
+                <th>Measuring Rod</th>
+                <td>Mark 3.</td>
+                <td><span class="kw-scry">Scry</span>.</td>
+              </tr>
+              <tr>
+                <th>Twisted Ribbon</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Glass Slipper</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Wedding Veil</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Funeral Veil</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Backstage</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Grand Staircase</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Spiral Well</th>
+                <td>Put another card from your hand on the bottom of your draw pile. Draw 1 card.</td>
+                <td>Put this card on the bottom of your library. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Sewer</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Peat Bog</th>
+                <td>Weaken 3. Deal 2 <span class="kw-decay">Decay</span> damage.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 1. Deal 2 <span class="kw-decay">Decay</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Icehouse</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Counting House</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand. Draw 2 cards.</td>
+                <td>Put a random card from your hand on the bottom of your library. Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Thieves Den</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Dovecote</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td>
+              </tr>
+              <tr>
+                <th>Spider Nursery</th>
+                <td>Weaken 4.</td>
+                <td>Apply 2 <span class="kw-poison">Poison</span>.</td>
+              </tr>
+              <tr>
+                <th>Tidal Causeway</th>
+                <td>Exchange a card in your hand with one in your discard pile.</td>
+                <td>Exchange a random card in your hand with the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Drifting Island</th>
+                <td>Shuffle your hand into your draw pile. Draw 4 cards.</td>
+                <td>Shuffle your hand into your library. Draw 4 cards.</td>
+              </tr>
+              <tr>
+                <th>Pottery Workshop</th>
+                <td>
+                  <span class="kw-flip">Flip</span> a card in your discard pile. Return it to your hand.
+                </td>
+                <td>
+                  <span class="kw-flip">Flip</span> the top card of your discard pile. Return it to your hand.
+                </td>
+              </tr>
+              <tr>
+                <th>Abandoned Fairground</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Paved Road</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td><span class="kw-scry">Scry</span>. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Bell Founder</th>
+                <td>Mark 3.</td>
+                <td><span class="kw-bless">Bless</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Crown Jeweler</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Turn the top card of your discard pile to its light face. Return it to your hand.</td>
+              </tr>
+              <tr>
+                <th>Shade Keeper</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td>
+              </tr>
+              <tr>
+                <th>Dream Binder</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Dream Unbinder</th>
+                <td>Remove all your Weaken.</td>
+                <td>Remove all your <span class="kw-curse">Curse</span>.</td>
+              </tr>
+              <tr>
+                <th>Clockmaker</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>
+                  Put the top card of your discard pile on top of your library.
+                  <span class="kw-scry">Scry</span>.
+                </td>
+              </tr>
+              <tr>
+                <th>Plague Doctor</th>
+                <td>Remove all your Weaken. Heal 3 HP. <span class="kw-banish">Banish</span> this card.</td>
+                <td>
+                  Remove all your <span class="kw-poison">Poison</span>. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Parchment Scribe</th>
+                <td>Put a card from your discard pile on top of your draw pile.</td>
+                <td>Put the bottom card of your discard pile on top of your library.</td>
+              </tr>
+              <tr>
+                <th>Ink Drinker</th>
+                <td>
+                  <span class="kw-banish">Banish</span> a card from your discard pile. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+                <td>
+                  <span class="kw-banish">Banish</span> the top card of your discard pile. Heal 3 HP.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Portrait Painter</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Portrait Eraser</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Glassblower</th>
+                <td>
+                  <span class="kw-flip">Flip</span> a card in your discard pile. Return it to your hand.
+                </td>
+                <td>
+                  <span class="kw-flip">Flip</span> the top card of your discard pile. Return it to your hand.
+                </td>
+              </tr>
+              <tr>
+                <th>Perfumer</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Scent Thief</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Bird Keeper</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Cage Builder</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Cage Breaker</th>
+                <td>
+                  Remove all your Weaken. Draw 2 cards. <span class="kw-banish">Banish</span> this card.
+                </td>
+                <td>
+                  Remove all your <span class="kw-curse">Curse</span>. Draw 2 cards.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Thread Spinner</th>
+                <td>Put a card from your discard pile on top of your draw pile.</td>
+                <td>Put the top card of your discard pile on top of your library.</td>
+              </tr>
+              <tr>
+                <th>Thread Cutter</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Story Swallower</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Path Eraser</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your library.</td>
+              </tr>
+              <tr>
+                <th>Oath Keeper</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Oath Breaker</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand. Draw 1 card.</td>
+                <td>Draw 1 card. <span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Doll Mender</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Turn the top card of your discard pile to its light face. Return it to your hand.</td>
+              </tr>
+              <tr>
+                <th>Doll Thief</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Music Conductor</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>Reverse the top 3 cards of your library. <span class="kw-scry">Scry</span>.</td>
+              </tr>
+              <tr>
+                <th>Improviser</th>
+                <td>Draw 2 cards. Discard a card.</td>
+                <td>Draw 2 cards. Discard a random card.</td>
+              </tr>
+              <tr>
+                <th>Tide Keeper</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Tide Wanderer</th>
+                <td>Exchange a card in your hand with one in your discard pile.</td>
+                <td>Exchange a random card in your hand with the bottom card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Black Fox</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Glass Snail</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Day Moth</th>
+                <td>Turn a card in your hand to its light face.</td>
+                <td>Turn a random dark card in your hand to its light face.</td>
+              </tr>
+              <tr>
+                <th>Night Moth</th>
+                <td>Turn a card in your hand to its dark face.</td>
+                <td>Turn a random light card in your hand to its dark face.</td>
+              </tr>
+              <tr>
+                <th>Alabaster Spider</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Obsidian Spider</th>
+                <td>Mark 3.</td>
+                <td>
+                  Deal 2 <span class="kw-decay">Decay</span> damage. Apply 2
+                  <span class="kw-poison">Poison</span>.
+                </td>
+              </tr>
+              <tr>
+                <th>Black Adder</th>
+                <td>
+                  Deal 5 <span class="kw-decay">Decay</span> damage, ignoring
+                  <span class="kw-ward">Ward</span>.
+                </td>
+                <td>
+                  Deal 3 <span class="kw-decay">Decay</span> damage. Apply 2
+                  <span class="kw-poison">Poison</span>.
+                </td>
+              </tr>
+              <tr>
+                <th>Soft Coral</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Hawk Moth</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Whole Egg</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Cracked Egg</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td>Draw 2 cards. <span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Butterfly Wing</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Amber Frog</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Indigo Toad</th>
+                <td>Weaken 3.</td>
+                <td>Apply 3 <span class="kw-poison">Poison</span>.</td>
+              </tr>
+              <tr>
+                <th>Red Panda</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Living Jellyfish</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Jellyfish Fossil</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Silver Birch</th>
+                <td>Put up to 2 cards from your discard pile on the bottom of your draw pile.</td>
+                <td>Put the bottom 2 cards of your discard pile on the bottom of your library.</td>
+              </tr>
+              <tr>
+                <th>Hollow Oak</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td>
+              </tr>
+              <tr>
+                <th>Fern Fiddlehead</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td>
+                  <span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Fallen Leaf</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Flower Bud</th>
+                <td>
+                  <span class="kw-flip">Flip</span> a card in your hand. <span class="kw-keep">Keep</span> it.
+                </td>
+                <td>
+                  <span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Wild Mushroom</th>
+                <td>Shuffle your hand into your draw pile. Draw 4 cards.</td>
+                <td>Shuffle your hand into your library. Draw 4 cards.</td>
+              </tr>
+              <tr>
+                <th>Ice Crystal</th>
+                <td>Weaken 2. Deal 3 <span class="kw-frost">Frost</span> damage.</td>
+                <td>
+                  <span class="kw-freeze">Freeze</span>. <span class="kw-banish">Banish</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Salt Crystal</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>River Pearl</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Golden Mask</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td>
+                  <span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>Cracked Mask</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Silver Crown</th>
+                <td>Mark 3.</td>
+                <td><span class="kw-bless">Bless</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Rusty Crown</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Silk Glove</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Woven Basket</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td>
+              </tr>
+              <tr>
+                <th>Unwoven Reeds</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand.</td>
+                <td><span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Music Box</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Closed Parasol</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td>
+                  <span class="kw-flip">Flip</span> this card. <span class="kw-keep">Keep</span> this card.
+                </td>
+              </tr>
+              <tr>
+                <th>White Fan</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Black Fan</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Wooden Spool</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Loose Thread</th>
+                <td><span class="kw-banish">Banish</span> another card from your hand.</td>
+                <td><span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Gilded Cage</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Broken Cage</th>
+                <td>Remove all your Weaken. Draw 1 card.</td>
+                <td>Remove all your <span class="kw-curse">Curse</span>. Draw 1 card.</td>
+              </tr>
+              <tr>
+                <th>Tarnished Mirror</th>
+                <td>
+                  <span class="kw-flip">Flip</span> a card in your discard pile. Return it to your hand.
+                </td>
+                <td>
+                  <span class="kw-flip">Flip</span> the top card of your discard pile. Return it to your hand.
+                </td>
+              </tr>
+              <tr>
+                <th>Silver Locket</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Empty Locket</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Melted Key</th>
+                <td>
+                  <span class="kw-banish">Banish</span> a card from your discard pile.
+                  <span class="kw-banish">Banish</span> this card.
+                </td>
+                <td><span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Feather Quill</th>
+                <td>Put a card from your discard pile on top of your draw pile.</td>
+                <td>Put the top card of your discard pile on top of your library.</td>
+              </tr>
+              <tr>
+                <th>Ink Blot</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Paintbrush</th>
+                <td><span class="kw-flip">Flip</span> a card in your hand.</td>
+                <td><span class="kw-flip">Flip</span> a random card in your hand.</td>
+              </tr>
+              <tr>
+                <th>Paint Scraper</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the top card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Spent Match</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Iron Needlecase</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Empty Needlecase</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>White Ribbon</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> 2 random cards in your hand.</td>
+              </tr>
+              <tr>
+                <th>Black Ribbon</th>
+                <td>Weaken 4.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Shadow Gallery</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Winter Conservatory</th>
+                <td><span class="kw-keep">Keep</span> up to 2 cards in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Hidden Basement</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Hedge Garden</th>
+                <td>Look at the top 3 cards of your draw pile. Put them back in any order.</td>
+                <td>Reverse the top 3 cards of your library. <span class="kw-scry">Scry</span>.</td>
+              </tr>
+              <tr>
+                <th>Wild Thicket</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Dry Fountain</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> this card.</td>
+              </tr>
+              <tr>
+                <th>Golden Atrium</th>
+                <td>
+                  Look at the top 3 cards of your draw pile. Put 1 in your hand and the rest on the bottom in
+                  any order.
+                </td>
+                <td>
+                  Draw 1 card. Turn your hand to its light faces. <span class="kw-banish">Banish</span> this
+                  card.
+                </td>
+              </tr>
+              <tr>
+                <th>Black Atrium</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+              <tr>
+                <th>Underground Mill</th>
+                <td>Discard a card. Draw 2 cards.</td>
+                <td>Discard a random card. Draw 2 cards.</td>
+              </tr>
+              <tr>
+                <th>Collapsed Watchtower</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Grand Library</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Forgotten Archive</th>
+                <td><span class="kw-banish">Banish</span> a card from your discard pile.</td>
+                <td><span class="kw-banish">Banish</span> the bottom card of your discard pile.</td>
+              </tr>
+              <tr>
+                <th>Frozen Waterfall</th>
+                <td>Weaken 2. Deal 3 <span class="kw-frost">Frost</span> damage.</td>
+                <td>
+                  <span class="kw-curse">Curse</span> 1. Deal 3 <span class="kw-frost">Frost</span> damage.
+                </td>
+              </tr>
+              <tr>
+                <th>Ship Graveyard</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Ivory Bridge</th>
+                <td>Exchange a card in your hand with one in your discard pile.</td>
+                <td>Return the top card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Obsidian Bridge</th>
+                <td>Weaken 3.</td>
+                <td><span class="kw-curse">Curse</span> 2.</td>
+              </tr>
+              <tr>
+                <th>Stone Stairway</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Timeless Tower</th>
+                <td>Return a card from your discard pile to your hand.</td>
+                <td>Return the bottom card of your discard pile to your hand.</td>
+              </tr>
+              <tr>
+                <th>Shuttered Window</th>
+                <td><span class="kw-keep">Keep</span> a card in your hand.</td>
+                <td><span class="kw-keep">Keep</span> your hand.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer>
+        The companion JSON records all 606 checks and every current action preview. Read the
+        <a href="Dusk%20%26%20Dawn%20%E2%80%94%20Game%20Design%20v0.2.html">design</a> and the
+        <a href="Full%20Content%20Review%20v0.1.html">individual artwork rationales</a>. Focused
+        reference-model checks are not a running game or proof of balance.
+      </footer>
+    </main>
+  </body>
+</html>

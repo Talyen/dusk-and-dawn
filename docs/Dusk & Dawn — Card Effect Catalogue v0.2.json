@@ -9,9 +9,7 @@
     "side": "light",
     "artwork_id": "1gf2mh7TkrIfloWCPQ7eM-Yy7B_sqTXCM",
     "artwork_url": "https://drive.google.com/file/d/1gf2mh7TkrIfloWCPQ7eM-Yy7B_sqTXCM/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -24,10 +22,7 @@
     "side": "dark",
     "artwork_id": "1WRjvnkMnntuyzt9W3ffUZuBi32ISMnKi",
     "artwork_url": "https://drive.google.com/file/d/1WRjvnkMnntuyzt9W3ffUZuBi32ISMnKi/view?usp=drivesdk",
-    "keywords": [
-      "Leech",
-      "Shadow"
-    ],
+    "keywords": ["Leech", "Shadow"],
     "automatic_targets": []
   },
   {
@@ -40,9 +35,7 @@
     "side": "light",
     "artwork_id": "1eaeOAnVrVANKAIEe7XLH8vmtvu-pFWcN",
     "artwork_url": "https://drive.google.com/file/d/1eaeOAnVrVANKAIEe7XLH8vmtvu-pFWcN/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -55,9 +48,7 @@
     "side": "dark",
     "artwork_id": "1VHEVaXE_I5CPs8eTdyrVAHP1lJR6PU12",
     "artwork_url": "https://drive.google.com/file/d/1VHEVaXE_I5CPs8eTdyrVAHP1lJR6PU12/view?usp=drivesdk",
-    "keywords": [
-      "Shadow"
-    ],
+    "keywords": ["Shadow"],
     "automatic_targets": []
   },
   {
@@ -70,9 +61,7 @@
     "side": "light",
     "artwork_id": "1kWjOLG3VHPoi4PwYNu0fI5k5pEX1DzuO",
     "artwork_url": "https://drive.google.com/file/d/1kWjOLG3VHPoi4PwYNu0fI5k5pEX1DzuO/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -85,10 +74,7 @@
     "side": "dark",
     "artwork_id": "1w678nha_7CQax0ANweJ_wd9-ALeY44tw",
     "artwork_url": "https://drive.google.com/file/d/1w678nha_7CQax0ANweJ_wd9-ALeY44tw/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Shadow"
-    ],
+    "keywords": ["Flip", "Shadow"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -109,9 +95,7 @@
     "side": "light",
     "artwork_id": "1b1QyOMNnc_ltlChW2zjG7exmVdiUAc7i",
     "artwork_url": "https://drive.google.com/file/d/1b1QyOMNnc_ltlChW2zjG7exmVdiUAc7i/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -124,10 +108,7 @@
     "side": "dark",
     "artwork_id": "1z2fjM5pY9iySrwye0xU-hcXfkK_C-sNm",
     "artwork_url": "https://drive.google.com/file/d/1z2fjM5pY9iySrwye0xU-hcXfkK_C-sNm/view?usp=drivesdk",
-    "keywords": [
-      "Keep",
-      "Shadow"
-    ],
+    "keywords": ["Keep", "Shadow"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -146,9 +127,7 @@
     "side": "light",
     "artwork_id": "1wLeBlGBqKxXhCP6q8VMu9V06zfqBg4rv",
     "artwork_url": "https://drive.google.com/file/d/1wLeBlGBqKxXhCP6q8VMu9V06zfqBg4rv/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -174,9 +153,7 @@
     "side": "light",
     "artwork_id": "1HzcE3Sz2jfUacwPg0SOcXK-LruOL56Og",
     "artwork_url": "https://drive.google.com/file/d/1HzcE3Sz2jfUacwPg0SOcXK-LruOL56Og/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -189,9 +166,7 @@
     "side": "dark",
     "artwork_id": "1B442rTJ-G88RgKLVkzyLF7QJ5v5XrAbh",
     "artwork_url": "https://drive.google.com/file/d/1B442rTJ-G88RgKLVkzyLF7QJ5v5XrAbh/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -212,10 +187,7 @@
     "side": "light",
     "artwork_id": "1d_X8Jst2cKr2SJb0_Rn4WvYHQWCArgt5",
     "artwork_url": "https://drive.google.com/file/d/1d_X8Jst2cKr2SJb0_Rn4WvYHQWCArgt5/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Cleanse"
-    ],
+    "keywords": ["Banish", "Cleanse"],
     "automatic_targets": [
       {
         "op": "Cleanse",
@@ -238,11 +210,7 @@
     "side": "dark",
     "artwork_id": "1kYvTIgcuYKYIRxcEq3kG2hHyJtDHyv3_",
     "artwork_url": "https://drive.google.com/file/d/1kYvTIgcuYKYIRxcEq3kG2hHyJtDHyv3_/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Leech",
-      "Shadow"
-    ],
+    "keywords": ["Banish", "Leech", "Shadow"],
     "automatic_targets": []
   },
   {
@@ -255,9 +223,7 @@
     "side": "light",
     "artwork_id": "1pDYifJsl73qJcT0o0SlT-N38Vpm6imzn",
     "artwork_url": "https://drive.google.com/file/d/1pDYifJsl73qJcT0o0SlT-N38Vpm6imzn/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -270,9 +236,7 @@
     "side": "dark",
     "artwork_id": "14oRUk765jv4fojMiIGbxfSE7cJ8jNr7h",
     "artwork_url": "https://drive.google.com/file/d/14oRUk765jv4fojMiIGbxfSE7cJ8jNr7h/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -285,9 +249,7 @@
     "side": "light",
     "artwork_id": "1hiYS5Fahg8J0eD7__6xik6EcRDoXNqM4",
     "artwork_url": "https://drive.google.com/file/d/1hiYS5Fahg8J0eD7__6xik6EcRDoXNqM4/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -300,9 +262,7 @@
     "side": "dark",
     "artwork_id": "1BJhBLdhlJkPVk0FzcfWD99alhe72SGD9",
     "artwork_url": "https://drive.google.com/file/d/1BJhBLdhlJkPVk0FzcfWD99alhe72SGD9/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -321,9 +281,7 @@
     "side": "light",
     "artwork_id": "1LWZWgu3YdLS4TgPQ4MUIdaV1oLOKE718",
     "artwork_url": "https://drive.google.com/file/d/1LWZWgu3YdLS4TgPQ4MUIdaV1oLOKE718/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -336,10 +294,7 @@
     "side": "dark",
     "artwork_id": "1HcY-W3cmije33XfE-ww1Tz_MaCpJ1ekp",
     "artwork_url": "https://drive.google.com/file/d/1HcY-W3cmije33XfE-ww1Tz_MaCpJ1ekp/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Curse"
-    ],
+    "keywords": ["Banish", "Curse"],
     "automatic_targets": []
   },
   {
@@ -365,9 +320,7 @@
     "side": "light",
     "artwork_id": "1W1dk7oEX0qYVBDXXpSdNb51otyqxqksA",
     "artwork_url": "https://drive.google.com/file/d/1W1dk7oEX0qYVBDXXpSdNb51otyqxqksA/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -380,10 +333,7 @@
     "side": "light",
     "artwork_id": "1jhtld-SF4GHdYTWSqQlJQ8leldeiU6mW",
     "artwork_url": "https://drive.google.com/file/d/1jhtld-SF4GHdYTWSqQlJQ8leldeiU6mW/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Radiance"
-    ],
+    "keywords": ["Banish", "Radiance"],
     "automatic_targets": [],
     "selection_exception": {
       "kind": "choose-offering",
@@ -403,9 +353,7 @@
     "side": "dark",
     "artwork_id": "1izaIhpfTEhP5UNnS4VxODD4wLIlRlWZF",
     "artwork_url": "https://drive.google.com/file/d/1izaIhpfTEhP5UNnS4VxODD4wLIlRlWZF/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -418,9 +366,7 @@
     "side": "light",
     "artwork_id": "1vvmtMlRmLAT1YmECVRJYFnQ4EVZru0TW",
     "artwork_url": "https://drive.google.com/file/d/1vvmtMlRmLAT1YmECVRJYFnQ4EVZru0TW/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -446,9 +392,7 @@
     "side": "light",
     "artwork_id": "1maFl73KL3A1pmsjOmk_1TWerytqMnq0O",
     "artwork_url": "https://drive.google.com/file/d/1maFl73KL3A1pmsjOmk_1TWerytqMnq0O/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -461,9 +405,7 @@
     "side": "dark",
     "artwork_id": "1hFaqiYvmkgm2eoU4HwC0ENUiit55MLLd",
     "artwork_url": "https://drive.google.com/file/d/1hFaqiYvmkgm2eoU4HwC0ENUiit55MLLd/view?usp=drivesdk",
-    "keywords": [
-      "Shadow"
-    ],
+    "keywords": ["Shadow"],
     "automatic_targets": []
   },
   {
@@ -476,10 +418,7 @@
     "side": "light",
     "artwork_id": "1Fl2PIQzlz69dqkBumaq0t1gZ7C4LSMGE",
     "artwork_url": "https://drive.google.com/file/d/1Fl2PIQzlz69dqkBumaq0t1gZ7C4LSMGE/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -492,9 +431,7 @@
     "side": "dark",
     "artwork_id": "1hqB4hlGncbJEHgG5L4FwD0pZyntMsJuw",
     "artwork_url": "https://drive.google.com/file/d/1hqB4hlGncbJEHgG5L4FwD0pZyntMsJuw/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -513,9 +450,7 @@
     "side": "light",
     "artwork_id": "1qoTQy2Xz8H817rIVr5-ZsZ4IfykRB0-M",
     "artwork_url": "https://drive.google.com/file/d/1qoTQy2Xz8H817rIVr5-ZsZ4IfykRB0-M/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -528,9 +463,7 @@
     "side": "dark",
     "artwork_id": "1QcK3stH8gCQbwojdWmJbX-AlLEaJteY4",
     "artwork_url": "https://drive.google.com/file/d/1QcK3stH8gCQbwojdWmJbX-AlLEaJteY4/view?usp=drivesdk",
-    "keywords": [
-      "Shadow"
-    ],
+    "keywords": ["Shadow"],
     "automatic_targets": []
   },
   {
@@ -543,9 +476,7 @@
     "side": "light",
     "artwork_id": "13ftDB_VQrowQtLLCX3c8g0BRX-_CG0YX",
     "artwork_url": "https://drive.google.com/file/d/13ftDB_VQrowQtLLCX3c8g0BRX-_CG0YX/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -566,9 +497,7 @@
     "side": "dark",
     "artwork_id": "1BnAd0FJlK_jFJ7kK323ipJKsA_LUc4vY",
     "artwork_url": "https://drive.google.com/file/d/1BnAd0FJlK_jFJ7kK323ipJKsA_LUc4vY/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -602,9 +531,7 @@
     "side": "dark",
     "artwork_id": "1r3hSe3EiTQfJwIUi9Hm2ExGFqmVsbZ1p",
     "artwork_url": "https://drive.google.com/file/d/1r3hSe3EiTQfJwIUi9Hm2ExGFqmVsbZ1p/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -617,9 +544,7 @@
     "side": "light",
     "artwork_id": "14yQROs_jIBKhE-ZgkBOsb7Cv2x3DQu-K",
     "artwork_url": "https://drive.google.com/file/d/14yQROs_jIBKhE-ZgkBOsb7Cv2x3DQu-K/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -632,9 +557,7 @@
     "side": "dark",
     "artwork_id": "1-guil20XD-fPnf9L1A6mu_-04ojJhsmz",
     "artwork_url": "https://drive.google.com/file/d/1-guil20XD-fPnf9L1A6mu_-04ojJhsmz/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -693,9 +616,7 @@
     "side": "light",
     "artwork_id": "1m9vvaP5gxE_iXTeAWzKWPrJU0dqVqW3C",
     "artwork_url": "https://drive.google.com/file/d/1m9vvaP5gxE_iXTeAWzKWPrJU0dqVqW3C/view?usp=drivesdk",
-    "keywords": [
-      "Burn"
-    ],
+    "keywords": ["Burn"],
     "automatic_targets": []
   },
   {
@@ -708,9 +629,7 @@
     "side": "dark",
     "artwork_id": "167voktusMUlZ37aYbLz5rcqiOuepYXgo",
     "artwork_url": "https://drive.google.com/file/d/167voktusMUlZ37aYbLz5rcqiOuepYXgo/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -723,10 +642,7 @@
     "side": "light",
     "artwork_id": "1j6ZbPNZIeh4YKSlE7WbPuaAcwzvoD9Xd",
     "artwork_url": "https://drive.google.com/file/d/1j6ZbPNZIeh4YKSlE7WbPuaAcwzvoD9Xd/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -739,9 +655,7 @@
     "side": "dark",
     "artwork_id": "1T02mBuBiSqe_tEGZt-TedhuCFug01x_V",
     "artwork_url": "https://drive.google.com/file/d/1T02mBuBiSqe_tEGZt-TedhuCFug01x_V/view?usp=drivesdk",
-    "keywords": [
-      "Decay"
-    ],
+    "keywords": ["Decay"],
     "automatic_targets": []
   },
   {
@@ -754,9 +668,7 @@
     "side": "light",
     "artwork_id": "1weJMD7YujS38lFI9Q2-KIWth3yFzjPpU",
     "artwork_url": "https://drive.google.com/file/d/1weJMD7YujS38lFI9Q2-KIWth3yFzjPpU/view?usp=drivesdk",
-    "keywords": [
-      "Bless"
-    ],
+    "keywords": ["Bless"],
     "automatic_targets": []
   },
   {
@@ -769,10 +681,7 @@
     "side": "dark",
     "artwork_id": "1rCoLZGWqyKhEGJSmHCHjsxpdg3E4XUvo",
     "artwork_url": "https://drive.google.com/file/d/1rCoLZGWqyKhEGJSmHCHjsxpdg3E4XUvo/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Hush"
-    ],
+    "keywords": ["Banish", "Hush"],
     "automatic_targets": []
   },
   {
@@ -785,9 +694,7 @@
     "side": "light",
     "artwork_id": "1BXDLCQd1vMN8wkBe9kdAjZzvL-LJvI1_",
     "artwork_url": "https://drive.google.com/file/d/1BXDLCQd1vMN8wkBe9kdAjZzvL-LJvI1_/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -800,9 +707,7 @@
     "side": "dark",
     "artwork_id": "1YJCkmg_2gzl88aMkcSBh_Y9Ryl5Cn6Iv",
     "artwork_url": "https://drive.google.com/file/d/1YJCkmg_2gzl88aMkcSBh_Y9Ryl5Cn6Iv/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -815,9 +720,7 @@
     "side": "light",
     "artwork_id": "1580yzY8NaonMm1PAX7pA77gqGvo7QqY2",
     "artwork_url": "https://drive.google.com/file/d/1580yzY8NaonMm1PAX7pA77gqGvo7QqY2/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -830,9 +733,7 @@
     "side": "dark",
     "artwork_id": "13FHe9prWQiGRuFejiKjsyLAFTjYISdWz",
     "artwork_url": "https://drive.google.com/file/d/13FHe9prWQiGRuFejiKjsyLAFTjYISdWz/view?usp=drivesdk",
-    "keywords": [
-      "Poison"
-    ],
+    "keywords": ["Poison"],
     "automatic_targets": []
   },
   {
@@ -845,9 +746,7 @@
     "side": "light",
     "artwork_id": "1Ku4P8G2kPu_v_aB-QUjAuhELnGSv5eHC",
     "artwork_url": "https://drive.google.com/file/d/1Ku4P8G2kPu_v_aB-QUjAuhELnGSv5eHC/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -866,9 +765,7 @@
     "side": "dark",
     "artwork_id": "14jo6saxL26SVfCRgGqApBwlkOdNyUWJf",
     "artwork_url": "https://drive.google.com/file/d/14jo6saxL26SVfCRgGqApBwlkOdNyUWJf/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -881,9 +778,7 @@
     "side": "light",
     "artwork_id": "1HqyEfdoDiIcmGZhxNTfsiTZ7S93QnWYG",
     "artwork_url": "https://drive.google.com/file/d/1HqyEfdoDiIcmGZhxNTfsiTZ7S93QnWYG/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -896,10 +791,7 @@
     "side": "dark",
     "artwork_id": "1FEvFp0PJmpWchpMOQgP_k1WBxgaPMPB5",
     "artwork_url": "https://drive.google.com/file/d/1FEvFp0PJmpWchpMOQgP_k1WBxgaPMPB5/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -925,10 +817,7 @@
     "side": "dark",
     "artwork_id": "1Sgy_ypZplm-dpsldyX7cSwCZMpLnURQE",
     "artwork_url": "https://drive.google.com/file/d/1Sgy_ypZplm-dpsldyX7cSwCZMpLnURQE/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -941,9 +830,7 @@
     "side": "light",
     "artwork_id": "138xstSsSzp9zxkITDplEZrtnHEypteK0",
     "artwork_url": "https://drive.google.com/file/d/138xstSsSzp9zxkITDplEZrtnHEypteK0/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -956,9 +843,7 @@
     "side": "dark",
     "artwork_id": "1IbLIZHFI7QLkpjSlz9nUoq5oAaB9vzRZ",
     "artwork_url": "https://drive.google.com/file/d/1IbLIZHFI7QLkpjSlz9nUoq5oAaB9vzRZ/view?usp=drivesdk",
-    "keywords": [
-      "Decay"
-    ],
+    "keywords": ["Decay"],
     "automatic_targets": []
   },
   {
@@ -971,9 +856,7 @@
     "side": "light",
     "artwork_id": "1mI4_Cw888c9nSU8tRauyiwz453HNdHp0",
     "artwork_url": "https://drive.google.com/file/d/1mI4_Cw888c9nSU8tRauyiwz453HNdHp0/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -992,9 +875,7 @@
     "side": "dark",
     "artwork_id": "1gvt-G8h2VZFBId3Rau5lhdLU8T5A69t-",
     "artwork_url": "https://drive.google.com/file/d/1gvt-G8h2VZFBId3Rau5lhdLU8T5A69t-/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -1013,10 +894,7 @@
     "side": "light",
     "artwork_id": "1CIvhKW-K6gq833bMX8kkbVc2towQCFao",
     "artwork_url": "https://drive.google.com/file/d/1CIvhKW-K6gq833bMX8kkbVc2towQCFao/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -1029,9 +907,7 @@
     "side": "dark",
     "artwork_id": "1XcxPW2ZUlBlB6JgPzXtygIGOV0rHURYF",
     "artwork_url": "https://drive.google.com/file/d/1XcxPW2ZUlBlB6JgPzXtygIGOV0rHURYF/view?usp=drivesdk",
-    "keywords": [
-      "Release"
-    ],
+    "keywords": ["Release"],
     "automatic_targets": []
   },
   {
@@ -1044,10 +920,7 @@
     "side": "light",
     "artwork_id": "1xviuWsLJ86BKgXPGS33TSyE9kKa6gblb",
     "artwork_url": "https://drive.google.com/file/d/1xviuWsLJ86BKgXPGS33TSyE9kKa6gblb/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -1060,9 +933,7 @@
     "side": "dark",
     "artwork_id": "1ci6cugdzMShKb7UUcQvTWbPfrYtOcpT8",
     "artwork_url": "https://drive.google.com/file/d/1ci6cugdzMShKb7UUcQvTWbPfrYtOcpT8/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": [
       {
         "op": "Turn",
@@ -1095,9 +966,7 @@
     "side": "dark",
     "artwork_id": "1w929N_nB6UcmuNSiLC8xBw5Q8nKJSyaY",
     "artwork_url": "https://drive.google.com/file/d/1w929N_nB6UcmuNSiLC8xBw5Q8nKJSyaY/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -1116,9 +985,7 @@
     "side": "light",
     "artwork_id": "1oPMBgpZbq-VdwPd-W9Sc777BAlUowr4P",
     "artwork_url": "https://drive.google.com/file/d/1oPMBgpZbq-VdwPd-W9Sc777BAlUowr4P/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1131,9 +998,7 @@
     "side": "dark",
     "artwork_id": "1YIbHQw8lhUngqqFt3tuv6FHulyXxYSNi",
     "artwork_url": "https://drive.google.com/file/d/1YIbHQw8lhUngqqFt3tuv6FHulyXxYSNi/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -1159,9 +1024,7 @@
     "side": "dark",
     "artwork_id": "15sUIxgGzo0ap_DXgHm8hoEuyBUFIgadu",
     "artwork_url": "https://drive.google.com/file/d/15sUIxgGzo0ap_DXgHm8hoEuyBUFIgadu/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1174,9 +1037,7 @@
     "side": "light",
     "artwork_id": "1o2tLAnfaToEKcrvvPPHuf2xDogT1Q0pa",
     "artwork_url": "https://drive.google.com/file/d/1o2tLAnfaToEKcrvvPPHuf2xDogT1Q0pa/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -1202,10 +1063,7 @@
     "side": "light",
     "artwork_id": "1JuqHF1P1zHu-SsKVjioLSBX_0uOv6GGi",
     "artwork_url": "https://drive.google.com/file/d/1JuqHF1P1zHu-SsKVjioLSBX_0uOv6GGi/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Cleanse"
-    ],
+    "keywords": ["Banish", "Cleanse"],
     "automatic_targets": [
       {
         "op": "Cleanse",
@@ -1241,9 +1099,7 @@
     "side": "light",
     "artwork_id": "1rlHrBKfevYfpMk_o3h0lJQhWX-ZoVwLC",
     "artwork_url": "https://drive.google.com/file/d/1rlHrBKfevYfpMk_o3h0lJQhWX-ZoVwLC/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -1269,9 +1125,7 @@
     "side": "light",
     "artwork_id": "1ZOHVqQbdvFgb-0oZBigbRkwDW2ha1lzm",
     "artwork_url": "https://drive.google.com/file/d/1ZOHVqQbdvFgb-0oZBigbRkwDW2ha1lzm/view?usp=drivesdk",
-    "keywords": [
-      "Bless"
-    ],
+    "keywords": ["Bless"],
     "automatic_targets": []
   },
   {
@@ -1284,9 +1138,7 @@
     "side": "dark",
     "artwork_id": "1RqoykT4WLSi9zf6RAB7xa3_67MfUjT6C",
     "artwork_url": "https://drive.google.com/file/d/1RqoykT4WLSi9zf6RAB7xa3_67MfUjT6C/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -1312,10 +1164,7 @@
     "side": "dark",
     "artwork_id": "1T5Vey3NTvNsi5MGhIIH2J0KMXpgP1G4z",
     "artwork_url": "https://drive.google.com/file/d/1T5Vey3NTvNsi5MGhIIH2J0KMXpgP1G4z/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Shadow"
-    ],
+    "keywords": ["Ward", "Shadow"],
     "automatic_targets": []
   },
   {
@@ -1341,9 +1190,7 @@
     "side": "dark",
     "artwork_id": "1r4TA80YCa8JMFwHtVNIxX4v-gvzPYO9v",
     "artwork_url": "https://drive.google.com/file/d/1r4TA80YCa8JMFwHtVNIxX4v-gvzPYO9v/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1356,10 +1203,7 @@
     "side": "light",
     "artwork_id": "19v2hhOQhYK8XgnOufG9HUQiGDGl_DJbD",
     "artwork_url": "https://drive.google.com/file/d/19v2hhOQhYK8XgnOufG9HUQiGDGl_DJbD/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Cleanse"
-    ],
+    "keywords": ["Banish", "Cleanse"],
     "automatic_targets": [
       {
         "op": "Cleanse",
@@ -1380,10 +1224,7 @@
     "side": "dark",
     "artwork_id": "14W0dmIr1HL9r9Tx6UhLMhIT5iqChZpGz",
     "artwork_url": "https://drive.google.com/file/d/14W0dmIr1HL9r9Tx6UhLMhIT5iqChZpGz/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Curse"
-    ],
+    "keywords": ["Banish", "Curse"],
     "automatic_targets": []
   },
   {
@@ -1396,9 +1237,7 @@
     "side": "light",
     "artwork_id": "108Im1Ah97nWNM7JTDYXuIpqwHHtZFr9o",
     "artwork_url": "https://drive.google.com/file/d/108Im1Ah97nWNM7JTDYXuIpqwHHtZFr9o/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -1424,10 +1263,7 @@
     "side": "light",
     "artwork_id": "1XVqqqNmQ5OF-m6yoZiWbs_h7_Nh8rUCD",
     "artwork_url": "https://drive.google.com/file/d/1XVqqqNmQ5OF-m6yoZiWbs_h7_Nh8rUCD/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Bless"
-    ],
+    "keywords": ["Banish", "Bless"],
     "automatic_targets": []
   },
   {
@@ -1440,9 +1276,7 @@
     "side": "dark",
     "artwork_id": "1WgakSgo92a19dVli80QHeKmM9GV1MK-Q",
     "artwork_url": "https://drive.google.com/file/d/1WgakSgo92a19dVli80QHeKmM9GV1MK-Q/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1481,9 +1315,7 @@
     "side": "light",
     "artwork_id": "1PLDRJ9CG9_He7SfDctxvFBABymm8uN3j",
     "artwork_url": "https://drive.google.com/file/d/1PLDRJ9CG9_He7SfDctxvFBABymm8uN3j/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": [],
     "selection_exception": {
       "kind": "recall-specific-card",
@@ -1503,10 +1335,7 @@
     "side": "dark",
     "artwork_id": "1phPSIbRLd-eHaTbs5VTXUSWPZSTbBLdM",
     "artwork_url": "https://drive.google.com/file/d/1phPSIbRLd-eHaTbs5VTXUSWPZSTbBLdM/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Oblivion"
-    ],
+    "keywords": ["Banish", "Oblivion"],
     "automatic_targets": []
   },
   {
@@ -1519,9 +1348,7 @@
     "side": "light",
     "artwork_id": "164u6Y8WxgoZAEyJVbb92kL5U_linS8d6",
     "artwork_url": "https://drive.google.com/file/d/164u6Y8WxgoZAEyJVbb92kL5U_linS8d6/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -1534,9 +1361,7 @@
     "side": "dark",
     "artwork_id": "1ESInrS0cKlRm4dq3pHBgYNGO_1jTwrvG",
     "artwork_url": "https://drive.google.com/file/d/1ESInrS0cKlRm4dq3pHBgYNGO_1jTwrvG/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1549,9 +1374,7 @@
     "side": "dark",
     "artwork_id": "1kOQ8OsYrRzPv_k7YqeF3SDNx1gVHfLTG",
     "artwork_url": "https://drive.google.com/file/d/1kOQ8OsYrRzPv_k7YqeF3SDNx1gVHfLTG/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1577,9 +1400,7 @@
     "status": "proposed",
     "artwork_id": "1O8FBT6cKAQTXiADvORymx5I1HuyBHSkz",
     "artwork_url": "https://drive.google.com/file/d/1O8FBT6cKAQTXiADvORymx5I1HuyBHSkz/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1592,9 +1413,7 @@
     "status": "proposed",
     "artwork_id": "1fUUEm0VWJLih7cOj-CzhWPxOfqoDHoAL",
     "artwork_url": "https://drive.google.com/file/d/1fUUEm0VWJLih7cOj-CzhWPxOfqoDHoAL/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -1613,9 +1432,7 @@
     "status": "proposed",
     "artwork_id": "1zV99UfETJda9F_gUFVtUe-x8AR7IeKrM",
     "artwork_url": "https://drive.google.com/file/d/1zV99UfETJda9F_gUFVtUe-x8AR7IeKrM/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -1634,10 +1451,7 @@
     "status": "proposed",
     "artwork_id": "1NeJQqnh1Pl6Saath5Nl7Gg5zSwGFtPc2",
     "artwork_url": "https://drive.google.com/file/d/1NeJQqnh1Pl6Saath5Nl7Gg5zSwGFtPc2/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -1676,10 +1490,7 @@
     "status": "proposed",
     "artwork_id": "15nP3K-JKTELsrDyM1jGC3LNp9UCeVcGj",
     "artwork_url": "https://drive.google.com/file/d/15nP3K-JKTELsrDyM1jGC3LNp9UCeVcGj/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -1692,9 +1503,7 @@
     "status": "proposed",
     "artwork_id": "1SR3rd6Xtot7-tB_QYnaY8w0V8O9aCOTk",
     "artwork_url": "https://drive.google.com/file/d/1SR3rd6Xtot7-tB_QYnaY8w0V8O9aCOTk/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -1707,9 +1516,7 @@
     "status": "proposed",
     "artwork_id": "1z6xEFUV5CiqjUgx4IceUpJvV3KbO2_Aq",
     "artwork_url": "https://drive.google.com/file/d/1z6xEFUV5CiqjUgx4IceUpJvV3KbO2_Aq/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -1722,9 +1529,7 @@
     "status": "proposed",
     "artwork_id": "1cTS95GO922qcICKs00Yfc2Dl27VU7kLt",
     "artwork_url": "https://drive.google.com/file/d/1cTS95GO922qcICKs00Yfc2Dl27VU7kLt/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -1783,9 +1588,7 @@
     "status": "proposed",
     "artwork_id": "1aENIZ2cNoVCyF-6m2fqcAnUXNxbj2QFV",
     "artwork_url": "https://drive.google.com/file/d/1aENIZ2cNoVCyF-6m2fqcAnUXNxbj2QFV/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -1811,10 +1614,7 @@
     "status": "proposed",
     "artwork_id": "1qpKXlGJpdi99K7ZJawHoNjlBQu709GYp",
     "artwork_url": "https://drive.google.com/file/d/1qpKXlGJpdi99K7ZJawHoNjlBQu709GYp/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Growth"
-    ],
+    "keywords": ["Banish", "Growth"],
     "automatic_targets": []
   },
   {
@@ -1827,10 +1627,7 @@
     "status": "proposed",
     "artwork_id": "17OGUw5Q4UFVuHmGrGunFxGuqO4-byG_e",
     "artwork_url": "https://drive.google.com/file/d/17OGUw5Q4UFVuHmGrGunFxGuqO4-byG_e/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -1843,9 +1640,7 @@
     "status": "proposed",
     "artwork_id": "1kahEnL1cbpSgErZtSVa1ug2kxS0AYf0h",
     "artwork_url": "https://drive.google.com/file/d/1kahEnL1cbpSgErZtSVa1ug2kxS0AYf0h/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -1858,9 +1653,7 @@
     "status": "proposed",
     "artwork_id": "16uNNWR7MkEfXi2L0qJ_FOfdbQNE3cNmB",
     "artwork_url": "https://drive.google.com/file/d/16uNNWR7MkEfXi2L0qJ_FOfdbQNE3cNmB/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -1886,10 +1679,7 @@
     "status": "proposed",
     "artwork_id": "1-Q3qwTjJ7RVn-HL6u41cazot0WhpLHI1",
     "artwork_url": "https://drive.google.com/file/d/1-Q3qwTjJ7RVn-HL6u41cazot0WhpLHI1/view?usp=drivesdk",
-    "keywords": [
-      "Curse",
-      "Shadow"
-    ],
+    "keywords": ["Curse", "Shadow"],
     "automatic_targets": []
   },
   {
@@ -1902,9 +1692,7 @@
     "status": "proposed",
     "artwork_id": "1hXUjPdPlAUxWZfHmD48gw7vkINSc3MYJ",
     "artwork_url": "https://drive.google.com/file/d/1hXUjPdPlAUxWZfHmD48gw7vkINSc3MYJ/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -1936,9 +1724,7 @@
     "status": "proposed",
     "artwork_id": "1j7sWF2Nc_2t4tjK6BoKTocBv9vE-Qfit",
     "artwork_url": "https://drive.google.com/file/d/1j7sWF2Nc_2t4tjK6BoKTocBv9vE-Qfit/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -1951,9 +1737,7 @@
     "status": "proposed",
     "artwork_id": "1NICbiA54f07pUljFXszyUfIPaWBvSqHP",
     "artwork_url": "https://drive.google.com/file/d/1NICbiA54f07pUljFXszyUfIPaWBvSqHP/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -1966,9 +1750,7 @@
     "status": "proposed",
     "artwork_id": "1mz09Ei9VD3KlvjPZzOjQY2f-Upgi344x",
     "artwork_url": "https://drive.google.com/file/d/1mz09Ei9VD3KlvjPZzOjQY2f-Upgi344x/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -1981,10 +1763,7 @@
     "status": "proposed",
     "artwork_id": "1PUWZozI1LuDdqVKkzoGiZt88dI7YNVo7",
     "artwork_url": "https://drive.google.com/file/d/1PUWZozI1LuDdqVKkzoGiZt88dI7YNVo7/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -1997,9 +1776,7 @@
     "status": "proposed",
     "artwork_id": "1ZtY-zD5UOL4YoHmNKdWfaNgr5eyl73bC",
     "artwork_url": "https://drive.google.com/file/d/1ZtY-zD5UOL4YoHmNKdWfaNgr5eyl73bC/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2012,9 +1789,7 @@
     "status": "proposed",
     "artwork_id": "1KLhKYrRLx3iqvKeRjuLT-BOG97sv8uim",
     "artwork_url": "https://drive.google.com/file/d/1KLhKYrRLx3iqvKeRjuLT-BOG97sv8uim/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -2033,9 +1808,7 @@
     "status": "proposed",
     "artwork_id": "1tOMfqJUUW7-Y6xicvYbKnol0oFGvtFQR",
     "artwork_url": "https://drive.google.com/file/d/1tOMfqJUUW7-Y6xicvYbKnol0oFGvtFQR/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -2068,9 +1841,7 @@
     "status": "proposed",
     "artwork_id": "18vHVACNt3nBVHxl7ebvq1c3zbHGQH1OV",
     "artwork_url": "https://drive.google.com/file/d/18vHVACNt3nBVHxl7ebvq1c3zbHGQH1OV/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2083,9 +1854,7 @@
     "status": "proposed",
     "artwork_id": "1BmvMha_J_iU7XXg9wtC3YIO3Q4C031y2",
     "artwork_url": "https://drive.google.com/file/d/1BmvMha_J_iU7XXg9wtC3YIO3Q4C031y2/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2111,9 +1880,7 @@
     "status": "proposed",
     "artwork_id": "1-JkE_E8LG6Jp3_UQlUW6IiqfBTpz5ElC",
     "artwork_url": "https://drive.google.com/file/d/1-JkE_E8LG6Jp3_UQlUW6IiqfBTpz5ElC/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2126,9 +1893,7 @@
     "status": "proposed",
     "artwork_id": "13UCRQeQ1y4V1PgvpKUjdz1fUhyuL-_Ul",
     "artwork_url": "https://drive.google.com/file/d/13UCRQeQ1y4V1PgvpKUjdz1fUhyuL-_Ul/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2141,9 +1906,7 @@
     "status": "proposed",
     "artwork_id": "10-VsWyB_iTiTpUnKsYK8d76d0tN9Jtd4",
     "artwork_url": "https://drive.google.com/file/d/10-VsWyB_iTiTpUnKsYK8d76d0tN9Jtd4/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2156,9 +1919,7 @@
     "status": "proposed",
     "artwork_id": "1y9AodrYRVJyI8r2oDkj0FeUpfGHHDoy5",
     "artwork_url": "https://drive.google.com/file/d/1y9AodrYRVJyI8r2oDkj0FeUpfGHHDoy5/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -2184,9 +1945,7 @@
     "status": "proposed",
     "artwork_id": "1tDKi2PpbBuJREcnxQrIxVVbudNv-wSxp",
     "artwork_url": "https://drive.google.com/file/d/1tDKi2PpbBuJREcnxQrIxVVbudNv-wSxp/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -2199,9 +1958,7 @@
     "status": "proposed",
     "artwork_id": "16AoI0C9m9ImwOkRMNd0BZsPOvIgja4c6",
     "artwork_url": "https://drive.google.com/file/d/16AoI0C9m9ImwOkRMNd0BZsPOvIgja4c6/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -2214,10 +1971,7 @@
     "status": "proposed",
     "artwork_id": "1utKFzykk_TUhgY4JtjdyPgCQy0eF413I",
     "artwork_url": "https://drive.google.com/file/d/1utKFzykk_TUhgY4JtjdyPgCQy0eF413I/view?usp=drivesdk",
-    "keywords": [
-      "Curse",
-      "Frost"
-    ],
+    "keywords": ["Curse", "Frost"],
     "automatic_targets": []
   },
   {
@@ -2230,10 +1984,7 @@
     "status": "proposed",
     "artwork_id": "1eqFrNAPQmHTMSvk5eoPRPrbeF1KsZZ1X",
     "artwork_url": "https://drive.google.com/file/d/1eqFrNAPQmHTMSvk5eoPRPrbeF1KsZZ1X/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Fire"
-    ],
+    "keywords": ["Burn", "Fire"],
     "automatic_targets": []
   },
   {
@@ -2246,9 +1997,7 @@
     "status": "proposed",
     "artwork_id": "1VH2RCjfCcjgSm8oW0Ze0wermIxIsOy9M",
     "artwork_url": "https://drive.google.com/file/d/1VH2RCjfCcjgSm8oW0Ze0wermIxIsOy9M/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -2274,10 +2023,7 @@
     "status": "proposed",
     "artwork_id": "1Cqja1jSt42AVMswRTKhuuIifZMFJDG62",
     "artwork_url": "https://drive.google.com/file/d/1Cqja1jSt42AVMswRTKhuuIifZMFJDG62/view?usp=drivesdk",
-    "keywords": [
-      "Curse",
-      "Radiance"
-    ],
+    "keywords": ["Curse", "Radiance"],
     "automatic_targets": []
   },
   {
@@ -2290,9 +2036,7 @@
     "status": "proposed",
     "artwork_id": "1nMM5KwyGHjVaEcxJTSXc0FZdldqAV1CG",
     "artwork_url": "https://drive.google.com/file/d/1nMM5KwyGHjVaEcxJTSXc0FZdldqAV1CG/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -2311,9 +2055,7 @@
     "status": "proposed",
     "artwork_id": "1fqx350oCraaM7aHIOVa-vZCyutbl_VoO",
     "artwork_url": "https://drive.google.com/file/d/1fqx350oCraaM7aHIOVa-vZCyutbl_VoO/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -2358,11 +2100,7 @@
     "status": "proposed",
     "artwork_id": "1jk_i4j-yfX02XOHKVhKZ3Y2d-nc9RlED",
     "artwork_url": "https://drive.google.com/file/d/1jk_i4j-yfX02XOHKVhKZ3Y2d-nc9RlED/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Ward", "Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -2375,9 +2113,7 @@
     "status": "proposed",
     "artwork_id": "15ZTFaNh20J0f2Mm_DfpfHjGATjfN9MnP",
     "artwork_url": "https://drive.google.com/file/d/15ZTFaNh20J0f2Mm_DfpfHjGATjfN9MnP/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -2390,9 +2126,7 @@
     "status": "proposed",
     "artwork_id": "1A3OuMOkvTX_55q0Rz9NeLUN-dxkYXEGU",
     "artwork_url": "https://drive.google.com/file/d/1A3OuMOkvTX_55q0Rz9NeLUN-dxkYXEGU/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -2405,9 +2139,7 @@
     "status": "proposed",
     "artwork_id": "1OQ1ABFj8KkQDY6up5ZCdg8-PhFlC1ala",
     "artwork_url": "https://drive.google.com/file/d/1OQ1ABFj8KkQDY6up5ZCdg8-PhFlC1ala/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -2420,9 +2152,7 @@
     "status": "proposed",
     "artwork_id": "11Tw0W1sgKfa4CjDRCV932__yD4o8GrHK",
     "artwork_url": "https://drive.google.com/file/d/11Tw0W1sgKfa4CjDRCV932__yD4o8GrHK/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -2441,9 +2171,7 @@
     "status": "proposed",
     "artwork_id": "1FN4vtJKlb88-WrQPRGpWMX77Z4Qbqf4Q",
     "artwork_url": "https://drive.google.com/file/d/1FN4vtJKlb88-WrQPRGpWMX77Z4Qbqf4Q/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -2456,10 +2184,7 @@
     "status": "proposed",
     "artwork_id": "1edAessku82DgRJFVq_0bzjJYOhLsvAtT",
     "artwork_url": "https://drive.google.com/file/d/1edAessku82DgRJFVq_0bzjJYOhLsvAtT/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -2472,9 +2197,7 @@
     "status": "proposed",
     "artwork_id": "1baely1s9BmqmKnBO2DwVmWRx1nnhQBWa",
     "artwork_url": "https://drive.google.com/file/d/1baely1s9BmqmKnBO2DwVmWRx1nnhQBWa/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -2487,10 +2210,7 @@
     "status": "proposed",
     "artwork_id": "1T5rnIRur8OM4rYk0oUt7hC0mqYO-bj9K",
     "artwork_url": "https://drive.google.com/file/d/1T5rnIRur8OM4rYk0oUt7hC0mqYO-bj9K/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Curse"
-    ],
+    "keywords": ["Banish", "Curse"],
     "automatic_targets": []
   },
   {
@@ -2503,10 +2223,7 @@
     "status": "proposed",
     "artwork_id": "1nd3-mZo4ry6l7590as8l82pzDGrHvJg7",
     "artwork_url": "https://drive.google.com/file/d/1nd3-mZo4ry6l7590as8l82pzDGrHvJg7/view?usp=drivesdk",
-    "keywords": [
-      "Bless",
-      "Curse"
-    ],
+    "keywords": ["Bless", "Curse"],
     "automatic_targets": []
   },
   {
@@ -2539,10 +2256,7 @@
     "status": "proposed",
     "artwork_id": "1oimt6rlrGPRMs5Dv77O_m-Ut2fKLMww3",
     "artwork_url": "https://drive.google.com/file/d/1oimt6rlrGPRMs5Dv77O_m-Ut2fKLMww3/view?usp=drivesdk",
-    "keywords": [
-      "Scry",
-      "Curse"
-    ],
+    "keywords": ["Scry", "Curse"],
     "automatic_targets": []
   },
   {
@@ -2568,9 +2282,7 @@
     "status": "proposed",
     "artwork_id": "1fCSB-Gdr1dCZW8jN4LGx63z9XCvXJCZR",
     "artwork_url": "https://drive.google.com/file/d/1fCSB-Gdr1dCZW8jN4LGx63z9XCvXJCZR/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -2589,9 +2301,7 @@
     "status": "proposed",
     "artwork_id": "13pFtoRmLIzXYzbpcpqagg2itPIp9zPtD",
     "artwork_url": "https://drive.google.com/file/d/13pFtoRmLIzXYzbpcpqagg2itPIp9zPtD/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2604,9 +2314,7 @@
     "status": "proposed",
     "artwork_id": "11IP2UlKOWLM5dPLI-DLSKFvF_AF15o0C",
     "artwork_url": "https://drive.google.com/file/d/11IP2UlKOWLM5dPLI-DLSKFvF_AF15o0C/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -2638,9 +2346,7 @@
     "status": "proposed",
     "artwork_id": "1cwht9HIaWBasTTSD_uN3i18d0HijYmUr",
     "artwork_url": "https://drive.google.com/file/d/1cwht9HIaWBasTTSD_uN3i18d0HijYmUr/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -2653,9 +2359,7 @@
     "status": "proposed",
     "artwork_id": "1j2YDTZA0r7Yj7DChzrwIaXzhygpmrpGq",
     "artwork_url": "https://drive.google.com/file/d/1j2YDTZA0r7Yj7DChzrwIaXzhygpmrpGq/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -2668,9 +2372,7 @@
     "status": "proposed",
     "artwork_id": "1fbKDfvoy2Y-YFWh9w-bne0EAYMum8zco",
     "artwork_url": "https://drive.google.com/file/d/1fbKDfvoy2Y-YFWh9w-bne0EAYMum8zco/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -2683,9 +2385,7 @@
     "status": "proposed",
     "artwork_id": "1dKztkN0t59NW-zbenT4smgLsToZP0BFD",
     "artwork_url": "https://drive.google.com/file/d/1dKztkN0t59NW-zbenT4smgLsToZP0BFD/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -2718,9 +2418,7 @@
     "status": "proposed",
     "artwork_id": "1Tegjhx0D4gHYRbg3xVQNoVxdQguQfwK5",
     "artwork_url": "https://drive.google.com/file/d/1Tegjhx0D4gHYRbg3xVQNoVxdQguQfwK5/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -2733,9 +2431,7 @@
     "status": "proposed",
     "artwork_id": "1VmJDUYtjdOhJy5xY7aUi1Zx5N15Jt0wp",
     "artwork_url": "https://drive.google.com/file/d/1VmJDUYtjdOhJy5xY7aUi1Zx5N15Jt0wp/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -2754,9 +2450,7 @@
     "status": "proposed",
     "artwork_id": "1QG79Z_khsW9ugx9I60doTXq3GkTpDFiq",
     "artwork_url": "https://drive.google.com/file/d/1QG79Z_khsW9ugx9I60doTXq3GkTpDFiq/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -2769,10 +2463,7 @@
     "status": "proposed",
     "artwork_id": "1HogzwkGW9JIZdg2PxJQvpgnY4byfnR0p",
     "artwork_url": "https://drive.google.com/file/d/1HogzwkGW9JIZdg2PxJQvpgnY4byfnR0p/view?usp=drivesdk",
-    "keywords": [
-      "Bless",
-      "Curse"
-    ],
+    "keywords": ["Bless", "Curse"],
     "automatic_targets": []
   },
   {
@@ -2798,9 +2489,7 @@
     "status": "proposed",
     "artwork_id": "14X_kRQam3rXAXDhS6lDRRvkcFxQlLfno",
     "artwork_url": "https://drive.google.com/file/d/14X_kRQam3rXAXDhS6lDRRvkcFxQlLfno/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -2819,10 +2508,7 @@
     "status": "proposed",
     "artwork_id": "1hSq3fmIIdXlFjXIoNP7oOxuajkAnGWGa",
     "artwork_url": "https://drive.google.com/file/d/1hSq3fmIIdXlFjXIoNP7oOxuajkAnGWGa/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -2861,9 +2547,7 @@
     "status": "proposed",
     "artwork_id": "1nmN6_fJHOsqzZQkZi_3_b4GARRi3_zYc",
     "artwork_url": "https://drive.google.com/file/d/1nmN6_fJHOsqzZQkZi_3_b4GARRi3_zYc/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -2915,9 +2599,7 @@
     "status": "proposed",
     "artwork_id": "1YQl4C3YEK-zl-iIO1AEaKcZIyqAPcKYU",
     "artwork_url": "https://drive.google.com/file/d/1YQl4C3YEK-zl-iIO1AEaKcZIyqAPcKYU/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -2943,10 +2625,7 @@
     "status": "proposed",
     "artwork_id": "1wJ1tMK0HBuvdk7dT9CJ1hzBZwKQCa8Up",
     "artwork_url": "https://drive.google.com/file/d/1wJ1tMK0HBuvdk7dT9CJ1hzBZwKQCa8Up/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Curse"
-    ],
+    "keywords": ["Banish", "Curse"],
     "automatic_targets": []
   },
   {
@@ -2959,9 +2638,7 @@
     "status": "proposed",
     "artwork_id": "1oXVkVVhKD3gGFICNyWdGvWQZuWe_hHAd",
     "artwork_url": "https://drive.google.com/file/d/1oXVkVVhKD3gGFICNyWdGvWQZuWe_hHAd/view?usp=drivesdk",
-    "keywords": [
-      "Release"
-    ],
+    "keywords": ["Release"],
     "automatic_targets": []
   },
   {
@@ -2974,10 +2651,7 @@
     "status": "proposed",
     "artwork_id": "1rccNvjMcDf85wimiOTJMal2AmC-4akCh",
     "artwork_url": "https://drive.google.com/file/d/1rccNvjMcDf85wimiOTJMal2AmC-4akCh/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Hush"
-    ],
+    "keywords": ["Banish", "Hush"],
     "automatic_targets": []
   },
   {
@@ -2990,9 +2664,7 @@
     "status": "proposed",
     "artwork_id": "1dNFUoCjW4VowLKqKgULxCRs5m6Cuakvy",
     "artwork_url": "https://drive.google.com/file/d/1dNFUoCjW4VowLKqKgULxCRs5m6Cuakvy/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -3005,9 +2677,7 @@
     "status": "proposed",
     "artwork_id": "1nkwXC5ky0hMR0eoy17U88GzS2rgrwxDN",
     "artwork_url": "https://drive.google.com/file/d/1nkwXC5ky0hMR0eoy17U88GzS2rgrwxDN/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": [
       {
         "op": "Turn",
@@ -3027,9 +2697,7 @@
     "status": "proposed",
     "artwork_id": "19k98fCMN5rMQyUpYTLpWi_Afdn625-YY",
     "artwork_url": "https://drive.google.com/file/d/19k98fCMN5rMQyUpYTLpWi_Afdn625-YY/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3042,9 +2710,7 @@
     "status": "proposed",
     "artwork_id": "1BllolN1BifC_jIP4LVk6-dFbrbyREyw8",
     "artwork_url": "https://drive.google.com/file/d/1BllolN1BifC_jIP4LVk6-dFbrbyREyw8/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3057,9 +2723,7 @@
     "status": "proposed",
     "artwork_id": "1SWKAxTy-aFYVNluBm01asDypGl2tA5TT",
     "artwork_url": "https://drive.google.com/file/d/1SWKAxTy-aFYVNluBm01asDypGl2tA5TT/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3072,9 +2736,7 @@
     "status": "proposed",
     "artwork_id": "1739gVPPt7kRvZVk-zVKlC1tafzlgcWTy",
     "artwork_url": "https://drive.google.com/file/d/1739gVPPt7kRvZVk-zVKlC1tafzlgcWTy/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3087,9 +2749,7 @@
     "status": "proposed",
     "artwork_id": "15GvNDRJ6KTqftLyuM5KAex1-Tkpa0vDs",
     "artwork_url": "https://drive.google.com/file/d/15GvNDRJ6KTqftLyuM5KAex1-Tkpa0vDs/view?usp=drivesdk",
-    "keywords": [
-      "Decay"
-    ],
+    "keywords": ["Decay"],
     "automatic_targets": []
   },
   {
@@ -3115,9 +2775,7 @@
     "status": "proposed",
     "artwork_id": "1G5Hb4whf2nT0ktQNK9ROz9nPu4p-d8Cq",
     "artwork_url": "https://drive.google.com/file/d/1G5Hb4whf2nT0ktQNK9ROz9nPu4p-d8Cq/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -3130,10 +2788,7 @@
     "status": "proposed",
     "artwork_id": "1EYm5F6-MpL_7sYsb7MTZGaTzMed9OnV2",
     "artwork_url": "https://drive.google.com/file/d/1EYm5F6-MpL_7sYsb7MTZGaTzMed9OnV2/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Purge"
-    ],
+    "keywords": ["Banish", "Purge"],
     "automatic_targets": [
       {
         "op": "Purge",
@@ -3154,9 +2809,7 @@
     "status": "proposed",
     "artwork_id": "1r8Ci8WSz_9tj31GT563rt5MQL9D_sss7",
     "artwork_url": "https://drive.google.com/file/d/1r8Ci8WSz_9tj31GT563rt5MQL9D_sss7/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -3175,9 +2828,7 @@
     "status": "proposed",
     "artwork_id": "1uFPL0WYkTGKChGPjeCI17Bofth0w-8bm",
     "artwork_url": "https://drive.google.com/file/d/1uFPL0WYkTGKChGPjeCI17Bofth0w-8bm/view?usp=drivesdk",
-    "keywords": [
-      "Bless"
-    ],
+    "keywords": ["Bless"],
     "automatic_targets": []
   },
   {
@@ -3203,9 +2854,7 @@
     "status": "proposed",
     "artwork_id": "10mNhqLt5HmvcJiYXHxvIVV-ZGiUhTX8l",
     "artwork_url": "https://drive.google.com/file/d/10mNhqLt5HmvcJiYXHxvIVV-ZGiUhTX8l/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3218,10 +2867,7 @@
     "status": "proposed",
     "artwork_id": "1vZfxfeDYDH-1AC1FMPIv3Dttl_idSmEC",
     "artwork_url": "https://drive.google.com/file/d/1vZfxfeDYDH-1AC1FMPIv3Dttl_idSmEC/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -3234,9 +2880,7 @@
     "status": "proposed",
     "artwork_id": "1PdHHfLIBYmwPoKpsgVLdy7vzOlba6Cct",
     "artwork_url": "https://drive.google.com/file/d/1PdHHfLIBYmwPoKpsgVLdy7vzOlba6Cct/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -3249,10 +2893,7 @@
     "status": "proposed",
     "artwork_id": "1VNSg4QzycaFpB_-y8j7QL1axNp6A0I7O",
     "artwork_url": "https://drive.google.com/file/d/1VNSg4QzycaFpB_-y8j7QL1axNp6A0I7O/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -3276,9 +2917,7 @@
     "status": "proposed",
     "artwork_id": "18EcvYegKBcNie-hlC7j2oTcjS4XYUheW",
     "artwork_url": "https://drive.google.com/file/d/18EcvYegKBcNie-hlC7j2oTcjS4XYUheW/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -3299,9 +2938,7 @@
     "status": "proposed",
     "artwork_id": "1-SJTrMnA90Wq8C0Nl5Mst5YPqbad_O9d",
     "artwork_url": "https://drive.google.com/file/d/1-SJTrMnA90Wq8C0Nl5Mst5YPqbad_O9d/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -3322,9 +2959,7 @@
     "status": "proposed",
     "artwork_id": "1rGSLSSBR4grvcVZjOEPtoyoGau28eB0H",
     "artwork_url": "https://drive.google.com/file/d/1rGSLSSBR4grvcVZjOEPtoyoGau28eB0H/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -3337,9 +2972,7 @@
     "status": "proposed",
     "artwork_id": "1fx15jhYL5fT_AuS_bIjTVdxDZqVpnDzA",
     "artwork_url": "https://drive.google.com/file/d/1fx15jhYL5fT_AuS_bIjTVdxDZqVpnDzA/view?usp=drivesdk",
-    "keywords": [
-      "Decay"
-    ],
+    "keywords": ["Decay"],
     "automatic_targets": []
   },
   {
@@ -3352,9 +2985,7 @@
     "status": "proposed",
     "artwork_id": "12SQv7ooUvU__YDTea4nq2bW2r3eRr533",
     "artwork_url": "https://drive.google.com/file/d/12SQv7ooUvU__YDTea4nq2bW2r3eRr533/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -3406,9 +3037,7 @@
     "status": "proposed",
     "artwork_id": "1gAvzazmYiekgx_hZy5SZaHWnPw2DYNJg",
     "artwork_url": "https://drive.google.com/file/d/1gAvzazmYiekgx_hZy5SZaHWnPw2DYNJg/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -3427,10 +3056,7 @@
     "status": "proposed",
     "artwork_id": "18HTeADbrfOoNTbEc4GS_gJMyQ-fnHp2H",
     "artwork_url": "https://drive.google.com/file/d/18HTeADbrfOoNTbEc4GS_gJMyQ-fnHp2H/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -3454,9 +3080,7 @@
     "status": "proposed",
     "artwork_id": "1mWtIgbjgzkthfNBIAE97xb6HQZsx189c",
     "artwork_url": "https://drive.google.com/file/d/1mWtIgbjgzkthfNBIAE97xb6HQZsx189c/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -3482,9 +3106,7 @@
     "status": "proposed",
     "artwork_id": "1WDzj7JbcIsjO5yNv7x8hpYGZ9q8Fhm44",
     "artwork_url": "https://drive.google.com/file/d/1WDzj7JbcIsjO5yNv7x8hpYGZ9q8Fhm44/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -3497,9 +3119,7 @@
     "status": "proposed",
     "artwork_id": "1w4SfSSfnLcIVuQbLxFvuRUk3s9OgjUUK",
     "artwork_url": "https://drive.google.com/file/d/1w4SfSSfnLcIVuQbLxFvuRUk3s9OgjUUK/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3512,9 +3132,7 @@
     "status": "proposed",
     "artwork_id": "1UdPhmWsyVJyKxkdr88SQixr3e7Gpl9NH",
     "artwork_url": "https://drive.google.com/file/d/1UdPhmWsyVJyKxkdr88SQixr3e7Gpl9NH/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -3527,9 +3145,7 @@
     "status": "proposed",
     "artwork_id": "1QsdyaQaCR3FXLB6vnUftADn_sIzio1rv",
     "artwork_url": "https://drive.google.com/file/d/1QsdyaQaCR3FXLB6vnUftADn_sIzio1rv/view?usp=drivesdk",
-    "keywords": [
-      "Purge"
-    ],
+    "keywords": ["Purge"],
     "automatic_targets": [
       {
         "op": "Purge",
@@ -3552,10 +3168,7 @@
     "status": "proposed",
     "artwork_id": "1xPn9UfgSX3Xkyyhnn5RlmZTc0ciBS3LF",
     "artwork_url": "https://drive.google.com/file/d/1xPn9UfgSX3Xkyyhnn5RlmZTc0ciBS3LF/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -3568,9 +3181,7 @@
     "status": "proposed",
     "artwork_id": "1bl8JrbiSwNjR2iPGSNkql-f1DnsBDrDb",
     "artwork_url": "https://drive.google.com/file/d/1bl8JrbiSwNjR2iPGSNkql-f1DnsBDrDb/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -3583,9 +3194,7 @@
     "status": "proposed",
     "artwork_id": "1gGztQN5stDyoG1aUkqx9MBElDoBruSfl",
     "artwork_url": "https://drive.google.com/file/d/1gGztQN5stDyoG1aUkqx9MBElDoBruSfl/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -3598,9 +3207,7 @@
     "status": "proposed",
     "artwork_id": "1ENL48xfaEFYEfrmMvndA2rNPSsEv2__c",
     "artwork_url": "https://drive.google.com/file/d/1ENL48xfaEFYEfrmMvndA2rNPSsEv2__c/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -3613,9 +3220,7 @@
     "status": "proposed",
     "artwork_id": "1AcuP5GhRkulKD3Op3G5K6K_3IWstVBvQ",
     "artwork_url": "https://drive.google.com/file/d/1AcuP5GhRkulKD3Op3G5K6K_3IWstVBvQ/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -3634,9 +3239,7 @@
     "status": "proposed",
     "artwork_id": "1xIWKJgYYrJFarHfGnm79VGiP_Pg0iLrt",
     "artwork_url": "https://drive.google.com/file/d/1xIWKJgYYrJFarHfGnm79VGiP_Pg0iLrt/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -3675,9 +3278,7 @@
     "status": "proposed",
     "artwork_id": "1w4V-iszHEpIcj9kpqSdYRmvB74zXrodE",
     "artwork_url": "https://drive.google.com/file/d/1w4V-iszHEpIcj9kpqSdYRmvB74zXrodE/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -3690,9 +3291,7 @@
     "status": "proposed",
     "artwork_id": "11wqM0NaqCXkDJTLLOtD-f5mgv0eluvz4",
     "artwork_url": "https://drive.google.com/file/d/11wqM0NaqCXkDJTLLOtD-f5mgv0eluvz4/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -3705,10 +3304,7 @@
     "status": "proposed",
     "artwork_id": "1tXmBeCuva1jL5Bzdc32NUAYckdUHMlk0",
     "artwork_url": "https://drive.google.com/file/d/1tXmBeCuva1jL5Bzdc32NUAYckdUHMlk0/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Release"
-    ],
+    "keywords": ["Banish", "Release"],
     "automatic_targets": []
   },
   {
@@ -3734,10 +3330,7 @@
     "status": "proposed",
     "artwork_id": "1eb2ZpjtvDCmSuZ7uiMDcZcg2BUiOLX6z",
     "artwork_url": "https://drive.google.com/file/d/1eb2ZpjtvDCmSuZ7uiMDcZcg2BUiOLX6z/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Curse"
-    ],
+    "keywords": ["Banish", "Curse"],
     "automatic_targets": []
   },
   {
@@ -3750,9 +3343,7 @@
     "status": "proposed",
     "artwork_id": "16251RrxPKuLoYKEeQwf0RYmvCa5E9e91",
     "artwork_url": "https://drive.google.com/file/d/16251RrxPKuLoYKEeQwf0RYmvCa5E9e91/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3765,11 +3356,7 @@
     "status": "proposed",
     "artwork_id": "1k9dmxGyjrq8IB0ApbaVRaTHfAzs1MnHc",
     "artwork_url": "https://drive.google.com/file/d/1k9dmxGyjrq8IB0ApbaVRaTHfAzs1MnHc/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Ward", "Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -3782,10 +3369,7 @@
     "status": "proposed",
     "artwork_id": "1KGoybZxq0G4xJz4RlYDPxoZjtgLBVSoC",
     "artwork_url": "https://drive.google.com/file/d/1KGoybZxq0G4xJz4RlYDPxoZjtgLBVSoC/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -3809,9 +3393,7 @@
     "status": "proposed",
     "artwork_id": "1z-AWt7ktim6aKVC84o392W6qj1k8jc-R",
     "artwork_url": "https://drive.google.com/file/d/1z-AWt7ktim6aKVC84o392W6qj1k8jc-R/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3824,9 +3406,7 @@
     "status": "proposed",
     "artwork_id": "1uGX-ECkdoIb0DRM9D-xS6ZlivVNz5c97",
     "artwork_url": "https://drive.google.com/file/d/1uGX-ECkdoIb0DRM9D-xS6ZlivVNz5c97/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3839,10 +3419,7 @@
     "status": "proposed",
     "artwork_id": "1hmRVclMw_hmK-5m96SE2gDUwCU3leRFw",
     "artwork_url": "https://drive.google.com/file/d/1hmRVclMw_hmK-5m96SE2gDUwCU3leRFw/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Decay"],
     "automatic_targets": []
   },
   {
@@ -3855,9 +3432,7 @@
     "status": "proposed",
     "artwork_id": "1Aq9jicBE1l3wMyv3mQUFS-_ZJjRXkWk2",
     "artwork_url": "https://drive.google.com/file/d/1Aq9jicBE1l3wMyv3mQUFS-_ZJjRXkWk2/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -3870,10 +3445,7 @@
     "status": "proposed",
     "artwork_id": "12itd1ddQDtK3oIZxiZJH_F6SjFjHgiF2",
     "artwork_url": "https://drive.google.com/file/d/12itd1ddQDtK3oIZxiZJH_F6SjFjHgiF2/view?usp=drivesdk",
-    "keywords": [
-      "Leech",
-      "Shadow"
-    ],
+    "keywords": ["Leech", "Shadow"],
     "automatic_targets": []
   },
   {
@@ -3886,9 +3458,7 @@
     "status": "proposed",
     "artwork_id": "1ZIsjuHpo29eppd3hwW7VFXOLz46Ipx49",
     "artwork_url": "https://drive.google.com/file/d/1ZIsjuHpo29eppd3hwW7VFXOLz46Ipx49/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3921,9 +3491,7 @@
     "status": "proposed",
     "artwork_id": "1RtXoBB5B6632MJ2XRUkaXMyJq288ZxTV",
     "artwork_url": "https://drive.google.com/file/d/1RtXoBB5B6632MJ2XRUkaXMyJq288ZxTV/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3936,9 +3504,7 @@
     "status": "proposed",
     "artwork_id": "1LqFQ3TwN6iZwrIk71jPj-UxEb9wOq-F-",
     "artwork_url": "https://drive.google.com/file/d/1LqFQ3TwN6iZwrIk71jPj-UxEb9wOq-F-/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -3951,9 +3517,7 @@
     "status": "proposed",
     "artwork_id": "1P0keoJxTo7V5gyqOVl96HlN-YzHJRa0A",
     "artwork_url": "https://drive.google.com/file/d/1P0keoJxTo7V5gyqOVl96HlN-YzHJRa0A/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -3972,9 +3536,7 @@
     "status": "proposed",
     "artwork_id": "13jynn7l2gc2XaGyVdvaBN9DTpXQ-94C9",
     "artwork_url": "https://drive.google.com/file/d/13jynn7l2gc2XaGyVdvaBN9DTpXQ-94C9/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -3987,9 +3549,7 @@
     "status": "proposed",
     "artwork_id": "1hloy-jxu4ZSie6l01Kyy9OIaOg6wTlTh",
     "artwork_url": "https://drive.google.com/file/d/1hloy-jxu4ZSie6l01Kyy9OIaOg6wTlTh/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4002,9 +3562,7 @@
     "status": "proposed",
     "artwork_id": "1UhljPiyfbXwDyivQvi5yOf785lalJcXo",
     "artwork_url": "https://drive.google.com/file/d/1UhljPiyfbXwDyivQvi5yOf785lalJcXo/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4030,9 +3588,7 @@
     "status": "proposed",
     "artwork_id": "1IQj_UoOoCSV7FebIkgon5iA4XqZTRLpn",
     "artwork_url": "https://drive.google.com/file/d/1IQj_UoOoCSV7FebIkgon5iA4XqZTRLpn/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4045,9 +3601,7 @@
     "status": "proposed",
     "artwork_id": "16CoBFJwN3eZSFQ3DjdTpE69OIuzS7Cm4",
     "artwork_url": "https://drive.google.com/file/d/16CoBFJwN3eZSFQ3DjdTpE69OIuzS7Cm4/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4060,11 +3614,7 @@
     "status": "proposed",
     "artwork_id": "19pRdCRzC2KqqhWTAGLij2YQ_odw_i5Et",
     "artwork_url": "https://drive.google.com/file/d/19pRdCRzC2KqqhWTAGLij2YQ_odw_i5Et/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Banish",
-      "Release"
-    ],
+    "keywords": ["Ward", "Banish", "Release"],
     "automatic_targets": []
   },
   {
@@ -4110,9 +3660,7 @@
     "status": "proposed",
     "artwork_id": "1q8UO8pAVxAkX9sWE61CAsA5EgCIE7evV",
     "artwork_url": "https://drive.google.com/file/d/1q8UO8pAVxAkX9sWE61CAsA5EgCIE7evV/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4131,9 +3679,7 @@
     "status": "proposed",
     "artwork_id": "1qt1r1_8_oBHRo-0v4z-hmR7Y9Q-NdAHB",
     "artwork_url": "https://drive.google.com/file/d/1qt1r1_8_oBHRo-0v4z-hmR7Y9Q-NdAHB/view?usp=drivesdk",
-    "keywords": [
-      "Release"
-    ],
+    "keywords": ["Release"],
     "automatic_targets": []
   },
   {
@@ -4146,9 +3692,7 @@
     "status": "proposed",
     "artwork_id": "1pOWrkSHqk4dOazmvUYGVysSSpWU2v-X3",
     "artwork_url": "https://drive.google.com/file/d/1pOWrkSHqk4dOazmvUYGVysSSpWU2v-X3/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4161,9 +3705,7 @@
     "status": "proposed",
     "artwork_id": "19TAUN3hRrXB6FnNCy3hc40hE8bWijPLa",
     "artwork_url": "https://drive.google.com/file/d/19TAUN3hRrXB6FnNCy3hc40hE8bWijPLa/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4176,9 +3718,7 @@
     "status": "proposed",
     "artwork_id": "1QS_GxhDZxhSFWAFwCk1iFzQDfX_PtDoo",
     "artwork_url": "https://drive.google.com/file/d/1QS_GxhDZxhSFWAFwCk1iFzQDfX_PtDoo/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -4191,9 +3731,7 @@
     "status": "proposed",
     "artwork_id": "1UNUw01VqZegkknVDUC1WaA7XDaQUn1nY",
     "artwork_url": "https://drive.google.com/file/d/1UNUw01VqZegkknVDUC1WaA7XDaQUn1nY/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4225,10 +3763,7 @@
     "status": "proposed",
     "artwork_id": "1767ZRdBXhB_SEwjYMEKEBo_yWq7q6y11",
     "artwork_url": "https://drive.google.com/file/d/1767ZRdBXhB_SEwjYMEKEBo_yWq7q6y11/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Shadow"
-    ],
+    "keywords": ["Ward", "Shadow"],
     "automatic_targets": []
   },
   {
@@ -4241,9 +3776,7 @@
     "status": "proposed",
     "artwork_id": "1Ta2kSWANHatk5acjjpeO2w_lxQJtlXn6",
     "artwork_url": "https://drive.google.com/file/d/1Ta2kSWANHatk5acjjpeO2w_lxQJtlXn6/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4256,9 +3789,7 @@
     "status": "proposed",
     "artwork_id": "17P8t2aFwouFg5cuScxyvOqL8jSWSd9no",
     "artwork_url": "https://drive.google.com/file/d/17P8t2aFwouFg5cuScxyvOqL8jSWSd9no/view?usp=drivesdk",
-    "keywords": [
-      "Release"
-    ],
+    "keywords": ["Release"],
     "automatic_targets": []
   },
   {
@@ -4271,9 +3802,7 @@
     "status": "proposed",
     "artwork_id": "11uWvNYOgbgjFwkRs9J6X_2sHJfLdYyYJ",
     "artwork_url": "https://drive.google.com/file/d/11uWvNYOgbgjFwkRs9J6X_2sHJfLdYyYJ/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4292,9 +3821,7 @@
     "status": "proposed",
     "artwork_id": "1PSDlQcd2nH136wJJLo3AhaEC4KUeBomz",
     "artwork_url": "https://drive.google.com/file/d/1PSDlQcd2nH136wJJLo3AhaEC4KUeBomz/view?usp=drivesdk",
-    "keywords": [
-      "Poison"
-    ],
+    "keywords": ["Poison"],
     "automatic_targets": []
   },
   {
@@ -4307,9 +3834,7 @@
     "status": "proposed",
     "artwork_id": "13XGoQ3PUp7ORGsn8xI270thZNaDGmiuZ",
     "artwork_url": "https://drive.google.com/file/d/13XGoQ3PUp7ORGsn8xI270thZNaDGmiuZ/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -4322,9 +3847,7 @@
     "status": "proposed",
     "artwork_id": "1K7O0tFADVa-Uz2oQvpcj-fj5r-KCL56d",
     "artwork_url": "https://drive.google.com/file/d/1K7O0tFADVa-Uz2oQvpcj-fj5r-KCL56d/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4337,9 +3860,7 @@
     "status": "proposed",
     "artwork_id": "12kJJoPusWxNANRVcyzMls9GQh7W0gNuJ",
     "artwork_url": "https://drive.google.com/file/d/12kJJoPusWxNANRVcyzMls9GQh7W0gNuJ/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -4360,9 +3881,7 @@
     "status": "proposed",
     "artwork_id": "1YEPDmPs2yl3ZDAjiPj9eD5ZdIhBQkiIT",
     "artwork_url": "https://drive.google.com/file/d/1YEPDmPs2yl3ZDAjiPj9eD5ZdIhBQkiIT/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -4375,9 +3894,7 @@
     "status": "proposed",
     "artwork_id": "12m5SVFFDGMKpzzC8IRjMet7yKJUzUziR",
     "artwork_url": "https://drive.google.com/file/d/12m5SVFFDGMKpzzC8IRjMet7yKJUzUziR/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4396,9 +3913,7 @@
     "status": "proposed",
     "artwork_id": "1z4c7EynRaTexalizCZdNJJZheF8WFb2U",
     "artwork_url": "https://drive.google.com/file/d/1z4c7EynRaTexalizCZdNJJZheF8WFb2U/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4463,9 +3978,7 @@
     "status": "proposed",
     "artwork_id": "1Gxa2HmV8GSKU411UdnC-BnfJRmiMqVWh",
     "artwork_url": "https://drive.google.com/file/d/1Gxa2HmV8GSKU411UdnC-BnfJRmiMqVWh/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4478,9 +3991,7 @@
     "status": "proposed",
     "artwork_id": "1Vn0fqXm-OlFD48D-dxQzsSDkRXmphvZl",
     "artwork_url": "https://drive.google.com/file/d/1Vn0fqXm-OlFD48D-dxQzsSDkRXmphvZl/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4493,9 +4004,7 @@
     "status": "proposed",
     "artwork_id": "1ZM8kSuKY6AMSuRyw2nu0fKA0ofuqAi6g",
     "artwork_url": "https://drive.google.com/file/d/1ZM8kSuKY6AMSuRyw2nu0fKA0ofuqAi6g/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -4508,10 +4017,7 @@
     "status": "proposed",
     "artwork_id": "1dbyS5SoY3Jd5X9K0071PZKP2LNHHmElI",
     "artwork_url": "https://drive.google.com/file/d/1dbyS5SoY3Jd5X9K0071PZKP2LNHHmElI/view?usp=drivesdk",
-    "keywords": [
-      "Curse",
-      "Decay"
-    ],
+    "keywords": ["Curse", "Decay"],
     "automatic_targets": []
   },
   {
@@ -4524,10 +4030,7 @@
     "status": "proposed",
     "artwork_id": "1A-Ifrbul5RgGCUyyVrqDEoRLu_sxX2dQ",
     "artwork_url": "https://drive.google.com/file/d/1A-Ifrbul5RgGCUyyVrqDEoRLu_sxX2dQ/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -4540,9 +4043,7 @@
     "status": "proposed",
     "artwork_id": "1R9zc4drUBtyQoHfMpTfAhTvT0leow1rz",
     "artwork_url": "https://drive.google.com/file/d/1R9zc4drUBtyQoHfMpTfAhTvT0leow1rz/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4574,9 +4075,7 @@
     "status": "proposed",
     "artwork_id": "1WPX7NllTsJ9z1G4Ue6OrKhnV5dlO1Zmk",
     "artwork_url": "https://drive.google.com/file/d/1WPX7NllTsJ9z1G4Ue6OrKhnV5dlO1Zmk/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4595,9 +4094,7 @@
     "status": "proposed",
     "artwork_id": "1OXNNCnOsGMDY75wLDFgWZxBSjwZM2taI",
     "artwork_url": "https://drive.google.com/file/d/1OXNNCnOsGMDY75wLDFgWZxBSjwZM2taI/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4618,9 +4115,7 @@
     "status": "proposed",
     "artwork_id": "1HqviJ1BPxtmnhZalCib5l32f8riJCtdZ",
     "artwork_url": "https://drive.google.com/file/d/1HqviJ1BPxtmnhZalCib5l32f8riJCtdZ/view?usp=drivesdk",
-    "keywords": [
-      "Poison"
-    ],
+    "keywords": ["Poison"],
     "automatic_targets": []
   },
   {
@@ -4659,10 +4154,7 @@
     "status": "proposed",
     "artwork_id": "13fcYTdR5mzrUdTEUt4w4Aw2D4CwerPeR",
     "artwork_url": "https://drive.google.com/file/d/13fcYTdR5mzrUdTEUt4w4Aw2D4CwerPeR/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -4675,10 +4167,7 @@
     "status": "proposed",
     "artwork_id": "1tkjisj5PIAGGsuLq87QezipLAYSaQVjb",
     "artwork_url": "https://drive.google.com/file/d/1tkjisj5PIAGGsuLq87QezipLAYSaQVjb/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -4691,9 +4180,7 @@
     "status": "proposed",
     "artwork_id": "1FE4Gm0LAKvXg5iR6njdw44UkgAZNc0dV",
     "artwork_url": "https://drive.google.com/file/d/1FE4Gm0LAKvXg5iR6njdw44UkgAZNc0dV/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -4712,9 +4199,7 @@
     "status": "proposed",
     "artwork_id": "1GM9mPjlVDEXeDRrNr9mI39Fze5S9xoTL",
     "artwork_url": "https://drive.google.com/file/d/1GM9mPjlVDEXeDRrNr9mI39Fze5S9xoTL/view?usp=drivesdk",
-    "keywords": [
-      "Decay"
-    ],
+    "keywords": ["Decay"],
     "automatic_targets": []
   },
   {
@@ -4727,9 +4212,7 @@
     "status": "proposed",
     "artwork_id": "1rwVSsCNPVsOHbJ3_8VjPeGmU0hxrJJDP",
     "artwork_url": "https://drive.google.com/file/d/1rwVSsCNPVsOHbJ3_8VjPeGmU0hxrJJDP/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -4761,9 +4244,7 @@
     "status": "proposed",
     "artwork_id": "18t2mj1PGyuj7X0KT-BUhMtB68X_gV7rN",
     "artwork_url": "https://drive.google.com/file/d/18t2mj1PGyuj7X0KT-BUhMtB68X_gV7rN/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4776,9 +4257,7 @@
     "status": "proposed",
     "artwork_id": "16FGArJB5LFjBHXuJCaa_L_8Xf9yCJmsh",
     "artwork_url": "https://drive.google.com/file/d/16FGArJB5LFjBHXuJCaa_L_8Xf9yCJmsh/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -4791,9 +4270,7 @@
     "status": "proposed",
     "artwork_id": "1FHAPCT-BCgAiNtSTo0ONANc3Qzg_j_Kh",
     "artwork_url": "https://drive.google.com/file/d/1FHAPCT-BCgAiNtSTo0ONANc3Qzg_j_Kh/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -4806,9 +4283,7 @@
     "status": "proposed",
     "artwork_id": "1mMl1nEb2tJ-nXxHtAbXCm9g1obIak-zG",
     "artwork_url": "https://drive.google.com/file/d/1mMl1nEb2tJ-nXxHtAbXCm9g1obIak-zG/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -4820,9 +4295,7 @@
     "status": "proposed",
     "artwork_id": "1ftMufZKisD0RKlmQA5DWZ8wLYL1MTNHf",
     "artwork_url": "https://drive.google.com/file/d/1ftMufZKisD0RKlmQA5DWZ8wLYL1MTNHf/view?usp=drivesdk",
-    "keywords": [
-      "Bless"
-    ],
+    "keywords": ["Bless"],
     "automatic_targets": []
   },
   {
@@ -4834,10 +4307,7 @@
     "status": "proposed",
     "artwork_id": "1xA3y9DjXYx8TM0lvHd7fWXFgCjFLsyqe",
     "artwork_url": "https://drive.google.com/file/d/1xA3y9DjXYx8TM0lvHd7fWXFgCjFLsyqe/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Hush"
-    ],
+    "keywords": ["Banish", "Hush"],
     "automatic_targets": []
   },
   {
@@ -4868,10 +4338,7 @@
     "status": "proposed",
     "artwork_id": "1A1IFu3r3KUh19pGrlvbyMrjfvi50WSW5",
     "artwork_url": "https://drive.google.com/file/d/1A1IFu3r3KUh19pGrlvbyMrjfvi50WSW5/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Hush"
-    ],
+    "keywords": ["Banish", "Hush"],
     "automatic_targets": []
   },
   {
@@ -4883,9 +4350,7 @@
     "status": "proposed",
     "artwork_id": "1dBYyxiy9TgL8H6_R4OdcMnhl9eRE6tlK",
     "artwork_url": "https://drive.google.com/file/d/1dBYyxiy9TgL8H6_R4OdcMnhl9eRE6tlK/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -4897,9 +4362,7 @@
     "status": "proposed",
     "artwork_id": "1KDuG399WnWIxxHB2_QNSbLgJqaUXjX4t",
     "artwork_url": "https://drive.google.com/file/d/1KDuG399WnWIxxHB2_QNSbLgJqaUXjX4t/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -4919,9 +4382,7 @@
     "status": "proposed",
     "artwork_id": "1usk09I5PHy15lv9UFidJBnx_KIfgVjDT",
     "artwork_url": "https://drive.google.com/file/d/1usk09I5PHy15lv9UFidJBnx_KIfgVjDT/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4933,9 +4394,7 @@
     "status": "proposed",
     "artwork_id": "1KF8RnbOzRK41-tKzNgQXNR6IcorIohhi",
     "artwork_url": "https://drive.google.com/file/d/1KF8RnbOzRK41-tKzNgQXNR6IcorIohhi/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -4947,9 +4406,7 @@
     "status": "proposed",
     "artwork_id": "1JyKasXM8Cb6P3ZKMsIakkU3l97YAwi07",
     "artwork_url": "https://drive.google.com/file/d/1JyKasXM8Cb6P3ZKMsIakkU3l97YAwi07/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -4961,9 +4418,7 @@
     "status": "proposed",
     "artwork_id": "135e3z8-KfovDxwwLCzMpj8EY4BuBdzkY",
     "artwork_url": "https://drive.google.com/file/d/135e3z8-KfovDxwwLCzMpj8EY4BuBdzkY/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4975,9 +4430,7 @@
     "status": "proposed",
     "artwork_id": "19i04EwYFN5DXEQ6X0AXwzUAPbvFnkzUF",
     "artwork_url": "https://drive.google.com/file/d/19i04EwYFN5DXEQ6X0AXwzUAPbvFnkzUF/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -4989,10 +4442,7 @@
     "status": "proposed",
     "artwork_id": "1ecQsE6EwlpQxQwMe0b5nSVHbl_k0QB9L",
     "artwork_url": "https://drive.google.com/file/d/1ecQsE6EwlpQxQwMe0b5nSVHbl_k0QB9L/view?usp=drivesdk",
-    "keywords": [
-      "Poison",
-      "Banish"
-    ],
+    "keywords": ["Poison", "Banish"],
     "automatic_targets": []
   },
   {
@@ -5016,9 +4466,7 @@
     "status": "proposed",
     "artwork_id": "1oRwuEphhSN0OEiKRlANKABJ5Ct4EYTH1",
     "artwork_url": "https://drive.google.com/file/d/1oRwuEphhSN0OEiKRlANKABJ5Ct4EYTH1/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5030,9 +4478,7 @@
     "status": "proposed",
     "artwork_id": "1s4wNcZo9iAO14duzvbtyVTpKoF90loJO",
     "artwork_url": "https://drive.google.com/file/d/1s4wNcZo9iAO14duzvbtyVTpKoF90loJO/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -5052,9 +4498,7 @@
     "status": "proposed",
     "artwork_id": "1eNNcQ_QdR_InAMPREwXBdFyixPz7pfHF",
     "artwork_url": "https://drive.google.com/file/d/1eNNcQ_QdR_InAMPREwXBdFyixPz7pfHF/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5066,9 +4510,7 @@
     "status": "proposed",
     "artwork_id": "1HWHAd4-tDPGj5DVmXiQ4ukqAhsyEZeQ0",
     "artwork_url": "https://drive.google.com/file/d/1HWHAd4-tDPGj5DVmXiQ4ukqAhsyEZeQ0/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -5086,10 +4528,7 @@
     "status": "proposed",
     "artwork_id": "1tNC0kiTw0s6gT8A6pFqOiA7hk1-WP_Yo",
     "artwork_url": "https://drive.google.com/file/d/1tNC0kiTw0s6gT8A6pFqOiA7hk1-WP_Yo/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Release"
-    ],
+    "keywords": ["Ward", "Release"],
     "automatic_targets": []
   },
   {
@@ -5101,9 +4540,7 @@
     "status": "proposed",
     "artwork_id": "1K9OtvTkXWemHbbFhrTcbXxeP1EdBau2Y",
     "artwork_url": "https://drive.google.com/file/d/1K9OtvTkXWemHbbFhrTcbXxeP1EdBau2Y/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -5115,9 +4552,7 @@
     "status": "proposed",
     "artwork_id": "1qanLMdF8qC96JfeCp5_CLYK9FtSkhCmy",
     "artwork_url": "https://drive.google.com/file/d/1qanLMdF8qC96JfeCp5_CLYK9FtSkhCmy/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5129,9 +4564,7 @@
     "status": "proposed",
     "artwork_id": "18kMtxpJwyiqyWzFXm6-swUWVKJPNO_LF",
     "artwork_url": "https://drive.google.com/file/d/18kMtxpJwyiqyWzFXm6-swUWVKJPNO_LF/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -5143,10 +4576,7 @@
     "status": "proposed",
     "artwork_id": "1Vi5APdojPq7S2DIe_Spu-v59SEj3Vhok",
     "artwork_url": "https://drive.google.com/file/d/1Vi5APdojPq7S2DIe_Spu-v59SEj3Vhok/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Banish"
-    ],
+    "keywords": ["Ward", "Banish"],
     "automatic_targets": []
   },
   {
@@ -5158,9 +4588,7 @@
     "status": "proposed",
     "artwork_id": "1kfXGl4cJUiDeKByBem_T_2rHaz5_r2vF",
     "artwork_url": "https://drive.google.com/file/d/1kfXGl4cJUiDeKByBem_T_2rHaz5_r2vF/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -5180,9 +4608,7 @@
     "status": "proposed",
     "artwork_id": "1fS4OyYag95k1if-kzuG9vbsHt5L51IF-",
     "artwork_url": "https://drive.google.com/file/d/1fS4OyYag95k1if-kzuG9vbsHt5L51IF-/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5194,9 +4620,7 @@
     "status": "proposed",
     "artwork_id": "1iamq-p5-ep0pY3sM7KbmbV3CI0junRHP",
     "artwork_url": "https://drive.google.com/file/d/1iamq-p5-ep0pY3sM7KbmbV3CI0junRHP/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -5216,10 +4640,7 @@
     "status": "proposed",
     "artwork_id": "1wiOh1lkZWO0jdfLysNKyqQzAwnjPU5Ir",
     "artwork_url": "https://drive.google.com/file/d/1wiOh1lkZWO0jdfLysNKyqQzAwnjPU5Ir/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Curse"
-    ],
+    "keywords": ["Banish", "Curse"],
     "automatic_targets": []
   },
   {
@@ -5231,9 +4652,7 @@
     "status": "proposed",
     "artwork_id": "1kSVM03Z5jobRlxqKWOs5nAoRErKNIJkk",
     "artwork_url": "https://drive.google.com/file/d/1kSVM03Z5jobRlxqKWOs5nAoRErKNIJkk/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -5257,9 +4676,7 @@
     "status": "proposed",
     "artwork_id": "1IWQD5FmLBMeq_rOwu2IqefisdF0uemRo",
     "artwork_url": "https://drive.google.com/file/d/1IWQD5FmLBMeq_rOwu2IqefisdF0uemRo/view?usp=drivesdk",
-    "keywords": [
-      "Burn"
-    ],
+    "keywords": ["Burn"],
     "automatic_targets": []
   },
   {
@@ -5271,9 +4688,7 @@
     "status": "proposed",
     "artwork_id": "1LVaaUnrEn8JrSzSuqygrDu0F8b4orTc3",
     "artwork_url": "https://drive.google.com/file/d/1LVaaUnrEn8JrSzSuqygrDu0F8b4orTc3/view?usp=drivesdk",
-    "keywords": [
-      "Burn"
-    ],
+    "keywords": ["Burn"],
     "automatic_targets": [
       {
         "op": "Turn",
@@ -5304,9 +4719,7 @@
     "status": "proposed",
     "artwork_id": "1TWvk4_6t2QhPZn6IJGd0fUX-Ch9oX7bV",
     "artwork_url": "https://drive.google.com/file/d/1TWvk4_6t2QhPZn6IJGd0fUX-Ch9oX7bV/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5318,9 +4731,7 @@
     "status": "proposed",
     "artwork_id": "1hq5b8_BJsm3WuDp4uU7FXJ1LuPlqa9Fo",
     "artwork_url": "https://drive.google.com/file/d/1hq5b8_BJsm3WuDp4uU7FXJ1LuPlqa9Fo/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5332,9 +4743,7 @@
     "status": "proposed",
     "artwork_id": "1XbBHCmpEHe8sKENFSjXXOCIzQ1ZAxjNA",
     "artwork_url": "https://drive.google.com/file/d/1XbBHCmpEHe8sKENFSjXXOCIzQ1ZAxjNA/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5346,9 +4755,7 @@
     "status": "proposed",
     "artwork_id": "1HyjoExEDPI97wcuambSj5U5Y6zDRgs_u",
     "artwork_url": "https://drive.google.com/file/d/1HyjoExEDPI97wcuambSj5U5Y6zDRgs_u/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5360,10 +4767,7 @@
     "status": "proposed",
     "artwork_id": "1PNwOsYaoYCFP158qvs2-sB-nacQNg-lS",
     "artwork_url": "https://drive.google.com/file/d/1PNwOsYaoYCFP158qvs2-sB-nacQNg-lS/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -5375,9 +4779,7 @@
     "status": "proposed",
     "artwork_id": "1ZhM4zwAmEZs2xeUbyvqJaMf7XsrS5WnV",
     "artwork_url": "https://drive.google.com/file/d/1ZhM4zwAmEZs2xeUbyvqJaMf7XsrS5WnV/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -5389,9 +4791,7 @@
     "status": "proposed",
     "artwork_id": "1ne8OrqEIQQHYrsM0NGuXDyVZy-q7Nw1V",
     "artwork_url": "https://drive.google.com/file/d/1ne8OrqEIQQHYrsM0NGuXDyVZy-q7Nw1V/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5403,9 +4803,7 @@
     "status": "proposed",
     "artwork_id": "1A8lXu2_7ogkG4UkrkXU3fEMV2kjw9ygV",
     "artwork_url": "https://drive.google.com/file/d/1A8lXu2_7ogkG4UkrkXU3fEMV2kjw9ygV/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -5417,9 +4815,7 @@
     "status": "proposed",
     "artwork_id": "1gkUBSNHblmrEOc5ocZwQYXvAaeltstLz",
     "artwork_url": "https://drive.google.com/file/d/1gkUBSNHblmrEOc5ocZwQYXvAaeltstLz/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5431,9 +4827,7 @@
     "status": "proposed",
     "artwork_id": "1TzBUjm4F1Gi_rg-AWN-sgEl2vd11Vcnr",
     "artwork_url": "https://drive.google.com/file/d/1TzBUjm4F1Gi_rg-AWN-sgEl2vd11Vcnr/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -5451,9 +4845,7 @@
     "status": "proposed",
     "artwork_id": "1whoFB6Jcg9gTqNg3YofufncixbWhNHic",
     "artwork_url": "https://drive.google.com/file/d/1whoFB6Jcg9gTqNg3YofufncixbWhNHic/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5465,9 +4857,7 @@
     "status": "proposed",
     "artwork_id": "1zgkEjrAT1dTQSw6s6LxGTkfo5PPwVCVw",
     "artwork_url": "https://drive.google.com/file/d/1zgkEjrAT1dTQSw6s6LxGTkfo5PPwVCVw/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -5479,9 +4869,7 @@
     "status": "proposed",
     "artwork_id": "1H-C4EPxB9DyzIx1IuZAZ1uPZfTxU6U8E",
     "artwork_url": "https://drive.google.com/file/d/1H-C4EPxB9DyzIx1IuZAZ1uPZfTxU6U8E/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -5524,9 +4912,7 @@
     "status": "proposed",
     "artwork_id": "1Mn7_mn_iW_PfoBah2xOc_PjTXJEZE6tU",
     "artwork_url": "https://drive.google.com/file/d/1Mn7_mn_iW_PfoBah2xOc_PjTXJEZE6tU/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -5550,9 +4936,7 @@
     "status": "proposed",
     "artwork_id": "1606cBStbiYN2jX9hzSBQufu7kobpl4u6",
     "artwork_url": "https://drive.google.com/file/d/1606cBStbiYN2jX9hzSBQufu7kobpl4u6/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -5576,9 +4960,7 @@
     "status": "proposed",
     "artwork_id": "1fwCYD4LMMMeSJSaXXuaBmsHVSAUR19As",
     "artwork_url": "https://drive.google.com/file/d/1fwCYD4LMMMeSJSaXXuaBmsHVSAUR19As/view?usp=drivesdk",
-    "keywords": [
-      "Release"
-    ],
+    "keywords": ["Release"],
     "automatic_targets": []
   },
   {
@@ -5590,9 +4972,7 @@
     "status": "proposed",
     "artwork_id": "1xFPSkUSpyFNCd4rpcSpEyO1ZLSpkOVjP",
     "artwork_url": "https://drive.google.com/file/d/1xFPSkUSpyFNCd4rpcSpEyO1ZLSpkOVjP/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -5604,9 +4984,7 @@
     "status": "proposed",
     "artwork_id": "1JTB93usDflGZnky7IVhFuiZj3ogKJ83S",
     "artwork_url": "https://drive.google.com/file/d/1JTB93usDflGZnky7IVhFuiZj3ogKJ83S/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -5618,9 +4996,7 @@
     "status": "proposed",
     "artwork_id": "1RiNVVluuNccpFCFK0KK6d4pqDgeeOnqE",
     "artwork_url": "https://drive.google.com/file/d/1RiNVVluuNccpFCFK0KK6d4pqDgeeOnqE/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -5640,9 +5016,7 @@
     "status": "proposed",
     "artwork_id": "1SWJ0EEnpm9prx-EBz71I7o7JZ-c7jFOn",
     "artwork_url": "https://drive.google.com/file/d/1SWJ0EEnpm9prx-EBz71I7o7JZ-c7jFOn/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -5660,9 +5034,7 @@
     "status": "proposed",
     "artwork_id": "181yMOSb5X_u7PM26NXFLrgiVjMi-GNUN",
     "artwork_url": "https://drive.google.com/file/d/181yMOSb5X_u7PM26NXFLrgiVjMi-GNUN/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -5686,9 +5058,7 @@
     "status": "proposed",
     "artwork_id": "1cVHio-tqD5eEo3TFfJGVgaonEWlcG6kI",
     "artwork_url": "https://drive.google.com/file/d/1cVHio-tqD5eEo3TFfJGVgaonEWlcG6kI/view?usp=drivesdk",
-    "keywords": [
-      "Shadow"
-    ],
+    "keywords": ["Shadow"],
     "automatic_targets": []
   },
   {
@@ -5700,9 +5070,7 @@
     "status": "proposed",
     "artwork_id": "1wC1uHhSpaz4nLTgHrqVWtJcybhmdXPEt",
     "artwork_url": "https://drive.google.com/file/d/1wC1uHhSpaz4nLTgHrqVWtJcybhmdXPEt/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -5714,11 +5082,7 @@
     "status": "proposed",
     "artwork_id": "1AgmOivs3y6NwwRFlxZHykgxa47ItNZK4",
     "artwork_url": "https://drive.google.com/file/d/1AgmOivs3y6NwwRFlxZHykgxa47ItNZK4/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Leech",
-      "Decay"
-    ],
+    "keywords": ["Banish", "Leech", "Decay"],
     "automatic_targets": []
   },
   {
@@ -5772,9 +5136,7 @@
     "status": "proposed",
     "artwork_id": "1ripPvZY9bYhV5uLL-7YZOXm5FzowxPvd",
     "artwork_url": "https://drive.google.com/file/d/1ripPvZY9bYhV5uLL-7YZOXm5FzowxPvd/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -5786,10 +5148,7 @@
     "status": "proposed",
     "artwork_id": "1Yv6wB8F8uV34d8HykX2TyEiN9-5n8X1u",
     "artwork_url": "https://drive.google.com/file/d/1Yv6wB8F8uV34d8HykX2TyEiN9-5n8X1u/view?usp=drivesdk",
-    "keywords": [
-      "Poison",
-      "Decay"
-    ],
+    "keywords": ["Poison", "Decay"],
     "automatic_targets": []
   },
   {
@@ -5801,9 +5160,7 @@
     "status": "proposed",
     "artwork_id": "1ZrG7_64gGAms4Ib1B-k5axwyeE0rbT1i",
     "artwork_url": "https://drive.google.com/file/d/1ZrG7_64gGAms4Ib1B-k5axwyeE0rbT1i/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -5815,9 +5172,7 @@
     "status": "proposed",
     "artwork_id": "1k7yY2JB0AHf-_1M0HE5irMYKvkN01SKy",
     "artwork_url": "https://drive.google.com/file/d/1k7yY2JB0AHf-_1M0HE5irMYKvkN01SKy/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -5829,9 +5184,7 @@
     "status": "proposed",
     "artwork_id": "1CxJ-3PfJMNHxUsMPwHixphDMvdhNjgYL",
     "artwork_url": "https://drive.google.com/file/d/1CxJ-3PfJMNHxUsMPwHixphDMvdhNjgYL/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5843,9 +5196,7 @@
     "status": "proposed",
     "artwork_id": "1hgS7Jf68GqwH3fmXDsWvjR49Xuy6GjMD",
     "artwork_url": "https://drive.google.com/file/d/1hgS7Jf68GqwH3fmXDsWvjR49Xuy6GjMD/view?usp=drivesdk",
-    "keywords": [
-      "Decay"
-    ],
+    "keywords": ["Decay"],
     "automatic_targets": []
   },
   {
@@ -5857,9 +5208,7 @@
     "status": "proposed",
     "artwork_id": "1R_8IrKM8lHUbAUwYNc3uA4PY28RwqFgH",
     "artwork_url": "https://drive.google.com/file/d/1R_8IrKM8lHUbAUwYNc3uA4PY28RwqFgH/view?usp=drivesdk",
-    "keywords": [
-      "Radiance"
-    ],
+    "keywords": ["Radiance"],
     "automatic_targets": []
   },
   {
@@ -5871,10 +5220,7 @@
     "status": "proposed",
     "artwork_id": "1RDqP2COPwgDGYbfOC7mc0ko5AC_jTvyl",
     "artwork_url": "https://drive.google.com/file/d/1RDqP2COPwgDGYbfOC7mc0ko5AC_jTvyl/view?usp=drivesdk",
-    "keywords": [
-      "Poison",
-      "Decay"
-    ],
+    "keywords": ["Poison", "Decay"],
     "automatic_targets": []
   },
   {
@@ -5886,9 +5232,7 @@
     "status": "proposed",
     "artwork_id": "12SLJgmtqcxVKxVFxwH8oIJKqrm0Dj3ZE",
     "artwork_url": "https://drive.google.com/file/d/12SLJgmtqcxVKxVFxwH8oIJKqrm0Dj3ZE/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -5900,9 +5244,7 @@
     "status": "proposed",
     "artwork_id": "1ac4bI3qhlCwOyRZUhSEgSS9c-yvtJwnM",
     "artwork_url": "https://drive.google.com/file/d/1ac4bI3qhlCwOyRZUhSEgSS9c-yvtJwnM/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -5920,9 +5262,7 @@
     "status": "proposed",
     "artwork_id": "1OusX_XcVrHsPyhWUKiaklqAFhOoVqc60",
     "artwork_url": "https://drive.google.com/file/d/1OusX_XcVrHsPyhWUKiaklqAFhOoVqc60/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5934,9 +5274,7 @@
     "status": "proposed",
     "artwork_id": "1Rb-ixxPTJd5GUvynvzKwDQdeiEBJda2g",
     "artwork_url": "https://drive.google.com/file/d/1Rb-ixxPTJd5GUvynvzKwDQdeiEBJda2g/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -5948,9 +5286,7 @@
     "status": "proposed",
     "artwork_id": "1KxET2X_ziAbUV8KYITXJch3mcy-IqBt7",
     "artwork_url": "https://drive.google.com/file/d/1KxET2X_ziAbUV8KYITXJch3mcy-IqBt7/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -5968,9 +5304,7 @@
     "status": "proposed",
     "artwork_id": "1SXMPLUCdIpmaCugGWkoyNLmxTVmr9947",
     "artwork_url": "https://drive.google.com/file/d/1SXMPLUCdIpmaCugGWkoyNLmxTVmr9947/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -5982,9 +5316,7 @@
     "status": "proposed",
     "artwork_id": "1SO6ZvlWewqOOPkGGx8SkmHGt1DQiXrm0",
     "artwork_url": "https://drive.google.com/file/d/1SO6ZvlWewqOOPkGGx8SkmHGt1DQiXrm0/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6004,9 +5336,7 @@
     "status": "proposed",
     "artwork_id": "107HAMuwazg9r0-6K06jCWAOe39H5sLDq",
     "artwork_url": "https://drive.google.com/file/d/107HAMuwazg9r0-6K06jCWAOe39H5sLDq/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -6018,9 +5348,7 @@
     "status": "proposed",
     "artwork_id": "1NnmuykqMoHgI3lMoiYk0QFfFmTB2Z54W",
     "artwork_url": "https://drive.google.com/file/d/1NnmuykqMoHgI3lMoiYk0QFfFmTB2Z54W/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6038,9 +5366,7 @@
     "status": "proposed",
     "artwork_id": "1INmwR23IDUbhf_S75f2ttFT9tadXjB95",
     "artwork_url": "https://drive.google.com/file/d/1INmwR23IDUbhf_S75f2ttFT9tadXjB95/view?usp=drivesdk",
-    "keywords": [
-      "Poison"
-    ],
+    "keywords": ["Poison"],
     "automatic_targets": []
   },
   {
@@ -6052,9 +5378,7 @@
     "status": "proposed",
     "artwork_id": "19BYSHsdWX7113diKEUd-xzlp_B9l-nh3",
     "artwork_url": "https://drive.google.com/file/d/19BYSHsdWX7113diKEUd-xzlp_B9l-nh3/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -6066,9 +5390,7 @@
     "status": "proposed",
     "artwork_id": "1JuwzBeCTfjXfX1ySHjUhwP_f6LYQ5jiP",
     "artwork_url": "https://drive.google.com/file/d/1JuwzBeCTfjXfX1ySHjUhwP_f6LYQ5jiP/view?usp=drivesdk",
-    "keywords": [
-      "Shadow"
-    ],
+    "keywords": ["Shadow"],
     "automatic_targets": []
   },
   {
@@ -6080,9 +5402,7 @@
     "status": "proposed",
     "artwork_id": "1QbwX7iffDIJGlYuqZJjWVGjHI32qql3m",
     "artwork_url": "https://drive.google.com/file/d/1QbwX7iffDIJGlYuqZJjWVGjHI32qql3m/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -6094,9 +5414,7 @@
     "status": "proposed",
     "artwork_id": "1BBGJNpL6J2ux-Aly5Voheu4IUgUUmiU4",
     "artwork_url": "https://drive.google.com/file/d/1BBGJNpL6J2ux-Aly5Voheu4IUgUUmiU4/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6114,9 +5432,7 @@
     "status": "proposed",
     "artwork_id": "1PGk_mbDkf__jEUgyY3zvAVKoO6zv-2et",
     "artwork_url": "https://drive.google.com/file/d/1PGk_mbDkf__jEUgyY3zvAVKoO6zv-2et/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6128,9 +5444,7 @@
     "status": "proposed",
     "artwork_id": "1j83OxtFSENp0P4aEnxRsTxW8RAiTxdGp",
     "artwork_url": "https://drive.google.com/file/d/1j83OxtFSENp0P4aEnxRsTxW8RAiTxdGp/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6154,9 +5468,7 @@
     "status": "proposed",
     "artwork_id": "1pn36xtbcYGzue-gBCkFT9k6CbowF9E3e",
     "artwork_url": "https://drive.google.com/file/d/1pn36xtbcYGzue-gBCkFT9k6CbowF9E3e/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6176,10 +5488,7 @@
     "status": "proposed",
     "artwork_id": "1_Ad7LqNoFEuIUl0RpxuSCDjlgK5clY68",
     "artwork_url": "https://drive.google.com/file/d/1_Ad7LqNoFEuIUl0RpxuSCDjlgK5clY68/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6202,9 +5511,7 @@
     "status": "proposed",
     "artwork_id": "1BJfTl2iBu801GsAT9OJyk_irM5iTV8yB",
     "artwork_url": "https://drive.google.com/file/d/1BJfTl2iBu801GsAT9OJyk_irM5iTV8yB/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6216,10 +5523,7 @@
     "status": "proposed",
     "artwork_id": "1htErAmPRp1eIIzpzJz6M7b1ItlvItEx4",
     "artwork_url": "https://drive.google.com/file/d/1htErAmPRp1eIIzpzJz6M7b1ItlvItEx4/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6254,9 +5558,7 @@
     "status": "proposed",
     "artwork_id": "1YUEo3PFO0d10NV5BEmc3fizObWANY6CX",
     "artwork_url": "https://drive.google.com/file/d/1YUEo3PFO0d10NV5BEmc3fizObWANY6CX/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6280,9 +5582,7 @@
     "status": "proposed",
     "artwork_id": "1Leo4wy_fhMqsjhHS_-Ro5dHacsR3evX4",
     "artwork_url": "https://drive.google.com/file/d/1Leo4wy_fhMqsjhHS_-Ro5dHacsR3evX4/view?usp=drivesdk",
-    "keywords": [
-      "Growth"
-    ],
+    "keywords": ["Growth"],
     "automatic_targets": []
   },
   {
@@ -6294,10 +5594,7 @@
     "status": "proposed",
     "artwork_id": "1K2vvOA2urv-zwwJAjlOfkK9qEwG09Yij",
     "artwork_url": "https://drive.google.com/file/d/1K2vvOA2urv-zwwJAjlOfkK9qEwG09Yij/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Decay"
-    ],
+    "keywords": ["Ward", "Decay"],
     "automatic_targets": []
   },
   {
@@ -6309,10 +5606,7 @@
     "status": "proposed",
     "artwork_id": "1SwKu2a2rvfI1YhPAYCwzrXEgbTjTLh81",
     "artwork_url": "https://drive.google.com/file/d/1SwKu2a2rvfI1YhPAYCwzrXEgbTjTLh81/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Freeze"
-    ],
+    "keywords": ["Banish", "Freeze"],
     "automatic_targets": []
   },
   {
@@ -6324,9 +5618,7 @@
     "status": "proposed",
     "artwork_id": "1LD72ZKhcE_h4dj402xcOEKjBkfbQTtx5",
     "artwork_url": "https://drive.google.com/file/d/1LD72ZKhcE_h4dj402xcOEKjBkfbQTtx5/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6344,9 +5636,7 @@
     "status": "proposed",
     "artwork_id": "1LdcYvSobZ6jvNqIr1Gv5GWvgtXgW5hFF",
     "artwork_url": "https://drive.google.com/file/d/1LdcYvSobZ6jvNqIr1Gv5GWvgtXgW5hFF/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6364,9 +5654,7 @@
     "status": "proposed",
     "artwork_id": "1VIWyc7aEuTbeg85pWO3YO8HTVWBhFhEX",
     "artwork_url": "https://drive.google.com/file/d/1VIWyc7aEuTbeg85pWO3YO8HTVWBhFhEX/view?usp=drivesdk",
-    "keywords": [
-      "Burn"
-    ],
+    "keywords": ["Burn"],
     "automatic_targets": []
   },
   {
@@ -6378,10 +5666,7 @@
     "status": "proposed",
     "artwork_id": "1jINNmrpN1E8Jml7CJUtT_DZJHSb2CTNA",
     "artwork_url": "https://drive.google.com/file/d/1jINNmrpN1E8Jml7CJUtT_DZJHSb2CTNA/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6404,9 +5689,7 @@
     "status": "proposed",
     "artwork_id": "1at4wsEWspmF3d7SvCp-PNRlJVZpUzJng",
     "artwork_url": "https://drive.google.com/file/d/1at4wsEWspmF3d7SvCp-PNRlJVZpUzJng/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6424,9 +5707,7 @@
     "status": "proposed",
     "artwork_id": "1TGqO5fSWv4OGY4UzujXRvte9tixKRn1T",
     "artwork_url": "https://drive.google.com/file/d/1TGqO5fSWv4OGY4UzujXRvte9tixKRn1T/view?usp=drivesdk",
-    "keywords": [
-      "Bless"
-    ],
+    "keywords": ["Bless"],
     "automatic_targets": []
   },
   {
@@ -6438,9 +5719,7 @@
     "status": "proposed",
     "artwork_id": "1AiCyPh6b14Ge33dWfdJNlPVIVHj_s4oQ",
     "artwork_url": "https://drive.google.com/file/d/1AiCyPh6b14Ge33dWfdJNlPVIVHj_s4oQ/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -6452,9 +5731,7 @@
     "status": "proposed",
     "artwork_id": "1XI3u4CEgbOgiLfkUOgS1PuCEGbQo8qM3",
     "artwork_url": "https://drive.google.com/file/d/1XI3u4CEgbOgiLfkUOgS1PuCEGbQo8qM3/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6466,9 +5743,7 @@
     "status": "proposed",
     "artwork_id": "1X3P9gG2bv1harmubVCY6UfFDCdgDEQjZ",
     "artwork_url": "https://drive.google.com/file/d/1X3P9gG2bv1harmubVCY6UfFDCdgDEQjZ/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6492,9 +5767,7 @@
     "status": "proposed",
     "artwork_id": "1ofIAmxihLiEebOQ65Naw6oKWziq6p-qz",
     "artwork_url": "https://drive.google.com/file/d/1ofIAmxihLiEebOQ65Naw6oKWziq6p-qz/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -6506,9 +5779,7 @@
     "status": "proposed",
     "artwork_id": "13UA0GE_yN6sF3kHC1-s7mzkH3Av9A7QZ",
     "artwork_url": "https://drive.google.com/file/d/13UA0GE_yN6sF3kHC1-s7mzkH3Av9A7QZ/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6528,9 +5799,7 @@
     "status": "proposed",
     "artwork_id": "1ICjWTvL2KwQo7r3iiB9ePkenTORSN-hI",
     "artwork_url": "https://drive.google.com/file/d/1ICjWTvL2KwQo7r3iiB9ePkenTORSN-hI/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6542,9 +5811,7 @@
     "status": "proposed",
     "artwork_id": "1_fGrLWnpVbjF0glvj5pftEpy1rvIoUWy",
     "artwork_url": "https://drive.google.com/file/d/1_fGrLWnpVbjF0glvj5pftEpy1rvIoUWy/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -6556,10 +5823,7 @@
     "status": "proposed",
     "artwork_id": "1Hbz6jkPm4od4TcGELT-noNPOOSAi9_YN",
     "artwork_url": "https://drive.google.com/file/d/1Hbz6jkPm4od4TcGELT-noNPOOSAi9_YN/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Hush"
-    ],
+    "keywords": ["Banish", "Hush"],
     "automatic_targets": []
   },
   {
@@ -6571,10 +5835,7 @@
     "status": "proposed",
     "artwork_id": "11Xnq_-YSm4gYNyBmDyHGeIY_zNdShnmx",
     "artwork_url": "https://drive.google.com/file/d/11Xnq_-YSm4gYNyBmDyHGeIY_zNdShnmx/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Keep"
-    ],
+    "keywords": ["Flip", "Keep"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6597,9 +5858,7 @@
     "status": "proposed",
     "artwork_id": "1bcKehOyA-lfB-KUjlG8h6yaG3cD_1M1X",
     "artwork_url": "https://drive.google.com/file/d/1bcKehOyA-lfB-KUjlG8h6yaG3cD_1M1X/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -6611,9 +5870,7 @@
     "status": "proposed",
     "artwork_id": "1aghUy0aUrQDb_gDwUPvTrDixhn0R1gFy",
     "artwork_url": "https://drive.google.com/file/d/1aghUy0aUrQDb_gDwUPvTrDixhn0R1gFy/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6631,9 +5888,7 @@
     "status": "proposed",
     "artwork_id": "1VryJ6zAyPAHtd63KNLlP9-JFw9O5Wh4M",
     "artwork_url": "https://drive.google.com/file/d/1VryJ6zAyPAHtd63KNLlP9-JFw9O5Wh4M/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6651,9 +5906,7 @@
     "status": "proposed",
     "artwork_id": "1O7JYQCnT63P26D-2r_ANzLGaC5FL-WTM",
     "artwork_url": "https://drive.google.com/file/d/1O7JYQCnT63P26D-2r_ANzLGaC5FL-WTM/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6671,9 +5924,7 @@
     "status": "proposed",
     "artwork_id": "1oxU-wll1CkaG7YjJq7lJMxHJDu779r55",
     "artwork_url": "https://drive.google.com/file/d/1oxU-wll1CkaG7YjJq7lJMxHJDu779r55/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6685,9 +5936,7 @@
     "status": "proposed",
     "artwork_id": "103u7kJ08876rjT6ttB5ta4OaGU-l19xm",
     "artwork_url": "https://drive.google.com/file/d/103u7kJ08876rjT6ttB5ta4OaGU-l19xm/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6707,9 +5956,7 @@
     "status": "proposed",
     "artwork_id": "15kEUzzTziwujXCihrEmx8-od-P0KKOZm",
     "artwork_url": "https://drive.google.com/file/d/15kEUzzTziwujXCihrEmx8-od-P0KKOZm/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -6721,10 +5968,7 @@
     "status": "proposed",
     "artwork_id": "1EkqgBvrLrRsJMvZy_i2v6F9WVmIysJd0",
     "artwork_url": "https://drive.google.com/file/d/1EkqgBvrLrRsJMvZy_i2v6F9WVmIysJd0/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -6736,9 +5980,7 @@
     "status": "proposed",
     "artwork_id": "11fSJYjFVg9xFaL4AQY9NpHn_hxTn0L0u",
     "artwork_url": "https://drive.google.com/file/d/11fSJYjFVg9xFaL4AQY9NpHn_hxTn0L0u/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6756,10 +5998,7 @@
     "status": "proposed",
     "artwork_id": "1gDNwiK7ez956CDHN-VKkBnwzZ6qhwjT8",
     "artwork_url": "https://drive.google.com/file/d/1gDNwiK7ez956CDHN-VKkBnwzZ6qhwjT8/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -6771,9 +6010,7 @@
     "status": "proposed",
     "artwork_id": "1wuBMQUxkX0OxwJo7RbPYvRXmfn0bg5VZ",
     "artwork_url": "https://drive.google.com/file/d/1wuBMQUxkX0OxwJo7RbPYvRXmfn0bg5VZ/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -6785,9 +6022,7 @@
     "status": "proposed",
     "artwork_id": "1WXDNTeVa33vWlZjLcmnEhlU8S2QYg844",
     "artwork_url": "https://drive.google.com/file/d/1WXDNTeVa33vWlZjLcmnEhlU8S2QYg844/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -6805,9 +6040,7 @@
     "status": "proposed",
     "artwork_id": "1qYi_R3rb0F9WcR7V4A6Rkba0384vfCUO",
     "artwork_url": "https://drive.google.com/file/d/1qYi_R3rb0F9WcR7V4A6Rkba0384vfCUO/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6819,10 +6052,7 @@
     "status": "proposed",
     "artwork_id": "1sjq6KqOHishiYASsaoR1CwK9mLMMDNsk",
     "artwork_url": "https://drive.google.com/file/d/1sjq6KqOHishiYASsaoR1CwK9mLMMDNsk/view?usp=drivesdk",
-    "keywords": [
-      "Flip",
-      "Banish"
-    ],
+    "keywords": ["Flip", "Banish"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6840,9 +6070,7 @@
     "status": "proposed",
     "artwork_id": "1ISo1yLH0d5S37qMT_T-Su3XkqVWcWp3I",
     "artwork_url": "https://drive.google.com/file/d/1ISo1yLH0d5S37qMT_T-Su3XkqVWcWp3I/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6854,10 +6082,7 @@
     "status": "proposed",
     "artwork_id": "15zSYNtsAv4Ntm7QCMYNq_DFf0-BXjwev",
     "artwork_url": "https://drive.google.com/file/d/15zSYNtsAv4Ntm7QCMYNq_DFf0-BXjwev/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Release"
-    ],
+    "keywords": ["Ward", "Release"],
     "automatic_targets": []
   },
   {
@@ -6869,9 +6094,7 @@
     "status": "proposed",
     "artwork_id": "1UsDofhQcqZT54-nWnBPjy9WdjFVFe755",
     "artwork_url": "https://drive.google.com/file/d/1UsDofhQcqZT54-nWnBPjy9WdjFVFe755/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -6883,9 +6106,7 @@
     "status": "proposed",
     "artwork_id": "1s4Mfgli8Rm0UZ-SAs00iMQDnqxu5MDrG",
     "artwork_url": "https://drive.google.com/file/d/1s4Mfgli8Rm0UZ-SAs00iMQDnqxu5MDrG/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6897,9 +6118,7 @@
     "status": "proposed",
     "artwork_id": "1Z6vHYRqKOIqeRCGPM-ENUcU5RXQJ38aT",
     "artwork_url": "https://drive.google.com/file/d/1Z6vHYRqKOIqeRCGPM-ENUcU5RXQJ38aT/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6923,9 +6142,7 @@
     "status": "proposed",
     "artwork_id": "1lARfmjzBugRkExhtWUYfp8zb7lRCgc79",
     "artwork_url": "https://drive.google.com/file/d/1lARfmjzBugRkExhtWUYfp8zb7lRCgc79/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6937,9 +6154,7 @@
     "status": "proposed",
     "artwork_id": "1nCXwA4NtHzRlo4wdshVitxcmMM1SgyS8",
     "artwork_url": "https://drive.google.com/file/d/1nCXwA4NtHzRlo4wdshVitxcmMM1SgyS8/view?usp=drivesdk",
-    "keywords": [
-      "Flip"
-    ],
+    "keywords": ["Flip"],
     "automatic_targets": [
       {
         "op": "Flip",
@@ -6959,9 +6174,7 @@
     "status": "proposed",
     "artwork_id": "1-aHwrBxzfb77j27vzpRtrF1HG8QUAYLM",
     "artwork_url": "https://drive.google.com/file/d/1-aHwrBxzfb77j27vzpRtrF1HG8QUAYLM/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -6973,10 +6186,7 @@
     "status": "proposed",
     "artwork_id": "1Rc2D0cYo0v2ba2q_8UL2UypesFzGb364",
     "artwork_url": "https://drive.google.com/file/d/1Rc2D0cYo0v2ba2q_8UL2UypesFzGb364/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -6988,9 +6198,7 @@
     "status": "proposed",
     "artwork_id": "1l-d2OFwKN7END4RfAaKY1zxeayt40eFz",
     "artwork_url": "https://drive.google.com/file/d/1l-d2OFwKN7END4RfAaKY1zxeayt40eFz/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -7014,9 +6222,7 @@
     "status": "proposed",
     "artwork_id": "17pTXhd7qHQCGZ1zvte4t0hi4NTOlvBk0",
     "artwork_url": "https://drive.google.com/file/d/17pTXhd7qHQCGZ1zvte4t0hi4NTOlvBk0/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7028,9 +6234,7 @@
     "status": "proposed",
     "artwork_id": "1JP3bPU1OloYFstRaBUxEQEpQeDzvDijA",
     "artwork_url": "https://drive.google.com/file/d/1JP3bPU1OloYFstRaBUxEQEpQeDzvDijA/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -7048,9 +6252,7 @@
     "status": "proposed",
     "artwork_id": "1O23i9vRqtY9c6Ocw3INf3aG93fcjZoif",
     "artwork_url": "https://drive.google.com/file/d/1O23i9vRqtY9c6Ocw3INf3aG93fcjZoif/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -7062,9 +6264,7 @@
     "status": "proposed",
     "artwork_id": "1wNNucUyzSzEJ7DG2r1ToKSbGZZf97cxk",
     "artwork_url": "https://drive.google.com/file/d/1wNNucUyzSzEJ7DG2r1ToKSbGZZf97cxk/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -7084,9 +6284,7 @@
     "status": "proposed",
     "artwork_id": "1ATSsBmCgv8SqavIlxSCQBnirCFcU8Cj3",
     "artwork_url": "https://drive.google.com/file/d/1ATSsBmCgv8SqavIlxSCQBnirCFcU8Cj3/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -7098,9 +6296,7 @@
     "status": "proposed",
     "artwork_id": "1-gYxAh1MKrrGbvf4VnBwinEDKyfwuTx7",
     "artwork_url": "https://drive.google.com/file/d/1-gYxAh1MKrrGbvf4VnBwinEDKyfwuTx7/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7112,10 +6308,7 @@
     "status": "proposed",
     "artwork_id": "1wycLIUgZD28Se0DrbHGPYH-lWnsg1m7f",
     "artwork_url": "https://drive.google.com/file/d/1wycLIUgZD28Se0DrbHGPYH-lWnsg1m7f/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Hush"
-    ],
+    "keywords": ["Banish", "Hush"],
     "automatic_targets": []
   },
   {
@@ -7127,10 +6320,7 @@
     "status": "proposed",
     "artwork_id": "1zmX7Q7Pl-LYCcKTe-PF5nizG6_9R2ddp",
     "artwork_url": "https://drive.google.com/file/d/1zmX7Q7Pl-LYCcKTe-PF5nizG6_9R2ddp/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -7142,10 +6332,7 @@
     "status": "proposed",
     "artwork_id": "1wJ3ji_YRNjj3v1OK0Rir74nfFFonp43T",
     "artwork_url": "https://drive.google.com/file/d/1wJ3ji_YRNjj3v1OK0Rir74nfFFonp43T/view?usp=drivesdk",
-    "keywords": [
-      "Ward",
-      "Decay"
-    ],
+    "keywords": ["Ward", "Decay"],
     "automatic_targets": []
   },
   {
@@ -7157,9 +6344,7 @@
     "status": "proposed",
     "artwork_id": "1m3quWQOP8a5bwZ5hBIm-Bia7a2z41c6w",
     "artwork_url": "https://drive.google.com/file/d/1m3quWQOP8a5bwZ5hBIm-Bia7a2z41c6w/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7171,9 +6356,7 @@
     "status": "proposed",
     "artwork_id": "1X1n17_3-gGK6I572QrPECmJzrHldewET",
     "artwork_url": "https://drive.google.com/file/d/1X1n17_3-gGK6I572QrPECmJzrHldewET/view?usp=drivesdk",
-    "keywords": [
-      "Shadow"
-    ],
+    "keywords": ["Shadow"],
     "automatic_targets": []
   },
   {
@@ -7185,9 +6368,7 @@
     "status": "proposed",
     "artwork_id": "1vJPRrUVC_HIlUqqGctHVqwIKFyY8qWAs",
     "artwork_url": "https://drive.google.com/file/d/1vJPRrUVC_HIlUqqGctHVqwIKFyY8qWAs/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7199,9 +6380,7 @@
     "status": "proposed",
     "artwork_id": "1fwRyYd2iEwpF5q4woiIEJSgDuXkLtaNv",
     "artwork_url": "https://drive.google.com/file/d/1fwRyYd2iEwpF5q4woiIEJSgDuXkLtaNv/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -7219,9 +6398,7 @@
     "status": "proposed",
     "artwork_id": "1ou6BOrZnkOHjNDRvwWwH1d2BV5wHpcSf",
     "artwork_url": "https://drive.google.com/file/d/1ou6BOrZnkOHjNDRvwWwH1d2BV5wHpcSf/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -7239,9 +6416,7 @@
     "status": "proposed",
     "artwork_id": "1wmz5myUWFCXpAQ0v1TypvWaD000yJuAV",
     "artwork_url": "https://drive.google.com/file/d/1wmz5myUWFCXpAQ0v1TypvWaD000yJuAV/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -7253,9 +6428,7 @@
     "status": "proposed",
     "artwork_id": "1zl0Sf5kHV0MORfQiES4Kcmkt9YAZzBt_",
     "artwork_url": "https://drive.google.com/file/d/1zl0Sf5kHV0MORfQiES4Kcmkt9YAZzBt_/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7267,9 +6440,7 @@
     "status": "proposed",
     "artwork_id": "1jcQ9HpPZwVD1SfMpPnX8oL1_gjBIcfiz",
     "artwork_url": "https://drive.google.com/file/d/1jcQ9HpPZwVD1SfMpPnX8oL1_gjBIcfiz/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -7299,9 +6470,7 @@
     "status": "proposed",
     "artwork_id": "1t00_0N50Z-XG_fmJkwOT0tSGncPx5jLi",
     "artwork_url": "https://drive.google.com/file/d/1t00_0N50Z-XG_fmJkwOT0tSGncPx5jLi/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7313,10 +6482,7 @@
     "status": "proposed",
     "artwork_id": "1FYRVPV7uZ3suHWDiUwPSwp7gxCSzLDjM",
     "artwork_url": "https://drive.google.com/file/d/1FYRVPV7uZ3suHWDiUwPSwp7gxCSzLDjM/view?usp=drivesdk",
-    "keywords": [
-      "Banish",
-      "Reflect"
-    ],
+    "keywords": ["Banish", "Reflect"],
     "automatic_targets": []
   },
   {
@@ -7328,9 +6494,7 @@
     "status": "proposed",
     "artwork_id": "1qb4J2KKZqi0ulUomnwtaB_M50EYSfTJz",
     "artwork_url": "https://drive.google.com/file/d/1qb4J2KKZqi0ulUomnwtaB_M50EYSfTJz/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7342,9 +6506,7 @@
     "status": "proposed",
     "artwork_id": "1Qzg8Dn-urRmDberiEL8C-xkimdI-DsZ9",
     "artwork_url": "https://drive.google.com/file/d/1Qzg8Dn-urRmDberiEL8C-xkimdI-DsZ9/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7356,9 +6518,7 @@
     "status": "proposed",
     "artwork_id": "12rP35aIj8TDQuMmKGS2h3hVxbl2NmzuF",
     "artwork_url": "https://drive.google.com/file/d/12rP35aIj8TDQuMmKGS2h3hVxbl2NmzuF/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -7370,9 +6530,7 @@
     "status": "proposed",
     "artwork_id": "1oP6wlq_SHODPgVcHQMiV0GxGAE5UAJaX",
     "artwork_url": "https://drive.google.com/file/d/1oP6wlq_SHODPgVcHQMiV0GxGAE5UAJaX/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -7384,9 +6542,7 @@
     "status": "proposed",
     "artwork_id": "13jnjBNWIe390h83r6omH6hH8g5t3s0yN",
     "artwork_url": "https://drive.google.com/file/d/13jnjBNWIe390h83r6omH6hH8g5t3s0yN/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -7398,9 +6554,7 @@
     "status": "proposed",
     "artwork_id": "14VvdDhU-fiiaJ81VezlDk-bMljuTob7C",
     "artwork_url": "https://drive.google.com/file/d/14VvdDhU-fiiaJ81VezlDk-bMljuTob7C/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": [
       {
         "op": "Turn",
@@ -7419,9 +6573,7 @@
     "status": "proposed",
     "artwork_id": "1f8GpT4vliE4eZub7g16tuty8_5DJ5eQU",
     "artwork_url": "https://drive.google.com/file/d/1f8GpT4vliE4eZub7g16tuty8_5DJ5eQU/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",
@@ -7439,9 +6591,7 @@
     "status": "proposed",
     "artwork_id": "1mIOG4DXz7gnqM9iE3qAUdq7biIuqWR0W",
     "artwork_url": "https://drive.google.com/file/d/1mIOG4DXz7gnqM9iE3qAUdq7biIuqWR0W/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7453,9 +6603,7 @@
     "status": "proposed",
     "artwork_id": "1hBViq9MICzyCOGiCt1U1ufYeoQIU73y8",
     "artwork_url": "https://drive.google.com/file/d/1hBViq9MICzyCOGiCt1U1ufYeoQIU73y8/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7467,9 +6615,7 @@
     "status": "proposed",
     "artwork_id": "1c0MWpYjOhR6qMoZLHcy6D2Q3InFIbLXZ",
     "artwork_url": "https://drive.google.com/file/d/1c0MWpYjOhR6qMoZLHcy6D2Q3InFIbLXZ/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -7493,9 +6639,7 @@
     "status": "proposed",
     "artwork_id": "13eKKMD9cTJ04e_QvHO0vTu-Bj2QBiPu3",
     "artwork_url": "https://drive.google.com/file/d/13eKKMD9cTJ04e_QvHO0vTu-Bj2QBiPu3/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7507,9 +6651,7 @@
     "status": "proposed",
     "artwork_id": "1aTEjSUcPVynfQN9Eswe6nwiNWueEz74e",
     "artwork_url": "https://drive.google.com/file/d/1aTEjSUcPVynfQN9Eswe6nwiNWueEz74e/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -7533,9 +6675,7 @@
     "status": "proposed",
     "artwork_id": "1X5muc5W2DTUj11z4UBJYkWjtkKiC4diM",
     "artwork_url": "https://drive.google.com/file/d/1X5muc5W2DTUj11z4UBJYkWjtkKiC4diM/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7559,9 +6699,7 @@
     "status": "proposed",
     "artwork_id": "1d1TRR2rcTsJ-J8MDwuvp_8ehiid9ob16",
     "artwork_url": "https://drive.google.com/file/d/1d1TRR2rcTsJ-J8MDwuvp_8ehiid9ob16/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -7573,10 +6711,7 @@
     "status": "proposed",
     "artwork_id": "1f_qBQzjm25KRI-fd2v95onHwh52TBOuv",
     "artwork_url": "https://drive.google.com/file/d/1f_qBQzjm25KRI-fd2v95onHwh52TBOuv/view?usp=drivesdk",
-    "keywords": [
-      "Curse",
-      "Frost"
-    ],
+    "keywords": ["Curse", "Frost"],
     "automatic_targets": []
   },
   {
@@ -7588,9 +6723,7 @@
     "status": "proposed",
     "artwork_id": "198c930r4FN671-AnMTf_0ThNjTiuWIPN",
     "artwork_url": "https://drive.google.com/file/d/198c930r4FN671-AnMTf_0ThNjTiuWIPN/view?usp=drivesdk",
-    "keywords": [
-      "Burn"
-    ],
+    "keywords": ["Burn"],
     "automatic_targets": []
   },
   {
@@ -7602,9 +6735,7 @@
     "status": "proposed",
     "artwork_id": "1Pu_zhmbVPTEyQVTrHlxzrSP1Ffc4NNJ_",
     "artwork_url": "https://drive.google.com/file/d/1Pu_zhmbVPTEyQVTrHlxzrSP1Ffc4NNJ_/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7640,9 +6771,7 @@
     "status": "proposed",
     "artwork_id": "1FGwTBqRu1F-I_mGnjBSNpLdBt9Jw9G4b",
     "artwork_url": "https://drive.google.com/file/d/1FGwTBqRu1F-I_mGnjBSNpLdBt9Jw9G4b/view?usp=drivesdk",
-    "keywords": [
-      "Curse"
-    ],
+    "keywords": ["Curse"],
     "automatic_targets": []
   },
   {
@@ -7654,9 +6783,7 @@
     "status": "proposed",
     "artwork_id": "1o-dkTiZ0h3XR0uM16LjLdWhgNsAEkrVc",
     "artwork_url": "https://drive.google.com/file/d/1o-dkTiZ0h3XR0uM16LjLdWhgNsAEkrVc/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7718,10 +6845,7 @@
     "status": "proposed",
     "artwork_id": "1gEONgE4aoDSi0TjRTnx6KJh8KzEkaxA6",
     "artwork_url": "https://drive.google.com/file/d/1gEONgE4aoDSi0TjRTnx6KJh8KzEkaxA6/view?usp=drivesdk",
-    "keywords": [
-      "Burn",
-      "Banish"
-    ],
+    "keywords": ["Burn", "Banish"],
     "automatic_targets": []
   },
   {
@@ -7733,9 +6857,7 @@
     "status": "proposed",
     "artwork_id": "1XYTvAxxjPY_X_nT4YS80IQhF4Piu93UR",
     "artwork_url": "https://drive.google.com/file/d/1XYTvAxxjPY_X_nT4YS80IQhF4Piu93UR/view?usp=drivesdk",
-    "keywords": [
-      "Decay"
-    ],
+    "keywords": ["Decay"],
     "automatic_targets": []
   },
   {
@@ -7747,9 +6869,7 @@
     "status": "proposed",
     "artwork_id": "1l1KGiZRbTHGf-klaCItchDG3h1YQegfA",
     "artwork_url": "https://drive.google.com/file/d/1l1KGiZRbTHGf-klaCItchDG3h1YQegfA/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7773,9 +6893,7 @@
     "status": "proposed",
     "artwork_id": "1vrnC1LfHR5y8Z7v90h47fDvm8FtoeNeT",
     "artwork_url": "https://drive.google.com/file/d/1vrnC1LfHR5y8Z7v90h47fDvm8FtoeNeT/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7787,9 +6905,7 @@
     "status": "proposed",
     "artwork_id": "1fTkI3f9m1JEeHbCNXj-jyuqVEoXl_MaR",
     "artwork_url": "https://drive.google.com/file/d/1fTkI3f9m1JEeHbCNXj-jyuqVEoXl_MaR/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7801,9 +6917,7 @@
     "status": "proposed",
     "artwork_id": "1pj0jmUuw-gjzsZzJguUKWWNskSK6ubV6",
     "artwork_url": "https://drive.google.com/file/d/1pj0jmUuw-gjzsZzJguUKWWNskSK6ubV6/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7815,9 +6929,7 @@
     "status": "proposed",
     "artwork_id": "1R5NkIm5cbejZbf-6jN79JG3DupKNcGgH",
     "artwork_url": "https://drive.google.com/file/d/1R5NkIm5cbejZbf-6jN79JG3DupKNcGgH/view?usp=drivesdk",
-    "keywords": [
-      "Binding"
-    ],
+    "keywords": ["Binding"],
     "automatic_targets": []
   },
   {
@@ -7829,9 +6941,7 @@
     "status": "proposed",
     "artwork_id": "1rNReDA-OZzIU8yF-lJNAHPFCDAqUxjwR",
     "artwork_url": "https://drive.google.com/file/d/1rNReDA-OZzIU8yF-lJNAHPFCDAqUxjwR/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7843,9 +6953,7 @@
     "status": "proposed",
     "artwork_id": "167i8ayKaXrs_Y0WlPUXNoXn2BEnM7Jzt",
     "artwork_url": "https://drive.google.com/file/d/167i8ayKaXrs_Y0WlPUXNoXn2BEnM7Jzt/view?usp=drivesdk",
-    "keywords": [
-      "Shadow"
-    ],
+    "keywords": ["Shadow"],
     "automatic_targets": []
   },
   {
@@ -7857,9 +6965,7 @@
     "status": "proposed",
     "artwork_id": "18LGNndyVDWXwXCR0jMCN-53oW7fuxrc0",
     "artwork_url": "https://drive.google.com/file/d/18LGNndyVDWXwXCR0jMCN-53oW7fuxrc0/view?usp=drivesdk",
-    "keywords": [
-      "Banish"
-    ],
+    "keywords": ["Banish"],
     "automatic_targets": []
   },
   {
@@ -7871,9 +6977,7 @@
     "status": "proposed",
     "artwork_id": "1XOjsIF3ds7gVZNGfVG2xF5md2KqK6qXa",
     "artwork_url": "https://drive.google.com/file/d/1XOjsIF3ds7gVZNGfVG2xF5md2KqK6qXa/view?usp=drivesdk",
-    "keywords": [
-      "Ward"
-    ],
+    "keywords": ["Ward"],
     "automatic_targets": []
   },
   {
@@ -7885,9 +6989,7 @@
     "status": "proposed",
     "artwork_id": "1oTwsRMB7-OzEg1vn2a9Tl6cQEp5uPSZH",
     "artwork_url": "https://drive.google.com/file/d/1oTwsRMB7-OzEg1vn2a9Tl6cQEp5uPSZH/view?usp=drivesdk",
-    "keywords": [
-      "Scry"
-    ],
+    "keywords": ["Scry"],
     "automatic_targets": []
   },
   {
@@ -7899,9 +7001,7 @@
     "status": "proposed",
     "artwork_id": "1nBvpPWDdN24U2WoF060JUiwkKkgqtBL6",
     "artwork_url": "https://drive.google.com/file/d/1nBvpPWDdN24U2WoF060JUiwkKkgqtBL6/view?usp=drivesdk",
-    "keywords": [
-      "Keep"
-    ],
+    "keywords": ["Keep"],
     "automatic_targets": [
       {
         "op": "Keep",

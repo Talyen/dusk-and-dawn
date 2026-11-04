@@ -25,12 +25,7 @@
       "gain": "add"
     },
     "damage_over_time": {
-      "order": [
-        "player Burn",
-        "player Poison",
-        "enemy Burn",
-        "enemy Poison"
-      ],
+      "order": ["player Burn", "player Poison", "enemy Burn", "enemy Poison"],
       "timing": "player turn end, after unkept cards are discarded",
       "damage_types": {
         "Burn": "Fire",
@@ -81,10 +76,7 @@
       "percentage_candidate": {
         "per_stack_percent": 25,
         "stacking": "add percentage points; net Bless minus Curse before clamping",
-        "multiplier_bounds": [
-          0,
-          2
-        ],
+        "multiplier_bounds": [0, 2],
         "rounding": "nearest integer; half ties upward",
         "formula": "round_half_up((base hit + first-hit weakness) * clamp(1 + 0.25*(Bless-Curse), 0, 2))",
         "status": "comparison only, not approved"
@@ -126,11 +118,7 @@
     "Purge": {
       "target": "enemy",
       "quantity": "one random eligible status or all, explicitly printed",
-      "eligible": [
-        "Ward",
-        "Reflect",
-        "Bless"
-      ],
+      "eligible": ["Ward", "Reflect", "Bless"],
       "one": "whole named effect, all stacks",
       "random": "uniform across active eligible kinds",
       "selection_prompts": 0,
@@ -238,135 +226,39 @@
   "actual_attack_examples": [
     {
       "name": "Prism",
-      "base_hits": [
-        2,
-        2,
-        2
-      ],
-      "flat_Bless1": [
-        3,
-        3,
-        3
-      ],
-      "percent25_Bless1": [
-        3,
-        3,
-        3
-      ],
-      "flat_Curse1": [
-        1,
-        1,
-        1
-      ],
-      "percent25_Curse1": [
-        2,
-        2,
-        2
-      ],
-      "percent25_Curse2": [
-        1,
-        1,
-        1
-      ]
+      "base_hits": [2, 2, 2],
+      "flat_Bless1": [3, 3, 3],
+      "percent25_Bless1": [3, 3, 3],
+      "flat_Curse1": [1, 1, 1],
+      "percent25_Curse1": [2, 2, 2],
+      "percent25_Curse2": [1, 1, 1]
     },
     {
       "name": "Porcelain Choir · Chorus",
-      "base_hits": [
-        2,
-        2,
-        2
-      ],
-      "flat_Bless1": [
-        3,
-        3,
-        3
-      ],
-      "percent25_Bless1": [
-        3,
-        3,
-        3
-      ],
-      "flat_Curse1": [
-        1,
-        1,
-        1
-      ],
-      "percent25_Curse1": [
-        2,
-        2,
-        2
-      ],
-      "percent25_Curse2": [
-        1,
-        1,
-        1
-      ]
+      "base_hits": [2, 2, 2],
+      "flat_Bless1": [3, 3, 3],
+      "percent25_Bless1": [3, 3, 3],
+      "flat_Curse1": [1, 1, 1],
+      "percent25_Curse1": [2, 2, 2],
+      "percent25_Curse2": [1, 1, 1]
     },
     {
       "name": "Golden Millipede · March",
-      "base_hits": [
-        3,
-        1,
-        1,
-        1,
-        1
-      ],
-      "flat_Bless1": [
-        4,
-        2,
-        2,
-        2,
-        2
-      ],
-      "percent25_Bless1": [
-        4,
-        1,
-        1,
-        1,
-        1
-      ],
-      "flat_Curse1": [
-        2,
-        0,
-        0,
-        0,
-        0
-      ],
-      "percent25_Curse1": [
-        2,
-        1,
-        1,
-        1,
-        1
-      ],
-      "percent25_Curse2": [
-        2,
-        1,
-        1,
-        1,
-        1
-      ]
+      "base_hits": [3, 1, 1, 1, 1],
+      "flat_Bless1": [4, 2, 2, 2, 2],
+      "percent25_Bless1": [4, 1, 1, 1, 1],
+      "flat_Curse1": [2, 0, 0, 0, 0],
+      "percent25_Curse1": [2, 1, 1, 1, 1],
+      "percent25_Curse2": [2, 1, 1, 1, 1]
     },
     {
       "name": "Large printed card hit",
-      "base_hits": [
-        11
-      ],
-      "flat_Bless1": [
-        12
-      ],
-      "percent25_Bless1": [
-        14
-      ],
-      "flat_Curse1": [
-        10
-      ],
-      "percent25_Curse1": [
-        8
-      ],
-      "percent25_Curse2": [
-        6
-      ]
+      "base_hits": [11],
+      "flat_Bless1": [12],
+      "percent25_Bless1": [14],
+      "flat_Curse1": [10],
+      "percent25_Curse1": [8],
+      "percent25_Curse2": [6]
     }
   ],
   "selection_audit": [
@@ -506,9 +398,7 @@
       "number": 23,
       "face": "Sacrifice",
       "effect": "Banish another card of your choice from your hand. Deal 8 Radiance damage.",
-      "flags": [
-        "choose-held-card"
-      ]
+      "flags": ["choose-held-card"]
     },
     {
       "number": 24,
@@ -916,9 +806,7 @@
       "number": 91,
       "face": "Memory",
       "effect": "Return a card of your choice from your discard pile to your hand. Banish this card.",
-      "flags": [
-        "explicit-card-choice"
-      ]
+      "flags": ["explicit-card-choice"]
     },
     {
       "number": 92,
@@ -1014,9 +902,7 @@
       "number": 107,
       "face": "Cartographer",
       "effect": "Look at the top 3 cards of your library. Put them back in any order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     },
     {
       "number": 108,
@@ -1130,9 +1016,7 @@
       "number": 126,
       "face": "Wilderness",
       "effect": "Look at the top 3 cards of your library. Put 1 in your hand and the rest on the bottom in library order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     },
     {
       "number": 127,
@@ -1312,9 +1196,7 @@
       "number": 156,
       "face": "Loaded Dice",
       "effect": "Look at the top 3 cards of your library. Put 2 in your hand and the rest on the bottom in library order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     },
     {
       "number": 157,
@@ -1884,9 +1766,7 @@
       "number": 251,
       "face": "Sieve",
       "effect": "Look at the top 4 cards of your library. Put 1 in your hand and discard the rest in library order.",
-      "flags": [
-        "inspection-selection-or-order"
-      ]
+      "flags": ["inspection-selection-or-order"]
     },
     {
       "number": 252,

@@ -547,10 +547,7 @@
     },
     "7": {
       "trait": "On Root Lash: Apply 2 Weaken to the player.",
-      "actions": [
-        "Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player.",
-        "Heal 3 HP."
-      ]
+      "actions": ["Deal 7 Growth damage. Trait — Root Snare: Apply 2 Weaken to the player.", "Heal 3 HP."]
     },
     "8": {
       "trait": "On Chorus and Clutch: Add 2 hits of 2 Binding damage.",
@@ -632,10 +629,7 @@
     },
     "19": {
       "trait": "On Blackwater Charge: Apply 2 Weaken to the player.",
-      "actions": [
-        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player.",
-        "Heal 4 HP."
-      ]
+      "actions": ["Deal 7 Shadow damage. Trait — Mud Spray: Apply 2 Weaken to the player.", "Heal 4 HP."]
     },
     "20": {
       "trait": "On Round Again: Move the top 1 card of the player's library to the bottom of that pile.",
@@ -689,10 +683,7 @@
     },
     "27": {
       "trait": "On Pour the Wax: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Fire damage.",
-        "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."
-      ]
+      "actions": ["Deal 5 Fire damage.", "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."]
     },
     "28": {
       "trait": "On Reel the Line: The player discards 1 held card of their choice, if any.",
@@ -703,10 +694,7 @@
     },
     "29": {
       "trait": "On Bitter Goblet: Apply 2 Weaken to the player.",
-      "actions": [
-        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player.",
-        "Heal 4 HP."
-      ]
+      "actions": ["Deal 6 Decay damage. Trait — Cellar Fumes: Apply 2 Weaken to the player.", "Heal 4 HP."]
     },
     "30": {
       "trait": "On Shake the Chalk: Apply 3 Weaken to the player.",
@@ -776,10 +764,7 @@
     },
     "39": {
       "trait": "On Fold the Shelter: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."
-      ]
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."]
     },
     "40": {
       "trait": "On Scoop the Offering: The player Banishes 1 held card of their choice, if any.",
@@ -942,10 +927,7 @@
     },
     "62": {
       "trait": "On Let the Moss Drink: Heal 3 HP.",
-      "actions": [
-        "Deal 6 Growth damage.",
-        "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."
-      ]
+      "actions": ["Deal 6 Growth damage.", "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."]
     },
     "63": {
       "trait": "On Loose the Moths: Move the top 2 cards of the player's library to the player's discard pile.",
@@ -1000,10 +982,7 @@
     },
     "70": {
       "trait": "On Fold the Spiral: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."
-      ]
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."]
     },
     "71": {
       "trait": "On Collect the Pearl: The player starts their next turn with 1 less mana.",

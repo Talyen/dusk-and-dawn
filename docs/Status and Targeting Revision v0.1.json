@@ -13,12 +13,7 @@
       "gain": "add"
     },
     "damage_over_time": {
-      "order": [
-        "player Burn",
-        "player Poison",
-        "enemy Burn",
-        "enemy Poison"
-      ],
+      "order": ["player Burn", "player Poison", "enemy Burn", "enemy Poison"],
       "timing": "player turn end, after unkept cards are discarded",
       "damage_types": {
         "Burn": "Fire",
@@ -69,10 +64,7 @@
       "percentage_candidate": {
         "per_stack_percent": 25,
         "stacking": "add percentage points; net Bless minus Curse before clamping",
-        "multiplier_bounds": [
-          0,
-          2
-        ],
+        "multiplier_bounds": [0, 2],
         "rounding": "nearest integer; half ties upward",
         "formula": "round_half_up((base hit + first-hit weakness) * clamp(1 + 0.25*(Bless-Curse), 0, 2))",
         "status": "comparison only, not approved"
@@ -114,11 +106,7 @@
     "Purge": {
       "target": "enemy",
       "quantity": "one random eligible status or all, explicitly printed",
-      "eligible": [
-        "Ward",
-        "Reflect",
-        "Bless"
-      ],
+      "eligible": ["Ward", "Reflect", "Bless"],
       "one": "whole named effect, all stacks",
       "random": "uniform across active eligible kinds",
       "selection_prompts": 0,
@@ -147,34 +135,12 @@
     "selection_prompts_for_Keep_or_Flip": 0
   },
   "damage_over_time_examples": {
-    "1": [
-      1
-    ],
-    "2": [
-      2,
-      1
-    ],
-    "3": [
-      3,
-      1
-    ],
-    "4": [
-      4,
-      2,
-      1
-    ],
-    "7": [
-      7,
-      3,
-      1
-    ],
-    "16": [
-      16,
-      8,
-      4,
-      2,
-      1
-    ]
+    "1": [1],
+    "2": [2, 1],
+    "3": [3, 1],
+    "4": [4, 2, 1],
+    "7": [7, 3, 1],
+    "16": [16, 8, 4, 2, 1]
   },
   "balance_and_gameplay": [
     "Ward banking makes spare defense useful across turns and can make quiet enemy turns more defensive. Repeated gains may support stalls: 10 Ward every turn with no damage approaches 19 from zero after gain. Values remain unchanged pending playtests; test healing plus Ward and shield-stripping counters.",
@@ -215,11 +181,7 @@
     }
   },
   "status_classification": {
-    "beneficial_combat_statuses": [
-      "Ward",
-      "Reflect",
-      "Bless"
-    ],
+    "beneficial_combat_statuses": ["Ward", "Reflect", "Bless"],
     "harmful_combat_statuses": [
       "Burn",
       "Poison",
@@ -245,9 +207,7 @@
       "after": "Gain 5 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 2,
@@ -256,10 +216,7 @@
       "after": "Deal 4 Shadow damage. Leech.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Leech",
-        "Shadow"
-      ]
+      "keywords": ["Leech", "Shadow"]
     },
     {
       "number": 3,
@@ -268,9 +225,7 @@
       "after": "Deal 7 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 4,
@@ -279,9 +234,7 @@
       "after": "Lose 2 HP. Deal 9 Shadow damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Shadow"
-      ]
+      "keywords": ["Shadow"]
     },
     {
       "number": 5,
@@ -290,9 +243,7 @@
       "after": "Heal 3 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 6,
@@ -301,10 +252,7 @@
       "after": "Deal 4 Shadow damage. Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Shadow"
-      ]
+      "keywords": ["Flip", "Shadow"]
     },
     {
       "number": 7,
@@ -313,9 +261,7 @@
       "after": "Gain 7 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 8,
@@ -324,10 +270,7 @@
       "after": "Deal 3 Shadow damage. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep",
-        "Shadow"
-      ]
+      "keywords": ["Keep", "Shadow"]
     },
     {
       "number": 9,
@@ -336,9 +279,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 10,
@@ -356,9 +297,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 12,
@@ -367,9 +306,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 13,
@@ -378,10 +315,7 @@
       "after": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Cleanse"
-      ]
+      "keywords": ["Banish", "Cleanse"]
     },
     {
       "number": 14,
@@ -390,11 +324,7 @@
       "after": "Deal 5 Shadow damage. Leech. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Leech",
-        "Shadow"
-      ]
+      "keywords": ["Banish", "Leech", "Shadow"]
     },
     {
       "number": 15,
@@ -403,9 +333,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 16,
@@ -414,9 +342,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 17,
@@ -425,9 +351,7 @@
       "after": "Discard a random card. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 18,
@@ -436,9 +360,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 19,
@@ -447,9 +369,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 20,
@@ -458,10 +378,7 @@
       "after": "Curse 3. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Curse"
-      ]
+      "keywords": ["Banish", "Curse"]
     },
     {
       "number": 21,
@@ -479,9 +396,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 23,
@@ -490,10 +405,7 @@
       "after": "Banish another card of your choice from your hand. Deal 8 Radiance damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Radiance"
-      ]
+      "keywords": ["Banish", "Radiance"]
     },
     {
       "number": 24,
@@ -502,9 +414,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 25,
@@ -513,9 +423,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 26,
@@ -533,9 +441,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 28,
@@ -544,9 +450,7 @@
       "after": "Deal 6 Shadow damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Shadow"
-      ]
+      "keywords": ["Shadow"]
     },
     {
       "number": 29,
@@ -555,10 +459,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 30,
@@ -567,9 +468,7 @@
       "after": "Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 31,
@@ -578,9 +477,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 32,
@@ -589,9 +486,7 @@
       "after": "Deal 6 Shadow damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Shadow"
-      ]
+      "keywords": ["Shadow"]
     },
     {
       "number": 33,
@@ -600,9 +495,7 @@
       "after": "Flip 2 random cards in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 34,
@@ -611,9 +504,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 35,
@@ -631,9 +522,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 37,
@@ -642,9 +531,7 @@
       "after": "Deal 6 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 38,
@@ -653,9 +540,7 @@
       "after": "Flip your hand.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 39,
@@ -682,9 +567,7 @@
       "after": "Apply 3 Burn.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn"
-      ]
+      "keywords": ["Burn"]
     },
     {
       "number": 42,
@@ -693,9 +576,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 43,
@@ -704,10 +585,7 @@
       "after": "Remove all Burn from both combatants. Heal 3 HP. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 44,
@@ -716,9 +594,7 @@
       "after": "Deal 6 Decay damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Decay"
-      ]
+      "keywords": ["Decay"]
     },
     {
       "number": 45,
@@ -727,9 +603,7 @@
       "after": "Bless 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Bless"
-      ]
+      "keywords": ["Bless"]
     },
     {
       "number": 46,
@@ -738,10 +612,7 @@
       "after": "Hush. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Hush"
-      ]
+      "keywords": ["Banish", "Hush"]
     },
     {
       "number": 47,
@@ -750,9 +621,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 48,
@@ -761,9 +630,7 @@
       "after": "Lose 2 HP. Gain 1 mana. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 49,
@@ -772,9 +639,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 50,
@@ -783,9 +648,7 @@
       "after": "Apply 3 Poison.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Poison"
-      ]
+      "keywords": ["Poison"]
     },
     {
       "number": 51,
@@ -794,9 +657,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 52,
@@ -805,9 +666,7 @@
       "after": "Banish the bottom card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 53,
@@ -816,9 +675,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 54,
@@ -827,10 +684,7 @@
       "after": "Deal 7 Decay damage. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Decay"]
     },
     {
       "number": 55,
@@ -848,10 +702,7 @@
       "after": "Deal 7 Decay damage. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Decay"]
     },
     {
       "number": 57,
@@ -860,9 +711,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 58,
@@ -871,9 +720,7 @@
       "after": "Deal 2 Decay damage twice.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Decay"
-      ]
+      "keywords": ["Decay"]
     },
     {
       "number": 59,
@@ -882,9 +729,7 @@
       "after": "Draw 1 card. Flip your hand.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 60,
@@ -893,9 +738,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 61,
@@ -904,10 +747,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 62,
@@ -916,9 +756,7 @@
       "after": "Deal 2 Release damage twice.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Release"
-      ]
+      "keywords": ["Release"]
     },
     {
       "number": 63,
@@ -927,10 +765,7 @@
       "after": "Gain 1 mana. Apply 2 Burn. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 64,
@@ -939,9 +774,7 @@
       "after": "Turn your hand to its dark faces. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 65,
@@ -959,9 +792,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 67,
@@ -970,9 +801,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 68,
@@ -981,9 +810,7 @@
       "after": "Shuffle your hand into your library. Draw 5 cards. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 69,
@@ -1001,9 +828,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 71,
@@ -1012,9 +837,7 @@
       "after": "Gain 7 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 72,
@@ -1032,10 +855,7 @@
       "after": "Cleanse one random harmful status from yourself. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Cleanse"
-      ]
+      "keywords": ["Banish", "Cleanse"]
     },
     {
       "number": 74,
@@ -1053,9 +873,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 76,
@@ -1073,9 +891,7 @@
       "after": "Bless 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Bless"
-      ]
+      "keywords": ["Bless"]
     },
     {
       "number": 78,
@@ -1084,9 +900,7 @@
       "after": "Deal 7 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 79,
@@ -1104,10 +918,7 @@
       "after": "Deal 5 Shadow damage, ignoring Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Shadow"
-      ]
+      "keywords": ["Ward", "Shadow"]
     },
     {
       "number": 81,
@@ -1125,9 +936,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 83,
@@ -1136,10 +945,7 @@
       "after": "Cleanse all harmful statuses from yourself. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Cleanse"
-      ]
+      "keywords": ["Banish", "Cleanse"]
     },
     {
       "number": 84,
@@ -1148,10 +954,7 @@
       "after": "Curse 3. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Curse"
-      ]
+      "keywords": ["Banish", "Curse"]
     },
     {
       "number": 85,
@@ -1160,9 +963,7 @@
       "after": "Gain 7 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 86,
@@ -1180,10 +981,7 @@
       "after": "Bless 3. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Bless"
-      ]
+      "keywords": ["Banish", "Bless"]
     },
     {
       "number": 88,
@@ -1192,9 +990,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 89,
@@ -1221,9 +1017,7 @@
       "after": "Return a card of your choice from your discard pile to your hand. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 92,
@@ -1232,10 +1026,7 @@
       "after": "Deal 7 Oblivion damage. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Oblivion"
-      ]
+      "keywords": ["Banish", "Oblivion"]
     },
     {
       "number": 93,
@@ -1244,9 +1035,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 94,
@@ -1255,9 +1044,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 95,
@@ -1266,9 +1053,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 96,
@@ -1286,9 +1071,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 98,
@@ -1297,9 +1080,7 @@
       "after": "Flip your hand.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 99,
@@ -1308,9 +1089,7 @@
       "after": "Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 100,
@@ -1319,10 +1098,7 @@
       "after": "Flip a random card in your hand. Keep it.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 101,
@@ -1340,10 +1116,7 @@
       "after": "Banish the top card of your discard pile. Deal 6 Decay damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Decay"]
     },
     {
       "number": 103,
@@ -1352,9 +1125,7 @@
       "after": "Heal 5 HP. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 104,
@@ -1363,9 +1134,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 105,
@@ -1374,9 +1143,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 106,
@@ -1412,9 +1179,7 @@
       "after": "Deal 7 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 110,
@@ -1432,10 +1197,7 @@
       "after": "Deal 5 Growth damage. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Growth"
-      ]
+      "keywords": ["Banish", "Growth"]
     },
     {
       "number": 112,
@@ -1444,10 +1206,7 @@
       "after": "Banish the top card of your library. Deal 8 Decay damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Decay"]
     },
     {
       "number": 113,
@@ -1456,9 +1215,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 114,
@@ -1467,9 +1224,7 @@
       "after": "Banish the top card of your discard pile. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 115,
@@ -1487,10 +1242,7 @@
       "after": "Deal 3 Shadow damage. Curse 1.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse",
-        "Shadow"
-      ]
+      "keywords": ["Curse", "Shadow"]
     },
     {
       "number": 117,
@@ -1499,9 +1251,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 118,
@@ -1519,9 +1269,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 120,
@@ -1530,9 +1278,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 121,
@@ -1541,9 +1287,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 122,
@@ -1552,10 +1296,7 @@
       "after": "Deal 7 Decay damage. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Decay"]
     },
     {
       "number": 123,
@@ -1564,9 +1305,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 124,
@@ -1575,9 +1314,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 125,
@@ -1586,9 +1323,7 @@
       "after": "Gain 10 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 126,
@@ -1606,9 +1341,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 128,
@@ -1617,9 +1350,7 @@
       "after": "Banish the bottom card of your discard pile. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 129,
@@ -1637,9 +1368,7 @@
       "after": "Banish a random other card from your hand. Draw 3 cards.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 131,
@@ -1648,9 +1377,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 132,
@@ -1659,9 +1386,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 133,
@@ -1670,9 +1395,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 134,
@@ -1690,9 +1413,7 @@
       "after": "Deal 6 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 136,
@@ -1701,9 +1422,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 137,
@@ -1712,10 +1431,7 @@
       "after": "Curse 1. Deal 2 Frost damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse",
-        "Frost"
-      ]
+      "keywords": ["Curse", "Frost"]
     },
     {
       "number": 138,
@@ -1724,10 +1440,7 @@
       "after": "Deal 5 Fire damage. Apply 2 Burn.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Burn",
-        "Fire"
-      ]
+      "keywords": ["Burn", "Fire"]
     },
     {
       "number": 139,
@@ -1736,9 +1449,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 140,
@@ -1756,10 +1467,7 @@
       "after": "Curse 1. Deal 3 Radiance damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse",
-        "Radiance"
-      ]
+      "keywords": ["Curse", "Radiance"]
     },
     {
       "number": 142,
@@ -1768,9 +1476,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 143,
@@ -1779,9 +1485,7 @@
       "after": "Draw 1 card. Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 144,
@@ -1808,11 +1512,7 @@
       "after": "Banish the top card of your discard pile. Deal 5 Decay damage, ignoring Ward.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Ward",
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Ward", "Banish", "Decay"]
     },
     {
       "number": 147,
@@ -1821,9 +1521,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 148,
@@ -1832,9 +1530,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 149,
@@ -1843,9 +1539,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 150,
@@ -1854,9 +1548,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 151,
@@ -1865,9 +1557,7 @@
       "after": "Deal 2 Radiance damage three times.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 152,
@@ -1876,10 +1566,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 153,
@@ -1888,9 +1575,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 154,
@@ -1899,10 +1584,7 @@
       "after": "Curse 3. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Curse"
-      ]
+      "keywords": ["Banish", "Curse"]
     },
     {
       "number": 155,
@@ -1911,10 +1593,7 @@
       "after": "Bless 1. Curse 1.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Bless",
-        "Curse"
-      ]
+      "keywords": ["Bless", "Curse"]
     },
     {
       "number": 156,
@@ -1932,10 +1611,7 @@
       "after": "Scry. Curse 1.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry",
-        "Curse"
-      ]
+      "keywords": ["Scry", "Curse"]
     },
     {
       "number": 158,
@@ -1953,9 +1629,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 160,
@@ -1964,9 +1638,7 @@
       "after": "Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 161,
@@ -1975,9 +1647,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 162,
@@ -1995,9 +1665,7 @@
       "after": "Reverse the top 2 cards of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 164,
@@ -2006,9 +1674,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 165,
@@ -2017,9 +1683,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 166,
@@ -2028,9 +1692,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 167,
@@ -2048,9 +1710,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 169,
@@ -2059,9 +1719,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 170,
@@ -2070,9 +1728,7 @@
       "after": "Return the top 2 cards of your discard pile to your hand. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 171,
@@ -2081,10 +1737,7 @@
       "after": "Bless 1. Curse 1.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Bless",
-        "Curse"
-      ]
+      "keywords": ["Bless", "Curse"]
     },
     {
       "number": 172,
@@ -2102,9 +1755,7 @@
       "after": "Draw 1 card. Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 174,
@@ -2113,10 +1764,7 @@
       "after": "Deal 3 Decay damage twice. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Decay"]
     },
     {
       "number": 175,
@@ -2143,9 +1791,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 178,
@@ -2181,9 +1827,7 @@
       "after": "Deal 7 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 182,
@@ -2201,10 +1845,7 @@
       "after": "Curse 3. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Curse"
-      ]
+      "keywords": ["Banish", "Curse"]
     },
     {
       "number": 184,
@@ -2213,9 +1854,7 @@
       "after": "Discard a random card. Deal 10 Release damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Release"
-      ]
+      "keywords": ["Release"]
     },
     {
       "number": 185,
@@ -2224,10 +1863,7 @@
       "after": "Hush. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Hush"
-      ]
+      "keywords": ["Banish", "Hush"]
     },
     {
       "number": 186,
@@ -2236,9 +1872,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 187,
@@ -2247,9 +1881,7 @@
       "after": "Draw 1 card. Turn your hand to its light faces. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 188,
@@ -2258,9 +1890,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 189,
@@ -2269,9 +1899,7 @@
       "after": "Draw 3 cards. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 190,
@@ -2280,9 +1908,7 @@
       "after": "Banish all other cards in your hand.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 191,
@@ -2291,9 +1917,7 @@
       "after": "Heal 5 HP. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 192,
@@ -2302,9 +1926,7 @@
       "after": "Lose 2 HP. Deal 8 Decay damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Decay"
-      ]
+      "keywords": ["Decay"]
     },
     {
       "number": 193,
@@ -2322,9 +1944,7 @@
       "after": "Put the top card of your library on the bottom. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 195,
@@ -2333,10 +1953,7 @@
       "after": "Purge all beneficial statuses from the enemy. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Purge"
-      ]
+      "keywords": ["Banish", "Purge"]
     },
     {
       "number": 196,
@@ -2345,9 +1962,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 197,
@@ -2356,9 +1971,7 @@
       "after": "Bless 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Bless"
-      ]
+      "keywords": ["Bless"]
     },
     {
       "number": 198,
@@ -2376,9 +1989,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 200,
@@ -2387,10 +1998,7 @@
       "after": "Apply 3 Burn. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 201,
@@ -2399,9 +2007,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 202,
@@ -2410,10 +2016,7 @@
       "after": "Flip this card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 203,
@@ -2422,9 +2025,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 204,
@@ -2433,9 +2034,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 205,
@@ -2444,9 +2043,7 @@
       "after": "Deal 2 Radiance damage twice.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 206,
@@ -2455,9 +2052,7 @@
       "after": "Lose 2 HP. Deal 11 Decay damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Decay"
-      ]
+      "keywords": ["Decay"]
     },
     {
       "number": 207,
@@ -2466,9 +2061,7 @@
       "after": "Deal 7 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 208,
@@ -2504,9 +2097,7 @@
       "after": "Flip your hand.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 212,
@@ -2515,10 +2106,7 @@
       "after": "Flip this card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 213,
@@ -2527,9 +2115,7 @@
       "after": "Deal 2 Binding damage twice.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 214,
@@ -2547,9 +2133,7 @@
       "after": "Put the bottom card of your discard pile on top of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 216,
@@ -2558,9 +2142,7 @@
       "after": "Banish the bottom card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 217,
@@ -2569,9 +2151,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 218,
@@ -2580,9 +2160,7 @@
       "after": "Purge one random beneficial status from the enemy.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Purge"
-      ]
+      "keywords": ["Purge"]
     },
     {
       "number": 219,
@@ -2591,10 +2169,7 @@
       "after": "Remove all your Burn. Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 220,
@@ -2603,9 +2178,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 221,
@@ -2614,9 +2187,7 @@
       "after": "Gain 9 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 222,
@@ -2625,9 +2196,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 223,
@@ -2636,9 +2205,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 224,
@@ -2647,9 +2214,7 @@
       "after": "Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 225,
@@ -2667,9 +2232,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 227,
@@ -2678,9 +2241,7 @@
       "after": "Deal 6 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 228,
@@ -2689,10 +2250,7 @@
       "after": "Deal 7 Release damage. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Release"
-      ]
+      "keywords": ["Banish", "Release"]
     },
     {
       "number": 229,
@@ -2710,10 +2268,7 @@
       "after": "Curse 3. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Curse"
-      ]
+      "keywords": ["Banish", "Curse"]
     },
     {
       "number": 231,
@@ -2722,9 +2277,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 232,
@@ -2733,11 +2286,7 @@
       "after": "Deal 5 Decay damage, ignoring Ward. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Ward", "Banish", "Decay"]
     },
     {
       "number": 233,
@@ -2746,10 +2295,7 @@
       "after": "Flip this card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 234,
@@ -2758,9 +2304,7 @@
       "after": "Draw 1 card. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 235,
@@ -2769,9 +2313,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 236,
@@ -2780,10 +2322,7 @@
       "after": "Banish the bottom card of your discard pile. Deal 6 Decay damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Decay"]
     },
     {
       "number": 237,
@@ -2792,9 +2331,7 @@
       "after": "Deal 5 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 238,
@@ -2803,10 +2340,7 @@
       "after": "Deal 3 Shadow damage. Leech.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Leech",
-        "Shadow"
-      ]
+      "keywords": ["Leech", "Shadow"]
     },
     {
       "number": 239,
@@ -2815,9 +2349,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 240,
@@ -2835,9 +2367,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 242,
@@ -2846,9 +2376,7 @@
       "after": "Deal 5 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 243,
@@ -2857,9 +2385,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 244,
@@ -2868,9 +2394,7 @@
       "after": "Banish the bottom card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 245,
@@ -2879,9 +2403,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 246,
@@ -2890,9 +2412,7 @@
       "after": "Draw 2 cards. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 247,
@@ -2910,9 +2430,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 249,
@@ -2921,9 +2439,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 250,
@@ -2932,11 +2448,7 @@
       "after": "Deal 7 Release damage, ignoring Ward. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Banish",
-        "Release"
-      ]
+      "keywords": ["Ward", "Banish", "Release"]
     },
     {
       "number": 251,
@@ -2963,9 +2475,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 254,
@@ -2974,9 +2484,7 @@
       "after": "Deal 6 Release damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Release"
-      ]
+      "keywords": ["Release"]
     },
     {
       "number": 255,
@@ -2985,9 +2493,7 @@
       "after": "Remove all your Curse.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 256,
@@ -2996,9 +2502,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 257,
@@ -3007,9 +2511,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 258,
@@ -3018,9 +2520,7 @@
       "after": "Draw 1 card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 259,
@@ -3038,10 +2538,7 @@
       "after": "Deal 5 Shadow damage, ignoring Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Shadow"
-      ]
+      "keywords": ["Ward", "Shadow"]
     },
     {
       "number": 261,
@@ -3050,9 +2547,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 262,
@@ -3061,9 +2556,7 @@
       "after": "Deal 7 Release damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Release"
-      ]
+      "keywords": ["Release"]
     },
     {
       "number": 263,
@@ -3072,9 +2565,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 264,
@@ -3083,9 +2574,7 @@
       "after": "Apply 3 Poison.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Poison"
-      ]
+      "keywords": ["Poison"]
     },
     {
       "number": 265,
@@ -3094,9 +2583,7 @@
       "after": "Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 266,
@@ -3105,9 +2592,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 267,
@@ -3116,9 +2601,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 268,
@@ -3127,9 +2610,7 @@
       "after": "Deal 7 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 269,
@@ -3138,9 +2619,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 270,
@@ -3149,9 +2628,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 271,
@@ -3196,9 +2673,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 276,
@@ -3207,9 +2682,7 @@
       "after": "Banish the bottom card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 277,
@@ -3218,9 +2691,7 @@
       "after": "Deal 7 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 278,
@@ -3229,10 +2700,7 @@
       "after": "Curse 1. Deal 2 Decay damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse",
-        "Decay"
-      ]
+      "keywords": ["Curse", "Decay"]
     },
     {
       "number": 279,
@@ -3241,10 +2709,7 @@
       "after": "Remove all your Burn. Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 280,
@@ -3253,9 +2718,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 281,
@@ -3273,9 +2736,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 283,
@@ -3284,9 +2745,7 @@
       "after": "Keep 2 random cards in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 284,
@@ -3295,9 +2754,7 @@
       "after": "Apply 2 Poison.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Poison"
-      ]
+      "keywords": ["Poison"]
     },
     {
       "number": 285,
@@ -3324,10 +2781,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 288,
@@ -3336,10 +2790,7 @@
       "after": "Apply 3 Burn. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 289,
@@ -3348,9 +2799,7 @@
       "after": "Flip the top card of your discard pile. Return it to your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 290,
@@ -3359,9 +2808,7 @@
       "after": "Deal 2 Decay damage three times.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Decay"
-      ]
+      "keywords": ["Decay"]
     },
     {
       "number": 291,
@@ -3370,9 +2817,7 @@
       "after": "Flip your hand.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 292,
@@ -3390,9 +2835,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 294,
@@ -3401,9 +2844,7 @@
       "after": "Remove 6 enemy Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 295,
@@ -3412,9 +2853,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 296,
@@ -3423,9 +2862,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 297,
@@ -3434,9 +2871,7 @@
       "after": "Bless 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Bless"
-      ]
+      "keywords": ["Bless"]
     },
     {
       "number": 298,
@@ -3445,10 +2880,7 @@
       "after": "Hush. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Hush"
-      ]
+      "keywords": ["Banish", "Hush"]
     },
     {
       "number": 299,
@@ -3466,10 +2898,7 @@
       "after": "Hush. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Hush"
-      ]
+      "keywords": ["Banish", "Hush"]
     },
     {
       "number": 301,
@@ -3478,9 +2907,7 @@
       "after": "Deal 2 Radiance damage three times.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 302,
@@ -3489,9 +2916,7 @@
       "after": "Keep 2 random cards in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 303,
@@ -3500,9 +2925,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 304,
@@ -3511,9 +2934,7 @@
       "after": "Remove all your Curse.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 305,
@@ -3522,9 +2943,7 @@
       "after": "Put the top card of your discard pile on top of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 306,
@@ -3533,9 +2952,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 307,
@@ -3544,9 +2961,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 308,
@@ -3555,10 +2970,7 @@
       "after": "Remove all your Poison. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Poison",
-        "Banish"
-      ]
+      "keywords": ["Poison", "Banish"]
     },
     {
       "number": 309,
@@ -3576,9 +2988,7 @@
       "after": "Banish the top card of your discard pile. Heal 3 HP. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 311,
@@ -3587,9 +2997,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 312,
@@ -3598,9 +3006,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 313,
@@ -3609,9 +3015,7 @@
       "after": "Flip the top card of your discard pile. Return it to your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 314,
@@ -3620,10 +3024,7 @@
       "after": "Deal 6 Release damage, ignoring Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Release"
-      ]
+      "keywords": ["Ward", "Release"]
     },
     {
       "number": 315,
@@ -3632,9 +3033,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 316,
@@ -3643,9 +3042,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 317,
@@ -3654,9 +3051,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 318,
@@ -3665,10 +3060,7 @@
       "after": "Remove 4 enemy Ward. Heal 3 HP. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Banish"
-      ]
+      "keywords": ["Ward", "Banish"]
     },
     {
       "number": 319,
@@ -3677,9 +3069,7 @@
       "after": "Keep a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 320,
@@ -3688,9 +3078,7 @@
       "after": "Draw 3 cards. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 321,
@@ -3699,9 +3087,7 @@
       "after": "Keep a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 322,
@@ -3710,10 +3096,7 @@
       "after": "Remove all your Curse. Draw 2 cards. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Curse"
-      ]
+      "keywords": ["Banish", "Curse"]
     },
     {
       "number": 323,
@@ -3722,9 +3105,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 324,
@@ -3742,9 +3123,7 @@
       "after": "Apply 3 Burn.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn"
-      ]
+      "keywords": ["Burn"]
     },
     {
       "number": 326,
@@ -3753,9 +3132,7 @@
       "after": "Remove all Burn from both combatants. Turn your hand to its dark faces.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn"
-      ]
+      "keywords": ["Burn"]
     },
     {
       "number": 327,
@@ -3773,9 +3150,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 329,
@@ -3784,9 +3159,7 @@
       "after": "Draw 2 cards. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 330,
@@ -3795,9 +3168,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 331,
@@ -3806,9 +3177,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 332,
@@ -3817,10 +3186,7 @@
       "after": "Apply 1 Burn. Gain 1 mana. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 333,
@@ -3829,9 +3195,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 334,
@@ -3840,9 +3204,7 @@
       "after": "Banish the top card of your library.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 335,
@@ -3851,9 +3213,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 336,
@@ -3862,9 +3222,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 337,
@@ -3873,9 +3231,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 338,
@@ -3884,9 +3240,7 @@
       "after": "Draw 1 card. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 339,
@@ -3895,9 +3249,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 340,
@@ -3906,9 +3258,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 341,
@@ -3935,9 +3285,7 @@
       "after": "Reverse the top 3 cards of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 344,
@@ -3955,9 +3303,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 346,
@@ -3975,9 +3321,7 @@
       "after": "Deal 5 Release damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Release"
-      ]
+      "keywords": ["Release"]
     },
     {
       "number": 348,
@@ -3986,9 +3330,7 @@
       "after": "Gain 5 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 349,
@@ -3997,9 +3339,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 350,
@@ -4008,9 +3348,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 351,
@@ -4019,9 +3357,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 352,
@@ -4030,9 +3366,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 353,
@@ -4050,9 +3384,7 @@
       "after": "Deal 5 Shadow damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Shadow"
-      ]
+      "keywords": ["Shadow"]
     },
     {
       "number": 355,
@@ -4061,9 +3393,7 @@
       "after": "Deal 6 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 356,
@@ -4072,11 +3402,7 @@
       "after": "Deal 5 Decay damage. Leech. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Leech",
-        "Decay"
-      ]
+      "keywords": ["Banish", "Leech", "Decay"]
     },
     {
       "number": 357,
@@ -4103,9 +3429,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 360,
@@ -4114,10 +3438,7 @@
       "after": "Deal 2 Decay damage. Apply 2 Poison.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Poison",
-        "Decay"
-      ]
+      "keywords": ["Poison", "Decay"]
     },
     {
       "number": 361,
@@ -4126,9 +3447,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 362,
@@ -4137,9 +3456,7 @@
       "after": "Gain 5 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 363,
@@ -4148,9 +3465,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 364,
@@ -4159,9 +3474,7 @@
       "after": "Deal 2 Decay damage three times.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Decay"
-      ]
+      "keywords": ["Decay"]
     },
     {
       "number": 365,
@@ -4170,9 +3483,7 @@
       "after": "Deal 6 Radiance damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Radiance"
-      ]
+      "keywords": ["Radiance"]
     },
     {
       "number": 366,
@@ -4181,10 +3492,7 @@
       "after": "Deal 3 Decay damage. Apply 2 Poison.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Poison",
-        "Decay"
-      ]
+      "keywords": ["Poison", "Decay"]
     },
     {
       "number": 367,
@@ -4193,9 +3501,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 368,
@@ -4204,9 +3510,7 @@
       "after": "Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 369,
@@ -4215,9 +3519,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 370,
@@ -4226,9 +3528,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 371,
@@ -4237,9 +3537,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 372,
@@ -4248,9 +3546,7 @@
       "after": "Draw 2 cards. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 373,
@@ -4259,9 +3555,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 374,
@@ -4270,9 +3564,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 375,
@@ -4281,9 +3573,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 376,
@@ -4292,9 +3582,7 @@
       "after": "Apply 3 Poison.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Poison"
-      ]
+      "keywords": ["Poison"]
     },
     {
       "number": 377,
@@ -4303,9 +3591,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 378,
@@ -4314,9 +3600,7 @@
       "after": "Deal 6 Shadow damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Shadow"
-      ]
+      "keywords": ["Shadow"]
     },
     {
       "number": 379,
@@ -4325,9 +3609,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 380,
@@ -4336,9 +3618,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 381,
@@ -4347,9 +3627,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 382,
@@ -4358,9 +3636,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 383,
@@ -4378,9 +3654,7 @@
       "after": "Keep 2 random cards in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 385,
@@ -4389,10 +3663,7 @@
       "after": "Flip this card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 386,
@@ -4401,9 +3672,7 @@
       "after": "Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 387,
@@ -4412,10 +3681,7 @@
       "after": "Flip this card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 388,
@@ -4433,9 +3699,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 390,
@@ -4453,9 +3717,7 @@
       "after": "Deal 6 Growth damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Growth"
-      ]
+      "keywords": ["Growth"]
     },
     {
       "number": 392,
@@ -4464,10 +3726,7 @@
       "after": "Deal 5 Decay damage, ignoring Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Decay"
-      ]
+      "keywords": ["Ward", "Decay"]
     },
     {
       "number": 393,
@@ -4476,10 +3735,7 @@
       "after": "Freeze. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish",
-        "Freeze"
-      ]
+      "keywords": ["Banish", "Freeze"]
     },
     {
       "number": 394,
@@ -4488,9 +3744,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 395,
@@ -4499,9 +3753,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 396,
@@ -4510,9 +3762,7 @@
       "after": "Apply 3 Burn.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn"
-      ]
+      "keywords": ["Burn"]
     },
     {
       "number": 397,
@@ -4521,10 +3771,7 @@
       "after": "Flip this card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 398,
@@ -4533,9 +3780,7 @@
       "after": "Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 399,
@@ -4544,9 +3789,7 @@
       "after": "Bless 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Bless"
-      ]
+      "keywords": ["Bless"]
     },
     {
       "number": 400,
@@ -4555,9 +3798,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 401,
@@ -4566,9 +3807,7 @@
       "after": "Heal 5 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 402,
@@ -4577,9 +3816,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 403,
@@ -4597,9 +3834,7 @@
       "after": "Deal 6 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 405,
@@ -4608,9 +3843,7 @@
       "after": "Keep 2 random cards in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 406,
@@ -4619,9 +3852,7 @@
       "after": "Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 407,
@@ -4630,9 +3861,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 408,
@@ -4641,10 +3870,7 @@
       "after": "Hush. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Hush"
-      ]
+      "keywords": ["Banish", "Hush"]
     },
     {
       "number": 409,
@@ -4653,10 +3879,7 @@
       "after": "Flip this card. Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip",
-        "Keep"
-      ]
+      "keywords": ["Flip", "Keep"]
     },
     {
       "number": 410,
@@ -4665,9 +3888,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 411,
@@ -4676,9 +3897,7 @@
       "after": "Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 412,
@@ -4687,9 +3906,7 @@
       "after": "Flip your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 413,
@@ -4698,9 +3915,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 414,
@@ -4709,9 +3924,7 @@
       "after": "Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 415,
@@ -4720,9 +3933,7 @@
       "after": "Keep a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 416,
@@ -4731,9 +3942,7 @@
       "after": "Remove all your Curse. Draw 1 card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 417,
@@ -4742,10 +3951,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 418,
@@ -4754,9 +3960,7 @@
       "after": "Flip the top card of your discard pile. Return it to your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 419,
@@ -4765,10 +3969,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 420,
@@ -4777,9 +3978,7 @@
       "after": "Deal 6 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 421,
@@ -4788,9 +3987,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 422,
@@ -4799,9 +3996,7 @@
       "after": "Banish the bottom card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 423,
@@ -4810,10 +4005,7 @@
       "after": "Draw 1 card. Flip your hand. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Flip",
-        "Banish"
-      ]
+      "keywords": ["Flip", "Banish"]
     },
     {
       "number": 424,
@@ -4822,9 +4014,7 @@
       "after": "Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 425,
@@ -4833,10 +4023,7 @@
       "after": "Deal 6 Release damage, ignoring Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Release"
-      ]
+      "keywords": ["Ward", "Release"]
     },
     {
       "number": 426,
@@ -4845,9 +4032,7 @@
       "after": "Deal 3 Binding damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 427,
@@ -4856,9 +4041,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 428,
@@ -4867,9 +4050,7 @@
       "after": "Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 429,
@@ -4887,9 +4068,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 431,
@@ -4898,9 +4077,7 @@
       "after": "Flip a random card in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Flip"
-      ]
+      "keywords": ["Flip"]
     },
     {
       "number": 432,
@@ -4909,9 +4086,7 @@
       "after": "Banish the top card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 433,
@@ -4920,10 +4095,7 @@
       "after": "Apply 3 Burn. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 434,
@@ -4932,9 +4104,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 435,
@@ -4952,9 +4122,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 437,
@@ -4963,9 +4131,7 @@
       "after": "Keep this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 438,
@@ -4974,9 +4140,7 @@
       "after": "Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 439,
@@ -4985,9 +4149,7 @@
       "after": "Keep 2 random cards in your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 440,
@@ -4996,9 +4158,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 441,
@@ -5007,9 +4167,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 442,
@@ -5018,10 +4176,7 @@
       "after": "Hush. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Hush"
-      ]
+      "keywords": ["Banish", "Hush"]
     },
     {
       "number": 443,
@@ -5030,10 +4185,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 444,
@@ -5042,10 +4194,7 @@
       "after": "Deal 6 Decay damage, ignoring Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward",
-        "Decay"
-      ]
+      "keywords": ["Ward", "Decay"]
     },
     {
       "number": 445,
@@ -5054,9 +4203,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 446,
@@ -5065,9 +4212,7 @@
       "after": "Deal 7 Shadow damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Shadow"
-      ]
+      "keywords": ["Shadow"]
     },
     {
       "number": 447,
@@ -5076,9 +4221,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 448,
@@ -5087,9 +4230,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 449,
@@ -5098,9 +4239,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 450,
@@ -5109,9 +4248,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 451,
@@ -5120,9 +4257,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 452,
@@ -5131,9 +4266,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 453,
@@ -5151,9 +4284,7 @@
       "after": "Gain 8 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 455,
@@ -5162,10 +4293,7 @@
       "after": "Reflect the first hit of the enemy's next attack. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish",
-        "Reflect"
-      ]
+      "keywords": ["Banish", "Reflect"]
     },
     {
       "number": 456,
@@ -5174,9 +4302,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 457,
@@ -5185,9 +4311,7 @@
       "after": "Reverse the top 3 cards of your library. Scry.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 458,
@@ -5196,9 +4320,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 459,
@@ -5207,9 +4329,7 @@
       "after": "Heal 6 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 460,
@@ -5218,9 +4338,7 @@
       "after": "Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 461,
@@ -5229,9 +4347,7 @@
       "after": "Draw 1 card. Turn your hand to its light faces. Banish this card.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 462,
@@ -5240,9 +4356,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     },
     {
       "number": 463,
@@ -5251,9 +4365,7 @@
       "after": "Scry.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 464,
@@ -5262,9 +4374,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 465,
@@ -5273,9 +4383,7 @@
       "after": "Gain 1 mana. Draw 1 card. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 466,
@@ -5293,9 +4401,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 468,
@@ -5304,9 +4410,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 469,
@@ -5324,9 +4428,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 471,
@@ -5344,9 +4446,7 @@
       "after": "Banish the bottom card of your discard pile.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 473,
@@ -5355,10 +4455,7 @@
       "after": "Curse 1. Deal 3 Frost damage.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse",
-        "Frost"
-      ]
+      "keywords": ["Curse", "Frost"]
     },
     {
       "number": 474,
@@ -5367,9 +4464,7 @@
       "after": "Remove all your Burn. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn"
-      ]
+      "keywords": ["Burn"]
     },
     {
       "number": 475,
@@ -5378,9 +4473,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 476,
@@ -5407,9 +4500,7 @@
       "after": "Curse 2.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Curse"
-      ]
+      "keywords": ["Curse"]
     },
     {
       "number": 479,
@@ -5418,9 +4509,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 480,
@@ -5456,10 +4545,7 @@
       "after": "Remove all your Burn. Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Burn",
-        "Banish"
-      ]
+      "keywords": ["Burn", "Banish"]
     },
     {
       "number": 484,
@@ -5468,9 +4554,7 @@
       "after": "Deal 2 Decay damage twice.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Decay"
-      ]
+      "keywords": ["Decay"]
     },
     {
       "number": 485,
@@ -5479,9 +4563,7 @@
       "after": "Scry. Draw 1 card.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 486,
@@ -5499,9 +4581,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 488,
@@ -5510,9 +4590,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 489,
@@ -5521,9 +4599,7 @@
       "after": "Gain 6 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 490,
@@ -5532,9 +4608,7 @@
       "after": "Deal 2 Binding damage three times.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Binding"
-      ]
+      "keywords": ["Binding"]
     },
     {
       "number": 491,
@@ -5543,9 +4617,7 @@
       "after": "Scry.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 492,
@@ -5554,9 +4626,7 @@
       "after": "Deal 5 Shadow damage.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Shadow"
-      ]
+      "keywords": ["Shadow"]
     },
     {
       "number": 493,
@@ -5565,9 +4635,7 @@
       "after": "Heal 4 HP. Banish this card.",
       "changed": false,
       "review": "checked; no affected mechanic",
-      "keywords": [
-        "Banish"
-      ]
+      "keywords": ["Banish"]
     },
     {
       "number": 494,
@@ -5576,9 +4644,7 @@
       "after": "Gain 7 Ward.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Ward"
-      ]
+      "keywords": ["Ward"]
     },
     {
       "number": 495,
@@ -5587,9 +4653,7 @@
       "after": "Scry.",
       "changed": false,
       "review": "existing effect checked against revised timing",
-      "keywords": [
-        "Scry"
-      ]
+      "keywords": ["Scry"]
     },
     {
       "number": 496,
@@ -5598,9 +4662,7 @@
       "after": "Keep your hand.",
       "changed": true,
       "review": "updated thematic recipe",
-      "keywords": [
-        "Keep"
-      ]
+      "keywords": ["Keep"]
     }
   ],
   "enemies": [
@@ -5687,10 +4749,7 @@
       "after_trait": "On Root Lash: Apply 1 Curse to the player.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 7 Growth damage. Trait — Root Snare: Apply 1 Curse to the player.",
-        "Heal 3 HP."
-      ]
+      "actions": ["Deal 7 Growth damage. Trait — Root Snare: Apply 1 Curse to the player.", "Heal 3 HP."]
     },
     {
       "number": 8,
@@ -5832,10 +4891,7 @@
       "after_trait": "On Blackwater Charge: Apply 1 Curse to the player.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 1 Curse to the player.",
-        "Heal 4 HP."
-      ]
+      "actions": ["Deal 7 Shadow damage. Trait — Mud Spray: Apply 1 Curse to the player.", "Heal 4 HP."]
     },
     {
       "number": 20,
@@ -5869,10 +4925,7 @@
       "after_trait": "On Moon Howl: Gain 1 Bless.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 5 Shadow damage.",
-        "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."
-      ]
+      "actions": ["Deal 5 Shadow damage.", "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."]
     },
     {
       "number": 23,
@@ -5929,10 +4982,7 @@
       "after_trait": "On Pour the Wax: Gain 3 Ward.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 5 Fire damage.",
-        "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."
-      ]
+      "actions": ["Deal 5 Fire damage.", "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."]
     },
     {
       "number": 28,
@@ -5953,10 +5003,7 @@
       "after_trait": "On Bitter Goblet: Apply 1 Curse to the player.",
       "changed": true,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 1 Curse to the player.",
-        "Heal 4 HP."
-      ]
+      "actions": ["Deal 6 Decay damage. Trait — Cellar Fumes: Apply 1 Curse to the player.", "Heal 4 HP."]
     },
     {
       "number": 30,
@@ -6076,10 +5123,7 @@
       "after_trait": "On Fold the Shelter: Gain 3 Ward.",
       "changed": false,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."
-      ]
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."]
     },
     {
       "number": 40,
@@ -6357,10 +5401,7 @@
       "after_trait": "On Let the Moss Drink: Heal 3 HP.",
       "changed": false,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 6 Growth damage.",
-        "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."
-      ]
+      "actions": ["Deal 6 Growth damage.", "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."]
     },
     {
       "number": 63,
@@ -6455,10 +5496,7 @@
       "after_trait": "On Fold the Spiral: Gain 3 Ward.",
       "changed": false,
       "review": "all base effects, trait scope, weakness and Hush previews checked",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."
-      ]
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."]
     },
     {
       "number": 71,

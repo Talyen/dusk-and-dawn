@@ -2491,16 +2491,8 @@
       "expected": 0
     },
     "Curse flat candidate affects the whole choir": {
-      "result": [
-        1,
-        1,
-        1
-      ],
-      "expected": [
-        1,
-        1,
-        1
-      ]
+      "result": [1, 1, 1],
+      "expected": [1, 1, 1]
     },
     "Cursed choir through two Ward": {
       "result": 1,
@@ -2519,30 +2511,16 @@
       "expected": 4
     },
     "Prism weakness once, Bless on every hit": {
-      "result": [
-        7,
-        5,
-        5
-      ],
-      "expected": [
-        7,
-        5,
-        5
-      ]
+      "result": [7, 5, 5],
+      "expected": [7, 5, 5]
     },
     "Burn halves after tick before mouth condition": {
       "result": 1,
       "expected": 1
     },
     "Mana tax expires after refill": {
-      "result": [
-        2,
-        3
-      ],
-      "expected": [
-        2,
-        3
-      ]
+      "result": [2, 3],
+      "expected": [2, 3]
     },
     "hand cap after three kept cards": {
       "result": 5,
@@ -2561,134 +2539,50 @@
       "expected": 60
     },
     "DoT sequence 1": {
-      "result": [
-        1
-      ],
-      "expected": [
-        1
-      ]
+      "result": [1],
+      "expected": [1]
     },
     "DoT sequence 2": {
-      "result": [
-        2,
-        1
-      ],
-      "expected": [
-        2,
-        1
-      ]
+      "result": [2, 1],
+      "expected": [2, 1]
     },
     "DoT sequence 3": {
-      "result": [
-        3,
-        1
-      ],
-      "expected": [
-        3,
-        1
-      ]
+      "result": [3, 1],
+      "expected": [3, 1]
     },
     "DoT sequence 4": {
-      "result": [
-        4,
-        2,
-        1
-      ],
-      "expected": [
-        4,
-        2,
-        1
-      ]
+      "result": [4, 2, 1],
+      "expected": [4, 2, 1]
     },
     "DoT sequence 7": {
-      "result": [
-        7,
-        3,
-        1
-      ],
-      "expected": [
-        7,
-        3,
-        1
-      ]
+      "result": [7, 3, 1],
+      "expected": [7, 3, 1]
     },
     "DoT sequence 16": {
-      "result": [
-        16,
-        8,
-        4,
-        2,
-        1
-      ],
-      "expected": [
-        16,
-        8,
-        4,
-        2,
-        1
-      ]
+      "result": [16, 8, 4, 2, 1],
+      "expected": [16, 8, 4, 2, 1]
     },
     "non-additive DoT application": {
-      "result": [
-        3,
-        3
-      ],
-      "expected": [
-        3,
-        3
-      ]
+      "result": [3, 3],
+      "expected": [3, 3]
     },
     "Ward 7 clears over three starts": {
-      "result": [
-        3,
-        1,
-        0
-      ],
-      "expected": [
-        3,
-        1,
-        0
-      ]
+      "result": [3, 1, 0],
+      "expected": [3, 1, 0]
     },
     "Burn then Poison with Ward": {
       "result": [
-        [
-          "Fire",
-          4,
-          4
-        ],
-        [
-          "Decay",
-          3,
-          1
-        ]
+        ["Fire", 4, 4],
+        ["Decay", 3, 1]
       ],
       "expected": [
-        [
-          "Fire",
-          4,
-          4
-        ],
-        [
-          "Decay",
-          3,
-          1
-        ]
+        ["Fire", 4, 4],
+        ["Decay", 3, 1]
       ]
     },
     "both DoTs halve even when absorbed": {
-      "result": [
-        28,
-        0,
-        2,
-        1
-      ],
-      "expected": [
-        28,
-        0,
-        2,
-        1
-      ]
+      "result": [28, 0, 2, 1],
+      "expected": [28, 0, 2, 1]
     },
     "Hushed action still halves remaining Ward": {
       "result": 2,
@@ -2711,144 +2605,52 @@
       "expected": 5
     },
     "flat Blessed Prism": {
-      "result": [
-        3,
-        3,
-        3
-      ],
-      "expected": [
-        3,
-        3,
-        3
-      ]
+      "result": [3, 3, 3],
+      "expected": [3, 3, 3]
     },
     "flat Cursed Millipede": {
-      "result": [
-        2,
-        0,
-        0,
-        0,
-        0
-      ],
-      "expected": [
-        2,
-        0,
-        0,
-        0,
-        0
-      ]
+      "result": [2, 0, 0, 0, 0],
+      "expected": [2, 0, 0, 0, 0]
     },
     "25 percent Cursed Choir is unchanged": {
-      "result": [
-        2,
-        2,
-        2
-      ],
-      "expected": [
-        2,
-        2,
-        2
-      ]
+      "result": [2, 2, 2],
+      "expected": [2, 2, 2]
     },
     "25 percent Millipede Curse 1 and 2 share a rounding plateau": {
-      "result": [
-        2,
-        1,
-        1,
-        1,
-        1
-      ],
-      "expected": [
-        2,
-        1,
-        1,
-        1,
-        1
-      ]
+      "result": [2, 1, 1, 1, 1],
+      "expected": [2, 1, 1, 1, 1]
     },
     "percentage candidate upper bound": {
-      "result": [
-        22
-      ],
-      "expected": [
-        22
-      ]
+      "result": [22],
+      "expected": [22]
     },
     "percentage candidate zero floor": {
-      "result": [
-        0
-      ],
-      "expected": [
-        0
-      ]
+      "result": [0],
+      "expected": [0]
     },
     "opposed stacks combine before rounding": {
-      "result": [
-        2,
-        3,
-        6
-      ],
-      "expected": [
-        2,
-        3,
-        6
-      ]
+      "result": [2, 3, 6],
+      "expected": [2, 3, 6]
     },
     "reverse only the available top block": {
-      "result": [
-        "c",
-        "b",
-        "a",
-        "d"
-      ],
-      "expected": [
-        "c",
-        "b",
-        "a",
-        "d"
-      ]
+      "result": ["c", "b", "a", "d"],
+      "expected": ["c", "b", "a", "d"]
     },
     "two-beat reversal": {
-      "result": [
-        "b",
-        "c",
-        "a",
-        "d"
-      ],
-      "expected": [
-        "b",
-        "c",
-        "a",
-        "d"
-      ]
+      "result": ["b", "c", "a", "d"],
+      "expected": ["b", "c", "a", "d"]
     },
     "fixed discard top two in pile order": {
-      "result": [
-        "newest",
-        "middle"
-      ],
-      "expected": [
-        "newest",
-        "middle"
-      ]
+      "result": ["newest", "middle"],
+      "expected": ["newest", "middle"]
     },
     "fixed discard bottom two in pile order": {
-      "result": [
-        "middle",
-        "oldest"
-      ],
-      "expected": [
-        "middle",
-        "oldest"
-      ]
+      "result": ["middle", "oldest"],
+      "expected": ["middle", "oldest"]
     },
     "hand-cap limited group return": {
-      "result": [
-        "newest"
-      ],
-      "expected": [
-        "newest"
-      ]
+      "result": ["newest"],
+      "expected": ["newest"]
     }
   },
   "limitations": [

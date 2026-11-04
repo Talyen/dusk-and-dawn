@@ -5675,10 +5675,7 @@
       "reason": "The living roots nourish the tree and physically entangle the attacker's movement.",
       "before_trait": "On rooting turns, gain 5 Ward instead of attacking. After attacking, heal 3 HP if no direct card attack damaged its HP this turn.",
       "after_trait": "On Root Lash: Apply 1 Curse to the player.",
-      "actions": [
-        "Deal 7 Growth damage. Trait — Root Snare: Apply 1 Curse to the player.",
-        "Heal 3 HP."
-      ],
+      "actions": ["Deal 7 Growth damage. Trait — Root Snare: Apply 1 Curse to the player.", "Heal 3 HP."],
       "sheet": "enemy-artwork-review/contact-01.jpg"
     },
     {
@@ -5832,10 +5829,7 @@
       "reason": "Wallowing restores the great beast; its charge throws obscuring mud rather than manufacturing armor.",
       "before_trait": "On wallow turns, gain 5 Ward; the next fixed turn is its charge.",
       "after_trait": "On Blackwater Charge: Apply 1 Curse to the player.",
-      "actions": [
-        "Deal 7 Shadow damage. Trait — Mud Spray: Apply 1 Curse to the player.",
-        "Heal 4 HP."
-      ],
+      "actions": ["Deal 7 Shadow damage. Trait — Mud Spray: Apply 1 Curse to the player.", "Heal 4 HP."],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
     {
@@ -5872,10 +5866,7 @@
       "reason": "The moonlit howl gathers strength for the jackal’s next attack.",
       "before_trait": "If the player is below half maximum HP, add 2 damage.",
       "after_trait": "On Moon Howl: Gain 1 Bless.",
-      "actions": [
-        "Deal 5 Shadow damage.",
-        "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."
-      ],
+      "actions": ["Deal 5 Shadow damage.", "Deal 4 Shadow damage. Trait — Marked Quarry: Gain 1 Bless."],
       "sheet": "enemy-artwork-review/contact-02.jpg"
     },
     {
@@ -5937,10 +5928,7 @@
       "reason": "The poured wax hardens into a fresh covering after the scald.",
       "before_trait": "After every second attack, gain 3 Ward from freshly pooled wax.",
       "after_trait": "On Pour the Wax: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Fire damage.",
-        "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."
-      ],
+      "actions": ["Deal 5 Fire damage.", "Deal 5 Fire damage. Trait — Pooled Wax: Gain 3 Ward."],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
     {
@@ -5963,10 +5951,7 @@
       "reason": "The vintage restores its drinker while its heavy fumes impair the opponent.",
       "before_trait": "On drinking turns, heal 4 HP instead of attacking.",
       "after_trait": "On Bitter Goblet: Apply 1 Curse to the player.",
-      "actions": [
-        "Deal 6 Decay damage. Trait — Cellar Fumes: Apply 1 Curse to the player.",
-        "Heal 4 HP."
-      ],
+      "actions": ["Deal 6 Decay damage. Trait — Cellar Fumes: Apply 1 Curse to the player.", "Heal 4 HP."],
       "sheet": "enemy-artwork-review/contact-03.jpg"
     },
     {
@@ -6096,10 +6081,7 @@
       "reason": "The folded body adds new protective layers to itself rather than reacting to the player's Flip count.",
       "before_trait": "After attacking, gain 2 Ward for each Flip effect the player used this turn, capped at 4.",
       "after_trait": "On Fold the Shelter: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."
-      ],
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Refold: Gain 3 Ward."],
       "sheet": "enemy-artwork-review/contact-04.jpg"
     },
     {
@@ -6400,10 +6382,7 @@
       "reason": "The wet moss renews its own body directly, without copying the player's healing.",
       "before_trait": "If the player healed HP this turn, heal 3 HP after attacking.",
       "after_trait": "On Let the Moss Drink: Heal 3 HP.",
-      "actions": [
-        "Deal 6 Growth damage.",
-        "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."
-      ],
+      "actions": ["Deal 6 Growth damage.", "Deal 5 Growth damage. Trait — Moss Drinks: Heal 3 HP."],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
     {
@@ -6506,10 +6485,7 @@
       "reason": "The paper shell gains protective layers through its own folding rather than counting the player's remaining cards.",
       "before_trait": "After attacking, gain 1 Ward per card left in the player's hand, capped at 4.",
       "after_trait": "On Fold the Spiral: Gain 3 Ward.",
-      "actions": [
-        "Deal 5 Binding damage.",
-        "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."
-      ],
+      "actions": ["Deal 5 Binding damage.", "Deal 4 Binding damage. Trait — Nested Folds: Gain 3 Ward."],
       "sheet": "enemy-artwork-review/contact-06.jpg"
     },
     {
