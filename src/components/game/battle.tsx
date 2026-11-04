@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import {
   cards,
   cardCanBanishItself,
+  cardDealsDirectDamage,
   cardRestriction,
   createRun,
   enemyAttackHits,
@@ -1250,6 +1251,14 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
     lines.push(`Current attack: ${values.join(" + ")} ${hit.type} damage before Ward and Reflect.`);
     if (generic?.op === "attack-ignore-ward") lines.push("This attack ignores Ward, including if reflected.");
   }
+  const reaction =
+    !s.enemy.hush && cardDealsDirectDamage(card)
+      ? getEnemy(s).actions[s.action]!.effects?.find((effect) => effect.op === "reaction_damage")
+      : undefined;
+  if (typeof reaction?.amount === "number" && reaction.amount > 0)
+    lines.push(
+      `If both survive: ${reaction.amount}${reaction.damage_type ? ` ${reaction.damage_type}` : ""} damage after play, before Ward.`,
+    );
   const restriction = cardRestriction(s, card);
   if ((info.name === "Silence" || ops.some((op) => op.op === "hush")) && !restriction) {
     const action = getEnemy(s).actions[s.action]!;

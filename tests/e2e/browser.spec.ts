@@ -2602,10 +2602,14 @@ for (const condition of ["active", "hush", "freeze"] as const) {
     await intent.hover();
     if (condition === "freeze")
       await expect(page.getByRole("tooltip")).toContainText("once per direct attack card");
-    await page
-      .getByRole("button", { name: /^Sun light/ })
-      .first()
-      .click();
+    const firstAttack = page.getByRole("button", { name: /^Sun light/ }).first();
+    await firstAttack.hover();
+    const cardTooltip = page.getByRole("tooltip");
+    if (condition === "hush")
+      await expect(cardTooltip).not.toContainText("If both survive: 1 Binding damage after play");
+    else
+      await expect(cardTooltip).toContainText("If both survive: 1 Binding damage after play, before Ward.");
+    await firstAttack.click();
     await expect(page.locator(".battle-player")).toHaveAttribute(
       "data-player-hp",
       condition === "hush" ? "20" : "19",
@@ -5736,4 +5740,40 @@ test("Watchtower scouts and Collapsed Watchtower strikes the Magistrate", async 
   await expect(page.getByRole("img", { name: "The Bellflower Magistrate, 20 of 28 HP" })).toBeVisible();
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
+});
+
+test("attack inspection exposes lethal retaliation but support cards do not", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-thorned-librarian";
+  snapshot.state.enemy.hp = 10;
+  snapshot.state.enemy.maxHp = 26;
+  snapshot.state.action = 1;
+  snapshot.state.player.hp = 1;
+  snapshot.state.player.curse = 10;
+  snapshot.state.deck = [
+    { id: "sun", pair: "Sun & Moon" },
+    { id: "angel", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const angel = page.getByRole("button", { name: /^Angel light/ });
+  await angel.hover();
+  await expect(page.getByRole("tooltip")).not.toContainText("damage after play, before Ward");
+  const sun = page.getByRole("button", { name: /^Sun light/ });
+  await sun.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Current attack: 0 Radiance damage");
+  await expect(page.getByRole("tooltip")).toContainText(
+    "If both survive: 1 Binding damage after play, before Ward.",
+  );
+  await sun.click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
 });
