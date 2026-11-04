@@ -208,7 +208,7 @@ describe("retuned reward pairs", () => {
 it("the watchtower scouts while its collapsing face strikes and is spent", async () => {
   const pair = "Watchtower & Collapsed Watchtower";
   expect(cards[pair]!.light.effect).toBe("Scry. Draw 1 card.");
-  expect(cards[pair]!.dark.effect).toBe("Deal 6 Release damage. Banish this card.");
+  expect(cards[pair]!.dark.effect).toBe("Deal 6 Decay damage. Banish this card.");
   const scout = fixture(pair, "light");
   expect(scout.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
   expect(scout.getSnapshot().state.zones.scry).toBe(true);
@@ -216,7 +216,7 @@ it("the watchtower scouts while its collapsing face strikes and is spent", async
   expect(scout.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["card-0"]);
 
   const oldSave = structuredClone(fixture(pair, "dark").getSnapshot());
-  oldSave.state.encounters![0] = "the-fogbound-weaver"; // Weak to Release.
+  oldSave.state.encounters![0] = "the-bellflower-magistrate"; // Weak to Decay.
   oldSave.state.enemy.hp = oldSave.state.enemy.maxHp = 28;
   oldSave.state.enemy.ward = 2;
   const loaded = await readRun({ readCandidates: async () => [encodeRun(oldSave)], write: async () => {} });
@@ -226,4 +226,9 @@ it("the watchtower scouts while its collapsing face strikes and is spent", async
   expect(impact.getSnapshot().state.enemy).toMatchObject({ hp: 22, ward: 0, curse: 0 });
   expect(impact.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["card-0"]);
   expect(impact.getSnapshot().state.mana).toBe(2);
+  const neutral = structuredClone(oldSave);
+  neutral.state.encounters![0] = "the-fogbound-weaver"; // Weak to Release, not Decay.
+  const againstWeaver = restoreSession(neutral, runHandler);
+  expect(againstWeaver.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+  expect(againstWeaver.getSnapshot().state.enemy).toMatchObject({ hp: 24, ward: 0 });
 });

@@ -47,7 +47,7 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Iron Needlecase": "Deal 2 Binding damage twice. Keep this card.",
   "Empty Needlecase": "Gain 1 mana. Banish this card.",
   "Deer Trail": "Draw 1 card. Flip your hand.",
-  "Collapsed Watchtower": "Deal 6 Release damage. Banish this card.",
+  "Collapsed Watchtower": "Deal 6 Decay damage. Banish this card.",
   "Fern Fiddlehead": "Draw 2 cards.",
   "Fallen Leaf": "Draw 1 card. Banish this card.",
   "Flower Bud": "Keep your hand.",
@@ -110,8 +110,8 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
     dark: {
       name: "Collapsed Watchtower",
       effect: playtestEffectOverrides["Collapsed Watchtower"]!,
-      keywords: ["Release", "Banish"],
-      ops: [{ op: "attack", amount: 6, type: "Release", hits: 1, leech: false }, { op: "banish" }],
+      keywords: ["Decay", "Banish"],
+      ops: [{ op: "attack", amount: 6, type: "Decay", hits: 1, leech: false }, { op: "banish" }],
     },
   },
   "Fern Fiddlehead & Fallen Leaf": {

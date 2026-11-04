@@ -5698,9 +5698,9 @@ test("Seraph's Benediction survives reload against the Hollow King", async ({ pa
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
 });
 
-test("Watchtower scouts and Collapsed Watchtower strikes the Weaver", async ({ page }) => {
+test("Watchtower scouts and Collapsed Watchtower strikes the Magistrate", async ({ page }) => {
   const snapshot = structuredClone(createRun(42).getSnapshot());
-  snapshot.state.encounters![0] = "the-fogbound-weaver";
+  snapshot.state.encounters![0] = "the-bellflower-magistrate";
   snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 28;
   snapshot.state.action = 0;
   snapshot.state.deck = [
@@ -5723,13 +5723,17 @@ test("Watchtower scouts and Collapsed Watchtower strikes the Weaver", async ({ p
   await page.getByRole("button", { name: "Continue run" }).click();
   await page.getByRole("button", { name: /^Watchtower light/ }).click();
   await expect(page.getByRole("button", { name: /^Sun light/ })).toBeVisible();
-  await page.getByRole("button", { name: /^Collapsed Watchtower dark/ }).click();
-  await expect(page.getByRole("img", { name: "The Fogbound Weaver, 20 of 28 HP" })).toBeVisible();
+  const collapse = page.getByRole("button", { name: /^Collapsed Watchtower dark/ });
+  await page.mouse.move(5, 5);
+  await collapse.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Deal 6 Decay damage. Banish this card.");
+  await collapse.click();
+  await expect(page.getByRole("img", { name: "The Bellflower Magistrate, 20 of 28 HP" })).toBeVisible();
   await page.reload();
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("button", { name: /^Collapsed Watchtower dark/ })).toHaveCount(0);
-  await expect(page.getByRole("img", { name: "The Fogbound Weaver, 20 of 28 HP" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "The Bellflower Magistrate, 20 of 28 HP" })).toBeVisible();
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
 });
