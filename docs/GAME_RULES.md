@@ -16,9 +16,13 @@ The three initial antiheroes and these revised starting kits are playtest design
 
 - **The Oathless Seraph:** before each light card without a direct attack resolves, gain 1 Ward; earlier Seraph saves retain their original light-card passive. New runs start with Angel & Vampire and Benediction & Curse once each, plus two each of Feather & Chain, Seraph & Fallen Seraph, Bloom & Wither, and Key & Lock.
 - **The Thorn Witch:** before each dark card resolves, apply 1 Curse. New runs start with Angel & Vampire and Censer & Plague Brazier once each, plus two each of Sun & Moon, Ivy & Thorns, Bloom & Wither, and Key & Lock. Witch runs started before this tuning keep their original 2 Poison passive.
-- **The Veiled Oracle:** Scry at the start of each player turn, after the normal draw. New runs start with Angel & Vampire and Dove & Raven once each, plus two each of Sun & Moon, Bloom & Wither, Key & Lock, and Oracle & Deceiver.
+- **The Veiled Oracle:** Scry at the start of each player turn, after the normal draw. New runs start with Angel & Vampire and Candle & Extinguished Candle once each, plus two each of Sun & Moon, Bloom & Wither, Key & Lock, and Oracle & Deceiver.
 
 Light/dark passives trigger once on an accepted play, after payment and before the card effect. A paid hidden-card inspection receives its passive when committed, never again when the choice resolves. Rejected plays do not trigger it. Scry follows its normal empty-library and end-turn rules. Original starter pairs absent from a hero's kit remain eligible for that hero's rewards and expedition events; existing runs without a class retain their original reward pools.
+
+## Playtest card adjustments
+
+Wax Seal gives 7 Ward and Banishes itself; Torn Letter draws two and Banishes itself. Wooden Spool Keeps the rest of the hand, while Loose Thread Flips it. These provisional runtime effects replace the historical catalogue wording. Existing saves remain readable and use the current effects when those cards are played.
 
 ## Cards and turn order
 

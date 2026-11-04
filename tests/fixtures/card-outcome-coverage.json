@@ -5,7 +5,7 @@
     "numeric": {
       "test_file": "tests/lib/card-numeric-outcomes.test.ts",
       "test_name": "matches printed numeric card outcomes under Ward, weakness, statuses, and mana caps",
-      "count": 193,
+      "count": 192,
       "sentence_patterns": [
         "Deal \\d+ (?:Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage(?: (?:twice|three times)|, ignoring Ward)?\\.",
         "Leech\\.",
@@ -19,7 +19,7 @@
     "draw": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "draw and Scry faces obey printed counts, ordering, hand cap, mana and source disposition",
-      "count": 61,
+      "count": 62,
       "effect_pattern": "^(?:Scry\\. )?(?:Gain \\d+ mana\\. )?Draw \\d+ cards?\\.(?: Banish this card\\.)?$"
     },
     "scry": {
@@ -43,13 +43,13 @@
     "self-keep": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "self-Keep and self-Flip resolve the original source on its resulting face",
-      "count": 29,
+      "count": 27,
       "effect_pattern": "^(?:Flip this card\\. )?Keep this card\\.$"
     },
     "whole-hand": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "whole-hand Flip, Keep, and facing effects change the other held cards only",
-      "count": 30,
+      "count": 32,
       "effect_pattern": "^(?:Flip your hand\\.|Keep your hand\\.|Turn your hand to its (?:light|dark) faces\\.)$"
     },
     "random-hand": {
@@ -1190,13 +1190,13 @@
       "pair": "Wax Seal & Torn Letter",
       "side": "light",
       "face": "Wax Seal",
-      "family": "self-keep"
+      "family": "numeric"
     },
     {
       "pair": "Wax Seal & Torn Letter",
       "side": "dark",
       "face": "Torn Letter",
-      "family": "numeric"
+      "family": "draw"
     },
     {
       "pair": "Anchor & Kite",
@@ -2789,13 +2789,13 @@
       "pair": "Wooden Spool & Loose Thread",
       "side": "light",
       "face": "Wooden Spool",
-      "family": "self-keep"
+      "family": "whole-hand"
     },
     {
       "pair": "Wooden Spool & Loose Thread",
       "side": "dark",
       "face": "Loose Thread",
-      "family": "numeric"
+      "family": "whole-hand"
     },
     {
       "pair": "Gilded Cage & Broken Cage",

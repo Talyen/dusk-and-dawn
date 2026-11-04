@@ -27,7 +27,7 @@ describe("antihero starting kits and passives", () => {
     const signatures = {
       "oathless-seraph": "Benediction & Curse",
       "thorn-witch": "Censer & Plague Brazier",
-      "veiled-oracle": "Dove & Raven",
+      "veiled-oracle": "Candle & Extinguished Candle",
     } as const;
     for (const hero of heroIds) {
       const state = createRun(19, undefined, hero).getSnapshot().state;
@@ -88,14 +88,44 @@ describe("antihero starting kits and passives", () => {
     expect(game.getSnapshot().state.player.hp).toBe(27);
   });
 
-  it("lets the Oracle return the top discarded card while keeping Scry", () => {
-    const initial = setup("veiled-oracle", ["Dove & Raven", "Sun & Moon"], ["dark", "light"]);
-    initial.state.zones.discard = [initial.state.zones.hand.pop()!];
+  it("gives the Oracle a one-use Burn option and a deliberate dark hand", () => {
+    const initial = setup(
+      "veiled-oracle",
+      ["Candle & Extinguished Candle", "Sun & Moon"],
+      ["light", "light"],
+    );
     const game = restoreSession(initial, runHandler);
     expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
-    expect(game.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual(["test-1"]);
+    expect(game.getSnapshot().state.enemy.burn).toBe(2);
+    expect(game.getSnapshot().state.mana).toBe(3);
+    expect(game.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["test-0"]);
     expect(game.getSnapshot().state.zones.scry).toBe(true);
-    expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["test-0"]);
+
+    const dark = restoreSession(
+      setup(
+        "veiled-oracle",
+        ["Candle & Extinguished Candle", "Sun & Moon", "Bloom & Wither"],
+        ["dark", "light", "light"],
+      ),
+      runHandler,
+    );
+    expect(dark.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(dark.getSnapshot().state.zones.hand.map((card) => card.face)).toEqual(["dark", "dark"]);
+    expect(dark.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["test-0"]);
+  });
+
+  it("preserves the earlier Oracle signature pair in an existing save", async () => {
+    const old = structuredClone(createRun(19, undefined, "veiled-oracle").getSnapshot());
+    const original = old.state.deck.find((card) => card.pair === "Candle & Extinguished Candle")!;
+    const zone = [...old.state.zones.hand, ...old.state.zones.library].find(
+      (card) => card.id === original.id,
+    )!;
+    original.pair = "Dove & Raven";
+    zone.pair = "Dove & Raven";
+    const resumed = resumeRun(await saved(old));
+    expect(resumed.getSnapshot().state.deck.some((card) => card.pair === "Dove & Raven")).toBe(true);
+    expect(resumed.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect((await saved(resumed.getSnapshot())).state.deck).toEqual(old.state.deck);
   });
 
   it("grants the new Seraph Ward for light support but not direct attacks or dark plays", () => {

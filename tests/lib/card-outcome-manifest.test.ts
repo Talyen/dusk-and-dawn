@@ -64,13 +64,14 @@ it("indexes each distinct reviewed face to one matching, present outcome-test sc
       name: source.face,
       effect: playtestEffectOverrides[source.face] ?? source.effect,
     });
+    const effective = playtestEffectOverrides[source.face] ?? source.effect;
     const matched = Object.entries(manifest.families)
-      .filter(([, family]) => matches(source.effect, family))
+      .filter(([, family]) => matches(effective, family))
       .map(([id]) => id);
     if (row!.family === "bespoke") {
       expect(matched, source.face).toEqual([]);
       expect(row!.evidence, source.face).toBeDefined();
-      expect(row!.evidence!.effect, source.face).toBe(source.effect);
+      expect(row!.evidence!.effect, source.face).toBe(effective);
       assertEvidence(row!.evidence!.test_file, row!.evidence!.test_name, source.face);
       expect(testFiles.get(row!.evidence!.test_file), source.face).toContain(source.pair);
     } else {

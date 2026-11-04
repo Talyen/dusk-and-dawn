@@ -18,7 +18,7 @@ export const heroes = {
     name: "The Veiled Oracle",
     passive: "Scry at the start of each turn.",
     art: "hero-veiled-oracle.webp",
-    signature: "Dove & Raven",
+    signature: "Candle & Extinguished Candle",
     pairs: ["Angel & Vampire", "Sun & Moon", "Bloom & Wither", "Key & Lock", "Oracle & Deceiver"],
   },
 } as const;

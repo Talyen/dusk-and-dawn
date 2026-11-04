@@ -40,9 +40,41 @@ interface FaceInfo {
 export const vampireDamage = 3;
 export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   Vampire: `Deal ${vampireDamage} Shadow damage. Leech.`,
+  "Wax Seal": "Gain 7 Ward. Banish this card.",
+  "Torn Letter": "Draw 2 cards. Banish this card.",
+  "Wooden Spool": "Keep your hand.",
+  "Loose Thread": "Flip your hand.",
 };
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   ...simpleCards,
+  "Wax Seal & Torn Letter": {
+    light: {
+      name: "Wax Seal",
+      effect: playtestEffectOverrides["Wax Seal"]!,
+      keywords: ["Ward", "Banish"],
+      ops: [{ op: "ward", amount: 7 }, { op: "banish" }],
+    },
+    dark: {
+      name: "Torn Letter",
+      effect: playtestEffectOverrides["Torn Letter"]!,
+      keywords: ["Banish"],
+      ops: [{ op: "draw", amount: 2 }, { op: "banish" }],
+    },
+  },
+  "Wooden Spool & Loose Thread": {
+    light: {
+      name: "Wooden Spool",
+      effect: playtestEffectOverrides["Wooden Spool"]!,
+      keywords: ["Keep"],
+      ops: [{ op: "keep-hand" }],
+    },
+    dark: {
+      name: "Loose Thread",
+      effect: playtestEffectOverrides["Loose Thread"]!,
+      keywords: ["Flip"],
+      ops: [{ op: "flip-hand" }],
+    },
+  },
   "Angel & Vampire": {
     light: { name: "Angel", effect: "Gain 5 Ward.", keywords: ["Ward"] },
     dark: { name: "Vampire", effect: playtestEffectOverrides.Vampire!, keywords: ["Shadow", "Leech"] },

@@ -4250,3 +4250,79 @@ test("route enemy inspection shows its trait once without losing the action patt
   expect((await tip.innerText()).match(/After each of the player's direct attack cards/g)).toHaveLength(1);
   await expect(tip).toBeInViewport({ ratio: 1 });
 });
+
+test("revised reward pairs show both effects and preserve a chosen pair across reload", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "retuned-reward", tier: 1, orientation: "light", relic: "none" },
+      "thorn-witch",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = ["Wax Seal & Torn Letter", "Wooden Spool & Loose Thread", "Dove & Raven"];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(initial));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const wax = page.getByRole("button", { name: /^Wax Seal & Torn Letter/ });
+  await wax.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Gain 7 Ward. Banish this card.");
+  await expect(page.getByRole("tooltip")).toContainText("Draw 2 cards. Banish this card.");
+  const spool = page.getByRole("button", { name: /^Wooden Spool & Loose Thread/ });
+  await spool.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Keep your hand.");
+  await expect(page.getByRole("tooltip")).toContainText("Flip your hand.");
+  await spool.click();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.phase),
+    )
+    .toBe("route");
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Deck / }).click();
+  const deck = page.getByRole("dialog", { name: /^Deck/ });
+  await expect(deck.getByRole("button", { name: /^Wooden Spool & Loose Thread/ })).toBeVisible();
+});
+
+test("Wax Seal plays directly and its one-shot Ward survives a reload", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "wax-combat", tier: 1, orientation: "light", relic: "none" },
+      "thorn-witch",
+    ).getSnapshot(),
+  );
+  const card = initial.state.deck[0]!;
+  card.pair = "Wax Seal & Torn Letter";
+  const zoneCard = [...initial.state.zones.hand, ...initial.state.zones.library].find(
+    (item) => item.id === card.id,
+  )!;
+  initial.state.zones.hand = initial.state.zones.hand.filter((item) => item.id !== card.id);
+  initial.state.zones.library = initial.state.zones.library.filter((item) => item.id !== card.id);
+  initial.state.zones.hand.push({ ...zoneCard, pair: card.pair, face: "light", kept: false });
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(initial));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Wax Seal light/ }).click();
+  await expect(page.getByRole("button", { name: /Player status: ward 7/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Banished 1/ })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.player.ward),
+    )
+    .toBe(7);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: /Player status: ward 7/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Banished 1/ })).toBeVisible();
+});
