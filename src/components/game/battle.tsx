@@ -1617,11 +1617,32 @@ function BattleSession({
     enemyHits && bypass !== undefined
       ? Math.min(enemyHits[0]!, bypass === "all" ? enemyHits[0]! : bypass)
       : 0;
+  // An attack can carry a status even when Ward absorbs all of its damage.
+  // Show that consequence beside the damage so it can inform card order.
+  const statusEffects = traitWillActivate
+    ? [
+        ...(action.rider === "curse" ? ["Curse 1"] : []),
+        ...(action.rider === "poison" ? ["Poison 3"] : []),
+        ...(action.effects ?? [])
+          .filter(
+            (effect) =>
+              effect.stage === "after_attack" &&
+              ["curse", "poison", "burn"].includes(effect.op) &&
+              typeof effect.amount === "number" &&
+              effect.amount > 0,
+          )
+          .map((effect) => `${effect.op[0]!.toUpperCase()}${effect.op.slice(1)} ${effect.amount}`),
+      ]
+    : [];
   const intentText =
     s.enemy.freeze || (s.enemy.hush && action.ability)
       ? "Skipped"
       : enemyHits
-        ? `${enemyHits.join(" + ")} ${action.type}${bypassAmount ? ` · ${bypassAmount} through Ward` : ""}`
+        ? [
+            `${enemyHits.join(" + ")} ${action.type}`,
+            ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
+            ...statusEffects,
+          ].join(" · ")
         : action.text;
   const actionDetails = (
     <>

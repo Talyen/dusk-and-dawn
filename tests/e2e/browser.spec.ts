@@ -2113,7 +2113,7 @@ test("enemy intent explains a modified attack and its trait before the turn reso
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  const intent = page.getByRole("button", { name: "Mourning Tree intent: 8 Growth" });
+  const intent = page.getByRole("button", { name: "Mourning Tree intent: 8 Growth · Curse 1" });
   await intent.hover();
   await expect(page.getByRole("tooltip")).toContainText("Root Snare: Apply 1 Curse");
   await expect(page.getByRole("tooltip")).toContainText("Current attack: 8 Growth");
@@ -2160,6 +2160,84 @@ for (const condition of ["hush", "freeze"] as const) {
   });
 }
 
+for (const scenario of [
+  {
+    enemy: "hollow-king",
+    name: "Hollow King",
+    action: 2,
+    hp: 48,
+    attack: "7 Shadow",
+    status: "curse",
+    amount: 1,
+  },
+  {
+    enemy: "the-mould-harpist",
+    name: "The Mould Harpist",
+    action: 2,
+    hp: 30,
+    attack: "4 Growth",
+    status: "poison",
+    amount: 2,
+  },
+  {
+    enemy: "the-smiling-kiln",
+    name: "The Smiling Kiln",
+    action: 1,
+    hp: 30,
+    attack: "5 Fire",
+    status: "burn",
+    amount: 2,
+  },
+] as const) {
+  test(`${scenario.name} announces its attack status even through Ward`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = scenario.enemy;
+    snapshot.state.enemy.hp = scenario.hp;
+    snapshot.state.enemy.maxHp = scenario.hp;
+    snapshot.state.action = scenario.action;
+    snapshot.state.player.ward = 20;
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const status = `${scenario.status[0]!.toUpperCase()}${scenario.status.slice(1)} ${scenario.amount}`;
+    const intent = page.getByRole("button", {
+      name: `${scenario.name} intent: ${scenario.attack} · ${status}`,
+      exact: true,
+    });
+    for (const size of [
+      { width: 320, height: 480 },
+      { width: 390, height: 844 },
+      { width: 1280, height: 720 },
+    ]) {
+      await page.setViewportSize(size);
+      await expect(intent).toBeInViewport({ ratio: 1 });
+      const overlap = await intent.evaluate((element) => {
+        const bounds = element.getBoundingClientRect();
+        return [...document.querySelectorAll(".battle-card, .battle-actions button")].some((other) => {
+          const box = other.getBoundingClientRect();
+          return (
+            bounds.left < box.right &&
+            bounds.right > box.left &&
+            bounds.top < box.bottom &&
+            bounds.bottom > box.top
+          );
+        });
+      });
+      expect(overlap).toBe(false);
+    }
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(
+      page.getByRole("button", { name: new RegExp(`Player status:.*${scenario.status} ${scenario.amount}`) }),
+    ).toBeVisible();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "30");
+  });
+}
+
 test("touch inspects the enemy portrait and intent without advancing combat", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
@@ -2174,7 +2252,7 @@ test("touch inspects the enemy portrait and intent without advancing combat", as
   await page.getByRole("button", { name: "Continue run" }).click();
   await page.getByRole("img", { name: "Mourning Tree, 36 of 36 HP" }).tap();
   await expect(page.getByRole("tooltip")).toContainText("Weakness: Decay");
-  await page.getByRole("button", { name: "Mourning Tree intent: 7 Growth" }).tap();
+  await page.getByRole("button", { name: "Mourning Tree intent: 7 Growth · Curse 1" }).tap();
   await expect(page.getByRole("tooltip")).toContainText("Root Snare: Apply 1 Curse");
   await expect(page.getByRole("tooltip")).not.toContainText("Weakness: Decay");
   await page.touchscreen.tap(2, 2);
