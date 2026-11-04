@@ -5697,3 +5697,39 @@ test("Seraph's Benediction survives reload against the Hollow King", async ({ pa
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
 });
+
+test("Watchtower scouts and Collapsed Watchtower strikes the Weaver", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-fogbound-weaver";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 28;
+  snapshot.state.action = 0;
+  snapshot.state.deck = [
+    { id: "scout", pair: "Watchtower & Collapsed Watchtower" },
+    { id: "collapse", pair: "Watchtower & Collapsed Watchtower" },
+    { id: "sun", pair: "Sun & Moon" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "light", kept: false },
+    { ...snapshot.state.deck[1]!, face: "dark", kept: false },
+  ];
+  snapshot.state.zones.library = [{ ...snapshot.state.deck[2]!, face: "light", kept: false }];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Watchtower light/ }).click();
+  await expect(page.getByRole("button", { name: /^Sun light/ })).toBeVisible();
+  await page.getByRole("button", { name: /^Collapsed Watchtower dark/ }).click();
+  await expect(page.getByRole("img", { name: "The Fogbound Weaver, 20 of 28 HP" })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: /^Collapsed Watchtower dark/ })).toHaveCount(0);
+  await expect(page.getByRole("img", { name: "The Fogbound Weaver, 20 of 28 HP" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
+});

@@ -204,3 +204,26 @@ describe("retuned reward pairs", () => {
     expect(game.getSnapshot().state.zones.discard).toEqual([]);
   });
 });
+
+it("the watchtower scouts while its collapsing face strikes and is spent", async () => {
+  const pair = "Watchtower & Collapsed Watchtower";
+  expect(cards[pair]!.light.effect).toBe("Scry. Draw 1 card.");
+  expect(cards[pair]!.dark.effect).toBe("Deal 6 Release damage. Banish this card.");
+  const scout = fixture(pair, "light");
+  expect(scout.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+  expect(scout.getSnapshot().state.zones.scry).toBe(true);
+  expect(scout.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual(["card-1", "card-2", "card-4"]);
+  expect(scout.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["card-0"]);
+
+  const oldSave = structuredClone(fixture(pair, "dark").getSnapshot());
+  oldSave.state.encounters![0] = "the-fogbound-weaver"; // Weak to Release.
+  oldSave.state.enemy.hp = oldSave.state.enemy.maxHp = 28;
+  oldSave.state.enemy.ward = 2;
+  const loaded = await readRun({ readCandidates: async () => [encodeRun(oldSave)], write: async () => {} });
+  expect(loaded).toEqual(oldSave);
+  const impact = restoreSession(loaded!, runHandler);
+  expect(impact.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+  expect(impact.getSnapshot().state.enemy).toMatchObject({ hp: 22, ward: 0, curse: 0 });
+  expect(impact.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["card-0"]);
+  expect(impact.getSnapshot().state.mana).toBe(2);
+});

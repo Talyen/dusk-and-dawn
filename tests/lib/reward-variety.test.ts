@@ -252,3 +252,27 @@ describe("reward variety", () => {
     expect(new Set(game.getSnapshot().state.offers)).toEqual(new Set(choices));
   });
 });
+
+it("keeps the revised Watchtower distinct from otherwise identical scouting pairs", () => {
+  const choices = [
+    "Dream & Nightmare",
+    "Compass & Labyrinth",
+    "Lens & Blindfold",
+    "Watchtower & Collapsed Watchtower",
+  ];
+  for (let seed = 0; seed < 40; seed++) {
+    const snapshot = structuredClone(createRun(seed).getSnapshot());
+    snapshot.state.deck = Object.keys(cards)
+      .filter((pair) => !choices.includes(pair))
+      .map((pair, index) => ({ id: `card-${index}`, pair }));
+    const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+    snapshot.state.zones.hand = [fight.find((card) => card.pair === "Sun & Moon")!];
+    snapshot.state.zones.library = fight.filter((card) => card.pair !== "Sun & Moon");
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    const offers = win(restoreSession(snapshot, runHandler)).getSnapshot().state.offers;
+    expect(offers).toHaveLength(3);
+    expect(offers).toContain("Watchtower & Collapsed Watchtower");
+    expect(new Set(offers.map((pair) => cards[pair]!.dark.effect)).size).toBe(2);
+  }
+});
