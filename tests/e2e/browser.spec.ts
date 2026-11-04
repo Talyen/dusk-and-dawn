@@ -5667,3 +5667,33 @@ test("finishing a committed choice leaves the revealed hand clear under a statio
   );
   await expect(page.getByRole("tooltip")).toHaveCount(0);
 });
+
+test("Seraph's Benediction survives reload against the Hollow King", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42, undefined, "oathless-seraph").getSnapshot());
+  snapshot.state.encounters![0] = "hollow-king";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 48;
+  snapshot.state.action = 0;
+  snapshot.state.deck = [
+    { id: "bless", pair: "Benediction & Curse" },
+    { id: "seraph", pair: "Seraph & Fallen Seraph" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Benediction light/ }).click();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: /^Benediction light/ })).toHaveCount(0);
+  await page.getByRole("button", { name: /^Seraph light/ }).click();
+  await expect(page.getByRole("img", { name: "Hollow King, 36 of 48 HP" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
+});
