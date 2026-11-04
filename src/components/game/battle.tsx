@@ -1155,6 +1155,39 @@ function summarizeChanges(changes: string[]): string {
   return [...counts].map(([change, count]) => `${change}${count > 1 ? ` ×${count}` : ""}`).join("; ");
 }
 
+/** Summarize visible card flow without exposing identities from hidden piles. */
+function cardFlowChanges(before: RunState, after: RunState, sourceId: string): string[] {
+  const source = before.zones.hand.find((card) => card.id === sourceId);
+  if (!source || after.pending) return [];
+  const info = face(source);
+  const changes: string[] = [];
+  // Restrict draw counts to effects that draw directly into the hand and do not
+  // subsequently discard or exchange cards; a net hand diff is otherwise ambiguous.
+  const simpleDraw = /^(?:Scry\. )?Draw \d+ cards?\.(?: Flip your hand\.)?(?: Banish this card\.)?$/.test(
+    info.effect,
+  );
+  if (simpleDraw) {
+    const previouslyHeld = new Set(before.zones.hand.map((card) => card.id));
+    const drawn = after.zones.hand.filter((card) => !previouslyHeld.has(card.id)).length;
+    if (drawn) changes.push(`Drew ${drawn}`);
+  }
+  const flipsHand =
+    info.name === "Moon" || info.name === "Key" || info.ops?.some((op) => op.op === "flip-hand");
+  if (flipsHand) {
+    const previous = new Map(
+      [...before.zones.hand, ...before.zones.library, ...before.zones.discard].map((card) => [
+        card.id,
+        card.face,
+      ]),
+    );
+    const flipped = after.zones.hand.filter(
+      (card) => previous.has(card.id) && previous.get(card.id) !== card.face,
+    ).length;
+    if (flipped) changes.push(`Flipped ${flipped}`);
+  }
+  return changes;
+}
+
 function cardPreview(s: RunState, card: FightCard): ReactNode {
   const info = face(card);
   const ops = info.ops ?? [];
@@ -1773,6 +1806,7 @@ function BattleSession({
           if (enemyChange > 0 || (showReduction && enemyChange < 0))
             changes.push(`Enemy ${label} ${signed(enemyChange)}`);
         }
+        if (command.type === "play") changes.push(...cardFlowChanges(before, after, command.id));
         // Enemy effects can Banish cards while damage or Ward changes would otherwise
         // hide that outcome. Counts avoid revealing the names of hidden library cards.
         const enemyBanished = after.zones.banished.length - before.zones.banished.length;

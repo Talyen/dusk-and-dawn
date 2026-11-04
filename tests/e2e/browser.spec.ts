@@ -5269,3 +5269,119 @@ for (const hush of [false, true]) {
     await expect(page.getByRole("button", { name: /^Lock dark/ })).toBeVisible();
   });
 }
+
+test("Key reports the actual draw and flipped cards without revealing hidden cards", async ({ page }) => {
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [
+    { id: "key", pair: "Key & Lock" },
+    { id: "held", pair: "Angel & Vampire" },
+    { id: "other", pair: "Ivy & Thorns" },
+    { id: "drawn", pair: "Sun & Moon" },
+    { id: "hidden", pair: "Bloom & Wither" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck
+    .slice(0, 3)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [snapshot.state.deck[4]!, snapshot.state.deck[3]!].map((card) => ({
+    ...card,
+    face: "light",
+    kept: false,
+  }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  for (const viewport of [
+    { width: 320, height: 480 },
+    { width: 390, height: 844 },
+    { width: 1280, height: 720 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: /^Key light/ }).click();
+    const feedback = page.getByRole("status");
+    await expect(feedback).toHaveText("Drew 1 · Flipped 3");
+    await expect(feedback).not.toContainText("Bloom");
+    await expectIntentClear(feedback);
+    await expect(page.getByRole("button", { name: /^Moon dark/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Vampire dark/ })).toBeVisible();
+  }
+});
+
+test("card flow feedback uses actual outcomes when the library is empty or reshuffles", async ({ page }) => {
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [
+    { id: "oracle", pair: "Oracle & Deceiver" },
+    { id: "moon", pair: "Sun & Moon" },
+    { id: "held", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "light", kept: false },
+    { ...snapshot.state.deck[1]!, face: "dark", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [{ ...snapshot.state.deck[2]!, face: "light", kept: false }];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Oracle light/ }).click();
+  await expect(page.getByRole("status")).toHaveText("Drew 1");
+  await page.getByRole("button", { name: /^Moon dark/ }).click();
+  await expect(page.getByRole("status")).toHaveText("Flipped 1");
+  await expect(page.getByRole("button", { name: /^Vampire dark/ })).toBeVisible();
+});
+
+test("empty card draws do not claim a draw or Flip", async ({ page }) => {
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [{ id: "key", pair: "Key & Lock" }];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Key light/ }).click();
+  await expect(page.getByRole("status")).toHaveText("Played Key.");
+});
+
+test("a capped draw reports only cards that actually enter the hand", async ({ page }) => {
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [
+    { id: "letter", pair: "Wax Seal & Torn Letter" },
+    ...Array.from({ length: 9 }, (_, index) => ({ id: `card-${index}`, pair: "Sun & Moon" })),
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.slice(0, 8).map((card, index) => ({
+    ...card,
+    face: index === 0 ? "dark" : "light",
+    kept: false,
+  }));
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(8)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Torn Letter dark/ }).click();
+  await expect(page.getByRole("status")).toHaveText("Drew 1");
+  await expect(page.locator(".battle-card")).toHaveCount(8);
+});
