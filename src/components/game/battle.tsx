@@ -1643,6 +1643,11 @@ function BattleSession({
     typeof reaction?.amount === "number" && reaction.amount > 0
       ? `${reaction.amount} ${reaction.damage_type ?? "damage"} after your attacks`
       : undefined;
+  const activeActionEffects = traitWillActivate && !s.enemy.freeze ? (action.effects ?? []) : [];
+  const copiesLastHit = activeActionEffects.some((effect) => effect.op === "copy_latest_hit");
+  const nextHandFace = activeActionEffects.find(
+    (effect) => effect.op === "turn_after_draw" && effect.stage === "after_attack",
+  )?.face;
   const intentText = [
     s.enemy.freeze || (s.enemy.hush && action.ability)
       ? "Skipped"
@@ -1651,6 +1656,8 @@ function BattleSession({
             `${enemyHits.join(" + ")} ${action.type}`,
             ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
             ...statusEffects,
+            ...(copiesLastHit ? ["copies your last hit"] : []),
+            ...(nextHandFace ? [`next hand ${nextHandFace}`] : []),
           ].join(" · ")
         : action.text,
     ...(reactionText ? [reactionText] : []),

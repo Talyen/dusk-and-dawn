@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
 import { cards, createRun, runHandler } from "../../src/lib/game/run";
 import { restoreSession } from "../../src/lib/game/session";
 import { stateRng } from "../../src/lib/game/random-state";
@@ -2301,6 +2301,119 @@ for (const condition of ["active", "hush", "freeze"] as const) {
     await expect(
       page.getByText(`HP ${condition === "hush" ? "20" : "19"}/30`, { exact: true }),
     ).toBeVisible();
+  });
+}
+
+async function expectIntentClear(intent: Locator) {
+  await expect(intent).toBeInViewport({ ratio: 1 });
+  const overlap = await intent.evaluate((element) => {
+    const bounds = element.getBoundingClientRect();
+    return [...document.querySelectorAll(".battle-card, .battle-actions button")].some((other) => {
+      const box = other.getBoundingClientRect();
+      return (
+        bounds.left < box.right &&
+        bounds.right > box.left &&
+        bounds.top < box.bottom &&
+        bounds.bottom > box.top
+      );
+    });
+  });
+  expect(overlap).toBe(false);
+}
+
+for (const condition of ["active", "hush", "freeze"] as const) {
+  test(`Raven intent tracks the latest attack with ${condition}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-painted-raven";
+    snapshot.state.enemy.hp = 26;
+    snapshot.state.enemy.maxHp = 26;
+    snapshot.state.action = 1;
+    if (condition === "hush") snapshot.state.enemy.hush = true;
+    if (condition === "freeze") snapshot.state.enemy.freeze = true;
+    snapshot.state.deck = [{ id: "sun", pair: "Sun & Moon" }];
+    snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 320, height: 480 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const initial =
+      condition === "active"
+        ? "3 Memory · copies your last hit"
+        : condition === "hush"
+          ? "3 Memory"
+          : "Skipped";
+    await expectIntentClear(
+      page.getByRole("button", { name: `The Painted Raven intent: ${initial}`, exact: true }),
+    );
+    await page.getByRole("button", { name: /^Sun light/ }).click();
+    const after = condition === "active" ? "6 Memory · copies your last hit" : initial;
+    await expect(
+      page.getByRole("button", { name: `The Painted Raven intent: ${after}`, exact: true }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-player-hp",
+      condition === "active" ? "24" : condition === "hush" ? "27" : "30",
+    );
+  });
+}
+
+for (const condition of ["active", "hush", "freeze"] as const) {
+  test(`Sunken Sun previews the forced next hand with ${condition}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-sunken-sun";
+    snapshot.state.enemy.hp = 42;
+    snapshot.state.enemy.maxHp = 42;
+    snapshot.state.action = 1;
+    if (condition === "hush") snapshot.state.enemy.hush = true;
+    if (condition === "freeze") snapshot.state.enemy.freeze = true;
+    snapshot.state.deck = Array.from({ length: 5 }, (_, index) => ({
+      id: `card-${index}`,
+      pair: "Sun & Moon",
+    }));
+    snapshot.state.zones.hand = [snapshot.state.deck[0]!].map((card) => ({
+      ...card,
+      face: "light",
+      kept: false,
+    }));
+    snapshot.state.zones.library = snapshot.state.deck
+      .slice(1)
+      .map((card) => ({ ...card, face: "light", kept: false }));
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 320, height: 480 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const intent =
+      condition === "active"
+        ? "4 Radiance · next hand dark"
+        : condition === "hush"
+          ? "4 Radiance"
+          : "Skipped";
+    await expectIntentClear(
+      page.getByRole("button", { name: `The Sunken Sun intent: ${intent}`, exact: true }),
+    );
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.locator(".battle-card")).toHaveCount(5);
+    await expect(
+      page.getByRole("button", { name: condition === "active" ? /^Moon dark/ : /^Sun light/ }),
+    ).toHaveCount(5);
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-player-hp",
+      condition === "freeze" ? "30" : "26",
+    );
   });
 }
 
