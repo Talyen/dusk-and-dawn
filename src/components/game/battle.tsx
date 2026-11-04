@@ -12,6 +12,7 @@ import {
   face,
   getEnemy,
   route,
+  vampireDamage,
   type Command,
   type RunState,
 } from "../../lib/game/run";
@@ -1034,7 +1035,7 @@ function PileBrowser({
 
 const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = {
   Sacrifice: { hits: [8], type: "Radiance" },
-  Vampire: { hits: [4], type: "Shadow" },
+  Vampire: { hits: [vampireDamage], type: "Shadow" },
   Sun: { hits: [6], type: "Radiance" },
   Wither: { hits: [7], type: "Decay" },
   Thorns: { hits: [2, 2], type: "Decay" },

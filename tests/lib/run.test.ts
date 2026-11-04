@@ -29,6 +29,28 @@ describe("playable run", () => {
     const s = game.getSnapshot().state;
     expect([s.player.hp, s.player.ward, s.action, s.mana]).toEqual([30, 0, 1, 3]);
   });
+  it.each([
+    { enemy: "the-blue-jackal", hp: 24, ward: 0, healed: 3, remaining: 21, wardRemaining: 0 },
+    { enemy: "fixture:0", hp: 18, ward: 0, healed: 5, remaining: 13, wardRemaining: 0 },
+    { enemy: "fixture:0", hp: 18, ward: 10, healed: 5, remaining: 18, wardRemaining: 5 },
+    { enemy: "fixture:0", hp: 1, ward: 0, healed: 5, remaining: 0, wardRemaining: 0 },
+  ])("Vampire deals and Leeches its revised damage with $enemy at $hp HP and $ward Ward", (scenario) => {
+    const setup = structuredClone(createRun(1).getSnapshot());
+    setup.state.encounters![0] = scenario.enemy;
+    setup.state.enemy.hp = scenario.hp;
+    setup.state.enemy.maxHp = scenario.hp;
+    setup.state.enemy.ward = scenario.ward;
+    setup.state.player.hp = 20;
+    setup.state.zones.hand = [{ id: "vampire", pair: "Angel & Vampire", face: "dark", kept: false }];
+    const game = restoreSession(setup, runHandler);
+    expect(face(setup.state.zones.hand[0]!).effect).toBe("Deal 3 Shadow damage. Leech.");
+    expect(game.dispatch({ type: "play", id: "vampire" }).decision.accepted).toBe(true);
+    const state = game.getSnapshot().state;
+    expect(state.player.hp).toBe(20 + scenario.healed);
+    expect(state.enemy.hp).toBe(scenario.remaining);
+    expect(state.enemy.ward).toBe(scenario.wardRemaining);
+    expect(state.zones.discard.map((card) => card.id)).toContain("vampire");
+  });
   it("progresses through all five fights, rewards, midpoint rest, and victory", () => {
     const game = createRun(17);
     let snapshot = game.getSnapshot();

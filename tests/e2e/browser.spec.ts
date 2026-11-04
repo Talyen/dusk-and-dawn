@@ -2327,7 +2327,7 @@ test("touching an unavailable card explains the cost without playing it", async 
 test("combat feedback shows Curse being spent so attack order stays understandable", async ({ page }) => {
   const snapshot = rootLashFixture();
   snapshot.state.player.hp = 13;
-  snapshot.state.player.curse = 3;
+  snapshot.state.player.curse = 2;
   snapshot.state.enemy.curse = 2;
   snapshot.state.deck = [
     { id: "vampire", pair: "Angel & Vampire" },
@@ -2349,7 +2349,7 @@ test("combat feedback shows Curse being spent so attack order stays understandab
   await vampire.hover();
   await expect(page.getByRole("tooltip")).toContainText("Current attack: 1 Shadow damage");
   await vampire.click();
-  await expect(page.getByRole("status")).toContainText("You Curse −3");
+  await expect(page.getByRole("status")).toContainText("You Curse −2");
   await expect(page.getByText(/HP 14\/30/)).toBeVisible();
   await wither.hover();
   await expect(page.getByRole("tooltip")).toContainText("Current attack: 9 Decay damage");

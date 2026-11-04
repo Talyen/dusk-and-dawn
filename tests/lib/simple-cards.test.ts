@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { simpleCards } from "../../src/lib/game/simple-cards.generated";
-import { cards, createRun, runHandler } from "../../src/lib/game/run";
+import { cards, createRun, playtestEffectOverrides, runHandler } from "../../src/lib/game/run";
 import { restoreSession } from "../../src/lib/game/session";
 
 const slug = (name: string) =>
@@ -21,7 +21,7 @@ describe("supported catalogue cards", () => {
       for (const side of ["light", "dark"] as const) {
         const source = catalogue.find((entry) => entry.pair === pair && entry.side === side);
         expect(source?.face).toBe(faces[side].name);
-        expect(source?.effect).toBe(faces[side].effect);
+        expect(playtestEffectOverrides[faces[side].name] ?? source?.effect).toBe(faces[side].effect);
         expect(existsSync(`public/assets/card-${slug(faces[side].name)}.webp`)).toBe(true);
       }
     for (const [pair, faces] of Object.entries(simpleCards))

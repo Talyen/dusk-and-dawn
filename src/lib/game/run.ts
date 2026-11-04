@@ -36,11 +36,16 @@ interface FaceInfo {
   keywords: readonly string[];
   ops?: readonly SimpleOp[];
 }
+// Keep provisional tuning separate from the historical reviewed catalogue.
+export const vampireDamage = 3;
+export const playtestEffectOverrides: Readonly<Record<string, string>> = {
+  Vampire: `Deal ${vampireDamage} Shadow damage. Leech.`,
+};
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   ...simpleCards,
   "Angel & Vampire": {
     light: { name: "Angel", effect: "Gain 5 Ward.", keywords: ["Ward"] },
-    dark: { name: "Vampire", effect: "Deal 4 Shadow damage. Leech.", keywords: ["Shadow", "Leech"] },
+    dark: { name: "Vampire", effect: playtestEffectOverrides.Vampire!, keywords: ["Shadow", "Leech"] },
   },
   "Sun & Moon": {
     light: { name: "Sun", effect: "Deal 6 Radiance damage.", keywords: ["Radiance"] },
@@ -1008,7 +1013,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       s.player.ward += 5;
       break;
     case "Vampire":
-      attack(s, [4], "Shadow", true);
+      attack(s, [vampireDamage], "Shadow", true);
       break;
     case "Sun":
       attack(s, [6], "Radiance");

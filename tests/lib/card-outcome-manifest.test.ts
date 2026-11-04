@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
-import { cards } from "../../src/lib/game/run";
+import { cards, playtestEffectOverrides } from "../../src/lib/game/run";
 
 type Family = {
   test_file: string;
@@ -60,7 +60,10 @@ it("indexes each distinct reviewed face to one matching, present outcome-test sc
     const row = manifestByKey.get(key(source));
     expect(row, `${source.pair} ${source.side}`).toBeDefined();
     expect(row!.face).toBe(source.face);
-    expect(cards[source.pair]?.[source.side]).toMatchObject({ name: source.face, effect: source.effect });
+    expect(cards[source.pair]?.[source.side]).toMatchObject({
+      name: source.face,
+      effect: playtestEffectOverrides[source.face] ?? source.effect,
+    });
     const matched = Object.entries(manifest.families)
       .filter(([, family]) => matches(source.effect, family))
       .map(([id]) => id);
@@ -73,6 +76,7 @@ it("indexes each distinct reviewed face to one matching, present outcome-test sc
     } else {
       expect(row!.evidence, source.face).toBeUndefined();
       expect(matched, source.face).toEqual([row!.family]);
+      expect(matches(cards[source.pair]![source.side].effect, manifest.families[row!.family]!)).toBe(true);
     }
     counts.set(row!.family, (counts.get(row!.family) ?? 0) + 1);
   }
