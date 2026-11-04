@@ -402,6 +402,21 @@ function BattleCard({
   );
 }
 
+// Generated action descriptions can repeat the complete trait already shown above
+// the pattern. Keep any annotation that contains information not in the trait.
+function enemyPattern(enemy: ReturnType<typeof getEnemy>) {
+  return enemy.actions
+    .map((action) => {
+      const marker = " Trait — ";
+      const offset = action.text.indexOf(marker);
+      const annotation = offset < 0 ? "" : action.text.slice(offset + marker.length);
+      const colon = annotation.indexOf(": ");
+      const redundant = colon >= 0 && enemy.traitEffect.includes(annotation.slice(colon + 2));
+      return `${action.name}: ${redundant ? action.text.slice(0, offset) : action.text}`;
+    })
+    .join(" → ");
+}
+
 function EnemyPortrait({
   name,
   hp,
@@ -1891,7 +1906,7 @@ function BattleSession({
                 <p>
                   Trait: {enemy.trait} — {enemy.traitEffect}
                 </p>
-                <p>Pattern: {enemy.actions.map((a) => `${a.name}: ${a.text}`).join(" → ")}</p>
+                <p>Pattern: {enemyPattern(enemy)}</p>
               </EnemyPortrait>
               <h2>
                 {enemy.name} · {s.enemy.hp}/{s.enemy.maxHp}
@@ -2142,7 +2157,7 @@ function BattleSession({
                 <p>
                   {enemy.trait}: {enemy.traitEffect}
                 </p>
-                <p>Pattern: {enemy.actions.map((action) => `${action.name}: ${action.text}`).join(" → ")}</p>
+                <p>Pattern: {enemyPattern(enemy)}</p>
               </RouteChoice>
               <RouteChoice
                 label={`Rest: heal ${restHeal} HP`}

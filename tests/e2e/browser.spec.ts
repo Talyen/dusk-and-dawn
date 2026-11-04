@@ -4154,3 +4154,27 @@ test("route inspection leaves the deck action visible on desktop", async ({ page
   await deck.click();
   await expect(page.getByRole("dialog", { name: /^Deck/ })).toBeVisible();
 });
+
+test("route enemy inspection shows its trait once without losing the action pattern", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(31, { id: "route-pattern", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  const game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = structuredClone(game.getSnapshot());
+  route.state.experiment!.route!.enemy = "the-thorned-librarian";
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), encodeRun(route));
+  await page.setViewportSize({ width: 320, height: 480 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Combat: The Thorned Librarian/ }).hover();
+  const tip = page.getByRole("tooltip");
+  await expect(tip).toContainText("Thorn Page: Deal 5 Binding damage.");
+  await expect(tip).toContainText("Open the Brambles: Deal 4 Binding damage.");
+  await expect(tip).toContainText("After each of the player's direct attack cards");
+  expect((await tip.innerText()).match(/After each of the player's direct attack cards/g)).toHaveLength(1);
+  await expect(tip).toBeInViewport({ ratio: 1 });
+});
