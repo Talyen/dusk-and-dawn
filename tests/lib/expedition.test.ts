@@ -454,6 +454,33 @@ describe("experimental expeditions", () => {
     expect(unlockTier(recordExpedition(storage, "two"))).toBe(3);
     expect(createRun(4, options).getSnapshot().state.experiment!.tier).toBe(1);
   });
+  it("does not overwrite existing progression when its read fails or is malformed", () => {
+    const original = JSON.stringify({ completed: ["first", "second"] });
+    let stored = original;
+    let failRead = true;
+    let writes = 0;
+    const storage = {
+      getItem: () => {
+        if (failRead) throw new Error("temporary read failure");
+        return stored;
+      },
+      setItem: (_key: string, value: string) => {
+        writes++;
+        stored = value;
+      },
+    } as unknown as Storage;
+    expect(recordExpedition(storage, "third").completed).not.toContain("third");
+    expect(writes).toBe(0);
+    expect(stored).toBe(original);
+    failRead = false;
+    expect(recordExpedition(storage, "third").completed).toEqual(["first", "second", "third"]);
+    stored = "{corrupt";
+    const before = writes;
+    expect(recordExpedition(storage, "fourth").completed).not.toContain("fourth");
+    expect(writes).toBe(before);
+    expect(stored).toBe("{corrupt");
+  });
+
   it("does not report an unlock when progression storage fails", () => {
     const storage = {
       getItem: () => JSON.stringify({ completed: ["first"] }),

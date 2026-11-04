@@ -5101,3 +5101,91 @@ test("touch inspection previews Hush without playing it", async ({ browser }) =>
   await expect(page.getByRole("button", { name: "Mourning Tree intent: 5 Growth" })).toBeVisible();
   await context.close();
 });
+
+test("progress read failure preserves existing unlocks and retries after reload", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "failed-progress-read", tier: 2, orientation: "dark", relic: "none" },
+      "thorn-witch",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  const game = restoreSession(initial, runHandler);
+  expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+  expect(game.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
+  await page.addInitScript((data) => {
+    const key = "dusk-and-dawn.expeditions.v1";
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify({ completed: ["prior-run"] }));
+    const original = Storage.prototype.getItem;
+    Storage.prototype.getItem = function (name) {
+      if (name === key && (window as unknown as { failProgressRead?: boolean }).failProgressRead)
+        throw new Error("temporary progress read failure");
+      return original.call(this, name);
+    };
+  }, encodeRun(game.getSnapshot()));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.evaluate(() => {
+    (window as unknown as { failProgressRead: boolean }).failProgressRead = true;
+  });
+  await page.getByRole("button", { name: "Concede" }).click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+  await expect(page.getByRole("alert")).toHaveText("Expedition progress could not be saved.");
+  await page.evaluate(() => {
+    (window as unknown as { failProgressRead: boolean }).failProgressRead = false;
+  });
+  expect(
+    await page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.expeditions.v1")!).completed),
+  ).toEqual(["prior-run"]);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "Expedition pool · tier 3/3" })).toBeVisible();
+  expect(
+    await page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.expeditions.v1")!).completed),
+  ).toEqual(["prior-run", "failed-progress-read"]);
+});
+
+test("replay retains known unlock tier after a transient progression read failure", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(
+      41,
+      { id: "replay-read-failure", tier: 2, orientation: "dark", relic: "none" },
+      "veiled-oracle",
+    ).getSnapshot(),
+  );
+  snapshot.state.phase = "defeat";
+  snapshot.state.fight = 1;
+  snapshot.state.player.hp = 0;
+  snapshot.state.message = "You fell.";
+  await page.addInitScript((data) => {
+    localStorage.setItem("dusk-and-dawn.save.v1", data);
+    localStorage.setItem("dusk-and-dawn.expeditions.v1", JSON.stringify({ completed: ["prior-run"] }));
+    const original = Storage.prototype.getItem;
+    let reads = 0;
+    Storage.prototype.getItem = function (key) {
+      if (key === "dusk-and-dawn.expeditions.v1" && ++reads > 1) throw new Error("temporary read failure");
+      return original.call(this, key);
+    };
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("alert")).toHaveText("Expedition progress could not be saved.");
+  await page.getByRole("button", { name: "Play again" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const raw = localStorage.getItem("dusk-and-dawn.save.v1");
+        if (!raw) return null;
+        const run = JSON.parse(raw).state.run;
+        return run.phase === "battle" && run.experiment?.id !== "replay-read-failure" ? run.experiment : null;
+      }),
+    )
+    .toMatchObject({ tier: 2, orientation: "dark" });
+});

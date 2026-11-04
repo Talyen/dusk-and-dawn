@@ -1565,8 +1565,12 @@ export function Battle({
       onComplete={(id) => {
         try {
           const updated = recordExpedition(window.localStorage, id);
-          setProgress(updated);
-          setProgressError(!updated.completed.includes(id));
+          if (updated.completed.includes(id)) {
+            setProgress(updated);
+            setProgressError(false);
+          } else {
+            setProgressError(true);
+          }
         } catch {
           setProgressError(true);
         }

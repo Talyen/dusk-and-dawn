@@ -2,9 +2,14 @@ const key = "dusk-and-dawn.expeditions.v1";
 export interface Progression {
   completed: string[];
 }
-export function readProgression(storage: Storage | null): Progression {
+
+/** Distinguish an absent record from an unreadable or malformed one. */
+function readStoredProgression(storage: Storage | null): Progression | null {
+  if (!storage) return null;
   try {
-    const value: unknown = JSON.parse(storage?.getItem(key) ?? "null");
+    const raw = storage.getItem(key);
+    if (raw === null) return { completed: [] };
+    const value: unknown = JSON.parse(raw);
     if (value && typeof value === "object" && "completed" in value && Array.isArray(value.completed))
       return {
         completed: [
@@ -14,13 +19,18 @@ export function readProgression(storage: Storage | null): Progression {
         ].slice(-1000),
       };
   } catch {
-    /* A damaged progression record does not prevent a run. */
+    /* An unreadable record must not be replaced by an empty one. */
   }
-  return { completed: [] };
+  return null;
+}
+
+export function readProgression(storage: Storage | null): Progression {
+  return readStoredProgression(storage) ?? { completed: [] };
 }
 export function recordExpedition(storage: Storage | null, id: string): Progression {
-  const progress = readProgression(storage);
-  if (!storage || progress.completed.includes(id)) return progress;
+  const progress = readStoredProgression(storage);
+  if (!storage || !progress) return { completed: [] };
+  if (progress.completed.includes(id)) return progress;
   const updated = { completed: [...progress.completed, id] };
   try {
     storage.setItem(key, JSON.stringify(updated));
