@@ -5226,3 +5226,46 @@ test("Mirror and Shattered Mirror resolve against the Swan through save and resu
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "28");
   await expect(page.getByRole("img", { name: "The Mirror-Eyed Swan, 20 of 26 HP" })).toBeVisible();
 });
+
+for (const hush of [false, true]) {
+  test(`the Weaver's returned held cards ${hush ? "do not consume draws when Hushed" : "consume draws"}`, async ({
+    page,
+  }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-fogbound-weaver";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 28;
+    snapshot.state.action = 1;
+    snapshot.state.deck = [
+      { id: "held", pair: "Sun & Moon" },
+      { id: "lock", pair: "Key & Lock" },
+      { id: "silence", pair: "Silence & Clamor" },
+      ...Array.from({ length: 8 }, (_, index) => ({ id: `fresh-${index}`, pair: "Bloom & Wither" })),
+    ];
+    snapshot.state.zones.hand = [
+      { ...snapshot.state.deck[0]!, face: "light", kept: true },
+      { ...snapshot.state.deck[1]!, face: "dark", kept: false },
+      { ...snapshot.state.deck[2]!, face: "light", kept: false },
+    ];
+    snapshot.state.zones.library = snapshot.state.deck
+      .slice(3)
+      .map((card) => ({ ...card, face: "light", kept: false }));
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript((data) => {
+      if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    }, encodeRun(snapshot));
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: /^Lock dark/ }).click();
+    if (hush) await page.getByRole("button", { name: /^Silence light/ }).click();
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.locator(".battle-card")).toHaveCount(hush ? 7 : 5);
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "26");
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.locator(".battle-card")).toHaveCount(hush ? 7 : 5);
+    await expect(page.getByRole("button", { name: /^Lock dark/ })).toBeVisible();
+  });
+}
