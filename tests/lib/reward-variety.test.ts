@@ -143,7 +143,7 @@ describe("reward variety", () => {
 
   it("offers a fresh event pair immediately after the reward choices", () => {
     let game = createRun(
-      0,
+      1,
       { id: "event-variety", tier: 1, orientation: "light", relic: "none" },
       "thorn-witch",
     );

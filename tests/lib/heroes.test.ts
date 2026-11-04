@@ -23,17 +23,79 @@ async function saved(snapshot: ReturnType<ReturnType<typeof createRun>["getSnaps
 }
 
 describe("antihero starting kits and passives", () => {
-  it("starts each hero with two physical copies of each curated pair, without changing legacy runs", () => {
+  it("gives each hero a distinctive ten-card kit with one repeatable Leech pair", () => {
+    const signatures = {
+      "oathless-seraph": "Benediction & Curse",
+      "thorn-witch": "Censer & Plague Brazier",
+      "veiled-oracle": "Dove & Raven",
+    } as const;
     for (const hero of heroIds) {
       const state = createRun(19, undefined, hero).getSnapshot().state;
       expect(state.hero).toBe(hero);
       expect(state.heroRuleset).toBe(3);
       expect(state.deck).toHaveLength(10);
       expect(new Set(state.deck.map((card) => card.id)).size).toBe(10);
-      for (const pair of heroes[hero].pairs)
+      expect(state.deck.filter((card) => card.pair === "Angel & Vampire")).toHaveLength(1);
+      expect(state.deck.filter((card) => card.pair === signatures[hero])).toHaveLength(1);
+      for (const pair of heroes[hero].pairs.filter((pair) => pair !== "Angel & Vampire"))
         expect(state.deck.filter((card) => card.pair === pair)).toHaveLength(2);
     }
     expect(createRun(19).getSnapshot().state.hero).toBeUndefined();
+  });
+
+  it("keeps an existing saved kit and passive after the starter revision", async () => {
+    for (const hero of heroIds) {
+      const old = structuredClone(createRun(19, undefined, hero).getSnapshot());
+      const oldPairs: readonly string[] = heroes[hero].pairs;
+      const original = old.state.deck.find((card) => !oldPairs.includes(card.pair))!;
+      const id = original.id;
+      original.pair = "Angel & Vampire";
+      const zone = [...old.state.zones.hand, ...old.state.zones.library].find((card) => card.id === id)!;
+      zone.pair = "Angel & Vampire";
+      const resumed = resumeRun(await saved(old));
+      expect(resumed.getSnapshot().state.deck.filter((card) => card.pair === "Angel & Vampire")).toHaveLength(
+        2,
+      );
+      expect(resumed.dispatch({ type: "end" }).decision.accepted).toBe(true);
+      expect((await saved(resumed.getSnapshot())).state.deck).toEqual(old.state.deck);
+    }
+  });
+
+  it("lets the Seraph turn Benediction into a stronger attack and its support Ward", () => {
+    const initial = setup(
+      "oathless-seraph",
+      ["Benediction & Curse", "Seraph & Fallen Seraph"],
+      ["light", "light"],
+    );
+    initial.state.enemy.hp = 100;
+    initial.state.enemy.maxHp = 100;
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.player).toMatchObject({ ward: 1, bless: 3 });
+    expect(game.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["test-0"]);
+    expect(game.dispatch({ type: "play", id: "test-1" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.enemy.hp).toBe(90);
+    expect(game.getSnapshot().state.player.bless).toBe(0);
+  });
+
+  it("lets the Witch apply Poison and passive Curse before the enemy turn", () => {
+    const initial = setup("thorn-witch", ["Censer & Plague Brazier"], ["dark"]);
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.enemy).toMatchObject({ poison: 3, curse: 1 });
+    expect(game.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.enemy).toMatchObject({ hp: 15, poison: 1, curse: 0 });
+    expect(game.getSnapshot().state.player.hp).toBe(27);
+  });
+
+  it("lets the Oracle return the top discarded card while keeping Scry", () => {
+    const initial = setup("veiled-oracle", ["Dove & Raven", "Sun & Moon"], ["dark", "light"]);
+    initial.state.zones.discard = [initial.state.zones.hand.pop()!];
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual(["test-1"]);
+    expect(game.getSnapshot().state.zones.scry).toBe(true);
+    expect(game.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["test-0"]);
   });
 
   it("grants the new Seraph Ward for light support but not direct attacks or dark plays", () => {

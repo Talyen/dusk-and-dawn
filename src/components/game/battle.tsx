@@ -1,7 +1,7 @@
 import { relicIds, relics, type RelicId } from "../../lib/game/relics";
 import { expeditionEvent } from "../../lib/game/expedition-events";
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
-import { heroes, heroIds, heroPassive, type HeroId } from "../../lib/game/heroes";
+import { heroes, heroIds, heroPassive, heroDeckDescription, type HeroId } from "../../lib/game/heroes";
 import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -1339,7 +1339,7 @@ export function Battle({
               <RouteChoice
                 key={id}
                 className="battle-hero-choice"
-                label={`${choice.name}. ${choice.passive} Starting deck: two copies each of ${choice.pairs.join(", ")}.`}
+                label={`${choice.name}. ${choice.passive} Starting deck: ${heroDeckDescription(id)}`}
                 caption={choice.name.replace(/^The /, "")}
                 pressed={hero === id}
                 inspectOnSelect
@@ -1352,7 +1352,7 @@ export function Battle({
               >
                 <strong>{choice.name}</strong>
                 <p>{choice.passive}</p>
-                <p>Starting deck: 2 each of {choice.pairs.join(", ")}.</p>
+                <p>Starting deck: {heroDeckDescription(id)}</p>
               </RouteChoice>
             );
           })}

@@ -1235,8 +1235,8 @@ test("plays a full branching expedition through the browser", async ({ page }) =
 });
 
 test("inspects battle cards on hover and keyboard focus without selecting them", async ({ page }) => {
-  const seed = Array.from({ length: 20 }, (_, index) => index).find((value) =>
-    createRun(value)
+  const seed = Array.from({ length: 100 }, (_, index) => index).find((value) =>
+    createRun(value, { id: "inspection", tier: 1, orientation: "light", relic: "none" }, "oathless-seraph")
       .getSnapshot()
       .state.zones.hand.some((card) => card.pair === "Angel & Vampire"),
   )!;

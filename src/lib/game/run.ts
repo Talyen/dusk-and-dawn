@@ -1,6 +1,6 @@
 import type { RelicId } from "./relics";
 import { expeditionEventIds, type ExpeditionEventId } from "./expedition-events";
-import { heroes, type HeroId, type HeroRuleset } from "./heroes";
+import { heroes, heroStartingPairs, type HeroId, type HeroRuleset } from "./heroes";
 import { simpleEnemies } from "./simple-enemies.generated";
 import { simpleCards } from "./simple-cards.generated";
 import { rngInt, shuffle, type Rng } from "../random";
@@ -1418,10 +1418,8 @@ export type ExperimentOptions = {
   relic: RelicId;
 };
 export function createRun(seed: number, experiment?: ExperimentOptions, hero?: HeroId) {
-  const deck = (hero ? heroes[hero].pairs : starter).flatMap((pair, i) => [
-    { id: `card-${i * 2}`, pair },
-    { id: `card-${i * 2 + 1}`, pair },
-  ]);
+  const startingPairs = hero ? heroStartingPairs(hero) : starter.flatMap((pair) => [pair, pair]);
+  const deck = startingPairs.map((pair, i) => ({ id: `card-${i}`, pair }));
   const initial: RunState = {
     phase: "battle",
     ...(hero ? { hero, heroRuleset: 3 as const } : {}),
