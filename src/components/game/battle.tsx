@@ -264,6 +264,7 @@ function BattleCard({
   drop,
   preview,
   onSelect,
+  hoverReady,
 }: {
   card: FightCard;
   selected: boolean;
@@ -273,6 +274,7 @@ function BattleCard({
   drop: number;
   preview: ReactNode;
   onSelect: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  hoverReady: { current: boolean };
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -286,6 +288,14 @@ function BattleCard({
   });
   const info = face(card);
   const other = cards[card.pair]![card.face === "light" ? "dark" : "light"];
+  useEffect(() => {
+    const dismissPointer = () => {
+      pointer.current = false;
+      if (!focus.current && !touchPinned.current) setOpen(false);
+    };
+    document.addEventListener("dusk-hand-action", dismissPointer);
+    return () => document.removeEventListener("dusk-hand-action", dismissPointer);
+  }, []);
   useEffect(() => {
     if (!open) return;
     const dismiss = () => {
@@ -331,12 +341,23 @@ function BattleCard({
         aria-describedby={open ? id : undefined}
         disabled={disabled}
         onPointerDown={touch.onPointerDown}
-        onPointerMove={touch.onPointerMove}
+        onPointerMove={(event) => {
+          touch.onPointerMove(event);
+          if (
+            event.pointerType !== "touch" &&
+            hoverReady.current &&
+            (event.movementX !== 0 || event.movementY !== 0) &&
+            !pointer.current
+          ) {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
         onPointerUp={touch.onPointerUp}
         onPointerCancel={touch.onPointerCancel}
         onContextMenu={touch.onContextMenu}
         onPointerEnter={(event) => {
-          if (event.pointerType !== "touch") {
+          if (event.pointerType !== "touch" && hoverReady.current) {
             pointer.current = true;
             setOpen(true);
           }
@@ -1731,8 +1752,10 @@ function BattleSession({
   }
   const s = snapshot.state;
   const phaseHoverReady = useRef(false);
+  const handHoverReady = useRef(false);
   useLayoutEffect(() => {
     phaseHoverReady.current = false;
+    handHoverReady.current = false;
   }, [s.phase, s.experiment?.route?.selecting, s.experiment?.restRemovals]);
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -1788,6 +1811,8 @@ function BattleSession({
     } else {
       setError("");
       if (snapshot.state.phase === "battle" && (command.type === "play" || command.type === "end")) {
+        handHoverReady.current = false;
+        document.dispatchEvent(new Event("dusk-hand-action"));
         const before = snapshot.state;
         const after = result.snapshot.state;
         const changes: string[] = [];
@@ -2018,8 +2043,10 @@ function BattleSession({
       className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : s.phase === "route" ? " battle-screen--route" : s.phase === "rest" ? " battle-screen--rest" : s.phase === "victory" || s.phase === "defeat" ? " battle-screen--ending" : ""}`}
       aria-labelledby="battle-title"
       onPointerMoveCapture={(event) => {
-        if (event.pointerType !== "touch" && (event.movementX !== 0 || event.movementY !== 0))
+        if (event.pointerType !== "touch" && (event.movementX !== 0 || event.movementY !== 0)) {
           phaseHoverReady.current = true;
+          handHoverReady.current = true;
+        }
       }}
       onWheelCapture={() => {
         phaseHoverReady.current = false;
@@ -2151,6 +2178,7 @@ function BattleSession({
                   angle={(index - (s.zones.hand.length - 1) / 2) * 2.5}
                   drop={Math.abs(index - (s.zones.hand.length - 1) / 2) * 3}
                   preview={cardPreview(s, card)}
+                  hoverReady={handHoverReady}
                   onSelect={(event) => {
                     const name = face(card).name;
                     const choices =

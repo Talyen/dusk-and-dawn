@@ -5484,3 +5484,186 @@ for (const scenario of [
     if (scenario.visible) await expect(page.getByRole("button", { name: scenario.visible })).toBeVisible();
   });
 }
+
+test("playing a card does not inspect a different card that moves under a stationary pointer", async ({
+  page,
+}) => {
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [
+    { id: "angel", pair: "Angel & Vampire" },
+    { id: "bloom", pair: "Bloom & Wither" },
+    { id: "key", pair: "Key & Lock" },
+    { id: "sun", pair: "Sun & Moon" },
+    { id: "ivy", pair: "Ivy & Thorns" },
+    { id: "drawn", pair: "Candle & Extinguished Candle" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck
+    .slice(0, 5)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [{ ...snapshot.state.deck[5]!, face: "light", kept: false }];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  for (const viewport of [
+    { width: 320, height: 480 },
+    { width: 390, height: 844 },
+    { width: 1280, height: 720 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const key = page.getByRole("button", { name: /^Key light/ });
+    await key.hover();
+    await expect(page.getByRole("tooltip")).toContainText("Flip preview:");
+    const box = (await key.boundingBox())!;
+    await key.click();
+    await expect(page.getByRole("status")).toHaveText("Drew 1 · Flipped 5");
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+    );
+    await expect(page.getByRole("tooltip")).toHaveCount(0);
+    await page.mouse.move(box.x + box.width / 2 + 4, box.y + box.height / 2);
+    await expect(page.getByRole("tooltip")).toContainText("Moon");
+    await page.mouse.move(2, 2);
+    await expect(page.getByRole("tooltip")).toHaveCount(0);
+    await page.keyboard.press("Tab");
+    await page.getByRole("button", { name: /^Moon dark/ }).focus();
+    await expect(page.getByRole("tooltip")).toContainText("Moon");
+    await page.keyboard.press("Enter");
+    await expect(page.getByText("Mana 1/3", { exact: false })).toBeVisible();
+  }
+});
+
+test("ending a turn does not inspect the new hand under a stationary pointer", async ({ page }) => {
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [
+    ...["Angel & Vampire", "Bloom & Wither", "Key & Lock", "Sun & Moon", "Ivy & Thorns"].map(
+      (pair, index) => ({ id: `old-${index}`, pair }),
+    ),
+    ...[
+      "Candle & Extinguished Candle",
+      "Oracle & Deceiver",
+      "Bloom & Wither",
+      "Sun & Moon",
+      "Angel & Vampire",
+    ].map((pair, index) => ({ id: `new-${index}`, pair })),
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck
+    .slice(0, 5)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(5)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const card = page.getByRole("button", { name: /^Key light/ });
+  await card.hover();
+  const box = (await card.boundingBox())!;
+  await expect(page.getByRole("tooltip")).toContainText("Flip preview:");
+  await page.getByRole("button", { name: "End turn" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Oracle light/ })).toBeVisible();
+  await page.evaluate(
+    () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+  );
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await page.mouse.move(box.x + box.width / 2 + 4, box.y + box.height / 2);
+  await expect(page.getByRole("tooltip")).toBeVisible();
+});
+
+test("touch can inspect and play the rearranged hand after a card play", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const cdp = await context.newCDPSession(page);
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [
+    { id: "key", pair: "Key & Lock" },
+    { id: "angel", pair: "Angel & Vampire" },
+    { id: "bloom", pair: "Bloom & Wither" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "light", kept: false },
+    { ...snapshot.state.deck[1]!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.library = [{ ...snapshot.state.deck[2]!, face: "light", kept: false }];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  await page.getByRole("button", { name: "Continue run" }).tap();
+  await page.getByRole("button", { name: /^Key light/ }).tap();
+  await expect(page.getByRole("status")).toHaveText("Drew 1 · Flipped 2");
+  const vampire = page.getByRole("button", { name: /^Vampire dark/ });
+  const box = (await vampire.boundingBox())!;
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchStart",
+    touchPoints: [{ x: box.x + box.width / 2, y: box.y + box.height / 2 }],
+  });
+  await page.waitForTimeout(600);
+  await expect(page.getByRole("tooltip")).toContainText("Leech");
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await vampire.tap();
+  await expect(page.getByText("Mana 1/3", { exact: false })).toBeVisible();
+  await context.close();
+});
+
+test("finishing a committed choice leaves the revealed hand clear under a stationary pointer", async ({
+  page,
+}) => {
+  const snapshot = structuredClone(createRun(44).getSnapshot());
+  snapshot.state.deck = [
+    { id: "source", pair: "Walled City & Wilderness" },
+    { id: "held", pair: "Sun & Moon" },
+    { id: "one", pair: "Sun & Moon" },
+    { id: "two", pair: "Angel & Vampire" },
+    { id: "three", pair: "Flame & Frost" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "dark", kept: false },
+    { ...snapshot.state.deck[1]!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(2)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.setViewportSize({ width: 320, height: 480 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Wilderness dark/ }).click();
+  const panel = page.getByLabel("Committed inspection");
+  await expect(panel).toBeVisible();
+  await panel.getByRole("button", { name: /^Flame —/ }).click();
+  await expect(panel).toHaveCount(0);
+  await page.evaluate(
+    () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+  );
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+});
