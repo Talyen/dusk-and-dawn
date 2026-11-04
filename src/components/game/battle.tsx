@@ -532,9 +532,13 @@ function RewardCard({
   const focus = useRef(false);
   const [open, setOpen] = useState(false);
   const touchPinned = useRef(false);
+  const inspect = () => {
+    document.dispatchEvent(new CustomEvent("dusk-reward-inspection", { detail: trigger.current }));
+    setOpen(true);
+  };
   const touch = useTouchInspection<HTMLButtonElement>(() => {
     touchPinned.current = true;
-    setOpen(true);
+    inspect();
   });
   useEffect(() => {
     if (!open) return;
@@ -559,7 +563,6 @@ function RewardCard({
     };
   }, [open]);
   useEffect(() => {
-    if (!open) return;
     const closeForAnother = (event: Event) => {
       if (event instanceof CustomEvent && event.detail !== trigger.current) {
         pointer.current = false;
@@ -569,9 +572,8 @@ function RewardCard({
       }
     };
     document.addEventListener("dusk-reward-inspection", closeForAnother);
-    document.dispatchEvent(new CustomEvent("dusk-reward-inspection", { detail: trigger.current }));
     return () => document.removeEventListener("dusk-reward-inspection", closeForAnother);
-  }, [open]);
+  }, []);
   const light = cards[pair]!.light;
   const dark = cards[pair]!.dark;
   return (
@@ -587,7 +589,7 @@ function RewardCard({
           }
           if (inspecting) {
             touchPinned.current = true;
-            setOpen(true);
+            inspect();
           } else onChoose(event);
         }}
         aria-label={`${exchangeFor ? `Exchange ${pair} for ${exchangeFor}` : `${removing ? "Remove " : ""}${pair}`}${inspecting && count !== undefined ? `, ${count} ${count === 1 ? "copy" : "copies"}` : ""}. ${light.name}: ${light.effect} ${dark.name}: ${dark.effect}`}
@@ -600,7 +602,7 @@ function RewardCard({
         onPointerEnter={(event) => {
           if (event.pointerType !== "touch") {
             pointer.current = true;
-            setOpen(true);
+            inspect();
           }
         }}
         onPointerLeave={(event) => {
@@ -611,7 +613,7 @@ function RewardCard({
         onFocus={(event) => {
           if (event.currentTarget.matches(":focus-visible")) {
             focus.current = true;
-            setOpen(true);
+            inspect();
           }
         }}
         onBlur={() => {

@@ -3989,3 +3989,46 @@ test("Sunken Sanctuary previews healing versus mana without revealing or adding 
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "3");
 });
+
+test("deck focus overrides a stationary pointer inspecting another pair", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = ["Sanctuary & Prison"];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Deck 10", exact: true }).click();
+  const deck = page.getByRole("dialog", { name: "Deck · 10" });
+  const angel = deck.getByRole("button", { name: /^Angel & Vampire, 2 copies/ });
+  const sun = deck.getByRole("button", { name: /^Sun & Moon, 2 copies/ });
+  await page.keyboard.press("Shift+Tab");
+  await sun.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Deal 6 Radiance damage");
+  await deck.locator(".battle-deck-pair button").nth(3).focus();
+  await expect(page.getByRole("tooltip")).toContainText("Apply 3 Burn");
+  await page.evaluate(() => {
+    const dialog = document.querySelector('[role="dialog"][aria-labelledby]')!;
+    const buttons = [...dialog.querySelectorAll<HTMLButtonElement>(".battle-deck-pair button")];
+    buttons[1]!.dispatchEvent(new PointerEvent("pointerover", { bubbles: true, pointerType: "mouse" }));
+    buttons[0]!.focus();
+  });
+  await expect(angel).toBeFocused();
+  await expect(page.getByRole("tooltip")).toHaveCount(1);
+  await expect(page.getByRole("tooltip")).toContainText("Gain 5 Ward");
+  await expect(page.getByRole("tooltip")).toContainText("Deal 3 Shadow damage");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await expect(deck).toBeVisible();
+  await page.mouse.move(5, 5);
+  await sun.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Deal 6 Radiance damage");
+  await page.keyboard.press("Tab");
+  await expect(sun).toBeFocused();
+  await expect(page.getByRole("tooltip")).toContainText("Deal 6 Radiance damage");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+});
