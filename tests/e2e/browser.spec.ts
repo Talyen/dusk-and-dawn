@@ -6676,3 +6676,174 @@ test("reward inspection identifies a matching deck pair without removing the cho
     .toBe(true);
   await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
 });
+
+for (const scenario of [
+  {
+    id: "the-ashen-puppeteer",
+    name: "The Ashen Puppeteer",
+    hp: 28,
+    damage: "4 Binding",
+    cue: "Flip up to 1 kept",
+    flipped: 1,
+  },
+  {
+    id: "the-shadow-puppeteer",
+    name: "The Shadow Puppeteer",
+    hp: 30,
+    damage: "4 Shadow",
+    cue: "Flip all kept",
+    flipped: 2,
+  },
+  {
+    id: "the-noon-dancer",
+    name: "The Noon Dancer",
+    hp: 26,
+    damage: "4 Radiance",
+    cue: "turn kept light",
+    flipped: 2,
+  },
+  {
+    id: "the-threaded-monarch",
+    name: "The Threaded Monarch",
+    hp: 36,
+    damage: "4 Binding",
+    cue: "turn kept light",
+    flipped: 2,
+  },
+] as const) {
+  for (const condition of ["active", "hush", "freeze"] as const) {
+    test(`${scenario.name} shows and resolves its kept-face effect with ${condition}`, async ({ page }) => {
+      const snapshot = structuredClone(createRun(42).getSnapshot());
+      snapshot.state.encounters![0] = scenario.id;
+      snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = scenario.hp;
+      snapshot.state.enemy.hush = condition === "hush";
+      snapshot.state.enemy.freeze = condition === "freeze";
+      snapshot.state.action = 1;
+      snapshot.state.deck = [
+        { id: "lock", pair: "Key & Lock" },
+        { id: "moon", pair: "Sun & Moon" },
+      ];
+      snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "dark", kept: true }));
+      snapshot.state.zones.library = [];
+      snapshot.state.zones.discard = [];
+      snapshot.state.zones.banished = [];
+      await page.addInitScript(
+        (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+        encodeRun(snapshot),
+      );
+      await page.setViewportSize({ width: 320, height: 480 });
+      await page.goto("/");
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      const intent =
+        condition === "freeze"
+          ? "Skipped"
+          : `${scenario.damage}${condition === "active" ? ` · ${scenario.cue}` : ""}`;
+      await expectIntentClear(
+        page.getByRole("button", { name: `${scenario.name} intent: ${intent}`, exact: true }),
+      );
+      await page.getByRole("button", { name: "End turn" }).click();
+      await expect(page.getByRole("button", { name: /^(Key|Sun) light/ })).toHaveCount(
+        condition === "active" ? scenario.flipped : 0,
+      );
+      if (condition === "active")
+        await expect(page.getByRole("status")).toContainText(`${scenario.flipped} kept changed face`);
+      else await expect(page.getByRole("status")).not.toContainText("kept changed face");
+    });
+  }
+}
+
+for (const condition of ["active", "hush", "freeze"] as const) {
+  test(`Taxman reports its actual mana refill with ${condition}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-pearl-taxman";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+    snapshot.state.enemy.hush = condition === "hush";
+    snapshot.state.enemy.freeze = condition === "freeze";
+    snapshot.state.player.ward = 5;
+    snapshot.state.action = 1;
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-mana",
+      condition === "active" ? "2" : "3",
+    );
+    if (condition === "active") await expect(page.getByRole("status")).toContainText("Mana 2/3");
+    else await expect(page.getByRole("status")).not.toContainText("Mana 2/3");
+  });
+}
+
+test("forced light-facing feedback counts only kept cards that actually change", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-noon-dancer";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+  snapshot.state.action = 1;
+  snapshot.state.deck = [
+    { id: "sun", pair: "Sun & Moon" },
+    { id: "lock", pair: "Key & Lock" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "light", kept: true },
+    { ...snapshot.state.deck[1]!, face: "dark", kept: true },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByRole("status")).toContainText("1 kept changed face");
+  await expect(page.getByRole("button", { name: /^Sun light/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Key light/ })).toBeVisible();
+});
+
+test("forced facing does not report a change when every kept card already faces light", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-noon-dancer";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+  snapshot.state.action = 1;
+  snapshot.state.deck = [{ id: "sun", pair: "Sun & Moon" }];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: true }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByRole("status")).not.toContainText("kept changed face");
+  await expect(page.getByRole("button", { name: /^Sun light/ })).toBeVisible();
+});
+
+test("mana feedback reports the actual larger existing penalty", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-pearl-taxman";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+  snapshot.state.player.nextManaPenalty = 2;
+  snapshot.state.action = 1;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "1");
+  await expect(page.getByRole("status")).toContainText("Mana 1/3");
+});

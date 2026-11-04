@@ -1935,6 +1935,16 @@ function BattleSession({
             changes.push(`Enemy ${label} ${signed(enemyChange)}`);
         }
         if (before.player.reflect && !after.player.reflect) changes.push("Your Reflect ended");
+        if (command.type === "end" && after.phase === "battle") {
+          if (after.mana < 3) changes.push(`Mana ${after.mana}/3`);
+          const keptFaces = new Map(
+            before.zones.hand.filter((card) => card.kept).map((card) => [card.id, card.face]),
+          );
+          const flipped = after.zones.hand.filter(
+            (card) => keptFaces.has(card.id) && keptFaces.get(card.id) !== card.face,
+          ).length;
+          if (flipped) changes.push(`${flipped} kept changed face`);
+        }
         if (command.type === "play") {
           if (!before.player.reflect && after.player.reflect) changes.push("You gained Reflect");
           if (before.enemy.reflect && !after.enemy.reflect) changes.push("Enemy Reflect ended");
@@ -2065,6 +2075,15 @@ function BattleSession({
     const source = effect.op === "move_held" ? `${effect.amount} kept` : `${effect.amount} from library top`;
     return [`up to ${source} → ${destination}`];
   });
+  const keptFaceChanges = activeActionEffects.flatMap((effect) => {
+    if (effect.stage !== "after_attack") return [];
+    if (effect.op === "flip_held") {
+      if (effect.amount === "all") return ["Flip all kept"];
+      if (typeof effect.amount === "number" && effect.amount > 0) return [`Flip up to ${effect.amount} kept`];
+    }
+    if (effect.op === "turn_held" && effect.face) return [`turn kept ${effect.face}`];
+    return [];
+  });
   const copiesLastHit = activeActionEffects.some((effect) => effect.op === "copy_latest_hit");
   const nextHandFace = activeActionEffects.find(
     (effect) => effect.op === "turn_after_draw" && effect.stage === "after_attack",
@@ -2085,6 +2104,7 @@ function BattleSession({
               ...statusEffects,
               ...nextTurnPenalties,
               ...cardMoves,
+              ...keptFaceChanges,
               ...(copiesLastHit ? ["copies your last hit"] : []),
               ...(nextHandFace ? [`next hand ${nextHandFace}`] : []),
             ].join(" · ")
