@@ -397,6 +397,7 @@ export interface RunState {
             }
           | undefined;
         lastEvent?: ExpeditionEventId | undefined;
+        lastDetour?: string | undefined;
         restRemovals?: number | undefined;
       }
     | undefined;
@@ -729,7 +730,10 @@ function resolveInspection(s: RunState, ids: string[]): boolean {
   return true;
 }
 function continueRoute(s: RunState, rng: Rng) {
-  if (s.experiment) delete s.experiment.route;
+  if (s.experiment) {
+    if (s.experiment.route?.active) s.experiment.lastDetour = s.experiment.route.enemy;
+    delete s.experiment.route;
+  }
   s.fight++;
   beginFight(s, rng);
 }
@@ -738,7 +742,7 @@ function offerRoute(s: RunState, rng: Rng) {
   const candidates = unlocked(
     simpleEnemies.filter((enemy) => enemy.hp <= 30 && enemy.name !== "Radiant Moth"),
     experiment.tier,
-  ).filter((enemy) => !s.encounters?.includes(enemy.id));
+  ).filter((enemy) => !s.encounters?.includes(enemy.id) && enemy.id !== experiment.lastDetour);
   const pairs = rewardPool(experiment.tier, s.hero).filter(
     (pair) => !s.deck.some((card) => card.pair === pair),
   );

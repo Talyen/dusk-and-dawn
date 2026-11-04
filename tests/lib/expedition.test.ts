@@ -46,6 +46,80 @@ describe("experimental expeditions", () => {
     expect(game.getSnapshot().state.player.hp).toBe(8);
     expect(game.getSnapshot().state.fight).toBe(1);
   });
+  it("does not repeat a completed detour after saving and resuming its reward", async () => {
+    const initial = structuredClone(createRun(45, options).getSnapshot());
+    initial.state.phase = "reward";
+    initial.state.offers = [];
+    let game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+    const first = game.getSnapshot().state.experiment!.route!.enemy;
+    expect(first).toBe("the-bone-cartographer");
+    expect(game.dispatch({ type: "route", choice: "combat" }).decision.accepted).toBe(true);
+    const battle = structuredClone(game.getSnapshot());
+    battle.state.enemy.hp = 1;
+    const source = [...battle.state.zones.hand, ...battle.state.zones.library].find(
+      (card) => card.pair === "Sun & Moon",
+    )!;
+    if (!battle.state.zones.hand.some((card) => card.id === source.id)) {
+      battle.state.zones.library = battle.state.zones.library.filter((card) => card.id !== source.id);
+      battle.state.zones.hand.push(source);
+    }
+    game = restoreSession(battle, runHandler);
+    expect(game.dispatch({ type: "play", id: source.id }).decision.accepted).toBe(true);
+    const detourReward = game.getSnapshot();
+    expect(detourReward.state.phase).toBe("reward");
+    expect(detourReward.state.experiment!.route).toMatchObject({ active: true, enemy: first });
+    expect(detourReward.state.experiment!.lastDetour).toBeUndefined();
+    const oldSave = await readRunWithRecovery({
+      readCandidates: async () => [encodeRun(detourReward)],
+      write: async () => {},
+    });
+    expect(oldSave?.snapshot).toEqual(detourReward);
+    game = restoreSession(oldSave!.snapshot, runHandler);
+    expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.experiment!.lastDetour).toBe(first);
+    const resumed = await readRunWithRecovery({
+      readCandidates: async () => [encodeRun(game.getSnapshot())],
+      write: async () => {},
+    });
+    expect(resumed?.snapshot).toEqual(game.getSnapshot());
+    const later = structuredClone(resumed!.snapshot);
+    later.state.fight = 2;
+    later.state.phase = "reward";
+    later.state.offers = [];
+    later.state.action = 0;
+    game = restoreSession(later, runHandler);
+    expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+    const next = game.getSnapshot();
+    expect(next.state.experiment!.route!.enemy).not.toBe(first);
+    expect(next.state.encounters).not.toContain(next.state.experiment!.route!.enemy);
+    const routeSave = await readRunWithRecovery({
+      readCandidates: async () => [encodeRun(next)],
+      write: async () => {},
+    });
+    expect(routeSave?.snapshot).toEqual(next);
+  });
+  it("does not record an unchosen combat as a completed detour", () => {
+    const game = routeGame();
+    expect(game.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.experiment!.lastDetour).toBeUndefined();
+  });
+  it("rejects an unknown saved detour without rejecting older saves", async () => {
+    const original = createRun(45, options).getSnapshot();
+    expect(
+      (
+        await readRunWithRecovery({
+          readCandidates: async () => [encodeRun(original)],
+          write: async () => {},
+        })
+      )?.snapshot,
+    ).toEqual(original);
+    const bad = structuredClone(original);
+    bad.state.experiment!.lastDetour = "unknown-enemy";
+    await expect(
+      readRunWithRecovery({ readCandidates: async () => [encodeRun(bad)], write: async () => {} }),
+    ).rejects.toThrow();
+  });
   it("offers varied events without repeating the previous route's event", () => {
     const firstEvents = new Set<string>();
     for (let seed = 0; seed < 60; seed++) {

@@ -40,6 +40,10 @@ const runSchema = z
         relic: z.enum(relicIds),
         restRemovals: z.literal(1).optional(),
         lastEvent: z.enum(expeditionEventIds).optional(),
+        lastDetour: z
+          .string()
+          .refine((id) => validEncounter(id) && !id.startsWith("fixture:"))
+          .optional(),
         route: z
           .object({
             enemy: z.string().refine((id) => validEncounter(id) && !id.startsWith("fixture:")),

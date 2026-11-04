@@ -1331,6 +1331,57 @@ test("hand inspection keeps the enemy and actions clear when desktop space permi
   await expect(page.getByText(/Mana 2\/3/)).toBeVisible();
 });
 
+test("a completed detour remains recorded across reward and battle reloads", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(45, { id: "detour-memory", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  let game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const detour = game.getSnapshot().state.experiment!.route!.enemy;
+  game.dispatch({ type: "route", choice: "combat" });
+  const battle = structuredClone(game.getSnapshot());
+  battle.state.enemy.hp = 1;
+  const sun = [...battle.state.zones.hand, ...battle.state.zones.library].find(
+    (card) => card.pair === "Sun & Moon",
+  )!;
+  if (!battle.state.zones.hand.some((card) => card.id === sun.id)) {
+    battle.state.zones.library = battle.state.zones.library.filter((card) => card.id !== sun.id);
+    battle.state.zones.hand.push(sun);
+  }
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(battle));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Sun light/ }).click();
+  await expect(page.getByRole("heading", { name: "Rewards" })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Rewards" })).toBeVisible();
+  await page.getByRole("button", { name: "Skip reward" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.experiment.lastDetour,
+      ),
+    )
+    .toBe(detour);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByText("A retained copy of the run was recovered.")).toHaveCount(0);
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator("#battle-title")).not.toHaveText("Rewards");
+  expect(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.experiment.lastDetour,
+    ),
+  ).toBe(detour);
+});
+
 test("a conceded detour reloads as a defeat instead of recovering the previous battle", async ({ page }) => {
   const setup = structuredClone(
     createRun(71, { id: "detour-save", tier: 1, orientation: "light", relic: "none" }).getSnapshot(),
