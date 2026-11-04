@@ -1597,7 +1597,7 @@ input:focus-visible,
 }
 @media (max-height: 600px) {
   .battle-tooltip {
-    font-size: calc(var(--tooltip-unit) * 0.875);
+    font-size: max(0.875rem, calc(var(--tooltip-unit) * 0.875));
     line-height: 1.2;
     padding: calc(0.5 * var(--tooltip-unit));
   }
