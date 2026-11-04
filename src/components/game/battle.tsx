@@ -1163,17 +1163,21 @@ function cardFlowChanges(before: RunState, after: RunState, sourceId: string): s
   const changes: string[] = [];
   // Restrict draw counts to effects that draw directly into the hand and do not
   // subsequently discard or exchange cards; a net hand diff is otherwise ambiguous.
-  const simpleDraw = /^(?:Scry\. )?Draw \d+ cards?\.(?: Flip your hand\.)?(?: Banish this card\.)?$/.test(
-    info.effect,
-  );
+  const simpleDraw =
+    /^(?:Scry\. )?Draw \d+ cards?\.(?: Flip your hand\.| Turn your hand to its (?:light|dark) faces\.)?(?: Banish this card\.)?$/.test(
+      info.effect,
+    );
   if (simpleDraw) {
     const previouslyHeld = new Set(before.zones.hand.map((card) => card.id));
     const drawn = after.zones.hand.filter((card) => !previouslyHeld.has(card.id)).length;
     if (drawn) changes.push(`Drew ${drawn}`);
   }
-  const flipsHand =
-    info.name === "Moon" || info.name === "Key" || info.ops?.some((op) => op.op === "flip-hand");
-  if (flipsHand) {
+  const changesFaces =
+    info.name === "Moon" ||
+    info.name === "Key" ||
+    info.name === "Extinguished Candle" ||
+    info.ops?.some((op) => ["flip-hand", "flip-random", "flip-self", "turn-hand"].includes(op.op));
+  if (changesFaces) {
     const previous = new Map(
       [...before.zones.hand, ...before.zones.library, ...before.zones.discard].map((card) => [
         card.id,

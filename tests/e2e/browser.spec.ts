@@ -5385,3 +5385,102 @@ test("a capped draw reports only cards that actually enter the hand", async ({ p
   await expect(page.getByRole("status")).toHaveText("Drew 1");
   await expect(page.locator(".battle-card")).toHaveCount(8);
 });
+
+test("Deceiver reports the actual random Flip after playing", async ({ page }) => {
+  const snapshot = structuredClone(createRun(31).getSnapshot());
+  snapshot.state.deck = [
+    { id: "deceiver", pair: "Oracle & Deceiver" },
+    { id: "held", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "dark", kept: false },
+    { ...snapshot.state.deck[1]!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Deceiver dark/ }).click();
+  await expect(page.getByRole("status")).toHaveText("Flipped 1");
+  await expect(page.getByRole("button", { name: /^Vampire dark/ })).toBeVisible();
+});
+
+for (const scenario of [
+  {
+    name: "Imp damage and random Flip",
+    source: { id: "source", pair: "Cherub & Imp", face: "dark" as const, kept: false },
+    hand: [{ id: "held", pair: "Angel & Vampire", face: "light" as const, kept: false }],
+    library: [],
+    card: /^Imp dark/,
+    feedback: "Enemy −6 HP · Flipped 1",
+    visible: /^Vampire dark/,
+  },
+  {
+    name: "Cocoon flips itself and stays in hand",
+    source: { id: "source", pair: "Cocoon & Shed Skin", face: "light" as const, kept: false },
+    hand: [],
+    library: [],
+    card: /^Cocoon light/,
+    feedback: "Flipped 1",
+    visible: /^Shed Skin dark/,
+  },
+  {
+    name: "Extinguished Candle turns only light faces",
+    source: { id: "source", pair: "Candle & Extinguished Candle", face: "dark" as const, kept: false },
+    hand: [
+      { id: "held", pair: "Angel & Vampire", face: "light" as const, kept: false },
+      { id: "already-dark", pair: "Sun & Moon", face: "dark" as const, kept: false },
+    ],
+    library: [],
+    card: /^Extinguished Candle dark/,
+    feedback: "Flipped 1",
+    visible: /^Vampire dark/,
+  },
+  {
+    name: "Golden Atrium draws and turns its new card",
+    source: { id: "source", pair: "Golden Atrium & Black Atrium", face: "light" as const, kept: false },
+    hand: [{ id: "held", pair: "Angel & Vampire", face: "dark" as const, kept: false }],
+    library: [{ id: "drawn", pair: "Sun & Moon", face: "dark" as const, kept: false }],
+    card: /^Golden Atrium light/,
+    feedback: "Drew 1 · Flipped 2",
+    visible: /^Angel light/,
+  },
+  {
+    name: "Deceiver has no eligible random target",
+    source: { id: "source", pair: "Oracle & Deceiver", face: "dark" as const, kept: false },
+    hand: [],
+    library: [],
+    card: /^Deceiver dark/,
+    feedback: "Played Deceiver.",
+    visible: undefined,
+  },
+] as const) {
+  test(`actual card feedback: ${scenario.name}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(31).getSnapshot());
+    snapshot.state.encounters![0] = "radiant-moth";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 18;
+    snapshot.state.zones.hand = [{ ...scenario.source }, ...scenario.hand.map((card) => ({ ...card }))];
+    snapshot.state.zones.library = scenario.library.map((card) => ({ ...card }));
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    snapshot.state.deck = [...snapshot.state.zones.hand, ...snapshot.state.zones.library].map(
+      ({ id, pair }) => ({ id, pair }),
+    );
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: scenario.card }).click();
+    await expect(page.getByRole("status")).toHaveText(scenario.feedback);
+    if (scenario.visible) await expect(page.getByRole("button", { name: scenario.visible })).toBeVisible();
+  });
+}
