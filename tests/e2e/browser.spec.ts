@@ -4705,3 +4705,54 @@ test("Flower Bud and Moon preserve kept card faces through save and turn end", a
   await expect(page.getByRole("button", { name: /^Vampire dark · 1 mana/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /^Fallen Leaf dark · 1 mana/ })).toBeVisible();
 });
+
+for (const scenario of ["ability", "attack", "held", "frozen", "empty"] as const) {
+  test(`enemy Banish feedback reports actual cards alongside ${scenario} outcomes`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] =
+      scenario === "attack"
+        ? "the-hollow-harvester"
+        : scenario === "held"
+          ? "the-gilded-pelican"
+          : "hollow-king";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp =
+      scenario === "attack" || scenario === "held" ? 30 : 48;
+    snapshot.state.action = 1;
+    snapshot.state.player.ward = scenario === "attack" || scenario === "held" ? 0 : 4;
+    snapshot.state.enemy.freeze = scenario === "frozen";
+    if (scenario === "held") snapshot.state.zones.hand[0]!.kept = true;
+    if (scenario === "empty") {
+      snapshot.state.zones.banished.push(...snapshot.state.zones.hand.splice(0));
+      snapshot.state.zones.banished.push(...snapshot.state.zones.library.splice(0));
+    }
+    const alreadyBanished = snapshot.state.zones.library.shift()!;
+    if (alreadyBanished) snapshot.state.zones.banished.push(alreadyBanished);
+    const hiddenCard = snapshot.state.zones.library.at(-1);
+    const hiddenName = hiddenCard ? cards[hiddenCard.pair]![hiddenCard.face].name : null;
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 320, height: 480 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: "End turn", exact: true }).click();
+    const feedback = page.getByRole("status");
+    if (scenario === "frozen" || scenario === "empty") {
+      await expect(feedback).toContainText("Ward −2");
+      await expect(feedback).not.toContainText("card Banished");
+      await expect(
+        page.getByRole("button", { name: scenario === "empty" ? /Banished 10/ : /Banished 1/ }),
+      ).toBeVisible();
+    } else {
+      await expect(feedback).toContainText(
+        scenario === "attack" || scenario === "held" ? "You −5 HP" : "Ward −2",
+      );
+      await expect(feedback).toContainText("1 card Banished");
+      if (hiddenName) await expect(feedback).not.toContainText(hiddenName);
+      await expect(page.getByRole("button", { name: /Banished 2/ })).toBeVisible();
+    }
+    await expectIntentClear(feedback);
+  });
+}

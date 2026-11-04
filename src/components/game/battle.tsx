@@ -1732,6 +1732,11 @@ function BattleSession({
           if (enemyChange > 0 || (showReduction && enemyChange < 0))
             changes.push(`Enemy ${label} ${signed(enemyChange)}`);
         }
+        // Enemy effects can Banish cards while damage or Ward changes would otherwise
+        // hide that outcome. Counts avoid revealing the names of hidden library cards.
+        const enemyBanished = after.zones.banished.length - before.zones.banished.length;
+        if (command.type === "end" && enemyBanished > 0)
+          changes.push(`${enemyBanished} card${enemyBanished === 1 ? "" : "s"} Banished`);
         const text =
           after.phase === "reward" || after.phase === "victory"
             ? `${getEnemy(before).name} defeated`
