@@ -2,7 +2,7 @@ import { relicIds, relics, type RelicId } from "../../lib/game/relics";
 import { expeditionEvent } from "../../lib/game/expedition-events";
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
 import { heroes, heroIds, heroPassive, type HeroId } from "../../lib/game/heroes";
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   cards,
   cardCanBanishItself,
@@ -185,6 +185,36 @@ function InspectionTrigger({
     </>
   );
 }
+function HeroHealth({ state }: { state: RunState }) {
+  const hero = state.hero;
+  const relic = state.experiment?.relic;
+  const health = `HP ${state.player.hp}/${state.player.maxHp}`;
+  if (!hero && (!relic || relic === "none")) return <>{health}</>;
+  return (
+    <InspectionTrigger
+      label={`${hero ? heroes[hero].name : "Player"}, ${health}`}
+      text={health}
+      className="battle-hero-resource"
+      placement="top"
+    >
+      {hero && (
+        <>
+          <strong>{heroes[hero].name}</strong>
+          <p>{heroPassive(hero, state.heroRuleset)}</p>
+        </>
+      )}
+      {relic && relic !== "none" && (
+        <>
+          <strong>{relics[relic].name}</strong>
+          <p>
+            <Description text={relics[relic].effect} />
+          </p>
+        </>
+      )}
+    </InspectionTrigger>
+  );
+}
+
 function StatusDisplay({ holder, side }: { holder: RunState["player"]; side: "player" | "enemy" }) {
   const effects = (["Ward", "Burn", "Poison", "Bless", "Curse", "Reflect", "Hush", "Freeze"] as const).filter(
     (name) => holder[name.toLowerCase() as Lowercase<typeof name>],
@@ -1440,6 +1470,9 @@ function BattleSession({
     void writes.current.catch(() => undefined).then(onExit);
   }
   const s = snapshot.state;
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [s.phase]);
   const preloadedImages = useRef<HTMLImageElement[]>([]);
   const preloadPairs = [...new Set(s.deck.map((card) => card.pair))].join("\0");
   useEffect(() => {
@@ -1639,6 +1672,11 @@ function BattleSession({
           (s.phase === "battle" || s.phase === "reward" ? feedback?.text : feedback?.text || s.message)}
       </p>
       {saveError && <p role="alert">The run could not be saved. Play can continue in this session.</p>}
+      {(s.phase === "reward" || s.phase === "route") && (
+        <div className="battle-decision-health">
+          <HeroHealth state={s} />
+        </div>
+      )}
       {s.phase === "battle" && (
         <>
           <div className="battle-board">
@@ -1651,33 +1689,7 @@ function BattleSession({
             >
               <div className="battle-resource battle-resource--health">
                 <p>
-                  {s.hero || (s.experiment && s.experiment.relic !== "none") ? (
-                    <InspectionTrigger
-                      label={`${s.hero ? heroes[s.hero].name : "Player"}, HP ${s.player.hp}/${s.player.maxHp}`}
-                      text={`HP ${s.player.hp}/${s.player.maxHp}`}
-                      className="battle-hero-resource"
-                      placement="top"
-                    >
-                      {s.hero && (
-                        <>
-                          <strong>{heroes[s.hero].name}</strong>
-                          <p>{heroPassive(s.hero, s.heroRuleset)}</p>
-                        </>
-                      )}
-                      {s.experiment && s.experiment.relic !== "none" && (
-                        <>
-                          <strong>{relics[s.experiment.relic].name}</strong>
-                          <p>
-                            <Description text={relics[s.experiment.relic].effect} />
-                          </p>
-                        </>
-                      )}
-                    </InspectionTrigger>
-                  ) : (
-                    <>
-                      HP {s.player.hp}/{s.player.maxHp}
-                    </>
-                  )}
+                  <HeroHealth state={s} />
                 </p>
                 {top ? (
                   <PileCard card={top} libraryCount={s.zones.library.length} />
@@ -1913,6 +1925,7 @@ function BattleSession({
           const path = s.experiment.route;
           const enemy = simpleEnemies.find((entry) => entry.id === path.enemy)!;
           const event = expeditionEvent(path.event);
+          const restHeal = Math.min(4, s.player.maxHp - s.player.hp);
           return (
             <section className="battle-route" aria-label="Route choices">
               <RouteChoice
@@ -1935,8 +1948,8 @@ function BattleSession({
                 <p>Pattern: {enemy.actions.map((action) => `${action.name}: ${action.text}`).join(" → ")}</p>
               </RouteChoice>
               <RouteChoice
-                label="Rest: heal 4 HP"
-                caption="Rest · +4 HP"
+                label={`Rest: heal ${restHeal} HP`}
+                caption={`Rest · +${restHeal} HP`}
                 onChoose={() => dispatch({ type: "route", choice: "rest" })}
                 art={
                   <span className="battle-route-art">
@@ -1945,7 +1958,7 @@ function BattleSession({
                 }
               >
                 <strong>Rest</strong>
-                <p>Heal 4 HP.</p>
+                <p>Heal {restHeal} HP.</p>
               </RouteChoice>
               <RouteChoice
                 label={`Event: ${event.label}, add ${path.pair}`}
@@ -1983,10 +1996,12 @@ function BattleSession({
         <section className="battle-rest" aria-label="Rest choices">
           <div className="battle-rest__heal">
             <p>
-              HP {s.player.hp}/{s.player.maxHp}
+              <HeroHealth state={s} />
             </p>
             <Button onClick={() => dispatch({ type: "rest" })}>
-              {s.experiment?.restRemovals ? "Continue without another removal" : "Heal 6 HP"}
+              {s.experiment?.restRemovals
+                ? "Continue without another removal"
+                : `Heal ${Math.min(6, s.player.maxHp - s.player.hp)} HP`}
             </Button>
           </div>
           <h2>{s.experiment?.restRemovals ? "Remove another pair" : "Remove a pair"}</h2>

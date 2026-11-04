@@ -592,7 +592,7 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
       continue;
     }
     if (title === "A moment of rest") {
-      await page.getByRole("button", { name: "Heal 6 HP" }).click();
+      await page.getByRole("button", { name: /^Heal \d+ HP$/ }).click();
       continue;
     }
     encountered.add(title);
@@ -1129,7 +1129,7 @@ test("plays a full branching expedition through the browser", async ({ page }) =
     if (title === "Run ended") throw new Error(`Seeded browser run ended in defeat after ${step} decisions`);
     if (title === "Choose a path") {
       branches++;
-      await page.getByRole("button", { name: branches === 1 ? /^Combat:/ : /^Rest: heal 4/ }).click();
+      await page.getByRole("button", { name: branches === 1 ? /^Combat:/ : /^Rest: heal \d+/ }).click();
       continue;
     }
     if (title === "Rewards") {
@@ -1144,7 +1144,7 @@ test("plays a full branching expedition through the browser", async ({ page }) =
       continue;
     }
     if (title === "A moment of rest") {
-      await page.getByRole("button", { name: "Heal 6 HP" }).click();
+      await page.getByRole("button", { name: /^Heal \d+ HP$/ }).click();
       continue;
     }
     encountered.add(title);
@@ -1464,7 +1464,7 @@ test("rest previews both faces and heals without changing the deck", async ({ pa
   await expect(page.getByRole("tooltip")).toContainText("Leech");
   await expect(page.getByText("HP 19/30")).toBeVisible();
   await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
-  await page.getByRole("button", { name: "Heal 6 HP" }).click();
+  await page.getByRole("button", { name: /^Heal \d+ HP$/ }).click();
   await expect(page.getByText(/HP 25\/30/)).toBeVisible();
   await expect
     .poll(() =>
@@ -2433,7 +2433,7 @@ test("touch can inspect the deck on an expedition route without choosing it", as
   expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
   await deck.getByRole("button", { name: "Close" }).tap();
   await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
-  await page.getByRole("button", { name: /^Rest: heal 4/ }).tap();
+  await page.getByRole("button", { name: /^Rest: heal \d+/ }).tap();
   await expect(page.getByRole("heading", { name: "Choose a path" })).toHaveCount(0);
   await context.close();
 });
@@ -2777,3 +2777,127 @@ test("Hollow Chalice previews capped healing for skipping and persists the lean 
   await page.getByRole("button", { name: /^Rest:/ }).click();
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "30");
 });
+
+for (const hp of [25, 28, 30]) {
+  test(`route shows ${hp}/30 HP and previews capped rest healing`, async ({ page }) => {
+    const initial = structuredClone(
+      createRun(
+        31,
+        { id: `route-health-${hp}`, tier: 1, orientation: "light", relic: "hollow-chalice" },
+        "thorn-witch",
+      ).getSnapshot(),
+    );
+    initial.state.phase = "reward";
+    initial.state.offers = [];
+    initial.state.player.hp = hp;
+    const game = restoreSession(initial, runHandler);
+    game.dispatch({ type: "reward", pair: null });
+    const saved = encodeRun(game.getSnapshot());
+    await page.addInitScript((data) => {
+      if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    }, saved);
+    await page.setViewportSize({ width: 390, height: 700 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const health = page.getByRole("button", { name: `The Thorn Witch, HP ${hp}/30` });
+    await expect(health).toBeVisible();
+    await page.keyboard.press("Tab");
+    await health.focus();
+    const tip = page.getByRole("tooltip").filter({ hasText: "Hollow Chalice" });
+    await expect(tip).toContainText("Before each dark card resolves");
+    const amount = Math.min(4, 30 - hp);
+    const rest = page.getByRole("button", { name: `Rest: heal ${amount} HP` });
+    await expect(rest).toContainText(`Rest · +${amount} HP`);
+    expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.getByRole("button", { name: `The Thorn Witch, HP ${hp}/30` })).toBeVisible();
+    await page.getByRole("button", { name: `Rest: heal ${amount} HP` }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", String(hp + amount));
+  });
+}
+
+test("reward health stays visible and shows relic details without changing the save", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      9,
+      { id: "reward-health", tier: 1, orientation: "light", relic: "hollow-chalice" },
+      "veiled-oracle",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = ["Flame & Frost"];
+  initial.state.player.hp = 27;
+  const saved = encodeRun(initial);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.setViewportSize({ width: 320, height: 480 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const health = page.getByRole("button", { name: "The Veiled Oracle, HP 27/30" });
+  await expect(health).toBeInViewport();
+  await expect(page.getByRole("button", { name: "Skip reward · +3 HP" })).toBeVisible();
+  await page.keyboard.press("Tab");
+  await health.focus();
+  await expect(page.getByRole("tooltip").filter({ hasText: "Hollow Chalice" })).toContainText("Heal 3 HP");
+  await page.keyboard.press("Escape");
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+});
+
+for (const hp of [28, 30]) {
+  test(`midpoint rest previews its actual healing at ${hp} HP`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(9).getSnapshot());
+    snapshot.state.phase = "rest";
+    snapshot.state.fight = 1;
+    snapshot.state.player.hp = hp;
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.getByText(`HP ${hp}/30`)).toBeVisible();
+    await page.getByRole("button", { name: `Heal ${30 - hp} HP` }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "30");
+  });
+}
+
+for (const fight of [0, 1]) {
+  test(`a scrolled reward opens the next ${fight === 0 ? "route" : "rest"} at the top on a phone`, async ({
+    page,
+  }) => {
+    const initial = structuredClone(
+      createRun(
+        9,
+        { id: `scroll-${fight}`, tier: 1, orientation: "light", relic: "none" },
+        "oathless-seraph",
+      ).getSnapshot(),
+    );
+    initial.state.phase = "reward";
+    initial.state.fight = fight;
+    initial.state.player.hp = 28;
+    initial.state.offers = ["Flame & Frost", "Sun & Moon", "Sanctuary & Prison"];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(initial),
+    );
+    await page.setViewportSize({ width: 320, height: 480 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const skip = page.getByRole("button", { name: "Skip reward" });
+    await skip.scrollIntoViewIfNeeded();
+    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    await skip.click();
+    await expect(
+      page.getByRole("heading", { name: fight === 0 ? "Choose a path" : "A moment of rest" }),
+    ).toBeInViewport();
+    await expect(page.getByRole("button", { name: "The Oathless Seraph, HP 28/30" })).toBeInViewport();
+    if (fight === 0) await expect(page.getByRole("button", { name: /^Combat:/ })).toBeInViewport();
+    else await expect(page.getByRole("button", { name: "Heal 2 HP" })).toBeInViewport();
+    await expect.poll(async () => page.evaluate(() => window.scrollY)).toBe(0);
+  });
+}

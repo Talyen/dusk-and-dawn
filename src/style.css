@@ -1575,6 +1575,11 @@ input:focus-visible,
   opacity: 0.45;
   cursor: default;
 }
+.battle-decision-health {
+  margin: 0.5rem auto 0;
+  color: #d7c7b4;
+  text-align: center;
+}
 .battle-rewards {
   display: grid;
   grid-template-columns: repeat(var(--offers), minmax(0, 1fr));
