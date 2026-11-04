@@ -1183,6 +1183,22 @@ input:focus-visible,
     1.25rem Georgia,
     serif;
 }
+.battle-status-trigger {
+  display: block;
+  margin: 0.2rem auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  line-height: inherit;
+  text-decoration: underline dotted #a8937d;
+  text-underline-offset: 0.2em;
+  cursor: help;
+}
+.battle-status-trigger:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
 .battle-resource-status {
   max-width: 10rem;
   font-size: 0.75rem;
@@ -1931,7 +1947,8 @@ button.battle-pile:disabled {
 }
 
 @media (max-width: 700px) {
-  .battle-scry-tooltip {
+  .battle-scry-tooltip,
+  .battle-status-tooltip {
     max-width: min(14rem, calc(100vw - 6rem)) !important;
   }
 }

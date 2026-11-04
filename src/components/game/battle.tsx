@@ -73,6 +73,119 @@ const keywordHelp: Record<string, string> = {
     "If still active at the next enemy action, skip it and remove Freeze. Early thaw rules are undecided.",
   Leech: "Heal for the attack's final damage before Ward, including overkill, up to maximum HP.",
 };
+function StatusDisplay({ holder, side }: { holder: RunState["player"]; side: "player" | "enemy" }) {
+  const trigger = useRef<HTMLButtonElement>(null);
+  const id = useId();
+  const pointer = useRef(false);
+  const focus = useRef(false);
+  const pinned = useRef(false);
+  const [open, setOpen] = useState(false);
+  const touch = useTouchInspection<HTMLButtonElement>(() => {
+    pinned.current = true;
+    setOpen(true);
+  });
+  const dismiss = () => {
+    pointer.current = false;
+    focus.current = false;
+    pinned.current = false;
+    setOpen(false);
+  };
+  useEffect(() => {
+    const outside = (event: Event) => {
+      if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) dismiss();
+    };
+    document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("focusin", outside, true);
+    document.addEventListener("scroll", dismiss, true);
+    window.addEventListener("blur", dismiss);
+    return () => {
+      document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("focusin", outside, true);
+      document.removeEventListener("scroll", dismiss, true);
+      window.removeEventListener("blur", dismiss);
+    };
+  }, []);
+  const effects = (["Ward", "Burn", "Poison", "Bless", "Curse", "Reflect", "Hush", "Freeze"] as const).filter(
+    (name) => holder[name.toLowerCase() as Lowercase<typeof name>],
+  );
+  return (
+    <>
+      <button
+        ref={trigger}
+        type="button"
+        className={`battle-status-trigger ${side === "player" ? "battle-resource-status" : "battle-enemy-status"}`}
+        aria-label={`${side === "player" ? "Player" : "Enemy"} status: ${statuses(holder)}`}
+        aria-describedby={open ? id : undefined}
+        onPointerDown={touch.onPointerDown}
+        onPointerMove={touch.onPointerMove}
+        onPointerUp={touch.onPointerUp}
+        onPointerCancel={touch.onPointerCancel}
+        onContextMenu={touch.onContextMenu}
+        onClick={() => {
+          if (touch.wasTouch()) touch.consumeClick();
+          pinned.current = true;
+          setOpen(true);
+        }}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType !== "touch") {
+            pointer.current = false;
+            if (!focus.current && !pinned.current) setOpen(false);
+          }
+        }}
+        onFocus={(event) => {
+          if (event.currentTarget.matches(":focus-visible")) {
+            focus.current = true;
+            setOpen(true);
+          }
+        }}
+        onBlur={(event) => {
+          focus.current = false;
+          if (event.relatedTarget instanceof HTMLElement || (!pointer.current && !pinned.current)) dismiss();
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && open) {
+            event.stopPropagation();
+            dismiss();
+          }
+        }}
+      >
+        {statuses(holder)}
+      </button>
+      <Tooltip
+        triggerRef={trigger}
+        id={id}
+        open={open}
+        placement={side === "player" ? "top" : "right"}
+        overlayNarrow
+        avoidSelector=".battle-hand-stage"
+        className="battle-tooltip battle-status-tooltip"
+      >
+        {effects.map((name) => (
+          <p key={name}>
+            <strong>{name}</strong> {keywordHelp[name]}
+          </p>
+        ))}
+        {holder.nextDrawPenalty > 0 && (
+          <p>
+            <strong>Next draw −{holder.nextDrawPenalty}</strong> Fewer cards drawn at the start of your next
+            turn.
+          </p>
+        )}
+        {holder.nextManaPenalty > 0 && (
+          <p>
+            <strong>Next mana −{holder.nextManaPenalty}</strong> Less mana at the start of your next turn.
+          </p>
+        )}
+      </Tooltip>
+    </>
+  );
+}
 function BattleCard({
   card,
   selected,
@@ -240,7 +353,6 @@ function EnemyPortrait({
     setOpen(true);
   });
   useEffect(() => {
-    if (!open) return;
     const outside = (event: globalThis.PointerEvent) => {
       if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) {
         touchPinned.current = false;
@@ -261,7 +373,7 @@ function EnemyPortrait({
       document.removeEventListener("pointerdown", outside, true);
       document.removeEventListener("focusin", focusOutside, true);
     };
-  }, [open]);
+  }, []);
   return (
     <figure className="battle-enemy-figure">
       <div
@@ -293,9 +405,13 @@ function EnemyPortrait({
             setOpen(true);
           }
         }}
-        onBlur={() => {
+        onBlur={(event) => {
           focus.current = false;
-          if (!pointer.current && !touchPinned.current) setOpen(false);
+          if (event.relatedTarget instanceof HTMLElement || (!pointer.current && !touchPinned.current)) {
+            pointer.current = false;
+            touchPinned.current = false;
+            setOpen(false);
+          }
         }}
         onKeyDown={(event) => {
           if (event.key === "Escape" && open) {
@@ -1360,9 +1476,7 @@ function BattleSession({
                     <span>{s.zones.library.length}</span>
                   </span>
                 )}
-                {statuses(s.player) !== "None" && (
-                  <p className="battle-resource-status">{statuses(s.player)}</p>
-                )}
+                {statuses(s.player) !== "None" && <StatusDisplay holder={s.player} side="player" />}
               </div>
               <div className="battle-resource battle-resource--mana">
                 <p>Mana {s.mana}/3</p>
@@ -1431,7 +1545,7 @@ function BattleSession({
                     ? `${enemyHits.join(" + ")} ${action.type}`
                     : action.text}
               </p>
-              {statuses(s.enemy) !== "None" && <p className="battle-enemy-status">{statuses(s.enemy)}</p>}
+              {statuses(s.enemy) !== "None" && <StatusDisplay holder={s.enemy} side="enemy" />}
             </section>
           </div>
           <section className="battle-hand-stage" aria-labelledby="hand-title">

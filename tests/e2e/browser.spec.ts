@@ -777,6 +777,7 @@ test("keyboard activation directly plays an ordinary card and keeps focus in the
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Start new run" }).click();
   const card = page.locator(".battle-card").first();
+  await page.locator(".battle-enemy-trigger").hover();
   await page.keyboard.press("Tab");
   await card.focus();
   await expect(page.getByRole("tooltip")).toBeVisible();
@@ -1872,4 +1873,65 @@ test("a Scry reveal remains clear of the hand in a compact viewport", async ({ p
     })
     .toBe(true);
   await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+});
+
+test("active status counters explain their effects without changing the run", async ({ page }) => {
+  const snapshot = pileFixture();
+  snapshot.state.player.ward = 5;
+  snapshot.state.player.curse = 2;
+  snapshot.state.enemy.burn = 3;
+  const saved = encodeRun(snapshot);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const player = page.getByRole("button", { name: "Player status: ward 5 · curse 2" });
+  const enemy = page.getByRole("button", { name: "Enemy status: burn 3" });
+  await player.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Absorbs damage");
+  await expect(page.getByRole("tooltip")).toContainText("reduced damage per stack");
+  await page.mouse.move(0, 0);
+  await page.keyboard.press("Tab");
+  await player.focus();
+  await expect(page.getByRole("tooltip")).toContainText("Ward");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await enemy.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Fire damage");
+  await page.keyboard.press("Tab");
+  await page.getByRole("button", { name: /Sun light/ }).focus();
+  await expect(page.getByRole("tooltip")).toHaveCount(1);
+  await expect(page.getByRole("tooltip")).toContainText("Sun");
+  await expect(new AxeBuilder({ page }).analyze()).resolves.toHaveProperty("violations", []);
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await page.getByRole("button", { name: /Sun light/ }).click();
+  await expect(page.getByRole("button", { name: "Player status: ward 5" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Player status:.*curse/ })).toHaveCount(0);
+});
+
+test("touch can inspect active statuses without consuming mana", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const snapshot = pileFixture();
+  snapshot.state.player.curse = 1;
+  snapshot.state.enemy.burn = 3;
+  const saved = encodeRun(snapshot);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Player status: curse 1" }).tap();
+  await expect(page.getByRole("tooltip")).toContainText("reduced damage per stack");
+  await page.getByRole("button", { name: "Enemy status: burn 3" }).tap();
+  await expect(page.getByRole("tooltip")).toContainText("Fire damage");
+  await expect(page.getByRole("tooltip")).not.toContainText("reduced damage per stack");
+  await page.touchscreen.tap(2, 2);
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
+  await context.close();
 });
