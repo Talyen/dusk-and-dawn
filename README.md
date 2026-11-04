@@ -19,6 +19,8 @@ Open the local URL printed by Vite. `npm run dev:desktop` opens the app in Elect
 - [Architecture and persistence](docs/ARCHITECTURE.md): ownership, command and random-state boundaries, saves, and recovery.
 - [Content and asset workflows](docs/CONTENT_WORKFLOWS.md): design sources, generated runtime data, artwork, and localization.
 - [UI and interaction](docs/UI.md): shared controls, navigation, inspection, scaling, and review.
+- [Seeded playthroughs](docs/PLAYTHROUGHS.md): existing simulations, replay, and interpreting their evidence.
+- [Review guide](docs/REVIEWS.md): evidence-based lenses for focused or project-wide audits.
 - [Design and review index](docs/README.md): current design inputs, historical records, and their limitations.
 
 `package.json` owns the complete command list. Follow [AGENTS.md](AGENTS.md) for worktree isolation and the shared local integration lock. Pushes and publication require separate authorization.
