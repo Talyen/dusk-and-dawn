@@ -19,7 +19,7 @@
     "draw": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "draw and Scry faces obey printed counts, ordering, hand cap, mana and source disposition",
-      "count": 62,
+      "count": 61,
       "effect_pattern": "^(?:Scry\\. )?(?:Gain \\d+ mana\\. )?Draw \\d+ cards?\\.(?: Banish this card\\.)?$"
     },
     "scry": {
@@ -43,7 +43,7 @@
     "self-keep": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "self-Keep and self-Flip resolve the original source on its resulting face",
-      "count": 26,
+      "count": 25,
       "effect_pattern": "^(?:Flip this card\\. )?Keep this card\\.$"
     },
     "whole-hand": {
@@ -91,7 +91,7 @@
     "draw-hand-effect": {
       "test_file": "tests/lib/card-sequencing-families.test.ts",
       "test_name": "draw-before-Flip, facing, and Keep effects include the newly drawn card",
-      "count": 6,
+      "count": 7,
       "effect_pattern": "^Draw 1 card\\. (?:Flip your hand\\.(?: Banish this card\\.)?|Turn your hand to its (?:light|dark) faces\\. Banish this card\\.|Keep your hand\\.)$"
     },
     "draw-random-discard": {
@@ -2057,7 +2057,7 @@
       "pair": "Paved Road & Deer Trail",
       "side": "dark",
       "face": "Deer Trail",
-      "family": "draw"
+      "family": "draw-hand-effect"
     },
     {
       "pair": "Bell Founder & Bell Breaker",
@@ -2616,7 +2616,12 @@
       "pair": "Fern Fiddlehead & Fallen Leaf",
       "side": "light",
       "face": "Fern Fiddlehead",
-      "family": "self-keep"
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/weak-reward-outcomes.test.ts",
+        "test_name": "Fern draws, flips itself and remains playable as Fallen Leaf",
+        "effect": "Draw 1 card. Flip this card. Keep this card."
+      }
     },
     {
       "pair": "Fern Fiddlehead & Fallen Leaf",

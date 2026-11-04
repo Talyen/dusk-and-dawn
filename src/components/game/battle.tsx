@@ -1286,7 +1286,7 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
       );
   }
   if (
-    info.name === "Water Clock" &&
+    (info.name === "Water Clock" || info.name === "Fern Fiddlehead") &&
     s.zones.hand.length === 8 &&
     (s.zones.library.length > 0 || s.zones.discard.length > 0)
   )

@@ -28,6 +28,13 @@ type Pair = string;
 type SimpleOp =
   | (typeof simpleCards)[keyof typeof simpleCards]["light"]["ops"][number]
   | (typeof simpleCards)[keyof typeof simpleCards]["dark"]["ops"][number]
+  | {
+      readonly op: "attack";
+      readonly amount: number;
+      readonly type: DamageType;
+      readonly hits: number;
+      readonly leech: boolean;
+    }
   | { readonly op: "shuffle-library" }
   | { readonly op: "hand-library"; readonly position: "top" };
 interface FaceInfo {
@@ -46,6 +53,9 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Loose Thread": "Flip your hand.",
   "Iron Needlecase": "Deal 2 Binding damage twice. Keep this card.",
   "Empty Needlecase": "Gain 1 mana. Banish this card.",
+  "Deer Trail": "Draw 1 card. Flip your hand.",
+  "Fern Fiddlehead": "Draw 1 card. Flip this card. Keep this card.",
+  "Fallen Leaf": "Deal 5 Decay damage. Banish this card.",
 };
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   ...simpleCards,
@@ -89,6 +99,29 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
       effect: playtestEffectOverrides["Empty Needlecase"]!,
       keywords: ["Banish"],
       ops: [{ op: "mana", amount: 1 }, { op: "banish" }],
+    },
+  },
+  "Paved Road & Deer Trail": {
+    light: simpleCards["Paved Road & Deer Trail"].light,
+    dark: {
+      name: "Deer Trail",
+      effect: playtestEffectOverrides["Deer Trail"]!,
+      keywords: ["Flip"],
+      ops: [{ op: "draw", amount: 1 }, { op: "flip-hand" }],
+    },
+  },
+  "Fern Fiddlehead & Fallen Leaf": {
+    light: {
+      name: "Fern Fiddlehead",
+      effect: playtestEffectOverrides["Fern Fiddlehead"]!,
+      keywords: ["Flip", "Keep"],
+      ops: [{ op: "draw", amount: 1 }, { op: "flip-self" }, { op: "keep-self" }],
+    },
+    dark: {
+      name: "Fallen Leaf",
+      effect: playtestEffectOverrides["Fallen Leaf"]!,
+      keywords: ["Decay", "Banish"],
+      ops: [{ op: "attack", amount: 5, type: "Decay", hits: 1, leech: false }, { op: "banish" }],
     },
   },
   "Angel & Vampire": {

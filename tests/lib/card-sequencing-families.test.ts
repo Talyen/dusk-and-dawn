@@ -184,7 +184,7 @@ it("draw-before-Flip, facing, and Keep effects include the newly drawn card", ()
     expect(state.zones.discard.map((card) => card.id)).toEqual(banished ? [] : ["source"]);
     expect(state.zones.banished.map((card) => card.id)).toEqual(banished ? ["source"] : []);
   }
-  expect(checked).toBe(6);
+  expect(checked).toBe(7);
 });
 
 it("draw-before-random-discard may discard a newly drawn card", () => {

@@ -55,7 +55,7 @@ it("draw and Scry faces obey printed counts, ordering, hand cap, mana and source
       expect(state.zones.banished.map((card) => card.id)).toEqual(match[4] ? ["source"] : []);
     }
   }
-  expect(checked).toBe(62);
+  expect(checked).toBe(61);
 });
 
 it("pure Scry follows an empty library without revealing or reshuffling the discard pile", () => {
@@ -124,7 +124,7 @@ it("self-Keep and self-Flip resolve the original source on its resulting face", 
   const faces = catalogue.filter((face) =>
     ["Keep this card.", "Flip this card. Keep this card."].includes(face.effect),
   );
-  expect(faces).toHaveLength(26);
+  expect(faces).toHaveLength(25);
   for (const face of faces) {
     const held = Array.from({ length: 7 }, (_, index) => c(`held-${index}`, index % 2 ? "dark" : "light"));
     const game = fixture(face, held, [], []);

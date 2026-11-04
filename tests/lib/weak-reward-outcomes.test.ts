@@ -104,4 +104,61 @@ describe("retuned reward pairs", () => {
     ]);
     expect(game.getSnapshot().state.zones.banished).toEqual([]);
   });
+
+  it("Deer Trail draws before flipping the other hand, including the drawn card", () => {
+    const pair = "Paved Road & Deer Trail";
+    expect(cards[pair]!.light.effect).toBe("Scry. Draw 1 card.");
+    expect(cards[pair]!.dark.effect).toBe("Draw 1 card. Flip your hand.");
+    const game = fixture(pair, "dark");
+    expect(game.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand.map((card) => [card.id, card.face, card.kept])).toEqual([
+      ["card-1", "dark", false],
+      ["card-2", "light", true],
+      ["card-4", "dark", false],
+    ]);
+    expect(game.getSnapshot().state.zones.discard.map((card) => [card.id, card.face])).toEqual([
+      ["card-0", "dark"],
+    ]);
+    expect(game.getSnapshot().state.zones.scry).toBe(false);
+  });
+
+  it("Fern draws, flips itself and remains playable as Fallen Leaf", async () => {
+    const pair = "Fern Fiddlehead & Fallen Leaf";
+    expect(cards[pair]!.light.effect).toBe("Draw 1 card. Flip this card. Keep this card.");
+    expect(cards[pair]!.dark.effect).toBe("Deal 5 Decay damage. Banish this card.");
+    const initial = structuredClone(fixture(pair, "light").getSnapshot());
+    initial.state.enemy.hp = initial.state.enemy.maxHp = 100;
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand.map((card) => [card.id, card.face, card.kept])).toEqual([
+      ["card-1", "light", false],
+      ["card-2", "dark", true],
+      ["card-4", "light", false],
+      ["card-0", "dark", true],
+    ]);
+    expect(game.getSnapshot().state.mana).toBe(2);
+    const loaded = await readRun({
+      readCandidates: async () => [encodeRun(game.getSnapshot())],
+      write: async () => {},
+    });
+    const resumed = restoreSession(loaded!, runHandler);
+    expect(resumed.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.enemy.hp).toBe(95);
+    expect(resumed.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["card-0"]);
+  });
+
+  it("a full hand can consume the Fern's vacated slot before it Keeps itself", () => {
+    const initial = structuredClone(fixture("Fern Fiddlehead & Fallen Leaf", "light").getSnapshot());
+    for (let i = 0; i < 5; i++) {
+      const extra = { id: `extra-${i}`, pair: "Sun & Moon" };
+      initial.state.deck.push(extra);
+      initial.state.zones.hand.push({ ...extra, face: "light", kept: false });
+    }
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand).toHaveLength(8);
+    expect(game.getSnapshot().state.zones.discard).toEqual([
+      { id: "card-0", pair: "Fern Fiddlehead & Fallen Leaf", face: "dark", kept: false },
+    ]);
+  });
 });

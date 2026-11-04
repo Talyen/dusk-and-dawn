@@ -4604,3 +4604,70 @@ test("the lethal forecast updates when a card protects the player", async ({ pag
   await page.getByRole("button", { name: /^Angel light/ }).click();
   await expect(page.getByRole("button", { name: "Mourning Tree intent: 7 Growth · Curse 1" })).toBeVisible();
 });
+
+test("revised trail and fern reward choices inspect and persist", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "path-reward", tier: 1, orientation: "light", relic: "none" },
+      "veiled-oracle",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [
+    "Paved Road & Deer Trail",
+    "Fern Fiddlehead & Fallen Leaf",
+    "Wax Seal & Torn Letter",
+  ];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(initial));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const trail = page.getByRole("button", { name: /^Paved Road & Deer Trail/ });
+  await trail.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Scry. Draw 1 card.");
+  await expect(page.getByRole("tooltip")).toContainText("Draw 1 card. Flip your hand.");
+  const fern = page.getByRole("button", { name: /^Fern Fiddlehead & Fallen Leaf/ });
+  await fern.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Draw 1 card. Flip this card. Keep this card.");
+  await expect(page.getByRole("tooltip")).toContainText("Deal 5 Decay damage. Banish this card.");
+  await fern.click();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Deck / }).click();
+  await expect(
+    page
+      .getByRole("dialog", { name: /^Deck/ })
+      .getByRole("button", { name: /^Fern Fiddlehead & Fallen Leaf/ }),
+  ).toBeVisible();
+});
+
+test("Fern previews when its draw prevents Keep in a full hand", async ({ page }) => {
+  const initial = structuredClone(createRun(22).getSnapshot());
+  initial.state.deck[0]!.pair = "Fern Fiddlehead & Fallen Leaf";
+  const fight = initial.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+  initial.state.zones.hand = fight.slice(0, 8);
+  initial.state.zones.library = fight.slice(8);
+  initial.state.zones.discard = [];
+  initial.state.zones.banished = [];
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), encodeRun(initial));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const fern = page.getByRole("button", { name: /^Fern Fiddlehead light/ });
+  await fern.hover();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "Drawing will fill your hand, so this card cannot return to it with Keep.",
+  );
+  await fern.click();
+  await expect(page.getByRole("button", { name: /^Fallen Leaf/ })).toHaveCount(0);
+  await expect(page.locator(".battle-card")).toHaveCount(8);
+  await page.getByRole("button", { name: /^Discard / }).click();
+  await expect(
+    page.getByRole("dialog", { name: /Discard/ }).getByRole("img", { name: /Fallen Leaf dark/ }),
+  ).toBeVisible();
+});
