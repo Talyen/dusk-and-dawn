@@ -149,4 +149,15 @@ describe("experimental expeditions", () => {
     expect(unlockTier(recordExpedition(storage, "two"))).toBe(3);
     expect(createRun(4, options).getSnapshot().state.experiment!.tier).toBe(1);
   });
+  it("does not report an unlock when progression storage fails", () => {
+    const storage = {
+      getItem: () => JSON.stringify({ completed: ["first"] }),
+      setItem: () => {
+        throw new Error("storage full");
+      },
+    } as unknown as Storage;
+    expect(recordExpedition(storage, "second")).toEqual({ completed: ["first"] });
+    expect(unlockTier(recordExpedition(storage, "second"))).toBe(2);
+    expect(recordExpedition(null, "first")).toEqual({ completed: [] });
+  });
 });

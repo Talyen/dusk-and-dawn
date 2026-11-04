@@ -946,6 +946,25 @@ test("expedition event survives reload and unlocks the dark start for a future r
       page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.expeditions.v1") || "{}")),
     )
     .toEqual({ completed: ["browser-expedition"] });
+  await expect(
+    page.getByRole("status").filter({ hasText: "Expedition pool · tier 2/3 · Nocturne unlocked" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "View deck" }).click();
+  const deck = page.getByRole("dialog", { name: /^Deck/ });
+  await expect(deck).toBeVisible();
+  await expect(deck.getByLabel(new RegExp(route.pair.split(" & ")[0]!))).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(deck).toBeHidden();
+  await expect(page.getByRole("button", { name: "View deck" })).toBeFocused();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByText("Expedition pool · tier 2/3 · Nocturne unlocked")).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.expeditions.v1") || "{}").completed),
+    )
+    .toEqual(["browser-expedition"]);
   await page.getByRole("button", { name: "Return to main menu" }).click();
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Configure expedition" }).click();
@@ -955,6 +974,40 @@ test("expedition event survives reload and unlocks the dark start for a future r
   await page.getByRole("button", { name: "Start expedition" }).click();
   await expect(page.getByText(/HP 24\/30/)).toBeVisible();
   await expect(page.locator(".battle-card").first()).toContainText("dark");
+});
+
+test("an expedition recap does not claim a progress unlock when storage is unavailable", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(31, {
+      id: "failed-progress-write",
+      tier: 1,
+      orientation: "light",
+      relic: "none",
+    }).getSnapshot(),
+  );
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = [];
+  const game = restoreSession(snapshot, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  game.dispatch({ type: "route", choice: "rest" });
+  const saved = encodeRun(game.getSnapshot());
+  await page.addInitScript((data) => {
+    localStorage.setItem("dusk-and-dawn.save.v1", data);
+    const original = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === "dusk-and-dawn.expeditions.v1") throw new Error("storage full");
+      return original.call(this, key, value);
+    };
+  }, saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Concede" }).click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+  await expect(page.getByText(/Expedition pool/)).toHaveCount(0);
+  await expect(page.getByRole("alert")).toHaveText("Expedition progress could not be saved.");
+  await page.getByRole("button", { name: "View deck" }).click();
+  await expect(page.getByRole("dialog", { name: /^Deck/ })).toBeVisible();
 });
 
 test("plays a full branching expedition through the browser", async ({ page }) => {
@@ -1110,6 +1163,8 @@ test("a conceded detour reloads as a defeat instead of recovering the previous b
   await expect(page.getByText("A retained copy of the run was recovered.")).toHaveCount(0);
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+  await expect(page.getByText(/Expedition pool/)).toHaveCount(0);
+  await expect(page.getByText("Journey 1/5 · Deck 10")).toBeVisible();
 });
 
 test("enemy pattern inspection preserves repeated actions without console errors", async ({ page }) => {

@@ -20,13 +20,15 @@ export function readProgression(storage: Storage | null): Progression {
 }
 export function recordExpedition(storage: Storage | null, id: string): Progression {
   const progress = readProgression(storage);
-  if (!progress.completed.includes(id)) progress.completed.push(id);
+  if (!storage || progress.completed.includes(id)) return progress;
+  const updated = { completed: [...progress.completed, id] };
   try {
-    storage?.setItem(key, JSON.stringify(progress));
+    storage.setItem(key, JSON.stringify(updated));
+    return updated;
   } catch {
-    /* Play remains available without storage. */
+    /* Play remains available without claiming an unsaved unlock. */
+    return progress;
   }
-  return progress;
 }
 export function unlockTier(progress: Progression): number {
   return Math.min(3, 1 + progress.completed.length);

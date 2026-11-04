@@ -15,7 +15,7 @@ import {
 import { scryTop, type FightCard } from "../../lib/game/card-zones";
 import { attackValues, type DamageType } from "../../lib/game/combat-status";
 import { encodeRun, readRunWithRecovery, resumeRun } from "../../lib/game/run-save";
-import { readProgression, recordExpedition, unlockTier } from "../../lib/game/progression";
+import { readProgression, recordExpedition, unlockTier, type Progression } from "../../lib/game/progression";
 import {
   browserSaveBackend,
   desktopSaveBackend,
@@ -1175,6 +1175,7 @@ export function Battle({
     }
   });
   const tier = unlockTier(progress);
+  const [progressError, setProgressError] = useState(false);
   const [saved, setSaved] = useState<{ snapshot: Snapshot<RunState>; recovered: boolean } | null>(null);
   const [game, setGame] = useState<{
     session: ReturnType<typeof createRun>;
@@ -1329,11 +1330,15 @@ export function Battle({
       backend={backend}
       onExit={onExit}
       onDiscover={onDiscover}
+      progress={progress}
+      progressError={progressError}
       onComplete={(id) => {
         try {
-          setProgress(recordExpedition(window.localStorage, id));
+          const updated = recordExpedition(window.localStorage, id);
+          setProgress(updated);
+          setProgressError(!updated.completed.includes(id));
         } catch {
-          /* Keep playing without progression storage. */
+          setProgressError(true);
         }
       }}
     />
@@ -1347,6 +1352,8 @@ function BattleSession({
   backend,
   onExit,
   onDiscover,
+  progress,
+  progressError,
   onComplete,
 }: {
   game: ReturnType<typeof createRun>;
@@ -1355,6 +1362,8 @@ function BattleSession({
   backend: SaveBackend;
   onExit: () => void;
   onDiscover: (ids: readonly string[]) => void;
+  progress: Progression;
+  progressError: boolean;
   onComplete: (id: string) => void;
 }) {
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
@@ -1975,9 +1984,18 @@ function BattleSession({
         <section className="battle-ending">
           <img src={art("enemy", enemy.name)} alt="" />
           <p>
-            Encounters {s.fight + 1}/{route.length} · Deck {s.deck.length}
+            Journey {s.fight + 1}/{route.length} · Deck {s.deck.length}
           </p>
-          <Button onClick={exitBattle}>Return to main menu</Button>
+          {s.experiment && progress.completed.includes(s.experiment.id) && (
+            <p role="status">Expedition pool · tier {unlockTier(progress)}/3 · Nocturne unlocked</p>
+          )}
+          {progressError && <p role="alert">Expedition progress could not be saved.</p>}
+          <div className="battle-ending__actions">
+            <Button variant="outline" onClick={() => setPileOpen(true)}>
+              View deck
+            </Button>
+            <Button onClick={exitBattle}>Return to main menu</Button>
+          </div>
         </section>
       )}
     </section>

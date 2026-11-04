@@ -8,7 +8,7 @@ A new run starts at 30 HP with two copies of each of the selected antihero's fiv
 
 Victory before the last scheduled fight offers up to three unowned card pairs or a skip. After the second scheduled fight, the player may heal 6 HP or remove a deck card. The optional expedition can add a route after the first and third fights: combat for a reward, rest for 4 HP, or an event costing 4 HP for a card pair. The event requires more than 4 HP; routes rejoin before the next scheduled fight. Relics can alter these choices. See `tests/lib/expedition.test.ts` and `tests/lib/run.test.ts`.
 
-The run deck can be inspected at reward and route choices, and from the combat pile browser. It groups physical cards by pair and shows both faces and copy counts. It does not show the order or current facing of cards in the hidden library, and inspection does not change the run or consume randomness.
+The run deck can be inspected at reward and route choices, from the combat pile browser, and on the end-of-run screen. A qualifying expedition's end screen also shows the saved pool tier and Nocturne unlock; failed progression writes show a save error instead of reporting an unlock. The deck browser groups physical cards by pair and shows both faces and copy counts. It does not show the order or current facing of cards in the hidden library, and inspection does not change the run or consume randomness.
 
 ## Antiheroes
 
