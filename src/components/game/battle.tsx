@@ -73,7 +73,19 @@ const keywordHelp: Record<string, string> = {
     "If still active at the next enemy action, skip it and remove Freeze. Early thaw rules are undecided.",
   Leech: "Heal for the attack's final damage before Ward, including overkill, up to maximum HP.",
 };
-function StatusDisplay({ holder, side }: { holder: RunState["player"]; side: "player" | "enemy" }) {
+function InspectionTrigger({
+  label,
+  text,
+  className,
+  placement,
+  children,
+}: {
+  label: string;
+  text: string;
+  className: string;
+  placement: "top" | "right";
+  children: ReactNode;
+}) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
   const pointer = useRef(false);
@@ -105,16 +117,13 @@ function StatusDisplay({ holder, side }: { holder: RunState["player"]; side: "pl
       window.removeEventListener("blur", dismiss);
     };
   }, []);
-  const effects = (["Ward", "Burn", "Poison", "Bless", "Curse", "Reflect", "Hush", "Freeze"] as const).filter(
-    (name) => holder[name.toLowerCase() as Lowercase<typeof name>],
-  );
   return (
     <>
       <button
         ref={trigger}
         type="button"
-        className={`battle-status-trigger ${side === "player" ? "battle-resource-status" : "battle-enemy-status"}`}
-        aria-label={`${side === "player" ? "Player" : "Enemy"} status: ${statuses(holder)}`}
+        className={`battle-status-trigger ${className}`}
+        aria-label={label}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
         onPointerMove={touch.onPointerMove}
@@ -155,35 +164,50 @@ function StatusDisplay({ holder, side }: { holder: RunState["player"]; side: "pl
           }
         }}
       >
-        {statuses(holder)}
+        {text}
       </button>
       <Tooltip
         triggerRef={trigger}
         id={id}
         open={open}
-        placement={side === "player" ? "top" : "right"}
+        placement={placement}
         overlayNarrow
         avoidSelector=".battle-hand-stage"
         className="battle-tooltip battle-status-tooltip"
       >
-        {effects.map((name) => (
-          <p key={name}>
-            <strong>{name}</strong> {keywordHelp[name]}
-          </p>
-        ))}
-        {holder.nextDrawPenalty > 0 && (
-          <p>
-            <strong>Next draw −{holder.nextDrawPenalty}</strong> Fewer cards drawn at the start of your next
-            turn.
-          </p>
-        )}
-        {holder.nextManaPenalty > 0 && (
-          <p>
-            <strong>Next mana −{holder.nextManaPenalty}</strong> Less mana at the start of your next turn.
-          </p>
-        )}
+        {children}
       </Tooltip>
     </>
+  );
+}
+function StatusDisplay({ holder, side }: { holder: RunState["player"]; side: "player" | "enemy" }) {
+  const effects = (["Ward", "Burn", "Poison", "Bless", "Curse", "Reflect", "Hush", "Freeze"] as const).filter(
+    (name) => holder[name.toLowerCase() as Lowercase<typeof name>],
+  );
+  return (
+    <InspectionTrigger
+      label={`${side === "player" ? "Player" : "Enemy"} status: ${statuses(holder)}`}
+      text={statuses(holder)}
+      className={side === "player" ? "battle-resource-status" : "battle-enemy-status"}
+      placement={side === "player" ? "top" : "right"}
+    >
+      {effects.map((name) => (
+        <p key={name}>
+          <strong>{name}</strong> {keywordHelp[name]}
+        </p>
+      ))}
+      {holder.nextDrawPenalty > 0 && (
+        <p>
+          <strong>Next draw −{holder.nextDrawPenalty}</strong> Fewer cards drawn at the start of your next
+          turn.
+        </p>
+      )}
+      {holder.nextManaPenalty > 0 && (
+        <p>
+          <strong>Next mana −{holder.nextManaPenalty}</strong> Less mana at the start of your next turn.
+        </p>
+      )}
+    </InspectionTrigger>
   );
 }
 function BattleCard({
@@ -388,6 +412,13 @@ function EnemyPortrait({
         onPointerUp={touch.onPointerUp}
         onPointerCancel={touch.onPointerCancel}
         onContextMenu={touch.onContextMenu}
+        onClick={() => {
+          if (touch.wasTouch()) {
+            touch.consumeClick();
+            touchPinned.current = true;
+            setOpen(true);
+          }
+        }}
         onPointerEnter={(event) => {
           if (event.pointerType !== "touch") {
             pointer.current = true;
@@ -1356,6 +1387,10 @@ function BattleSession({
         if (after.enemy.ward !== before.enemy.ward)
           changes.push(`${getEnemy(before).name} Ward ${signed(after.enemy.ward - before.enemy.ward)}`);
         for (const name of ["burn", "poison", "curse", "bless"] as const) {
+          if (after.player[name] > before.player[name])
+            changes.push(
+              `You ${name[0]!.toUpperCase()}${name.slice(1)} +${after.player[name] - before.player[name]}`,
+            );
           if (after.enemy[name] > before.enemy[name])
             changes.push(
               `${name[0]!.toUpperCase()}${name.slice(1)} +${after.enemy[name] - before.enemy[name]}`,
@@ -1412,6 +1447,48 @@ function BattleSession({
           0,
           "flat-preview",
         );
+  const intentText =
+    s.enemy.freeze || (s.enemy.hush && action.ability)
+      ? "Skipped"
+      : enemyHits
+        ? `${enemyHits.join(" + ")} ${action.type}`
+        : action.text;
+  const actionDetails = (
+    <>
+      <p>
+        <strong>Next: {action.name}</strong> —{" "}
+        {s.enemy.freeze ? (
+          "Frozen: this action is skipped."
+        ) : s.enemy.hush && action.ability ? (
+          "Hushed: this ability is skipped."
+        ) : s.enemy.hush ? (
+          <>
+            <Description text={action.text.split(" Trait — ")[0]!} /> Hushed: the trait is suppressed.
+          </>
+        ) : (
+          <Description text={action.text} />
+        )}
+      </p>
+      {enemyHits && !s.enemy.freeze && (
+        <p>
+          Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}
+          {action.hit}; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
+        </p>
+      )}
+      {!s.enemy.hush &&
+        !s.enemy.freeze &&
+        action.effects?.some((effect) => ["move_held", "flip_held", "turn_held"].includes(effect.op)) && (
+          <p>
+            Held-card hazard pool if you end turn now:{" "}
+            {s.zones.hand
+              .filter((card) => card.kept)
+              .map((card) => face(card).name)
+              .join(", ") || "none"}
+            . Unkept cards are discarded before the enemy acts.
+          </p>
+        )}
+    </>
+  );
   return (
     <section
       className={`battle-screen${s.phase === "battle" ? " battle-screen--active" : s.phase === "reward" ? " battle-screen--reward" : s.phase === "route" ? " battle-screen--route" : s.phase === "rest" ? " battle-screen--rest" : s.phase === "victory" || s.phase === "defeat" ? " battle-screen--ending" : ""}`}
@@ -1498,38 +1575,7 @@ function BattleSession({
                   HP {s.enemy.hp}/{s.enemy.maxHp} · Weakness: {enemy.weakness} (+2 on first matching hit)
                 </p>
                 <p>Statuses: {statuses(s.enemy)}</p>
-                <p>
-                  <strong>Next: {action.name}</strong> —{" "}
-                  {s.enemy.freeze ? (
-                    "Frozen: this action is skipped."
-                  ) : s.enemy.hush && action.ability ? (
-                    "Hushed: this ability is skipped."
-                  ) : s.enemy.hush ? (
-                    "Hushed: base attack only; the trait is suppressed."
-                  ) : (
-                    <Description text={action.text} />
-                  )}
-                </p>
-                {enemyHits && !s.enemy.freeze && (
-                  <p>
-                    Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}
-                    {action.hit}; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
-                  </p>
-                )}
-                {!s.enemy.hush &&
-                  !s.enemy.freeze &&
-                  action.effects?.some((effect) =>
-                    ["move_held", "flip_held", "turn_held"].includes(effect.op),
-                  ) && (
-                    <p>
-                      Held-card hazard pool if you end turn now:{" "}
-                      {s.zones.hand
-                        .filter((card) => card.kept)
-                        .map((card) => face(card).name)
-                        .join(", ") || "none"}
-                      . Unkept cards are discarded before the enemy acts.
-                    </p>
-                  )}
+                {actionDetails}
                 <p>
                   Trait: {enemy.trait} — {enemy.traitEffect}
                 </p>
@@ -1538,13 +1584,14 @@ function BattleSession({
               <h2>
                 {enemy.name} · {s.enemy.hp}/{s.enemy.maxHp}
               </h2>
-              <p className="battle-intent">
-                {s.enemy.freeze || (s.enemy.hush && action.ability)
-                  ? "Skipped"
-                  : enemyHits
-                    ? `${enemyHits.join(" + ")} ${action.type}`
-                    : action.text}
-              </p>
+              <InspectionTrigger
+                label={`${enemy.name} intent: ${intentText}`}
+                text={intentText}
+                className="battle-intent"
+                placement="right"
+              >
+                {actionDetails}
+              </InspectionTrigger>
               {statuses(s.enemy) !== "None" && <StatusDisplay holder={s.enemy} side="enemy" />}
             </section>
           </div>

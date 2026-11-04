@@ -1935,3 +1935,92 @@ test("touch can inspect active statuses without consuming mana", async ({ browse
   await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
   await context.close();
 });
+
+function rootLashFixture() {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.encounters![0] = "mourning-tree";
+  snapshot.state.enemy.hp = 36;
+  snapshot.state.enemy.maxHp = 36;
+  snapshot.state.action = 1;
+  return snapshot;
+}
+
+test("enemy intent explains a modified attack and its trait before the turn resolves", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.enemy.bless = 2;
+  snapshot.state.enemy.curse = 1;
+  const saved = encodeRun(snapshot);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const intent = page.getByRole("button", { name: "Mourning Tree intent: 8 Growth" });
+  await intent.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Root Snare: Apply 1 Curse");
+  await expect(page.getByRole("tooltip")).toContainText("Current attack: 8 Growth");
+  await page.mouse.move(0, 0);
+  await page.keyboard.press("Tab");
+  await intent.focus();
+  await expect(page.getByRole("tooltip")).toContainText("Root Lash");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByText(/HP 22\/30/)).toBeVisible();
+  await expect(page.getByRole("status")).toContainText("You Curse +1");
+  await expect(page.getByRole("button", { name: "Player status: curse 1" })).toBeVisible();
+});
+
+for (const condition of ["hush", "freeze"] as const) {
+  test(`enemy intent reports ${condition} correctly and matches resolution`, async ({ page }) => {
+    const snapshot = rootLashFixture();
+    snapshot.state.enemy[condition] = true;
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const intent = page.getByRole("button", {
+      name: `Mourning Tree intent: ${condition === "hush" ? "7 Growth" : "Skipped"}`,
+    });
+    await intent.hover();
+    const tooltip = page.getByRole("tooltip");
+    if (condition === "hush") {
+      await expect(tooltip).toContainText("Deal 7 Growth damage");
+      await expect(tooltip).toContainText("trait is suppressed");
+      await expect(tooltip).not.toContainText("Apply 1 Curse");
+    } else {
+      await expect(tooltip).toContainText("Frozen: this action is skipped");
+      await expect(tooltip).not.toContainText("Current attack");
+    }
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.getByText(condition === "hush" ? /HP 23\/30/ : /HP 30\/30/)).toBeVisible();
+    await expect(page.getByRole("button", { name: /Player status:.*curse/ })).toHaveCount(0);
+  });
+}
+
+test("touch inspects the enemy portrait and intent without advancing combat", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const saved = encodeRun(rootLashFixture());
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("img", { name: "Mourning Tree, 36 of 36 HP" }).tap();
+  await expect(page.getByRole("tooltip")).toContainText("Weakness: Decay");
+  await page.getByRole("button", { name: "Mourning Tree intent: 7 Growth" }).tap();
+  await expect(page.getByRole("tooltip")).toContainText("Root Snare: Apply 1 Curse");
+  await expect(page.getByRole("tooltip")).not.toContainText("Weakness: Decay");
+  await page.touchscreen.tap(2, 2);
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
+  await context.close();
+});
