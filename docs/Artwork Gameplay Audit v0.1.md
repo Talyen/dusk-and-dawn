@@ -126,3 +126,17 @@ The Paper Nautilus has a layered spiral shell and tentacles; its second Binding 
 In a controlled Seraph comparison against the Moth, the caged bird drew Sun and remained for the next turn; the wild face drew Sun and Wither, allowing the stronger Wither attack but leaving the bird in discard. Both lines then played Angel and prevented the enemy's attack. A browser scenario played the caged face three times, spending all 3 mana, gaining the Seraph's support Ward each time and keeping the bird across save/reload and the turn boundary. The card can be played repeatedly while mana remains, so this interaction merits natural-run balance testing; the scenario is not evidence of overall balance.
 
 When a hand is already full, the drawn card can occupy the vacated slot before the source returns, so the bird goes to discard. The existing Water Clock preview now covers both identical draw-and-self-Keep sequences; browser tests verify both the warning and the outcome. Draw feedback also reports the card actually drawn. Existing saved cards use the revised effect. No broader damage type or Bless/Curse rule changed.
+
+## Eighth pass: split light, gravity and a completed expedition
+
+At `de74e20`, four card-face WebPs and three enemy WebPs were individually inspected and compared with their runtime behavior. In a normally played light Seraph expedition, Prism and Gravity were acquired as rewards; Prism and Seraph were used against the Mirrored Sphinx, and Gravity and Prism against the Sunken Sun. The run ended in victory at 22/30 HP. This single run is not evidence of overall balance.
+
+| Entry | Artwork and assessment |
+| --- | --- |
+| Prism & Black Glass | A prism splits a beam into colors; the reverse shows dark reflective glass. Three Radiance hits and a single reflected enemy hit fit those images and offer an attack-versus-defense choice. |
+| Gravity & Levitation | Figures fall into a deep vortex on one face and rise on the other. Direct Binding damage and returning the most recent discard to hand suggest downward force versus lifting something back. Binding remains a provisional damage name; the effects are unchanged. |
+| The Mirrored Sphinx | Two facing sphinxes frame a dark sun. Its second action hits twice, matching the mirrored figures; the additional hit is suppressed by Hush. |
+| The Bleak Carousel | Figures ride horses around a ruined carousel. Its second action moves the library's next card to the bottom, a further circuit; Hush suppresses that movement while the base attack remains. |
+| The Sunken Sun | A large sun sinks beneath dark waves. Alternating light and dark orientations after the next draw express the rising and sinking cycle; Hush and Freeze can prevent the change. |
+
+Controlled checks in `tests/lib/expedition-art-review.test.ts` compare both Prism faces against the Sphinx's two hits, Gravity/Levitation play order and the Carousel's movement with and without Hush. The existing Sunken Sun checks cover forced orientation after drawing and the Hush/Freeze intent. These tests exercise selected states, not every interaction. No effect, damage type or Bless/Curse rule was changed; existing saves are unchanged.
