@@ -6478,3 +6478,109 @@ for (const condition of ["frozen", "lethal-burn"] as const) {
     }
   });
 }
+
+test("reflected Vampire reports the spent enemy Reflect when damage and Leech cancel", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-mirror-eyed-swan";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+  snapshot.state.enemy.reflect = true;
+  snapshot.state.player.hp = 20;
+  snapshot.state.action = 1;
+  snapshot.state.deck = [{ id: "vampire", pair: "Angel & Vampire" }];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "dark", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Vampire dark/ }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "20");
+  await expect(page.getByRole("progressbar", { name: "The Mirror-Eyed Swan health" })).toHaveAttribute(
+    "value",
+    "26",
+  );
+  await expect(page.getByRole("status")).toContainText("Enemy Reflect ended");
+  await expect(page.getByRole("button", { name: /Enemy status:.*Reflect/ })).toHaveCount(0);
+});
+
+test("control cards report their actual Reflect, Hush and Freeze changes", async ({ page }) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-mirror-eyed-swan";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+  snapshot.state.enemy.reflect = true;
+  snapshot.state.action = 1;
+  snapshot.state.deck = [
+    { id: "mirror", pair: "Mirror & Shattered Mirror" },
+    { id: "silence", pair: "Silence & Clamor" },
+    { id: "ice", pair: "Ice Crystal & Salt Crystal" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Mirror light/ }).click();
+  await expect(page.getByRole("status")).toContainText("You gained Reflect");
+  await expect(page.getByRole("button", { name: /Player status:.*Reflect/ })).toBeVisible();
+  await page.getByRole("button", { name: /^Silence light/ }).click();
+  await expect(page.getByRole("status")).toContainText("Enemy Reflect ended");
+  await expect(page.getByRole("status")).toContainText("Enemy Hushed");
+  await expect(page.getByRole("button", { name: /Enemy status:.*Hush/ })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Ice Crystal light/ }).click();
+  await expect(page.getByRole("status")).toContainText("Enemy Frozen");
+  await expect(page.getByRole("button", { name: /Enemy status:.*Freeze/ })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "30");
+});
+
+for (const frozen of [false, true]) {
+  test(`player Reflect ${frozen ? "remains after a skipped attack" : "is reported when the enemy hit reflects"}`, async ({
+    page,
+  }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "radiant-moth";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 18;
+    snapshot.state.enemy.freeze = frozen;
+    snapshot.state.action = 0;
+    snapshot.state.deck = [{ id: "mirror", pair: "Mirror & Shattered Mirror" }];
+    snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page.getByRole("button", { name: /^Mirror light/ }).click();
+    await expect(page.getByRole("status")).toContainText("You gained Reflect");
+    await page.getByRole("button", { name: "End turn" }).click();
+    await expect(page.getByRole("progressbar", { name: "Radiant Moth health" })).toHaveAttribute(
+      "value",
+      frozen ? "18" : "14",
+    );
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "30");
+    if (frozen) {
+      await expect(page.getByRole("status")).not.toContainText("Your Reflect ended");
+      await expect(page.getByRole("button", { name: /Player status:.*Reflect/ })).toBeVisible();
+    } else {
+      await expect(page.getByRole("status")).toContainText("Your Reflect ended");
+      await expect(page.getByRole("button", { name: /Player status:.*Reflect/ })).toHaveCount(0);
+    }
+  });
+}

@@ -1919,7 +1919,14 @@ function BattleSession({
           if (enemyChange > 0 || (showReduction && enemyChange < 0))
             changes.push(`Enemy ${label} ${signed(enemyChange)}`);
         }
-        if (command.type === "play") changes.push(...cardFlowChanges(before, after, command.id));
+        if (before.player.reflect && !after.player.reflect) changes.push("Your Reflect ended");
+        if (command.type === "play") {
+          if (!before.player.reflect && after.player.reflect) changes.push("You gained Reflect");
+          if (before.enemy.reflect && !after.enemy.reflect) changes.push("Enemy Reflect ended");
+          if (!before.enemy.hush && after.enemy.hush) changes.push("Enemy Hushed");
+          if (!before.enemy.freeze && after.enemy.freeze) changes.push("Enemy Frozen");
+          changes.push(...cardFlowChanges(before, after, command.id));
+        }
         // Enemy effects can Banish cards while damage or Ward changes would otherwise
         // hide that outcome. Counts avoid revealing the names of hidden library cards.
         const enemyBanished = after.zones.banished.length - before.zones.banished.length;
