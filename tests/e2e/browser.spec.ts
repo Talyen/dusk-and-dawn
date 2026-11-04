@@ -6250,3 +6250,50 @@ test("Scabbard draws the blade for the next turn and persists it on reload", asy
   await expect(page.getByRole("img", { name: "Radiant Moth, 12 of 18 HP" })).toBeVisible();
   await expect(page.getByRole("button", { name: /^Drawn Blade dark/ })).toHaveCount(0);
 });
+
+test("Bridge recovers Chasm through a save and Chasm still bypasses Ward", async ({ page }) => {
+  const snapshot = structuredClone(createRun(19, undefined, "veiled-oracle").getSnapshot());
+  snapshot.state.encounters![0] = "the-chalk-giant";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 36;
+  snapshot.state.enemy.ward = 5;
+  snapshot.state.deck[0]!.pair = "Bridge & Chasm";
+  snapshot.state.deck[1]!.pair = "Bridge & Chasm";
+  const fight = snapshot.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
+  snapshot.state.zones.hand = [fight[0]!, { ...fight[1]!, face: "dark" }];
+  snapshot.state.zones.library = fight.slice(2);
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Chasm dark/ }).click();
+  await expect(page.getByRole("progressbar", { name: "The Chalk Giant health" })).toHaveAttribute(
+    "value",
+    "31",
+  );
+  await page.getByRole("button", { name: /^Bridge light/ }).click();
+  await expect(page.getByRole("button", { name: /^Chasm dark/ })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.mana),
+    )
+    .toBe(1);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: /^Chasm dark/ })).toBeVisible();
+  await page.getByRole("button", { name: /^Chasm dark/ }).click();
+  await expect(page.getByRole("progressbar", { name: "The Chalk Giant health" })).toHaveAttribute(
+    "value",
+    "26",
+  );
+  await expect(page.getByText("Mana 0/3", { exact: false })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.enemy.ward),
+    )
+    .toBe(5);
+});
