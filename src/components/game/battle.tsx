@@ -325,7 +325,10 @@ function BattleCard({
             event.preventDefault();
             return;
           }
-          if (!exhausted) onSelect(event);
+          if (exhausted) {
+            touchPinned.current = true;
+            setOpen(true);
+          } else onSelect(event);
         }}
       >
         <img className="battle-card-art" src={art("card", info.name)} alt="" />
@@ -1067,6 +1070,7 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
   if ((info.name === "Memory" || info.name === "Sacrifice") && targets.length === 1)
     lines.push(`Automatic target: ${face(targets[0]!).name}.`);
   if (info.name === "Memory" && !targets.length) lines.push("No cards in the discard pile.");
+  if (s.mana === 0) lines.push("Not enough mana.");
   const restriction = cardRestriction(s, card);
   if (restriction) lines.push(restriction);
   return lines.map((line, index) => <p key={index}>{line}</p>);
@@ -1606,7 +1610,7 @@ function BattleSession({
                   card={card}
                   selected={selected === card.id}
                   disabled={!!s.pending || !!selected}
-                  exhausted={s.mana === 0}
+                  exhausted={s.mana === 0 || !!cardRestriction(s, card)}
                   angle={(index - (s.zones.hand.length - 1) / 2) * 2.5}
                   drop={Math.abs(index - (s.zones.hand.length - 1) / 2) * 3}
                   preview={cardPreview(s, card)}

@@ -2024,3 +2024,65 @@ test("touch inspects the enemy portrait and intent without advancing combat", as
   await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
   await context.close();
 });
+
+test("a card that cannot pay its HP cost is inspectable and becomes playable after healing", async ({
+  page,
+}) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "fallen", pair: "Seraph & Fallen Seraph" },
+    { id: "bloom", pair: "Bloom & Wither" },
+  ];
+  snapshot.state.zones.hand = [
+    { ...snapshot.state.deck[0]!, face: "dark", kept: false },
+    { ...snapshot.state.deck[1]!, face: "light", kept: false },
+  ];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  snapshot.state.player.hp = 2;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const fallen = page.getByRole("button", { name: /Fallen Seraph dark/ });
+  await expect(fallen).toHaveAttribute("aria-disabled", "true");
+  await expect(fallen).toHaveAttribute("data-exhausted", "true");
+  await fallen.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Not enough HP to pay this cost.");
+  const box = (await fallen.boundingBox())!;
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
+  await page.getByRole("button", { name: /Bloom light/ }).click();
+  await expect(page.getByText(/HP 6\/30/)).toBeVisible();
+  await expect(fallen).not.toHaveAttribute("aria-disabled");
+  await fallen.click();
+  await expect(page.getByText(/HP 4\/30/)).toBeVisible();
+  await expect(page.getByText(/Mana 1\/3/)).toBeVisible();
+});
+
+test("touching an unavailable card explains the cost without playing it", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.mana = 0;
+  const saved = encodeRun(snapshot);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const card = page.locator(".battle-card").first();
+  const box = (await card.boundingBox())!;
+  await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+  await expect(page.getByRole("tooltip")).toContainText("Not enough mana.");
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await expect(page.getByText(/Mana 0\/3/)).toBeVisible();
+  await context.close();
+});
