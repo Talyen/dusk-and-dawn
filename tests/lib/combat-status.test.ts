@@ -3,6 +3,7 @@ import {
   applyDamageOverTime,
   attackValues,
   halveWard,
+  lethalDamageOverTime,
   removeStatuses,
   resolveDamageOverTime,
   type Combatant,
@@ -56,10 +57,44 @@ describe("combat status rules", () => {
     expect([player.hp, player.poison, enemy.hp, enemy.burn]).toEqual([0, 3, 30, 4]);
   });
 
+  it("forecasts lethal ticks in order through Ward without mutating combatants", () => {
+    const player = fighter({ hp: 3, ward: 1, burn: 2, poison: 2 });
+    const enemy = fighter({ hp: 1, poison: 3 });
+    const before = structuredClone({ player, enemy });
+    expect(lethalDamageOverTime(player, enemy)).toEqual({ target: "player", source: "poison" });
+    expect({ player, enemy }).toEqual(before);
+
+    player.ward = 2;
+    expect(lethalDamageOverTime(player, enemy)).toEqual({ target: "enemy", source: "poison" });
+    enemy.ward = 3;
+    expect(lethalDamageOverTime(player, enemy)).toBeUndefined();
+    enemy.burn = 2;
+    expect(lethalDamageOverTime(player, enemy)).toEqual({ target: "enemy", source: "poison" });
+  });
+
   it("makes both unapproved scaling candidates explicit and applies weakness only to the first hit", () => {
     expect(attackValues([2, 2, 2], 1, 0, 2, "flat-preview")).toEqual([5, 3, 3]);
     expect(attackValues([2, 2, 2], 0, 1, 0, "percentage-preview")).toEqual([2, 2, 2]);
     expect(attackValues([1], 0, 5, 0, "flat-preview")).toEqual([0]);
+  });
+
+  it("compares multi-hit suppression and large-hit Bless without selecting either candidate", () => {
+    const multi = [3, 2, 2, 2];
+    expect(attackValues(multi, 0, 1, 0, "flat-preview")).toEqual([2, 1, 1, 1]);
+    expect(attackValues(multi, 0, 1, 0, "percentage-preview")).toEqual([2, 2, 2, 2]);
+    expect(attackValues(multi, 0, 3, 0, "flat-preview")).toEqual([0, 0, 0, 0]);
+    expect(attackValues(multi, 0, 3, 0, "percentage-preview")).toEqual([1, 1, 1, 1]);
+    expect(attackValues([11], 3, 0, 0, "flat-preview")).toEqual([14]);
+    expect(attackValues([11], 3, 0, 0, "percentage-preview")).toEqual([19]);
+  });
+
+  it("compares percentage rounding, cancellation and the comparison cap", () => {
+    expect(attackValues([2], 0, 1, 0, "percentage-preview")).toEqual([2]); // 1.5 rounds up
+    expect(attackValues([2], 1, 0, 0, "percentage-preview")).toEqual([3]); // 2.5 rounds up
+    expect(attackValues([2], 1, 1, 0, "percentage-preview")).toEqual([2]);
+    expect(attackValues([11], 7, 0, 0, "percentage-preview")).toEqual([22]);
+    expect(attackValues([11], 0, 7, 0, "percentage-preview")).toEqual([0]);
+    expect(attackValues([2, 2], 0, 1, 2, "percentage-preview")).toEqual([3, 2]);
   });
 
   it("removes whole random eligible kinds, without drawing randomness for an empty pool", () => {

@@ -93,6 +93,18 @@ export function resolveDamageOverTime(player: Combatant, enemy: Combatant): Dama
   return events;
 }
 
+/** Predict the first lethal end-of-turn tick without changing either combatant. */
+export function lethalDamageOverTime(
+  player: Combatant,
+  enemy: Combatant,
+): Pick<DamageEvent, "target" | "source"> | undefined {
+  const playerAfter = { ...player };
+  const enemyAfter = { ...enemy };
+  const last = resolveDamageOverTime(playerAfter, enemyAfter).at(-1);
+  if (!last || (last.target === "player" ? playerAfter.hp : enemyAfter.hp) !== 0) return undefined;
+  return { target: last.target, source: last.source };
+}
+
 /** The caller must explicitly select a comparison model; neither model is final. */
 export function attackValues(
   hits: readonly number[],

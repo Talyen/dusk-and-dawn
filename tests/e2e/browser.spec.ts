@@ -4525,3 +4525,82 @@ test("compact menu sizing still follows the player's game-size setting", async (
   }
   expect(heights[1]! / heights[0]!).toBeCloseTo(1.5, 1);
 });
+
+test("enemy intent reflects lethal Poison before its action", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.enemy.hp = 2;
+  snapshot.state.enemy.poison = 2;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const intent = page.getByRole("button", { name: "Mourning Tree intent: End turn: enemy falls to Poison" });
+  await expect(intent).toBeVisible();
+  await intent.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Enemy falls to Poison before the enemy acts.");
+  await expect(page.getByRole("tooltip")).not.toContainText("Current attack:");
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Rewards" })).toBeVisible();
+  await expect(page.getByText("HP 30/30")).toBeVisible();
+});
+
+test("end-turn intent respects Ward and the player's earlier lethal tick", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.enemy.hp = 2;
+  snapshot.state.enemy.poison = 2;
+  snapshot.state.enemy.ward = 1;
+  snapshot.state.player.hp = 2;
+  snapshot.state.player.burn = 2;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const intent = page.getByRole("button", { name: "Mourning Tree intent: End turn: lethal Burn" });
+  await expect(intent).toBeVisible();
+  await intent.hover();
+  await expect(page.getByRole("tooltip")).toContainText("You fall to Burn before the enemy acts.");
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Run ended" })).toBeVisible();
+});
+
+test("enemy intent returns to its attack when Ward prevents a lethal tick", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.enemy.hp = 2;
+  snapshot.state.enemy.poison = 2;
+  snapshot.state.enemy.ward = 1;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: "Mourning Tree intent: 7 Growth · Curse 1" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.getByText("HP 23/30")).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Mourning Tree.*1\s*\/\s*36/ })).toBeVisible();
+});
+
+test("the lethal forecast updates when a card protects the player", async ({ page }) => {
+  const snapshot = rootLashFixture();
+  snapshot.state.player.hp = 2;
+  snapshot.state.player.burn = 2;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(
+    page.getByRole("button", { name: "Mourning Tree intent: End turn: lethal Burn" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: /^Angel light/ }).click();
+  await expect(page.getByRole("button", { name: "Mourning Tree intent: 7 Growth · Curse 1" })).toBeVisible();
+});

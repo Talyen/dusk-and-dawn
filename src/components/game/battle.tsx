@@ -20,7 +20,7 @@ import {
   type RunState,
 } from "../../lib/game/run";
 import { scryTop, type FightCard } from "../../lib/game/card-zones";
-import { attackValues, type DamageType } from "../../lib/game/combat-status";
+import { attackValues, lethalDamageOverTime, type DamageType } from "../../lib/game/combat-status";
 import { encodeRun, readRunWithRecovery, resumeRun } from "../../lib/game/run-save";
 import { readProgression, recordExpedition, unlockTier, type Progression } from "../../lib/game/progression";
 import {
@@ -1853,61 +1853,80 @@ function BattleSession({
   const nextHandFace = activeActionEffects.find(
     (effect) => effect.op === "turn_after_draw" && effect.stage === "after_attack",
   )?.face;
+  const lethalTick = lethalDamageOverTime(s.player, s.enemy);
+  const lethalSource = lethalTick && `${lethalTick.source[0]!.toUpperCase()}${lethalTick.source.slice(1)}`;
   const intentText = [
-    s.enemy.freeze || (s.enemy.hush && action.ability)
-      ? "Skipped"
-      : enemyHits
-        ? [
-            `${enemyHits.join(" + ")} ${action.type}`,
-            ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
-            ...statusEffects,
-            ...nextTurnPenalties,
-            ...cardMoves,
-            ...(copiesLastHit ? ["copies your last hit"] : []),
-            ...(nextHandFace ? [`next hand ${nextHandFace}`] : []),
-          ].join(" · ")
-        : action.text,
+    lethalTick
+      ? lethalTick.target === "player"
+        ? `End turn: lethal ${lethalSource}`
+        : `End turn: enemy falls to ${lethalSource}`
+      : s.enemy.freeze || (s.enemy.hush && action.ability)
+        ? "Skipped"
+        : enemyHits
+          ? [
+              `${enemyHits.join(" + ")} ${action.type}`,
+              ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
+              ...statusEffects,
+              ...nextTurnPenalties,
+              ...cardMoves,
+              ...(copiesLastHit ? ["copies your last hit"] : []),
+              ...(nextHandFace ? [`next hand ${nextHandFace}`] : []),
+            ].join(" · ")
+          : action.text,
     ...(reactionText ? [reactionText] : []),
   ].join(" · ");
   const actionDetails = (
     <>
-      <p>
-        <strong>Next: {action.name}</strong> —{" "}
-        {s.enemy.freeze ? (
-          "Frozen: this action is skipped."
-        ) : s.enemy.hush && action.ability ? (
-          "Hushed: this ability is skipped."
-        ) : s.enemy.hush ? (
-          <>
-            <Description text={action.text.split(" Trait — ")[0]!} /> Hushed: the trait is suppressed.
-          </>
-        ) : (
-          <Description text={action.text} />
-        )}
-      </p>
-      {s.enemy.freeze && reactionText && (
-        <p>
-          Active while Frozen: {reactionText} if the enemy survives. This happens once per direct attack card.
-        </p>
-      )}
-      {enemyHits && !s.enemy.freeze && (
-        <p>
-          Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}
-          {action.hit}; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
-        </p>
-      )}
-      {!s.enemy.hush &&
-        !s.enemy.freeze &&
-        action.effects?.some((effect) => ["move_held", "flip_held", "turn_held"].includes(effect.op)) && (
+      {lethalTick ? (
+        <>
           <p>
-            Held-card hazard pool if you end turn now:{" "}
-            {s.zones.hand
-              .filter((card) => card.kept)
-              .map((card) => face(card).name)
-              .join(", ") || "none"}
-            . Unkept cards are discarded before the enemy acts.
+            {lethalTick.target === "enemy" ? "Enemy falls" : "You fall"} to {lethalSource} before the enemy
+            acts.
           </p>
-        )}
+          {reactionText && <p>Active now: {reactionText} if the enemy survives.</p>}
+        </>
+      ) : (
+        <>
+          <p>
+            <strong>Next: {action.name}</strong> —{" "}
+            {s.enemy.freeze ? (
+              "Frozen: this action is skipped."
+            ) : s.enemy.hush && action.ability ? (
+              "Hushed: this ability is skipped."
+            ) : s.enemy.hush ? (
+              <>
+                <Description text={action.text.split(" Trait — ")[0]!} /> Hushed: the trait is suppressed.
+              </>
+            ) : (
+              <Description text={action.text} />
+            )}
+          </p>
+          {s.enemy.freeze && reactionText && (
+            <p>
+              Active while Frozen: {reactionText} if the enemy survives. This happens once per direct attack
+              card.
+            </p>
+          )}
+          {enemyHits && !s.enemy.freeze && (
+            <p>
+              Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}
+              {action.hit}; Bless {s.enemy.bless}, Curse {s.enemy.curse}).
+            </p>
+          )}
+          {!s.enemy.hush &&
+            !s.enemy.freeze &&
+            action.effects?.some((effect) => ["move_held", "flip_held", "turn_held"].includes(effect.op)) && (
+              <p>
+                Held-card hazard pool if you end turn now:{" "}
+                {s.zones.hand
+                  .filter((card) => card.kept)
+                  .map((card) => face(card).name)
+                  .join(", ") || "none"}
+                . Unkept cards are discarded before the enemy acts.
+              </p>
+            )}
+        </>
+      )}
     </>
   );
   return (
