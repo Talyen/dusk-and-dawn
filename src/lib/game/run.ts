@@ -1,3 +1,4 @@
+import type { RelicId } from "./relics";
 import { expeditionEventIds, type ExpeditionEventId } from "./expedition-events";
 import { heroes, type HeroId } from "./heroes";
 import { simpleEnemies } from "./simple-enemies.generated";
@@ -369,7 +370,7 @@ export interface RunState {
         id: string;
         tier: number;
         orientation: "light" | "dark";
-        relic: "none" | "many-eyes" | "spare-thread" | "cracked-vessel";
+        relic: RelicId;
         route?:
           | { enemy: string; pair: Pair; active: boolean; event?: ExpeditionEventId | undefined }
           | undefined;
@@ -420,6 +421,22 @@ export function face(card: FightCard): FaceInfo {
   const pair = cards[card.pair];
   if (!pair) throw new Error(`Unknown card pair: ${card.pair}`);
   return pair[card.face];
+}
+const selfBanishingSpecialFaces = new Set([
+  "Bloom",
+  "Wither",
+  "Mirror",
+  "Candle",
+  "Extinguished Candle",
+  "Ash",
+  "Memory",
+  "Oblivion",
+  "Silence",
+  "Ice Crystal",
+]);
+export function cardCanBanishItself(card: FightCard): boolean {
+  const info = face(card);
+  return selfBanishingSpecialFaces.has(info.name) || !!info.ops?.some((op) => op.op === "banish");
 }
 function beginFight(s: RunState, rng: Rng) {
   const hp = s.player.hp;
@@ -708,6 +725,8 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     if (s.phase !== "reward" || (command.pair !== null && !s.offers.includes(command.pair)))
       return no("Invalid reward.");
     if (command.pair) s.deck.push({ id: `card-${s.nextId++}`, pair: command.pair });
+    else if (s.offers.length && s.experiment?.relic === "hollow-chalice")
+      s.player.hp = Math.min(s.player.maxHp, s.player.hp + 3);
     s.offers = [];
     if (s.experiment?.route?.active) continueRoute(s, rng);
     else if (s.fight === 1) {
@@ -1266,24 +1285,10 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
         if (s.player.hp === 0) break;
       }
   }
-  if (
-    banishSource ||
-    (s.player.hp > 0 &&
-      [
-        "Bloom",
-        "Wither",
-        "Mirror",
-        "Candle",
-        "Extinguished Candle",
-        "Ash",
-        "Memory",
-        "Oblivion",
-        "Silence",
-        "Ice Crystal",
-      ].includes(name))
-  )
+  if (banishSource || (s.player.hp > 0 && selfBanishingSpecialFaces.has(name))) {
     s.zones.banished.push(source);
-  else if (!sourceMoved) finishSource(s.zones, source);
+    if (s.player.hp > 0 && s.experiment?.relic === "ashen-seal") s.player.ward += 2;
+  } else if (!sourceMoved) finishSource(s.zones, source);
   const reaction = getEnemy(s).actions[s.action]!.effects?.find((effect) => effect.op === "reaction_damage");
   if (isDirectAttack && reaction && !s.enemy.hush && s.enemy.hp > 0 && s.player.hp > 0) {
     const amount = typeof reaction.amount === "number" ? reaction.amount : 0;
@@ -1302,7 +1307,7 @@ export type ExperimentOptions = {
   id: string;
   tier: number;
   orientation: "light" | "dark";
-  relic: "none" | "many-eyes" | "spare-thread" | "cracked-vessel";
+  relic: RelicId;
 };
 export function createRun(seed: number, experiment?: ExperimentOptions, hero?: HeroId) {
   const deck = (hero ? heroes[hero].pairs : starter).flatMap((pair, i) => [

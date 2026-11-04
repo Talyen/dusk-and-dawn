@@ -1,3 +1,4 @@
+import { relicIds } from "./relics";
 import { expeditionEventIds } from "./expedition-events";
 import { z } from "zod";
 import { heroIds } from "./heroes";
@@ -36,7 +37,7 @@ const runSchema = z
         id: z.string().min(1).max(128),
         tier: z.number().int().min(1).max(3),
         orientation: z.enum(["light", "dark"]),
-        relic: z.enum(["none", "many-eyes", "spare-thread", "cracked-vessel"]),
+        relic: z.enum(relicIds),
         restRemovals: z.literal(1).optional(),
         lastEvent: z.enum(expeditionEventIds).optional(),
         route: z

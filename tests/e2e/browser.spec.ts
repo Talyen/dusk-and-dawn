@@ -2698,3 +2698,82 @@ test("an empty Scry library does not reveal the card drawn after reshuffling", a
   await page.getByRole("button", { name: /Key light/ }).click();
   await expect(page.getByRole("button", { name: /Vampire dark/ })).toBeVisible();
 });
+
+test("Ashen Seal previews and preserves its self-Banish Ward with the Seraph", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      17,
+      { id: "ashen-ui", tier: 1, orientation: "light", relic: "ashen-seal" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  const state = initial.state;
+  const source = [...state.zones.hand, ...state.zones.library].find(
+    (card) => card.pair === "Bloom & Wither",
+  )!;
+  state.zones.library = state.zones.library.filter((card) => card.id !== source.id);
+  if (!state.zones.hand.some((card) => card.id === source.id)) state.zones.hand.push(source);
+  state.player.hp = 26;
+  await page.addInitScript((saved) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", saved);
+  }, encodeRun(initial));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const card = page.getByRole("button", { name: /^Bloom light/ }).first();
+  await card.hover();
+  await expect(page.getByRole("tooltip").filter({ hasText: "Ashen Seal" })).toContainText(
+    "gain 2 Ward after this card Banishes itself",
+  );
+  await card.click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-ward", "3");
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "30");
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.player?.ward,
+      ),
+    )
+    .toBe(3);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-ward", "3");
+  await page.getByRole("button", { name: /The Oathless Seraph, HP/ }).hover();
+  await expect(page.getByRole("tooltip").filter({ hasText: "Ashen Seal" })).toContainText("gain 2 Ward");
+});
+
+test("Hollow Chalice previews capped healing for skipping and persists the lean deck", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      17,
+      { id: "chalice-ui", tier: 1, orientation: "light", relic: "hollow-chalice" },
+      "veiled-oracle",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = ["Flame & Frost"];
+  initial.state.player.hp = 28;
+  await page.addInitScript((saved) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", saved);
+  }, encodeRun(initial));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Skip reward · +2 HP" }).click();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Deck 10" })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.player?.hp,
+      ),
+    )
+    .toBe(30);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: "Deck 10" })).toBeVisible();
+  await page.getByRole("button", { name: /^Rest:/ }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "30");
+});

@@ -1,9 +1,11 @@
+import { relicIds, relics, type RelicId } from "../../lib/game/relics";
 import { expeditionEvent } from "../../lib/game/expedition-events";
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
 import { heroes, heroIds, heroPassive, type HeroId } from "../../lib/game/heroes";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   cards,
+  cardCanBanishItself,
   cardRestriction,
   createRun,
   enemyAttackHits,
@@ -1026,6 +1028,8 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
         ? "On play: apply 1 Curse before this effect."
         : "On play: apply 2 Poison before this effect.",
     );
+  if (s.experiment?.relic === "ashen-seal" && cardCanBanishItself(card))
+    lines.push("Ashen Seal: gain 2 Ward after this card Banishes itself.");
   const generic = ops.find((op) => op.op === "attack" || op.op === "attack-ignore-ward");
   const hit =
     directCardAttacks[info.name] ??
@@ -1167,7 +1171,7 @@ export function Battle({
   const [configuring, setConfiguring] = useState(false);
   const [hero, setHero] = useState<HeroId>("oathless-seraph");
   const [orientation, setOrientation] = useState<"light" | "dark">("light");
-  const [relic, setRelic] = useState<"none" | "many-eyes" | "spare-thread" | "cracked-vessel">("none");
+  const [relic, setRelic] = useState<RelicId>("none");
   const [progress, setProgress] = useState(() => {
     try {
       return readProgression(window.localStorage);
@@ -1290,10 +1294,12 @@ export function Battle({
                 <label>
                   Run relic
                   <select value={relic} onChange={(event) => setRelic(event.target.value as typeof relic)}>
-                    <option value="none">None</option>
-                    <option value="many-eyes">Many Eyes · four reward offers</option>
-                    <option value="spare-thread">Spare Thread · a second midpoint removal</option>
-                    <option value="cracked-vessel">Cracked Vessel · start at 24 HP with an extra pair</option>
+                    {relicIds.map((id) => (
+                      <option value={id} key={id}>
+                        {relics[id].name}
+                        {relics[id].effect ? ` · ${relics[id].effect}` : ""}
+                      </option>
+                    ))}
                   </select>
                 </label>
               </div>
@@ -1645,15 +1651,27 @@ function BattleSession({
             >
               <div className="battle-resource battle-resource--health">
                 <p>
-                  {s.hero ? (
+                  {s.hero || (s.experiment && s.experiment.relic !== "none") ? (
                     <InspectionTrigger
-                      label={`${heroes[s.hero].name}, HP ${s.player.hp}/${s.player.maxHp}`}
+                      label={`${s.hero ? heroes[s.hero].name : "Player"}, HP ${s.player.hp}/${s.player.maxHp}`}
                       text={`HP ${s.player.hp}/${s.player.maxHp}`}
                       className="battle-hero-resource"
                       placement="top"
                     >
-                      <strong>{heroes[s.hero].name}</strong>
-                      <p>{heroPassive(s.hero, s.heroRuleset)}</p>
+                      {s.hero && (
+                        <>
+                          <strong>{heroes[s.hero].name}</strong>
+                          <p>{heroPassive(s.hero, s.heroRuleset)}</p>
+                        </>
+                      )}
+                      {s.experiment && s.experiment.relic !== "none" && (
+                        <>
+                          <strong>{relics[s.experiment.relic].name}</strong>
+                          <p>
+                            <Description text={relics[s.experiment.relic].effect} />
+                          </p>
+                        </>
+                      )}
                     </InspectionTrigger>
                   ) : (
                     <>
@@ -1880,7 +1898,12 @@ function BattleSession({
             <Button variant="outline" onClick={() => setPileOpen(true)}>
               Deck {s.deck.length}
             </Button>
-            <Button onClick={() => dispatch({ type: "reward", pair: null })}>Skip reward</Button>
+            <Button onClick={() => dispatch({ type: "reward", pair: null })}>
+              Skip reward
+              {s.experiment?.relic === "hollow-chalice" && s.offers.length > 0 && s.player.hp < s.player.maxHp
+                ? ` · +${Math.min(3, s.player.maxHp - s.player.hp)} HP`
+                : ""}
+            </Button>
           </div>
         </div>
       )}
