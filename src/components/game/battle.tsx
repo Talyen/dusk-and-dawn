@@ -2187,8 +2187,8 @@ function BattleSession({
                 <p>Pattern: {enemyPattern(enemy)}</p>
               </RouteChoice>
               <RouteChoice
-                label={`Rest: heal ${restHeal} HP`}
-                caption={`Rest · +${restHeal} HP`}
+                label={`Rest: heal ${restHeal} HP, start next fight with 3 Ward`}
+                caption={`Rest · +${restHeal} HP · 3 Ward`}
                 onChoose={() => dispatch({ type: "route", choice: "rest" })}
                 art={
                   <span className="battle-route-art">
@@ -2197,7 +2197,7 @@ function BattleSession({
                 }
               >
                 <strong>Rest</strong>
-                <p>Heal {restHeal} HP.</p>
+                <p>Heal {restHeal} HP. Start the next fight with 3 Ward.</p>
               </RouteChoice>
               <RouteChoice
                 label={

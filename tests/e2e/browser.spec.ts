@@ -3707,15 +3707,20 @@ for (const hp of [25, 28, 30]) {
     const tip = page.getByRole("tooltip").filter({ hasText: "Hollow Chalice" });
     await expect(tip).toContainText("Before each dark card resolves");
     const amount = Math.min(4, 30 - hp);
-    const rest = page.getByRole("button", { name: `Rest: heal ${amount} HP` });
+    const rest = page.getByRole("button", { name: `Rest: heal ${amount} HP, start next fight with 3 Ward` });
     await expect(rest).toContainText(`Rest · +${amount} HP`);
     expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
     await page.reload();
     await page.getByRole("button", { name: "Play", exact: true }).click();
     await page.getByRole("button", { name: "Continue run" }).click();
     await expect(page.getByRole("button", { name: `The Thorn Witch, HP ${hp}/30` })).toBeVisible();
-    await page.getByRole("button", { name: `Rest: heal ${amount} HP` }).click();
+    await page.getByRole("button", { name: `Rest: heal ${amount} HP, start next fight with 3 Ward` }).click();
     await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", String(hp + amount));
+    await expect(page.getByRole("button", { name: "Player status: ward 3" })).toBeVisible();
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.getByRole("button", { name: "Player status: ward 3" })).toBeVisible();
   });
 }
 
@@ -4117,7 +4122,9 @@ test("Sunken Sanctuary previews healing versus mana without revealing or adding 
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("button", { name: "The Oathless Seraph, HP 20/30" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Rest: heal 4 HP" })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Rest: heal 4 HP, start next fight with 3 Ward" }),
+  ).toBeVisible();
   const shrine = page.getByRole("button", { name: "Event: heal 7 HP, start next fight with 2 mana" });
   await expect(shrine).toContainText("Sunken Sanctuary · +7 HP · −1 mana");
   await shrine.hover();
@@ -4326,3 +4333,59 @@ test("Wax Seal plays directly and its one-shot Ward survives a reload", async ({
   await expect(page.getByRole("button", { name: /Player status: ward 7/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /Banished 1/ })).toBeVisible();
 });
+
+for (const side of ["light", "dark"] as const) {
+  test(`revised Needlecase ${side} face plays directly and survives reload`, async ({ page }) => {
+    const initial = structuredClone(
+      createRun(
+        31,
+        { id: `needle-${side}`, tier: 1, orientation: "light", relic: "none" },
+        "thorn-witch",
+      ).getSnapshot(),
+    );
+    const card = initial.state.deck[0]!;
+    card.pair = "Iron Needlecase & Empty Needlecase";
+    const zoneCard = [...initial.state.zones.hand, ...initial.state.zones.library].find(
+      (item) => item.id === card.id,
+    )!;
+    initial.state.zones.hand = initial.state.zones.hand.filter((item) => item.id !== card.id);
+    initial.state.zones.library = initial.state.zones.library.filter((item) => item.id !== card.id);
+    initial.state.zones.hand.push({ ...zoneCard, pair: card.pair, face: side, kept: false });
+    await page.addInitScript((data) => {
+      if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    }, encodeRun(initial));
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await page
+      .getByRole("button", { name: side === "light" ? /^Iron Needlecase light/ : /^Empty Needlecase dark/ })
+      .click();
+    if (side === "light") {
+      await expect(page.getByRole("button", { name: /^Iron Needlecase light · Kept/ })).toBeVisible();
+      await expect(page.getByRole("img", { name: /Radiant Moth, 14 of 18 HP/ })).toBeVisible();
+    } else {
+      await expect(page.getByRole("button", { name: /Banished 1/ })).toBeVisible();
+      await expect(page.getByText("Mana 3/3")).toBeVisible();
+    }
+    await expect
+      .poll(async () =>
+        page.evaluate((selectedSide) => {
+          const raw = localStorage.getItem("dusk-and-dawn.save.v1");
+          if (!raw) return false;
+          const state = JSON.parse(raw).state.run;
+          return selectedSide === "light"
+            ? state.zones.hand.some(
+                (card: { id: string; kept: boolean }) => card.id === "card-0" && card.kept,
+              )
+            : state.zones.banished.some((card: { id: string }) => card.id === "card-0");
+        }, side),
+      )
+      .toBe(true);
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    if (side === "light")
+      await expect(page.getByRole("button", { name: /^Iron Needlecase light · Kept/ })).toBeVisible();
+    else await expect(page.getByRole("button", { name: /Banished 1/ })).toBeVisible();
+  });
+}

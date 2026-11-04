@@ -43,7 +43,7 @@
     "self-keep": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "self-Keep and self-Flip resolve the original source on its resulting face",
-      "count": 27,
+      "count": 26,
       "effect_pattern": "^(?:Flip this card\\. )?Keep this card\\.$"
     },
     "whole-hand": {
@@ -2933,7 +2933,12 @@
       "pair": "Iron Needlecase & Empty Needlecase",
       "side": "light",
       "face": "Iron Needlecase",
-      "family": "self-keep"
+      "family": "bespoke",
+      "evidence": {
+        "test_file": "tests/lib/needlecase-outcomes.test.ts",
+        "test_name": "deals two Binding hits and keeps its source for a later turn",
+        "effect": "Deal 2 Binding damage twice. Keep this card."
+      }
     },
     {
       "pair": "Iron Needlecase & Empty Needlecase",

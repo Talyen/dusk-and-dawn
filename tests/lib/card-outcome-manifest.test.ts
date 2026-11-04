@@ -82,5 +82,5 @@ it("indexes each distinct reviewed face to one matching, present outcome-test sc
     counts.set(row!.family, (counts.get(row!.family) ?? 0) + 1);
   }
   for (const [id, family] of Object.entries(manifest.families)) expect(counts.get(id), id).toBe(family.count);
-  expect(counts.get("bespoke")).toBe(29);
+  expect(counts.get("bespoke")).toBe(30);
 });

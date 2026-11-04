@@ -44,7 +44,45 @@ describe("experimental expeditions", () => {
     expect(rejected.snapshot).toEqual(initial);
     expect(game.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
     expect(game.getSnapshot().state.player.hp).toBe(8);
+    expect(game.getSnapshot().state.player.ward).toBe(3);
     expect(game.getSnapshot().state.fight).toBe(1);
+  });
+  it("starts a rested fight with Ward at full health and preserves it across reload", async () => {
+    const initial = routeGame().getSnapshot();
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
+    const rested = game.getSnapshot();
+    expect(rested.state.player).toMatchObject({ hp: 30, ward: 3 });
+    expect(rested.state.fight).toBe(1);
+    expect(rested.state.deck).toEqual(initial.state.deck);
+    const loaded = await readRunWithRecovery({
+      readCandidates: async () => [encodeRun(rested)],
+      write: async () => {},
+    });
+    expect(loaded?.snapshot).toEqual(rested);
+    const resumed = restoreSession(loaded!.snapshot, runHandler);
+    expect(resumed.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.player.ward).toBeLessThan(3);
+  });
+  it("uses the opening Ward against damage and does not give it to other routes", () => {
+    const rested = routeGame();
+    const combat = routeGame();
+    const event = routeGame();
+    expect(rested.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
+    expect(combat.dispatch({ type: "route", choice: "combat" }).decision.accepted).toBe(true);
+    expect(event.dispatch({ type: "route", choice: "event" }).decision.accepted).toBe(true);
+    expect(combat.getSnapshot().state.player.ward).toBe(0);
+    expect(event.getSnapshot().state.player.ward).toBe(0);
+    const snapshot = structuredClone(rested.getSnapshot());
+    snapshot.state.encounters![1] = "fixture:0";
+    const withoutWard = structuredClone(snapshot);
+    withoutWard.state.player.ward = 0;
+    const protectedGame = restoreSession(snapshot, runHandler);
+    const unprotected = restoreSession(withoutWard, runHandler);
+    expect(protectedGame.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(unprotected.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(protectedGame.getSnapshot().state.player.hp).toBe(29);
+    expect(unprotected.getSnapshot().state.player.hp).toBe(26);
   });
   it("does not repeat a completed detour after saving and resuming its reward", async () => {
     const initial = structuredClone(createRun(45, options).getSnapshot());

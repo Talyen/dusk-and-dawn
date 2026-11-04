@@ -44,6 +44,8 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Torn Letter": "Draw 2 cards. Banish this card.",
   "Wooden Spool": "Keep your hand.",
   "Loose Thread": "Flip your hand.",
+  "Iron Needlecase": "Deal 2 Binding damage twice. Keep this card.",
+  "Empty Needlecase": "Gain 1 mana. Banish this card.",
 };
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   ...simpleCards,
@@ -73,6 +75,20 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
       effect: playtestEffectOverrides["Loose Thread"]!,
       keywords: ["Flip"],
       ops: [{ op: "flip-hand" }],
+    },
+  },
+  "Iron Needlecase & Empty Needlecase": {
+    light: {
+      name: "Iron Needlecase",
+      effect: playtestEffectOverrides["Iron Needlecase"]!,
+      keywords: ["Binding", "Keep"],
+      ops: [{ op: "attack", amount: 2, type: "Binding", hits: 2, leech: false }, { op: "keep-self" }],
+    },
+    dark: {
+      name: "Empty Needlecase",
+      effect: playtestEffectOverrides["Empty Needlecase"]!,
+      keywords: ["Banish"],
+      ops: [{ op: "mana", amount: 1 }, { op: "banish" }],
     },
   },
   "Angel & Vampire": {
@@ -896,6 +912,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
         s.deck.push({ id: `card-${s.nextId++}`, pair: path.pair });
       }
       continueRoute(s, rng);
+      if (command.choice === "rest") s.player.ward = 3;
       if (command.choice === "event" && event === "thorns") applyDamageOverTime(s.player, "poison", 4);
       if (command.choice === "event" && (event === "lantern" || event === "sanctuary")) s.mana = 2;
     }
