@@ -2046,6 +2046,15 @@ function BattleSession({
       ? `${reaction.amount} ${reaction.damage_type ?? "damage"} after your attacks`
       : undefined;
   const activeActionEffects = traitWillActivate && !s.enemy.freeze ? (action.effects ?? []) : [];
+  const wardRemoval = activeActionEffects
+    .filter(
+      (effect) =>
+        effect.stage === "before_attack" &&
+        effect.op === "remove_ward" &&
+        typeof effect.amount === "number" &&
+        effect.amount > 0,
+    )
+    .map((effect) => `remove up to ${effect.amount} Ward first`);
   const nextTurnPenalties = activeActionEffects
     .filter(
       (effect) =>
@@ -2100,6 +2109,7 @@ function BattleSession({
         : enemyHits
           ? [
               `${enemyHits.join(" + ")} ${action.type}`,
+              ...wardRemoval,
               ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
               ...statusEffects,
               ...nextTurnPenalties,

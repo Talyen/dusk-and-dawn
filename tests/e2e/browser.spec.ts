@@ -6847,3 +6847,149 @@ test("mana feedback reports the actual larger existing penalty", async ({ page }
   await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "1");
   await expect(page.getByRole("status")).toContainText("Mana 1/3");
 });
+
+for (const scenario of [
+  { id: "the-dusk-fisher", name: "The Dusk Fisher", hp: 26, type: "Binding", removed: 4 },
+  { id: "the-ivory-dentist", name: "The Ivory Dentist", hp: 26, type: "Release", removed: 5 },
+] as const) {
+  for (const condition of ["active", "hush", "freeze", "curse", "reflect"] as const) {
+    test(`${scenario.name} forecasts Ward removal with ${condition}`, async ({ page }) => {
+      const snapshot = structuredClone(createRun(42).getSnapshot());
+      snapshot.state.encounters![0] = scenario.id;
+      snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = scenario.hp;
+      snapshot.state.enemy.curse = condition === "curse" ? 4 : 0;
+      snapshot.state.player.ward = 5;
+      snapshot.state.player.reflect = condition === "reflect";
+      snapshot.state.action = 1;
+      snapshot.state.deck = [
+        { id: "silence", pair: "Silence & Clamor" },
+        { id: "ice", pair: "Ice Crystal & Salt Crystal" },
+      ];
+      snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({
+        ...card,
+        face: "light",
+        kept: false,
+      }));
+      snapshot.state.zones.library = [];
+      snapshot.state.zones.discard = [];
+      snapshot.state.zones.banished = [];
+      await page.addInitScript(
+        (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+        encodeRun(snapshot),
+      );
+      await page.setViewportSize({ width: 320, height: 480 });
+      await page.goto("/");
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      if (condition === "hush") {
+        const silence = page.getByRole("button", { name: /^Silence light/ });
+        await silence.hover();
+        await expect(page.getByRole("tooltip")).toContainText(
+          `If Hushed: 4 ${scenario.type} damage before Ward and Reflect.`,
+        );
+        await silence.click();
+      } else if (condition === "freeze")
+        await page.getByRole("button", { name: /^Ice Crystal light/ }).click();
+      const damage = condition === "curse" ? 0 : 4;
+      const intent =
+        condition === "freeze"
+          ? "Skipped"
+          : `${damage} ${scenario.type}${condition === "hush" ? "" : ` · remove up to ${scenario.removed} Ward first`}`;
+      const intentButton = page.getByRole("button", {
+        name: `${scenario.name} intent: ${intent}`,
+        exact: true,
+      });
+      await expectIntentClear(intentButton);
+      await intentButton.hover();
+      const tooltip = page.getByRole("tooltip");
+      if (condition === "hush") await expect(tooltip).toContainText("Hushed: the trait is suppressed.");
+      else if (condition === "freeze") await expect(tooltip).toContainText("Frozen: this action is skipped.");
+      else {
+        await expect(tooltip).toContainText(
+          `Remove up to ${scenario.removed} player Ward before the base hit.`,
+        );
+        await expect(tooltip).toContainText(
+          `Current attack: ${damage} ${scenario.type} damage before Ward and Reflect`,
+        );
+      }
+      await page.mouse.move(1, 1);
+      await page.getByRole("button", { name: "End turn" }).click();
+      const damageToPlayer = condition === "active" ? (scenario.removed === 4 ? 3 : 4) : 0;
+      await expect(page.locator(".battle-player")).toHaveAttribute(
+        "data-player-hp",
+        String(30 - damageToPlayer),
+      );
+      await expect(page.locator(".battle-player")).toHaveAttribute(
+        "data-ward",
+        condition === "freeze" ? "2" : "0",
+      );
+      await expect(page.getByRole("progressbar", { name: `${scenario.name} health` })).toHaveAttribute(
+        "value",
+        condition === "reflect" ? "22" : "26",
+      );
+    });
+  }
+}
+
+for (const condition of ["active", "hush", "freeze", "curse", "reflect"] as const) {
+  test(`the Sable Locksmith forecasts Ward bypass with ${condition}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-sable-locksmith";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 24;
+    snapshot.state.enemy.curse = condition === "curse" ? 4 : 0;
+    snapshot.state.player.ward = 5;
+    snapshot.state.player.reflect = condition === "reflect";
+    snapshot.state.action = 1;
+    snapshot.state.deck = [
+      { id: "silence", pair: "Silence & Clamor" },
+      { id: "ice", pair: "Ice Crystal & Salt Crystal" },
+    ];
+    snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 320, height: 480 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    if (condition === "hush") {
+      const silence = page.getByRole("button", { name: /^Silence light/ });
+      await silence.hover();
+      await expect(page.getByRole("tooltip")).toContainText(
+        "If Hushed: 5 Binding damage before Ward and Reflect.",
+      );
+      await silence.click();
+    } else if (condition === "freeze") await page.getByRole("button", { name: /^Ice Crystal light/ }).click();
+    const intent =
+      condition === "freeze"
+        ? "Skipped"
+        : condition === "hush"
+          ? "5 Binding"
+          : condition === "curse"
+            ? "1 Binding · 1 through Ward"
+            : "5 Binding · 5 through Ward";
+    const button = page.getByRole("button", { name: `The Sable Locksmith intent: ${intent}`, exact: true });
+    await expectIntentClear(button);
+    await button.hover();
+    const tooltip = page.getByRole("tooltip");
+    if (condition === "hush") await expect(tooltip).toContainText("Hushed: the trait is suppressed.");
+    else if (condition === "freeze") await expect(tooltip).toContainText("Frozen: this action is skipped.");
+    else await expect(tooltip).toContainText("The base hit ignores all player Ward.");
+    await page.mouse.move(1, 1);
+    await page.getByRole("button", { name: "End turn" }).click();
+    const damage = condition === "active" ? 5 : condition === "curse" ? 1 : 0;
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", String(30 - damage));
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-ward",
+      condition === "hush" ? "0" : "2",
+    );
+    await expect(page.getByRole("progressbar", { name: "The Sable Locksmith health" })).toHaveAttribute(
+      "value",
+      condition === "reflect" ? "19" : "24",
+    );
+  });
+}
