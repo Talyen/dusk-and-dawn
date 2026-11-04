@@ -1694,6 +1694,65 @@ test("preloads both faces of the deck and reports actual combat damage briefly",
   await expect(page.getByRole("status")).toBeEmpty({ timeout: 5000 });
 });
 
+test("waits for visible battle art before preloading the rest of the deck", async ({ page }) => {
+  const requested = new Set<string>();
+  page.on("request", (request) => requested.add(new URL(request.url()).pathname));
+  await page.addInitScript(() => {
+    Math.random = () => 0.42;
+  });
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/assets/card-seraph.webp", async (route) => {
+    await held;
+    await route.continue();
+  });
+  try {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Start expedition" }).click();
+    await expect.poll(() => requested.has("/assets/card-seraph.webp")).toBe(true);
+    await expect(page.locator(".battle-card-art[src$='card-seraph.webp']").first()).toHaveJSProperty(
+      "complete",
+      false,
+    );
+    await page.waitForTimeout(300);
+    expect(requested.has("/assets/card-vampire.webp")).toBe(false);
+  } finally {
+    release();
+  }
+  await expect.poll(() => requested.has("/assets/card-vampire.webp")).toBe(true);
+  await expect.poll(() => requested.has("/assets/card-lock.webp")).toBe(true);
+});
+
+test("a flip can start remaining preloads while an old visible image is still pending", async ({ page }) => {
+  const requested = new Set<string>();
+  page.on("request", (request) => requested.add(new URL(request.url()).pathname));
+  await page.addInitScript(() => {
+    Math.random = () => 0.42;
+  });
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/assets/card-seraph.webp", async (route) => {
+    await held;
+    await route.continue();
+  });
+  try {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Start expedition" }).click();
+    await expect.poll(() => requested.has("/assets/card-seraph.webp")).toBe(true);
+    await page.getByRole("button", { name: /^Key light/ }).click();
+    await expect(page.getByRole("button", { name: /^Fallen Seraph dark/ }).first()).toBeVisible();
+    await expect.poll(() => requested.has("/assets/card-vampire.webp")).toBe(true);
+  } finally {
+    release();
+  }
+});
+
 test("touch hold inspects a battle card without playing it; a tap plays it", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 700 },

@@ -398,7 +398,7 @@ function BattleCard({
           } else onSelect(event);
         }}
       >
-        <img className="battle-card-art" src={art("card", info.name)} alt="" />
+        <img className="battle-card-art" src={art("card", info.name)} alt="" fetchPriority="high" />
         <span className="battle-card-description">
           <strong>{info.name}</strong> {card.face} · {card.kept ? "Kept · " : ""}1 mana. {info.effect}
         </span>
@@ -558,7 +558,7 @@ function EnemyPortrait({
           }
         }}
       >
-        <img className="battle-enemy-art" src={art("enemy", name)} alt="" />
+        <img className="battle-enemy-art" src={art("enemy", name)} alt="" fetchPriority="high" />
       </div>
       <progress aria-label={`${name} health`} value={hp} max={maxHp} />
       <Tooltip triggerRef={trigger} id={id} open={open} placement="right" className="battle-tooltip">
@@ -1811,16 +1811,46 @@ function BattleSession({
   const preloadedImages = useRef<HTMLImageElement[]>([]);
   const preloadPairs = [...new Set(s.deck.map((card) => card.pair))].join("\0");
   useEffect(() => {
-    preloadedImages.current = preloadPairs
-      .split("\0")
-      .filter(Boolean)
-      .flatMap((pair) => [cards[pair]!.light, cards[pair]!.dark])
-      .map((face) => {
-        const image = new Image();
-        image.src = art("card", face.name);
-        return image;
-      });
-  }, [preloadPairs]);
+    if (s.phase !== "battle") return;
+    // Start background face downloads once the current enemy and hand have loaded.
+    // Watch the live board so a quick play or Flip cannot leave us waiting for removed images.
+    let started = false;
+    const board = document.querySelector(".battle-screen--active");
+    if (!board) return;
+    const observer = new MutationObserver(checkVisibleArt);
+    function stopWatching() {
+      observer.disconnect();
+      board!.removeEventListener("load", checkVisibleArt, true);
+      board!.removeEventListener("error", checkVisibleArt, true);
+    }
+    function checkVisibleArt() {
+      if (started) return;
+      const visible = board!.querySelectorAll<HTMLImageElement>(".battle-card-art, .battle-enemy-art");
+      if (!visible.length || [...visible].some((image) => !image.complete)) return;
+      started = true;
+      stopWatching();
+      preloadedImages.current = preloadPairs
+        .split("\0")
+        .filter(Boolean)
+        .flatMap((pair) => [cards[pair]!.light, cards[pair]!.dark])
+        .map((face) => {
+          const image = new Image();
+          image.fetchPriority = "low";
+          image.src = art("card", face.name);
+          return image;
+        });
+    }
+    observer.observe(board, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["src"],
+    });
+    board.addEventListener("load", checkVisibleArt, true);
+    board.addEventListener("error", checkVisibleArt, true);
+    checkVisibleArt();
+    return stopWatching;
+  }, [preloadPairs, s.phase]);
   const completed = useRef(false);
   useEffect(() => {
     if (
