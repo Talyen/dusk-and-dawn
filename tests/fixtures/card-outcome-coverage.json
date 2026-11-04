@@ -5,7 +5,7 @@
     "numeric": {
       "test_file": "tests/lib/card-numeric-outcomes.test.ts",
       "test_name": "matches printed numeric card outcomes under Ward, weakness, statuses, and mana caps",
-      "count": 192,
+      "count": 191,
       "sentence_patterns": [
         "Deal \\d+ (?:Radiance|Shadow|Growth|Decay|Binding|Release|Fire|Frost|Memory|Oblivion) damage(?: (?:twice|three times)|, ignoring Ward)?\\.",
         "Leech\\.",
@@ -19,7 +19,7 @@
     "draw": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "draw and Scry faces obey printed counts, ordering, hand cap, mana and source disposition",
-      "count": 61,
+      "count": 63,
       "effect_pattern": "^(?:Scry\\. )?(?:Gain \\d+ mana\\. )?Draw \\d+ cards?\\.(?: Banish this card\\.)?$"
     },
     "scry": {
@@ -43,13 +43,13 @@
     "self-keep": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "self-Keep and self-Flip resolve the original source on its resulting face",
-      "count": 25,
+      "count": 24,
       "effect_pattern": "^(?:Flip this card\\. )?Keep this card\\.$"
     },
     "whole-hand": {
       "test_file": "tests/lib/card-flow-families.test.ts",
       "test_name": "whole-hand Flip, Keep, and facing effects change the other held cards only",
-      "count": 32,
+      "count": 33,
       "effect_pattern": "^(?:Flip your hand\\.|Keep your hand\\.|Turn your hand to its (?:light|dark) faces\\.)$"
     },
     "random-hand": {
@@ -2616,24 +2616,19 @@
       "pair": "Fern Fiddlehead & Fallen Leaf",
       "side": "light",
       "face": "Fern Fiddlehead",
-      "family": "bespoke",
-      "evidence": {
-        "test_file": "tests/lib/weak-reward-outcomes.test.ts",
-        "test_name": "Fern draws, flips itself and remains playable as Fallen Leaf",
-        "effect": "Draw 1 card. Flip this card. Keep this card."
-      }
+      "family": "draw"
     },
     {
       "pair": "Fern Fiddlehead & Fallen Leaf",
       "side": "dark",
       "face": "Fallen Leaf",
-      "family": "numeric"
+      "family": "draw"
     },
     {
       "pair": "Flower Bud & Seed Pod",
       "side": "light",
       "face": "Flower Bud",
-      "family": "self-keep"
+      "family": "whole-hand"
     },
     {
       "pair": "Flower Bud & Seed Pod",

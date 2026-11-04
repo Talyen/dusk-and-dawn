@@ -4631,8 +4631,8 @@ test("revised trail and fern reward choices inspect and persist", async ({ page 
   await expect(page.getByRole("tooltip")).toContainText("Draw 1 card. Flip your hand.");
   const fern = page.getByRole("button", { name: /^Fern Fiddlehead & Fallen Leaf/ });
   await fern.hover();
-  await expect(page.getByRole("tooltip")).toContainText("Draw 1 card. Flip this card. Keep this card.");
-  await expect(page.getByRole("tooltip")).toContainText("Deal 5 Decay damage. Banish this card.");
+  await expect(page.getByRole("tooltip")).toContainText("Draw 2 cards.");
+  await expect(page.getByRole("tooltip")).toContainText("Draw 1 card. Banish this card.");
   await fern.click();
   await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
   await page.reload();
@@ -4646,7 +4646,7 @@ test("revised trail and fern reward choices inspect and persist", async ({ page 
   ).toBeVisible();
 });
 
-test("Fern previews when its draw prevents Keep in a full hand", async ({ page }) => {
+test("Fern draws only what fits when played from a full hand", async ({ page }) => {
   const initial = structuredClone(createRun(22).getSnapshot());
   initial.state.deck[0]!.pair = "Fern Fiddlehead & Fallen Leaf";
   const fight = initial.state.deck.map((card) => ({ ...card, face: "light" as const, kept: false }));
@@ -4660,14 +4660,48 @@ test("Fern previews when its draw prevents Keep in a full hand", async ({ page }
   await page.getByRole("button", { name: "Continue run" }).click();
   const fern = page.getByRole("button", { name: /^Fern Fiddlehead light/ });
   await fern.hover();
-  await expect(page.getByRole("tooltip")).toContainText(
-    "Drawing will fill your hand, so this card cannot return to it with Keep.",
-  );
+  await expect(page.getByRole("tooltip")).toContainText("Draw 2 cards.");
+  await expect(page.getByRole("tooltip")).not.toContainText("cannot return to it with Keep");
   await fern.click();
-  await expect(page.getByRole("button", { name: /^Fallen Leaf/ })).toHaveCount(0);
   await expect(page.locator(".battle-card")).toHaveCount(8);
-  await page.getByRole("button", { name: /^Discard / }).click();
+  await expect(page.getByRole("button", { name: /^Discard 1/ })).toBeVisible();
+  await page.getByRole("button", { name: /^Discard 1/ }).click();
   await expect(
-    page.getByRole("dialog", { name: /Discard/ }).getByRole("img", { name: /Fallen Leaf dark/ }),
+    page.getByRole("dialog", { name: /Discard/ }).getByRole("img", { name: /Fern Fiddlehead light/ }),
   ).toBeVisible();
+});
+
+test("Flower Bud and Moon preserve kept card faces through save and turn end", async ({ page }) => {
+  const initial = structuredClone(createRun(22).getSnapshot());
+  initial.state.deck[0]!.pair = "Flower Bud & Seed Pod";
+  initial.state.deck[1]!.pair = "Sun & Moon";
+  initial.state.deck[2]!.pair = "Angel & Vampire";
+  initial.state.deck[3]!.pair = "Fern Fiddlehead & Fallen Leaf";
+  const fight = initial.state.deck.map((card, index) => ({
+    ...card,
+    face: index === 1 ? ("dark" as const) : ("light" as const),
+    kept: false,
+  }));
+  initial.state.zones.hand = fight.slice(0, 4);
+  initial.state.zones.library = fight.slice(4);
+  initial.state.zones.discard = [];
+  initial.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(initial));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /^Flower Bud light/ }).click();
+  await page.getByRole("button", { name: /^Moon dark · Kept/ }).click();
+  await expect(page.getByRole("button", { name: /^Vampire dark · Kept/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Fallen Leaf dark · Kept/ })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: /^Vampire dark · Kept/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Fallen Leaf dark · Kept/ })).toBeVisible();
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.getByRole("button", { name: /^Vampire dark · 1 mana/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Fallen Leaf dark · 1 mana/ })).toBeVisible();
 });

@@ -28,13 +28,6 @@ type Pair = string;
 type SimpleOp =
   | (typeof simpleCards)[keyof typeof simpleCards]["light"]["ops"][number]
   | (typeof simpleCards)[keyof typeof simpleCards]["dark"]["ops"][number]
-  | {
-      readonly op: "attack";
-      readonly amount: number;
-      readonly type: DamageType;
-      readonly hits: number;
-      readonly leech: boolean;
-    }
   | { readonly op: "shuffle-library" }
   | { readonly op: "hand-library"; readonly position: "top" };
 interface FaceInfo {
@@ -54,8 +47,9 @@ export const playtestEffectOverrides: Readonly<Record<string, string>> = {
   "Iron Needlecase": "Deal 2 Binding damage twice. Keep this card.",
   "Empty Needlecase": "Gain 1 mana. Banish this card.",
   "Deer Trail": "Draw 1 card. Flip your hand.",
-  "Fern Fiddlehead": "Draw 1 card. Flip this card. Keep this card.",
-  "Fallen Leaf": "Deal 5 Decay damage. Banish this card.",
+  "Fern Fiddlehead": "Draw 2 cards.",
+  "Fallen Leaf": "Draw 1 card. Banish this card.",
+  "Flower Bud": "Keep your hand.",
 };
 export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
   ...simpleCards,
@@ -114,15 +108,24 @@ export const cards: Record<Pair, { light: FaceInfo; dark: FaceInfo }> = {
     light: {
       name: "Fern Fiddlehead",
       effect: playtestEffectOverrides["Fern Fiddlehead"]!,
-      keywords: ["Flip", "Keep"],
-      ops: [{ op: "draw", amount: 1 }, { op: "flip-self" }, { op: "keep-self" }],
+      keywords: [],
+      ops: [{ op: "draw", amount: 2 }],
     },
     dark: {
       name: "Fallen Leaf",
       effect: playtestEffectOverrides["Fallen Leaf"]!,
-      keywords: ["Decay", "Banish"],
-      ops: [{ op: "attack", amount: 5, type: "Decay", hits: 1, leech: false }, { op: "banish" }],
+      keywords: ["Banish"],
+      ops: [{ op: "draw", amount: 1 }, { op: "banish" }],
     },
+  },
+  "Flower Bud & Seed Pod": {
+    light: {
+      name: "Flower Bud",
+      effect: playtestEffectOverrides["Flower Bud"]!,
+      keywords: ["Keep"],
+      ops: [{ op: "keep-hand" }],
+    },
+    dark: simpleCards["Flower Bud & Seed Pod"].dark,
   },
   "Angel & Vampire": {
     light: { name: "Angel", effect: "Gain 5 Ward.", keywords: ["Ward"] },

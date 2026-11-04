@@ -122,33 +122,73 @@ describe("retuned reward pairs", () => {
     expect(game.getSnapshot().state.zones.scry).toBe(false);
   });
 
-  it("Fern draws, flips itself and remains playable as Fallen Leaf", async () => {
+  it("Fern unfolds into two cards while Fallen Leaf draws once and leaves the fight", async () => {
     const pair = "Fern Fiddlehead & Fallen Leaf";
-    expect(cards[pair]!.light.effect).toBe("Draw 1 card. Flip this card. Keep this card.");
-    expect(cards[pair]!.dark.effect).toBe("Deal 5 Decay damage. Banish this card.");
+    expect(cards[pair]!.light.effect).toBe("Draw 2 cards.");
+    expect(cards[pair]!.dark.effect).toBe("Draw 1 card. Banish this card.");
+    const fern = fixture(pair, "light");
+    expect(fern.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(fern.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual([
+      "card-1",
+      "card-2",
+      "card-4",
+      "card-3",
+    ]);
+    expect(fern.getSnapshot().state.zones.discard.map((card) => card.id)).toEqual(["card-0"]);
+    const leaf = fixture(pair, "dark");
+    const loaded = await readRun({
+      readCandidates: async () => [encodeRun(leaf.getSnapshot())],
+      write: async () => {},
+    });
+    const resumed = restoreSession(loaded!, runHandler);
+    expect(resumed.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.zones.hand.map((card) => card.id)).toEqual([
+      "card-1",
+      "card-2",
+      "card-4",
+    ]);
+    expect(resumed.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["card-0"]);
+    expect(resumed.getSnapshot().state.zones.library.map((card) => card.id)).toEqual(["card-3"]);
+  });
+
+  it("Flower Bud keeps the hand, and flipping those cards preserves Keep until the turn ends", async () => {
+    const pair = "Flower Bud & Seed Pod";
+    expect(cards[pair]!.light.effect).toBe("Keep your hand.");
+    expect(cards[pair]!.dark.effect).toBe("Draw 2 cards.");
     const initial = structuredClone(fixture(pair, "light").getSnapshot());
-    initial.state.enemy.hp = initial.state.enemy.maxHp = 100;
+    initial.state.deck[3]!.pair = "Sun & Moon";
+    const moon = initial.state.zones.library.find((card) => card.id === "card-3")!;
+    moon.pair = "Sun & Moon";
+    moon.face = "dark";
+    initial.state.zones.library = initial.state.zones.library.filter((card) => card.id !== "card-3");
+    initial.state.zones.hand.push(moon);
     const game = restoreSession(initial, runHandler);
     expect(game.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.zones.hand.every((card) => card.kept)).toBe(true);
+    expect(game.dispatch({ type: "play", id: "card-3" }).decision.accepted).toBe(true);
     expect(game.getSnapshot().state.zones.hand.map((card) => [card.id, card.face, card.kept])).toEqual([
-      ["card-1", "light", false],
-      ["card-2", "dark", true],
-      ["card-4", "light", false],
-      ["card-0", "dark", true],
+      ["card-1", "dark", true],
+      ["card-2", "light", true],
     ]);
-    expect(game.getSnapshot().state.mana).toBe(2);
     const loaded = await readRun({
       readCandidates: async () => [encodeRun(game.getSnapshot())],
       write: async () => {},
     });
     const resumed = restoreSession(loaded!, runHandler);
-    expect(resumed.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
-    expect(resumed.getSnapshot().state.enemy.hp).toBe(95);
-    expect(resumed.getSnapshot().state.zones.banished.map((card) => card.id)).toEqual(["card-0"]);
+    expect(resumed.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.zones.hand.find((card) => card.id === "card-1")).toMatchObject({
+      face: "dark",
+      kept: false,
+    });
+    expect(resumed.getSnapshot().state.zones.hand.find((card) => card.id === "card-2")).toMatchObject({
+      face: "light",
+      kept: false,
+    });
   });
 
-  it("a full hand can consume the Fern's vacated slot before it Keeps itself", () => {
-    const initial = structuredClone(fixture("Fern Fiddlehead & Fallen Leaf", "light").getSnapshot());
+  it("a full hand keeps Water Clock when no card can be drawn", () => {
+    const initial = structuredClone(fixture("Sundial & Water Clock", "dark").getSnapshot());
+    initial.state.zones.banished = initial.state.zones.library.splice(0);
     for (let i = 0; i < 5; i++) {
       const extra = { id: `extra-${i}`, pair: "Sun & Moon" };
       initial.state.deck.push(extra);
@@ -157,8 +197,10 @@ describe("retuned reward pairs", () => {
     const game = restoreSession(initial, runHandler);
     expect(game.dispatch({ type: "play", id: "card-0" }).decision.accepted).toBe(true);
     expect(game.getSnapshot().state.zones.hand).toHaveLength(8);
-    expect(game.getSnapshot().state.zones.discard).toEqual([
-      { id: "card-0", pair: "Fern Fiddlehead & Fallen Leaf", face: "dark", kept: false },
-    ]);
+    expect(game.getSnapshot().state.zones.hand.find((card) => card.id === "card-0")).toMatchObject({
+      face: "dark",
+      kept: true,
+    });
+    expect(game.getSnapshot().state.zones.discard).toEqual([]);
   });
 });
