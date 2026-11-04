@@ -459,11 +459,11 @@ test("a player can inspect and play a card, then end the turn", async ({ page })
   await expect(card.locator("img")).toHaveJSProperty("complete", true);
   expect(await card.locator("img").evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   await expect(page.getByText(/Current attack:.*Radiance damage before Ward and Reflect/)).toBeVisible();
+  await card.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Other face:");
   await card.click();
-  await expect(page.getByLabel("Selected card").getByText(/Other face:/)).toBeVisible();
-  await expect(page.getByRole("button", { name: /^Play / })).toBeInViewport();
-  await page.getByRole("button", { name: /^Play / }).click();
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Play / })).toHaveCount(0);
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
   await page.screenshot({ path: "/tmp/dusk-dawn-battle.png", fullPage: true });
@@ -515,10 +515,10 @@ test("paid library inspection survives reload and resolves without leaking early
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  await page.getByRole("button", { name: /Wilderness dark/ }).click();
   await expect(page.getByLabel("Committed inspection")).toHaveCount(0);
-  await page.getByRole("button", { name: "Play Wilderness" }).click();
-  await expect(page.getByLabel("Committed inspection")).toBeVisible();
+  await page.getByRole("button", { name: /Wilderness dark/ }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByLabel("Committed inspection")).toBeFocused();
   await expect(page.getByRole("button", { name: "End turn" })).toBeDisabled();
   await expect
     .poll(async () =>
@@ -618,7 +618,6 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
       continue;
     }
     await choices.nth(best).click();
-    await page.getByRole("button", { name: /^Play / }).click();
   }
   await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
   expect(encountered.size).toBe(5);
@@ -688,11 +687,90 @@ test("automatically retrieves Memory's only eligible discard target", async ({ p
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  await page.getByRole("button", { name: /Memory light/ }).click();
-  await expect(page.getByText("Automatic target: Moon.")).toBeVisible();
+  const memory = page.getByRole("button", { name: /Memory light/ });
+  await memory.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Automatic target: Moon.");
+  await memory.click();
   await expect(page.getByText("Choose a card from your discard pile.")).toHaveCount(0);
-  await page.getByRole("button", { name: "Play Memory" }).click();
   await expect(page.getByRole("button", { name: /Moon dark/ })).toBeVisible();
+});
+
+for (const name of ["Memory", "Sacrifice"] as const) {
+  test(`${name} asks only for a necessary target and plays on target activation`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(22).getSnapshot());
+    snapshot.state.deck = [
+      { id: "source", pair: name === "Memory" ? "Memory & Oblivion" : "Sacrifice & Self-Preservation" },
+      { id: "one", pair: "Sun & Moon" },
+      { id: "two", pair: "Angel & Vampire" },
+    ];
+    const [source, one, two] = snapshot.state.deck.map((card) => ({
+      ...card,
+      face: "light" as const,
+      kept: false,
+    }));
+    snapshot.state.zones.hand = name === "Memory" ? [source!] : [source!, one!, two!];
+    snapshot.state.zones.discard = name === "Memory" ? [one!, two!] : [];
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const sourceButton = page.getByRole("button", { name: new RegExp(`${name} light`) });
+    await sourceButton.focus();
+    await page.keyboard.press("Enter");
+    const choice = page.getByLabel("Selected card");
+    await expect(choice).toBeFocused();
+    await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
+    await expect(page.getByRole("button", { name: `Play ${name}` })).toHaveCount(0);
+    await page.getByRole("button", { name: "Cancel", exact: true }).click();
+    await expect(choice).toHaveCount(0);
+    await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
+    await sourceButton.focus();
+    await page.keyboard.press("Enter");
+    await choice.getByRole("button", { name: "Angel", exact: true }).focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
+    await expect(choice).toHaveCount(0);
+    if (name === "Memory") await expect(page.getByRole("button", { name: /Angel light/ })).toBeVisible();
+    else await expect(page.getByRole("button", { name: /Angel light/ })).toHaveCount(0);
+    await expect(page.locator(".battle-card:focus")).toHaveCount(1);
+  });
+}
+
+test("keyboard activation directly plays an ordinary card and keeps focus in the hand", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
+  const card = page.locator(".battle-card").first();
+  await page.keyboard.press("Tab");
+  await card.focus();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await expect(page.getByText("Mana 3/3", { exact: false })).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
+  await expect(page.locator(".battle-card:focus")).toHaveCount(1);
+});
+
+test("a card rejected for lack of mana remains in hand", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.mana = 0;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const cards = page.locator(".battle-card");
+  const count = await cards.count();
+  await cards.first().click();
+  await expect(page.getByRole("status")).toContainText(/mana/i);
+  await expect(cards).toHaveCount(count);
+  await expect(page.getByText("Mana 0/3", { exact: false })).toBeVisible();
 });
 
 test("previews when Water Clock cannot Keep itself after filling the hand", async ({ page }) => {
@@ -710,11 +788,12 @@ test("previews when Water Clock cannot Keep itself after filling the hand", asyn
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  await page.getByRole("button", { name: /Water Clock dark/ }).click();
-  await expect(
-    page.getByText("Drawing will fill your hand, so this card cannot return to it with Keep."),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Play Water Clock" }).click();
+  const waterClock = page.getByRole("button", { name: /Water Clock dark/ });
+  await waterClock.hover();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "Drawing will fill your hand, so this card cannot return to it with Keep.",
+  );
+  await waterClock.click();
   await expect(page.getByRole("button", { name: /Water Clock dark/ })).toHaveCount(0);
   await expect(page.locator(".battle-card")).toHaveCount(8);
 });
@@ -754,7 +833,7 @@ test("battle art remains full-bleed and combat text stays readable at common siz
     await tooltip.evaluate((element) => parseFloat(getComputedStyle(element).fontSize)),
   ).toBeGreaterThanOrEqual(14);
   await card.click();
-  await expect(page.getByRole("button", { name: /^Play / })).toBeInViewport();
+  await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
 });
 
 test("battle actions stay usable on a small viewport", async ({ page }) => {
@@ -764,9 +843,6 @@ test("battle actions stay usable on a small viewport", async ({ page }) => {
   await page.getByRole("button", { name: "Start new run" }).click();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
   await page.locator(".battle-card").first().click();
-  const play = page.getByRole("button", { name: /^Play / });
-  await expect(play).toBeInViewport();
-  await play.click();
   await expect(page.getByText("Mana 2/3", { exact: false })).toBeVisible();
   await expect(page.getByRole("button", { name: "End turn" })).toBeInViewport();
 });
@@ -889,7 +965,6 @@ test("plays a full branching expedition through the browser", async ({ page }) =
       continue;
     }
     await choices.nth(best).click();
-    await page.getByRole("button", { name: /^Play / }).click();
   }
   await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
   expect(encountered.size).toBe(6);
@@ -919,7 +994,11 @@ test("inspects battle cards on hover and keyboard focus without selecting them",
   await expect(tip).toContainText("Absorbs damage");
   await expect(tip).toContainText("Other face:");
   await expect(tip).toContainText("Vampire");
-  await expect(card).toHaveAttribute("aria-pressed", "false");
+  const layer = await page
+    .locator("#tooltip-root")
+    .evaluate((element) => Number(getComputedStyle(element).zIndex));
+  expect(layer).toBeGreaterThan(10);
+  await expect(page.getByText(/Mana 3\/3/)).toBeVisible();
   await expect(page.getByRole("button", { name: /^Play Angel/ })).toHaveCount(0);
   await page.mouse.move(5, 5);
   await expect(tip).toBeHidden();
@@ -1047,11 +1126,12 @@ test("Funnel previews and draws the first card in the visible hand order", async
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
-  await page.getByRole("button", { name: /Funnel dark/ }).click();
-  await expect(
-    page.getByText(/Hand to library top \(draw order within moved cards\): Moon, Angel/),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Play Funnel" }).click();
+  const funnel = page.getByRole("button", { name: /Funnel dark/ });
+  await funnel.hover();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "Hand to library top (draw order within moved cards): Moon, Angel",
+  );
+  await funnel.click();
   await expect(page.locator(".battle-card")).toHaveCount(1);
   await expect(page.locator(".battle-card").first()).toContainText("Moon");
   await expect(page.locator(".battle-card").first()).not.toContainText("Kept");

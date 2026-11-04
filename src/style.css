@@ -513,6 +513,7 @@ input:focus-visible,
 
 #tooltip-root {
   position: fixed;
+  z-index: 100;
   inset: 0;
   pointer-events: none;
 }
@@ -955,7 +956,7 @@ input:focus-visible,
 .battle-reward span {
   font-size: 0.85rem;
 }
-.battle-card[aria-pressed="true"],
+.battle-card[data-selected="true"],
 .battle-targets button[aria-pressed="true"] {
   border-color: #e9c58b;
   box-shadow: 0 0 0 2px #e9c58b;

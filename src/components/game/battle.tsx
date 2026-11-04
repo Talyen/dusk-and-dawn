@@ -1,5 +1,5 @@
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   cards,
   cardRestriction,
@@ -76,12 +76,14 @@ function BattleCard({
   card,
   selected,
   disabled,
+  preview,
   onSelect,
 }: {
   card: FightCard;
   selected: boolean;
   disabled: boolean;
-  onSelect: () => void;
+  preview: ReactNode;
+  onSelect: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -110,7 +112,7 @@ function BattleCard({
         ref={trigger}
         type="button"
         className="battle-card"
-        aria-pressed={selected}
+        data-selected={selected || undefined}
         aria-describedby={open ? id : undefined}
         disabled={disabled}
         onPointerEnter={(event) => {
@@ -161,6 +163,7 @@ function BattleCard({
         <p>
           Other face: <strong>{other.name}</strong> — <Description text={other.effect} />
         </p>
+        {preview}
         {info.keywords
           .filter((keyword) => keywordHelp[keyword])
           .map((keyword) => (
@@ -183,6 +186,117 @@ const directCardAttacks: Record<string, { hits: number[]; type: DamageType }> = 
   Ash: { hits: [7], type: "Decay" },
   Oblivion: { hits: [7], type: "Oblivion" },
 };
+
+function cardPreview(s: RunState, card: FightCard): ReactNode {
+  const info = face(card);
+  const ops = info.ops ?? [];
+  const hand = s.zones.hand.filter((other) => other.id !== card.id);
+  const flipped = hand.map((other) => {
+    const next = cards[other.pair]![other.face === "light" ? "dark" : "light"];
+    return `${face(other).name} → ${next.name}`;
+  });
+  const lines: string[] = [];
+  const generic = ops.find((op) => op.op === "attack" || op.op === "attack-ignore-ward");
+  const hit =
+    directCardAttacks[info.name] ??
+    (generic
+      ? {
+          hits: Array(generic.op === "attack" ? generic.hits : 1).fill(generic.amount) as number[],
+          type: generic.type,
+        }
+      : undefined);
+  if (hit) {
+    const enemy = getEnemy(s);
+    const values = attackValues(
+      hit.hits,
+      s.player.bless,
+      s.player.curse,
+      hit.type === enemy.weakness ? 2 : 0,
+      "flat-preview",
+    );
+    lines.push(`Current attack: ${values.join(" + ")} ${hit.type} damage before Ward and Reflect.`);
+    if (generic?.op === "attack-ignore-ward") lines.push("This attack ignores Ward, including if reflected.");
+  }
+  if (info.name === "Moon" || info.name === "Key" || ops.some((op) => op.op === "flip-hand")) {
+    lines.push(`Flip preview: ${flipped.join("; ") || "no other cards in hand"}.`);
+    if (info.name === "Key" || ops.some((op) => op.op === "draw"))
+      lines.push("Any card drawn first will also flip; its identity is not revealed yet.");
+  }
+  if (ops.some((op) => op.op === "flip-random"))
+    lines.push(
+      `Random Flip eligible cards: ${flipped.join("; ") || "none"}. The random selection happens after play.`,
+    );
+  const handMove = info.name === "Funnel" ? "top" : ops.find((op) => op.op === "hand-library")?.position;
+  if (handMove)
+    lines.push(
+      `Hand to library ${handMove} (draw order within moved cards): ${hand.map((other) => face(other).name).join(", ") || "none"}. Keep markers on moved cards are cleared.`,
+    );
+  for (const op of ops) {
+    if (
+      op.op === "banish-discard" ||
+      op.op === "return-discard" ||
+      op.op === "discard-library-top" ||
+      op.op === "discard-library-bottom" ||
+      op.op === "return-top-discard" ||
+      op.op === "flip-discard-top" ||
+      op.op === "light-discard-top"
+    ) {
+      const position =
+        op.op === "discard-library-bottom"
+          ? "bottom"
+          : op.op === "return-top-discard" || op.op === "flip-discard-top" || op.op === "light-discard-top"
+            ? "top"
+            : op.position;
+      let chosen: FightCard[];
+      if (op.op === "return-top-discard")
+        chosen = s.zones.discard
+          .slice(-op.count)
+          .reverse()
+          .slice(0, 8 - hand.length);
+      else if (op.op === "discard-library-top" || op.op === "discard-library-bottom")
+        chosen =
+          position === "top"
+            ? s.zones.discard.slice(-op.count).reverse()
+            : s.zones.discard.slice(0, op.count).reverse();
+      else chosen = position === "top" ? s.zones.discard.slice(-1) : s.zones.discard.slice(0, 1);
+      lines.push(
+        `${position === "top" ? "Top" : "Bottom"} of discard (top to bottom): ${chosen.map((other) => face(other).name).join(", ") || "empty"}.`,
+      );
+    }
+    if (op.op === "turn-random")
+      lines.push(
+        `Eligible ${op.from} cards: ${
+          hand
+            .filter((other) => other.face === op.from)
+            .map((other) => face(other).name)
+            .join(", ") || "none"
+        }. A card is chosen after play.`,
+      );
+  }
+  if (
+    info.name === "Water Clock" &&
+    s.zones.hand.length === 8 &&
+    (s.zones.library.length > 0 || s.zones.discard.length > 0)
+  )
+    lines.push("Drawing will fill your hand, so this card cannot return to it with Keep.");
+  if (info.name === "Seed")
+    lines.push(
+      `Bottom of discard: ${
+        s.zones.discard
+          .slice(0, 2)
+          .reverse()
+          .map((other) => face(other).name)
+          .join(", ") || "empty"
+      }.`,
+    );
+  const targets = info.name === "Memory" ? s.zones.discard : info.name === "Sacrifice" ? hand : [];
+  if ((info.name === "Memory" || info.name === "Sacrifice") && targets.length === 1)
+    lines.push(`Automatic target: ${face(targets[0]!).name}.`);
+  if (info.name === "Memory" && !targets.length) lines.push("No cards in the discard pile.");
+  const restriction = cardRestriction(s, card);
+  if (restriction) lines.push(restriction);
+  return lines.map((line, index) => <p key={index}>{line}</p>);
+}
 
 function saveBackend(): SaveBackend {
   const bridge = (window as unknown as { duskDesktop?: DesktopSaveBridge }).duskDesktop;
@@ -378,7 +492,28 @@ function BattleSession({
   onComplete: (id: string) => void;
 }) {
   const [snapshot, setSnapshot] = useState(game.getSnapshot);
+  const handRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const pendingRef = useRef<HTMLElement>(null);
+  const actionRef = useRef<HTMLDivElement>(null);
+  const focusAfterPlay = useRef<number | null>(null);
+  useEffect(() => {
+    const index = focusAfterPlay.current;
+    if (index === null) return;
+    focusAfterPlay.current = null;
+    const handButtons = handRef.current?.querySelectorAll<HTMLButtonElement>(".battle-card:not(:disabled)");
+    (
+      pendingRef.current ??
+      handButtons?.[Math.min(index, handButtons.length - 1)] ??
+      actionRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)") ??
+      titleRef.current
+    )?.focus();
+  }, [snapshot]);
   const [selected, setSelected] = useState<string | null>(null);
+  const choiceRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (selected) choiceRef.current?.focus();
+  }, [selected]);
   const [targets, setTargets] = useState<string[]>([]);
   const [error, setError] = useState("");
   const [saveError, setSaveError] = useState(false);
@@ -426,8 +561,10 @@ function BattleSession({
   }, [snapshot, onDiscover]);
   function dispatch(command: Command) {
     const result = game.dispatch(command);
-    if (!result.decision.accepted) setError(result.decision.reason);
-    else {
+    if (!result.decision.accepted) {
+      focusAfterPlay.current = null;
+      setError(result.decision.reason);
+    } else {
       setError("");
       setSelected(null);
       setTargets([]);
@@ -487,7 +624,6 @@ function BattleSession({
         : undefined;
   const maxTargets = s.pending ? s.pending.required : 1;
   const unavailable = selectedCard ? cardRestriction(s, selectedCard) : "";
-  const canPlay = !!selectedCard && s.mana > 0 && !unavailable && (!needsTarget || targets.length === 1);
   function toggleTarget(id: string) {
     setTargets((t) =>
       t.includes(id)
@@ -542,7 +678,7 @@ function BattleSession({
       <div className="battle-head">
         <div>
           <p className="battle-eyebrow">Dusk & Dawn · playable preview</p>
-          <h1 id="battle-title">
+          <h1 id="battle-title" ref={titleRef} tabIndex={-1}>
             {s.phase === "battle"
               ? enemy.name
               : s.phase === "reward"
@@ -650,17 +786,31 @@ function BattleSession({
           </div>
           <section aria-labelledby="hand-title">
             <h2 id="hand-title">Your hand</h2>
-            <div className="battle-hand">
+            <div className="battle-hand" ref={handRef}>
               {s.zones.hand.map((card) => (
                 <BattleCard
                   key={card.id}
                   card={card}
                   selected={selected === card.id}
                   disabled={!!s.pending}
-                  onSelect={() => {
-                    setSelected(card.id);
-                    setTargets([]);
-                    setError("");
+                  preview={cardPreview(s, card)}
+                  onSelect={(event) => {
+                    const name = face(card).name;
+                    const choices =
+                      name === "Memory"
+                        ? s.zones.discard
+                        : name === "Sacrifice"
+                          ? s.zones.hand.filter((other) => other.id !== card.id)
+                          : [];
+                    if (choices.length > 1 && s.mana > 0 && !cardRestriction(s, card)) {
+                      setSelected(card.id);
+                      setTargets([]);
+                      setError("");
+                    } else {
+                      if (event.detail === 0)
+                        focusAfterPlay.current = s.zones.hand.findIndex((other) => other.id === card.id);
+                      dispatch({ type: "play", id: card.id });
+                    }
                   }}
                 />
               ))}
@@ -669,6 +819,8 @@ function BattleSession({
           {s.pending && (
             <section
               id="committed-inspection"
+              ref={pendingRef}
+              tabIndex={-1}
               className="battle-panel battle-details"
               aria-label="Committed inspection"
             >
@@ -709,6 +861,8 @@ function BattleSession({
           {selectedCard && !s.pending && (
             <section
               id="selected-card-details"
+              ref={choiceRef}
+              tabIndex={-1}
               className="battle-panel battle-details"
               aria-label="Selected card"
             >
@@ -835,8 +989,13 @@ function BattleSession({
                         <button
                           type="button"
                           key={card.id}
-                          aria-pressed={targets.includes(card.id)}
-                          onClick={() => toggleTarget(card.id)}
+                          onClick={(event) => {
+                            if (event.detail === 0)
+                              focusAfterPlay.current = s.zones.hand.findIndex(
+                                (other) => other.id === selectedCard.id,
+                              );
+                            dispatch({ type: "play", id: selectedCard.id, targets: [card.id] });
+                          }}
                         >
                           {face(card).name}
                         </button>
@@ -848,7 +1007,7 @@ function BattleSession({
               {unavailable && <p>{unavailable}</p>}
             </section>
           )}
-          <div className="battle-actions" role="group" aria-label="Battle actions">
+          <div className="battle-actions" ref={actionRef} role="group" aria-label="Battle actions">
             {s.pending ? (
               <a href="#committed-inspection">Choose cards</a>
             ) : selectedCard ? (
@@ -857,16 +1016,11 @@ function BattleSession({
                   {face(selectedCard).name}
                   {needsTarget && !targets.length ? " · choose a target" : ""}
                 </span>
-                <a href="#selected-card-details">Details</a>
-                <Button
-                  disabled={!canPlay}
-                  onClick={() => dispatch({ type: "play", id: selectedCard.id, targets })}
-                >
-                  Play {face(selectedCard).name}
-                </Button>
+                <a href="#selected-card-details">Choose target</a>
+                <Button onClick={() => setSelected(null)}>Cancel</Button>
               </>
             ) : (
-              <span className="battle-actions__selection">Select a card to play</span>
+              <span className="battle-actions__selection">Click a card to play</span>
             )}
             <Button disabled={!!s.pending} onClick={() => dispatch({ type: "end" })}>
               End turn
