@@ -604,6 +604,7 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
     const burn = Number(await enemy.getAttribute("data-enemy-burn"));
     const curse = Number(await enemy.getAttribute("data-enemy-curse"));
     const priority: Record<string, number> = {
+      Seraph: 21,
       Sun: 20,
       Vampire: 19,
       Wither: 18,
@@ -611,6 +612,8 @@ test("plays a complete seeded run through the browser", async ({ page }) => {
       Angel: ward < 5 ? 12 : 2,
       Frost: curse < 2 ? 11 : 1,
       Key: 10,
+      Feather: 10,
+      Chain: curse < 2 ? 11 : 1,
       Moon: 9,
       Bloom: hp <= 24 ? 6 : 0,
     };
@@ -1002,6 +1005,7 @@ test("plays a full branching expedition through the browser", async ({ page }) =
     const burn = Number(await enemy.getAttribute("data-enemy-burn"));
     const curse = Number(await enemy.getAttribute("data-enemy-curse"));
     const priority: Record<string, number> = {
+      Seraph: 21,
       Sun: 20,
       Vampire: 19,
       Wither: 18,
@@ -1009,6 +1013,8 @@ test("plays a full branching expedition through the browser", async ({ page }) =
       Angel: ward < 5 ? 12 : 2,
       Frost: curse < 2 ? 11 : 1,
       Key: 10,
+      Feather: 10,
+      Chain: curse < 2 ? 11 : 1,
       Moon: 9,
       Bloom: hp <= 24 ? 6 : 0,
     };
@@ -1206,7 +1212,7 @@ test("preloads both faces of the deck and reports actual combat damage briefly",
   await page.goto("/");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Start new run" }).click();
-  await expect.poll(() => requested.has("/assets/card-moon.webp")).toBe(true);
+  await expect.poll(() => requested.has("/assets/card-fallen-seraph.webp")).toBe(true);
   await expect.poll(() => requested.has("/assets/card-vampire.webp")).toBe(true);
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.getByRole("status")).toContainText("You −4 HP");
@@ -2325,7 +2331,7 @@ test("antihero selection shows the supplied artwork and starts a dark Witch expe
   }
   const witch = choices.getByRole("button", { name: /^The Thorn Witch/ });
   await witch.hover();
-  await expect(page.getByRole("tooltip")).toContainText("apply 2 Poison");
+  await expect(page.getByRole("tooltip")).toContainText("apply 1 Curse");
   await witch.click();
   await expect(witch).toHaveAttribute("aria-pressed", "true");
   expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBeNull();
@@ -2337,9 +2343,9 @@ test("antihero selection shows the supplied artwork and starts a dark Witch expe
   await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/30" })).toBeVisible();
   await expect(page.locator(".battle-card").first()).toContainText("dark");
   await page.locator(".battle-card").first().hover();
-  await expect(page.getByRole("tooltip")).toContainText("apply 2 Poison before this effect");
+  await expect(page.getByRole("tooltip")).toContainText("apply 1 Curse before this effect");
   await page.locator(".battle-card").first().click();
-  await expect(page.getByRole("button", { name: /Enemy status:.*poison 2/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Enemy status:.*curse 1/ })).toBeVisible();
   await expect
     .poll(() =>
       page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.hero),
@@ -2349,7 +2355,7 @@ test("antihero selection shows the supplied artwork and starts a dark Witch expe
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Continue run" }).click();
   await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/30" })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Enemy status:.*poison 2/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Enemy status:.*curse 1/ })).toBeVisible();
 });
 
 test("the Oracle reveals the next library card every turn and survives resume", async ({ page }) => {
@@ -2400,7 +2406,7 @@ test("touching an antihero selects it and reveals its passive before starting", 
   const witch = page.getByRole("button", { name: /^The Thorn Witch/ });
   await witch.tap();
   await expect(witch).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("tooltip")).toContainText("Before each dark card resolves, apply 2 Poison");
+  await expect(page.getByRole("tooltip")).toContainText("Before each dark card resolves, apply 1 Curse");
   expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBeNull();
   const oracle = page.getByRole("button", { name: /^The Veiled Oracle/ });
   await oracle.tap();
@@ -2410,4 +2416,132 @@ test("touching an antihero selects it and reveals its passive before starting", 
   await page.getByRole("button", { name: "Start new run" }).tap();
   await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
   await context.close();
+});
+
+test("Scry-aware flip previews show the revealed draw without exposing deeper cards", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22, undefined, "veiled-oracle").getSnapshot());
+  snapshot.state.deck = [
+    { id: "key", pair: "Key & Lock" },
+    { id: "held", pair: "Sun & Moon" },
+    { id: "hidden", pair: "Flame & Frost" },
+    { id: "top", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck
+    .slice(0, 2)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = snapshot.state.deck
+    .slice(2)
+    .map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  snapshot.state.zones.scry = true;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const key = page.getByRole("button", { name: /Key light/ });
+  await key.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Draw and Flip: Angel → Vampire");
+  await expect(page.getByRole("tooltip")).not.toContainText("identity is not revealed");
+  await expect(page.getByRole("tooltip")).not.toContainText("Flame");
+  await key.click();
+  await expect(page.getByRole("button", { name: /Vampire dark/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Moon dark/ })).toBeVisible();
+  await expect(page.getByRole("img", { name: /Library 1\. Scry\. Flame light/ })).toBeVisible();
+});
+
+test("flip previews keep an unrevealed draw secret", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [
+    { id: "key", pair: "Key & Lock" },
+    { id: "hidden", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = [{ ...snapshot.state.deck[1]!, face: "light", kept: false }];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  snapshot.state.zones.scry = false;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Key light/ }).hover();
+  await expect(page.getByRole("tooltip")).toContainText("identity is not revealed yet");
+  await expect(page.getByRole("tooltip")).not.toContainText("Angel");
+});
+
+test("a draw-and-flip preview identifies an empty draw without reshuffling", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22).getSnapshot());
+  snapshot.state.deck = [{ id: "key", pair: "Key & Lock" }];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  snapshot.state.zones.scry = true;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Key light/ }).hover();
+  await expect(page.getByRole("tooltip")).toContainText("No card will be drawn.");
+  await expect(page.getByRole("tooltip")).not.toContainText("Draw and Flip:");
+});
+
+test("a pre-tuning Witch save retains its Poison passive in the UI and on play", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22, undefined, "thorn-witch").getSnapshot());
+  delete snapshot.state.heroRuleset;
+  snapshot.state.deck = [{ id: "lock", pair: "Key & Lock" }];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "dark", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /The Thorn Witch, HP/ }).hover();
+  await expect(page.getByRole("tooltip")).toContainText("apply 2 Poison");
+  const lock = page.getByRole("button", { name: /Lock dark/ });
+  await lock.hover();
+  await expect(page.getByRole("tooltip")).toContainText("apply 2 Poison before this effect");
+  await lock.click();
+  await expect(page.getByRole("button", { name: /Enemy status:.*poison 2/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Enemy status:.*curse/ })).toHaveCount(0);
+});
+
+test("an empty Scry library does not reveal the card drawn after reshuffling", async ({ page }) => {
+  const snapshot = structuredClone(createRun(22, undefined, "veiled-oracle").getSnapshot());
+  snapshot.state.deck = [
+    { id: "key", pair: "Key & Lock" },
+    { id: "discarded", pair: "Angel & Vampire" },
+  ];
+  snapshot.state.zones.hand = [{ ...snapshot.state.deck[0]!, face: "light", kept: false }];
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [{ ...snapshot.state.deck[1]!, face: "light", kept: false }];
+  snapshot.state.zones.banished = [];
+  snapshot.state.zones.scry = true;
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: /Key light/ }).hover();
+  await expect(page.getByRole("tooltip")).toContainText("identity is not revealed yet");
+  await expect(page.getByRole("tooltip")).not.toContainText("Angel");
+  await page.getByRole("button", { name: /Key light/ }).click();
+  await expect(page.getByRole("button", { name: /Vampire dark/ })).toBeVisible();
 });

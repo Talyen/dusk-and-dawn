@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { heroes, heroIds, type HeroId } from "../../src/lib/game/heroes";
+import { heroes, heroIds, heroPassive, type HeroId } from "../../src/lib/game/heroes";
 import { createRun, runHandler } from "../../src/lib/game/run";
 import { encodeRun, readRun, resumeRun } from "../../src/lib/game/run-save";
 import { restoreSession } from "../../src/lib/game/session";
@@ -27,6 +27,7 @@ describe("antihero starting kits and passives", () => {
     for (const hero of heroIds) {
       const state = createRun(19, undefined, hero).getSnapshot().state;
       expect(state.hero).toBe(hero);
+      expect(state.heroRuleset).toBe(2);
       expect(state.deck).toHaveLength(10);
       expect(new Set(state.deck.map((card) => card.id)).size).toBe(10);
       for (const pair of heroes[hero].pairs)
@@ -67,24 +68,35 @@ describe("antihero starting kits and passives", () => {
     expect(resumed.getSnapshot().state.hero).toBe("oathless-seraph");
   });
 
-  it("applies Witch Poison on dark plays using the normal maximum rule", () => {
-    const initial = setup(
-      "thorn-witch",
-      ["Sun & Moon", "Angel & Vampire", "Flame & Frost"],
-      ["light", "dark", "dark"],
-    );
+  it("applies Witch Curse on every dark play, including repeated plays in one turn", async () => {
+    const initial = setup("thorn-witch", ["Key & Lock", "Sun & Moon"], ["dark", "light"]);
     const game = restoreSession(initial, runHandler);
-    game.dispatch({ type: "play", id: "test-0" });
-    expect(game.getSnapshot().state.enemy.poison).toBe(0);
-    game.dispatch({ type: "play", id: "test-1" });
-    expect(game.getSnapshot().state.enemy.poison).toBe(2);
-    game.dispatch({ type: "play", id: "test-2" });
-    expect(game.getSnapshot().state.enemy.poison).toBe(2);
-    const stronger = structuredClone(initial);
-    stronger.state.enemy.poison = 4;
-    const other = restoreSession(stronger, runHandler);
-    other.dispatch({ type: "play", id: "test-1" });
-    expect(other.getSnapshot().state.enemy.poison).toBe(4);
+    expect(game.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(game.getSnapshot().state.enemy.curse).toBe(1);
+    const resumed = resumeRun(await saved(game.getSnapshot()));
+    expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.enemy.curse).toBe(2);
+    expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.enemy.curse).toBe(3);
+    expect(resumed.getSnapshot().state.enemy.poison).toBe(0);
+    const before = resumed.getSnapshot();
+    expect(resumed.dispatch({ type: "play", id: "test-0" }).decision.accepted).toBe(false);
+    expect(resumed.getSnapshot()).toEqual(before);
+    expect(resumed.dispatch({ type: "end" }).decision.accepted).toBe(true);
+    expect(resumed.getSnapshot().state.player.hp).toBe(29); // Moth's 4 damage is reduced by three Curse.
+    expect(resumed.getSnapshot().state.enemy.curse).toBe(0);
+  });
+
+  it("preserves the original Poison passive for Witch saves created before ruleset 2", async () => {
+    const initial = setup("thorn-witch", ["Key & Lock"], ["dark"]);
+    delete initial.state.heroRuleset;
+    const resumed = resumeRun(await saved(initial));
+    expect(heroPassive("thorn-witch", resumed.getSnapshot().state.heroRuleset)).toContain("2 Poison");
+    resumed.dispatch({ type: "play", id: "test-0" });
+    resumed.dispatch({ type: "play", id: "test-0" });
+    expect(resumed.getSnapshot().state.enemy.poison).toBe(2);
+    expect(resumed.getSnapshot().state.enemy.curse).toBe(0);
+    expect((await saved(resumed.getSnapshot())).state.heroRuleset).toBeUndefined();
   });
 
   it("starts each Oracle turn with Scry, retains it through saves, and preserves legacy saves", async () => {
@@ -125,7 +137,11 @@ describe("antihero reward pools", () => {
   it("can offer an unowned original starter pair without changing legacy pools", () => {
     for (const hero of [...heroIds, undefined]) {
       const snapshot = structuredClone(createRun(5, undefined, hero).getSnapshot());
-      const sun = snapshot.state.deck.find((card) => card.pair === "Sun & Moon")!;
+      const sun = snapshot.state.deck.find((card) => card.pair === "Sun & Moon") ?? {
+        id: "test-sun",
+        pair: "Sun & Moon",
+      };
+      if (!snapshot.state.deck.some((card) => card.id === sun.id)) snapshot.state.deck.push(sun);
       snapshot.state.zones.hand = [{ ...sun, face: "light", kept: false }];
       snapshot.state.enemy.hp = 1;
       let calls = 0;
@@ -139,6 +155,17 @@ describe("antihero reward pools", () => {
     }
   });
 
+  it("keeps Sun eligible as a reward for a new Seraph kit", () => {
+    const snapshot = structuredClone(createRun(5, undefined, "oathless-seraph").getSnapshot());
+    const seraph = snapshot.state.deck.find((card) => card.pair === "Seraph & Fallen Seraph")!;
+    snapshot.state.zones.hand = [{ ...seraph, face: "light", kept: false }];
+    snapshot.state.enemy.hp = 1;
+    let calls = 0;
+    const rng = () => (calls++ < 2 ? 0 : 0.999999);
+    expect(runHandler(snapshot.state, { type: "play", id: seraph.id }, rng).accepted).toBe(true);
+    expect(snapshot.state.offers).toContain("Sun & Moon");
+  });
+
   it("can put an absent original pair in an expedition event", () => {
     const experiment = { id: "hero-route", tier: 1, orientation: "light", relic: "none" } as const;
     const snapshot = structuredClone(createRun(5, experiment, "thorn-witch").getSnapshot());
@@ -149,4 +176,15 @@ describe("antihero reward pools", () => {
     expect(runHandler(snapshot.state, { type: "reward", pair: null }, rng).accepted).toBe(true);
     expect(snapshot.state.experiment?.route?.pair).toBe("Flame & Frost");
   });
+});
+
+it("rejects a ruleset marker without a hero and retains valid fallback saves", async () => {
+  const legacy = createRun(29).getSnapshot();
+  const invalid = structuredClone(legacy);
+  invalid.state.heroRuleset = 2;
+  const result = await readRun({
+    readCandidates: async () => [encodeRun(invalid), encodeRun(legacy)],
+    write: async () => {},
+  });
+  expect(result).toEqual(legacy);
 });

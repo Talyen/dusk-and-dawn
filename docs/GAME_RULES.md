@@ -14,8 +14,8 @@ The run deck can be inspected at reward and route choices, and from the combat p
 
 The three initial antiheroes are playtest designs. All use the same one-mana card and turn rules, and their selected class persists for the run. The normal light/dark starting orientation and expedition relic apply independently of class.
 
-- **The Oathless Seraph:** before each light card resolves, gain 1 Ward. The starting pairs are Angel & Vampire, Sun & Moon, Seraph & Fallen Seraph, Bloom & Wither, and Key & Lock.
-- **The Thorn Witch:** before each dark card resolves, apply 2 Poison using the normal maximum rule. The starting pairs are Angel & Vampire, Sun & Moon, Ivy & Thorns, Bloom & Wither, and Key & Lock.
+- **The Oathless Seraph:** before each light card resolves, gain 1 Ward. New runs start with Angel & Vampire, Feather & Chain, Seraph & Fallen Seraph, Bloom & Wither, and Key & Lock.
+- **The Thorn Witch:** before each dark card resolves, apply 1 Curse. The starting pairs are Angel & Vampire, Sun & Moon, Ivy & Thorns, Bloom & Wither, and Key & Lock. Witch runs started before this tuning keep their original 2 Poison passive.
 - **The Veiled Oracle:** Scry at the start of each player turn, after the normal draw. The starting pairs are Angel & Vampire, Sun & Moon, Bloom & Wither, Key & Lock, and Oracle & Deceiver.
 
 Light/dark passives trigger once on an accepted play, after payment and before the card effect. A paid hidden-card inspection receives its passive when committed, never again when the choice resolves. Rejected plays do not trigger it. Scry follows its normal empty-library and end-turn rules. Original starter pairs absent from a hero's kit remain eligible for that hero's rewards and expedition events; existing runs without a class retain their original reward pools.

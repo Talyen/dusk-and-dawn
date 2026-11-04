@@ -4,11 +4,11 @@ export const heroes = {
     name: "The Oathless Seraph",
     passive: "Before each light card resolves, gain 1 Ward.",
     art: "hero-oathless-seraph.webp",
-    pairs: ["Angel & Vampire", "Sun & Moon", "Seraph & Fallen Seraph", "Bloom & Wither", "Key & Lock"],
+    pairs: ["Angel & Vampire", "Feather & Chain", "Seraph & Fallen Seraph", "Bloom & Wither", "Key & Lock"],
   },
   "thorn-witch": {
     name: "The Thorn Witch",
-    passive: "Before each dark card resolves, apply 2 Poison.",
+    passive: "Before each dark card resolves, apply 1 Curse.",
     art: "hero-thorn-witch.webp",
     pairs: ["Angel & Vampire", "Sun & Moon", "Ivy & Thorns", "Bloom & Wither", "Key & Lock"],
   },
@@ -25,3 +25,9 @@ export const heroIds = [
   "thorn-witch",
   "veiled-oracle",
 ] as const satisfies readonly HeroId[];
+
+/** Class saves created before ruleset 2 retain their original Witch passive. */
+export function heroPassive(hero: HeroId, ruleset?: 2): string {
+  if (hero === "thorn-witch" && ruleset !== 2) return "Before each dark card resolves, apply 2 Poison.";
+  return heroes[hero].passive;
+}

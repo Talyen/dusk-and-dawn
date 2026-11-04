@@ -1,5 +1,5 @@
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
-import { heroes, heroIds, type HeroId } from "../../lib/game/heroes";
+import { heroes, heroIds, heroPassive, type HeroId } from "../../lib/game/heroes";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   cards,
@@ -1020,7 +1020,11 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
   if (s.hero === "oathless-seraph" && card.face === "light")
     lines.push("On play: gain 1 Ward before this effect.");
   if (s.hero === "thorn-witch" && card.face === "dark")
-    lines.push("On play: apply 2 Poison before this effect.");
+    lines.push(
+      s.heroRuleset === 2
+        ? "On play: apply 1 Curse before this effect."
+        : "On play: apply 2 Poison before this effect.",
+    );
   const generic = ops.find((op) => op.op === "attack" || op.op === "attack-ignore-ward");
   const hit =
     directCardAttacks[info.name] ??
@@ -1044,8 +1048,17 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
   }
   if (info.name === "Moon" || info.name === "Key" || ops.some((op) => op.op === "flip-hand")) {
     lines.push(`Flip preview: ${flipped.join("; ") || "no other cards in hand"}.`);
-    if (info.name === "Key" || ops.some((op) => op.op === "draw"))
-      lines.push("Any card drawn first will also flip; its identity is not revealed yet.");
+    if (info.name === "Key" || ops.some((op) => op.op === "draw")) {
+      const revealed = scryTop(s.zones);
+      if (revealed) {
+        const other = cards[revealed.pair]![revealed.face === "light" ? "dark" : "light"];
+        lines.push(`Draw and Flip: ${face(revealed).name} → ${other.name}.`);
+      } else if (!s.zones.library.length && !s.zones.discard.length) {
+        lines.push("No card will be drawn.");
+      } else {
+        lines.push("Any card drawn first will also flip; its identity is not revealed yet.");
+      }
+    }
   }
   if (ops.some((op) => op.op === "flip-random"))
     lines.push(
@@ -1630,7 +1643,7 @@ function BattleSession({
                       placement="top"
                     >
                       <strong>{heroes[s.hero].name}</strong>
-                      <p>{heroes[s.hero].passive}</p>
+                      <p>{heroPassive(s.hero, s.heroRuleset)}</p>
                     </InspectionTrigger>
                   ) : (
                     <>

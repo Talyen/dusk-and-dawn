@@ -29,6 +29,7 @@ const runSchema = z
   .object({
     phase: z.enum(["battle", "reward", "rest", "route", "victory", "defeat"]),
     hero: z.enum(heroIds).optional(),
+    heroRuleset: z.literal(2).optional(),
     experiment: z
       .object({
         id: z.string().min(1).max(128),
@@ -79,6 +80,8 @@ const runSchema = z
   })
   .strict()
   .superRefine((run, ctx) => {
+    if (run.heroRuleset && !run.hero)
+      ctx.addIssue({ code: "custom", message: "Hero ruleset requires a hero" });
     if (
       (run.phase === "route" && (!run.experiment?.route || run.experiment.route.active)) ||
       (run.experiment?.route && !run.experiment.route.active && run.phase !== "route") ||

@@ -4,10 +4,12 @@ import {
   createRun,
   face,
   getEnemy,
+  runHandler,
   type Command,
   type RunState,
 } from "../../src/lib/game/run";
 import type { FightCard } from "../../src/lib/game/card-zones";
+import { restoreSession } from "../../src/lib/game/session";
 
 type Policy = "attack" | "defense" | "control" | "random";
 function policyRandom(seed: number) {
@@ -413,3 +415,31 @@ it("samples the three antiheroes across attack and defense policies", () => {
   }
   console.log("Antihero strategy samples, 30 seeds each", JSON.stringify(results));
 }, 60_000);
+
+it("records opening fights won solely by three visible direct attacks", () => {
+  const counts: Record<string, number> = {};
+  for (const hero of ["oathless-seraph", "thorn-witch", "veiled-oracle"] as const) {
+    let wins = 0;
+    for (let seed = 0; seed < 100; seed++) {
+      const snapshot = createRun(seed, undefined, hero).getSnapshot();
+      const attackers = snapshot.state.zones.hand.filter((card) =>
+        /^Deal \d+ \w+ damage\.$/.test(face(card).effect),
+      );
+      let won = false;
+      for (let a = 0; a < attackers.length && !won; a++)
+        for (let b = a + 1; b < attackers.length && !won; b++)
+          for (let c = b + 1; c < attackers.length && !won; c++) {
+            const game = restoreSession(snapshot, runHandler);
+            for (const card of [attackers[a]!, attackers[b]!, attackers[c]!]) {
+              if (game.getSnapshot().state.phase !== "battle") break;
+              expect(game.dispatch({ type: "play", id: card.id }).decision.accepted).toBe(true);
+            }
+            if (game.getSnapshot().state.phase === "reward") won = true;
+          }
+      if (won) wins++;
+    }
+    counts[hero] = wins;
+  }
+  console.log("Visible direct-attack opening wins, 100 seeds", JSON.stringify(counts));
+  expect(counts["oathless-seraph"]).toBe(0);
+});

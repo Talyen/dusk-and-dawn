@@ -362,6 +362,7 @@ export interface PendingChoice {
 export interface RunState {
   phase: "battle" | "reward" | "rest" | "route" | "victory" | "defeat";
   hero?: HeroId | undefined;
+  heroRuleset?: 2 | undefined;
   experiment?:
     | {
         id: string;
@@ -864,7 +865,10 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   source.kept = false;
   s.mana--;
   if (s.hero === "oathless-seraph" && source.face === "light") s.player.ward++;
-  if (s.hero === "thorn-witch" && source.face === "dark") applyDamageOverTime(s.enemy, "poison", 2);
+  if (s.hero === "thorn-witch" && source.face === "dark") {
+    if (s.heroRuleset === 2) s.enemy.curse++;
+    else applyDamageOverTime(s.enemy, "poison", 2);
+  }
   let banishSource = false;
   let sourceMoved = false;
   let referenced: FightCard | null = null;
@@ -1298,7 +1302,7 @@ export function createRun(seed: number, experiment?: ExperimentOptions, hero?: H
   ]);
   const initial: RunState = {
     phase: "battle",
-    ...(hero ? { hero } : {}),
+    ...(hero ? { hero, heroRuleset: 2 as const } : {}),
     fight: 0,
     deck,
     nextId: 10,
