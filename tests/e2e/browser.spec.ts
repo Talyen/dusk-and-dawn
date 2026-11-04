@@ -6395,3 +6395,86 @@ test("Bridge recovers Chasm through a save and Chasm still bypasses Ward", async
     )
     .toBe(5);
 });
+
+test("Swan inspection tracks whether its one-use Reflect is still available across reload", async ({
+  page,
+}) => {
+  const snapshot = structuredClone(createRun(42).getSnapshot());
+  snapshot.state.encounters![0] = "the-mirror-eyed-swan";
+  snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+  snapshot.state.enemy.reflect = true;
+  snapshot.state.action = 1;
+  snapshot.state.deck = [
+    { id: "sun", pair: "Sun & Moon" },
+    { id: "seraph", pair: "Seraph & Fallen Seraph" },
+  ];
+  snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+  snapshot.state.zones.library = [];
+  snapshot.state.zones.discard = [];
+  snapshot.state.zones.banished = [];
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, encodeRun(snapshot));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const intent = page.getByRole("button", { name: /^The Mirror-Eyed Swan intent:/ });
+  await intent.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Reflect the first hit");
+  await page.getByRole("button", { name: /^Sun light/ }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "24");
+  await intent.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Reflect already spent.");
+  await expect(page.getByRole("tooltip")).not.toContainText(
+    "Reflect the first hit of the next direct card attack",
+  );
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await intent.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Reflect already spent.");
+  await page.getByRole("button", { name: /^Seraph light/ }).click();
+  await expect(page.getByRole("progressbar", { name: "The Mirror-Eyed Swan health" })).toHaveAttribute(
+    "value",
+    "19",
+  );
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "24");
+});
+
+for (const condition of ["frozen", "lethal-burn"] as const) {
+  test(`the Swan's reflection remains visible when ${condition} makes its next action moot`, async ({
+    page,
+  }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-mirror-eyed-swan";
+    snapshot.state.enemy.hp = snapshot.state.enemy.maxHp = 26;
+    snapshot.state.enemy.reflect = true;
+    snapshot.state.enemy.freeze = condition === "frozen";
+    snapshot.state.enemy.burn = condition === "lethal-burn" ? 26 : 0;
+    snapshot.state.action = 1;
+    snapshot.state.deck = [{ id: "sun", pair: "Sun & Moon" }];
+    snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const intent = page.getByRole("button", { name: /^The Mirror-Eyed Swan intent:/ });
+    await intent.hover();
+    await expect(page.getByRole("tooltip")).toContainText(
+      condition === "frozen" ? "Reflect remains active while Frozen." : "Active now: enemy Reflect.",
+    );
+    await page.getByRole("button", { name: /^Sun light/ }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "24");
+    if (condition === "frozen") {
+      await intent.hover();
+      await expect(page.getByRole("tooltip")).toContainText("Reflect already spent.");
+      await expect(page.getByRole("tooltip")).not.toContainText("Reflect remains active while Frozen.");
+    }
+  });
+}

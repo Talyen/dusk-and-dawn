@@ -1966,6 +1966,7 @@ function BattleSession({
   const top = scryTop(s.zones);
   const enemy = getEnemy(s);
   const action = enemy.actions[s.action]!;
+  const reflectTrait = action.effects?.some((effect) => effect.op === "reflect_once") ?? false;
   const traitWillActivate =
     !s.enemy.hush &&
     (!action.condition ||
@@ -2077,6 +2078,7 @@ function BattleSession({
             acts.
           </p>
           {reactionText && <p>Active now: {reactionText} if the enemy survives.</p>}
+          {reflectTrait && !s.enemy.hush && s.enemy.reflect && <p>Active now: enemy Reflect.</p>}
         </>
       ) : (
         <>
@@ -2090,10 +2092,16 @@ function BattleSession({
               <>
                 <Description text={action.text.split(" Trait — ")[0]!} /> Hushed: the trait is suppressed.
               </>
+            ) : reflectTrait && !s.enemy.reflect ? (
+              <Description text={action.text.split(" Trait — ")[0]!} />
             ) : (
               <Description text={action.text} />
             )}
           </p>
+          {reflectTrait && !s.enemy.hush && !s.enemy.reflect && <p>Reflect already spent.</p>}
+          {reflectTrait && !s.enemy.hush && s.enemy.reflect && s.enemy.freeze && (
+            <p>Reflect remains active while Frozen.</p>
+          )}
           {s.enemy.freeze && reactionText && (
             <p>
               Active while Frozen: {reactionText} if the enemy survives. This happens once per direct attack
