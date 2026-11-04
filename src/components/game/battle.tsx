@@ -1749,6 +1749,26 @@ function BattleSession({
         effect.amount > 0,
     )
     .map((effect) => `next ${effect.op === "reduce_next_draw" ? "draw" : "mana"} −${effect.amount}`);
+  const cardMoves = activeActionEffects.flatMap((effect) => {
+    if (
+      effect.stage !== "after_attack" ||
+      (effect.op !== "move_top" && effect.op !== "move_held") ||
+      typeof effect.amount !== "number" ||
+      effect.amount <= 0 ||
+      !effect.to
+    )
+      return [];
+    const destinations: Record<string, string> = {
+      player_draw_top: "library top",
+      player_draw_bottom: effect.op === "move_top" ? "bottom" : "library bottom",
+      player_discard: "discard",
+      player_banished: "banished",
+    };
+    const destination = destinations[effect.to];
+    if (!destination) return [];
+    const source = effect.op === "move_held" ? `${effect.amount} kept` : `${effect.amount} from library top`;
+    return [`up to ${source} → ${destination}`];
+  });
   const copiesLastHit = activeActionEffects.some((effect) => effect.op === "copy_latest_hit");
   const nextHandFace = activeActionEffects.find(
     (effect) => effect.op === "turn_after_draw" && effect.stage === "after_attack",
@@ -1762,6 +1782,7 @@ function BattleSession({
             ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
             ...statusEffects,
             ...nextTurnPenalties,
+            ...cardMoves,
             ...(copiesLastHit ? ["copies your last hit"] : []),
             ...(nextHandFace ? [`next hand ${nextHandFace}`] : []),
           ].join(" · ")

@@ -2770,6 +2770,56 @@ for (const scenario of [
   }
 }
 
+for (const scenario of [
+  {
+    id: "the-bone-cartographer",
+    name: "The Bone Cartographer",
+    hp: 28,
+    attack: "4 Memory",
+    cue: "up to 2 from library top → bottom",
+  },
+  {
+    id: "the-fogbound-weaver",
+    name: "The Fogbound Weaver",
+    hp: 28,
+    attack: "4 Binding",
+    cue: "up to 2 kept → library top",
+  },
+  {
+    id: "the-wax-regent",
+    name: "The Wax Regent",
+    hp: 36,
+    attack: "4 Fire · Burn 1",
+    cue: "up to 1 kept → library top",
+  },
+] as const) {
+  for (const condition of ["active", "hush", "freeze"] as const) {
+    test(`${scenario.name} previews card movement with ${condition}`, async ({ page }) => {
+      const snapshot = structuredClone(createRun(42).getSnapshot());
+      snapshot.state.encounters![0] = scenario.id;
+      snapshot.state.enemy.hp = scenario.hp;
+      snapshot.state.enemy.maxHp = scenario.hp;
+      snapshot.state.action = 1;
+      if (condition === "hush") snapshot.state.enemy.hush = true;
+      if (condition === "freeze") snapshot.state.enemy.freeze = true;
+      await page.addInitScript(
+        (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+        encodeRun(snapshot),
+      );
+      await page.setViewportSize({ width: 320, height: 480 });
+      await page.goto("/");
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      const base = condition === "hush" ? scenario.attack.split(" · ")[0] : scenario.attack;
+      const intent =
+        condition === "freeze" ? "Skipped" : `${base}${condition === "active" ? ` · ${scenario.cue}` : ""}`;
+      await expectIntentClear(
+        page.getByRole("button", { name: `${scenario.name} intent: ${intent}`, exact: true }),
+      );
+    });
+  }
+}
+
 test("touch inspects the enemy portrait and intent without advancing combat", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
