@@ -1,7 +1,10 @@
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { _electron as electron, expect, test } from "@playwright/test";
+import { createRun, runHandler } from "../../src/lib/game/run";
+import { encodeRun } from "../../src/lib/game/run-save";
+import { restoreSession } from "../../src/lib/game/session";
 
 test("opens the built renderer and recovers a retained save", async () => {
   const directory = await mkdtemp(join(tmpdir(), "dusk-electron-"));
@@ -311,6 +314,70 @@ test("desktop resumes an Oracle run with its passive and kit", async () => {
       await page.getByRole("button", { name: "Continue run" }).click();
       await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
       await expect(page.getByRole("img", { name: /^Library 5\. Scry\./ })).toBeVisible();
+    } finally {
+      await reopened.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("desktop resumes a Sunken Sanctuary choice and its opening mana", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-sanctuary-"));
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "desktop-sanctuary", tier: 1, orientation: "light", relic: "none" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  initial.state.player.hp = 20;
+  const game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = structuredClone(game.getSnapshot());
+  route.state.experiment!.route!.event = "sanctuary";
+  route.state.experiment!.lastEvent = "sanctuary";
+  const launch = () =>
+    electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+  try {
+    await mkdir(join(directory, "saves"), { recursive: true });
+    await writeFile(join(directory, "saves", "save.json"), encodeRun(route));
+    const app = await launch();
+    try {
+      const page = await app.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      await page.getByRole("button", { name: "Event: heal 7 HP, start next fight with 2 mana" }).click();
+      await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "27");
+      await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "2");
+      await expect
+        .poll(async () =>
+          page.evaluate(async () => {
+            const bridge = (window as unknown as { duskDesktop: { readSaveCandidates(): Promise<string[]> } })
+              .duskDesktop;
+            const [raw] = await bridge.readSaveCandidates();
+            return raw ? JSON.parse(raw).state.run.fight : null;
+          }),
+        )
+        .toBe(1);
+    } finally {
+      await app.close();
+    }
+    const reopened = await launch();
+    try {
+      const page = await reopened.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "27");
+      await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "2");
+      await page.getByRole("button", { name: /Discard .* Banished/ }).click();
+      await page.getByRole("button", { name: "Deck 10", exact: true }).click();
+      await expect(page.getByRole("dialog", { name: "Deck · 10" })).toBeVisible();
     } finally {
       await reopened.close();
     }

@@ -782,13 +782,14 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
       beginFight(s, rng);
     } else {
       if (command.choice === "rest") s.player.hp = Math.min(s.player.maxHp, s.player.hp + 4);
+      else if (event === "sanctuary") s.player.hp = Math.min(s.player.maxHp, s.player.hp + 7);
       else {
         if (event === "blood") s.player.hp -= 4;
         s.deck.push({ id: `card-${s.nextId++}`, pair: path.pair });
       }
       continueRoute(s, rng);
       if (command.choice === "event" && event === "thorns") applyDamageOverTime(s.player, "poison", 4);
-      if (command.choice === "event" && event === "lantern") s.mana = 2;
+      if (command.choice === "event" && (event === "lantern" || event === "sanctuary")) s.mana = 2;
     }
     return yes();
   }

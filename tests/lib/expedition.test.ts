@@ -65,7 +65,7 @@ describe("experimental expeditions", () => {
       expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
       expect(game.getSnapshot().state.experiment!.route!.event).not.toBe(first);
     }
-    expect(firstEvents).toEqual(new Set(["blood", "thorns", "lantern", "exchange"]));
+    expect(firstEvents).toEqual(new Set(["blood", "thorns", "lantern", "exchange", "sanctuary"]));
   });
   for (const event of ["blood", "thorns", "lantern"] as const) {
     it(`previews, saves, and resolves the ${event} event once`, async () => {
@@ -100,6 +100,29 @@ describe("experimental expeditions", () => {
       expect(game.getSnapshot().state.mana).toBe(3);
     });
   }
+  it.each([1, 20, 29, 30])("heals and starts with less mana at the sanctuary from %i HP", async (hp) => {
+    const initial = structuredClone(routeGame().getSnapshot());
+    initial.state.experiment!.route!.event = "sanctuary";
+    initial.state.experiment!.lastEvent = "sanctuary";
+    initial.state.player.hp = hp;
+    const game = restoreSession(initial, runHandler);
+    const rest = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "route", choice: "event" }).decision.accepted).toBe(true);
+    expect(rest.dispatch({ type: "route", choice: "rest" }).decision.accepted).toBe(true);
+    const result = game.getSnapshot();
+    expect(result.state.player.hp).toBe(Math.min(30, hp + 7));
+    expect(rest.getSnapshot().state.player.hp).toBe(Math.min(30, hp + 4));
+    expect(result.state.mana).toBe(2);
+    expect(rest.getSnapshot().state.mana).toBe(3);
+    expect(result.state.deck).toEqual(initial.state.deck);
+    expect(result.state.zones).toEqual(rest.getSnapshot().state.zones);
+    expect(result.random).toEqual(rest.getSnapshot().random);
+    const resumed = await readRunWithRecovery({
+      readCandidates: async () => [encodeRun(result)],
+      write: async () => {},
+    });
+    expect(resumed?.snapshot).toEqual(result);
+  });
   it("saves and cancels an exchange without changing the deck or randomness, then swaps exactly one card", async () => {
     const initial = structuredClone(routeGame().getSnapshot());
     initial.state.experiment!.route!.event = "exchange";

@@ -1,4 +1,4 @@
-export const expeditionEventIds = ["blood", "thorns", "lantern", "exchange"] as const;
+export const expeditionEventIds = ["blood", "thorns", "lantern", "exchange", "sanctuary"] as const;
 export type ExpeditionEventId = (typeof expeditionEventIds)[number];
 
 /** An absent event is a route saved before event variety was introduced. */
@@ -27,6 +27,12 @@ export function expeditionEvent(id: ExpeditionEventId = "blood") {
       caption: "Mirror Exchange · Trade a card",
       cost: "Exchange a card in your deck for this pair.",
       label: "exchange a card for",
+    },
+    sanctuary: {
+      name: "Sunken Sanctuary",
+      caption: "Sunken Sanctuary",
+      cost: "Heal up to 7 HP. Start the next fight with 2 mana.",
+      label: "heal up to 7 HP, start next fight with 2 mana",
     },
   }[id];
 }

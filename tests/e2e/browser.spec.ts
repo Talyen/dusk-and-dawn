@@ -3040,7 +3040,11 @@ test("route previews become collection discoveries without revealing future enco
     const game = restoreSession(initial, runHandler);
     game.dispatch({ type: "reward", pair: null });
     const state = game.getSnapshot().state;
-    if (candidates.has(state.experiment!.route!.pair) && state.encounters![1] !== "crowned-sun") {
+    if (
+      candidates.has(state.experiment!.route!.pair) &&
+      state.experiment!.route!.event !== "sanctuary" &&
+      state.encounters![1] !== "crowned-sun"
+    ) {
       route = structuredClone(game.getSnapshot());
       break;
     }
@@ -3184,4 +3188,66 @@ test("an all-Ward bypass reports the full hit and ignores the shield", async ({ 
   await page.getByRole("button", { name: "End turn" }).click();
   await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "25");
   await expect(page.locator(".battle-player")).toHaveAttribute("data-ward", "5");
+});
+
+test("Sunken Sanctuary previews healing versus mana without revealing or adding a card", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "sanctuary-ui", tier: 1, orientation: "light", relic: "none" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  initial.state.player.hp = 20;
+  initial.state.encounters![1] = "fixture:0";
+  const game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = structuredClone(game.getSnapshot());
+  route.state.experiment!.route!.event = "sanctuary";
+  route.state.experiment!.route!.pair = "Cherub & Imp";
+  route.state.experiment!.lastEvent = "sanctuary";
+  const saved = encodeRun(route);
+  await page.addInitScript((data) => {
+    if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+  }, saved);
+  await page.setViewportSize({ width: 390, height: 700 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: "The Oathless Seraph, HP 20/30" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Rest: heal 4 HP" })).toBeVisible();
+  const shrine = page.getByRole("button", { name: "Event: heal 7 HP, start next fight with 2 mana" });
+  await expect(shrine).toContainText("Sunken Sanctuary · +7 HP · −1 mana");
+  await shrine.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Heal 7 HP. Start the next fight with 2 mana.");
+  const discovered = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("dusk-and-dawn.collection.v1") || "[]"),
+  );
+  expect(discovered).not.toContain("card:Cherub");
+  expect(discovered).not.toContain("card:Imp");
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await page.getByRole("button", { name: "Event: heal 7 HP, start next fight with 2 mana" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "27");
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "2");
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state?.run?.fight,
+      ),
+    )
+    .toBe(1);
+  const after = await page.evaluate(
+    () => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1") || "{}").state.run,
+  );
+  expect(after.deck).toEqual(route.state.deck);
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "2");
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "3");
 });

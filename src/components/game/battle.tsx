@@ -1512,7 +1512,7 @@ function BattleSession({
     const visiblePairs = [
       ...s.deck.map((card) => card.pair),
       ...s.offers,
-      ...(routePreview ? [routePreview.pair] : []),
+      ...(routePreview && routePreview.event !== "sanctuary" ? [routePreview.pair] : []),
     ];
     const ids = visiblePairs.flatMap((pair) => [
       `card:${cards[pair]!.light.name}`,
@@ -1954,6 +1954,7 @@ function BattleSession({
           const enemy = simpleEnemies.find((entry) => entry.id === path.enemy)!;
           const event = expeditionEvent(path.event);
           const restHeal = Math.min(4, s.player.maxHp - s.player.hp);
+          const sanctuaryHeal = Math.min(7, s.player.maxHp - s.player.hp);
           if (path.selecting)
             return (
               <section className="battle-exchange" aria-label="Mirror Exchange">
@@ -2025,9 +2026,15 @@ function BattleSession({
                 label={
                   path.event === "exchange"
                     ? `Event: ${event.label} ${path.pair}`
-                    : `Event: ${event.label}, add ${path.pair}`
+                    : path.event === "sanctuary"
+                      ? `Event: heal ${sanctuaryHeal} HP, start next fight with 2 mana`
+                      : `Event: ${event.label}, add ${path.pair}`
                 }
-                caption={event.caption}
+                caption={
+                  path.event === "sanctuary"
+                    ? `${event.name} · +${sanctuaryHeal} HP · −1 mana`
+                    : event.caption
+                }
                 disabled={
                   ((path.event ?? "blood") === "blood" && s.player.hp <= 4) ||
                   (path.event === "exchange" && !s.deck.length)
@@ -2037,25 +2044,41 @@ function BattleSession({
                   dispatch({ type: "route", choice: "event" });
                 }}
                 art={
-                  <span className="battle-route-art battle-route-art--pair">
-                    <img src={art("card", cards[path.pair]!.light.name)} alt="" />
-                    <img src={art("card", cards[path.pair]!.dark.name)} alt="" />
-                  </span>
+                  path.event === "sanctuary" ? (
+                    <span className="battle-route-art">
+                      <img src={art("card", "Sunken Shrine")} alt="" />
+                    </span>
+                  ) : (
+                    <span className="battle-route-art battle-route-art--pair">
+                      <img src={art("card", cards[path.pair]!.light.name)} alt="" />
+                      <img src={art("card", cards[path.pair]!.dark.name)} alt="" />
+                    </span>
+                  )
                 }
               >
                 <strong>{event.name}</strong>
                 <p>
-                  <Description text={event.cost} />
+                  <Description
+                    text={
+                      path.event === "sanctuary"
+                        ? `Heal ${sanctuaryHeal} HP. Start the next fight with 2 mana.`
+                        : event.cost
+                    }
+                  />
                 </p>
                 {path.event === "thorns" && (
                   <p>
                     <strong>Poison</strong> deals its amount at end turn, then halves.
                   </p>
                 )}
-                <strong>{cards[path.pair]!.light.name}</strong>
-                <p>{cards[path.pair]!.light.effect}</p>
-                <strong>{cards[path.pair]!.dark.name}</strong>
-                <p>{cards[path.pair]!.dark.effect}</p>
+                {path.event !== "sanctuary" && (
+                  <>
+                    <strong>{cards[path.pair]!.light.name}</strong>
+                    <p>{cards[path.pair]!.light.effect}</p>
+                    <strong>{cards[path.pair]!.dark.name}</strong>
+                    <p>{cards[path.pair]!.dark.effect}</p>
+                  </>
+                )}
               </RouteChoice>
               <Button className="battle-route-deck" variant="outline" onClick={() => setPileOpen(true)}>
                 Deck {s.deck.length}
