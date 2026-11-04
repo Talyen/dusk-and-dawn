@@ -2238,6 +2238,72 @@ for (const scenario of [
   });
 }
 
+for (const condition of ["active", "hush", "freeze"] as const) {
+  test(`reactive intent shows ${condition} correctly before attack cards`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(42).getSnapshot());
+    snapshot.state.encounters![0] = "the-thorned-librarian";
+    snapshot.state.enemy.hp = 10;
+    snapshot.state.enemy.maxHp = 26;
+    snapshot.state.action = 1;
+    snapshot.state.player.hp = 20;
+    if (condition === "hush") snapshot.state.enemy.hush = true;
+    if (condition === "freeze") snapshot.state.enemy.freeze = true;
+    snapshot.state.deck = [
+      { id: "sun-1", pair: "Sun & Moon" },
+      { id: "sun-2", pair: "Sun & Moon" },
+    ];
+    snapshot.state.zones.hand = snapshot.state.deck.map((card) => ({ ...card, face: "light", kept: false }));
+    snapshot.state.zones.library = [];
+    snapshot.state.zones.discard = [];
+    snapshot.state.zones.banished = [];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 320, height: 480 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const text =
+      condition === "hush"
+        ? "4 Binding"
+        : condition === "freeze"
+          ? "Skipped · 1 Binding after your attacks"
+          : "4 Binding · 1 Binding after your attacks";
+    const intent = page.getByRole("button", { name: `The Thorned Librarian intent: ${text}`, exact: true });
+    await expect(intent).toBeInViewport({ ratio: 1 });
+    const overlap = await intent.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      return [...document.querySelectorAll(".battle-card, .battle-actions button")].some((other) => {
+        const box = other.getBoundingClientRect();
+        return (
+          bounds.left < box.right &&
+          bounds.right > box.left &&
+          bounds.top < box.bottom &&
+          bounds.bottom > box.top
+        );
+      });
+    });
+    expect(overlap).toBe(false);
+    await intent.hover();
+    if (condition === "freeze")
+      await expect(page.getByRole("tooltip")).toContainText("once per direct attack card");
+    await page
+      .getByRole("button", { name: /^Sun light/ })
+      .first()
+      .click();
+    await expect(page.locator(".battle-player")).toHaveAttribute(
+      "data-player-hp",
+      condition === "hush" ? "20" : "19",
+    );
+    await page.getByRole("button", { name: /^Sun light/ }).click();
+    await expect(page.getByRole("heading", { name: "Rewards", exact: true })).toBeVisible();
+    await expect(
+      page.getByText(`HP ${condition === "hush" ? "20" : "19"}/30`, { exact: true }),
+    ).toBeVisible();
+  });
+}
+
 test("touch inspects the enemy portrait and intent without advancing combat", async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },

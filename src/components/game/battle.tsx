@@ -1635,7 +1635,15 @@ function BattleSession({
           .map((effect) => `${effect.op[0]!.toUpperCase()}${effect.op.slice(1)} ${effect.amount}`),
       ]
     : [];
-  const intentText =
+  // Some traits react during the player's turn, even if Freeze will skip the next action.
+  const reaction = !s.enemy.hush
+    ? action.effects?.find((effect) => effect.op === "reaction_damage")
+    : undefined;
+  const reactionText =
+    typeof reaction?.amount === "number" && reaction.amount > 0
+      ? `${reaction.amount} ${reaction.damage_type ?? "damage"} after your attacks`
+      : undefined;
+  const intentText = [
     s.enemy.freeze || (s.enemy.hush && action.ability)
       ? "Skipped"
       : enemyHits
@@ -1644,7 +1652,9 @@ function BattleSession({
             ...(bypassAmount ? [`${bypassAmount} through Ward`] : []),
             ...statusEffects,
           ].join(" · ")
-        : action.text;
+        : action.text,
+    ...(reactionText ? [reactionText] : []),
+  ].join(" · ");
   const actionDetails = (
     <>
       <p>
@@ -1661,6 +1671,11 @@ function BattleSession({
           <Description text={action.text} />
         )}
       </p>
+      {s.enemy.freeze && reactionText && (
+        <p>
+          Active while Frozen: {reactionText} if the enemy survives. This happens once per direct attack card.
+        </p>
+      )}
       {enemyHits && !s.enemy.freeze && (
         <p>
           Current attack: {enemyHits.join(" + ")} {action.type} damage before Ward and Reflect (base{" "}

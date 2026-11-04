@@ -191,6 +191,7 @@ const rewards: Pair[] = [
 interface EnemyEffect {
   op: string;
   amount?: number | "all";
+  damage_type?: DamageType;
   stage?: string;
   to?: string;
   face?: "light" | "dark";
