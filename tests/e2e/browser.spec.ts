@@ -6584,3 +6584,95 @@ for (const frozen of [false, true]) {
     }
   });
 }
+
+for (const pair of ["Bound Soul & Unbound Spirit", "Open Gate & Sealed Gate"] as const) {
+  test(`route inspection ${pair === "Bound Soul & Unbound Spirit" ? "identifies both matching faces" : "does not equate one matching face"}`, async ({
+    page,
+  }) => {
+    const initial = structuredClone(
+      createRun(
+        31,
+        { id: `route-match-${pair}`, tier: 1, orientation: "light", relic: "none" },
+        "oathless-seraph",
+      ).getSnapshot(),
+    );
+    initial.state.phase = "reward";
+    initial.state.offers = [];
+    const game = restoreSession(initial, runHandler);
+    expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+    const route = structuredClone(game.getSnapshot());
+    route.state.experiment!.route!.event = "blood";
+    route.state.experiment!.route!.pair = pair;
+    await page.addInitScript((data) => {
+      if (!localStorage.getItem("dusk-and-dawn.save.v1")) localStorage.setItem("dusk-and-dawn.save.v1", data);
+    }, encodeRun(route));
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const event = page.getByRole("button", { name: /^Event: lose 4 HP/ });
+    await page.keyboard.press("Tab");
+    await event.focus();
+    await expect(page.getByRole("tooltip")).toBeInViewport({ ratio: 1 });
+    if (pair === "Bound Soul & Unbound Spirit")
+      await expect(page.getByRole("tooltip")).toContainText(
+        "Same printed effects as Feather & Chain in your deck.",
+      );
+    else await expect(page.getByRole("tooltip")).not.toContainText("Same printed effects as");
+    await event.click();
+    await expect
+      .poll(() =>
+        page.evaluate(
+          (value) =>
+            JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck.some(
+              (card: { pair: string }) => card.pair === value,
+            ),
+          pair,
+        ),
+      )
+      .toBe(true);
+    await page.reload();
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-player-hp", "26");
+  });
+}
+
+test("reward inspection identifies a matching deck pair without removing the choice", async ({ page }) => {
+  const snapshot = structuredClone(
+    createRun(
+      42,
+      { id: "reward-match", tier: 1, orientation: "light", relic: "none" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  snapshot.state.phase = "reward";
+  snapshot.state.offers = [
+    "Bound Soul & Unbound Spirit",
+    "Open Gate & Sealed Gate",
+    "Wax Seal & Torn Letter",
+  ];
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const choice = page.getByRole("button", { name: /^Bound Soul & Unbound Spirit/ });
+  await choice.hover();
+  await expect(page.getByRole("tooltip")).toContainText(
+    "Same printed effects as Feather & Chain in your deck.",
+  );
+  await choice.click();
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.deck.some(
+          (card: { pair: string }) => card.pair === "Bound Soul & Unbound Spirit",
+        ),
+      ),
+    )
+    .toBe(true);
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+});

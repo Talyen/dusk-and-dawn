@@ -574,6 +574,18 @@ function EnemyPortrait({
   );
 }
 
+function matchingPrintedPair(pair: string, deck: readonly { pair: string }[]): string | undefined {
+  const candidate = cards[pair]!;
+  return deck.find(({ pair: owned }) => {
+    const current = cards[owned]!;
+    return (
+      owned !== pair &&
+      current.light.effect === candidate.light.effect &&
+      current.dark.effect === candidate.dark.effect
+    );
+  })?.pair;
+}
+
 function RewardCard({
   pair,
   onChoose,
@@ -583,6 +595,7 @@ function RewardCard({
   exchangeFor,
   hoverReady,
   rewardScreen = false,
+  matchingPair,
 }: {
   pair: string;
   onChoose: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -592,6 +605,7 @@ function RewardCard({
   exchangeFor?: string;
   hoverReady?: { current: boolean };
   rewardScreen?: boolean;
+  matchingPair?: string | undefined;
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -743,6 +757,7 @@ function RewardCard({
         <p>
           <Description text={dark.effect} />
         </p>
+        {matchingPair && <p>Same printed effects as {matchingPair} in your deck.</p>}
       </Tooltip>
     </>
   );
@@ -2433,6 +2448,7 @@ function BattleSession({
               pair={pair}
               hoverReady={phaseHoverReady}
               rewardScreen
+              matchingPair={matchingPrintedPair(pair, s.deck)}
               onChoose={() => dispatch({ type: "reward", pair })}
             />
           ))}
@@ -2457,6 +2473,7 @@ function BattleSession({
           const event = expeditionEvent(path.event);
           const restHeal = Math.min(4, s.player.maxHp - s.player.hp);
           const sanctuaryHeal = Math.min(7, s.player.maxHp - s.player.hp);
+          const matchingPair = matchingPrintedPair(path.pair, s.deck);
           if (path.selecting)
             return (
               <section className="battle-exchange" aria-label="Mirror Exchange">
@@ -2583,6 +2600,7 @@ function BattleSession({
                     <p>{cards[path.pair]!.light.effect}</p>
                     <strong>{cards[path.pair]!.dark.name}</strong>
                     <p>{cards[path.pair]!.dark.effect}</p>
+                    {matchingPair && <p>Same printed effects as {matchingPair} in your deck.</p>}
                   </>
                 )}
               </RouteChoice>
