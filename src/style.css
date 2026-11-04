@@ -1274,6 +1274,15 @@ input:focus-visible,
     transform 160ms ease,
     box-shadow 160ms ease;
 }
+@media (min-width: 1400px) and (min-height: 800px) {
+  .battle-hand-stage {
+    width: min(76vw, max(58rem, calc(58 * var(--ui-unit))));
+  }
+  .battle-hand .battle-card {
+    width: min(max(10rem, calc(10 * var(--ui-unit))), calc((100% - 4.2rem) / 5), 23vh);
+    flex-basis: max(10rem, calc(10 * var(--ui-unit)));
+  }
+}
 .battle-hand .battle-card:hover,
 .battle-hand .battle-card:focus-visible {
   transform: translateY(-0.5rem);
@@ -1418,7 +1427,7 @@ input:focus-visible,
   }
 }
 .battle-setup {
-  width: min(32rem, 92vw);
+  width: min(42rem, 92vw);
   text-align: center;
 }
 .battle-setup__actions {
@@ -1429,6 +1438,18 @@ input:focus-visible,
 }
 .battle-setup .battle-panel {
   text-align: left;
+}
+@media (max-width: 700px) {
+  .battle-setup__actions > .ui-button,
+  .battle-setup > .ui-button,
+  .battle-setup__fields select {
+    min-height: 44px;
+    font-size: max(0.875rem, var(--ui-unit));
+  }
+  .battle-setup__actions > .ui-button,
+  .battle-setup > .ui-button {
+    padding-inline: 1rem;
+  }
 }
 .battle-screen--reward {
   text-align: center;

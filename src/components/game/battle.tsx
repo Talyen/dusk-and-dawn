@@ -451,11 +451,13 @@ function EnemyPortrait({
   hp,
   maxHp,
   children,
+  hoverReady,
 }: {
   name: string;
   hp: number;
   maxHp: number;
   children: ReactNode;
+  hoverReady: { current: boolean };
 }) {
   const trigger = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -499,7 +501,18 @@ function EnemyPortrait({
         aria-label={`${name}, ${hp} of ${maxHp} HP`}
         aria-describedby={open ? id : undefined}
         onPointerDown={touch.onPointerDown}
-        onPointerMove={touch.onPointerMove}
+        onPointerMove={(event) => {
+          touch.onPointerMove(event);
+          if (
+            hoverReady.current &&
+            event.pointerType !== "touch" &&
+            (event.movementX !== 0 || event.movementY !== 0) &&
+            !pointer.current
+          ) {
+            pointer.current = true;
+            setOpen(true);
+          }
+        }}
         onPointerUp={touch.onPointerUp}
         onPointerCancel={touch.onPointerCancel}
         onContextMenu={touch.onContextMenu}
@@ -511,7 +524,7 @@ function EnemyPortrait({
           }
         }}
         onPointerEnter={(event) => {
-          if (event.pointerType !== "touch") {
+          if (event.pointerType !== "touch" && hoverReady.current) {
             pointer.current = true;
             setOpen(true);
           }
@@ -563,6 +576,7 @@ function RewardCard({
   count,
   exchangeFor,
   hoverReady,
+  rewardScreen = false,
 }: {
   pair: string;
   onChoose: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -571,6 +585,7 @@ function RewardCard({
   count?: number;
   exchangeFor?: string;
   hoverReady?: { current: boolean };
+  rewardScreen?: boolean;
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const id = useId();
@@ -597,14 +612,28 @@ function RewardCard({
     const outside = (event: Event) => {
       if (!(event.target instanceof Node) || !trigger.current?.contains(event.target)) dismiss();
     };
+    const scroll = () => {
+      const bounds = trigger.current?.getBoundingClientRect();
+      if (
+        focus.current &&
+        document.activeElement === trigger.current &&
+        bounds &&
+        bounds.bottom > 0 &&
+        bounds.top < window.innerHeight &&
+        bounds.right > 0 &&
+        bounds.left < window.innerWidth
+      )
+        return;
+      dismiss();
+    };
     document.addEventListener("pointerdown", outside, true);
     document.addEventListener("focusin", outside, true);
-    document.addEventListener("scroll", dismiss, true);
+    document.addEventListener("scroll", scroll, true);
     window.addEventListener("blur", dismiss);
     return () => {
       document.removeEventListener("pointerdown", outside, true);
       document.removeEventListener("focusin", outside, true);
-      document.removeEventListener("scroll", dismiss, true);
+      document.removeEventListener("scroll", scroll, true);
       window.removeEventListener("blur", dismiss);
     };
   }, [open]);
@@ -692,7 +721,14 @@ function RewardCard({
           <img src={art("card", dark.name)} alt="" />
         </span>
       </button>
-      <Tooltip triggerRef={trigger} id={id} open={open} className="battle-tooltip">
+      <Tooltip
+        triggerRef={trigger}
+        id={id}
+        open={open}
+        placement={rewardScreen ? "bottom" : "top"}
+        {...(rewardScreen ? { avoidRegions: ".battle-reward-actions" } : {})}
+        className="battle-tooltip"
+      >
         <strong>{light.name}</strong>
         <p>
           <Description text={light.effect} />
@@ -2149,7 +2185,12 @@ function BattleSession({
               </div>
             </section>
             <section className="battle-enemy" data-enemy-burn={s.enemy.burn} data-enemy-curse={s.enemy.curse}>
-              <EnemyPortrait name={enemy.name} hp={s.enemy.hp} maxHp={s.enemy.maxHp}>
+              <EnemyPortrait
+                name={enemy.name}
+                hp={s.enemy.hp}
+                maxHp={s.enemy.maxHp}
+                hoverReady={phaseHoverReady}
+              >
                 <strong>{enemy.name}</strong>
                 <p>
                   HP {s.enemy.hp}/{s.enemy.maxHp} · Weakness: {enemy.weakness} (+2 on first matching hit)
@@ -2340,6 +2381,7 @@ function BattleSession({
               key={pair}
               pair={pair}
               hoverReady={phaseHoverReady}
+              rewardScreen
               onChoose={() => dispatch({ type: "reward", pair })}
             />
           ))}

@@ -5915,3 +5915,211 @@ test("caged songbird draws for mana, stays for the next turn and survives reload
   await expect(page.getByRole("button", { name: /^Caged Songbird light/ })).toBeVisible();
   await expect(page.locator(".battle-card[data-kept]")).toHaveCount(0);
 });
+
+for (const viewport of [
+  { width: 1280, height: 720 },
+  { width: 1600, height: 900 },
+]) {
+  test(`reward inspection keeps health, artwork and actions clear at ${viewport.width}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(22, undefined, "oathless-seraph").getSnapshot());
+    snapshot.state.phase = "reward";
+    snapshot.state.player.hp = 26;
+    snapshot.state.offers = ["Weaver & Unraveler", "Sovereign & Jester", "Sanctuary & Prison"];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    for (const [pair, name] of [
+      [/^Weaver & Unraveler/, "Weaver"],
+      [/^Sovereign & Jester/, "Sovereign"],
+      [/^Sanctuary & Prison/, "Sanctuary"],
+    ] as const) {
+      await page.getByRole("button", { name: pair }).hover();
+      const tip = page.getByRole("tooltip");
+      await expect(tip).toContainText(name);
+      const obscured = await tip.evaluate((element) => {
+        const tip = element.getBoundingClientRect();
+        return [
+          ...document.querySelectorAll(".battle-decision-health, .battle-reward-actions, .battle-reward"),
+        ].some((other) => {
+          const box = other.getBoundingClientRect();
+          return tip.left < box.right && tip.right > box.left && tip.top < box.bottom && tip.bottom > box.top;
+        });
+      });
+      expect(obscured, name).toBe(false);
+    }
+    await page.keyboard.press("Tab");
+    await page.getByRole("button", { name: /^Sanctuary & Prison/ }).focus();
+    await expect(page.getByRole("tooltip")).toContainText("Sanctuary");
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("tooltip")).toHaveCount(0);
+  });
+}
+
+test("a route click does not inspect the new enemy under a stationary pointer", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      31,
+      { id: "route-enemy-hover", tier: 1, orientation: "light", relic: "none" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  const game = restoreSession(initial, runHandler);
+  expect(game.dispatch({ type: "reward", pair: null }).decision.accepted).toBe(true);
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(game.getSnapshot()),
+  );
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  const rest = page.getByRole("button", { name: /^Rest:/ });
+  const point = (await rest.boundingBox())!;
+  await rest.click();
+  await expect(page.locator(".battle-enemy-trigger")).toBeVisible();
+  await page.evaluate(
+    () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+  );
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await page.mouse.move(point.x + point.width / 2 + 3, point.y + point.height / 2);
+  await expect(page.getByRole("tooltip")).toContainText("Weakness");
+  await page.keyboard.press("Tab");
+  await page.locator(".battle-enemy-trigger").focus();
+  await expect(page.getByRole("tooltip")).toContainText("Weakness");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+});
+
+test("class artwork uses the desktop space while remaining usable on compact screens", async ({ page }) => {
+  for (const viewport of [
+    { width: 1280, height: 720 },
+    { width: 390, height: 844 },
+    { width: 320, height: 480 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    const choices = page.getByRole("group", { name: "Antiheroes" });
+    const images = choices.locator("img");
+    await expect(images).toHaveCount(3);
+    const first = (await images.first().boundingBox())!;
+    expect(first.width).toBeGreaterThanOrEqual(viewport.width === 1280 ? 210 : 80);
+    const start = page.getByRole("button", { name: "Start expedition", exact: true });
+    await expect(start).toBeVisible();
+    if (viewport.width <= 700) {
+      for (const label of ["Start expedition", "Configure expedition", "Main menu"]) {
+        const bounds = (await page.getByRole("button", { name: label, exact: true }).boundingBox())!;
+        expect(bounds.height, label).toBeGreaterThanOrEqual(44);
+      }
+    }
+  }
+});
+
+test("the reflective hand grows on a wider desktop without covering combat controls", async ({ page }) => {
+  const snapshot = structuredClone(createRun(19, undefined, "oathless-seraph").getSnapshot());
+  await page.addInitScript(
+    (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+    encodeRun(snapshot),
+  );
+  for (const viewport of [
+    { width: 1280, height: 720 },
+    { width: 1600, height: 900 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const hand = page.locator(".battle-hand .battle-card");
+    await expect(hand).toHaveCount(5);
+    const geometry = await hand.first().evaluate((element) => {
+      const first = element.getBoundingClientRect();
+      const cards = [...document.querySelectorAll(".battle-hand .battle-card")].map((item) =>
+        item.getBoundingClientRect(),
+      );
+      const targets = [...document.querySelectorAll(".battle-enemy, .battle-resource, .battle-actions")].map(
+        (item) => item.getBoundingClientRect(),
+      );
+      const overlap = (a: DOMRect, b: DOMRect) =>
+        a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+      return {
+        width: first.width,
+        overlap: cards.some((card) => targets.some((target) => overlap(card, target))),
+      };
+    });
+    expect(geometry.width).toBeGreaterThanOrEqual(viewport.width === 1600 ? 185 : 155);
+    expect(geometry.overlap).toBe(false);
+  }
+});
+
+for (const handSize of [2, 8]) {
+  test(`wide desktop keeps a ${handSize}-card hand clear of resources and actions`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(19, undefined, "oathless-seraph").getSnapshot());
+    const all = [...snapshot.state.zones.hand, ...snapshot.state.zones.library];
+    snapshot.state.zones.hand = all.slice(0, handSize);
+    snapshot.state.zones.library = all.slice(handSize);
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const hand = page.locator(".battle-hand .battle-card");
+    await expect(hand).toHaveCount(handSize);
+    const overlap = await hand.first().evaluate(() => {
+      const cards = [...document.querySelectorAll(".battle-hand .battle-card")].map((item) =>
+        item.getBoundingClientRect(),
+      );
+      const targets = [...document.querySelectorAll(".battle-enemy, .battle-resource, .battle-actions")].map(
+        (item) => item.getBoundingClientRect(),
+      );
+      return cards.some((a) =>
+        targets.some((b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top),
+      );
+    });
+    expect(overlap).toBe(false);
+    await hand.first().click();
+    await expect(page.locator(".battle-player")).toHaveAttribute("data-mana", "2");
+  });
+}
+
+for (const viewport of [
+  { width: 390, height: 844 },
+  { width: 320, height: 480 },
+]) {
+  test(`compact reward inspection remains usable at ${viewport.width}`, async ({ page }) => {
+    const snapshot = structuredClone(createRun(22).getSnapshot());
+    snapshot.state.phase = "reward";
+    snapshot.state.offers = ["Orchard & Bone Orchard", "Sovereign & Jester", "Sanctuary & Prison"];
+    await page.addInitScript(
+      (data) => localStorage.setItem("dusk-and-dawn.save.v1", data),
+      encodeRun(snapshot),
+    );
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Play", exact: true }).click();
+    await page.getByRole("button", { name: "Continue run" }).click();
+    const reward = page.getByRole("button", { name: /^Sovereign & Jester/ });
+    await page.keyboard.press("Tab");
+    await reward.focus();
+    const tip = page.getByRole("tooltip");
+    await expect(tip).toContainText("Sovereign");
+    const box = (await tip.boundingBox())!;
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(viewport.width);
+    expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("tooltip")).toHaveCount(0);
+    await reward.click();
+    await expect(page.locator(".battle-enemy-trigger")).toBeVisible();
+  });
+}
