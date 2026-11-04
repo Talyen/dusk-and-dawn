@@ -3023,3 +3023,86 @@ test("touch inspects an exchange card without trading until tapped", async ({ br
     .toBe(1);
   await context.close();
 });
+
+test("route previews become collection discoveries without revealing future encounters", async ({ page }) => {
+  const candidates = new Set(["Cherub & Imp", "Winged Guardian & Revenant"]);
+  let route: ReturnType<ReturnType<typeof createRun>["getSnapshot"]> | undefined;
+  for (let seed = 0; seed < 800; seed++) {
+    const initial = structuredClone(
+      createRun(
+        seed,
+        { id: `discovery-${seed}`, tier: 3, orientation: "light", relic: "none" },
+        "oathless-seraph",
+      ).getSnapshot(),
+    );
+    initial.state.phase = "reward";
+    initial.state.offers = [];
+    const game = restoreSession(initial, runHandler);
+    game.dispatch({ type: "reward", pair: null });
+    const state = game.getSnapshot().state;
+    if (candidates.has(state.experiment!.route!.pair) && state.encounters![1] !== "crowned-sun") {
+      route = structuredClone(game.getSnapshot());
+      break;
+    }
+  }
+  expect(route).toBeDefined();
+  const path = route!.state.experiment!.route!;
+  const light = cards[path.pair]!.light.name;
+  const dark = cards[path.pair]!.dark.name;
+  const hiddenEnemy = route!.state.encounters![1]!;
+  const saved = encodeRun(route!);
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), saved);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Choose a path" })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.collection.v1") || "[]")),
+    )
+    .toEqual(expect.arrayContaining([`card:${light}`, `card:${dark}`, `enemy:${path.enemy}`]));
+  const discovered = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("dusk-and-dawn.collection.v1") || "[]"),
+  );
+  expect(discovered).not.toContain(`enemy:${hiddenEnemy}`);
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
+  await page.reload();
+  await page.getByRole("button", { name: "Collection" }).click();
+  await expect(page.getByRole("img", { name: light, exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: dark, exact: true })).toBeVisible();
+});
+
+test("resuming an exchange does not reveal a route enemy that is not on screen", async ({ page }) => {
+  const initial = structuredClone(
+    createRun(
+      30,
+      { id: "exchange-discovery", tier: 3, orientation: "light", relic: "none" },
+      "oathless-seraph",
+    ).getSnapshot(),
+  );
+  initial.state.phase = "reward";
+  initial.state.offers = [];
+  const game = restoreSession(initial, runHandler);
+  game.dispatch({ type: "reward", pair: null });
+  const route = structuredClone(game.getSnapshot());
+  route.state.experiment!.route!.event = "exchange";
+  route.state.experiment!.route!.selecting = true;
+  const path = route.state.experiment!.route!;
+  const light = cards[path.pair]!.light.name;
+  const dark = cards[path.pair]!.dark.name;
+  expect(path.enemy).not.toBe("crowned-sun");
+  await page.addInitScript((data) => localStorage.setItem("dusk-and-dawn.save.v1", data), encodeRun(route));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("heading", { name: "Mirror Exchange", exact: true })).toBeVisible();
+  await expect
+    .poll(async () =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.collection.v1") || "[]")),
+    )
+    .toEqual(expect.arrayContaining([`card:${light}`, `card:${dark}`]));
+  const discovered = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("dusk-and-dawn.collection.v1") || "[]"),
+  );
+  expect(discovered).not.toContain(`enemy:${path.enemy}`);
+});

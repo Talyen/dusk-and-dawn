@@ -1508,7 +1508,12 @@ function BattleSession({
     }
   }, [s.experiment, s.fight, s.phase, onComplete]);
   useEffect(() => {
-    const visiblePairs = [...s.deck.map((card) => card.pair), ...s.offers];
+    const routePreview = s.phase === "route" ? s.experiment?.route : undefined;
+    const visiblePairs = [
+      ...s.deck.map((card) => card.pair),
+      ...s.offers,
+      ...(routePreview ? [routePreview.pair] : []),
+    ];
     const ids = visiblePairs.flatMap((pair) => [
       `card:${cards[pair]!.light.name}`,
       `card:${cards[pair]!.dark.name}`,
@@ -1516,6 +1521,7 @@ function BattleSession({
     const enemy = getEnemy(s);
     const enemyEntry = simpleEnemies.find((entry) => entry.name === enemy.name);
     if (enemyEntry) ids.push(`enemy:${enemyEntry.id}`);
+    if (routePreview && !routePreview.selecting) ids.push(`enemy:${routePreview.enemy}`);
     onDiscover(ids);
   }, [snapshot, onDiscover]);
   function dispatch(command: Command) {

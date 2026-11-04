@@ -2,7 +2,7 @@
 
 `src/components/ui/controls.tsx` owns reusable controls and screen surfaces; `src/style.css` owns the palette and layout. Use native controls, accessible names and visible keyboard focus. Give actions clear feedback and keep information needed for a decision available at the point of action.
 
-Collection uses paginated grids of player and enemy cards. Hover or keyboard focus reveals details; clicking a Collection card does not select it. Arrow keys move among visible controls, Tab follows normal focus order, and Back/Escape follow navigation history. Undiscovered entries are masked. Battle has its own selection and inspection flows; preserve keyboard access, focus recovery and the difference between inspecting and committing a play.
+Collection uses paginated grids of player and enemy cards. Hover or keyboard focus reveals details; clicking a Collection card does not select it. Arrow keys move among visible controls, Tab follows normal focus order, and Back/Escape follow navigation history. Undiscovered entries are masked. A route's visible card pair and enemy preview count as discoveries even when the player takes another path; hidden future encounters remain masked. Battle has its own selection and inspection flows; preserve keyboard access, focus recovery and the difference between inspecting and committing a play.
 
 Reward and route screens show current HP with the same contextual antihero and relic inspection as combat. Rest choices preview actual healing after the maximum-HP cap. The Mirror Exchange shows the offered pair alongside the current deck, with a way back before committing a trade. When the run changes phase, the view returns to the top so compact screens start at the new decision rather than a prior scroll position.
 
