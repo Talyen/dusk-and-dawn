@@ -330,3 +330,86 @@ it("isolates orientation and Cracked Vessel across attack and defense policies",
     }
   console.log("Orientation and relic factorial, 100 runs each", JSON.stringify(results));
 }, 120_000);
+
+it("samples the three antiheroes across attack and defense policies", () => {
+  const results: Record<string, unknown> = {};
+  for (const hero of ["oathless-seraph", "thorn-witch", "veiled-oracle"] as const) {
+    for (const policy of ["attack", "defense"] as const) {
+      const counts = { victory: 0, defeat: 0, unfinished: 0 };
+      const victoryHp: number[] = [];
+      let turns = 0;
+      for (let seed = 0; seed < 30; seed++) {
+        const game = createRun(seed, undefined, hero);
+        for (let step = 0; step < 400; step++) {
+          const state = game.getSnapshot().state;
+          if (state.phase === "victory" || state.phase === "defeat") break;
+          let command: Command;
+          if (state.phase === "reward") {
+            const ranked = state.offers
+              .map((pair) => {
+                const light: FightCard = { id: "preview", pair, face: "light", kept: false };
+                return {
+                  pair,
+                  value: Math.max(
+                    score(light, state, policy),
+                    score({ ...light, face: "dark" }, state, policy),
+                  ),
+                };
+              })
+              .sort((a, b) => b.value - a.value);
+            command = { type: "reward", pair: ranked[0]?.value ? ranked[0].pair : null };
+          } else if (state.phase === "rest") command = { type: "rest" };
+          else if (state.pending) {
+            const choices = state.pending.cards
+              .slice()
+              .sort((a, b) => score(b, state, policy) - score(a, state, policy));
+            command = {
+              type: "choose",
+              ids: choices.slice(0, state.pending.required).map((card) => card.id),
+            };
+          } else {
+            const ranked = state.zones.hand
+              .filter((card) => !cardRestriction(state, card))
+              .map((card) => ({ card, value: score(card, state, policy) }))
+              .sort((a, b) => b.value - a.value);
+            const choice = state.mana && ranked[0] && ranked[0].value > 0 ? ranked[0].card : undefined;
+            if (!choice) {
+              command = { type: "end" };
+              turns++;
+            } else {
+              const name = face(choice).name;
+              const targets =
+                name === "Memory"
+                  ? state.zones.discard.slice(0, 1).map((card) => card.id)
+                  : name === "Sacrifice"
+                    ? state.zones.hand
+                        .filter((card) => card.id !== choice.id)
+                        .slice(0, 1)
+                        .map((card) => card.id)
+                    : [];
+              command = { type: "play", id: choice.id, targets };
+            }
+          }
+          expect(
+            game.dispatch(command).decision,
+            `${hero} ${policy} seed ${seed} step ${step}`,
+          ).toMatchObject({ accepted: true });
+        }
+        const state = game.getSnapshot().state;
+        const outcome = state.phase === "victory" || state.phase === "defeat" ? state.phase : "unfinished";
+        counts[outcome]++;
+        if (outcome === "victory") victoryHp.push(state.player.hp);
+      }
+      results[`${hero}/${policy}`] = {
+        ...counts,
+        turns,
+        meanVictoryHp: victoryHp.length
+          ? +(victoryHp.reduce((sum, hp) => sum + hp, 0) / victoryHp.length).toFixed(1)
+          : null,
+      };
+      expect(counts.victory + counts.defeat + counts.unfinished).toBe(30);
+      expect(counts.victory).toBeGreaterThan(0);
+    }
+  }
+  console.log("Antihero strategy samples, 30 seeds each", JSON.stringify(results));
+}, 60_000);

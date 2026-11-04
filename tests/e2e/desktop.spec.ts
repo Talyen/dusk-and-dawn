@@ -234,7 +234,8 @@ test("desktop resumes a saved combat after relaunch", async () => {
       await page.getByRole("button", { name: "Play", exact: true }).click();
       await page.getByRole("button", { name: "Continue run" }).click();
       await expect(page.getByText(/HP 26\/30/)).toBeVisible();
-      await expect(page.getByText(/Next: Open-Wing Dust/)).toBeVisible();
+      await page.locator(".battle-enemy-trigger").hover();
+      await expect(page.getByRole("tooltip")).toContainText("Next: Open-Wing Dust");
     } finally {
       await reopened.close();
     }
@@ -267,6 +268,49 @@ test("desktop retains expedition unlocks after relaunch", async () => {
       await page.getByRole("button", { name: "Configure expedition" }).click();
       await expect(page.getByText(/Pool tier 2\/3/)).toBeVisible();
       await expect(page.getByRole("option", { name: /Nocturne/ })).toBeEnabled();
+    } finally {
+      await reopened.close();
+    }
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("desktop resumes an Oracle run with its passive and kit", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "dusk-electron-hero-"));
+  const launch = () =>
+    electron.launch({
+      args: [".", `--user-data-dir=${directory}`],
+      env: { ...process.env, DUSK_DEV_URL: "" },
+    });
+  try {
+    const app = await launch();
+    try {
+      const page = await app.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: /^The Veiled Oracle/ }).click();
+      await page.getByRole("button", { name: "Start new run" }).click();
+      await expect(page.getByRole("img", { name: /^Library 5\. Scry\./ })).toBeVisible();
+      await expect
+        .poll(async () =>
+          page.evaluate(async () => {
+            const bridge = (window as unknown as { duskDesktop: { readSaveCandidates(): Promise<string[]> } })
+              .duskDesktop;
+            const [raw] = await bridge.readSaveCandidates();
+            return raw ? JSON.parse(raw).state.run.hero : null;
+          }),
+        )
+        .toBe("veiled-oracle");
+    } finally {
+      await app.close();
+    }
+    const reopened = await launch();
+    try {
+      const page = await reopened.firstWindow();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Continue run" }).click();
+      await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
+      await expect(page.getByRole("img", { name: /^Library 5\. Scry\./ })).toBeVisible();
     } finally {
       await reopened.close();
     }

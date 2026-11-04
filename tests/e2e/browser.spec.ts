@@ -2307,3 +2307,107 @@ test("a large deck scrolls in a small window without losing controls or stale in
   await deck.getByRole("button", { name: "Close" }).click();
   expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBe(saved);
 });
+
+test("antihero selection shows the supplied artwork and starts a dark Witch expedition", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 700 });
+  await page.addInitScript(() => {
+    Math.random = () => 0;
+    localStorage.setItem("dusk-and-dawn.expeditions.v1", JSON.stringify({ completed: ["prior-run"] }));
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  const choices = page.getByRole("group", { name: "Antiheroes" });
+  await expect(choices.locator("img")).toHaveCount(3);
+  for (const art of await choices.locator("img").all()) {
+    await expect.poll(() => art.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    const bounds = (await art.boundingBox())!;
+    expect(bounds.width / bounds.height).toBeCloseTo(4 / 3, 1);
+  }
+  const witch = choices.getByRole("button", { name: /^The Thorn Witch/ });
+  await witch.hover();
+  await expect(page.getByRole("tooltip")).toContainText("apply 2 Poison");
+  await witch.click();
+  await expect(witch).toHaveAttribute("aria-pressed", "true");
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBeNull();
+  await page.getByRole("button", { name: "Configure expedition" }).click();
+  await page.getByLabel("Starting orientation").selectOption("dark");
+  await page.getByLabel("Run relic").selectOption("cracked-vessel");
+  await expect(page.getByRole("button", { name: "Start expedition" })).toBeInViewport({ ratio: 1 });
+  await page.getByRole("button", { name: "Start expedition" }).click();
+  await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/30" })).toBeVisible();
+  await expect(page.locator(".battle-card").first()).toContainText("dark");
+  await page.locator(".battle-card").first().hover();
+  await expect(page.getByRole("tooltip")).toContainText("apply 2 Poison before this effect");
+  await page.locator(".battle-card").first().click();
+  await expect(page.getByRole("button", { name: /Enemy status:.*poison 2/ })).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate(() => JSON.parse(localStorage.getItem("dusk-and-dawn.save.v1")!).state.run.hero),
+    )
+    .toBe("thorn-witch");
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: "The Thorn Witch, HP 24/30" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Enemy status:.*poison 2/ })).toBeVisible();
+});
+
+test("the Oracle reveals the next library card every turn and survives resume", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: /^The Veiled Oracle/ }).click();
+  await page.getByRole("button", { name: "Start new run" }).click();
+  await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
+  await expect(page.getByRole("img", { name: /^Library 5\. Scry\./ })).toBeVisible();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByRole("img", { name: "Library 0. Scry: empty" })).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await page.getByRole("button", { name: "Continue run" }).click();
+  await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 26/30" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Library 0. Scry: empty" })).toBeVisible();
+});
+
+test("the Seraph gains Ward on a light play and exposes the passive contextually", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("button", { name: /^The Oathless Seraph/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.getByRole("button", { name: "Start new run" }).click();
+  const health = page.getByRole("button", { name: "The Oathless Seraph, HP 30/30" });
+  await health.hover();
+  await expect(page.getByRole("tooltip")).toContainText("Before each light card resolves, gain 1 Ward");
+  const first = page.locator(".battle-card").first();
+  await first.hover();
+  await expect(page.getByRole("tooltip")).toContainText("gain 1 Ward before this effect");
+  await first.click();
+  await expect
+    .poll(async () => Number(await page.locator(".battle-player").getAttribute("data-ward")))
+    .toBeGreaterThanOrEqual(1);
+});
+
+test("touching an antihero selects it and reveals its passive before starting", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 700 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play", exact: true }).tap();
+  const witch = page.getByRole("button", { name: /^The Thorn Witch/ });
+  await witch.tap();
+  await expect(witch).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("tooltip")).toContainText("Before each dark card resolves, apply 2 Poison");
+  expect(await page.evaluate(() => localStorage.getItem("dusk-and-dawn.save.v1"))).toBeNull();
+  const oracle = page.getByRole("button", { name: /^The Veiled Oracle/ });
+  await oracle.tap();
+  await expect(oracle).toHaveAttribute("aria-pressed", "true");
+  await expect(witch).toHaveAttribute("aria-pressed", "false");
+  await expect(page.getByRole("tooltip")).toContainText("Scry at the start of each turn");
+  await page.getByRole("button", { name: "Start new run" }).tap();
+  await expect(page.getByRole("button", { name: "The Veiled Oracle, HP 30/30" })).toBeVisible();
+  await context.close();
+});

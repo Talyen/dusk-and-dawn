@@ -3634,5 +3634,23 @@
     "output": "enemy-the-whispering-casket.webp",
     "width": 640,
     "quality": 82
+  },
+  {
+    "source": "Hero Artwork/The Oathless Seraph.png",
+    "output": "hero-oathless-seraph.webp",
+    "width": 1024,
+    "quality": 82
+  },
+  {
+    "source": "Hero Artwork/The Thorn Witch.png",
+    "output": "hero-thorn-witch.webp",
+    "width": 1024,
+    "quality": 82
+  },
+  {
+    "source": "Hero Artwork/The Veiled Oracle.png",
+    "output": "hero-veiled-oracle.webp",
+    "width": 1024,
+    "quality": 82
   }
 ]

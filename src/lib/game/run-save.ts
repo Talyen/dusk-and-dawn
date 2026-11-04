@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { heroIds } from "./heroes";
 import { cards, getEnemy, route, runHandler, validEncounter, type RunState } from "./run";
 import { restoreSession, type Snapshot } from "./session";
 import { decodeSave, encodeSave, snapshotFromSave, snapshotToSave, type SaveBackend } from "../save/save";
@@ -27,6 +28,7 @@ const combatant = z
 const runSchema = z
   .object({
     phase: z.enum(["battle", "reward", "rest", "route", "victory", "defeat"]),
+    hero: z.enum(heroIds).optional(),
     experiment: z
       .object({
         id: z.string().min(1).max(128),

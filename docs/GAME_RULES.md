@@ -4,11 +4,21 @@ This is a guide to the prototype's shared behavior, not a complete catalogue of 
 
 ## Run and fight
 
-A run starts at 30 HP with two copies of each of five starter pairs; the Cracked Vessel expedition relic instead starts at 24 HP and adds a card pair. Its five scheduled fights comprise the fixed opening enemy, two sampled regulars, an elite and a boss. HP carries between fights; fight-local statuses and card zones are reset. At each fight start the deck is shuffled into the library, cards start light-side up (or use the expedition orientation), the player receives 3 mana and draws up to 5 cards.
+A new run starts at 30 HP with two copies of each of the selected antihero's five starting pairs; the Cracked Vessel expedition relic instead starts at 24 HP and adds a card pair. Legacy saved runs retain their original deck and have no antihero passive. Its five scheduled fights comprise the fixed opening enemy, two sampled regulars, an elite and a boss. HP carries between fights; fight-local statuses and card zones are reset. At each fight start the deck is shuffled into the library, cards start light-side up (or use the expedition orientation), the player receives 3 mana and draws up to 5 cards.
 
 Victory before the last scheduled fight offers up to three unowned card pairs or a skip. After the second scheduled fight, the player may heal 6 HP or remove a deck card. The optional expedition can add a route after the first and third fights: combat for a reward, rest for 4 HP, or an event costing 4 HP for a card pair. The event requires more than 4 HP; routes rejoin before the next scheduled fight. Relics can alter these choices. See `tests/lib/expedition.test.ts` and `tests/lib/run.test.ts`.
 
 The run deck can be inspected at reward and route choices, and from the combat pile browser. It groups physical cards by pair and shows both faces and copy counts. It does not show the order or current facing of cards in the hidden library, and inspection does not change the run or consume randomness.
+
+## Antiheroes
+
+The three initial antiheroes are playtest designs. All use the same one-mana card and turn rules, and their selected class persists for the run. The normal light/dark starting orientation and expedition relic apply independently of class.
+
+- **The Oathless Seraph:** before each light card resolves, gain 1 Ward. The starting pairs are Angel & Vampire, Sun & Moon, Seraph & Fallen Seraph, Bloom & Wither, and Key & Lock.
+- **The Thorn Witch:** before each dark card resolves, apply 2 Poison using the normal maximum rule. The starting pairs are Angel & Vampire, Sun & Moon, Ivy & Thorns, Bloom & Wither, and Key & Lock.
+- **The Veiled Oracle:** Scry at the start of each player turn, after the normal draw. The starting pairs are Angel & Vampire, Sun & Moon, Bloom & Wither, Key & Lock, and Oracle & Deceiver.
+
+Light/dark passives trigger once on an accepted play, after payment and before the card effect. A paid hidden-card inspection receives its passive when committed, never again when the choice resolves. Rejected plays do not trigger it. Scry follows its normal empty-library and end-turn rules. Original starter pairs absent from a hero's kit remain eligible for that hero's rewards and expedition events; existing runs without a class retain their original reward pools.
 
 ## Cards and turn order
 

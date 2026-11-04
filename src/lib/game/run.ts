@@ -1,3 +1,4 @@
+import { heroes, type HeroId } from "./heroes";
 import { simpleEnemies } from "./simple-enemies.generated";
 import { simpleCards } from "./simple-cards.generated";
 import { rngInt, shuffle, type Rng } from "../random";
@@ -322,8 +323,11 @@ export function getEnemy(s: Pick<RunState, "fight" | "encounters" | "experiment"
 function unlocked<T>(items: readonly T[], tier: number): T[] {
   return items.slice(0, Math.ceil((items.length * Math.min(3, Math.max(1, tier))) / 3));
 }
-function rewardPool(tier: number) {
-  return unlocked(rewards, tier);
+function rewardPool(tier: number, hero?: HeroId) {
+  const pool = unlocked(rewards, tier);
+  if (!hero) return pool;
+  const kit = new Set<string>(heroes[hero].pairs);
+  return [...pool, ...starter.filter((pair) => !kit.has(pair))];
 }
 function chooseEncounters(rng: Rng, tier = 3): string[] {
   const regular = unlocked(
@@ -357,6 +361,7 @@ export interface PendingChoice {
 }
 export interface RunState {
   phase: "battle" | "reward" | "rest" | "route" | "victory" | "defeat";
+  hero?: HeroId | undefined;
   experiment?:
     | {
         id: string;
@@ -426,6 +431,7 @@ function beginFight(s: RunState, rng: Rng) {
     rng,
   );
   drawCards(s.zones, 5, rng);
+  if (s.hero === "veiled-oracle") s.zones.scry = true;
   s.phase = "battle";
   s.message = `Fight ${s.fight + 1}: ${getEnemy(s).name}`;
 }
@@ -437,7 +443,7 @@ function victory(s: RunState, rng: Rng) {
   }
   const owned = new Set(s.deck.map((c) => c.pair));
   s.offers = shuffle(
-    rewardPool(s.experiment?.tier ?? 3).filter((p) => !owned.has(p)),
+    rewardPool(s.experiment?.tier ?? 3, s.hero).filter((p) => !owned.has(p)),
     rng,
   ).slice(0, s.experiment?.relic === "many-eyes" ? 4 : 3);
   s.phase = "reward";
@@ -664,7 +670,9 @@ function offerRoute(s: RunState, rng: Rng) {
     simpleEnemies.filter((enemy) => enemy.hp <= 30 && enemy.name !== "Radiant Moth"),
     experiment.tier,
   ).filter((enemy) => !s.encounters?.includes(enemy.id));
-  const pairs = rewardPool(experiment.tier).filter((pair) => !s.deck.some((card) => card.pair === pair));
+  const pairs = rewardPool(experiment.tier, s.hero).filter(
+    (pair) => !s.deck.some((card) => card.pair === pair),
+  );
   if (!candidates.length || !pairs.length) {
     continueRoute(s, rng);
     return;
@@ -817,6 +825,7 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
     s.player.nextDrawPenalty = 0;
     drawCards(s.zones, drawCount, rng);
     if (context.nextFace) for (const card of s.zones.hand) card.face = context.nextFace;
+    if (s.hero === "veiled-oracle") s.zones.scry = true;
     delete s.latestDirectHit;
     applyEnemyIntent(s);
     s.message = skipped ? `${a.name} skipped.` : `${a.name} resolved.`;
@@ -854,6 +863,8 @@ export const runHandler: Handler<RunState, Command, string> = (s, command, rng) 
   s.zones.hand.splice(index, 1);
   source.kept = false;
   s.mana--;
+  if (s.hero === "oathless-seraph" && source.face === "light") s.player.ward++;
+  if (s.hero === "thorn-witch" && source.face === "dark") applyDamageOverTime(s.enemy, "poison", 2);
   let banishSource = false;
   let sourceMoved = false;
   let referenced: FightCard | null = null;
@@ -1280,13 +1291,14 @@ export type ExperimentOptions = {
   orientation: "light" | "dark";
   relic: "none" | "many-eyes" | "spare-thread" | "cracked-vessel";
 };
-export function createRun(seed: number, experiment?: ExperimentOptions) {
-  const deck = starter.flatMap((pair, i) => [
+export function createRun(seed: number, experiment?: ExperimentOptions, hero?: HeroId) {
+  const deck = (hero ? heroes[hero].pairs : starter).flatMap((pair, i) => [
     { id: `card-${i * 2}`, pair },
     { id: `card-${i * 2 + 1}`, pair },
   ]);
   const initial: RunState = {
     phase: "battle",
+    ...(hero ? { hero } : {}),
     fight: 0,
     deck,
     nextId: 10,
@@ -1305,7 +1317,9 @@ export function createRun(seed: number, experiment?: ExperimentOptions) {
   const boot: Handler<RunState, { type: "boot" }, string> = (s, _c, rng) => {
     s.encounters = chooseEncounters(rng, s.experiment?.tier ?? 3);
     if (s.experiment?.relic === "cracked-vessel") {
-      const pool = rewardPool(s.experiment.tier).filter((pair) => !s.deck.some((card) => card.pair === pair));
+      const pool = rewardPool(s.experiment.tier, s.hero).filter(
+        (pair) => !s.deck.some((card) => card.pair === pair),
+      );
       s.deck.push({ id: `card-${s.nextId++}`, pair: pool[rngInt(rng, pool.length)]! });
       s.player.hp = 24;
     }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "manifestHash": "8e38441ab5f1c4139afe8dc6b634e78ec6e66f80a0d31533051d0b9b3bc8c5a8",
+  "manifestHash": "ddba22c106dc6f6605baa7ea072aa09d2c738eede186dcbe64176b9408be6b12",
   "outputs": [
     {
       "output": "card-angel.webp",
@@ -3031,6 +3031,21 @@
       "output": "enemy-the-whispering-casket.webp",
       "sourceHash": "f17a396086a5c72c20a3836375d75de63da7e544d85d5468912e3c7a43fab5f4",
       "hash": "80c1c65cc9c0ba6a4f6f2c5e527358522dc6d331db675a78e1cfd18b34744f42"
+    },
+    {
+      "output": "hero-oathless-seraph.webp",
+      "sourceHash": "309ac54d3bdadefb7d4423414f899be2b2ac2eac9a3cf7d6f9f5735f04416a9b",
+      "hash": "8b2e2e453ada94b838d666cf2ec211127439c52e63a319bdfbec1e2e0b160c59"
+    },
+    {
+      "output": "hero-thorn-witch.webp",
+      "sourceHash": "3caca9580a6872f5f34cda79d66f34729f3bba7e1f05362d253904c0c241d630",
+      "hash": "21fd1073bd0540e166ee9256193ce8bc3fde5845f57966cdf3173947f6fdc362"
+    },
+    {
+      "output": "hero-veiled-oracle.webp",
+      "sourceHash": "6a325021cdb6439280e9213b2bf566d1117d33eee28389f35ccc67d0d1d40d0f",
+      "hash": "e719586798deb4f0cda7fa9bd07ece0f432ccb1ab988e6a688f04e8e93ca2dbf"
     }
   ]
 }

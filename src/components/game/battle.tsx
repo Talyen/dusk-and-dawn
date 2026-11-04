@@ -1,4 +1,5 @@
 import { simpleEnemies } from "../../lib/game/simple-enemies.generated";
+import { heroes, heroIds, type HeroId } from "../../lib/game/heroes";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   cards,
@@ -55,8 +56,9 @@ function statuses(holder: RunState["player"]) {
 }
 const keywordHelp: Record<string, string> = {
   Ward: "Absorbs damage; halve remaining Ward at the start of its holder's turn.",
-  Burn: "At end turn, deal this much Fire damage, then halve Burn, rounding down.",
-  Poison: "At end turn, deal this much Decay damage, then halve Poison, rounding down.",
+  Burn: "Keep the higher amount on reapplication. At end turn, deal this much Fire damage, then halve Burn, rounding down.",
+  Poison:
+    "Keep the higher amount on reapplication. At end turn, deal this much Decay damage, then halve Poison, rounding down.",
   Flip: "Turn each affected card to its other face. Cards keep their face as they move.",
   Banish: "Remove this card from the fight; it returns for the next encounter.",
   Scry: "See the current top card of the library until end turn; Scry does not reshuffle.",
@@ -610,6 +612,7 @@ function RouteChoice({
   children,
   className,
   pressed,
+  inspectOnSelect = false,
   placement = "bottom",
 }: {
   label: string;
@@ -620,6 +623,7 @@ function RouteChoice({
   children: ReactNode;
   className?: string;
   pressed?: boolean | undefined;
+  inspectOnSelect?: boolean;
   placement?: "top" | "bottom";
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
@@ -661,7 +665,13 @@ function RouteChoice({
         disabled={disabled}
         onClick={(event) => {
           if (touch.consumeClick()) event.preventDefault();
-          else onChoose(event);
+          else {
+            onChoose(event);
+            if (inspectOnSelect && touch.wasTouch()) {
+              pinned.current = true;
+              setOpen(true);
+            }
+          }
         }}
         onPointerDown={touch.onPointerDown}
         onPointerMove={touch.onPointerMove}
@@ -1007,6 +1017,10 @@ function cardPreview(s: RunState, card: FightCard): ReactNode {
     return `${face(other).name} → ${next.name}`;
   });
   const lines: string[] = [];
+  if (s.hero === "oathless-seraph" && card.face === "light")
+    lines.push("On play: gain 1 Ward before this effect.");
+  if (s.hero === "thorn-witch" && card.face === "dark")
+    lines.push("On play: apply 2 Poison before this effect.");
   const generic = ops.find((op) => op.op === "attack" || op.op === "attack-ignore-ward");
   const hit =
     directCardAttacks[info.name] ??
@@ -1137,6 +1151,7 @@ export function Battle({
   const [backend] = useState(saveBackend);
   const [loaded, setLoaded] = useState(false);
   const [configuring, setConfiguring] = useState(false);
+  const [hero, setHero] = useState<HeroId>("oathless-seraph");
   const [orientation, setOrientation] = useState<"light" | "dark">("light");
   const [relic, setRelic] = useState<"none" | "many-eyes" | "spare-thread" | "cracked-vessel">("none");
   const [progress, setProgress] = useState(() => {
@@ -1185,6 +1200,31 @@ export function Battle({
         {loadError && <p role="alert">{loadError}</p>}
         {saved?.recovered && <p>A retained copy of the run was recovered.</p>}
         {saved && <p>Starting a new run replaces the current saved run.</p>}
+        <div className="battle-hero-choices" role="group" aria-label="Antiheroes">
+          {heroIds.map((id) => {
+            const choice = heroes[id];
+            return (
+              <RouteChoice
+                key={id}
+                className="battle-hero-choice"
+                label={`${choice.name}. ${choice.passive} Starting deck: two copies each of ${choice.pairs.join(", ")}.`}
+                caption={choice.name.replace(/^The /, "")}
+                pressed={hero === id}
+                inspectOnSelect
+                onChoose={() => setHero(id)}
+                art={
+                  <span className="battle-hero-art">
+                    <img src={`${import.meta.env.BASE_URL}assets/${choice.art}`} alt="" />
+                  </span>
+                }
+              >
+                <strong>{choice.name}</strong>
+                <p>{choice.passive}</p>
+                <p>Starting deck: 2 each of {choice.pairs.join(", ")}.</p>
+              </RouteChoice>
+            );
+          })}
+        </div>
         <div className="battle-setup__actions">
           {saved && (
             <Button
@@ -1198,7 +1238,7 @@ export function Battle({
           <Button
             onClick={() =>
               setGame({
-                session: createRun(Math.floor(Math.random() * 0x100000000)),
+                session: createRun(Math.floor(Math.random() * 0x100000000), undefined, hero),
                 isNew: true,
                 recovered: false,
               })
@@ -1245,12 +1285,16 @@ export function Battle({
               <Button
                 onClick={() =>
                   setGame({
-                    session: createRun(Math.floor(Math.random() * 0x100000000), {
-                      id: crypto.randomUUID(),
-                      tier,
-                      orientation,
-                      relic,
-                    }),
+                    session: createRun(
+                      Math.floor(Math.random() * 0x100000000),
+                      {
+                        id: crypto.randomUUID(),
+                        tier,
+                        orientation,
+                        relic,
+                      },
+                      hero,
+                    ),
                     isNew: true,
                     recovered: false,
                   })
@@ -1578,7 +1622,21 @@ function BattleSession({
             >
               <div className="battle-resource battle-resource--health">
                 <p>
-                  HP {s.player.hp}/{s.player.maxHp}
+                  {s.hero ? (
+                    <InspectionTrigger
+                      label={`${heroes[s.hero].name}, HP ${s.player.hp}/${s.player.maxHp}`}
+                      text={`HP ${s.player.hp}/${s.player.maxHp}`}
+                      className="battle-hero-resource"
+                      placement="top"
+                    >
+                      <strong>{heroes[s.hero].name}</strong>
+                      <p>{heroes[s.hero].passive}</p>
+                    </InspectionTrigger>
+                  ) : (
+                    <>
+                      HP {s.player.hp}/{s.player.maxHp}
+                    </>
+                  )}
                 </p>
                 {top ? (
                   <PileCard card={top} libraryCount={s.zones.library.length} />

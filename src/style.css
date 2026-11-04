@@ -1979,3 +1979,57 @@ button.battle-pile:disabled {
   display: block;
   margin-top: 0.3rem;
 }
+
+.battle-hero-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 0 auto 1rem;
+}
+.battle-hero-choice {
+  min-width: 0;
+  font-size: 0.85rem;
+}
+.battle-hero-choice > span:last-child {
+  margin-top: 0.4rem;
+}
+.battle-hero-art {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid #786651;
+  border-radius: 0.35rem;
+  opacity: 0.7;
+}
+.battle-hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.battle-hero-choice:hover .battle-hero-art,
+.battle-hero-choice:focus-visible .battle-hero-art,
+.battle-hero-choice[aria-pressed="true"] .battle-hero-art {
+  opacity: 1;
+  border-color: #e8c68a;
+  box-shadow: 0 0 1rem #efd0a65c;
+}
+.battle-hero-choice[aria-pressed="true"] .battle-hero-art {
+  outline: 1px solid #e8c68a;
+  outline-offset: 2px;
+}
+.battle-hero-resource {
+  margin: 0 auto;
+  font:
+    1.25rem Georgia,
+    serif;
+  color: inherit;
+  white-space: nowrap;
+}
+@media (max-width: 700px), (max-height: 600px) {
+  .battle-hero-resource {
+    font-size: 0.85rem;
+  }
+  .battle-hero-choice {
+    font-size: 0.7rem;
+  }
+}
